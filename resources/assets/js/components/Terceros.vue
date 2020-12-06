@@ -110,7 +110,7 @@
                             <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
-                                        <label for="text-input">Tipo Persona (*)</label>                                                                             
+                                        <label for="text-input">Tipo Persona (*)</label>
                                         <select v-model="tipo_persona" class="form-control" v-bind:class="{ 'is-invalid': hasError.tipo_persona==1 }">
                                             <option value="Natural">Natural</option>
                                             <option value="Juridica">Jurídica</option>

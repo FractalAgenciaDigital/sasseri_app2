@@ -33,21 +33,21 @@ class LoginController extends Controller
             $id_usuario = Auth::user()->id;
             $resultado=array();
             //$modulosPadre = self::obtenerModulos(1, $empresas_id);
-            $cons="SELECT * FROM modulos_empresas_usuarios,modulos_empresas,modulos WHERE usuarios_id=$id_usuario and modulos_empresas.empresas_id=$empresas_id and modulos_empresas_id = modulos_empresas.id and modulos_id=modulos.id AND tipo=1 AND modulos.estado=1";
-            $respuesta = DB::select($cons);
-            foreach($respuesta as $res){
+            // $cons="SELECT * FROM modulos_empresas_usuarios,modulos_empresas,modulos WHERE usuarios_id=$id_usuario and modulos_empresas.empresas_id=$empresas_id and modulos_empresas_id = modulos_empresas.id and modulos_id=modulos.id AND tipo=1 AND modulos.estado=1";
+            // $respuesta = DB::select($cons);
+            // foreach($respuesta as $res){
                 
-                $hijos = array();
+            //     $hijos = array();
                 
-                $cons2="SELECT * FROM modulos_empresas_usuarios,modulos_empresas,modulos WHERE usuarios_id=$id_usuario and modulos_empresas.empresas_id=$empresas_id and modulos_empresas_id = modulos_empresas.id and modulos_id=modulos.id AND padre =  ".$res->id." AND modulos.estado=1";
-                $respuesta2 = DB::select($cons2);
+            //     $cons2="SELECT * FROM modulos_empresas_usuarios,modulos_empresas,modulos WHERE usuarios_id=$id_usuario and modulos_empresas.empresas_id=$empresas_id and modulos_empresas_id = modulos_empresas.id and modulos_id=modulos.id AND padre =  ".$res->id." AND modulos.estado=1";
+            //     $respuesta2 = DB::select($cons2);
 
-                foreach($respuesta2 as $res2){
-                    $hijos[] = ["modulo"=>$res2->nombre,"icono"=>$res2->icono,"menu"=>$res2->menu, "lectura"=>$res2->leer, "escritura"=>$res2->crear, "editar"=>$res2->actualizar, "anular"=>$res2->anular, "imprimir"=>$res2->imprimir,"hijos" =>array(),"template_menu"=>$res2->template];
-                }
+            //     foreach($respuesta2 as $res2){
+            //         $hijos[] = ["modulo"=>$res2->nombre,"icono"=>$res2->icono,"menu"=>$res2->menu, "lectura"=>$res2->leer, "escritura"=>$res2->crear, "editar"=>$res2->actualizar, "anular"=>$res2->anular, "imprimir"=>$res2->imprimir,"hijos" =>array(),"template_menu"=>$res2->template];
+            //     }
                 
-                $resultado[] = ["modulo"=>$res->nombre,"icono"=>$res->icono,"menu"=>$res->menu, "lectura"=>$res->leer, "escritura"=>$res->crear, "editar"=>$res->actualizar, "anular"=>$res->anular, "imprimir"=>$res->imprimir,"hijos" =>$hijos,"template_menu"=>$res->template];
-            }
+            //     $resultado[] = ["modulo"=>$res->nombre,"icono"=>$res->icono,"menu"=>$res->menu, "lectura"=>$res->leer, "escritura"=>$res->crear, "editar"=>$res->actualizar, "anular"=>$res->anular, "imprimir"=>$res->imprimir,"hijos" =>$hijos,"template_menu"=>$res->template];
+            // }
 
             $request->session()->put('menu_usu', $resultado);
             return redirect()->route('main');

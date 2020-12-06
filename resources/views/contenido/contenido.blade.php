@@ -16,7 +16,7 @@
             </template>
         @endif
 
-        @if($rol_usu==1)  
+        
             
             
 			<!-- @foreach ($menu_usuario2 as $menu_usu)
@@ -28,7 +28,7 @@
 					@endforeach
 				@endif
 			@endforeach -->
-			
+      
         @if($rol_usu == 1)   
             <template v-if="menu==999991">
                 <user :ruta="ruta"></user>
