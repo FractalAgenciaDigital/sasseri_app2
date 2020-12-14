@@ -266,6 +266,7 @@
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-user text-primary mr-1 h5"></i>
                                     <span class="mr-2 d-none d-lg-inline">{{Auth::user()->usuario}}</span>
                                     
                                 </a>
