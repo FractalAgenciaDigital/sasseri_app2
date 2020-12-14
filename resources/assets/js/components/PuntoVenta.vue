@@ -168,7 +168,7 @@
 
                     <div class="card-body">  
                         
-                        <div class="row border-bottom resaltar" @click="showUserOpts(tercero.id); id_selected_row=tercero.id"  v-for="tercero in arrayTerceros" :key="tercero.id"  v-bind:id="'person_row_'+tercero.id" > 
+                        <div class="row " :class=" id_selected_row_acitve==tercero.id ? 'border border-primary ' : 'border-bottom resaltar'" @click="showUserOpts(tercero.id); id_selected_row=tercero.id"  v-for="tercero in arrayTerceros" :key="tercero.id"  v-bind:id="'person_row_'+tercero.id" > 
                             <div v-if="tercero.nombre && !tercero.nombre1" class="col-8" >
                                 {{ tercero.nombre }} 
                             </div>
@@ -176,10 +176,12 @@
                                 {{ tercero.nombre1 + ' ' + validarUnder(tercero.nombre2)+' '+tercero.apellido1+' '+validarUnder(tercero.apellido2) }} 
                             </div>
                             <div class="col-2 text-right">
-                                <h3 v-if="id_selected_row==tercero.id" class="text-primary" v-bind:id="'person_opts_'+tercero.id" style="margin: auto; font-size: 19px;"><i class="fa fa-check"></i></h3>
+                                <h3 v-if="id_selected_row==tercero.id&&id_selected_row_acitve!=tercero.id" class="text-primary" v-bind:id="'person_opts_'+tercero.id" style="margin: auto; font-size: 19px;" @click="cargarTercero(tercero);id_selected_row_acitve=tercero.id;"><i class="fa fa-check"></i></h3>
+                                <h3 v-if="id_selected_row==tercero.id&&id_selected_row_acitve==tercero.id" class="text-danger" v-bind:id="'person_opts_'+tercero.id" style="margin: auto; font-size: 19px;" @click="id_selected_row_acitve='';"><i class="fa fa-times-circle"></i></h3>
+                                 
                             </div> 
-                            <div class="col-2 text-right">
-                                <h3 v-if="id_selected_row==tercero.id" class="text-success" v-bind:id="'person_opts_'+tercero.id" style="margin: auto; font-size: 19px;"><i class="fa fa-pencil"></i></h3>
+                            <div class="col-2 text-center">
+                                <h3 v-if="id_selected_row==tercero.id" class="text-success ex1" v-bind:id="'person_opts_'+tercero.id" style="margin: auto; font-size: 19px;"><i class="fa fa-pencil"></i></h3>
                             </div>
                         </div>                        
                     </div>                    
@@ -428,7 +430,10 @@
                                         <td v-if="facturacion.estado==2" class="text-success">Cerrada</td>
                                         <td v-if="facturacion.estado==0" class="text-danger">Cancelada</td>
                                         <td class="centrado">
-                                            <button class="btn-1 btn btn-success rounded-circle">
+                                            <button v-if="facturacion.estado==1"  @click="mostrarDetalle('facturacion','actualizar',facturacion);position=2;" class="btn-1 btn btn-success rounded-circle">
+                                                <i class="fa fa-pencil btn-edit-factura"></i>
+                                            </button>
+                                             <button v-else class="btn-1 btn btn-secondary rounded-circle">
                                                 <i class="fa fa-pencil btn-edit-factura"></i>
                                             </button>
                                         </td>
@@ -443,10 +448,12 @@
             
             <div class="row mt-1 fixed-bottom mx-auto"> <!-- boton de facturar -->
                 <div class="col-12" v-if="position==1||position==2">
-                    <a @click="validarFacturacion();" class="btn btn-block btn-lg active btn-success" href="#" role="button"><h3 class="text-white">Facturar $ {{saldo=calcularSaldo}}</h3></a>
+                    <a @click="registrarFacturacion();" class="btn btn-block btn-lg active btn-success" href="#" role="button"><h3 class="text-white">Facturar $ {{valor_final=calcularTotal}}</h3></a>
                 </div>
                 <div class="col-12" v-if="position==7">
-                    <a @click="position=1;mostrarDetalle()" class="btn btn-block btn-lg active btn-success"  href="#" role="button"><h3 class="text-white">Iniciar Factura</h3></a>
+
+                    <a v-if="no_caja==0" @click="position=1;mostrarDetalle()" class="btn btn-block btn-lg active btn-success"  href="#" role="button"><h3 class="text-white">Iniciar Factura</h3></a>
+                    <a v-else  class="btn btn-block btn-lg active btn-secondary"  href="#" role="button"><h3 class="text-white">No tienes una caja abierta</h3></a>
                 </div>
             </div> 
         </div>  
@@ -461,6 +468,8 @@
         data (){
             return {
                 position: 7,
+                no_caja: 1,
+                id_selected_row_acitve: '',
                 ingreso_id: 0,
                 idproveedor:0,
                 proveedor:'',
@@ -517,7 +526,6 @@
                 padreDetalle : '',
                 idDetalleAsociado : 0,
                 tipo_vista_articulo:1,
-
                 // variables modal buscar tercero
                 modal2 : '',
                 tercero :'',
@@ -778,6 +786,7 @@
 
                     if(ban==0 || ban==1)
                     {
+                        me.no_caja = 1;
                         // me.mostrarDetalle('cierres_caja','registrar');
                         Swal.fire({
                             // toast: true,
@@ -793,6 +802,7 @@
                     {
                         if(ban==3)
                         {
+                            me.no_caja = 0;
                             me.id_caja_facturacion = me.arrayCierresXCajas[0]['id'];
                             me.id_cierre_caja_facturacion = me.arrayCierresXCajas[0]['id'];
                             me.nom_caja_cierre_facturacion = me.arrayCierresXCajas[0]['nombre'];
@@ -807,6 +817,7 @@
 
                         if(ban==2)
                         {
+                            me.no_caja = 1;
                             //console.log("entra al ban 2");
                             // me.mostrarDetalle('cierres_caja','listar_cierres',me.arrayCierresXCajas[0]);
                             Swal.fire({
@@ -1310,6 +1321,7 @@
                 if(auxPosition >= 0) {
                     me.arrayDetalle[auxPosition].cantidad+=1;
                     me.arrayDetalle[auxPosition].valor_iva+=ivaVenta_vr;
+                    me.arrayDetalle[auxPosition].valor_subtotal +=  me.arrayDetalle[auxPosition].precio_venta - ivaVenta_vr;
                 }
                  
                 else {
@@ -1319,11 +1331,13 @@
                         id_asociado: producto.id_asociado,
                         articulo: producto.nombre,
                         cantidad: 1,
+                        tipo: producto.tipo_articulo,
                         valor_descuento: 0,
                         precio: producto.precio_venta,
                         precio_venta: producto.precio_venta,
                         iva: ivaVenta,
                         valor_iva: ivaVenta_vr,
+                        valor_subtotal: Math.round(parseFloat(producto.precio_venta-ivaVenta_vr)),
                         stock : producto.stock,
                         descuento : 0,
                         nom_presentacion : producto.nom_presentacion,
@@ -1476,52 +1490,68 @@
                 });
             },
             registrarFacturacion(){
+                console.log(this.validarFacturacion());
                 if (this.validarFacturacion()){
+
                     return;
                 }
+                else {
                 
-                let me = this;
-                
-                // for(var i=0; i<me.arrayDetalle.length; i++)
-                // {
-                //     me.descuento += parseFloat(me.arrayDetalle[i]['valor_descuento']);
-                //     me.iva += parseFloat(me.arrayDetalle[i]['valor_iva']);
-                //     me.subtotal += parseFloat(me.arrayDetalle[i]['valor_subtotal']);
-                // }
-                // me.total += parseFloat(me.subtotal)+parseFloat(me.iva);
-                // me.sugerirNumFactura();
+                    let me = this;
+                    
+                    // for(var i=0; i<me.arrayDetalle.length; i++)
+                    // {
+                    //     me.descuento += parseFloat(me.arrayDetalle[i]['valor_descuento']);
+                    //     me.iva += parseFloat(me.arrayDetalle[i]['valor_iva']);
+                    //     me.subtotal += parseFloat(me.arrayDetalle[i]['valor_subtotal']);
+                    // }
+                    // me.total += parseFloat(me.subtotal)+parseFloat(me.iva);
+                    // me.sugerirNumFactura();
 
-                axios.post(this.ruta +'/facturacion/registrar',{
-                    'num_factura': null,
-                    'id_tercero': me.id_tercero,
-                    'fec_edita': null,
-                    'usu_edita': null,
-                    'subtotal': me.subtotal,
-                    'valor_iva': me.valor_iva,
-                    'total': me.valor_final,
-                    'abono': me.abono,
-                    'saldo': me.saldo,
-                    'detalle': me.detalle,
-                    'lugar': me.lugar,
-                    'descuento': me.calcularDescuento,
-                    'fec_registra': null,
-                    'fec_envia': null,
-                    'fec_anula': null,
-                    'usu_registra': null,
-                    'usu_envia': null,
-                    'usu_anula': null,
-                    'fecha': me.fecha,
-                    'id_tarifario': me.id_tarifario,
-                    'id_cierre_caja': me.id_cierre_caja_facturacion,
-                    'data': me.arrayDetalle,
-                    'tipo_movimiento' : 4,
-                    'sumatoria' : 0
-                }).then(function (response) {
-                    me.ocultarDetalle();
-                    me.listarFacturacion(1,'','','','','','','');
-                }).catch(function (error) {
-                    console.log(error);
-                });
+                    axios.post(this.ruta +'/facturacion/registrar',{
+                        'num_factura': null,
+                        'id_tercero': me.id_tercero,
+                        'fec_edita': null,
+                        'usu_edita': null,
+                        'subtotal': me.subtotal,
+                        'valor_iva': me.valor_iva,
+                        'total': me.valor_final,
+                        'abono': me.abono,
+                        'saldo': me.saldo,
+                        'detalle': me.detalle,
+                        'lugar': me.lugar,
+                        'descuento': me.calcularDescuento,
+                        'fec_registra': null,
+                        'fec_envia': null,
+                        'fec_anula': null,
+                        'usu_registra': null,
+                        'usu_envia': null,
+                        'usu_anula': null,
+                        'fecha': me.fecha,
+                        'id_tarifario': me.id_tarifario,
+                        'id_cierre_caja': me.id_cierre_caja_facturacion,
+                        'data': me.arrayDetalle,
+                        'tipo_movimiento' : 4,
+                        'sumatoria' : 0
+                    }).then(function (response) {
+                        var toFind = "2";
+                        var filtered = me.arrayDetalle.filter(function(el) {
+                        return el.tipo === toFind;
+                        });
+                        me.arrayDetalle = [];
+                        me.id_tercero = '';
+                        me.tercero = '';
+                        me.lugar = '';
+                        me.ocultarDetalle();
+                        me.listarFacturacion(1,'','','','','','','');
+                        if(filtered)
+                            me.position = 6;
+                        else 
+                            me.position = 7;
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                }
             },
             actualizarFacturacion(){
                 if (this.validarFacturacion()){
@@ -1581,23 +1611,33 @@
             },
             validarFacturacion(){
                 this.errorFacturacion=0;
-                if(this.position==2) {
+                if(this.position!=2) {
+                    this.position = 2;
+                }
+               else {
                 
                     this.errorMostrarMsjFacturacion =[];
 
                     // if (this.fecha==0) this.errorMostrarMsjFacturacion.push("Ingrese la fecha");
                     // if (this.num_factura==0) this.errorMostrarMsjFacturacion.push("Seleccione el comprobante");
-                    if (!this.id_tercero) alert("Seleccione un tercero");
-                    if (!this.mesa) alert("Seleccione una mesa");
-                    if (this.arrayDetalle.length<=0) alert("Debe agregar productos");
-
+                    if (!this.id_tercero) {
+                     alert("Seleccione un tercero");
+                     return true;
+                    }
+                    if (!this.lugar) { 
+                        alert("Seleccione una mesa");
+                        return true;
+                    }
+                    if (this.arrayDetalle.length<=0) {
+                        alert("Debe agregar productos");
+                        return true;
+                    }
+                    /*
                     if (this.errorMostrarMsjFacturacion.length) this.errorFacturacion = 1;
 
-                    return this.errorFacturacion;
+                    return this.errorFacturacion;*/
                 }
-                else {
-                    this.position = 2;
-                }
+               
             },
             selectZonas(){
                 let me=this;
@@ -1942,7 +1982,7 @@
                 this.terc_busq = '';
             },
             cargarTercero(tercero){
-                if(this.tipoAccionModalTerceros==1)
+               /* if(this.tipoAccionModalTerceros==1)
                 {
                     this.tercero = tercero['num_documento'];
                     this.id_tercero = tercero['id'];
@@ -1956,9 +1996,11 @@
                 {
                     this.vendedorFiltro = tercero['num_documento'];
                     this.idVendedorFiltro = tercero['id'];
-                }
-
-                this.cerrarModalT();
+                }*/
+                console.log("llegando");
+                this.tercero = tercero['nombre1']+" "+tercero['nombre2']+" "+tercero['apellido1']+" "+tercero['apellido2'];
+                 this.id_tercero = tercero['id'];
+                this.position=2;
             },
             buscarTercero(){
                 let me=this;
@@ -2036,6 +2078,7 @@
             d = yyyy+'-'+mm+'-'+dd;
             me.fechaActual = d;
             me.hastaFiltro = d;
+            me.desdeFiltro = d;
             me.fecha = d;
             me.fechaHoraActual = d+' '+h+':'+min+':'+sec;
             this.ocultarDetalle();
@@ -2053,6 +2096,12 @@
             font-size: 12px;
             font-family: 'Times New Roman';
     }*/
+    .ex1 {
+        border: 1px solid rgb(49, 173, 45);
+        outline-style: solid;
+        outline-color: rgba(45, 189, 76, 0.87);
+        outline-width: thin;
+}
     .btn-edit-factura {
         font-size: 15px !important;
     }
