@@ -407,6 +407,7 @@
                             </div>  
                         </div>                          
                     </div>
+                    <notifications group="foo" />
                     <div class="card-header" style="font-size: 13px;">
                         <div class="row">
                             <table class="table table-sm table-bordered">
@@ -459,7 +460,9 @@
         </div>  
     </main>
 </template>
-
+<script>
+ alertify.alert('Ready!');
+</script>
 <script>  
 
     import vSelect from 'vue-select';
@@ -1346,10 +1349,15 @@
                     });
                 }
                
-                Swal.fire({
+              /*  Swal.fire({
                     type: 'success',
                     title: 'Producto agregado',
                     text: 'Progducto cargado',
+                });*/
+                this.$notify({
+                    group: 'foo',
+                    title: 'Important message',
+                    text: 'Hello fadf asdf user! This is a notification!'
                 });
 
                  this.ivaProces();
@@ -1478,8 +1486,8 @@
             listarArticulo (buscar,criterio,categoria){
                 let me=this;
                 var var_categoria='';
-               
-               
+                if(categoria && categoria!=''){var_categoria='&categoria='+categoria;}
+                var url= this.ruta +'/articulo/listarArticulo?buscar='+ buscar + '&criterio='+ criterio+var_categoria+'&id_tarifario='+me.id_tarifario;
                 axios.get(url).then(function (response) {
                     var respuesta= response.data;
                     me.arrayArticulo = [];
@@ -2068,7 +2076,11 @@
             var h = d.getHours();
             var min = d.getMinutes();
             var sec = d.getSeconds();
-            
+            this.$notify({
+                group: 'foo',
+                title: 'Important message',
+                text: 'Hello user! This is a notification!'
+            });
             if(dd<10){
                 dd='0'+dd;
             } 
@@ -2088,6 +2100,7 @@
             me.selectZonas();
             this.listarArticulo(this.buscarA,this.criterioA,this.buscarCategoriaA);
              me.listarFacturacion(1,me.numFacturaFiltro,me.estadoFiltro,me.idTerceroFiltro,me.ordenFiltro,me.desdeFiltro,me.hastaFiltro,me.idVendedorFiltro);
+             
         }
     }
 </script>

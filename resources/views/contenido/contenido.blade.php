@@ -12,10 +12,11 @@
                 <img src="img/targeta.PNG" class="card-img-top" alt="">
             </div>   
         </template>
-        @if($rol_usu==2)             
+        @if($rol_usu==2)                
             <template v-if="menu==40">
                 <punto_venta :ruta="ruta"></punto_venta>
             </template>
+
         @endif
 
                    
