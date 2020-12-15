@@ -1478,8 +1478,8 @@
             listarArticulo (buscar,criterio,categoria){
                 let me=this;
                 var var_categoria='';
-                if(categoria && categoria!=''){var_categoria='&categoria='+categoria;}
-                var url= this.ruta +'/articulo/listarArticulo?buscar='+ buscar + '&criterio='+ criterio+var_categoria+'&id_tarifario='+me.id_tarifario;
+               
+               
                 axios.get(url).then(function (response) {
                     var respuesta= response.data;
                     me.arrayArticulo = [];
