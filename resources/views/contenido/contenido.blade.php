@@ -8,7 +8,7 @@
     @if(Auth::check())
         <template v-if="menu==0">
             <br>
-            <div class="card text-center">
+            <div class="card center">
                 <img src="img/targeta.PNG" class="card-img-top" alt="">
             </div>   
         </template>
