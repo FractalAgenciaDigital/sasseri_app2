@@ -403,8 +403,22 @@
                                     <option value="2" style="font-size: 14px;">Cerrada</option>
                                     <option value="3" style="font-size: 14px;">Cancelada</option>
                                 </select>  
-                            </div>  
-                        </div>                          
+                            </div>
+                            <div class="container">
+                                <div class="row">
+                                <div class="col-6">
+                                    <label>Desde:</label>                                   
+                                    <input v-if="permisosUser.leer" type="date" class="form-control" v-model="desdeFiltro">
+                                    <input v-else disabled type="date" class="form-control" v-model="desdeFiltro">
+                                </div>
+                                <div class="col-6">
+                                    <label>Hasta:</label>                                   
+                                    <input v-if="permisosUser.leer" type="date" class="form-control" v-model="hastaFiltro">
+                                    <input v-else disabled type="date" class="form-control" v-model="hastaFiltro">
+                                </div>
+                                </div>
+                            </div>
+                        </div>                         
                     </div>
                     
                     <div class="card-header" style="font-size: 13px;">
@@ -1530,9 +1544,9 @@
                         'tipo_movimiento' : 4,
                         'sumatoria' : 0
                     }).then(function (response) {
-                        var toFind = "2";
+                        var toFind = "4";
                         var filtered = me.arrayDetalle.filter(function(el) {
-                        return el.tipo === toFind;
+                            return el.tipo === toFind;
                         });
                         me.arrayDetalle = [];
                         me.id_tercero = '';
@@ -1709,7 +1723,7 @@
                                 me.facturacion_id=data['id'];
                                 me.num_factura=data['num_factura'];
                                 me.id_tercero=data['id_tercero'];
-                                me.tercero=data['nombre1'] ?  data['nombre1']+''+data['nombre2']+' '+data['apellido1']+' '+data['apellido2'] : data['nom_tercero'];
+                                me.tercero=data['nombre1'] ?  data['nombre1']+' '+data['nombre2']+' '+data['apellido1']+' '+data['apellido2'] : data['nom_tercero'];
                                 me.fec_edita=me.fechaHoraActual;
                                 me.subtotal=data['subtotal'];
                                 me.valor_iva=data['valor_iva'];
