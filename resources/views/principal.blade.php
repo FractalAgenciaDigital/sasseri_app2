@@ -13,6 +13,13 @@
         <title>Sasseri</title>
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <link href="css/plantilla.css" rel="stylesheet">
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+        <!-- Default theme -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+        <!-- Semantic UI theme -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+        <!-- Bootstrap theme -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
         <style>
         .btn-crea-factura {
             height: 34px;
@@ -289,7 +296,7 @@
 
                     </nav>
                     <!-- End of Topbar -->
-
+                    
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
 
@@ -329,8 +336,8 @@
         <script src="js/app.js"></script>
         <script src="js/plantilla.js"></script>
         <!-- <script src="js/main.js"></script>     -->
-        <script src = "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.min.js"> </script>
-
+        <script src = "js/bootstrap-multis.min.js"> </script>
+        <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
         <!-- <script src="js/demo/chart-area-demo.js"></script>
         <script src="js/demo/chart-pie-demo.js"></script> -->
 
