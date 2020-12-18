@@ -392,7 +392,7 @@
                             <div class="col-3">
                                 <div class="input">
                                     <div class="input-group-prepend">
-                                        <h4  style="margin-left: -23px; margin-left: 13px; margin-top: 6px; font-size: 18px;" for="inputGroupSelect01">Estado</h4>
+                                        <h4  style="margin-left: -23px; margin-left: 13px; margin-top: 6px; font-size: 14px;" for="inputGroupSelect01">Estado</h4>
                                     </div>
                                 </div>
                             </div>
@@ -408,12 +408,12 @@
                                 <div class="row">
                                 <div class="col-6">
                                     <label>Desde:</label>                                   
-                                    <input v-if="permisosUser.leer" type="date" class="form-control" v-model="desdeFiltro">
+                                    <input v-if="permisosUser.leer" type="date" class="form-control" style="border-radius: 7px;" v-model="desdeFiltro">
                                     <input v-else disabled type="date" class="form-control" v-model="desdeFiltro">
                                 </div>
                                 <div class="col-6">
                                     <label>Hasta:</label>                                   
-                                    <input v-if="permisosUser.leer" type="date" class="form-control" v-model="hastaFiltro">
+                                    <input v-if="permisosUser.leer" type="date" class="form-control" style="border-radius: 7px;" v-model="hastaFiltro">
                                     <input v-else disabled type="date" class="form-control" v-model="hastaFiltro">
                                 </div>
                                 </div>

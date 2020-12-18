@@ -206,7 +206,7 @@
                                 <label>Cajero</label>                               
                                 <select class="form-control" v-model="id_cajero">
                                     <option value="0">Seleccione</option>
-                                    <option v-for="(cajero, index) in arrayCajeros" :key="index" :value="cajero.id" v-text="cajero.nombre"></option>
+                                    <option v-for="(cajero, index) in arrayCajeros" :key="index" :value="cajero.id" v-text="cajero.usuario"></option>
                                 </select>                                
                             </div>
                             
@@ -227,7 +227,7 @@
                                     <label>Cajero</label>                                    
                                     <select class="form-control" v-model="id_cajero" disabled>
                                         <option value="0">Seleccione</option>
-                                        <option v-for="(cajero, index) in arrayCajeros" :value="cajero.id" v-text="cajero.nombre" :key="index"></option>
+                                        <option v-for="(cajero, index) in arrayCajeros" :value="cajero.id" v-text="cajero.usuario" :key="index"></option>
                                     </select>
                                     
                                 </div>
@@ -606,10 +606,13 @@
             },
             selectCajeros(id){
                 let me=this;
+                console.log(id)
                 var url= this.ruta +'/cajas_admin/listarCajerosAdmin?id='+id;
-                 axios.get(url).then(function (response) {
+                axios.get(url).then(function (response) {
+                    console.log(response.data.cajas_admin.data)
                     var respuesta = response.data;
-                    me.arrayCajeros = respuesta.cajas_admin;                    
+                    console.log(respuesta);
+                    me.arrayCajeros = respuesta.cajas_admin.data;    
                 })
                 .catch(function (error) {
                     console.log(error);
