@@ -76,6 +76,54 @@
                         </li>
                         <li @click="menu=14" class="nav-item">
                             <a href="#" class="nav-link"><i class="icon-calculator"></i><span>Facturación</span> </a>
+                        </li>                       
+                        
+                        
+                        <li class="nav-item">
+                            <a 
+                                class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCajas"
+                                aria-expanded="true" aria-controls="collapseCajas"
+                            >
+                                <i class="icon-basket"></i>
+                                <span> Cajas</span>                       
+                            </a>
+                            <ul 
+                                id="collapseCajas" class="collapse" aria-labelledby="headingCajas" data-parent="#accordionSidebar"                   
+                            >
+                                <div class="collapse-inner">
+                                    <li @click="menu=35" class="collapse-item">
+                                        <a href="#"><i class="fa fa-list-ol"></i> Gestión de cajas</a>
+                                    </li>
+                                    <li @click="menu=29" class="collapse-item">
+                                        <a href="#">
+                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calculator" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M12 1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z"/>
+                                            <path d="M4 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-2zm0 4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-4z"/>
+                                        </svg>
+                                        Apertura de cajas</a>
+                                    </li>
+                                    <li @click="menu=30" class="collapse-item">
+                                        <a href="#"><i class="fa fa-times-circle"></i> <span>Cierre de caja</span></a>
+                                    </li>
+                                </div>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCartera"
+                            aria-expanded="true" aria-controls="collapseCartera">
+                                <i class="icon-wallet"></i><span>Cartera</span>
+                            </a>
+                            <ul id="collapseCartera" class="collapse" aria-labelledby="headingCartera"
+                            data-parent="#accordionSidebar">
+                                <div class="collapse-inner">
+                                    <li @click="menu=33" class="collapse-item">
+                                        <a href="#"><i class="fa fa-money"></i> Cuentas por cobrar</a>
+                                    </li>
+                                    <li @click="menu=34" class="collapse-item">
+                                        <a href="#"><i class="fa fa-money"></i> Cuentas por pagar</a>
+                                    </li>
+                                </div>
+                            </ul>
                         </li>
                         <li @click="menu=999991" class="nav-item">
                             <a href="#" class="nav-link"><i class="icon-user"></i> <span>Usuarios</span></a>
@@ -100,56 +148,9 @@
                                     </li>
                                     <li @click="menu=27" class="collapse-item">
                                         <a href="#"><i class="fa fa-percent"></i> IVAs</a>
-                                    </li>
-                                    <li @click="menu=29" class="collapse-item">
-                                        <a href="#">
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calculator" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" d="M12 1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z"/>
-                                            <path d="M4 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-2zm0 4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-4z"/>
-                                        </svg>
-                                        Cajas</a>
-                                    </li>
+                                    </li>                                    
                                 </div>
 
-                            </ul>
-                        </li>
-                        
-                        <li class="nav-item">
-                            <a 
-                                class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCajas"
-                                aria-expanded="true" aria-controls="collapseCajas"
-                            >
-                                <i class="icon-basket"></i>
-                                <span> Cajas</span>                       
-                            </a>
-                            <ul 
-                                id="collapseCajas" class="collapse" aria-labelledby="headingCajas" data-parent="#accordionSidebar"                   
-                            >
-                                <div class="collapse-inner">
-                                    <li @click="menu=35" class="collapse-item">
-                                        <a href="#"><i class="fa fa-list-ol"></i> Gestión de cajas</a>
-                                    </li>
-                                    <li @click="menu=30" class="collapse-item">
-                                        <a href="#"><i class="fa fa-times-circle"></i> <span>Cierre de caja</span></a>
-                                    </li>
-                                </div>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCartera"
-                            aria-expanded="true" aria-controls="collapseCartera">
-                                <i class="icon-wallet"></i><span>Cartera</span>
-                            </a>
-                            <ul id="collapseCartera" class="collapse" aria-labelledby="headingCartera"
-                            data-parent="#accordionSidebar">
-                                <div class="collapse-inner">
-                                    <li @click="menu=33" class="collapse-item">
-                                        <a href="#"><i class="fa fa-money"></i> Cuentas por cobrar</a>
-                                    </li>
-                                    <li @click="menu=34" class="collapse-item">
-                                        <a href="#"><i class="fa fa-money"></i> Cuentas por pagar</a>
-                                    </li>
-                                </div>
                             </ul>
                         </li>
                     </ul>

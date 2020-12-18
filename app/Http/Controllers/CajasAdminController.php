@@ -126,7 +126,7 @@ class CajasAdminController extends Controller
         ->select('users.id','cajas_admin.id_caja','cajas_admin.id_usuario','users.usuario as nombre')
         ->where('cajas_admin.id_caja','=',$request->id)->get();
 
-
+        echo $cajas_admin;
         
         return ['cajas_admin' => $cajas_admin];
     }

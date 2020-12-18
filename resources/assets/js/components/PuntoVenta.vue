@@ -207,9 +207,10 @@
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Tipo de documento</label>
                                 <select class="form-control" id="exampleFormControlSelect1">
-                                <option>Cedula Ciudadania</option>
-                                <option>Cedula Extrangera</option>
-                                <option>Tarjeta Identidad</option>
+                                    <option value="0" disabled>Seleccione</option>
+                                    <option>Cedula Ciudadania</option>
+                                    <option>Cedula Extrangera</option>
+                                    <option>Tarjeta Identidad</option>
                                 </select>
                             </div>
                             <div class="form-group">
