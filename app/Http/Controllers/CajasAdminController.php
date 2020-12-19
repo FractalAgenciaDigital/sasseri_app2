@@ -67,7 +67,7 @@ class CajasAdminController extends Controller
             /*$cajas_admin = CajasAdmin::rightJoin('users','cajas_admin.id_usuario','=','users.id')
             ->select('cajas_admin.id','cajas_admin.id_caja','cajas_admin.id_usuario','cajas_admin.usu_crea','users.usuario')
             ->orderBy('id', 'desc')->paginate(6);*/
-            $users = User::where('empresas_id','=',$id_empresa)->where('condicion','1')->where('idrol','2')->orderBy('nombre')->paginate(10);
+            $users = User::where('empresas_id','=',$id_empresa)->where('condicion','1')->where('idrol','2')->orderBy('id', 'desc')->paginate(10);
         }
 
         return [
