@@ -141,7 +141,7 @@
                                     <div class="form-group col-md-4">
                                         <label class="col-md-3 form-control-label float-left">Cuenta Salida <span style="color:red;" v-show="idCuentaSalidaProductos==''">(*)</span></label>
                                         <div class="form-inline col-md-9 float-right">
-                                            <input type="text" readonly class="form-control" v-model="cuentaSalidaProductos"v-bind:class="{ 'is-invalid' : hasError.idCuentaSalidaProductos==1}">
+                                            <input type="text" readonly class="form-control" v-model="cuentaSalidaProductos" v-bind:class="{ 'is-invalid' : hasError.idCuentaSalidaProductos==1}">
                                             <button type="button" @click="abrirModalCuentas('salida_productos')" title="Agragar cuenta" class="btn btn-primary">...</button>
                                         </div>
                                     </div>
@@ -188,8 +188,8 @@
                                         <label class="col-md-3 form-control-label float-left">Iva Compras<span style="color:red;" v-show="idIvaCompras==0">(*)</span></label>
                                         <div class="col-md-9 float-right">
                                             <select class="form-control" v-model="idIvaCompras" v-bind:class="{ 'is-invalid' : hasError.idIvaCompras==1}">
-                                                <option value="0">Seleccione</option>
-                                                <option v-for="(iva, index) in arrayIvasCompras" :value="iva.id" v-text="iva.nombre"></option>
+                                                <option value="0" disabled>Seleccione</option>
+                                                <option v-for="(iva, index) in arrayIvasCompras" :value="iva.id" :key="index" v-text="iva.nombre"></option>
                                             </select>
                                         </div>
                                     </div>
@@ -198,7 +198,7 @@
                                         <div class="col-md-9 float-right">
                                             <select class="form-control" v-model="idIvaVentas" v-bind:class="{ 'is-invalid' : hasError.idIvaVentas==1}">
                                                 <option value="0">Seleccione</option>
-                                                <option v-for="(iva, index) in arrayIvasVentas" :value="iva.id" v-text="iva.nombre"></option>
+                                                <option v-for="(iva, index) in arrayIvasVentas" :key="index" :value="iva.id" v-text="iva.nombre"></option>
                                             </select>
                                         </div>
                                     </div>
@@ -208,8 +208,8 @@
                                         <label class="col-md-3 form-control-label float-left">Iva Devolucion En Compras<span style="color:red;" v-show="idIvaDevolucionCompras==0">(*)</span></label>
                                         <div class="col-md-9 float-right">
                                             <select class="form-control" v-model="idIvaDevolucionCompras" v-bind:class="{ 'is-invalid' : hasError.idIvaDevolucionCompras==1}">
-                                                <option value="0">Seleccione</option>
-                                                <option v-for="(iva, index) in arrayIvasDevolucionCompras" :value="iva.id" v-text="iva.nombre"></option>
+                                                <option value="0" disabled>Seleccione</option>
+                                                <option v-for="(iva, index) in arrayIvasDevolucionCompras" :key="index" :value="iva.id" v-text="iva.nombre"></option>
                                             </select>
                                         </div>
                                     </div>
@@ -217,8 +217,8 @@
                                         <label class="col-md-3 form-control-label float-left">Iva Devolucion En Ventas<span style="color:red;" v-show="idIvaDevolucionVentas==0">(*)</span></label>
                                         <div class="col-md-9 float-right">
                                             <select class="form-control" v-model="idIvaDevolucionVentas" v-bind:class="{ 'is-invalid' : hasError.idIvaDevolucionVentas==1}">
-                                                <option value="0">Seleccione</option>
-                                                <option v-for="(iva, index) in arrayIvasDevolucionVentas" :value="iva.id" v-text="iva.nombre"></option>
+                                                <option value="0" disabled>Seleccione</option>
+                                                <option v-for="(iva, index) in arrayIvasDevolucionVentas" :key="index" :value="iva.id" v-text="iva.nombre"></option>
                                             </select>
                                         </div>
                                     </div>

@@ -1,6 +1,7 @@
 <template>
     <main class="main">
         <div>
+            <notifications group="foo" />
             <div class="card" v-show="position==1">  <!-- listado de productos de factura -->
                 <div class="card-header"> 
                     <div class="row mb-1">
@@ -207,9 +208,10 @@
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Tipo de documento</label>
                                 <select class="form-control" id="exampleFormControlSelect1">
-                                <option>Cedula Ciudadania</option>
-                                <option>Cedula Extrangera</option>
-                                <option>Tarjeta Identidad</option>
+                                    <option value="0" disabled>Seleccione</option>
+                                    <option>Cedula Ciudadania</option>
+                                    <option>Cedula Extrangera</option>
+                                    <option>Tarjeta Identidad</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -312,8 +314,6 @@
                     </div> 
                 </div>                    
             </div>  
-        </div>
-        <div>
             <div v-show="position==6"> <!-- tickets listado preparcion chef -->
                 <div class="card">
                     <div class="card-header">
@@ -393,7 +393,7 @@
                             <div class="col-3">
                                 <div class="input">
                                     <div class="input-group-prepend">
-                                        <h4  style="margin-left: -23px; margin-left: 13px; margin-top: 6px; font-size: 18px;" for="inputGroupSelect01">Estado</h4>
+                                        <h4  style="margin-left: -23px; margin-left: 13px; margin-top: 6px; font-size: 14px;" for="inputGroupSelect01">Estado</h4>
                                     </div>
                                 </div>
                             </div>
@@ -404,9 +404,24 @@
                                     <option value="2" style="font-size: 14px;">Cerrada</option>
                                     <option value="3" style="font-size: 14px;">Cancelada</option>
                                 </select>  
-                            </div>  
-                        </div>                          
+                            </div>
+                            <div class="container">
+                                <div class="row">
+                                <div class="col-6">
+                                    <label>Desde:</label>                                   
+                                    <input v-if="permisosUser.leer" type="date" class="form-control" style="border-radius: 7px;" v-model="desdeFiltro">
+                                    <input v-else disabled type="date" class="form-control" v-model="desdeFiltro">
+                                </div>
+                                <div class="col-6">
+                                    <label>Hasta:</label>                                   
+                                    <input v-if="permisosUser.leer" type="date" class="form-control" style="border-radius: 7px;" v-model="hastaFiltro">
+                                    <input v-else disabled type="date" class="form-control" v-model="hastaFiltro">
+                                </div>
+                                </div>
+                            </div>
+                        </div>                         
                     </div>
+                    
                     <div class="card-header" style="font-size: 13px;">
                         <div class="row">
                             <table class="table table-sm table-bordered">
@@ -445,10 +460,12 @@
                     </div>                      
                 </div>  
             </div>
+        </div>
+        <div>  
             
             <div class="row mt-1 fixed-bottom mx-auto"> <!-- boton de facturar -->
                 <div class="col-12" v-if="position==1||position==2">
-                    <a @click="registrarFacturacion();" class="btn btn-block btn-lg active btn-success" href="#" role="button"><h3 class="text-white">Facturar $ {{valor_final=calcularTotal}}</h3></a>
+                    <button type="button" @click="registrarFacturacion();" class="btn btn-block btn-lg active btn-success" href="#" role="button"><h3 class="text-white">Facturar $ {{valor_final=calcularTotal}}</h3></button>
                 </div>
                 <div class="col-12" v-if="position==7">
 
@@ -459,10 +476,14 @@
         </div>  
     </main>
 </template>
-
+<script>
+ alertify.alert('Ready!');
+</script>
 <script>  
 
     import vSelect from 'vue-select';
+    import Notifications from 'vue-notification'
+    import Vue from 'vue'
     export default {
         props : ['ruta'],
         data (){
@@ -724,19 +745,7 @@
                 .catch(function (error) {
                     console.log(error);
                 });
-            },
-            listarDetalle(id_factura){
-                let me=this;
-                var url= this.ruta +'/detalle_facturacion/buscarDetalleFacturacion?id_factura=' + id_factura;
-                axios.get(url).then(function (response) {
-                    var respuesta= response.data;
-                    me.arrayDetalle = respuesta.detalles;
-                    me.arrayDetalleT = respuesta.detalles;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            },
+            },            
             selectProveedor(search,loading){
                 let me=this;
                 loading(true)
@@ -1346,11 +1355,13 @@
                     });
                 }
                
-                Swal.fire({
+              /*  Swal.fire({
                     type: 'success',
                     title: 'Producto agregado',
                     text: 'Progducto cargado',
-                });
+                });*/
+                
+                this.llamarMensaje(producto.nombre);
 
                  this.ivaProces();
             },
@@ -1490,8 +1501,8 @@
                 });
             },
             registrarFacturacion(){
-                console.log(this.validarFacturacion());
-                if (this.validarFacturacion()){
+                //console.log(this.validarFacturacion());
+                if (!this.validarFacturacion()){
 
                     return;
                 }
@@ -1534,15 +1545,16 @@
                         'tipo_movimiento' : 4,
                         'sumatoria' : 0
                     }).then(function (response) {
-                        var toFind = "2";
+                        var toFind = "4";
                         var filtered = me.arrayDetalle.filter(function(el) {
-                        return el.tipo === toFind;
+                            return el.tipo === toFind;
                         });
                         me.arrayDetalle = [];
                         me.id_tercero = '';
                         me.tercero = '';
                         me.lugar = '';
                         me.ocultarDetalle();
+                        this.listarArticulo(me.buscarA,me.criterioA,me.buscarCategoriaA);
                         me.listarFacturacion(1,'','','','','','','');
                         if(filtered)
                             me.position = 6;
@@ -1605,33 +1617,55 @@
                 }).then(function (response) {
                     me.ocultarDetalle();
                     me.listarFacturacion(1,'','','','','','','');
+                    this.listarArticulo(me.buscarA,me.criterioA,me.buscarCategoriaA);
                 }).catch(function (error) {
                     console.log(error);
                 });
             },
             validarFacturacion(){
-                this.errorFacturacion=0;
+                this.errorFacturacion=0;               
                 if(this.position!=2) {
                     this.position = 2;
-                }
-               else {
+                    return false;
+                } else {
                 
                     this.errorMostrarMsjFacturacion =[];
 
                     // if (this.fecha==0) this.errorMostrarMsjFacturacion.push("Ingrese la fecha");
                     // if (this.num_factura==0) this.errorMostrarMsjFacturacion.push("Seleccione el comprobante");
                     if (!this.id_tercero) {
-                     alert("Seleccione un tercero");
-                     return true;
+                        this.$notify({
+                            group: 'foo',
+                            duration: 10000,
+                            position: 'top right',
+                            title: 'Seleccione Cliente',
+                            type: 'error',
+                            text: 'Debes seleccion un cliente'
+                        });
+                        return false;
                     }
                     if (!this.lugar) { 
-                        alert("Seleccione una mesa");
-                        return true;
+                         this.$notify({
+                            group: 'foo',
+                            duration: 10000,
+                            position: 'top right',
+                            title: 'Seleccione Mesa',
+                            type: 'error',
+                            text: 'Debes selecciona una mesa'
+                        });
+                        return false;
                     }
                     if (this.arrayDetalle.length<=0) {
-                        alert("Debe agregar productos");
-                        return true;
+                       this.$notify({
+                            group: 'foo',
+                            duration: 10000,
+                            position: 'top right',
+                            title: 'Seleccione Mesa',
+                            type: 'error',
+                            text: 'Debes agregar productos'
+                        });
                     }
+                    return true;
                     /*
                     if (this.errorMostrarMsjFacturacion.length) this.errorFacturacion = 1;
 
@@ -1690,7 +1724,7 @@
                                 me.facturacion_id=data['id'];
                                 me.num_factura=data['num_factura'];
                                 me.id_tercero=data['id_tercero'];
-                                me.tercero=data['nom_tercero'];
+                                me.tercero=data['nombre1'] ?  data['nombre1']+' '+data['nombre2']+' '+data['apellido1']+' '+data['apellido2'] : data['nom_tercero'];
                                 me.fec_edita=me.fechaHoraActual;
                                 me.subtotal=data['subtotal'];
                                 me.valor_iva=data['valor_iva'];
@@ -1883,6 +1917,18 @@
                 //Obtener los datos de los detalles 
                 me.listarDetalle(id);
             },
+            listarDetalle(id_factura){
+                let me=this;
+                var url= this.ruta +'/detalle_facturacion/buscarDetalleFacturacion?id_factura=' + id_factura;
+                axios.get(url).then(function (response) {
+                    var respuesta= response.data;
+                    me.arrayDetalle = respuesta.detalles;
+                    me.arrayDetalleT = respuesta.detalles;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
             cerrarModal(){
                 this.modal=0;
                 this.tituloModal='';
@@ -2047,6 +2093,15 @@
             pdfFormato(id){
                 window.open(this.ruta +'/facturacion/pdfFacturacion/'+ id);
             },
+            llamarMensaje(producto) {
+                this.$notify({
+                    group: 'foo',
+                    duration: 500,
+                    title: 'Product agregado',
+                    type: 'success',
+                    text: 'Agregado '+producto
+                });
+            }
         },
         mounted() {
             $(".mul-select").select2({
@@ -2068,7 +2123,7 @@
             var h = d.getHours();
             var min = d.getMinutes();
             var sec = d.getSeconds();
-            
+           
             if(dd<10){
                 dd='0'+dd;
             } 
@@ -2086,8 +2141,10 @@
             me.listarCajas();
             me.buscarTercero();
             me.selectZonas();
+           // me.llamarMensaje();
             this.listarArticulo(this.buscarA,this.criterioA,this.buscarCategoriaA);
              me.listarFacturacion(1,me.numFacturaFiltro,me.estadoFiltro,me.idTerceroFiltro,me.ordenFiltro,me.desdeFiltro,me.hastaFiltro,me.idVendedorFiltro);
+             
         }
     }
 </script>

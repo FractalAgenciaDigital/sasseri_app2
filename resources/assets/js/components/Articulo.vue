@@ -203,7 +203,6 @@
                                         <div class="input-group">
                                             <select class="form-control custom-select" v-model="idcategoria2" v-bind:class="{ 'is-invalid': hasError.idcategoria2==1 }">
                                                 <option value="0" disabled>Seleccione</option>
-                                                <option value="." disabled>.</option>
                                                 <option v-for="categoria in arrayCategoria2" :key="categoria.id" :value="categoria.id" v-text="categoria.nombre"></option>
                                             </select>
                                             <div class="input-group-append">
@@ -213,13 +212,13 @@
                                         </div>
                                     </div>
                                     <div style="display:none;background-color:#cacbc7" :class="{'col-md-12 p-1 mostrar-crear' : modalCrear==1}">
-                                        <div class="col-md-10 float-left">
-                                            <div class="col-md-6 float-left">
-                                                <span v-text="tituloModalCrear" class="form-control-label col-md-4 float-left"></span>
+                                        <div class="col-md-10">
+                                            <div class="col-md-6">
+                                                <span v-text="tituloModalCrear" class="form-control-label col-md-4"></span>
                                                 <input type="text" class="form-control col-md-8 float-right" v-model="nombre_crear">
                                             </div>
-                                            <div class="col-md-12 float-left">
-                                                <span class="form-control-label col-md-4 float-left">Descripción</span>
+                                            <div class="col-md-12">
+                                                <span class="form-control-label col-md-4">Descripción</span>
                                                 <input type="text" class="form-control col-md-8 float-right" v-model="descripcion_crear">
                                             </div>
                                         </div>
@@ -273,8 +272,7 @@
                                         <input type="number" v-model="minimo" :min="1" @blur="(function(){
                                             if(minimo<1) minimo=1;})" class="form-control" placeholder="" v-bind:class="{ 'is-invalid': hasError.minimo==1 }">
                                     </div>
-                                    <div v-else class="form-group col-md-6">
-                                    </div>
+                                    <!-- <div v-else></div> -->
                                     <div class="form-group col-md-6">
                                         <label for="text-input">Código</label>                                        
                                         <input type="text" v-model="codigo" class="form-control" placeholder="Código de barras" v-bind:class="{ 'is-invalid': hasError.codigo==1 }"> 
@@ -283,17 +281,15 @@
                                         <label for="text-input">Talla</label>
                                         <input type="text" v-model="talla" class="form-control" placeholder="Talla del producto" v-bind:class="{ 'is-invalid': hasError.talla==1 }">
                                     </div>
-                                    <div class="form-group col-md-6" v-else>
-                                    </div>
+                                    <!-- <div v-else></div> -->
                                     <div class="form-group col-md-6" v-if="tipo_articulo!=2 && tipo_articulo!=3">
                                         <label for="text-input">Fecha vencimiento</label>
                                         <input type="date" v-model="fec_vence" class="form-control" placeholder="" v-bind:class="{ 'is-invalid': hasError.fec_vence==1 }">
                                     </div>
-                                    <div class="form-group col-md-6" v-else>
-                                    </div>
-                                </div>
+                                    <!-- <div v-else></div> -->
+                                <!-- </div>
                                    
-                                <div class="form-row">
+                                <div class="form-row"> -->
                                     <div class="form-group col-md-6" v-if="tipo_articulo==1 || tipo_articulo==3">
                                         <label for="text-input">Und. medida</label>
                                         <div class="input-group">
@@ -307,8 +303,8 @@
                                     </div>
                                     
                                     <div style="display:none; background:#cacbc7" :class="{'form-group p-1 col-md-12 mostrar-crear' : modalCrear==2}">
-                                        <div class="col-md-10 float-left">
-                                            <span class="col-md-3 form-control-label float-left" v-text="tituloModalCrear"></span>
+                                        <div class="col-md-10">
+                                            <span class="col-md-3 form-control-label" v-text="tituloModalCrear"></span>
                                             <input type="text" class="form-control col-md-9 float-right" v-model="nombre_crear">
                                         </div>
                                         <div class="col-md-2 float-right">
@@ -317,8 +313,8 @@
                                         </div>
                                     </div>
                                     <div style="display:none;background:#cacbc7" :class="{'form-group p-1 col-md-12 mostrar-crear' : modalCrear==3}">
-                                        <div class="col-md-10 float-left">
-                                            <span class="col-md-3 form-control-label float-left" v-text="tituloModalCrear"></span>
+                                        <div class="col-md-10">
+                                            <span class="col-md-3 form-control-label" v-text="tituloModalCrear"></span>
                                             <input type="text" class="col-md-9 form-control float-right" v-model="nombre_crear">
                                         </div>
                                         <div class="col-md-2 float-right">
@@ -341,8 +337,8 @@
                                         </div>                   
                                     </div>
                                     <div style="display:none;background:#cacbc7" :class="{'form-group p-1 col-md-12 mostrar-crear' : modalCrear==4}">
-                                        <div class="col-md-10 float-left">
-                                            <span class="col-md-3 form-control-label float-left" v-text="tituloModalCrear"></span>
+                                        <div class="col-md-10">
+                                            <span class="col-md-3 form-control-label" v-text="tituloModalCrear"></span>
                                             <input type="text" class="col-md-9 form-control float-right" v-model="nombre_crear">
                                         </div>
                                         <div class="col-md-2 float-right">
@@ -352,9 +348,9 @@
                                     </div>
                                       
 
-                                        <!--<label class="col-md-3 form-control-label float-left" for="text-input">Concentración</label>
+                                        <!--<label class="col-md-3 form-control-label" for="text-input">Concentración</label>
                                         <div class="col-md-9 float-right">
-                                            <select class="form-control col-md-10 float-left" v-model="id_concentracion">
+                                            <select class="form-control col-md-10" v-model="id_concentracion">
                                                 <option value="0" disabled>Seleccione</option>
                                                 <option v-for="id_concentracion in arrayConcentracion" :key="id_concentracion.id" :value="id_concentracion.id" v-text="id_concentracion.nombre"></option>
                                             </select> 
@@ -362,8 +358,8 @@
                                         </div>-->
                                     
                                     
-                                </div>
-                                <div class="form-row">
+                                <!-- </div>
+                                <div class="form-row"> -->
                                     <div class="form-group col-md-6">
                                         <label>Marca</label>                                        
                                         <input type="text" v-model="marca" class="form-control" v-bind:class="{ 'is-invalid': hasError.marca==1 }">                                        
@@ -375,7 +371,7 @@
                                 </div>
                                     <div class="row">
                                         <div class="form-group col-md-6">
-                                            <label class="col-md-3 form-control-label float-left">Imagen</label>
+                                            <label class="col-md-3 form-control-label">Imagen</label>
                                             <div class="col-md-9 float-right">
                                                 <input type="file" id="img" name="img" ref="inputFileImg"  @change="cargarImg" class="form-control" v-bind:class="{ 'is-invalid': hasError.img==1 }">
                                             </div>
@@ -385,7 +381,7 @@
                                     </div>
                                     <!--<div class="row">
                                         <div class="form-group col-md-6">
-                                            <label class="col-md-3 form-control-label float-left" for="text-input">Código</label>
+                                            <label class="col-md-3 form-control-label" for="text-input">Código</label>
                                             <div class="col-md-9 float-right">
                                                 <input type="text" v-model="codigo" class="form-control" placeholder="Código de barras"> 
                                             </div>
@@ -432,13 +428,13 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="form-group col-md-5">
-                                        <label class="col-md-4 float-left">Fec. Inicia</label>
+                                        <label class="col-md-4">Fec. Inicia</label>
                                         <div class="col-md-8 float-right">
                                             <input type="date" class="form-control" v-model="fecIni">
                                         </div>
                                     </div>
                                     <div class="col-md-5">
-                                        <label class="col-md-4 float-left">Fec. Finaliza</label>
+                                        <label class="col-md-4">Fec. Finaliza</label>
                                         <div class="col-md-8 float-right">
                                             <input type="date" class="form-control" v-model="fecFin">
                                         </div>
@@ -563,7 +559,7 @@
                             <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                                 <div class="form-group row">
                                     <div class="col-md-12">
-                                        <label class="col-md-1 form-control-label float-left" for="text-input">Nombre</label>
+                                        <label class="col-md-1 form-control-label" for="text-input">Nombre</label>
                                         <div class="col-md-11 float-right">
                                             <input type="text" v-model="nombreModeloContable" class="form-control float-right" placeholder="Nombre del modelo contable" v-bind:class="{ 'is-invalid' : hasError.nombreModeloContable==1}">
                                         </div>
@@ -571,7 +567,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-12">
-                                        <label class="col-md-1 form-control-label float-left" for="email-input">Descripción</label>
+                                        <label class="col-md-1 form-control-label" for="email-input">Descripción</label>
                                         <div class="col-md-11 float-right">
                                             <textarea v-model="descripcionModeloContable" class="form-control float-right"></textarea>
                                         </div>
@@ -579,21 +575,21 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-4">
-                                        <label class="col-md-3 form-control-label float-left">Cuenta compra <span style="color:red;" v-show="idCuentaProductos==''">(*)</span></label>
+                                        <label class="col-md-3 form-control-label">Cuenta compra <span style="color:red;" v-show="idCuentaProductos==''">(*)</span></label>
                                         <div class="form-inline col-md-9 float-right">
                                             <input type="text" readonly class="form-control" style="width: 85%;" v-model="cuentaProductos" v-bind:class="{ 'is-invalid' : hasError.idCuentaProductos==1}">
                                             <button type="button" @click="abrirModalCuentas('productos')" title="Agragar cuenta" class="btn btn-primary">...</button>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label class="col-md-3 form-control-label float-left">Cuenta Salida <span style="color:red;" v-show="idCuentaSalidaProductos==''">(*)</span></label>
+                                        <label class="col-md-3 form-control-label">Cuenta Salida <span style="color:red;" v-show="idCuentaSalidaProductos==''">(*)</span></label>
                                         <div class="form-inline col-md-9 float-right">
                                             <input type="text" readonly class="form-control" style="width: 85%;" v-model="cuentaSalidaProductos" v-bind:class="{ 'is-invalid' : hasError.idCuentaSalidaProductos==1}">
                                             <button type="button" @click="abrirModalCuentas('salida_productos')" title="Agragar cuenta" class="btn btn-primary">...</button>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label class="col-md-3 form-control-label float-left">Saldos iniciales <span style="color:red;" v-show="idCuentaSaldosIniciales==''">(*)</span></label>
+                                        <label class="col-md-3 form-control-label">Saldos iniciales <span style="color:red;" v-show="idCuentaSaldosIniciales==''">(*)</span></label>
                                         <div class="form-inline col-md-9 float-right">
                                             <input type="text" readonly class="form-control" style="width: 85%;" v-model="cuentaSaldosIniciales" v-bind:class="{ 'is-invalid' : hasError.idCuentaSaldosIniciales==1}">
                                             <button type="button" @click="abrirModalCuentas('saldos_iniciales')" title="Agragar cuenta" class="btn btn-primary">...</button>
@@ -602,21 +598,21 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-4">
-                                        <label class="col-md-3 form-control-label float-left">Cuenta Donaciones <span style="color:red;" v-show="idCuentaDonaciones==''">(*)</span></label>
+                                        <label class="col-md-3 form-control-label">Cuenta Donaciones <span style="color:red;" v-show="idCuentaDonaciones==''">(*)</span></label>
                                         <div class="form-inline col-md-9 float-right">
                                             <input type="text" readonly class="form-control" style="width: 85%;" v-model="cuentaDonaciones" v-bind:class="{ 'is-invalid' : hasError.idCuentaDonaciones==1}">
                                             <button type="button" @click="abrirModalCuentas('donaciones')" title="Agragar cuenta" class="btn btn-primary">...</button>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label class="col-md-3 form-control-label float-left">Cuenta devoluciones ventas <span style="color:red;" v-show="idCuentaDevolucionesVentas==''">(*)</span></label>
+                                        <label class="col-md-3 form-control-label">Cuenta devoluciones ventas <span style="color:red;" v-show="idCuentaDevolucionesVentas==''">(*)</span></label>
                                         <div class="form-inline col-md-9 float-right">
                                             <input type="text" readonly class="form-control" style="width: 85%;" v-model="cuentaDevolucionesVentas" v-bind:class="{ 'is-invalid' : hasError.idCuentaDevolucionesVentas==1}">
                                             <button type="button" @click="abrirModalCuentas('devoluciones_ventas')" title="Agragar cuenta" class="btn btn-primary">...</button>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label class="col-md-3 form-control-label float-left">Cuenta devoluciones compras <span style="color:red;" v-show="idCuentaDevolucionesCompras==''">(*)</span></label>
+                                        <label class="col-md-3 form-control-label">Cuenta devoluciones compras <span style="color:red;" v-show="idCuentaDevolucionesCompras==''">(*)</span></label>
                                         <div class="form-inline col-md-9 float-right">
                                             <input type="text" readonly class="form-control" style="width: 85%;" v-model="cuentaDevolucionesCompras" v-bind:class="{ 'is-invalid' : hasError.idCuentaDevolucionesCompras==1}">
                                             <button type="button" @click="abrirModalCuentas('devoluciones_compras')" title="Agragar cuenta" class="btn btn-primary">...</button>
@@ -625,14 +621,14 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-4">
-                                        <label class="col-md-3 form-control-label float-left">Cuenta impuesto al consumo en ventas <span style="color:red;" v-show="idCuentaImpuestoConsumoVentas==''">(*)</span></label>
+                                        <label class="col-md-3 form-control-label">Cuenta impuesto al consumo en ventas <span style="color:red;" v-show="idCuentaImpuestoConsumoVentas==''">(*)</span></label>
                                         <div class="form-inline col-md-9 float-right">
                                             <input type="text" readonly class="form-control" style="width: 85%;" v-model="cuentaImpuestoConsumoVentas" v-bind:class="{ 'is-invalid' : hasError.idCuentaImpuestoConsumoVentas==1}">
                                             <button type="button" @click="abrirModalCuentas('impuesto_consumo_ventas')" title="Agragar cuenta" class="btn btn-primary">...</button>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label class="col-md-3 form-control-label float-left">Iva Compras<span style="color:red;" v-show="idIvaCompras==0">(*)</span></label>
+                                        <label class="col-md-3 form-control-label">Iva Compras<span style="color:red;" v-show="idIvaCompras==0">(*)</span></label>
                                         <div class="col-md-9 float-right">
                                             <select class="form-control" v-model="idIvaCompras" v-bind:class="{ 'is-invalid' : hasError.idIvaCompras==1}">
                                                 <option value="0">Seleccione</option>
@@ -641,7 +637,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label class="col-md-3 form-control-label float-left">Iva Ventas<span style="color:red;" v-show="idIvaVentas==0">(*)</span></label>
+                                        <label class="col-md-3 form-control-label">Iva Ventas<span style="color:red;" v-show="idIvaVentas==0">(*)</span></label>
                                         <div class="col-md-9 float-right">
                                             <select class="form-control" v-model="idIvaVentas" v-bind:class="{ 'is-invalid' : hasError.idIvaVentas==1}">
                                                 <option value="0">Seleccione</option>
@@ -652,7 +648,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-4">
-                                        <label class="col-md-3 form-control-label float-left">Iva Devolucion En Compras<span style="color:red;" v-show="idIvaDevolucionCompras==0">(*)</span></label>
+                                        <label class="col-md-3 form-control-label">Iva Devolucion En Compras<span style="color:red;" v-show="idIvaDevolucionCompras==0">(*)</span></label>
                                         <div class="col-md-9 float-right">
                                             <select class="form-control" v-model="idIvaDevolucionCompras" v-bind:class="{ 'is-invalid' : hasError.idIvaDevolucionCompras==1}">
                                                 <option value="0">Seleccione</option>
@@ -661,7 +657,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label class="col-md-3 form-control-label float-left">Iva Devolucion En Ventas<span style="color:red;" v-show="idIvaDevolucionVentas==0">(*)</span></label>
+                                        <label class="col-md-3 form-control-label">Iva Devolucion En Ventas<span style="color:red;" v-show="idIvaDevolucionVentas==0">(*)</span></label>
                                         <div class="col-md-9 float-right">
                                             <select class="form-control" v-model="idIvaDevolucionVentas" v-bind:class="{ 'is-invalid' : hasError.idIvaDevolucionVentas==1}">
                                                 <option value="0">Seleccione</option>
@@ -749,9 +745,9 @@
                             <form v-if="tipoAccion6==1" action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                                 <div class="form-group row">
                                     <div class="col-md-6">
-                                        <label class="col-md-3 form-control-label float-left" for="text-input">Presentación</label>
+                                        <label class="col-md-3 form-control-label" for="text-input">Presentación</label>
                                         <div class="col-md-9 float-right form-inline">
-                                            <select class="form-control col-md-10 float-left custom-select" v-model="idPresentacionAsociada" v-bind:class="{ 'is-invalid' : hasError.idPresentacionAsociada==1 }">
+                                            <select class="form-control col-md-10 custom-select" v-model="idPresentacionAsociada" v-bind:class="{ 'is-invalid' : hasError.idPresentacionAsociada==1 }">
                                                 <option value="0" disabled>Seleccione</option>
                                                 <option v-for="id_presentacion in arrayPresentacion" :key="id_presentacion.id" :value="id_presentacion.id" v-text="id_presentacion.nombre"></option>
                                             </select> 
@@ -760,7 +756,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="col-md-3 form-control-label float-left" for="text-input">Código</label>
+                                        <label class="col-md-3 form-control-label" for="text-input">Código</label>
                                         <div class="col-md-9 float-right">
                                             <input type="text" v-model="codigoPresentacionAsociada" class="form-control" v-bind:class="{ 'is-invalid' : hasError.codigoPresentacionAsociada==1 }">
                                         </div>
@@ -768,7 +764,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-6">
-                                        <label class="col-md-3 form-control-label float-left" for="text-input">Unidades</label>
+                                        <label class="col-md-3 form-control-label" for="text-input">Unidades</label>
                                         <div class="col-md-9 float-right">
                                             <input type="number" v-model="unidadesPresentacionAsociada" class="form-control" v-bind:class="{ 'is-invalid' : hasError.unidadesPresentacionAsociada==1 }">
                                         </div>
@@ -777,8 +773,8 @@
                                     </div>
                                 </div>
                                 <!--<div style="display:none;" :class="{'form-group col-md-12 mostrar-crear' : modalCrear==4}">
-                                    <div class="col-md-10 float-left">
-                                        <span class="col-md-3 form-control-label float-left" v-text="tituloModalCrear"></span>
+                                    <div class="col-md-10">
+                                        <span class="col-md-3 form-control-label" v-text="tituloModalCrear"></span>
                                         <input type="text" class="col-md-9 form-control-label float-right" v-model="nombre_crear">
                                     </div>
                                     <div class="col-md-2 float-right">
@@ -787,8 +783,8 @@
                                     </div>
                                 </div>-->
                                 <div class="row pb-3" v-if="modalCrear==4">
-                                    <div class="col-md-10 float-left">
-                                        <span class="col-md-3 form-control-label float-left" v-text="tituloModalCrear"></span>
+                                    <div class="col-md-10">
+                                        <span class="col-md-3 form-control-label" v-text="tituloModalCrear"></span>
                                         <input type="text" class="col-md-9 form-control-label float-right" v-model="nombre_crear">
                                     </div>
                                     <div class="col-md-2 float-right">

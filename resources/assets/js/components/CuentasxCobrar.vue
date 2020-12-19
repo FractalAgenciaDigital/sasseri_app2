@@ -37,6 +37,7 @@
                             <div class="form-group col-md-4">
                                 <label class="form-control-label" for="email-input">Estado</label>                                    
                                 <select class="form-control custom-select" v-model="Bestado" @keyup.enter="listarCuentasxCobrar(tercero_id_filtro,Bfactura,Bdesde,Bhasta,Bestado)">
+                                    <option value="0" disabled>Seleccione</option>
                                     <option value="1">Pendiente</option>
                                     <option value="2">Cancelada</option>
                                     <option value="3">Pagada</option>

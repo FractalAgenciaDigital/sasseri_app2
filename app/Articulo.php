@@ -18,7 +18,7 @@ class Articulo extends Model
         return $this->belongsTo('App\UndMedida');
     }
 
-    public function consentracion(){
+    public function concentracion(){
         return $this->belongsTo('App\Concentracion');
     }
 

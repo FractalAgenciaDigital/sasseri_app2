@@ -142,6 +142,7 @@
                                 <label>Tipo ingreso</label>
                                 <div>
                                     <select class="form-control" v-model="tipo_ingreso">
+                                        <option value="0" disabled>Seleccione</option>
                                         <option value="Compras">Compras</option>
                                         <option value="Devoluciones">Devoluciones</option>
                                         <option value="Donaciones">Donaciones</option>
