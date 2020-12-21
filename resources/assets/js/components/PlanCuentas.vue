@@ -173,6 +173,7 @@
                                     <label v-if="verificar_ini_cuenta" class="col-md-2 form-control-label" for="text-input">Orden</label>
                                     <div v-if="verificar_ini_cuenta" class="col-md-2">
                                         <select class="form-control" id="orden" v-model="orden">
+                                            <option value="0" disabled>Seleccione</option>
                                             <option value="">N/A</option>
                                             <option value="corriente">Corriente</option>
                                             <option value="corriente">No Corriente</option>

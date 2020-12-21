@@ -14,6 +14,7 @@
                                 <label class="col-md-4 float-left">Compras</label>
                                 <div class="col-md-8 float-right">
                                     <select class="form-control"  @change="registrarFormatoContrato()" v-model="idFormatoCompras">
+                                        <option value="0" disabled>Seleccione</option>
                                         <option v-for="conf_formato in arrayConf_formatos" :key="conf_formato.id" :value="conf_formato.id" v-text="conf_formato.nombre_formato"></option>
                                     </select>
                                 </div>
@@ -22,6 +23,7 @@
                                 <label class="col-md-4 float-left">Ventas</label>
                                 <div class="col-md-8 float-right">
                                     <select class="form-control" @change="registrarFormatoContrato()" v-model="idFormatoVentas">
+                                        <option value="0" disabled>Seleccione</option>
                                         <option v-for="conf_formato in arrayConf_formatos" :key="conf_formato.id" :value="conf_formato.id" v-text="conf_formato.nombre_formato"></option>
                                     </select>
                                 </div>
@@ -30,6 +32,7 @@
                                 <label class="col-md-4 float-left">Salidas</label>
                                 <div class="col-md-8 float-right">
                                     <select class="form-control" @change="registrarFormatoContrato()" v-model="idFormatoSalidas">
+                                        <option value="0" disabled>Seleccione</option>
                                         <option v-for="conf_formato in arrayConf_formatos" :key="conf_formato.id" :value="conf_formato.id" v-text="conf_formato.nombre_formato"></option>
                                     </select>
                                 </div>

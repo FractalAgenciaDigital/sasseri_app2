@@ -68,6 +68,7 @@ class LoginController extends Controller
     }
 
     public function logout(Request $request){
+        //echo "lleggaa"; exit;
         Auth::logout();
         $request->session()->invalidate();
         return redirect('/');

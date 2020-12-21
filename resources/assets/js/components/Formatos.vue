@@ -25,6 +25,7 @@
                         <div class="col-md-4">
                             <div class="input-group">
                                 <select class="form-control col-md-3" v-model="criterio">
+                                    <option value="0" disabled>Seleccione</option>
                                     <option value="">Numero</option>
                                     <option value="num_documento">Documento</option>
                                     <option value="email">Email</option>
