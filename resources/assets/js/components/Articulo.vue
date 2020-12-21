@@ -1616,7 +1616,7 @@
                 if(!this.id_presentacion) {error=1; this.hasError['id_presentacion']=1;}
                 if(!this.codigo) {error=1; this.hasError['codigo']=1;}
                 if(this.tipoAccion==1 && this.$refs.inputFileImg.value=='') {error=1; this.hasError['img']=1;}
-
+                
                 this.errorTarifario = 0;
                 for(var i=0; i<this.arrayTarifarios.length; i++)
                 {

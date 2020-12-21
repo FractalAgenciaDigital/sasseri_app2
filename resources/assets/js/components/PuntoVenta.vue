@@ -407,16 +407,16 @@
                             </div>
                             <div class="container">
                                 <div class="row">
-                                <div class="col-6">
-                                    <label>Desde:</label>                                   
-                                    <input v-if="permisosUser.leer" type="date" class="form-control" style="border-radius: 7px;" v-model="desdeFiltro">
-                                    <input v-else disabled type="date" class="form-control" v-model="desdeFiltro">
-                                </div>
-                                <div class="col-6">
-                                    <label>Hasta:</label>                                   
-                                    <input v-if="permisosUser.leer" type="date" class="form-control" style="border-radius: 7px;" v-model="hastaFiltro">
-                                    <input v-else disabled type="date" class="form-control" v-model="hastaFiltro">
-                                </div>
+                                    <div class="col-6">
+                                        <label>Desde:</label>                                   
+                                        <input v-if="permisosUser.leer" type="date" class="form-control" style="border-radius: 7px;" v-model="desdeFiltro">
+                                        <input v-else disabled type="date" class="form-control" v-model="desdeFiltro">
+                                    </div>
+                                    <div class="col-6">
+                                        <label>Hasta:</label>                                   
+                                        <input v-if="permisosUser.leer" type="date" class="form-control" style="border-radius: 7px;" v-model="hastaFiltro">
+                                        <input v-else disabled type="date" class="form-control" v-model="hastaFiltro">
+                                    </div>
                                 </div>
                             </div>
                         </div>                         
@@ -1320,9 +1320,11 @@
                 producto.productos_iva.forEach(function(iva){
                     if(iva.tipo_iva =='Venta'){ivaVenta=iva.porcentaje;}
                 });
+                var ivaVenta_vr=0;
                 if(ivaVenta>0) {
 
-                    var ivaVenta_vr = Math.round(parseFloat(producto.precio_venta)-parseFloat((producto.precio_venta)/((ivaVenta/100)+1)));}
+                    ivaVenta_vr = Math.round(parseFloat(producto.precio_venta)-parseFloat((producto.precio_venta)/((ivaVenta/100)+1)));
+                }
                 
                 console.log("ivaVenta_vr"+ivaVenta_vr);
                 let auxPosition = me.arrayDetalle.indexOf(me.arrayDetalle.find(({codigo}) => codigo === producto.codigo));
