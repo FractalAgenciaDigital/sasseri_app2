@@ -19,6 +19,7 @@
                             <div class="col-md-6">
                                 <div class="input-group">
                                     <select v-if="permisosUser.leer" class="form-control col-md-3" v-model="criterio" @click="listarPersona(1,buscar,criterio)">
+                                        <option value="0" disabled>Seleccione</option>
                                       <option value="nombre">Nombre</option>
                                       <option value="num_documento">Documento</option>
                                       <option value="email">Email</option>
@@ -112,6 +113,7 @@
                                     <div class="form-group col-md-4">
                                         <label for="text-input">Tipo Persona (*)</label>                                                                             
                                         <select v-model="tipo_persona" class="form-control" v-bind:class="{ 'is-invalid': hasError.tipo_persona==1 }">
+                                            <option value="0" disabled>Seleccione</option>
                                             <option value="Natural">Natural</option>
                                             <option value="Juridica">Jurídica</option>
                                         </select>                                        
@@ -175,6 +177,7 @@
                                     <div  class="form-group col-lg-4">
                                         <label for="text-input">Tipo Documento</label>                                      
                                         <select v-model="tipo_documento" class="form-control" v-bind:class="{ 'is-invalid': hasError.tipo_documento==1 }">
+                                            <option value="0" disabled>Seleccione</option>
                                             <option value="CC">Cedula de Ciudadania</option>
                                             <option value="NIT">NIT</option>
                                             <option value="CE">Cedula de Extranjeria</option>
@@ -188,6 +191,7 @@
                                     <div class="form-group col-lg-4">
                                         <label for="text-input">Regimen</label>                                        
                                         <select v-model="regimen" class="form-control" v-bind:class="{ 'is-invalid': hasError.regimen==1 }">
+                                            <option value="0" disabled>Seleccione</option>
                                             <option value="Comun">Común</option>
                                             <option value="Simplificado">Simplificado</option>
                                             <option value="CE">Gran Contribuyente</option>
@@ -256,7 +260,7 @@
                                     <div class="form-group col-lg-4">
                                         <label for="text-input">Autoretenedor</label>
                                         <select class="form-control" v-model="autoretenedor" v-bind:class="{ 'is-invalid': hasError.autoretenedor==1 }">
-                                            <option value="">Seleccione</option>
+                                            <option value="0" disabled>Seleccione</option>
                                             <option value="1">Autoretenedor</option>
                                             <option value="2">No autoretenedor</option>
                                         </select>
@@ -264,7 +268,7 @@
                                     <div class="form-group col-lg-4">
                                         <label for="text-input">Declarante</label>                                        
                                         <select class="form-control" v-model="declarante" v-bind:class="{ 'is-invalid': hasError.declarante==1 }">
-                                            <option value="">Seleccione</option>
+                                            <option value="0" disabled>Seleccione</option>
                                             <option value="1">Declarante</option>
                                             <option value="2">No declarante</option>
                                         </select>
@@ -325,7 +329,7 @@
                                     <div class="form-group col-md-12">
                                         <label>Vendedor</label>                                       
                                         <select class="form-control" v-model="id_vendedor" v-bind:class="{ 'is-invalid': hasError.id_vendedor==1 }">
-                                            <option>Seleccione</option>
+                                            <option value="0" disabled>Seleccione</option>
                                             <option v-for="vendedor in arrayVendedores" :key="vendedor.id" :value="vendedor.id" v-text="vendedor.colaborador"></option>
                                         </select>
                                         
@@ -333,7 +337,7 @@
                                     <div class="form-group col-md-12">
                                         <label>Zona</label>                                       
                                         <select class="form-control" v-model="id_zona" v-bind:class="{ 'is-invalid': hasError.id_zona==1 }">
-                                            <option>Seleccione</option>
+                                            <option value="0" disabled>Seleccione</option>
                                             <option v-for="zona in arrayZonas" :key="zona.id" :value="zona.id" v-text="zona.zona"></option>
                                         </select>
                                        
@@ -371,7 +375,8 @@
                                     <div class="form-group col-md-12">
                                         <label>Bancos</label>                                      
                                         <select class="form-control" v-model="id_banco" v-bind:class="{ 'is-invalid': hasError.id_banco==1 }">
-                                          <option v-for="banco in arrayBancos" :key="banco.id" :value="banco.id" v-text="banco.nombre"></option>
+                                            <option value="0" disabled>Seleccione</option>
+                                            <option v-for="banco in arrayBancos" :key="banco.id" :value="banco.id" v-text="banco.nombre"></option>
                                         </select>                                        
                                     </div>
                                     <div class="form-group col-md-12">
@@ -383,6 +388,7 @@
                                     <div class="form-group col-md-12">
                                         <label>Tipo cuenta</label>                                      
                                         <select class="form-control" v-model="tipo_cuenta" v-bind:class="{ 'is-invalid': hasError.tipo_cuenta==1 }">
+                                            <option value="0" disabled>Seleccione</option>
                                             <option value="Corriente">Corriente</option>
                                             <option value="Ahorros">Ahorros</option>
                                         </select>                                        

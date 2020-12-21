@@ -43,13 +43,13 @@ mix.styles([
     'resources/assets/plantilla/js/wow.min.js',
     'resources/assets/plantilla/js/animsition.min.js',
     'resources/assets/plantilla/js/bootstrap-progressbar.min.js',
-    'resources/assets/plantilla/js/jquery.waypoints.min.js',
-
+    'resources/assets/plantilla/js/jquery.waypoints.min.js',    
     'resources/assets/plantilla/js/jquery.counterup.min.js',
     'resources/assets/plantilla/js/circle-progress.min.js',
     'resources/assets/plantilla/js/sb-admin-2.min.js',
     'resources/assets/plantilla/js/perfect-scrollbar.js',
     'resources/assets/plantilla/js/Chart.bundle.min.js',
     'resources/assets/plantilla/js/select2.min.js',
+    'resources/assets/plantilla/js/theme.js',
 ], 'public/js/plantilla.js')
 .js(['resources/assets/js/app.js'],'public/js/app.js');

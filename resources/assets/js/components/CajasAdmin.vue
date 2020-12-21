@@ -123,7 +123,7 @@
                                         <select class="form-control" v-model="idCajaAgregar">
                                             <option>Buscar <input type="text" value=""></option>
                                             <option value="0">Seleccione</option>
-                                            <option v-for="(caja, index) in arrayCajas" :value="caja.id" v-text="caja.nombre"></option>
+                                            <option v-for="(caja, index) in arrayCajas" :value="caja.id" v-text="caja.nombre" :key="index"></option>
                                         </select>
                                     </div>
                                     <div class="col-md-1">
@@ -141,7 +141,7 @@
                                             <tr>
                                                 <th>Nombre</th>
                                             </tr>
-                                            <tr v-for="(cajamodal, index) in arrayCajasModal">
+                                            <tr v-for="(cajamodal, index) in arrayCajasModal" :key="index">
                                                 <td v-text="cajamodal.nom_caja"></td>
                                             </tr>
                                         </table>

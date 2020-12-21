@@ -29,6 +29,7 @@
                                 <!--<input type="date" class="form-control" name="fecha_ini" v-model="fecha_ini">-->
                                
                                 <select class="form-control" v-model="anio" name="anio" >
+                                    <option value="0" disabled>Seleccione</option>
                                     <option v-for="an in lista_anios" :value="an.num_anio" :key="an.num_anio" v-text="an.num_anio"></option>
                                 </select>
                             </div>
@@ -38,11 +39,13 @@
                         </div>
                         <div class="col-md-1">
                             <select class="form-control" v-model="mes" name="mes" @change="listar_dias()">
+                                <option value="0" disabled>Seleccione</option>
                                 <option v-for="me in lista_meses" :value="me.num_mes" :key="me.num_mes" v-text="me.nom_mes"></option>
                             </select>
                         </div>
                         <div class="col-md-1">
                             <select class="form-control" v-model="dia1">
+                                <option value="0" disabled>Seleccione</option>
                                 <option v-for="d1 in lista_dias1" :value="d1" :key="d1" v-text="d1"></option>
                             </select>
 
@@ -52,11 +55,13 @@
                         </div>
                         <div class="col-md-1">
                             <select class="form-control" v-model="mes2" name="mes2" >
+                                <option value="0" disabled>Seleccione</option>
                                 <option v-for="me in lista_meses" :value="me.num_mes" :key="me.num_mes" v-text="me.nom_mes"></option>
                             </select>
                         </div>
                         <div class="col-md-1">
                             <select class="form-control" v-model="dia2">
+                                <option value="0" disabled>Seleccione</option>
                                 <option v-for="d2 in lista_dias2" :value="d2" :key="d2" v-text="d2"></option>
                             </select>
 

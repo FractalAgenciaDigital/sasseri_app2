@@ -159,6 +159,7 @@
                                 <label>Tipo ingreso</label>
                                 <div>
                                     <select class="form-control" v-model="tipo_ingreso" @change="if(tipo_ingreso!='Compras'){forma_pago='';}">
+                                        <option value="0" disabled>Seleccione</option>
                                         <option value="Compras">Compras</option>
                                         <option value="Devoluciones">Devoluciones</option>
                                         <option value="Donaciones">Donaciones</option>
@@ -532,7 +533,7 @@
                                 <div class="col-sm-9 col-md-5">
                                     <label class="control-label col-sm-4 col-md-4 float-left"><i class="fa fa-search"></i> Categoría</label>
                                     <select class="form-control col-sm-8 col-md-8 float-right" v-model="buscarCategoriaA" @change="listarArticulo(buscarA,criterioA,buscarCategoriaA)">
-                                        <option value="">Seleccione</option>
+                                        <option value="" disabled>Seleccione</option>
                                         <option v-for="categoria in arrayCategoria2" :key="categoria.id" :value="categoria.id" v-text="categoria.nombre"></option>
                                     </select>
                                 </div>
