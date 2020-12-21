@@ -71,6 +71,9 @@
                                         <div v-else-if="articulo.tipo_articulo==3">
                                             <span>Producto simple</span>
                                         </div>
+                                        <div v-else-if="articulo.tipo_articulo==4">
+                                            <span>Preparado</span>
+                                        </div>
                                     </td>
                                     <td class="td-estado">
                                         <!-- <div v-if="articulo.condicion">
@@ -1640,7 +1643,7 @@
                 if(!this.id_presentacion) {error=1; this.hasError['id_presentacion']=1;}
                 if(!this.codigo) {error=1; this.hasError['codigo']=1;}
                 if(this.tipoAccion==1 && this.$refs.inputFileImg.value=='') {error=1; this.hasError['img']=1;}
-
+                
                 this.errorTarifario = 0;
                 for(var i=0; i<this.arrayTarifarios.length; i++)
                 {
