@@ -386,43 +386,36 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="row">
-                            <!--
-                            <div class="col-3">
-                                <button @click="position=6" class="btn btn-primary fa fa-undo"></button>
-                            </div>-->
-                            <div class="col-3">
-                                <div class="input">
-                                    <div class="input-group-prepend">
-                                        <h4  style="margin-left: -23px; margin-left: 13px; margin-top: 6px; font-size: 14px;" for="inputGroupSelect01">Estado</h4>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label style="font-size: 12px;">Desde:</label>                                   
+                                        <input v-if="permisosUser.leer" type="date" class="form-control" style="border-radius: 7px; width: 100%;" v-model="desdeFiltro">
+                                        <input v-else disabled type="date" class="form-control" v-model="desdeFiltro">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label style="font-size: 12px;">Hasta:</label>                                   
+                                        <input v-if="permisosUser.leer" type="date" class="form-control" style="border-radius: 7px; width: 100%;" v-model="hastaFiltro">
+                                        <input v-else disabled type="date" class="form-control" v-model="hastaFiltro">
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <label style="font-size: 12px;" for="inputGroupSelect01">Estado</label> 
+                                        <select class="custom-select" id="inputGroupSelect01" style="font-size: 11px;">
+                                            <option style="font-size: 11px;" selected >Seleccionar</option>
+                                            <option style="font-size: 11px;" value="1">Abierta</option>
+                                            <option style="font-size: 11px;" value="2">Cerrada</option>
+                                            <option style="font-size: 11px;" value="3">Cancelada</option>
+                                        </select>      
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-8">  
-                                <select class="custom-select" id="inputGroupSelect01">
-                                    <option selected  style="font-size: 14px;">Seleccionar</option>
-                                    <option value="1" style="font-size: 14px;">Abierta</option>
-                                    <option value="2" style="font-size: 14px;">Cerrada</option>
-                                    <option value="3" style="font-size: 14px;">Cancelada</option>
-                                </select>  
-                            </div>
-                            <div class="container">
-                                <div class="row">
-                                <div class="col-6">
-                                    <label>Desde:</label>                                   
-                                    <input v-if="permisosUser.leer" type="date" class="form-control" style="border-radius: 7px;" v-model="desdeFiltro">
-                                    <input v-else disabled type="date" class="form-control" v-model="desdeFiltro">
-                                </div>
-                                <div class="col-6">
-                                    <label>Hasta:</label>                                   
-                                    <input v-if="permisosUser.leer" type="date" class="form-control" style="border-radius: 7px;" v-model="hastaFiltro">
-                                    <input v-else disabled type="date" class="form-control" v-model="hastaFiltro">
-                                </div>
-                                </div>
+                            
                             </div>
                         </div>                         
                     </div>
                     
-                    <div class="card-header" style="font-size: 13px;">
+                    <div class="card-body" style="font-size: 13px;">
                         <div class="row">
                             <table class="table table-sm table-bordered">
                                 <thead class="thead-light">
