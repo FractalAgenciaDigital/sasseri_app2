@@ -33,10 +33,10 @@
                     <table v-if="tipoAccion!=3" class="table table-bordered table-striped table-sm table-responsive table-earning">
                         <thead>
                             <tr>
-                                <th class="col-md-19">Nombre</th>
-                                <th class="col-md-1">Fecha</th>
-                                <th class="col-md-1">Cajero</th>
-                                <th class="col-md-1">Opciones</th>
+                                <th class="col-md-6">Nombre</th>
+                                <th class="col-md-2">Fecha</th>
+                                <th class="col-md-">Cajero</th>
+                                <th class="col-md-2">Opciones</th>
                             </tr>
                         </thead>
                         <tbody v-if="permisosUser.leer && arrayCierresXCajas.length">
@@ -393,7 +393,7 @@
                 if(!this.vr_inicial || this.vr_inicial==0) this.errorMostrarMsjCierreXCaja.push("Ingrese valor inicial");
                 if(this.tipoAccion==2)
                 {
-                    if(!this.vr_gastos || this.vr_gastos==0) this.errorMostrarMsjCierreXCaja.push("Ingrese valor gastos");
+                    // if(!this.vr_gastos || this.vr_gastos==0) this.errorMostrarMsjCierreXCaja.push("Ingrese valor gastos");
                     if(!this.vr_final || this.vr_final==0) this.errorMostrarMsjCierreXCaja.push("Ingrese valor final");
                 }
 
@@ -481,7 +481,8 @@
             },
             cerrarCierreXCaja(){
                 let me = this;
-                if(me.id_caja!=0 && me.vr_inicial!=0 && me.vr_final!=0 && me.vr_gastos!=0)
+                // && me.vr_gastos!=0
+                if(me.id_caja!=0 && me.vr_inicial!=0 && me.vr_final!=0 )
                 {
                     Swal.fire({
                         title: 'Esta seguro de cerrar esta caja?',

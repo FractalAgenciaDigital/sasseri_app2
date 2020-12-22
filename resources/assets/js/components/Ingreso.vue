@@ -137,13 +137,15 @@
                         <div class="form-group row border">
                             <div class="form-group col-md-3" v-if="tipo_ingreso!='Saldos iniciales'">
                                 <label for="">Proveedor(*)</label>
-                                <div class="form-inline">
-                                    <input type="text" readonly style="max-width: 68%;width: 68%;" class="form-control" name="cuenta_fin" v-model="tercero">
-                                    <button @click="abrirModalT()" style="min-width: 30px;" class="btn btn-primary form-control">...</button>
-                                    <button @click="quitar(3)" style="min-width: 30px;" class="btn btn-danger form-control">
-                                        <i class="icon-trash"></i>
-                                    </button>
-                                </div>
+                                <div class="input-group">
+                                    <input type="text" readonly class="form-control" name="cuenta_fin" v-model="tercero">
+                                    <div class="input-group-append">
+                                        <button @click="abrirModalT()" class="btn btn-primary">...</button>
+                                        <button @click="quitar(3)" class="btn btn-danger">
+                                            <i class="icon-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>                               
                             </div>
                             <div class="form-group col-md-3" v-else>
                                 <label for="">Proveedor(*)</label>

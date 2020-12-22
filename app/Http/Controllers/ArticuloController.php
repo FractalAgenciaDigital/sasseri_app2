@@ -23,16 +23,16 @@ class ArticuloController extends Controller
         $id_empresa = $request->session()->get('id_empresa');
         
         if ($buscar=='' || $buscar==null){
-            $articulos = Articulo::leftJoin('modelo_contable','articulos.idcategoria','=','modelo_contable.id')
-            ->leftJoin('presentacion','articulos.id_presentacion','=','presentacion.id')
-            ->select('articulos.id','articulos.id as id_articulo','articulos.idcategoria','articulos.idcategoria2','articulos.codigo','articulos.nombre','modelo_contable.nombre as nombre_categoria','articulos.precio_venta','articulos.stock','id_und_medida','id_concentracion','articulos.cod_invima','articulos.lote','articulos.fec_vence','articulos.minimo','tipo_articulo','articulos.descripcion','articulos.condicion','articulos.id_presentacion','articulos.talla','articulos.marca','articulos.linea','articulos.img','articulos.id_empresa','presentacion.nombre as nom_presentacion')
+            $articulos = Articulo::leftJoin('presentacion','articulos.id_presentacion','=','presentacion.id')
+            ->leftJoin('categorias','articulos.idcategoria2','=','categorias.id')
+            ->select('articulos.id','articulos.id as id_articulo','articulos.idcategoria','articulos.idcategoria2','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','articulos.precio_venta','articulos.stock','id_und_medida','id_concentracion','articulos.cod_invima','articulos.lote','articulos.fec_vence','articulos.minimo','tipo_articulo','articulos.descripcion','articulos.condicion','articulos.id_presentacion','articulos.talla','articulos.marca','articulos.linea','articulos.img','articulos.id_empresa','presentacion.nombre as nom_presentacion')
             ->where('articulos.id_empresa','=',$id_empresa)
             ->orderBy('articulos.id', 'desc')->paginate(10);
         }
         else{
-            $articulos = Articulo::leftJoin('modelo_contable','articulos.idcategoria','=','modelo_contable.id')
-            ->leftJoin('presentacion','articulos.id_presentacion','=','presentacion.id')
-            ->select('articulos.id','articulos.id as id_articulo','articulos.idcategoria','articulos.idcategoria2','articulos.codigo','articulos.nombre','modelo_contable.nombre as nombre_categoria','articulos.precio_venta','articulos.stock','id_und_medida','id_concentracion','articulos.cod_invima','articulos.lote','articulos.fec_vence','articulos.minimo','tipo_articulo','articulos.descripcion','articulos.condicion','articulos.id_presentacion','articulos.talla','articulos.marca','articulos.linea','articulos.img','articulos.id_empresa','presentacion.nombre as nom_presentacion')
+            $articulos = Articulo::leftJoin('presentacion','articulos.id_presentacion','=','presentacion.id')
+            ->leftJoin('categorias','articulos.idcategoria2','=','categorias.id')
+            ->select('articulos.id','articulos.id as id_articulo','articulos.idcategoria','articulos.idcategoria2','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','articulos.precio_venta','articulos.stock','id_und_medida','id_concentracion','articulos.cod_invima','articulos.lote','articulos.fec_vence','articulos.minimo','tipo_articulo','articulos.descripcion','articulos.condicion','articulos.id_presentacion','articulos.talla','articulos.marca','articulos.linea','articulos.img','articulos.id_empresa','presentacion.nombre as nom_presentacion')
             ->where('articulos.id_empresa','=',$id_empresa)
             ->where('articulos.'.$criterio, 'like', '%'. $buscar . '%')
             ->orWhere('articulos.codigo', 'like', '%'. $buscar . '%')

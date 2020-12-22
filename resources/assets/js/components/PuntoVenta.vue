@@ -410,7 +410,31 @@
                                     </div>
                                 </div>
                             </div>
+<<<<<<< HEAD
                             
+=======
+                            <div class="col-8">  
+                                <select class="custom-select" id="inputGroupSelect01">
+                                    <option selected  style="font-size: 14px;">Seleccionar</option>
+                                    <option value="1" style="font-size: 14px;">Abierta</option>
+                                    <option value="2" style="font-size: 14px;">Cerrada</option>
+                                    <option value="3" style="font-size: 14px;">Cancelada</option>
+                                </select>  
+                            </div>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label>Desde:</label>                                   
+                                        <input v-if="permisosUser.leer" type="date" class="form-control" style="border-radius: 7px;" v-model="desdeFiltro">
+                                        <input v-else disabled type="date" class="form-control" v-model="desdeFiltro">
+                                    </div>
+                                    <div class="col-6">
+                                        <label>Hasta:</label>                                   
+                                        <input v-if="permisosUser.leer" type="date" class="form-control" style="border-radius: 7px;" v-model="hastaFiltro">
+                                        <input v-else disabled type="date" class="form-control" v-model="hastaFiltro">
+                                    </div>
+                                </div>
+>>>>>>> e36c5e45c5bd9e2d5ba9165fa9a54d39320335a2
                             </div>
                         </div>                         
                     </div>
@@ -1313,9 +1337,11 @@
                 producto.productos_iva.forEach(function(iva){
                     if(iva.tipo_iva =='Venta'){ivaVenta=iva.porcentaje;}
                 });
+                var ivaVenta_vr=0;
                 if(ivaVenta>0) {
 
-                    var ivaVenta_vr = Math.round(parseFloat(producto.precio_venta)-parseFloat((producto.precio_venta)/((ivaVenta/100)+1)));}
+                    ivaVenta_vr = Math.round(parseFloat(producto.precio_venta)-parseFloat((producto.precio_venta)/((ivaVenta/100)+1)));
+                }
                 
                 console.log("ivaVenta_vr"+ivaVenta_vr);
                 let auxPosition = me.arrayDetalle.indexOf(me.arrayDetalle.find(({codigo}) => codigo === producto.codigo));

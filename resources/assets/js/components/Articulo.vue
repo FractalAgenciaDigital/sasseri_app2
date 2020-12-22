@@ -71,6 +71,9 @@
                                         <div v-else-if="articulo.tipo_articulo==3">
                                             <span>Producto simple</span>
                                         </div>
+                                         <div v-else-if="articulo.tipo_articulo==4">
+                                            <span>Producto preparado</span>
+                                        </div>
                                     </td>
                                     <td class="td-estado">
                                         <!-- <div v-if="articulo.condicion">
@@ -346,20 +349,6 @@
                                             <button type="button" class="btn btn-danger" @click="cerrarModalCrear()" title="Cancelar"><i class="fa fa-times-circle"></i></button>
                                         </div>
                                     </div>
-                                      
-
-                                        <!--<label class="col-md-3 form-control-label" for="text-input">Concentración</label>
-                                        <div class="col-md-9 float-right">
-                                            <select class="form-control col-md-10" v-model="id_concentracion">
-                                                <option value="0" disabled>Seleccione</option>
-                                                <option v-for="id_concentracion in arrayConcentracion" :key="id_concentracion.id" :value="id_concentracion.id" v-text="id_concentracion.nombre"></option>
-                                            </select> 
-                                            <span class="btn btn-primary col-md-2 float-right" @click="abrirModalCrear('concentracion')"><i class="fa fa-plus-circle"></i></span>
-                                        </div>-->
-                                    
-                                    
-                                <!-- </div>
-                                <div class="form-row"> -->
                                     <div class="form-group col-md-6">
                                         <label>Marca</label>                                        
                                         <input type="text" v-model="marca" class="form-control" v-bind:class="{ 'is-invalid': hasError.marca==1 }">                                        
@@ -368,35 +357,22 @@
                                         <label>Linea</label>                                        
                                         <input type="text" v-model="linea" class="form-control" v-bind:class="{ 'is-invalid': hasError.linea==1 }">                                        
                                     </div>
+                               
+                                    <div class="form-group col-md-6">
+                                        <label class="form-control-label">Imagen</label>                                            
+                                        <div class="custom-file">                                        
+                                            <input type="file" class="custom-file-input" id="img" name="img" ref="inputFileImg"  @change="cargarImg"  v-bind:class="{ 'is-invalid': hasError.img==1 }">
+                                            <label class="custom-file-label" fors="validatedCustomFile">Choose file...</label>
+                                            <div class="invalid-feedback">Example invalid custom file feedback</div>
+                                        </div>
+                                    </div>                                    
                                 </div>
-                                    <div class="row">
-                                        <div class="form-group col-md-6">
-                                            <label class="col-md-3 form-control-label">Imagen</label>
-                                            <div class="col-md-9 float-right">
-                                                <input type="file" id="img" name="img" ref="inputFileImg"  @change="cargarImg" class="form-control" v-bind:class="{ 'is-invalid': hasError.img==1 }">
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-md-6">
+                                <div v-show="errorArticulo" class="form-group row div-error">
+                                    <div class="text-center text-error">
+                                        <div v-for="error in errorMostrarMsjArticulo" :key="error" v-text="error">
                                         </div>
                                     </div>
-                                    <!--<div class="row">
-                                        <div class="form-group col-md-6">
-                                            <label class="col-md-3 form-control-label" for="text-input">Código</label>
-                                            <div class="col-md-9 float-right">
-                                                <input type="text" v-model="codigo" class="form-control" placeholder="Código de barras"> 
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <barcode :value="codigo" :options="{ format: 'EAN-13' }" >Generando código de barras...</barcode>
-                                        </div>
-                                    </div>-->
-                                    <div v-show="errorArticulo" class="form-group row div-error">
-                                        <div class="text-center text-error">
-                                            <div v-for="error in errorMostrarMsjArticulo" :key="error" v-text="error">
-
-                                            </div>
-                                        </div>
-                                    </div>
+                                </div>
                                 
                             </form>
                         </div>
@@ -1640,7 +1616,7 @@
                 if(!this.id_presentacion) {error=1; this.hasError['id_presentacion']=1;}
                 if(!this.codigo) {error=1; this.hasError['codigo']=1;}
                 if(this.tipoAccion==1 && this.$refs.inputFileImg.value=='') {error=1; this.hasError['img']=1;}
-
+                
                 this.errorTarifario = 0;
                 for(var i=0; i<this.arrayTarifarios.length; i++)
                 {
