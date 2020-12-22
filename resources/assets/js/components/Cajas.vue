@@ -832,6 +832,7 @@
                                 break;
                             }
                         }
+                        break;
                     }
 
                     case "cierres_caja":
