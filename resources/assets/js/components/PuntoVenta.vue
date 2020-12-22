@@ -410,9 +410,6 @@
                                     </div>
                                 </div>
                             </div>
-<<<<<<< HEAD
-                            
-=======
                             <div class="col-8">  
                                 <select class="custom-select" id="inputGroupSelect01">
                                     <option selected  style="font-size: 14px;">Seleccionar</option>
@@ -434,7 +431,6 @@
                                         <input v-else disabled type="date" class="form-control" v-model="hastaFiltro">
                                     </div>
                                 </div>
->>>>>>> e36c5e45c5bd9e2d5ba9165fa9a54d39320335a2
                             </div>
                         </div>                         
                     </div>
