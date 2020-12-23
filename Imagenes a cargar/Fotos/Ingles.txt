@@ -1,0 +1,1037 @@
+﻿    Buscar Por Nombre:|search by name
+- El desconocimiento de estas condiciones no le exime del cumplimiento de las mismas.|- The ignorance of these conditions does not alter the performance of the same .
+---- En la modalidad BASICA, con una reducida cuota anual usted tendra habilitada las opciones del programa que le permitiran realizar todas gestiones necesarias para su negocio, para mayor detalle recuerde consultar la opcion de Tipos de Licencia.|---- In the BASIC mode , with a small annual fee you will have enabled the program options that allow you to make all necessary arrangements for your business, for more details see the option remember Types of License .
+---- En la modalidad COMPLETA, realizando un pago anual, ademas de las opciones incluidas en la version BASICA, tendra derecho a la asistencia de forma telefonica.|---- In FULL mode , making an annual payment , plus the options included in the BASIC version , shall be entitled to assistance in a telephone .
+---- En la modalidad GRATUITA, durante los primeros 90 dias usted podra probar y trabajar con la version BASICA, pasado ese periodo podra volver a la version gratuita o pasar a la version BASICA o COMPLETA. Recuerde que esta version GRATUITA  es para empr|---- In the FREE mode , during the first 90 days you could try and work with the BASIC version , after that period may return to the free version or go to BASIC or FULL version . Remember that this version is for empr FREE
+- Este es un programa estandar, no se hacen modificaciones a medida o personalizaciones, nuestros clientes en version BASICA y COMPLETA si pueden sugerirnos algunos cambios que nosotros sin ningun coste añadido incluiremos en siguientes versiones.|- This is a standard program , no modification is made to measure or customizations , our customers in BASIC and FULL version if you can suggest some changes we will include at no extra cost in following versions .
+- La empresa Tpv 123 - Gratuito no es responsable si el cliente formatea el equipo o es atacado por algun tipo de virus que provoque la perdida de informacion o de licencia.|- The company Tpv 123 - Free is not responsible if the client formats the computer or is attacked by some kind of virus that causes loss or licensing information .
+- Si usted esta utilizando la version GRATUITA y necesita algun tipo de asistencia recuerde que tiene que contratar la version BASICA o COMPLETA dependiendo de su incidencia.|- If you are using the FREE version and need some kind of assistance remember to hire BASIC or FULL version depending on its incidence.
+- Solo los clientes con la version COMPLETA tienen incluida la asistencia telefonica|- Only clients have the FULL version including telephone assistance
+- Tpv 123 - Gratuito recomienda la compra, para el buen funcionamiento del programa, de una impresora de tickets EPSON/SAMSUNG/Star o cualquier modelo de impresora, siempre que se instale junto con los drivers de dicha impresora. (Tipo de conexion recomen|- Tpv 123 - Free recommended purchase for the proper functioning of the program, ticket printer EPSON / SAMSUNG / Star or printer model when installed along with the drivers for that printer . ( Recommended Connection Type
+* Consulte nuestra pagina web, para confirmar los precios que es posible que hayan sufrido algun cambio|* See our website to confirm the prices that you may have suffered some change
+* Recuerde que para poder tener asistencia telefonica tiene que tener contratado la version Completa, en caso contrario haga su consulta directamente desde el programa.|* Remember that in order to have telephone assistance must have hired the Full version , otherwise make your inquiry directly from the program .
+** Bienvenido **|** Welcome **
+** DOBLE CLIC EN EL CLIENTE DESEADO|** Double click on the desired client
+*clic para ver datos del producto|*click to see product data
+*Pulse en la familia para ver los productos agregados a la misma|*Click on the family to see the products added to it
+¡Tiempo Limitado!|Limited time!
+¿Confirma que desea eliminar el siguiente registro?|Are you sure you want to delete the following record ?
+¿cuantos|how many
+¿Seleccione el Idioma?|¿Select the language ?
+<Tipo de Licencia>|Agreement> Type:
+0 decimales|0 decimals
+123 - Generico|123 - Generic
+2 decimales|2 decimals
+6 Comprados|6 Bought
+Abrir  Cajetin|Open  Drawer
+Aceptar|accept
+Acerca de|About
+Activar Gratis la version Basica|Activate Free Basic version
+Actualizaciones Activadas|Activated Updates
+Admisitracion Permisos|Permissions Administration
+ADVERTENCIAS IMPORTANTES|IMPORTANT
+Al instalar este programa,usted acepta las siguientes condiciones:|By installing this program , you agree to the following conditions:
+Almacenes|Stock
+Alta Salones/ Barra|New Lounges / Bar
+Ambos|both
+Añadir + Productos a la SubFamilia|Add + Products to the SubFamily
+Añadir Nuevos Productos|Add New Products
+Añadir Postre|Add Dessert
+Añadir Primero|Add First
+Añadir Producto|Add Product
+Añadir Productos|Add Products
+Añadir Segundo|Add Second
+Apellidos|surnames
+Apellidos:|Surname:
+Asistencia|Support
+Aumento Precio|Increase Price
+Barra|Bar
+Base De Datos|Database
+BEBIDAS/ POSTRES|BEVERAGES / DESSERTS
+Borrar Venta|Delete Sale
+Boton Pulsado|Pulsed Button
+Buscar|search
+Buscar Clientes|Find Customers
+Caja|box
+Caja Entradas|Tickets Box
+Caja Ropero|Wardrobe Box
+Cajetin|box
+Cancelar|cancel
+Cant.|Qty
+Cantidad|amount
+Cierre Año|Year close
+Clic en el producto que desee incluir en el subproducto|Click on the product you want to include in the subproduct
+Clic en el producto que desee incluir en su familia|Click on the product you want to include in your family
+Clic sobre la familia para ver mas detalles|Click on the family to see more details
+Click sobre la linea para añadir una traduccion|Click on the line to add a translation
+Click sobre la linea para modificar la traduccion|Click on the line to modify the translation
+Clientes|CUSTOMERS
+Cod Empleado|Employee Cod
+Cod. Prod.|Prod Code
+Codigo|Code
+Codigo de Barras:|Barcode :
+Codigo del Menu|Code of Menu
+codigo Familia|Family code
+Color|color
+comercial@tpvgratuito.com|comercial@tpvgratuito.com
+Comprar|buy
+Con este boton cambiara el color de la pantalla|With this button to change the color of the screen
+Con este boton cambiara el tamaño de la ventana.|With this button to change the window size .
+Con este boton podra ver datos de su licencia|This button may see your license data
+CONDICIONES DE USO DEL PROGRAMA|CONDITIONS TO USE THE PROGRAM
+Conectar en Red|Network Connect
+Configuracion|configuration
+Configuracion Inicial|Initial configuration
+Configuracion Regional|Regional settings
+Contacto:|Contact:
+Continuar|continue
+Continuar / Continue|Continue / Continue
+Copia de Seguridad|Backup
+Correo Electronico|email Address
+Desc|desc
+Desde|from
+Diferencias entre tipos de licencia|Differences between types of license
+Eliminar|remove
+Email|Email
+EMPLEADO|employee
+Empleados|staff
+Este boton le permitira cambiar la configuracion regional|This button allows you to change the regional settings
+Este boton le servira para cambiar el idioma|This button will serve to change the language
+Estoy utilizando una licencia|I am using a license
+Familias|FAMILIES
+Fecha de Alta|Date
+Formas de Pago|PAYMENT
+Hacer Copia de Seguridad|Backup
+Hasta|to
+Idiomas|Languages
+Imagen|image
+Impresoras|Printers
+Impuesto|tax
+Indice|Index
+Label3|Label3
+Licencia: XXX|License: XXX
+Lista de Empleados|List of Employees
+Lista de Productos |List of Products
+Lista de Proveedores|List of Suppliers
+Listados|Listings
+Madrid - España|Madrid - Spain
+Mantenimiento|maintenance
+Menu|Menu
+Modificar|change
+Mostrar en Caja |Show in a Box
+Movimiento|movement
+Ninguno|none
+Niveles de Acceso|Access Levels
+Nombre|name
+Nombre *|Name *
+Nombre de Empresa|Company Name
+Nombre:|Name:
+Nuevo|new
+Num_Factura|Num_Factura
+Numero|Number
+Observaciones:|Remarks:
+Opciones|Options
+Otros|others
+Pasar de la version Gratuita a la Basica|Moving from the Basic Free version
+PEDIDO|order
+Poblacion|population
+Posicion en Pantalla|Screen Position
+Posicion En Pantalla:|Position on screen:
+Precio|price
+Precio de Venta|Sale Price
+Precios|Prices
+Primero|first
+Producto|product
+Producto de Menu|Product Menu
+Productos|PRODUCTS
+Programa|program
+Programa protegido por los derechos de propiedad intelectual en Marcas y Patentes en cuanto a contenido y diseño.|Program protected by intellectual property rights in trademarks and patents in content and design.
+Proveedor:|Provider:
+Proveedores|SUPPLIERS
+Provincia|province
+Recargo|surcharge
+Registrar|register
+Regresar al idioma original|Back to the original language
+Restaurar Copia de Seguridad|Restore Backup
+Salir|leave
+Seleccione el Idioma / Select the Language|Select the Language / Select the Language
+Seleccione el Impuesto|Select the Tax
+Seleccione el Numero de Decimales|Select the Number of Decimal
+Seleccione el Pais|Select the country
+Seleccione la Moneda|Select the currency
+Seleccione su Bandera|Select your Flag
+Seleccione Su Opcion|CHOOSE YOUR OPTION
+Servido|used
+Si decide utilizar la version GRATUITA recuerde que tiene algunas limitaciones, consulte la opcion de Tipos de Licencia para una descripcion mas detallada de la version GRATUITA, BASICA y COMPLETA.|If you decide to use remember the FREE version has some limitations , see License Types option for a more detailed description of the FREE version , BASIC and FULL .
+Stock Actual:|Current Stock :
+Telefono|Phone
+Teléfono:|Phone:
+tipo|type
+Tipo de Impuesto|Type of Tax
+Total|total
+Tpv|Tpv
+TPV 123 - Generico|POS 123 - Generic
+Usted ha seleccionado|You have selected
+www.tpvgratuito.com|www.tpvgratuito.com
+XXX|XXX
+- Este es un programa estandar, no se hacen modificaciones a medida o personalizaciones, nuestros clientes en version BASICA y COMPLETA si pueden sugerirnos algunos cambios que nosotros sin ningun coste añadido incluiremos en siguientes versiones.|- This is a standard program, no custom modifications or customizations are made, our clients in BASIC and COMPLETE version if they can suggest some changes that we will include at no additional cost in the following versions.
+ Mostrar solo con Email Valido| Show only with Valid Email
+ Mostrar Todos| Show all
+$ 1 Dolar = |$ 1 Dollar =
+(Opcion utilizada con frecuencia en algunos paises del caribe y sudameria) / No activar en paises en los que no es obligatorio cobrar propina|(Option used frequently in some countries of the Caribbean and Sudameria) / Do not activate in countries where it is not mandatory to charge tips
+* Click en la columna de telefono para ver la direccion|* Click on the telephone column to see the address
+* click en la linea que desea reimprimir|* click on the line you want to reprint
+* Click para seleccionar la secuencia de apertura|* Click to select the opening sequence
+* Click para seleccionar la secuencia de corte|* Click to select the cutting sequence
+* Maximo 8 caracteres|* Maximum 8 characters
+* Si no pone un correo electronico valido no recibirá respuesta|* If you do not put a valid email you will not receive a reply
+** clic en la lista o introduzca el numero de ticket|** click on the list or enter the ticket number
+** Gracias por su visita **|** Thanks for your visit **
+*Clic para seleccionar salon|* Click to select room
+¡Tiempo Limitado!|Limited time!
+¿Confirma que desea eliminar el siguiente registro?|Are you sure you want to delete the next record?
+¿cuantos|how many
+¿Desea cargar el diseño anterior?|Do you want to load the previous design?
+¿Ha olvidado su contraseña?|Have you forgotten your password?
+¿Que son comandos adicionales? Despues de instalar los drivers de la impresora en propiedades de la misma encontramos una pestaña de comandos adicionales / desde aqui marcaremos la opcion de apertura de cajon (Open Draw1 o Open Draw2).|What are additional commands? After installing the printer drivers in properties of the same find a tab of additional commands / from here we mark the option to open drawer (Open Draw1 or Open Draw2).
+¿Seleccione el Idioma?|Select the Language?
+<---- Escriba el  texto que desea que aparezca en la parte inferior de la promocion|<---- Write the text you want to appear at the bottom of the promotion
+<---- Escriba el  texto que desea que aparezca en la parte inferior de la reserva|<---- Write the text you want to appear at the bottom of the reservation
+<---- Escriba el titulo o el texto que desea que aparezca en la cabecera de la promocion|<---- Write the title or text you want to appear in the header of the promotion
+<---- Escriba el titulo o el texto que desea que aparezca en la cabecera de la reserva|<---- Type the title or text you want to appear in the reservation header
+<---- Haga un click para insertar la imagen|<---- Click to insert the image
+<---- Texto que aparece en el cuerpo de la promocion|<---- Text that appears in the body of the promotion
+<---- Texto que se genera automaticamente|<---- Text that is generated automatically
+<Terminal>|<Terminal>
+€ 1 Euro = |€ 1 Euro =
+1.- La empresa SolverMedia no se responsabiliza de la mala manipulación de su registro de licencia así como del numero asignado para su registro.|1.- The company SolverMedia is not responsible for the bad manipulation of its license record as well as the number assigned for its registration.
+2.- La empresa SolverMedia no concederá una nueva licencia a aquellos clientes que por problemas ajenos a SolverMedia hallan perdido el registro del programa, esos problemas pueden venir causados por:|2.- The SolverMedia company will not grant a new license to those customers who, due to problems outside SolverMedia, have lost the program's registry, these problems can be caused by:
+3.- Si se produce alguno de estos casos anteriores, antes de realizar ninguna acción,  pongase en contacto con el departamento técnico de SolverMedia comercial@solvermedia.com para que le ayuden a realizar el cambio.|3.- If any of these previous cases occurs, before carrying out any action, contact the technical department of SolverMedia comercial@solvermedia.com to help you make the change.
+4.- Estimado cliente recuerde que sólo podrá recibir las actualizaciones del programa en caso de tener el contrato de mantenimiento al día.|4.- Dear customer, remember that you can only receive program updates if you have the maintenance contract up to date.
+Abrir Cajetin|Open Cajetin
+Acerca de ...|About ...
+activa|active
+Activar concepto Propina / Servicio / Otros|Activate concept Tipping / Service / Other
+Activar linea propina en preticket|Activate tip line in preticket
+Activar Opciones|Activate Options
+Activar Precios para este Terminal|Activate Prices for this Terminal
+Activar Precios para este terminal de venta|Activate Prices for this sales terminal
+Activar Servicio De Correos|Activate Post Service
+Administracion Permisos|Permissions Administration
+Almuerzo|lunch
+alturacandidadingredientes|heightcandityingredients
+alturagrid|alturagrid
+Ancho 10 cm|Width 10 cm
+Ancho A4 (21cm)|Width A4 (21cm)
+Ancho A5 (14cm)|Width A5 (14cm)
+Antigua|Ancient
+Añadir + Productos a la SubFamilia|Add + Products to the SubFamily
+Añadir codigo de barras en descripcion de producto|Add barcode in product description
+Añadir Nuevos Productos|Add New Products
+Añadir Postre|Add Dessert
+Añadir Primero|Add First
+Añadir Producto|Add Product
+Añadir Productos|Add Products
+Añadir Segundo|Add Second
+Año|Year
+Apertura estandar para impresoras USB|Standard opening for USB printers
+Aplicar Cambios para este Empleado|Apply Changes for this Employee
+Asistencia y Sugerencias|Assistance and Suggestions
+Asunto|Affair
+Aviso de averia|Breakdown notice
+Aviso de Averia / Consulta|Warning / Consultation
+Ayuda|Help
+B. Aires - Argentina|B. Aires - Argentina
+Base|Base
+Bit|Bit
+Bogota - Colombia|Bogota Colombia
+Boleta Formato Ticket|Ticket Format Ticket
+Boletas|Ballots
+Borrando|Erasing
+BORRAR|DELETE
+Borrar Restricciones|Delete Restrictions
+Btc 1 BitCoin = |Btc 1 BitCoin =
+Buenos Aires - Argentina|Buenos Aires, Argentina
+Buscar Cliente|Search Customer
+C. P.|C. P.
+C. Postal|C. Postal
+C. Postal:|C. Postal:
+Cabecera  Ticket|Ticket Header
+Caja - Ropero|Box - Wardrobe
+Caja Inicial:|Initial Cash:
+Caja Total x Dias|Total Box x Days
+Cambiar Contraseña|Change Password
+Cambiar Idioma / Change Language|Change Language / Change Language
+Cambio|Change
+Cambio de Clave|Key change
+Cambio de contraseña de direccion|Change of address password
+Cambio de equipo informatico, cambio de disco duro, formateo de disco duro, etc...|Change of computer equipment, hard disk change, hard disk format, etc ...
+Cambio Guardado|Saved Change
+Cambio Precio|Change Price
+Cambios guardados|Changes saved
+Cantidad de clientes que cumplen las condiciones|Number of clients that meet the conditions
+CantidaddeIngredientes|Amount of Ingredients
+caracteres por linea|characters per line
+Cargar monedas de la Zona Euro|Load coins from the Euro Zone
+Cena|Dinner
+Centrado|Centered
+Cerrar|Close
+Cerrar Venta|Close Sale
+Cerrar Ventas/Imprimir|Close Sales / Print
+Chart1|Chart1
+CHR$|CHR $
+Cierre Año|Year close
+Cierre De Caja|Close the box
+Cierres de Caja Formato Ticket|Cashier Closures Format Ticket
+CIF|CIF
+Cif / Dni|CIF / Dni
+CIF / DNI:|CIF / DNI:
+Clave:|Key:
+Clic para cambiar Imagen|Click to change Image
+Click sobre la linea para añadir una traduccion|Click on the line to add a translation
+Cliente|Client
+Cliente entrega Efectivo|Cash delivery customer
+Cliente paga con Tarjeta|Customer pays with Card
+Cliente:|Client:
+Clientes Seleccionados|Selected Clients
+Cobrar|Charge
+Cobro Parcial|Partial Collection
+Cocina|Kitchen
+Cod Promocion: XXXXX|Cod Promotion: XXXXX
+codCliente|codClient
+Codigo Barras|Barcode
+Codigo Cliente|Client Code
+Codigo Postal|Postal Code
+Código Postal:|Postal Code:
+Codigo Precio|Price Code
+codigoempleado|employee code
+Codigoproducto|Product code
+Color en Caja:|Color in Box:
+Color Salon|Color Salon
+COM 1|COM 1
+COM 2|COM 2
+COM 3|COM 3
+COM 4|COM 4
+comercial@gratisoft.com|comercial@gratisoft.com
+Como tiene que poner su equipo  en modo red local (varios equipos)|How to put your computer in local network mode (several computers)
+Con este boton cambiara el tamaño de la ventana.|With this button, you will change the size of the window.
+Concepto del gasto|Spending concept
+Condiciones|Terms
+Conectar con la base de datos|Connect with the database
+Conexion con dispositivo movil - android|Connection with mobile device - android
+Conexion con otro Terminal|Connection with another Terminal
+Conexion en Red|Network Connection
+Configuracion Correo|Mail Configuration
+Configuracion de Apertura de Cajon|Cajon Opening Configuration
+Configuracion de Cajetin|Cajetin Configuration
+Configuracion de corte automatico al final del ticket:|Automatic cutting configuration at the end of the ticket:
+Configuracion de Impresoras|Printer Configuration
+Configuracion Empresa|Company Configuration
+CONFIGURACION OPCIONES CAJA|CONFIGURATION BOX OPTIONS
+Configurar Email|Configure Email
+Confirmacion|Confirmation
+Confirme la contraseña|Confirm the password
+Consumo|Consumption
+Consumo de Platos Menu|Dish Consumption Menu
+Conteo y cierre de caja|Counting and closing of cash
+Contraseña Director|Director password
+Copiar Emails seleccionados  para envio manual|Copy selected emails for manual delivery
+Correo  Electrónico:|Email:
+Correo de Contacto|Contact Email
+Correo Electrónico:|Email:
+Costa Rica|Costa Rica
+Coste:|Cost:
+Courier New|Courier New
+CP|CP
+Crear nueva o modificar una lista de precios existente|Create new or modify an existing price list
+Crear Plantillas|Create Templates
+Crear Plantillas Reservas|Create Templates Reservations
+Crear/Modificar Salones|Create / Modify Rooms
+Ctrl+C para copiar los correos de esta lista para hacer un envio desde la aplicacion de correo electronico (gmail, hotmail, etc...) que desee.|Ctrl + C to copy the emails from this list to make a shipment from the email application (gmail, hotmail, etc ...) that you want.
+Cuerpo del Mensaje|Message body
+Cumpleaños|birthday
+Cuota|Share
+D. F. - Mexico|D. F. - Mexico
+datos|data
+Datos de Cabecera|Header data
+Datos de la empresa|Company data
+Datos de la Factura|Invoice data
+Datos de la Familia|Family Data
+Datos de la SubFamilia|Data of the SubFamily
+Datos del  Cliente|Client data
+datos familia generica|generic family data
+datos generica|generic data
+datos subfamilia|subfamily data
+dd|dd
+DD/MM/AAAA   HH:MM|DD / MM / YYYY HH: MM
+Deja en Caja :|Leave in Box:
+Desayuno|Breakfast
+Descripcion|Description
+Descripcion  Numerica:|Numerica description:
+Descripcion Numerica|Numerica description
+Descripcion Numerica:|Numerica description:
+Descuento|Discount
+Descuento %|Discount%
+Descuento a aplicar|Discount to apply
+Descuentos Realizados|Discounts made
+Desglose Impuesto|Tax Breakdown
+Destinatario|Addressee
+Detalles de la Empresa|Company details
+Detalles del  Ticket|Ticket details
+Detalles del Pedido|Order details
+Devolucion|Return
+Dia|Day
+Dia de Pago:|Payday:
+Dia de Visita:|Visit day:
+Direcccion|Direction
+Direccion|Address
+Direccion:|Address:
+Dirección:|Address:
+Diseñar Plantilla reserva|Design Template book
+Diseño|Design
+Diseño de salon|Salon design
+Diseño de Salones|Design of Rooms
+Diseño de Ticket|Ticket design
+Diseño Salon|Salon Design
+Diseño Ticket|Ticket Design
+Diseño Ticket / Factura|Ticket Design / Invoice
+DNI|ID
+DNI / CIF|DNI / CIF
+DNI/ CIF|DNI / CIF
+Elementos para  el diseño|Elements for design
+Eliminar Datos de Prueba|Delete Test Data
+Eliminar Diseño Salon|Remove Design Salon
+Eliminar Impresoras de este teminal|Remove Printers from this terminal
+Eliminar Mesa|Remove Table
+Eliminar Objeto|Delete Object
+Eliminar Venta Ya Cobrada|Delete Sale Already Collected
+Email:|E-mail:
+Email: *|Email: *
+E-mail: compras@tpvgratuito.com   www.tpvgratuito.com|E-mail: compras@tpvgratuito.com www.tpvgratuito.com
+Emails Seleccionados|Selected Emails
+Empleado del Mes|Employee of the Month
+Empleado:|Employee:
+En algunos paises la normativa indica que el numero de facturas tiene que ir precedido por una serie de identificadores.|In some countries, regulations indicate that the number of invoices must be preceded by a series of identifiers.
+Entrada + consumicion|Entry + consumption
+Entrada Seleccionada|Selected entry
+Entrada Seleccionada:|Selected entry:
+Entrar en modo Direccion|Enter in Address mode
+Entrega|Delivery
+Entrega cliente|Customer delivery
+enviado|sent
+Enviados:|Sent:
+Enviando Emails|Sending Emails
+Enviar|Submit
+Enviar a cocina|Send to kitchen
+Enviar Confirmacion Reserva|Send Confirmation Reservation
+Enviar Email a Clientes Seleccionados|Send Email to Selected Clients
+Enviar email al director / cierre caja|Send email to director / close box
+Enviar ticket Correo Electronico|Send ticket E-mail
+Envio|Shipping
+Envio Informes|Shipping Reports
+Envio Promocion|Shipping Promotion
+Envio Puntual|Timely Shipping
+Envio Puntual de Correo|Mail Sending
+Es el lugar donde queremos que se  muestre el producto en caja cuando hacemos clic sobre su familia.|It is the place where we want to show the product in the box when we click on your family.
+Escriba aqui su comentario del final de ticket|Write your comment of the ticket end here
+ESPACIO|SPACE
+Está a punto de realizar la restauración de sus copias de seguridad de sus bases de datos.  Para ello deberá localizar su copia de seguridad en su disco duro o en su modulo de memoria extraible.  Dicha operación demorará unos segundos, una vez finaliz|You are about to restore your backup copies of your databases. To do this you must locate your backup copy on your hard drive or removable memory module. Said operation will take a few seconds, once it has finished
+Esta a punto de restaurar una copia de seguridad, recuerde que este proceso es irreversible y cambiara la base de datos con la que trabaja en estos momentos por la seleccionada |You are about to restore a backup, remember that this process is irreversible and will change the database with which you are currently working for the selected one
+Esta diseñando el:|Is designing the:
+Esta familia no tiene productos relacionados|This family has no related products
+Esta zona la voy a utilizar para|I will use this area to
+Estadistica x Repartidor|Statistics x Dealer
+Estadisticas|Statistics
+F.Pago|F. Payment
+Fact. Simpli:|Fact. Simpli:
+Factura|bill
+Factura Numero|Bill Number
+Facturas|Bills
+Familia a la que pertenece|Family to which it belongs
+Familia Generica|Generic Family
+Familia Tipo Menu|Family Type Menu
+Familia Tipo Menu Combo|Family Type Menu Combo
+Fecha|Date
+Fecha Alta|Date High
+Fecha de Caducidad:|Date of Expiry:
+Fecha de creacion:  XXX|Date of creation: XXX
+Fecha de creacion: XXX|Date of creation: XXX
+Fecha de Instalacion:|Instalation date:
+Fecha Desde|Date from
+Fecha Hasta|Date Until
+Fijo / Movil|Fixed / Mobile
+Filtrar Clientes para Enviar Email|Filter Customers to Send Email
+Forma de Pago:|Way to pay:
+Formato A4|Format A4
+Formato A5|Format A5
+Formato de Factura|Invoice Format
+Formato de Impresion|Printing Format
+Formato Din-A4|Din-A4 format
+Formato Hora:|Time Format:
+Formato Ticket|Ticket format
+Formule su Consulta|Ask your question
+Foto:|Photo:
+Gastos|Expenses
+Gastos de Caja|Cash expenses
+Gastos del Dia|Day Expenses
+Gastos Del Día|Day Expenses
+Gestion de Clientes|Customer Management
+Gestion de Empleados|Employee Management
+Gestion de Familias|Family Management
+Gestion de Impresoras|Printer Management
+Gestion de Productos|Product Management
+Gestion de Productos Elaborados|Processed Products Management
+Gestion de Proveedores|Supplier Management
+Grafica de Envios|Shipping Graphics
+Grafico|Graphic
+GratiSoft|GratiSoft
+grid_ingredientes|grid_ingredientes
+grid_productosventas|grid_productosventas
+Guardado Correctamente|Saved Correctly
+Guardar|save
+Guardar Cambios|Save Changes
+Guardar Numero|Save Number
+H O R A S|HOURS
+H. INICIO|H. HOME
+h=12 Horas (AM o PM)|h = 12 Hours (AM or PM)
+h=24 Horas |h = 24 Hours
+Hasta 8 decimales|Up to 8 decimals
+historico ventas|historical sales
+Hora|Hour
+Hora de Reserva|Reservation Time
+Hora Desde|Time From
+Hora Hasta|Hour Until
+Hora Reserva|Reserve Time
+Horario|Schedule
+Horario Desde|Schedule From
+Horario Hasta|Schedule Up
+Horas:|Hours:
+id|id
+Id lista|Id list
+Identificacion Fiscal (Cif, Nif, Ruc, Rut, Rnc, etc.)|Tax Identification (Cif, Nif, Ruc, Rut, Rnc, etc.)
+Imagen al Principio|Image at the beginning
+Imagen Mesas|Picture Tables
+Imagen Salon|Salon image
+Importar Datos|Import Data
+Importar Imagenes del Servidor|Import Images from the Server
+Importe|Amount
+Importe a Retirar|Amount to Withdraw
+Importe Total Prendas|Total Amount Garments
+Imprimir en Cocina|Print in Kitchen
+Imprimir factura|Print invoice
+Imprimir Letreros  y  Etiquetas |Print Signs and Labels
+Imprimir Resguardo|Print Resguardo
+Imprimir Ticket|Print Ticket
+Impuesto:|Tax:
+Impuestos|Taxes
+Impuestos Incluidos|Taxes included
+Impuestos Repercutidos|Taxes Taxed
+Incluidos|Included
+Incluir Logo|Include Logo
+Indique su fecha de nacimiento|Indicate your date of birth
+Indiquenos desde que sitio ha descargado este programa|Indicate from which site you have downloaded this program
+INFORMACION SOBRE FACTURAS ESPECIALES|INFORMATION ON SPECIAL INVOICES
+Ingredientes|Ingredients
+Ingredientes Incluidos en el Producto: |Ingredients Included in the Product:
+Ingrese el concepto|Enter the concept
+Ingrese el nro. de percha|Enter the number of hanger
+Ingrese el numero de ticket / factura|Enter the ticket number / invoice
+Ingrese el segundo apellido de su madre|Enter your mother's second surname
+Ingrese la contraseña anterior|Enter the previous password
+Ingrese la contraseña nueva|Enter the new password
+Ingrese su clave:|Enter your password:
+Ingrese sus datos para poder responderle|Enter your information to be able to respond
+Ingrese un codigo postal|Enter a postal code
+Insertar Imagen|Insert image
+Juntar Cuentas|Join Accounts
+La contraseña de direccion es: |The address password is:
+La contraseña y las respuestas de recordatorio se han guardado correctamente.|The password and reminder responses have been saved correctly.
+La impresora se ha dado de alta correctamente|The printer has successfully registered
+La lista de precios que ha seleccionado esta fuera del rango actual|The price list you have selected is out of the current range
+Label32|Label32
+Label4|Label4
+Label5|Label5
+Label6|Label6
+Las respuestas introducidas no son correctas|The answers entered are not correct
+lb-_Empleado|lb-_Employee
+Lb_stopanelproductos|Lb_stopanelproducts
+lblCliente|lblClient
+Le hemos asignado  20 correos gratis|We have assigned you 20 free emails
+Libre|Free
+Lima - Peru|Lima Peru
+Limpiar|Clean
+Lineas en blanco al final del ticket = |Blank lines at the end of the ticket =
+lineas sin traducir|untranslated lines
+Lista de clientes|Client list
+Lista de correos seleccionados|List of selected emails
+Lista de Familias|List of Families
+Lista de las ultimas ventas|List of the latest sales
+Lista de Precios|Price list
+Lista de Precios Existentes|Existing Price List
+Lista de Salones - Barras|List of Rooms - Bars
+lista productos|list products
+Lista Ultimos 50 Clientes|Last 50 Customers List
+Listado de Clientes|List of Clients
+Listado de Empleados|List of Employees
+Listado de Familias|List of Families
+Listado de Productos|List of Products
+Listado de Proveedores|List of Providers
+Listados Caja|Listings Box
+Listados Generales|General Listings
+Listas activa en este terminal|Active lists in this terminal
+Listas de Precios|Price Lists
+Listas de precios no activa|Price lists not active
+Logo de la Empresa|Company logo
+LPT 1|LPT 1
+LPT 2|LPT 2
+Madrid - España|Madrid Spain
+Mantenimiento registrado hasta:|Registered maintenance up to:
+Marca de Impresora|Printer Brand
+Marcar Todos|Mark All
+Max. 20|Max. twenty
+Maximo 8 caracteres|Maximum 8 characters
+Mayor que|Greater than
+Menor que|Smaller than
+Mensaje|Message
+Mensaje Enviado|Message sent
+Mes|Month
+MESA|TABLE
+Mesas|Tables
+MESAS =|TABLES =
+Mi impresora imprime|My printer prints
+Miami - Florida|Miami Florida
+Modelo de Impresora|Printer Model
+Modificacion de Tickets|Modification of Tickets
+Modificar Datos|Modify data
+Moneda|Coin
+Mostrar clientes|Show clients
+Mostrar en Pantalla de Caja:|Show in Box Screen:
+Mostrar P. Unitario|Show P. Unitary
+Movil|Mobile
+Móvil / Celular:|Mobile phone:
+NIF/ CIF:|NIF / CIF:
+NNNNNNNNN|NNNNNNNNN
+No|Do not
+NO BORRAR|DO NOT DELETE
+No ha seleccionado ningun empleado|You have not selected any employee
+No hay datos para ser mostrados|There is no data to be shown
+No Incluidos|Not included
+No Movimiento|No movement
+NO Permite acceso al modulo|NO Allows access to the module
+Nombre  del Banco:|Name of the bank:
+Nombre (click para seleccionar/desactivar)|Name (click to select / deactivate)
+Nombre de la Empresa|Company name
+Nombre de la lista|Name of the list
+Nombre de Usuario|Username
+Nombre del Banco|Name of the bank
+Nombre del Impuesto (IVA, IGIC, IGV, etc.)|Name of the Tax (VAT, IGIC, IGV, etc.)
+Nombre del Producto:|Product name:
+Nombre del Visor:|Viewer Name:
+Nombre Empresa|Company name
+Nombre Plantilla|Template Name
+nombre restaurante|restaurant name
+nombreproducto|productname
+Nota: Es posible que la impresora realice el corte sin tener que añadir ninguna secuencia de apertura, en ese caso no hace falta que configure esta opcion|Note: It is possible that the printer makes the cut without having to add any opening sequence, in that case you do not need to configure this option
+Nota: Esta opcion solo esta pensado para aquellos clientes que en su pais el valor de sus monedas es diferente al establecido para la zona Euro.|Note: This option is only intended for those customers who in their country the value of their currencies is different to that established for the Euro zone.
+Nota: Localice el equipo que hara de servidor que la base de datos la encontrara en |Note: Locate the computer that will make the server the database will find it in
+Nro comensales|No diners
+Nro de Comensales|Number of Diners
+Nro de Mesas:|No. of Tables:
+Nro Prendas|No. Garments
+Nro Venta/Pie de Ticket|No Sale / Foot of Ticket
+Nro. de caracteres de su impresora|No. of characters of your printer
+Nro. de copias del preticket|No. of pre-ticket copies
+Nro. de copias del ticket|No. of copies of the ticket
+Nro. de Decimales que quiero utilizar|No. of Decimals that I want to use
+Nueva|New
+Nueva Plantilla|New Template
+Nueva Reserva|New reservation
+Nuevo Cliente|New client
+Nuevo Precio|New price
+Num S.S.:|Num S.S .:
+Num total de operaciones de este terminal|Total number of operations of this terminal
+Num total operaciones contado|Total transactions counted
+Num total operaciones otras formas pago|Num total operations other forms payment
+Num total operaciones tarjeta|Num total card operations
+Num. Visita|Visit number
+Numeracion de factura|Invoice number
+Número de  Cuenta:|Account number:
+Numero de credito fiscal|Tax credit number
+Número de Cuenta:|Account number:
+Numero de decimales ( 0,1,2)|Number of decimals (0,1,2)
+Número de tipos de moneda a utilizar:|Number of currency types to be used:
+Numero Mesa|Number Table
+Número:|Number:
+numPedido|numPedido
+NumPedido =|OrderNum =
+Objeto Pulsado|Pulsed Object
+Observ. Pedido|I observed Order
+Observaciones de caja:|Cash observations:
+Ocupada|Busy
+OFF|OFF
+OK|okay
+ON|ON
+Opciones configurables|Configurable options
+Orden Menu|Order Menu
+Otra Moneda|Other Currency
+Otras Opciones|Other options
+Otras secuencias de apertura|Other opening sequences
+Otras secuencias de Corte de Papel|Other sequences of Paper Cutting
+Otro Terminal|Other Terminal
+P. U.|P. U.
+Pagina Web|Web page
+Pais|Country
+País:|Country:
+panel de busqueda de clientes|customer search panel
+panel menu familia|panel menu family
+Panel Mesas|Panel Tables
+panel_opciones de caja|panel_options
+Para impresoras con comandos adicionales: (serie, paralelo, usb)|For printers with additional commands: (series, parallel, usb)
+Para impresoras conexion paralela:|For parallel connection printers:
+Para impresoras salida serie:|For serial output printers:
+Para poder recordarle la contraseña de direccion es necesario que responda a las siguientes preguntas|To be able to remind you of the address password you need to answer the following questions
+Paseo de Europa 7, (S.S. de los Reyes - Madrid -España)|Walk of Europe 7, (S.S. de los Reyes - Madrid-Spain)
+Paso1: Confirme que todos sus equipos esten conectados en red.  Paso2: De todos los equipos que tiene, tiene que seleccionar uno que va a hacer de servidor.  Paso3: El equipo que hara de servidor tiene que tener el disco C compartido y con los permiso|Step1: Confirm that all your computers are connected in a network. Step2: Of all the equipment you have, you have to select one that is going to be a server. Step3: The team that will make the server must have the shared disk C and with the permission
+Pedido Telefonico|Telephone Order
+Pedidos Realizados a Proveedor|Orders Made to Supplier
+Pedir Contraseña|Ask Password
+Pedir Contraseña Al Entrar Al Programa|Request Password When Entering the Program
+Pedir Contraseña Al Entrar Caja|Ask Password When Entering Box
+Pedir Contraseña Apertura de Cajetin|Request Password Cajetin Opening
+Pedir contraseña para las modificaciones / eliminaciones / descuentos ... (Para todos los empleados)|Ask password for modifications / deletions / discounts ... (For all employees)
+Pedir Empleado Al Entrar Caja|Ask Employee When Entering Box
+Pedir Empleado X Cada Venta|Ask for Employee X Every Sale
+Permisos de Usuario|User permits
+Permisos Usuario|User Permissions
+Permisos Usuarios|Users Permissions
+Permite acceso al modulo|Allows access to the module
+Pie de Correo|Foot Mail
+Pie de página|Footer
+Pie de Ticket|Ticket Foot
+Piso|Floor
+Piso:|Floor:
+Plantilla|Template
+Plantilla 1|Template 1
+Plantilla 2|Template 2
+Plantilla 3|Template 3
+Plantilla Guardada|Saved Template
+Plantilla Reservas|Template Reservations
+Plantillas Promociones|Promotions Templates
+Poblacion:|Population:
+Población:|Population:
+Posicion  en Pantalla:|Screen Position:
+Posicion del objeto/mesa|Position of the object / table
+Postre|Dessert
+Precio Actual|Actual Price
+Precio de Venta:|Sale price:
+Precio Original|Original price
+Precios Validos entre los siguientes dias y horas|Valid prices between the following days and hours
+Pregunta o Consulta|Question or Consultation
+Preticket|Preticket
+PRIMER PLATO|FIRST COURSE
+Probar / Guardar|Test / Save
+Prod. en Lista|Prod. In List
+Producto Elaborado|Elaborate product
+Producto incluido en otra familia|Product included in another family
+Producto para Venta|Product for Sale
+Producto preparado en|Product prepared in
+Producto preparado en:|Product prepared in:
+Productos Bajo Minimo|Products Low Minimum
+Productos Bajo Minimos Formato Ticket|Products Under Minimal Format Ticket
+Productos de Barra|Products of Barra
+Productos de cocina|Kitchen products
+Productos Elaborados|Processed products
+Productos Incluidos|Included Products
+Productos mas Vendidos|Most selled products
+Productos Primer Plato|First Plate Products
+Productos relacionados con el proveedor:|Products related to the supplier:
+Productos Segundo Plato|Second Plate Products
+Productos Sin Ventas|Products Without Sales
+Productos Tercer Plato/ Postre|Third Dish / Dessert Products
+Programa protegido por los derechos de propiedad intelectual en Marcas y Patentes en cuanto a contenido y diseño.|Program protected by intellectual property rights in Trademarks and Patents in terms of content and design.
+PROGRAMA REGISTRADO|REGISTERED PROGRAM
+Promociones / Envio Email|Promotions / Email
+Promociones Fast Food|Fast Food Promotions
+Propina|Tip
+Provincia:|Province:
+Proyecto: Servidor Net, Version: XXX|Project: Net Server, Version: XXX
+Proyecto: Tpv 123, Version: XXX|Project: Tpv 123, Version: XXX
+Puede cambiar|You can change
+Puerta|Door
+Puerta:|Door:
+Puerto Rico|Puerto Rico
+R e s e r v a s|Reservations
+Realizar cierre caja ciego|Perform closing blind box
+Recargo:|Surcharge:
+Recordatorio de contraseña de direccion|Address password reminder
+Recuerde que en la carpeta indicada en la linea superior tiene que existir el archivo nomprog.|Remember that in the folder indicated in the upper line there must exist the nomprog file.
+Reenviar|Resend
+Reenvio de Pedidos A cocina / Barra|Forwarding of Orders to Kitchen / Bar
+Reg. Anual|Annual Reg
+Registro de Licencias|Registration of Licenses
+Reimpresion Ticket|Reprinting Ticket
+Reimprimir Factura - Ticket|Reprint Invoice - Ticket
+Relacion de Propinas|Tip Ratio
+Relacion Emails Enviados|Relationship Emails Sent
+Relacion Envios Cocina contra Ventas|Shipping Relationship Kitchen vs. Sales
+Rellene algun campo para la busqueda|Fill in some fields for the search
+Remitente|Sender
+Repartidor:|Delivery man:
+Reserva|Reservation
+Reservada|Reserved
+Reservas|Reservations
+Reservas de Mesas|Table Reservations
+Reservas Hora/Dia /Mes|Reservations Time / Day / Month
+Reservas x Dia|Reservations x Day
+Resultado de la Búsqueda|Result of the Search
+Resultados de la Busqueda|Search results
+Resumen Contable de Facturas|Invoice Accounting Summary
+Resumen de Venta x Empleados|Summary of Sale x Employees
+Retirada de Caja|Withdrawal of Cash
+Retiradas|Withdrawn
+Retiradas Empleados|Withdrawn Employees
+Saldo:|Balance:
+SALON|LIVING ROOM
+Salones|Rooms
+Santiago de Chile|Santiago, Chile
+Secuencia de Apertura|Opening Sequence
+Secuencia de Corte|Cutting Sequence
+Segundo|Second
+SEGUNDO PLATO|SECOND COURSE
+Seleccion De Entradas|Selection of Tickets
+Seleccionar Color:|Select Color:
+SELECCIONE EL EMPLEADO|SELECT THE EMPLOYEE
+Seleccione el empleado al que va a configurar permisos|Select the employee to whom you are going to set permissions
+Seleccione el intervalo de fechas|Select the date range
+Seleccione el producto o el ingrediente a utilizar|Select the product or ingredient to use
+Seleccione el tipo de familia|Select the type of family
+Seleccione Horario|Select Timetable
+Seleccione la celda en la interseccion de la impresora y la zona que quiere asociar|Select the cell at the intersection of the printer and the area you want to associate
+Seleccione las monedas de su pais|Select the currencies of your country
+Seleccione las monedas en circulacion de su pais|Select the currencies in circulation of your country
+Seleccione su pais|Select your country
+Seleccione Tamaño Letra: Cuerpo|Select Letter Size: Body
+Seleccione Tamaño Letra: Titulo|Select Letter Size: Title
+Seleccione Tipo Letra|Select Type Letter
+Seleccione una opcion|Select an option
+Serie: XXX|Series: XXX
+Servicio Correo|Mail Service
+Servicio de asistencia:|Assistance service:
+Servicios a Domicilio|Domiciliary services
+Sí|Yes
+Si ACTIVA esta opcion, en las facturas el num. le aparecera asi: 000- 000-00-0000000X|If you activate this option, in the invoices the num. it will appear like this: 000-000-00-0000000X
+Si conoce que tipo de conexion tiene su impresora de tickets seleccione la que le corresponde en caso contrario pruebe cada uno de ellos hasta confirmar cual es el que abre.|If you know what type of connection your ticket printer has, select the one that corresponds to it otherwise try each one of them until you confirm which one opens.
+Si en su pais no se aplica esta normativa, NO ACTIVE esta opcion|If this regulation does not apply in your country, DO NOT activate this option
+Si la compra de este producto ha superado el año y tiene caducado la asistencia / actualizaciones del programa, y tiene un problema recuerde, primero contratar nuestro servicio de asistencia para una solucion adecuada.|If the purchase of this product has exceeded the year and the program's assistance / updates has expired, and you have a problem remember, first hire our assistance service for an adequate solution.
+Si no tiene contratado este servicio nuestra empresa no tiene la obligacion de dar ningun tipo de servicio o ser responsable de algun cambio de su sistema informatico.|If you do not have this service contracted, our company does not have the obligation to provide any kind of service or be responsible for any change in your computer system.
+Si olvida la contraseña que acaba de introducir podra recuperarla respondiendo a las preguntas anteriores.|If you forget the password you just entered, you can recover it by answering the previous questions.
+Si tiene alguna Incidencia / Pregunta sobre nuestro programa utilice esta opcion siguiendo los pasos:|If you have any Incidence / Question about our program use this option following the steps:
+Simbolo Moneda|Currency Symbol
+Sirve para que en lugar de que  aparezca una imagen en el boton  del producto aparezca un numero.|It serves so that instead of appearing an image on the product button, a number appears.
+situacion|situation
+situacion buscar|situation search
+Situacion cabecera|Head position
+Situacion datos cliente|Customer data situation
+SITUACION DE LOS PANELES|SITUATION OF THE PANELS
+situacion derecha|right situation
+Situacion detalles ticket|Location ticket details
+situacion izquierda|left situation
+situacion panel opciones|panel situation options
+situacion panel producto|product panel situation
+situacion paneles|situation panels
+Situacion pie ticket|Situation foot ticket
+situacion_paneles_generales|situation_general_panels
+situacion2|situation2
+situaciongrid|situaciongrid
+situacionpaneles|situacionpaneles
+SolverMedia|SolverMedia
+SolverMedia, Departamento de Desarrollo|SolverMedia, Development Department
+sto ingredientes|sto ingredients
+Stock Minimo:|Minimum stock:
+Su ID Es|Your ID Is
+Su registro se ha realizado con exito|Your registration has been successfully completed
+SubFamilias|SubFamilies
+SubFamilias Existentes|Existing SubFamilies
+Subproductos|Byproducts
+SubTotal|Subtotal
+Suma/Conteo de caja del turno actual|Sum / Current shift case count
+Tablet Activada|Activated Tablet
+Tamaño 10 cm.|Size 10 cm.
+Tel:|Tel:
+TELEF|TELEF
+Teléfono|Phone
+Telefono:|Phone:
+Teléfono:|Phone:
+Terminal = XXX|Terminal = XXX
+Terminar Venta|Finish Sale
+Terminar Venta <F12>|Finish Sale <F12>
+Texto|Text
+Texto Original|Original text
+Texto sin traducir|Untranslated text
+Texto Traducido|Translated text
+Tiene un descuento de|It has a discount of
+Tipo / Tamaño Letra|Type / Size Letter
+Tipo 20|Type 20
+Tipo de Consulta|Type of Consultation
+Tipo de Familia:|Kind of family:
+Tipo de Producto:|Kind of product:
+Tipo de venta|Type of sale
+Tipo IVA|VAT type
+Tipos de licencia|License types
+Titulo|Title
+Tlf Movil|Mobile Phone
+Todos|Everybody
+Todos los clientes|All customers
+toolStrip1|toolStrip1
+top grid|top grid
+Total Diario de Retiradas|Total Daily Withdrawals
+Total en Letras|Total in Letters
+Total monedas|Total coins
+Total otras formas de pago|Total other payment methods
+Total tarjetas|Total cards
+Tpv 123 Hosteleria|Tpv 123 Hospitality
+Tpv 123 Hosteleria (Version: 8.5.1)|Tpv 123 Hosteleria (Version: 8.5.1)
+TPV Gratuito|Free POS
+TPV Gratuito, Departamento de Desarrollo|Free POS, Development Department
+TPV Hosteleria|POS Terminal Hosteleria
+Traduccion|Translation
+Uds|You
+Ultima actualizacion: XXX|Last update: XXX
+Ultima Venta|Last Sale
+Ultimo Nro. Utilizado = |Last Used No =
+Ultimos 50 gastos (clic para modificar)|Last 50 expenses (click to modify)
+Unidades de medida:|Measurement units:
+USB|USB
+Usted está utilizando una licencia:|You are using a license:
+Usuario: Director|User: Director
+Utilizar Caja Rapida|Use Quick Box
+Utilizar SubTotal|Use SubTotal
+Utilizar Visor|Use Viewer
+V E R  T I C K E T|V E R T I C K E T
+Valor de venta en letras|Sale value in letters
+Valor n|Value n
+Valoracion Stock General|General Stock Valuation
+Valoracion Stock x Proveedores|Valuation Stock x Suppliers
+Varias lineas para descripcion del producto|Several lines for product description
+Varios Precios|Various Prices
+Venta Anterior|Previous Sale
+Ventas con Promociones|Sales with Promotions
+Ventas Detalladas x Empleados|Detailed Sales x Employees
+Ventas Eliminadas Formato Ticket|Sales Deleted Format Ticket
+Ventas Eliminadas y Descuentos|Deleted Sales and Discounts
+Ventas en el mes (Acumulado x Horas)|Sales in the month (Accumulated x Hours)
+Ventas Formato Ticket Detallado|Sales Detailed Ticket Format
+Ventas Formato Ticket Resumido|Sales Summary Ticket Format
+Ventas Formato Ticket x Empleado|Sales Format Ticket x Employee
+Ventas Generales x Dia|General Sales x Day
+Ventas NCF Rep. Dominicana|Sales NCF Rep. Dominicana
+Ventas x Clientes|Sales x Customers
+Ventas x Empleados|Sales x Employees
+Ventas x Familias|Sales x Families
+Ventas x Forma de Pago|Sales x Form of Payment
+Ventas x Horas|Sales x Hours
+Ventas x Menus|Sales x Menus
+Ventas x Zonas|Sales x Areas
+Ventas x Zonas Formato General|Sales x Areas General Format
+Ventas x Zonas -Totalizado x Productos|Sales x Areas -Totalized x Products
+Ver Datos Completos|See Full Data
+Ver Ingredientes|See Ingredients
+Ver Ingredientes Incluidos|See Ingredients Included
+Ver Lista|See list
+Ver Productos|See products
+Ver Productos Venta|See Products Sale
+Visitas|Visits
+Visor Pedidos|Order Viewer
+Vista Previa|Preview
+Volver a intentar|Try again
+Volver Lista de Precios|Back Price List
+WEB|WEB
+Zona Impresion|Impression Zone
+Zona:|Zone:
+ZonaImpresion|Impression Area
+Zonas|Areas
+Zonas de Impresion|Areas of Impression
+Zonas Existentes|Existing Areas
+* Clic sobre el impuesto que desea cambiar|* Click on the tax you want to change
+1.-Si desea aumentar el coste, solo debe ingresar el porcentaje en la caja del mismo.|1.-If you want to increase the cost, just enter the percentage in the box.
+2.-Luego seleccione el proveedor o seleccione la opcion todos.|2.-Then select the provider or select the option all.
+a:|to:
+alturapanel|alturapanel
+Aumento de Precios|Price increase
+Cambio de Coste / Precio|Change of Cost / Price
+Cambio el valor de los impuestos|Change the value of taxes
+Con redondeo|With rounding
+Coste|Cost
+De:|From:
+Deseo cambiar|I want to change
+Este proceso automatiza el aumento de precio, margen comercial y coste de los productos.|This process automates the increase in price, commercial margin and cost of the products.
+Los mismos pasos 1, 2 para margen comercial o precio de venta.|The same steps 1, 2 for commercial margin or sale price.
+Nro. de Productos|No. of Products
+Productos del Proveedor|Products of the Supplier
+Realizando cambios|Making changes
+Recuerde que este proceso es irreversible. Confirme y  verifique los porcentajes que está aumentando.|Remember that this process is irreversible. Confirm and verify the percentages that are increasing.
+Sin redondeo|Without rounding
+Todos los productos|All the products
+Escriba la clave de gerencia|Enter the management key
+Total Cuenta Parcial|Total Partial Account
+Venta Original|Original Sale
+Zona|Zone
+Contraseña = |Password =
+Hora de Entrega|Delivery Time
+Fecha de Entrega|Date of delivery
+Observaciones|Observations
+Hora Entrega|Delivery Time
+Fecha Entrega|Deliver date
+N. Pedido|N. Order
+Reservas Activas|Active Reserves
+Total Reservas|Total Reservations
+Fecha Seleccionada|Selected Date
+Pedidos en Reserva|Orders in Reserve
+Seleccione Salon|Select Salon
+Seleccione Salon Destino|Select Destination Salon
+Seleccione Mesa A Juntar|Select Table To Join
+Total Cuenta Origen|Total Account Origin
+Seleccione Mesa Destino|Select Destination Table
+Eliminar Observación|Delete Observation
+Escriba la nueva observacion|Write the new observation
+Posicion|Position
+Observaciones a Cocina|Observations to Kitchen
+Seleccione la observacion que desea eliminar del panel de arriba|Select the observation you want to remove from the panel above
+idenvio|idenvio
+estado|state
+Observacion|Observation
+comensal|diner
+Nueva Observación|New Observation
+Esta Forma de Pago es de tipo Tarjeta|This Payment Method is Card type
+Ventas Generales por Dia|General Sales per Day
+Totalizado por Forma de Pago|Totalized by Payment Form
+Total Retiradas|Total Withdrawals
+C. Inicial|C. Initial
+Total Gastos|Total spends
+Total General|Grand Total
+Completo|Full
+Servicios|Services
+Seleccione de que terminal quiere obtener la información|Select from which terminal you want to get the information
+Numero de Ventas Menores A: |Number of Minor Sales A:
+Requisitos Para Usar Sql Server|Requirements to Use Sql Server
+Si desea utilizar el programa con Sql Server un tecnico de nuestra empresa se lo puede instalar. Pasos que tiene que tomar en cuenta.|If you want to use the program with Sql Server, a technician of our company can install it. Steps you have to take into account.
+1.- Este servicio tiene un coste de 75 Euros + Iva|1.- This service has a cost of 75 Euros + VAT
+2.- Tiene que tener instalado el TeamViewer para que un tecnico pueda conectar a instalar la BD y dejarle el programa funcionando en Sql Server|2.- You must have the TeamViewer installed so that a technician can connect to install the BD and leave the program running on Sql Server
+3.- Tiene que indicarnos los nombre de los usuarios que utilizaran el programa para crear los usuarios en la base de datos. (este servicio incluye 3 usuarios si desea mas usuarios el coste es de 5 Euros por cada uno)|3.- You have to indicate the names of the users that will use the program to create the users in the database. (this service includes 3 users if you want more users the cost is 5 Euros each)
+4.- Solo le recomendamos que contrate este servicio y utilice esta opcion si solo si su empresa verdaderamente lo necesita, por nuestra experiencia el 90% de los usuarios de Puntos de Venta del sector retail no necesitan tener esta base de datos instalada|4.- We only recommend that you hire this service and use this option if only if your company really needs it, from our experience 90% of the users of Points of Sale in the retail sector do not need to have this database installed
+Seleccione el Horario de Cocina|Select the Kitchen Schedule
+Seleccione el Horario del Establecimiento|Select the Establishment Schedule
+El Horario de Cocina es:|The Kitchen Schedule is:
+El Horario del Establecimiento es:|The Establishment Schedule is:
+Label2|Label2
+Configure los Horarios de su establecimiento|Configure the Schedules of your establishment
+Pasar a la version Basica o Completa|Go to the Basic or Complete version
+El Tipo de Base De Datos Que Su Negocio Necesita|The Type of Database Your Business Needs
+ACCESS|ACCESS
+Indicado para empresas con volumen de datos bajos 1 o 2 PC en red.|Indicated for companies with low data volume 1 or 2 PCs in network.
+SQL SERVER|SQL SERVER
+Dirigido para aquellas empresas con volumenes de datos altos o muchas interacciones simultaneas soporta varios PC conectados en red sin problemas de concurrencias y trafico de datos. (si este es su caso nuestro programa funciona perfectamente con este ges|Directed for those companies with high data volumes or many simultaneous interactions supports several networked PCs without concurrency problems and data traffic. (If this is your case our program works perfectly with this ges
+Más Información|More information
+UTILIZAR SQL SERVER|USE SQL SERVER
+Utilizar  SQL   Server . . . . . |Use SQL Server . . . .
+Nombre Servidor SQL Server|Server Name SQL Server
