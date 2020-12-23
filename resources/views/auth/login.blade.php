@@ -20,7 +20,7 @@
                     <i class="icon-user"></i>
                   </span>                  
                 </div>
-                <input class="form-control" type="text" value="{{old('usuario')}}" name="usuario" id="usuario" placeholder="Usuario">
+                <input class="form-control" type="text" value="{{old('usuario')}}" name="usuario" id="usuario" placeholder="Usuario" autofocus>
                   {!!$errors->first('usuario','<span class="invalid-feedback">:message</span>')!!}
               </div>
 

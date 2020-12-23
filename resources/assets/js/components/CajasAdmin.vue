@@ -51,10 +51,10 @@
                                                 <i class="fa fa-check-circle"></i>
                                             </a> -->
                                         
-                                            <a v-if="cajas_admin.condicion" href="#" class="btn text-success" @click="desactivarConcentracion(cajas_admin.id)" title="Desactivar">
+                                            <a v-if="cajas_admin.condicion" href="#" class="btn text-success" @click="desactivarCajasAdmin(cajas_admin.id)" title="Desactivar">
                                                 <i class="fa fa-check-circle"></i>
                                             </a>
-                                            <a v-else href="#" class="btn text-danger" @click="activarConcentracion(cajas_admin.id)" title="Activar">
+                                            <a v-else href="#" class="btn text-danger" @click="activarCajasAdmin(cajas_admin.id)" title="Activar">
                                                 <i class="fa fa-times-circle"></i>
                                             </a>
                                         </template>
@@ -337,7 +337,7 @@
                 me.listarCajasAdmin(page,buscar,criterio);
             },
             registrarCajasAdmin(){
-                // if (this.validarConcentracion()){
+                // if (this.validarCajasAdmin()){
                 //     return;
                 // }
                 
@@ -354,7 +354,7 @@
                 });
             },
             actualizarCajasAdmin(){
-                // if (this.validarConcentracion()){
+                // if (this.validarCajasAdmin()){
                 //     return;
                 // }
                 
@@ -371,19 +371,19 @@
                     console.log(error);
                 }); 
             },
-            validarConcentracion(){
+            validarCajasAdmin(){
                 this.errorCajasAdmin=0;
                 this.errorMostrarMsjCajasAdmin =[];
 
-                if (!this.nombre) this.errorMostrarMsjCajasAdmin.push("Ingrese el nombre de la concentración.");
+                if (!this.nombre) this.errorMostrarMsjCajasAdmin.push("Ingrese el nombre de la Caja.");
 
                 if (this.errorMostrarMsjCajasAdmin.length) this.errorCajasAdmin = 1;
 
                 return this.errorCajasAdmin;
             },
-            desactivarConcentracion(id){
+            desactivarCajasAdmin(id){
                Swal.fire({
-                title: 'Esta seguro de desactivar esta concentracion?',
+                title: 'Esta seguro de desactivar esta Caja?',
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -420,9 +420,9 @@
                 }
                 }) 
             },
-            activarConcentracion(id){
+            activarCajasAdmin(id){
                Swal.fire({
-                title: 'Esta seguro de activar esta concentracion?',
+                title: 'Esta seguro de activar esta caja?',
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

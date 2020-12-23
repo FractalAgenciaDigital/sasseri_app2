@@ -506,6 +506,7 @@
                 arrayProveedor: [],
                 arrayDetalle : [],
                 arrayDetalleT : [],
+                arrayPreparados : [],
                 listado:1,
                 modal : 0,
                 tituloModal : '',
@@ -1329,13 +1330,33 @@
                 console.log("ivaVenta_vr"+ivaVenta_vr);
                 let auxPosition = me.arrayDetalle.indexOf(me.arrayDetalle.find(({codigo}) => codigo === producto.codigo));
                 
+                if(producto.tipo_articulo == 4) {
+                    me.arrayPreparados.push({
+                        codigo: producto.codigo,
+                        idarticulo: producto.id_articulo,
+                        id_asociado: producto.id_asociado,
+                        articulo: producto.nombre,
+                        cantidad: 1,
+                        tipo: producto.tipo_articulo,
+                        valor_descuento: 0,
+                        precio: producto.precio_venta,
+                        precio_venta: producto.precio_venta,
+                        iva: ivaVenta,
+                        valor_iva: ivaVenta_vr,
+                        valor_subtotal: Math.round(parseFloat(producto.precio_venta-ivaVenta_vr)),
+                        stock : producto.stock,
+                        descuento : 0,
+                        nom_presentacion : producto.nom_presentacion,
+                        id_presentacion : producto.id_presentacion,
+                        padre : producto.padre
+                    });
+                }
+
                 if(auxPosition >= 0) {
                     me.arrayDetalle[auxPosition].cantidad+=1;
                     me.arrayDetalle[auxPosition].valor_iva+=ivaVenta_vr;
                     me.arrayDetalle[auxPosition].valor_subtotal +=  me.arrayDetalle[auxPosition].precio_venta - ivaVenta_vr;
-                }
-                 
-                else {
+                }else {
                     me.arrayDetalle.push({
                         codigo: producto.codigo,
                         idarticulo: producto.id_articulo,
@@ -1512,14 +1533,6 @@
                 
                     let me = this;
                     
-                    // for(var i=0; i<me.arrayDetalle.length; i++)
-                    // {
-                    //     me.descuento += parseFloat(me.arrayDetalle[i]['valor_descuento']);
-                    //     me.iva += parseFloat(me.arrayDetalle[i]['valor_iva']);
-                    //     me.subtotal += parseFloat(me.arrayDetalle[i]['valor_subtotal']);
-                    // }
-                    // me.total += parseFloat(me.subtotal)+parseFloat(me.iva);
-                    // me.sugerirNumFactura();
 
                     axios.post(this.ruta +'/facturacion/registrar',{
                         'num_factura': null,
