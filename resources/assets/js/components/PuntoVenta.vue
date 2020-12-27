@@ -351,26 +351,16 @@
                         <table class="table table-sm">
                             <thead>
                                 <tr>
-                                    <th scope="col">CANT</th>
-                                    <th colspan="1"></th>
-                                    <th scope="col">DESCRIPCION</th>
+                                    <th scope="col">PRODUCTO</th>
+                                    <th colspan="1">CANTIDAD</th>
+                                    <th scope="col">PRECIO</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="centrado">3</td>
-                                    <td colspan="1"></td>
-                                    <td>LECHE ALQUERIA</td>
-                                </tr>
-                                <tr>
-                                    <td class="centrado">1</td>
-                                    <td colspan="1"></td>
-                                    <td>PAN DE QUESO</td>
-                                </tr>
-                                <tr>
-                                    <td class="centrado">3</td>
-                                    <td colspan="1"></td>
-                                    <td>CAFE NEGRO</td>
+                                <tr v-for="(prod_preparado,index) in arrayPreparado" :key="index">
+                                    <td>{{prod_preparado.articulo}}</td>
+                                    <td>{{prod_preparado.cantidad}}</td>
+                                    <td>{{prod_preparado.precio}}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1315,14 +1305,13 @@
                 if(detalle.cantidad2){
                     if (detalle.cantidad != detalle.cantidad2) {
                         detalle.cantidad = detalle.cantidad2
-                        detalle.prod_nuevo = 0
+                        detalle.prod_nuevo = 0; 
                     }
                 }
                 else{
                     me.arrayDetalle.splice(index, 1);
                 }
-                console.log(detalle);
-                // me.arrayDetalle.splice(index, 1);
+             
             },
            
             agregaDetalleMesero(producto){
@@ -1381,6 +1370,7 @@
                     me.arrayDetalle[auxPosition].prod_nuevo = 1
                     
                 }else {
+                    
                     me.arrayDetalle.push({
                         codigo: producto.codigo,
                         idarticulo: producto.id_articulo,
@@ -1399,7 +1389,7 @@
                         nom_presentacion : producto.nom_presentacion,
                         id_presentacion : producto.id_presentacion,
                         padre : producto.padre,
-                        prod_nuevo:1
+                        prod_nuevo:1,
                     });
                 }
                
