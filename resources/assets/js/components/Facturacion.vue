@@ -383,9 +383,14 @@
                                     <tbody v-if="arrayDetalle.length">
                                         <tr v-for="(detalle,index) in arrayDetalle" :key="detalle.id">
                                             <td>
-                                                <button @click="eliminarDetalle(index)" type="button" class="btn btn-danger btn-sm">
+                                                <!-- <h3 class="text-danger" v-if="rolusuario==1" @click="eliminarDetalle(index)" title="Remover"><i class="fa fa-times-circle"></i></h3> -->
+                                                 <button v-if="rolusuario==1" @click="eliminarDetalle(index)" type="button" class="btn btn-danger btn-sm">
                                                     <i class="icon-close"></i>
                                                 </button>
+                                                <h3 class="text-secondary" title="Deshabilitado" v-else>
+                                                    <i class="fa fa-times-circle"></i>
+                                                </h3>
+                                               
                                             </td>
                                             <td v-if="detalle.padre==null || detalle.padre==''" v-text="detalle.codigo+' - '+detalle.articulo+' - '+detalle.nom_presentacion">
                                             </td>
@@ -913,6 +918,7 @@
 
                 arrayFacturacion : [],
                 arrayFacturacionT : [],
+                rolusuario:0,
 
                 iva:0,
 
@@ -1053,6 +1059,7 @@
                 axios.get(url).then(function (response) {
                     var respuesta= response.data;
                     me.arrayFacturacion = respuesta.facturacion.data;
+                    me.rolusuario = respuesta.idrol;
                     me.pagination= respuesta.pagination;
                 })
                 .catch(function (error) {

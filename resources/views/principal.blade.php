@@ -27,6 +27,9 @@
         </style>
     </head>
     <?php $rol_usu = Auth::user()->idrol; ?>
+    <script>
+      
+    </script>
     <body id="page-top">
         <div id="app">
             <!-- Page Wrapper -->

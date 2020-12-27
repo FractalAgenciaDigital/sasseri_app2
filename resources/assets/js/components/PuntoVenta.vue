@@ -18,14 +18,10 @@
                     <div class="row">                            
                         <div class="col-12">
                             <div class="form-group">
-                       
-                       
                                 <select size="2" class="form-control" multiple  v-model="buscarCategoriaA"  placeholder="- Categorias -" @change="listarArticulo(buscarA,criterioA,buscarCategoriaA)">
                                     <option value="">- Categorias -</option>
                                     <option v-for="categoria in arrayCategoria2" :key="categoria.id" :value="categoria.id" v-text="categoria.nombre"></option>
-                                   
                                 </select>
-
                             </div> 
                         </div>  
                     </div>
@@ -47,8 +43,6 @@
                                     </div>
                                 </div>
                             </div>
-                            
-
                         </div>  
                     </div>
                 </div>
@@ -59,14 +53,12 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-6">
-                                <button class="btn btn-info" @click="position=1"><i class="fa fa-arrow-left"></i> Productos 
-                                    </button>
+                                <button class="btn btn-info" @click="position=1"><i class="fa fa-arrow-left"></i> Productos </button>
                             </div>
                             <div class="col-5 pr-1">
                                 <button class="btn btn-danger" style="margin-left: -31px;" @click="ocultarDetalle(); position=7;">Descartar <i class="fa fa-trash"></i>
                                 </button>
                             </div>
-                            
                         </div>                                
                     </div>
                     <div class="card-body">
@@ -80,7 +72,8 @@
                                     <div class="col-1">
                                         <h3  v-if="!tercero" style="cursor:pointer" class="text-primary" @click="position=3">
                                             <i class="fa fa-plus-circle" href="#59981A"></i>
-                                        </h3> 
+                                        </h3>     
+                                        
                                         <h3 v-else style="cursor:pointer" class="text-primary" @click="quitar(3)">
                                             <i class="fa fa-times-circle" href="#59981A"></i>
                                         </h3>
@@ -91,7 +84,7 @@
                                 <div class="col-12">
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <label class="input-group-text" for="inputGroupSelect01">Mezas</label>
+                                            <label class="input-group-text" for="inputGroupSelect01">Mesas</label>
                                         </div>
                                         <select class="custom-select form-control" v-model="lugar" id="inputGroupSelect01">
                                             <option selected>Ubicacion...</option>                                            
@@ -122,8 +115,14 @@
                                         </div>
                                         <div class="col-2 "><p class="text-right">{{detalle.cantidad}}</p></div>
                                         <div class="col-3 float-right"><p class="text-right"> $ {{Math.round(parseFloat((detalle.precio*detalle.cantidad)))}} </p></div>
-                                        <div class="col-1 ">
-                                            <h3 class="text-danger"  @click="eliminarDetalle(index)"><i class="fa fa-times-circle"></i></h3>
+                                        <div class="col-1 ">                                           
+                                            <h3 class="text-danger" v-if="rolusuario==1 || detalle.prod_nuevo==1" @click="eliminarDetalle(detalle,index)" title="Remover"><i class="fa fa-times-circle"></i></h3>
+                                            <!-- <h3 v-else-if="detalle.prod_nuevo==1"  @click="eliminarDetalle(detalle,index)">
+                                                <i class="fa fa-times-circle"></i>
+                                            </h3> -->
+                                             <h3 class="text-secondary" title="Deshabilitado" v-else>
+                                                <i class="fa fa-times-circle"></i>
+                                            </h3>
                                         </div>
                                     </div>
                                    
@@ -506,7 +505,7 @@
                 arrayProveedor: [],
                 arrayDetalle : [],
                 arrayDetalleT : [],
-                arrayPreparados : [],
+                arrayPreparado : [],
                 listado:1,
                 modal : 0,
                 tituloModal : '',
@@ -530,6 +529,7 @@
                     'actualizar':1,
                     'anular':1,
                 },
+                rolusuario:0,
                 offset : 3,
                 criterio : 'num_comprobante',
                 buscar : '',
@@ -653,7 +653,9 @@
                     vr_inicial_cierre : 0,
                     vr_gastos_cierre : 0,
                     vr_final_cierre : 0,
-                }
+                },
+
+                prod_nuevo : 0,
             }
         },
         components: {
@@ -741,6 +743,7 @@
                 axios.get(url).then(function (response) {
                     var respuesta= response.data;
                     me.arrayFacturacion = respuesta.facturacion.data;
+                    me.rolusuario = respuesta.idrol;
                     me.pagination= respuesta.pagination;
                 })
                 .catch(function (error) {
@@ -1307,14 +1310,25 @@
                 }
                 return sw;
             },
-            eliminarDetalle(index){
+            eliminarDetalle(detalle,index){
                 let me = this;
-                me.arrayDetalle.splice(index, 1);
+                if(detalle.cantidad2){
+                    if (detalle.cantidad != detalle.cantidad2) {
+                        detalle.cantidad = detalle.cantidad2
+                        detalle.prod_nuevo = 0
+                    }
+                }
+                else{
+                    me.arrayDetalle.splice(index, 1);
+                }
+                console.log(detalle);
+                // me.arrayDetalle.splice(index, 1);
             },
+           
             agregaDetalleMesero(producto){
                 //console.log(producto);
                 let me=this;
-                 var p = '';
+                var p = '';
                 if(producto.padre='') {p = ' '+producto.nom_presentacion+' (Presentacion asociada)';}
                 else {p = ' - '+producto.nom_presentacion;}
                 var ivaVenta = 0;
@@ -1323,39 +1337,49 @@
                 });
                 var ivaVenta_vr=0;
                 if(ivaVenta>0) {
-
                     ivaVenta_vr = Math.round(parseFloat(producto.precio_venta)-parseFloat((producto.precio_venta)/((ivaVenta/100)+1)));
                 }
                 
                 console.log("ivaVenta_vr"+ivaVenta_vr);
                 let auxPosition = me.arrayDetalle.indexOf(me.arrayDetalle.find(({codigo}) => codigo === producto.codigo));
-                
+
+                let auxPreparado = me.arrayPreparado.indexOf(me.arrayPreparado.find(({codigo}) => codigo === producto.codigo));
                 if(producto.tipo_articulo == 4) {
-                    me.arrayPreparados.push({
-                        codigo: producto.codigo,
-                        idarticulo: producto.id_articulo,
-                        id_asociado: producto.id_asociado,
-                        articulo: producto.nombre,
-                        cantidad: 1,
-                        tipo: producto.tipo_articulo,
-                        valor_descuento: 0,
-                        precio: producto.precio_venta,
-                        precio_venta: producto.precio_venta,
-                        iva: ivaVenta,
-                        valor_iva: ivaVenta_vr,
-                        valor_subtotal: Math.round(parseFloat(producto.precio_venta-ivaVenta_vr)),
-                        stock : producto.stock,
-                        descuento : 0,
-                        nom_presentacion : producto.nom_presentacion,
-                        id_presentacion : producto.id_presentacion,
-                        padre : producto.padre
-                    });
+                    if(auxPreparado >= 0) {
+                        me.arrayPreparado[auxPreparado].cantidad+=1;
+                        me.arrayPreparado[auxPreparado].valor_iva+=ivaVenta_vr;
+                        me.arrayPreparado[auxPreparado].valor_subtotal +=  me.arrayPreparado[auxPreparado].precio_venta - ivaVenta_vr;
+                    }else {
+                        me.arrayPreparado.push({
+                            codigo: producto.codigo,
+                            idarticulo: producto.id_articulo,
+                            id_asociado: producto.id_asociado,
+                            articulo: producto.nombre,
+                            cantidad: 1,
+                            tipo: producto.tipo_articulo,
+                            valor_descuento: 0,
+                            precio: producto.precio_venta,
+                            precio_venta: producto.precio_venta,
+                            iva: ivaVenta,
+                            valor_iva: ivaVenta_vr,
+                            valor_subtotal: Math.round(parseFloat(producto.precio_venta-ivaVenta_vr)),
+                            stock : producto.stock,
+                            descuento : 0,
+                            nom_presentacion : producto.nom_presentacion,
+                            id_presentacion : producto.id_presentacion,
+                            padre : producto.padre,
+                            
+                        });
+                    }
                 }
+                
 
                 if(auxPosition >= 0) {
                     me.arrayDetalle[auxPosition].cantidad+=1;
                     me.arrayDetalle[auxPosition].valor_iva+=ivaVenta_vr;
                     me.arrayDetalle[auxPosition].valor_subtotal +=  me.arrayDetalle[auxPosition].precio_venta - ivaVenta_vr;
+                    me.arrayDetalle[auxPosition].prod_nuevo = 1
+                    
                 }else {
                     me.arrayDetalle.push({
                         codigo: producto.codigo,
@@ -1374,7 +1398,8 @@
                         descuento : 0,
                         nom_presentacion : producto.nom_presentacion,
                         id_presentacion : producto.id_presentacion,
-                        padre : producto.padre
+                        padre : producto.padre,
+                        prod_nuevo:1
                     });
                 }
                
@@ -1529,11 +1554,8 @@
 
                     return;
                 }
-                else {
-                
+                else {                
                     let me = this;
-                    
-
                     axios.post(this.ruta +'/facturacion/registrar',{
                         'num_factura': null,
                         'id_tercero': me.id_tercero,
@@ -1575,6 +1597,7 @@
                             me.position = 6;
                         else 
                             me.position = 7;
+                        
                     }).catch(function (error) {
                         console.log(error);
                     });
@@ -2014,7 +2037,6 @@
                 }
                 }) 
             },
-
             // funcion abrir modal proveedores
             abrirModalT(accion){               
                 this.arrayTerceros=[];
