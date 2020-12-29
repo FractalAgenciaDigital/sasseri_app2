@@ -135,7 +135,7 @@
                     <template v-else-if="listado==0">
                     <div class="card-body">
                         <div class="form-group row border">
-                            <div class="form-group col-md-3" v-if="tipo_ingreso!='Saldos iniciales'">
+                            <div class="form-group col-sm-4 col-md-3 " v-if="tipo_ingreso!='Saldos iniciales'">
                                 <label for="">Proveedor(*)</label>
                                 <div class="input-group">
                                     <input type="text" readonly class="form-control" name="cuenta_fin" v-model="tercero">
