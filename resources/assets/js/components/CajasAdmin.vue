@@ -112,29 +112,32 @@
                             <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                                 <div class="form-group row">
                                     <div class="col-md-5">
-                                        <label class="col-md-3 form-control-label" for="text-input">Nombre</label>
-                                        <div class="form-inline float-right col-md-9">
-                                            <input type="text" readonly style="max-width: 130px;" class="form-control" name="cuenta_fin" v-model="tercero">
+                                        <label class="form-control-label" for="text-input">Nombre</label>
+                                        <div class="input-group">
+                                            <input type="text" readonly class="form-control" name="cuenta_fin" v-model="tercero">
+                                            <div class="input-group-append">
+                                                <button type="button" v-if="permisosUser.leer" @click="abrirModalT()" class="btn btn-primary">...</button>
+                                                <button v-else  class="btn btn-secondary">...</button>
 
-                                            <button type="button" v-if="permisosUser.leer" @click="abrirModalT()" style="min-width: 30px;" class="btn btn-primary form-control">...</button>
-                                            <button v-else  style="min-width: 30px;" class="btn btn-secondary form-control">...</button>
-
-                                            <button v-if="permisosUser.leer" type="button" @click="quitar(4)" style="min-width: 30px;" class="btn btn-danger form-control">
-                                                <i class="icon-trash"></i>
-                                            </button>
-                                            <button v-else type="button" style="min-width: 30px;" class="btn btn-secondary form-control">
-                                                <i class="icon-trash"></i>
-                                            </button>
+                                                <button v-if="permisosUser.leer" type="button" @click="quitar(4)" class="btn btn-danger">
+                                                    <i class="icon-trash"></i>
+                                                </button>
+                                                <button v-else type="button" class="btn btn-secondary">
+                                                    <i class="icon-trash"></i>
+                                                </button>
+                                            </div>
                                         </div>
+                                    
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-5 form-group">
+                                        <label class="form-control-label" for="text-input">Caja</label>
                                         <select class="form-control" v-model="idCajaAgregar">
                                             <option>Buscar <input type="text" value=""></option>
                                             <option value="0">Seleccione</option>
                                             <option v-for="(caja, index) in arrayCajas" :value="caja.id" v-text="caja.nombre" :key="index"></option>
                                         </select>
                                     </div>
-                                    <div class="col-md-1">
+                                    <div class="col-md-2 form-group mt-2">
                                         <button type="button" v-if="idCajaAgregar!=0" class="btn btn-success btn-sm" @click="agregarDetalleCajasAdmin()">
                                             <i class="fa fa-plus-circle"></i>
                                         </button>

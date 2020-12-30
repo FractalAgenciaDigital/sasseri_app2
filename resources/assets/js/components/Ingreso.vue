@@ -135,7 +135,7 @@
                     <template v-else-if="listado==0">
                     <div class="card-body">
                         <div class="form-group row border">
-                            <div class="form-group col-sm-4 col-md-3 " v-if="tipo_ingreso!='Saldos iniciales'">
+                            <div class="form-group col-md-6 col-lg-3 " v-if="tipo_ingreso!='Saldos iniciales'">
                                 <label for="">Proveedor(*)</label>
                                 <div class="input-group">
                                     <input type="text" readonly class="form-control" name="cuenta_fin" v-model="tercero">
@@ -147,7 +147,7 @@
                                     </div>
                                 </div>                               
                             </div>
-                            <div class="form-group col-md-3" v-else>
+                            <div class="form-group col-md-6 col-lg-3" v-else>
                                 <label for="">Proveedor(*)</label>
                                 <div class="form-inline">
                                     <input type="text" readonly style="max-width: 68%;width: 68%;" class="form-control" name="cuenta_fin">
@@ -157,7 +157,7 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-6 col-lg-3">
                                 <label>Tipo ingreso</label>
                                 <div>
                                     <select class="form-control" v-model="tipo_ingreso" @change="if(tipo_ingreso!='Compras'){forma_pago='';}">
@@ -169,7 +169,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-6 col-lg-3">
                                 <label><b>Fuente</b></label>
                                 <div>
                                     <select v-if="tipo_ingreso=='Compras'" v-model="forma_pago" class="form-control">
@@ -180,7 +180,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-6 col-lg-3">
                                 <label><b>Fecha ingreso</b></label>
                                 <div>
                                     <input type="date" class="form-control" v-model="fecha_ingreso">
@@ -248,31 +248,33 @@
                             </div>
                         </div>
                         <div class="form-group row border">
-                            <div class="col-md-4">
+                            <div class="col-lg-4 col-md-6">
                                 <div class="form-group">
-                                    <label>Artículo <span style="color:red;" v-show="idarticulo==0">(*Seleccione)</span></label>
-                                    <div class="form-inline">
-                                        <input type="text" class="form-control col-md-10" v-model="codigo" @keyup.enter="buscarArticulo()" placeholder="Ingrese artículo">
-                                        <button @click="abrirModal()" class="btn btn-primary col-md-2">...</button>
-                                        <input type="text" readonly class="form-control col-md-12" v-model="articulo">
-                                    </div>                                    
+                                    <label>Artículo <span class="text-danger" v-show="idarticulo==0">(*Seleccione)</span></label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" v-model="codigo" @keyup.enter="buscarArticulo()" placeholder="Ingrese artículo">
+                                        <div class="input-group-prepend">
+                                            <button @click="abrirModal()" class="btn btn-primary" id="basic-addon1">...</button>
+                                        </div>
+                                   </div>                              
+                                    <input type="text" readonly class="form-control col-md-12" v-model="articulo">                                 
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-lg-2 col-md-3">
                                 <div class="form-group">
                                     <label>Precio Und <span style="color:red;" v-if="!saldo_parcial" v-show="precio==0">(*)</span></label>
                                     <input v-if="!saldo_parcial && codigo!='' && idarticulo!=0" type="number" :min="1" step="any" class="form-control" v-model="precio">
                                     <input v-else disabled type="number" :min="0" step="any" class="form-control" v-model="precio">
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-lg-2 col-md-3">
                                 <div class="form-group">
                                     <label>Cantidad <span style="color:red;" v-show="cantidad==0">(*)</span></label>
                                     <input type="number" v-if="codigo!='' && idarticulo!=0" :min="1" class="form-control" v-model="cantidad">
                                     <input type="number" v-else :min="0" disabled class="form-control" v-model="cantidad">
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-lg-2 col-md-3">
                                 <div class="form-group">
                                     <label>Precio parcial <span style="color:red;" v-if="saldo_parcial" v-show="precio==0">(*)</span></label>
                                     <input v-if="saldo_parcial && codigo!='' && idarticulo!=0" type="number" :min="1" step="any" class="form-control" v-model="precio_parcial">
@@ -397,30 +399,7 @@
                                     <p v-text="proveedor"></p>
                                 </div>
                             </div>
-                            <!--
-                            <div class="col-md-3">
-                                <label for="">Impuesto</label>
-                                <p v-text="impuesto"></p>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Tipo Comprobante</label>
-                                    <p v-text="tipo_comprobante"></p>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Serie Comprobante</label>
-                                    <p v-text="serie_comprobante"></p>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Número Comprobante</label>
-                                    <p v-text="num_comprobante"></p>
-                                </div>
-                            </div>
-                            -->
+                         
                         </div>
                         <div class="form-group row border">
                             <div class="table-responsive col-md-12">
@@ -468,20 +447,7 @@
                                                 {{ detalle.precio*detalle.cantidad }}
                                             </td>
                                         </tr>
-                                        <!--
-                                        <tr style="background-color: #CEECF5;">
-                                            <td colspan="3" align="right"><strong>Total Parcial:</strong></td>
-                                            <td>$ {{totalParcial=(total-totalImpuesto).toFixed(2)}}</td>
-                                        </tr>
-                                        <tr style="background-color: #CEECF5;">
-                                            <td colspan="3" align="right"><strong>Total Impuesto:</strong></td>
-                                            <td>$ {{totalImpuesto=((total*impuesto)).toFixed(2)}}</td>
-                                        </tr>
-                                        -->
-                                        <!--<tr style="background-color: #CEECF5;">
-                                            <td colspan="3" align="right"><strong>Flete:</strong></td>
-                                            <td>$ {{flete}}</td>
-                                        </tr>-->
+                                    
                                         <tr style="background-color: #CEECF5;" @click="retornariva()">
                                             <td colspan="5" align="right"><strong>Total Iva:</strong></td>
                                             <td>$ {{total_iva=calcularTotalIva}}</td>

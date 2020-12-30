@@ -12,10 +12,10 @@
                         </button>
                     </div>
                     <div class="card-body">
-                        <div class="form-group row">
-                            <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-md-12 col-lg-6">
                                 <div class="input-group">
-                                    <select class="form-control col-md-3" v-model="criterio">
+                                    <select class="form-control" v-model="criterio">
                                       <option value="nombre">Nombre</option>
                                       <option value="num_documento">Documento</option>
                                       <option value="email">Email</option>

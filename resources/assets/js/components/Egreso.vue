@@ -18,27 +18,13 @@
                     <div class="form-group row">
                         <div class="col-md-6">
                             <div class="input-group">
-                                <!--<select v-if="permisosUser.leer" class="form-control col-md-3" v-model="criterio" @change="listarEgreso(1,buscar,criterio)">
-                                    <option value="tipo_comprobante">Tipo Comprobante</option>
-                                    <option value="num_comprobante">Número Comprobante</option>
-                                    <option value="fecha_hora">Fecha-Hora</option>
-                                </select>
-                                <select v-else disabled class="form-control col-md-3" v-model="criterio">
-                                </select>-->
-
-                                <!--<input v-if="permisosUser.leer" type="text" v-model="buscar" @keyup="listarEgreso(1,buscar,criterio)" class="form-control" placeholder="Texto a buscar">
-                                <input v-else disabled type="text" v-model="buscar" class="form-control" placeholder="Texto a buscar">-->
-
-                                <label class="col-md-3">Tipo Egreso</label>
-                                <select class="form-control col-md-4" v-model="tipo_egreso_filtro" @change="listarEgreso(1,tipo_egreso_filtro,'tipo_egreso')">
+                                <label class="col-lg-3 col-md-6">Tipo Egreso</label>
+                                <select class="form-control col-lg-4 col-md-6" v-model="tipo_egreso_filtro" @change="listarEgreso(1,tipo_egreso_filtro,'tipo_egreso')">
                                     <option value="" disabled>Seleccione</option>
                                     <option value="Bajas">Bajas</option>
                                     <option value="Ajuste inventario">Ajuste inventario</option>
                                     <option value="Devoluciones">Devoluciones</option>
                                 </select>
-
-                                <!--<button v-if="permisosUser.leer" type="submit" @click="listarEgreso(1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
-                                <button v-else type="submit" class="btn btn-secondary"><i class="fa fa-search"></i> Buscar</button>-->
                             </div>
                         </div>
                     </div>
@@ -142,22 +128,28 @@
                 <template v-else-if="listado==0">
                 <div class="card-body">
                     <div class="form-group row border">
-                        <div class="form-group col-md-3" v-if="tipo_egreso!='Saldos iniciales'">
+                        <div class="form-group col-lg-3 col-md-6" v-if="tipo_egreso!='Saldos iniciales'">
                             <label for="">Proveedor(*)</label>
+                            <div class="input-group">
+                                <input type="text" readonly class="form-control" name="cuenta_fin" v-model="tercero">
+                                <div class="input-group-append">
+                                    <button @click="abrirModalT()" class="btn btn-primary">...</button>
+                                    <button @click="quitar(3)" class="btn btn-danger">
+                                        <i class="icon-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
                             <div class="form-inline">
-                                <input type="text" readonly style="max-width: 68%;width: 68%;" class="form-control" name="cuenta_fin" v-model="tercero">
-                                <button @click="abrirModalT()" style="min-width: 30px;" class="btn btn-primary form-control">...</button>
-                                <button @click="quitar(3)" style="min-width: 30px;" class="btn btn-danger form-control">
-                                    <i class="icon-trash"></i>
-                                </button>
+                                
+                                
                             </div>
                         </div>
                         <div class="form-group col-md-3" v-else>
                             <label for="">Proveedor(*)</label>
                             <div class="form-inline">
                                 <input type="text" readonly style="max-width: 68%;width: 68%;" class="form-control" name="cuenta_fin">
-                                <button style="min-width: 30px;" class="btn btn-secondary form-control">...</button>
-                                <button style="min-width: 30px;" class="btn btn-secondary form-control">
+                                <button class="btn btn-secondary form-control">...</button>
+                                <button class="btn btn-secondary form-control">
                                     <i class="icon-trash"></i>
                                 </button>
                             </div>
@@ -187,36 +179,7 @@
                             <div>
                                 <input type="date" class="form-control" v-model="fecha_egreso">
                             </div>
-                        </div>
-                        <!--
-                        <div class="col-md-3">
-                            <label for="">Impuesto(*)</label>
-                            <input type="text" class="form-control" v-model="impuesto">
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Tipo Comprobante(*)</label>
-                                <select class="form-control" v-model="tipo_comprobante">
-                                    <option value="0">Seleccione</option>
-                                    <option value="BOLETA">Boleta</option>
-                                    <option value="FACTURA">Factura</option>
-                                    <option value="TICKET">Ticket</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Serie Comprobante</label>
-                                <input type="text" class="form-control" v-model="serie_comprobante" placeholder="000x">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Número Comprobante(*)</label>
-                                <input type="text" class="form-control" v-model="num_comprobante" placeholder="000xx">
-                            </div>
-                        </div>
-                        -->
+                        </div>                       
                     </div>
                     <div class="form-group row border">
                         <div class="form-group col-md-12">
@@ -250,38 +213,41 @@
                         </div>
                     </div>
                     <div class="form-group row border">
-                        <div class="col-md-4">
+                        <div class="col-lg-4 col-md-6">
                             <div class="form-group">
                                 <label>Artículo <span style="color:red;" v-show="idarticulo==0">(*Seleccione)</span></label>
-                                <div class="form-inline">
-                                    <input type="text" class="form-control col-md-10" v-model="codigo" @keyup.enter="buscarArticulo()" placeholder="Ingrese artículo">
-                                    <button @click="abrirModal()" class="btn btn-primary col-md-2">...</button>
-                                    <input type="text" readonly class="form-control col-md-12" v-model="articulo">
-                                </div>                                    
+                                <div class="input-group">
+                                    <input type="text" class="form-control" v-model="codigo" @keyup.enter="buscarArticulo()" placeholder="Ingrese artículo">
+                                    <div class="input-group-append">
+                                        <button @click="abrirModal()" class="btn btn-primary">...</button>
+                                    </div>
+                                </div>
+                                <input type="text" readonly class="form-control col-md-12" v-model="articulo">
+                                                          
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-lg-2 col-md-4">
                             <div class="form-group">
                                 <label>Precio Und <span style="color:red;" v-if="!saldo_parcial" v-show="precio==0">(*)</span></label>
                                 <input v-if="!saldo_parcial && codigo!='' && idarticulo!=0" type="number" :min="1" step="any" class="form-control" v-model="precio">
                                 <input v-else disabled type="number" :min="0" step="any" class="form-control" v-model="precio">
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-lg-2 col-md-4">
                             <div class="form-group">
                                 <label>Cantidad <span style="color:red;" v-show="cantidad==0">(*)</span></label>
                                 <input type="number" v-if="codigo!='' && idarticulo!=0" :min="1" class="form-control" v-model="cantidad">
                                 <input type="number" v-else :min="0" disabled class="form-control" v-model="cantidad">
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-lg-2 col-md-4">
                             <div class="form-group">
                                 <label>Precio parcial <span style="color:red;" v-if="saldo_parcial" v-show="precio==0">(*)</span></label>
                                 <input v-if="saldo_parcial && codigo!='' && idarticulo!=0" type="number" :min="1" step="any" class="form-control" v-model="precio_parcial">
                                 <input v-else disabled type="number" :min="0" step="any" class="form-control" v-model="precio_parcial">
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-lg-2 col-md-4">
                             <div class="form-group">
                                 <button @click="agregarDetalle()" class="btn btn-success form-control btnagregar"><i class="icon-plus"></i></button>
                             </div>
@@ -1983,7 +1949,7 @@
     }
     @media (min-width: 600px) {
         .btnagregar {
-            margin-top: 2rem;
+            margin-top: 1.5rem;
         }
     }
 
