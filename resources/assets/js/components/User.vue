@@ -196,13 +196,13 @@
                                         <h5 class="col-md-4">Marcar permisos como</h5>
                                         <select class="col-md-4 custom-select custom-select-sm" @change="marcarPermisosRol" v-model="idrol">
                                             <option value="" disabled>Seleccione un rol</option>
-                                            <option v-for="rol in arrRolesEmpresa" :value="rol.id" v-text="rol.nombre"></option>
+                                            <option v-for="rol in arrRolesEmpresa" :key="rol.id" :value="rol.id" v-text="rol.nombre"></option>
                                         </select>
                                     </div>
                                 <!-- Inicio tabla permisos -->
                                 <!--<div class="card">
                                     <div class="card-header">
-                                    <!--</div>-->
+                                    </div>-->
                                     <!--<div class="card-body">-->
                                         <table class="table table-bordered table-sm" style="overflow-y: auto;max-height: 26em !important;display: block;border: none;">
                                             <thead>
