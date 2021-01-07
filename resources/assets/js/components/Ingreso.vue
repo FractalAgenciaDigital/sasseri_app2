@@ -21,6 +21,7 @@
                             <div class="col-md-6">
                                 <div class="input-group">
                                     <select v-if="permisosUser.leer" class="form-control col-md-3" v-model="criterio" @change="listarIngreso(1,buscar,criterio)">
+                                        <option value="">Seleccionar</option>
                                       <option value="tipo_comprobante">Tipo Comprobante</option>
                                       <option value="num_comprobante">Número Comprobante</option>
                                       <option value="fecha_hora">Fecha-Hora</option>

@@ -215,8 +215,9 @@
                                 </div>
                                 <div class="form-row">
                                     <div  class="form-group col-lg-4">
-                                        <label for="text-input">Genero</label>                                   
+                                        <label for="text-input">Género</label>                                   
                                         <select v-model="sexo" class="form-control" v-bind:class="{ 'is-invalid': hasError.sexo==1 }">
+                                            <option value="0" disabled>Seleccione</option>
                                             <option value="Femenino">Femenino</option>
                                             <option value="Masculino">Masculino</option>
                                             <option value="Otro">Otro</option>

@@ -1229,10 +1229,10 @@
                             // toast: true,
                             // position: 'top-end',
                             type: 'error',
-                            title: 'Abir caja',
+                            title: 'Abrir caja',
                             position: 'center',
                             showConfirmButton: false,
-                            timer: 1700
+                            timer: 2000
                         })
                     }
                     else
