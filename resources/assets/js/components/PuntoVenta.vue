@@ -1581,7 +1581,7 @@
                         me.tercero = '';
                         me.lugar = '';
                         me.ocultarDetalle();
-                        this.listarArticulo(me.buscarA,me.criterioA,me.buscarCategoriaA);
+                        me.listarArticulo(me.buscarA,me.criterioA,me.buscarCategoriaA);
                         me.listarFacturacion(1,'','','','','','','');
                         if(filtered)
                             me.position = 6;
@@ -1596,22 +1596,8 @@
             actualizarFacturacion(){
                 if (this.validarFacturacion()){
                     return;
-                }
-                
+                }                
                 let me = this;
-                
-                // me.subtotal = 0;
-                // me.iva = 0;
-                // me.descuento = 0;
-                // me.total = 0;
-                // for(var i=0; i<me.arrayDetalle.length; i++)
-                // {
-                //     me.descuento += parseFloat(me.arrayDetalle[i].valor_descuento);
-                //     me.iva += parseFloat(me.arrayDetalle[i].valor_iva);
-                //     me.subtotal += parseFloat(me.arrayDetalle[i].valor_subtotal);
-                // }
-                
-                // me.total = parseFloat(me.subtotal)+parseFloat(me.iva);
                 if(me.estado==2)
                 {
                     me.sugerirNumFactura();
@@ -1659,8 +1645,6 @@
                 
                     this.errorMostrarMsjFacturacion =[];
 
-                    // if (this.fecha==0) this.errorMostrarMsjFacturacion.push("Ingrese la fecha");
-                    // if (this.num_factura==0) this.errorMostrarMsjFacturacion.push("Seleccione el comprobante");
                     if (!this.id_tercero) {
                         this.$notify({
                             group: 'foo',
@@ -1694,10 +1678,6 @@
                         });
                     }
                     return true;
-                    /*
-                    if (this.errorMostrarMsjFacturacion.length) this.errorFacturacion = 1;
-
-                    return this.errorFacturacion;*/
                 }
                
             },

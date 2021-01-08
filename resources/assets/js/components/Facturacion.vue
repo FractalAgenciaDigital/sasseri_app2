@@ -1258,7 +1258,7 @@
                                 // toast: true,
                                 // position: 'top-end',
                                 type: 'error',
-                                title: 'Abir caja',
+                                title: 'Abrir caja',
                                 position: 'center',
                                 showConfirmButton: false,
                                 timer: 1700
@@ -1877,16 +1877,7 @@
                 }
                 
                 let me = this;
-                
-                // for(var i=0; i<me.arrayDetalle.length; i++)
-                // {
-                //     me.descuento += parseFloat(me.arrayDetalle[i]['valor_descuento']);
-                //     me.iva += parseFloat(me.arrayDetalle[i]['valor_iva']);
-                //     me.subtotal += parseFloat(me.arrayDetalle[i]['valor_subtotal']);
-                // }
-                // me.total += parseFloat(me.subtotal)+parseFloat(me.iva);
-                // me.sugerirNumFactura();
-
+            
                 axios.post(this.ruta +'/facturacion/registrar',{
                     'num_factura': null,
                     'id_tercero': me.id_tercero,
@@ -1922,24 +1913,10 @@
             actualizarFacturacion(){
                 if (this.validarFacturacion()){
                     return;
-                }
-                
+                }                
                 let me = this;
-                
-                // me.subtotal = 0;
-                // me.iva = 0;
-                // me.descuento = 0;
-                // me.total = 0;
-                // for(var i=0; i<me.arrayDetalle.length; i++)
-                // {
-                //     me.descuento += parseFloat(me.arrayDetalle[i].valor_descuento);
-                //     me.iva += parseFloat(me.arrayDetalle[i].valor_iva);
-                //     me.subtotal += parseFloat(me.arrayDetalle[i].valor_subtotal);
-                // }
-                
-                // me.total = parseFloat(me.subtotal)+parseFloat(me.iva);
-                if(me.estado==2)
-                {
+               
+                if(me.estado==2){
                     me.sugerirNumFactura();
                 }
                 
@@ -2202,7 +2179,7 @@
                 me.arrayDetalle=[];
                 me.arrayTerceros=[];       
             },
-            verFacturacion(id){
+            verFacturacion(url){
                 let me=this;
                 me.listado=2;
 

@@ -64,27 +64,6 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/conf_formatos/activar', 'Conf_formatosController@activar');
         Route::get('/conf_formatos/get_tipos_formatos', 'Conf_formatosController@get_tipos_formatos');
         Route::get('/conf_formatos/get_filt_tipo', 'Conf_formatosController@get_filt_tipo');
-
-        Route::get('/facturacion', 'FacturacionController@index');
-        Route::post('/facturacion/registrar', 'FacturacionController@store');
-        Route::put('/facturacion/actualizar', 'FacturacionController@update');
-        Route::get('/facturacion/buscarFacturacion', 'FacturacionController@buscarFacturacion');
-        Route::put('/facturacion/cambiarEstado', 'FacturacionController@cambiarEstado');
-        Route::get('/facturacion/buscarNumFacturaSugerida', 'FacturacionController@buscarNumFacturaSugerida');
-        Route::get('/facturacion/obtenerCabecera', 'FacturacionController@obtenerCabecera');
-        Route::get('/facturacion/pdfFacturacion/{id}','FacturacionController@PdfFacturacion')->name('recibo_pdf');
-        Route::get('/facturacion/excelFacturacion/{id}','FacturacionController@ExcelFacturacion')->name('recibo_pdf');
-
-        Route::get('/formatos','FormatoController@index');
-        Route::post('/formatos/registrar','FormatoController@store');
-        Route::get('/formatos/numero_next','FormatoController@numero_next');
-        Route::put('/formatos/desactivar', 'FormatoController@desactivar');
-        Route::put('/formatos/cerrar', 'FormatoController@cerrar');
-        Route::get('/formatos/obtenerCabecera', 'FormatoController@obtenerCabecera');
-        Route::get('/formatos/obtenerDetalles', 'FormatoController@obtenerDetalles');
-        Route::get('/formatos/pdf/{id}','FormatoController@pdf')->name('formato_pdf');
-        Route::put('/formatos/actualizar', 'FormatoController@update');
-
         
         Route::get('/categoria', 'CategoriaController@index');
         Route::post('/categoria/registrar', 'CategoriaController@store');
@@ -210,6 +189,27 @@ Route::group(['middleware'=>['auth']],function(){
         Route::post('/evidencias_egresos/registrar', 'EvidenciasEgresosController@store');
         Route::get('/evidencias_egresos/listarEvidencias', 'EvidenciasEgresosController@listarEvidencias');
         Route::put('/evidencias_egresos/eliminarEvidencia', 'EvidenciasEgresosController@eliminarEvidencia');
+
+        Route::get('/facturacion', 'FacturacionController@index');
+        Route::post('/facturacion/registrar', 'FacturacionController@store');
+        Route::put('/facturacion/actualizar', 'FacturacionController@update');
+        Route::get('/facturacion/buscarFacturacion', 'FacturacionController@buscarFacturacion');
+        Route::put('/facturacion/cambiarEstado', 'FacturacionController@cambiarEstado');
+        Route::get('/facturacion/buscarNumFacturaSugerida', 'FacturacionController@buscarNumFacturaSugerida');
+        Route::get('/facturacion/obtenerCabecera', 'FacturacionController@obtenerCabecera');
+        Route::get('/facturacion/pdfFacturacion/{id}','FacturacionController@PdfFacturacion')->name('recibo_pdf');
+        Route::get('/facturacion/excelFacturacion/{id}','FacturacionController@ExcelFacturacion')->name('recibo_pdf');
+
+        Route::get('/formatos','FormatoController@index');
+        Route::post('/formatos/registrar','FormatoController@store');
+        Route::get('/formatos/numero_next','FormatoController@numero_next');
+        Route::put('/formatos/desactivar', 'FormatoController@desactivar');
+        Route::put('/formatos/cerrar', 'FormatoController@cerrar');
+        Route::get('/formatos/obtenerCabecera', 'FormatoController@obtenerCabecera');
+        Route::get('/formatos/obtenerDetalles', 'FormatoController@obtenerDetalles');
+        Route::get('/formatos/pdf/{id}','FormatoController@pdf')->name('formato_pdf');
+        Route::put('/formatos/actualizar', 'FormatoController@update');
+
 
         Route::get('/formato_proceso', 'FormatoProcesoController@index');
         Route::post('/formato_proceso/registrar', 'FormatoProcesoController@store');

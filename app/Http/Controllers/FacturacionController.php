@@ -284,6 +284,7 @@ class FacturacionController extends Controller
             $detalle->valor_final = $det['valor_subtotal']+$det['valor_iva'];
             $detalle->save();
         }
+        return 'ok';
     }
 
     public function cambiarEstado(Request $request)
