@@ -95,6 +95,9 @@
                 <template v-if="menu==34">
                     <cuentasxpagar :ruta="ruta"></cuentasxpagar>
                 </template>
+                <template v-if="menu==41">
+                    <impresora :ruta="ruta"></impresora>
+                </template>
 
 
 

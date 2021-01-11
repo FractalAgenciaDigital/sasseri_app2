@@ -158,6 +158,9 @@
                                     </li>
                                     <li @click="menu=27" class="collapse-item">
                                         <a href="#"><i class="fa fa-percent"></i> IVAs</a>
+                                    </li>   
+                                    <li @click="menu=41" class="collapse-item">
+                                        <a href="#"><i class="fa fa-percent"></i> Impresoras</a>
                                     </li>                                    
                                 </div>
 

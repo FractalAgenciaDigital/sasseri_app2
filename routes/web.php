@@ -43,6 +43,13 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/bancos/selectBancos', 'BancosController@selectBancos');
         Route::put('/bancos/desactivar', 'BancosController@desactivar');
         Route::put('/bancos/activar', 'BancosController@activar');
+
+        Route::get('/categoria', 'CategoriaController@index');
+        Route::post('/categoria/registrar', 'CategoriaController@store');
+        Route::put('/categoria/actualizar', 'CategoriaController@update');
+        Route::put('/categoria/desactivar', 'CategoriaController@desactivar');
+        Route::put('/categoria/activar', 'CategoriaController@activar');
+        Route::get('/categoria/selectCategoria', 'CategoriaController@selectCategoria');
      
         Route::get('/cliente', 'ClienteController@index');
         Route::post('/cliente/registrar', 'ClienteController@store');
@@ -65,13 +72,6 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/conf_formatos/get_tipos_formatos', 'Conf_formatosController@get_tipos_formatos');
         Route::get('/conf_formatos/get_filt_tipo', 'Conf_formatosController@get_filt_tipo');
         
-        Route::get('/categoria', 'CategoriaController@index');
-        Route::post('/categoria/registrar', 'CategoriaController@store');
-        Route::put('/categoria/actualizar', 'CategoriaController@update');
-        Route::put('/categoria/desactivar', 'CategoriaController@desactivar');
-        Route::put('/categoria/activar', 'CategoriaController@activar');
-        Route::get('/categoria/selectCategoria', 'CategoriaController@selectCategoria');
-
         Route::get('/cajas', 'CajasController@index');
         Route::post('/cajas/registrar', 'CajasController@store');
         Route::put('/cajas/actualizar', 'CajasController@update');
@@ -217,6 +217,13 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/formato_proceso/selectFormatoProceso', 'FormatoProcesoController@selectFormatoProceso');
         Route::put('/formato_proceso/desactivar', 'FormatoProcesoController@desactivar');
         Route::put('/formato_proceso/activar', 'FormatoProcesoController@activar');
+        
+        Route::get('/impresora', 'ImpresoraController@index');
+        Route::post('/impresora/registrar', 'ImpresoraController@store');
+        Route::put('/impresora/actualizar', 'ImpresoraController@update');
+        Route::put('/impresora/desactivar', 'ImpresoraController@desactivar');
+        Route::put('/impresora/activar', 'ImpresoraController@activar');
+        Route::get('/impresora/selectCategoria', 'ImpresoraController@selectCategoria');
 
         // Rutas del plan de cuentas, informe auxiliares, retenciones y de formatos
         Route::get('/info_auxiliares/selectInformes', 'InfAuxiliaresController@selectInformes');
