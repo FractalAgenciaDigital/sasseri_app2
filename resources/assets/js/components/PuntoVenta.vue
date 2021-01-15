@@ -309,7 +309,7 @@
                         </table>
                         -----------------------------------------
                         <br>
-                        <p class="centrado minimizar espacio-1">POWERE BY - FRACTAL AGENCIA DIGITAL<br>www.fractalagenciadigital.com<br>(CEL. 312-524-2544)</p><br>
+                        <p class="centrado minimizar espacio-1">POWERED BY - FRACTAL AGENCIA DIGITAL<br>www.fractalagenciadigital.com<br>(CEL. 312-524-2544)</p><br>
                     </div> 
                 </div>                    
             </div>  
@@ -453,11 +453,12 @@
         <div>  
             
             <div class="row mt-1 fixed-bottom mx-auto"> <!-- boton de facturar -->
-                <div class="col-12" v-if="position==1||position==2">
+                <div class="col-12" v-if="position==1||(position==2 && tipoAccion2==1) ||(position==2 && tipoAccion2==0)">
                     <button type="button" @click="registrarFacturacion();" class="btn btn-block btn-lg active btn-success" href="#" role="button"><h3 class="text-white">Facturar $ {{valor_final=calcularTotal}}</h3></button>
                 </div>
+                 <button type="button" v-if="(position==2 && tipoAccion2==2)"  class="btn-block btn-lg active btn-success" @click="actualizarFacturacion();">Actualizar</button>
+               
                 <div class="col-12" v-if="position==7">
-
                     <a v-if="no_caja==0" @click="position=1;mostrarDetalle()" class="btn btn-block btn-lg active btn-success"  href="#" role="button"><h3 class="text-white">Iniciar Factura</h3></a>
                     <a v-else  class="btn btn-block btn-lg active btn-secondary"  href="#" role="button"><h3 class="text-white">No tienes una caja abierta</h3></a>
                 </div>
@@ -583,12 +584,10 @@
 
                 arrayFacturacion : [],
                 arrayFacturacionT : [],
-
                 iva:0,
 
                 fechaActual: '',
                 fechaHoraActual:'',
-
                 estado: 0,
                 cambiarEstado: 0,
 
@@ -790,7 +789,7 @@
                     if(ban==0 || ban==1)
                     {
                         me.no_caja = 1;
-                        // me.mostrarDetalle('cierres_caja','registrar');
+                        
                         Swal.fire({
                             // toast: true,
                             // position: 'top-end',
@@ -821,8 +820,7 @@
                         if(ban==2)
                         {
                             me.no_caja = 1;
-                            //console.log("entra al ban 2");
-                            // me.mostrarDetalle('cierres_caja','listar_cierres',me.arrayCierresXCajas[0]);
+                            
                             Swal.fire({
                                 // toast: true,
                                 // position: 'top-end',
@@ -1392,16 +1390,11 @@
                         prod_nuevo:1,
                     });
                 }
-               
-              /*  Swal.fire({
-                    type: 'success',
-                    title: 'Producto agregado',
-                    text: 'Progducto cargado',
-                });*/
+              
                 
                 this.llamarMensaje(producto.nombre);
 
-                 this.ivaProces();
+                this.ivaProces();
             },
             agregarDetalle(){
                 let me=this;
@@ -1593,16 +1586,13 @@
                     });
                 }
             },
+            
             actualizarFacturacion(){
-                if (this.validarFacturacion()){
-                    return;
-                }                
+                console.log('hola0');
+                if (!this.id_tercero) this.errorMostrarMsjFacturacion.push("Seleccione un tercero");
+                if (!this.lugar) this.errorMostrarMsjFacturacion.push("Seleccione un lugar");
                 let me = this;
-                if(me.estado==2)
-                {
-                    me.sugerirNumFactura();
-                }
-                
+
                 axios.put(this.ruta +'/facturacion/actualizar',{
                     'num_factura': me.num_factura,
                     'id_tercero': me.id_tercero,
@@ -1632,8 +1622,12 @@
                     me.ocultarDetalle();
                     me.listarFacturacion(1,'','','','','','','');
                     this.listarArticulo(me.buscarA,me.criterioA,me.buscarCategoriaA);
+                    me.tipoAccion2 =1;
+                    position = 7;
+                  
                 }).catch(function (error) {
                     console.log(error);
+                  
                 });
             },
             validarFacturacion(){
@@ -1734,7 +1728,7 @@
                                 me.id_tercero=data['id_tercero'];
                                 me.tercero=data['nombre1'] ?  data['nombre1']+' '+data['nombre2']+' '+data['apellido1']+' '+data['apellido2'] : data['nom_tercero'];
                                 me.fec_edita=me.fechaHoraActual;
-                                me.subtotal=data['subtotal'];
+                                // me.subtotal=data['subtotal'];
                                 me.valor_iva=data['valor_iva'];
                                 me.total=data['total'];
                                 me.abono=data['abono'];
@@ -2035,21 +2029,7 @@
                 this.terc_busq = '';
             },
             cargarTercero(tercero){
-               /* if(this.tipoAccionModalTerceros==1)
-                {
-                    this.tercero = tercero['num_documento'];
-                    this.id_tercero = tercero['id'];
-                }
-                if(this.tipoAccionModalTerceros==2)
-                {
-                    this.terceroFiltro = tercero['num_documento'];
-                    this.idTerceroFiltro = tercero['id'];
-                }
-                if(this.tipoAccionModalTerceros==3)
-                {
-                    this.vendedorFiltro = tercero['num_documento'];
-                    this.idVendedorFiltro = tercero['id'];
-                }*/
+             
                 console.log("llegando");
                 this.tercero = tercero['nombre1']+" "+tercero['nombre2']+" "+tercero['apellido1']+" "+tercero['apellido2'];
                  this.id_tercero = tercero['id'];

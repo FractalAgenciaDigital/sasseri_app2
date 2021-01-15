@@ -176,21 +176,7 @@
                             </button>
                         </div>
                         <div v-if="tipoAccionCierre!=3 && tipoAccionCierre!=4" class="modal-body">
-                            <!--<div class="form-group row">
-                                <div class="col-md-12">
-                                    <label class="col-md-1 float-left">Caja</label>
-                                    <div class="float-right col-md-11">
-                                        <select v-if="tipoAccionCierre==2" disabled class="form-control float-right" v-model="id_caja_cierre" style="width: 95.7% !important;">
-                                            <option></option>
-                                            <option v-for="(caja, index) in arrayCajas" :value="caja.id" v-text="caja.nombre"></option>
-                                        </select>
-                                        <select v-else class="form-control float-right" v-model="id_caja_cierre" @change="selectValorInicialCaja(id_caja_cierre)" style="width: 95.7% !important;">
-                                            <option></option>
-                                            <option v-for="(caja, index) in arrayCajas" :value="caja.id" v-text="caja.nombre"></option>
-                                        </select>
-                                    </div>
-                                </div> 
-                            </div>-->
+                           
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <label>Vr. Inicial</label>

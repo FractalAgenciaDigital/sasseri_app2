@@ -243,9 +243,16 @@
                                             </div>
                                         </div>                                        
                                     </div>
-                                    <div class="form-group col-md-12">
+                                    <div class="form-group col-md-6">
                                         <label for="desc-input">Descripción</label>
                                         <input type="text" v-model="descripcion" class="form-control" placeholder="Ingrese descripción">                                        
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="imp-input">Impresora asignada</label>
+                                        <select class="form-control custom-select" v-model="id_impresora" v-bind:class="{ 'is-invalid': hasError.id_impresora==1 }">
+                                            <option value="">Seleccione</option>
+                                            <option v-for="impresora in arrayImpresora" :key="impresora.id" v-text="impresora.nombre_impresora + ' - '+ impresora.codigo" :value="impresora.id"></option>
+                                        </select>                                 
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -262,9 +269,7 @@
                                         <input type="text" v-model="cod_invima" class="form-control" placeholder="Código invima" v-bind:class="{ 'is-invalid': hasError.cod_invima==1 }">
                                     </div>
                                 </div>
-                                <div class="form-row">                                   
-                                   
-                                </div>
+                                
                                 <div class="form-row">  
                                     <div class="form-group col-md-6" v-if="tipo_articulo==1 || tipo_articulo==3">
                                         <label for="text-input">Lote</label>
@@ -872,6 +877,7 @@
                 id_und_medida : '',
                 id_concentracion : '',
                 id_presentacion : '',
+                id_impresora : '',
                 nombre_und_medida : '',
                 nombre_concentracion : '',
                 nombre_presentacion : '',
@@ -1035,6 +1041,7 @@
                     linea : 0,
                     id_und_medida : 0,
                     id_presentacion : 0,
+                    id_impresora : 0,
                     codigo : 0,
                     img : 0,
 
@@ -1055,7 +1062,10 @@
                     idPresentacionAsociada : 0,
                     unidadesPresentacionAsociada : 0,
                     codigoPresentacionAsociada : 0,
-                }
+                },
+
+                // Impresoras
+                arrayImpresora :[],
             }
         },
         components: {
@@ -1175,6 +1185,18 @@
                     me.arrayIvasVentas = respuesta.ivaVenta;
                     me.arrayIvasDevolucionCompras = respuesta.ivaDevolucionCompra;
                     me.arrayIvasDevolucionVentas = respuesta.ivaDevolucionVenta;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },           
+            listarImpresoras (page,buscar,criterio){
+                let me=this;
+                var url= this.ruta +'/impresora?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
+                axios.get(url).then(function (response) {
+                    var respuesta= response.data;
+                    me.arrayImpresora = respuesta.impresoras.data;
+                    // me.pagination= respuesta.pagination;
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -1340,45 +1362,7 @@
                 //Envia la petición para visualizar la data de esa página
                 me.listarStock(page_stock,id_articulo);
             },
-            /*registrarArticulo(){
-                if (this.validarArticulo()){
-                    return;
-                }
-                
-                let me = this;
-
-                axios.post(this.ruta + '/articulo/registrar',{
-                    'idcategoria': this.idcategoria,
-                    'idcategoria2': this.idcategoria2,
-                    'nombre' : this.nombre,
-                    'codigo': this.codigo,
-                    'precio_venta': this.precio_venta,
-                    'stock': this.stock,
-                    'cod_invima': this.cod_invima,
-                    'lote': this.lote,
-                    'fec_vence': this.fec_vence,
-                    'id_und_medida': this.id_und_medida,
-                    'id_concentracion': this.id_concentracion,
-                    'id_presentacion': this.id_presentacion,
-                    'minimo': this.minimo,
-                    'tipo_articulo': this.tipo_articulo,
-                    'iva': this.iva,
-                    'descripcion': this.descripcion,
-                    'talla': this.talla,
-                    'arrayTarifarios': this.arrayTarifarios,
-                    'tipo_movimiento' : 1,
-                }).then(function (response) {
-                    me.idArticuloStock = response['id'];
-                    me.cantidadStock = response['stock'];
-                    me.tipoMovimientoStock = 1;
-                    me.sumatoria = response['stock'];
-                    // me.registrarStock();
-                    me.cerrarModal();
-                    me.listarArticulo(1,'','nombre');
-                }).catch(function (error) {
-                    console.log(error);
-                });
-            },*/
+            
             registrarArticulo(){
                 this.active=true;
                 if (this.validarArticulo()){
@@ -1399,6 +1383,7 @@
                 data.append('id_und_medida', this.id_und_medida);
                 data.append('id_concentracion', this.id_concentracion);
                 data.append('id_presentacion', this.id_presentacion);
+                data.append('id_impresora', this.id_impresora);
                 data.append('minimo', this.minimo);
                 data.append('tipo_articulo', this.tipo_articulo);
                 data.append('descripcion', this.descripcion);
@@ -1410,6 +1395,20 @@
                 data.append('img', this.arrayImg);
 
                 axios.post(this.ruta +'/articulo/registrar', data,{
+                    headers:{'Content-Type':'multipart/form-data'}
+                }).then(function (response) {
+                    me.idArticuloStock = response['id'];
+                    me.cantidadStock = response['stock'];
+                    me.tipoMovimientoStock = 1;
+                    me.sumatoria = response['stock'];
+                    // me.registrarStock();
+                    me.cerrarModal();
+                    me.listarArticulo(1,'','nombre');
+                }).catch(function (error) {
+                    console.log(error);
+                });
+
+                axios.post(this.ruta +'/impresora/registrar', data,{
                     headers:{'Content-Type':'multipart/form-data'}
                 }).then(function (response) {
                     me.idArticuloStock = response['id'];
@@ -1461,6 +1460,7 @@
                 data2.append('id_und_medida', this.id_und_medida);
                 data2.append('id_concentracion', this.id_concentracion);
                 data2.append('id_presentacion', this.id_presentacion);
+                data2.append('id_impresora', this.id_impresora);
                 data2.append('minimo', this.minimo);
                 data2.append('tipo_articulo', this.tipo_articulo);
                 data2.append('descripcion', this.descripcion);
@@ -1571,6 +1571,7 @@
                 this.hasError['linea'] = 0;
                 this.hasError['id_und_medida'] = 0;
                 this.hasError['id_presentacion'] = 0;
+                this.hasError['id_impresora'] = 0;
                 this.hasError['codigo'] = 0;
                 this.hasError['img'] = 0;
                 
@@ -1614,6 +1615,7 @@
                 }
 
                 if(!this.id_presentacion) {error=1; this.hasError['id_presentacion']=1;}
+                if(!this.id_impresora) {error=1; this.hasError['id_impresora']=1;}
                 if(!this.codigo) {error=1; this.hasError['codigo']=1;}
                 if(this.tipoAccion==1 && this.$refs.inputFileImg.value=='') {error=1; this.hasError['img']=1;}
                 
@@ -1701,6 +1703,7 @@
                                 this.id_und_medida='';
                                 this.id_concentracion='';
                                 this.id_presentacion='';
+                                this.id_impresora='';
                                 this.minimo='';
                                 this.tipo_articulo='';
                                 this.descripcion = '';
@@ -1730,6 +1733,7 @@
                                 this.id_und_medida=data['id_und_medida'];
                                 this.id_concentracion=data['id_concentracion'];
                                 this.id_presentacion=data['id_presentacion'];
+                                this.id_impresora=data['id_impresora'];
                                 this.minimo=data['minimo'];
                                 this.tipo_articulo=data['tipo_articulo'];
                                 this.descripcion= data['descripcion'];
@@ -1763,6 +1767,8 @@
                         this.selectUndMedida();
                         this.selectConcentracion();
                         this.selectPresentacion();
+                        this.listarImpresoras();
+
                     }
                 }
                 
@@ -2145,3 +2151,5 @@
         position: absolute !important;
     }
 </style>
+
+

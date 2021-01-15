@@ -36,6 +36,12 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/articulo/activar', 'ArticuloController@activar');
         Route::get('/articulo/buscarArticulo', 'ArticuloController@buscarArticulo');
         Route::get('/articulo/listarArticulo', 'ArticuloController@listarArticulo');
+
+        Route::get('/articulo_impresora', 'ArticuloImpresoraController@index');
+        Route::post('/articulo_impresora/registrar', 'ArticuloImpresoraController@store');
+        Route::put('/articulo_impresora/actualizar', 'ArticuloImpresoraController@update');
+        Route::put('/articulo_impresora/desactivar', 'ArticuloImpresoraController@desactivar');
+        Route::put('/articulo_impresora/activar', 'ArticuloImpresoraController@activar');
         
         Route::get('/bancos', 'BancosController@index');
         Route::post('/bancos/registrar', 'BancosController@store');
@@ -43,7 +49,24 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/bancos/selectBancos', 'BancosController@selectBancos');
         Route::put('/bancos/desactivar', 'BancosController@desactivar');
         Route::put('/bancos/activar', 'BancosController@activar');
+        
+        Route::get('/cajas', 'CajasController@index');
+        Route::post('/cajas/registrar', 'CajasController@store');
+        Route::put('/cajas/actualizar', 'CajasController@update');
+        Route::get('/cajas/SelectCaja', 'CajasController@SelectCaja');
+        Route::put('/cajas/desactivar', 'CajasController@desactivar');
+        Route::put('/cajas/activar', 'CajasController@activar');
 
+        Route::get('/cajas_admin', 'CajasAdminController@index');
+        Route::post('/cajas_admin/registrar', 'CajasAdminController@store');
+        Route::put('/cajas_admin/actualizar', 'CajasAdminController@update');
+        Route::get('/cajas_admin/selectCajasAdmin', 'CajasAdminController@selectCajasAdmin');
+        Route::get('/cajas_admin/listarCajasAdmin', 'CajasAdminController@listarCajasAdmin');
+        Route::get('/cajas_admin/listarCajerosAdmin', 'CajasAdminController@listarCajerosAdmin');
+        Route::put('/cajas_admin/desactivar', 'CajasAdminController@desactivar');
+        Route::put('/cajas_admin/activar', 'CajasAdminController@activar');
+        Route::get('/cajas_admin/listarVendedores', 'CajasAdminController@listarVendedores');
+        
         Route::get('/categoria', 'CategoriaController@index');
         Route::post('/categoria/registrar', 'CategoriaController@store');
         Route::put('/categoria/actualizar', 'CategoriaController@update');
@@ -71,23 +94,6 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/conf_formatos/activar', 'Conf_formatosController@activar');
         Route::get('/conf_formatos/get_tipos_formatos', 'Conf_formatosController@get_tipos_formatos');
         Route::get('/conf_formatos/get_filt_tipo', 'Conf_formatosController@get_filt_tipo');
-        
-        Route::get('/cajas', 'CajasController@index');
-        Route::post('/cajas/registrar', 'CajasController@store');
-        Route::put('/cajas/actualizar', 'CajasController@update');
-        Route::get('/cajas/SelectCaja', 'CajasController@SelectCaja');
-        Route::put('/cajas/desactivar', 'CajasController@desactivar');
-        Route::put('/cajas/activar', 'CajasController@activar');
-
-        Route::get('/cajas_admin', 'CajasAdminController@index');
-        Route::post('/cajas_admin/registrar', 'CajasAdminController@store');
-        Route::put('/cajas_admin/actualizar', 'CajasAdminController@update');
-        Route::get('/cajas_admin/selectCajasAdmin', 'CajasAdminController@selectCajasAdmin');
-        Route::get('/cajas_admin/listarCajasAdmin', 'CajasAdminController@listarCajasAdmin');
-        Route::get('/cajas_admin/listarCajerosAdmin', 'CajasAdminController@listarCajerosAdmin');
-        Route::put('/cajas_admin/desactivar', 'CajasAdminController@desactivar');
-        Route::put('/cajas_admin/activar', 'CajasAdminController@activar');
-        Route::get('/cajas_admin/listarVendedores', 'CajasAdminController@listarVendedores');
         
         Route::get('/cierres_caja', 'CierresXCajaController@index');
         Route::post('/cierres_caja/registrar', 'CierresXCajaController@store');
@@ -160,10 +166,13 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/detalle_egreso/desactivar', 'DetalleEgresoController@desactivar');
         Route::put('/detalle_egreso/activar', 'DetalleEgresoController@activar');
 
-        Route::get('/detalle_facturacion', 'DetalleFacturacionController@index');
-        Route::post('/detalle_facturacion/registrar', 'DetalleFacturacionController@store');
-        Route::put('/detalle_facturacion/actualizar', 'DetalleFacturacionController@update');
+        Route::get('/detalle_facturacion', 'DetalleFacturacionController@index');               
         Route::get('/detalle_facturacion/buscarDetalleFacturacion', 'DetalleFacturacionController@buscarDetalleFacturacion');
+        Route::get('/detalle_facturacion/productosPreparados', 'DetalleFacturacionController@productosPreparados');
+        Route::post('/detalle_facturacion/registrar', 'DetalleFacturacionController@store'); 
+        Route::put('/detalle_facturacion/actualizar', 'DetalleFacturacionController@update');
+        Route::put('/detalle_facturacion/cocinado', 'DetalleFacturacionController@cocinado');
+        Route::put('/detalle_facturacion/sin-cocinar', 'DetalleFacturacionController@sinCocinar');
         
         Route::get('/detalle_ingreso', 'DetalleIngresoController@index');
         Route::post('/detalle_ingreso/registrar', 'DetalleIngresoController@store');
@@ -223,7 +232,6 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/impresora/actualizar', 'ImpresoraController@update');
         Route::put('/impresora/desactivar', 'ImpresoraController@desactivar');
         Route::put('/impresora/activar', 'ImpresoraController@activar');
-        Route::get('/impresora/selectCategoria', 'ImpresoraController@selectCategoria');
 
         // Rutas del plan de cuentas, informe auxiliares, retenciones y de formatos
         Route::get('/info_auxiliares/selectInformes', 'InfAuxiliaresController@selectInformes');
