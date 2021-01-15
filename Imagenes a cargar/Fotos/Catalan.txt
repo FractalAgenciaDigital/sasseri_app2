@@ -1,0 +1,992 @@
+﻿Configuracion Inicial|configuració Inicial
+Seleccione el Idioma / Select the Language|Seleccioneu l'Idioma / Select the Language
+Color|color
+Movimiento|moviment
+Otros|altres
+Indiquenos desde que sitio ha descargado este programa|Indiqui'ns des que lloc ha descarregat aquest programa
+Correo Electronico|correu Electronic
+2 decimales|2 decimals
+0 decimales|0 decimals
+Seleccione el Numero de Decimales|Seleccioneu el Nombre de Decimals
+Seleccione el Impuesto|Seleccioneu l'Impost
+Seleccione su Bandera|Seleccioneu la seva Bandera
+Seleccione la Moneda|Seleccioneu la Moneda
+Seleccione el Pais|Seleccioneu el País
+Nombre de Empresa|Nom d'Empresa
+Continuar|continuar
+Programa|programa
+Continuar / Continue|Continuar / Continue
+Este boton le permitira cambiar la configuracion regional|Aquest botó li permetrà canviar la configuració regional
+Con este boton cambiara el tamaño de la ventana.|Amb aquest botó canviés la mida de la finestra.
+Con este boton podra ver datos de su licencia|Amb aquest botó podrà veure dades de la seva llicència
+Este boton le servira para cambiar el idioma|Aquest botó li servirà per canviar l'idioma
+Con este boton cambiara el color de la pantalla|Amb aquest botó canviés el color de la pantalla
+Programa protegido por los derechos de propiedad intelectual en Marcas y Patentes en cuanto a contenido y diseño.|Programa protegit pels drets de propietat intel·lectual en Marques i Patents quant al contingut i disseny.
+Madrid - España|Madrid - Espanya
+Tpv|tpv
+** Bienvenido **|** Benvingut **
+Salir|sortir
+Caja Entradas|Caixa Entrades
+Seleccione Su Opcion|Seleccioneu El seu Opció
+Caja Ropero|Caixa Rober
+Comprar|comprar
+¡Tiempo Limitado!|¡Temps Limitat!
+6 Comprados|6 Comprats
+Horas:|hores:
+Cod Promocion: XXXXX|Cod Promoció: XXXXX
+Tiene un descuento de|Té un descompte de
+Precios|preus
+* Recuerde que para poder tener asistencia telefonica tiene que tener contratado la version Completa, en caso contrario haga su consulta directamente desde el programa.|* Recordeu que per poder tenir assistència telefònica ha de tenir contractat la versió Completa, en cas contrari faci la seva consulta directament des del programa.
+* Consulte nuestra pagina web, para confirmar los precios que es posible que hayan sufrido algun cambio|* Consulti la nostra pàgina web, per confirmar els preus que és possible que hagin patit algun canvi
+<Tipo de Licencia>|<Tipus de Llicència>
+Estoy utilizando una licencia|Estic utilitzant una llicència
+Diferencias entre tipos de licencia|Diferències entre tipus de llicència
+Pasar de la version Gratuita a la Basica|Passar de la versió Gratuïta a la Basica
+Promociones / Envio Email|Promocions / Enviament email
+Admisitracion Permisos|Admisitracion Permisos
+Tipos de licencia|Tipus de llicència
+Conectar en Red|Connectar en Xarxa
+Activar Gratis la version Basica|Activa Gratis la versió Basica
+Registrar|registrar
+<Terminal>|<Terminal>
+Acerca de|sobre
+Asistencia|assistència
+Configuracion|configuració
+Listados|Llistes
+Caja|Caixa
+Conexion con dispositivo movil - android|Conexion amb dispositiu mòbil - Android
+Niveles de Acceso|Nivells d'Accés
+Almacenes|magatzems
+Mantenimiento|manteniment
+Actualizaciones Activadas|actualitzacions Activades
+Tpv 123 Hosteleria (Version: 8.5.1)|Tpv 123 Hosteleria (Version: 8.5.1)
+Serie: XXX|Sèrie: XXX
+Licencia: XXX|Llicència: XXX
+PROGRAMA REGISTRADO|PROGRAMA REGISTRAT
+nombre restaurante|nom restaurant
+Tpv 123 Hosteleria|Tpv 123 Hosteleria
+ADVERTENCIAS IMPORTANTES|ADVERTÈNCIES IMPORTANTS
+- El desconocimiento de estas condiciones no le exime del cumplimiento de las mismas.|- El desconeixement d'aquestes condicions no l'eximeix del compliment de les mateixes.
+- Solo los clientes con la version COMPLETA tienen incluida la asistencia telefonica|- Només els clients amb la versió COMPLETA tenen inclosa l'assistència telefònica
+---- En la modalidad COMPLETA, realizando un pago anual, ademas de las opciones incluidas en la version BASICA, tendra derecho a la asistencia de forma telefonica.|---- En la modalitat COMPLETA, realitzant un pagament anual, a més de les opcions incloses en la versió BASICA, tindrà dret a l'assistència de forma telefònica.
+---- En la modalidad BASICA, con una reducida cuota anual usted tendra habilitada las opciones del programa que le permitiran realizar todas gestiones necesarias para su negocio, para mayor detalle recuerde consultar la opcion de Tipos de Licencia.|---- En la modalitat BASICA, amb una reduïda quota anual vostè tindrà habilitada les opcions del programa que li permetran realitzar totes gestions necessàries per al seu negoci, per a més detall recordi consultar l'opció de Tipus de Llicència.
+Si decide utilizar la version GRATUITA recuerde que tiene algunas limitaciones, consulte la opcion de Tipos de Licencia para una descripcion mas detallada de la version GRATUITA, BASICA y COMPLETA.|Si decideix utilitzar la versió GRATUÏTA recordi que té algunes limitacions, consulteu l'opció de Tipus de Llicència per a una descripció més detallada de la versió GRATUÏTA, BASICA i COMPLETA.
+---- En la modalidad GRATUITA, durante los primeros 90 dias usted podra probar y trabajar con la version BASICA, pasado ese periodo podra volver a la version gratuita o pasar a la version BASICA o COMPLETA. Recuerde que esta version GRATUITA  es para empr|---- En la modalitat GRATUÏTA, durant els primers 90 dies vostè podrà provar i treballar amb la versió BASICA, passat aquest període podrà tornar a la versió gratuïta o passar a la versió BÀSICA o COMPLETA. Recordeu que aquesta versió GRATUÏTA és per empr
+- La empresa Tpv 123 - Gratuito no es responsable si el cliente formatea el equipo o es atacado por algun tipo de virus que provoque la perdida de informacion o de licencia.|- L'empresa Tpv 123 - Gratuït no és responsable si el client formata l'equip o és atacat per algun tipus de virus que provoqui la pèrdua d'informació o de llicència.
+- Tpv 123 - Gratuito recomienda la compra, para el buen funcionamiento del programa, de una impresora de tickets EPSON/SAMSUNG/Star o cualquier modelo de impresora, siempre que se instale junto con los drivers de dicha impresora. (Tipo de conexion recomen|- Tpv 123 - Gratuït recomana la compra, per al bon funcionament del programa, d'una impressora de tiquets EPSON / SAMSUNG / Star o qualsevol model d'impressora, sempre que s'instal·li juntament amb els drivers d'aquesta impressora. (Tipus de connexió reco
+- Este es un programa estandar, no se hacen modificaciones a medida o personalizaciones, nuestros clientes en version BASICA y COMPLETA si pueden sugerirnos algunos cambios que nosotros sin ningun coste añadido incluiremos en siguientes versiones.|- Aquest és un programa estàndard, no es fan modificacions a mida o personalitzacions, els nostres clients en versió BÀSICA i COMPLETA si poden suggerir alguns canvis que nosaltres sense cap cost afegit inclourem en següents versions.
+- Si usted esta utilizando la version GRATUITA y necesita algun tipo de asistencia recuerde que tiene que contratar la version BASICA o COMPLETA dependiendo de su incidencia.|- Si aquesta utilitzant la versió GRATUÏTA i necessita algun tipus d'assistència recordi que ha de contractar la versió BÀSICA o COMPLETA depenent de la seva incidència.
+Al instalar este programa,usted acepta las siguientes condiciones:|En instal·lar aquest programa, vostè accepta les següents condicions:
+CONDICIONES DE USO DEL PROGRAMA|CONDICIONS D'ÚS DEL PROGRAMA
+Promociones Fast Food|Promocions Fast Food
+Zonas|zones
+SubFamilias|subfamílies
+Productos Elaborados|productes Elaborats
+Productos|productes
+Familias|famílies
+Varios Precios|diversos Preus
+Formas de Pago|Formes de Pagament
+Empleados|empleats
+Clientes|clients
+Proveedores|proveïdors
+Aceptar|acceptar
+Cancelar|Cancel
+Eliminar|eliminar
+Modificar|modificar
+Nuevo|nou
+No Movimiento|no Moviment
+Productos relacionados con el proveedor:|Productes relacionats amb el proveïdor:
+Dia de Visita:|Dia de Visita:
+Número de Cuenta:|Número de Compte:
+Nombre del Banco|Nom del Banc
+Dia de Pago:|Dia de pagament:
+Forma de Pago:|Forma de Pagament:
+Observaciones:|Observacions:
+Correo Electrónico:|Correu Electrònic:
+Móvil / Celular:|Mòbil / Cel·lular:
+Teléfono:|telèfon:
+Dirección:|direcció:
+Población:|població:
+Código Postal:|Codi Postal:
+Provincia:|província:
+País:|país:
+DNI / CIF|DNI / CIF
+Contacto:|contacte:
+Nombre|nom
+Gestion de Proveedores|Gestió de Proveïdors
+Lista de Proveedores|Llista de Proveïdors
+Ver Ingredientes|veure Ingredients
+Ver Productos Venta|Veure Productes Venda
+Zona:|zona:
+    Buscar Por Nombre:|    Cerca Per Nom:
+Codigoproducto|Codigoproducto
+Barra|barra
+Cocina|cuina
+Ambos|Tots dos
+situaciongrid|situaciongrid
+Posicion  en Pantalla:|Posició en Pantalla:
+Ingredientes|ingredients
+Producto para Venta|Producte per a Venda
+Mostrar en Pantalla de Caja:|Mostra en Pantalla de Caixa:
+Precio de Venta:|Preu de Venda:
+Impuesto:|Impost:
+grid_ingredientes|grid_ingredientes
+grid_productosventas|grid_productosventas
+Descripcion Numerica:|Descripció Numerica:
+Seleccionar Color:|Seleccionar Color:
+Insertar Imagen|inserir Imatge
+Tipo de Producto:|Tipus de Producte:
+Producto preparado en:|Producte preparat a:
+Coste:|cost:
+Stock Actual:|Stock Actual:
+Stock Minimo:|Stock Mínim:
+Proveedor:|proveïdor:
+Codigo de Barras:|Codi de Barres:
+Unidades de medida:|Unitats de mesura:
+Nombre del Producto:|Nom del Producte:
+Gestion de Productos|Gestió de Productes
+Buscar|Cercar
+Resultados de la Busqueda|Resultats de la Cerca
+panel de busqueda de clientes|panell de cerca de clients
+Buscar Clientes|Cercar Clients
+** DOBLE CLIC EN EL CLIENTE DESEADO|** DOBLE CLIC AL CLIENT DESITJAT
+Rellene algun campo para la busqueda|Ompli algun camp per a la cerca
+DNI/ CIF|DNI / CIF
+Tlf Movil|Tlf Mòbil
+Telefono|telefono
+Email|E-mail
+Provincia|província
+Poblacion|població
+Apellidos|Cognoms
+CP|CP
+Codigo Cliente|Codi Client
+situacion|situació
+Descuento %|descompte%
+historico ventas|històric vendes
+datos|dades
+Lista Ultimos 50 Clientes|Llista Últims 50 Clients
+Puerta|porta
+Numero|nombre
+Piso|pis
+Direcccion|Direcccion
+Nombre *|nom *
+situacion buscar|situació buscar
+Gestion de Clientes|Gestió de Clients
+Familia Tipo Menu Combo|Família Tipus Menú Combo
+Familia Tipo Menu|Família Tipus Menú
+Familia Generica|família Generica
+Gestion de Familias|Gestió de Famílies
+Clic sobre la familia para ver mas detalles|Clic sobre la família per veure mes detalls
+Lista de Familias|Llista de Famílies
+*Pulse en la familia para ver los productos agregados a la misma|* Premi a la família per veure els productes agregats a la mateixa
+Seleccione el tipo de familia|Seleccioneu el tipus de família
+Lb_stopanelproductos|Lb_stopanelproductos
+Esta familia no tiene productos relacionados|Aquesta família no té productes relacionats
+lista productos|llista productes
+Clic en el producto que desee incluir en su familia|Clic al producte que voleu incloure a la seva família
+Lista de Productos |Llista de Productes
+Añadir Productos|Afegir Productes
+Tipo de Familia:|Tipus de Família:
+Label5|Label5
+datos generica|dades generica
+datos familia generica|dades família generica
+Imagen|imatge
+Datos de la Familia|Dades de la Família
+Mostrar en Caja |Mostra en Caixa
+Posicion en Pantalla|Posició en Pantalla
+Descripcion Numerica|Descripció Numerica
+Productos Incluidos|productes Inclosos
+panel menu familia|panell menu família
+Producto incluido en otra familia|Producte inclòs en una altra família
+Productos Tercer Plato/ Postre|Productes Tercer Plat / Postres
+Productos Segundo Plato|Productes Segon Plat
+Productos Primer Plato|Productes Primer Plat
+Añadir Postre|Afegir Postres
+Añadir Segundo|Afegir Segon
+Añadir Primero|Afegir Primer
+Impuesto|Impost
+Precio de Venta|Preu de Venda
+tipo|tipus
+NO BORRAR|NO ESBORRAR
+situacion paneles|situació panells
+Añadir + Productos a la SubFamilia|Afegir + Productes a la subfamília
+Clic en el producto que desee incluir en el subproducto|Clic al producte que voleu incloure a l'subproducte
+Familia a la que pertenece|Família a la qual pertany
+datos subfamilia|dades subfamília
+Datos de la SubFamilia|Dades de la subfamília
+SubFamilias Existentes|subfamílies Existents
+Num S.S.:|Num S.S .:
+Repartidor:|repartidor:
+Apellidos:|Cognoms:
+Color en Caja:|Color en Caixa:
+Número de  Cuenta:|Número de Compte:
+Nombre  del Banco:|Nom del Banc:
+Foto:|foto:
+Correo  Electrónico:|Correu Electrònic:
+NIF/ CIF:|NIF / CIF:
+Nombre:|nom:
+Lista de Empleados|Llista d'Empleats
+Gestion de Empleados|Gestió d'Empleats
+*clic para ver datos del producto|* Clic per veure dades del producte
+top grid|top grid
+Sirve para que en lugar de que  aparezca una imagen en el boton  del producto aparezca un numero.|Serveix perquè en lloc que aparegui una imatge al botó del producte aparegui un número.
+alturacandidadingredientes|alturacandidadingredientes
+Es el lugar donde queremos que se  muestre el producto en caja cuando hacemos clic sobre su familia.|És el lloc on volem que es mostri el producte en caixa quan fem clic sobre la seva família.
+nombreproducto|nombreproducto
+Codigo|Codi
+CantidaddeIngredientes|CantidaddeIngredientes
+Cantidad|quantitat
+Ingredientes Incluidos en el Producto: |Ingredients Inclosos en el Producte:
+Ver Datos Completos|Veure Dades Complets
+¿cuantos|¿quants
+sto ingredientes|sto ingredients
+Producto Elaborado|producte Elaborat
+Producto preparado en|Producte preparat en
+Descripcion  Numerica:|Descripció Numerica:
+situacion izquierda|situació esquerra
+situacion derecha|situació dreta
+alturagrid|alturagrid
+Seleccione el producto o el ingrediente a utilizar|Seleccioneu el producte o l'ingredient a utilitzar
+Ver Productos|veure Productes
+Gestion de Productos Elaborados|Gestió de Productes Elaborats
+Ver Ingredientes Incluidos|Veure Ingredients Inclosos
+Añadir Producto|Afegir Producte
+Nuevo Precio|nou Preu
+Precio Actual|preu Actual
+Añadir Nuevos Productos|Afegir Nous Productes
+Producto|producte
+Precio Original|preu Original
+Precios Validos entre los siguientes dias y horas|Preus Valguts entre els següents dies i hores
+Hora Hasta|hora Fins
+Hora Desde|hora Des
+Fecha Hasta|data Fins
+Fecha Desde|data De
+Nombre de la lista|Nom de la llista
+SITUACION DE LOS PANELES|SITUACIÓ DELS PANELLS
+Id lista|Aneu llista
+Fecha de Alta|Data d'Alta
+Desde|des
+Hasta|fins
+Horario Desde|horari Des
+Horario Hasta|horari Fins
+Ver Lista|veure Llista
+Lista de Precios Existentes|Llista de Preus Existents
+Volver Lista de Precios|Tornar Llista de Preus
+Lista de Precios|Llista de Preus
+Productos de Barra|Productes de Barra
+Productos de cocina|Productes de cuina
+Esta zona la voy a utilizar para|Aquesta zona la utilitzaré per
+Zonas Existentes|zones Existents
+Zonas de Impresion|Zones d'Impresion
+Diseño|disseny
+Otro Terminal|Un altre Terminal
+Reservada|reservada
+Ocupada|ocupada
+Libre|lliure
+Panel Mesas|panell Taules
+Mesas|taules
+Diseño Salon|disseny Salon
+Reservas|reserves
+Salones|salons
+Reserva|Reserva
+Total|total
+Tablet Activada|Tablet Activada
+Visor Pedidos|visor Comandes
+Bit|bit
+Pedido Telefonico|Comanda Telefonico
+Envio|enviament
+Juntar Cuentas|ajuntar Comptes
+SALON|SALÓ
+EMPLEADO|EMPLEAT
+codigoempleado|codigoempleado
+PEDIDO|COMANDA
+H. INICIO|H. INICI
+MESA|TAULA
+Cant.|Quant.
+Precio|preu
+Primero|primer
+Segundo|segon
+Postre|postres
+Desc|desc
+Num_Factura|Num_Factura
+Recargo|recàrrec
+Producto de Menu|Producte de Menú
+Menu|menú
+Codigo del Menu|Codi del Menú
+Servido|servit
+Tipo de Impuesto|Tipus d'Impost
+Cod Empleado|Cod Empleat
+codigo Familia|codi Família
+Indice|Índex
+Cod. Prod.|Cod. Prod.
+Orden Menu|ordre Menú
+ZonaImpresion|ZonaImpresion
+BEBIDAS/ POSTRES|BEGUDES / POSTRES
+PRIMER PLATO|PRIMER PLAT
+SEGUNDO PLATO|SEGON PLAT
+situacion panel producto|situació panell producte
+Opciones|opcions
+Cobrar|cobrar
+Abrir  Cajetin|obrir Caixetí
+Preticket|Preticket
+Enviar a cocina|Enviar a cuina
+Borrar Venta|esborrar Venda
+Observ. Pedido|Observ. Comanda
+Crear/Modificar Salones|Crear / Modificar Salons
+Diseño de Salones|Disseny de Salons
+Elementos para  el diseño|Elements per al disseny
+Posicion del objeto/mesa|Posició de l'objecte / taula
+Eliminar Mesa|eliminar Taula
+Eliminar Objeto|eliminar Objecte
+Guardar Numero|Desar Nombre
+Numero Mesa|nombre Taula
+Eliminar Diseño Salon|Eliminar Disseny Salon
+Boton Pulsado|Botó Premut
+Objeto Pulsado|objecte Premut
+Esta diseñando el:|Aquesta dissenyant el:
+Alta Salones/ Barra|Alta Salons / Barra
+Lista de Salones - Barras|Llista de Salons - Barres
+Recargo:|recàrrec:
+Posicion En Pantalla:|Posició Pantalla:
+Color Salon|color Salon
+Imagen Mesas|imatge Taules
+Nro de Mesas:|Nro de Taules:
+Imagen Salon|imatge Salon
+Cambiar Idioma / Change Language|Canviar Idioma / Change Language
+Base De Datos|Base de Dades
+Contraseña Director|clau Director
+Importar Imagenes del Servidor|Importa Imatges del Servidor
+Permisos Usuario|permisos Usuari
+Importar Datos|Importa Dades
+Cierre Año|tancament Any
+Envio Informes|enviament Informes
+Conexion en Red|Connexió en Xarxa
+Aumento Precio|augment Preu
+Horario|horari
+Diseño Ticket / Factura|Disseny Ticket / Factura
+Cajetin|caixetí
+Impresoras|impressores
+Copia de Seguridad|Còpia de Seguretat
+Configuracion Regional|configuració Regional
+Datos de la empresa|Dades de l'empresa
+situacionpaneles|situacionpaneles
+Esta a punto de restaurar una copia de seguridad, recuerde que este proceso es irreversible y cambiara la base de datos con la que trabaja en estos momentos por la seleccionada |Aquesta a punt de restaurar una còpia de seguretat, recordeu que aquest procés és irreversible i canviés la base de dades amb què treballa en aquests moments per la seleccionada
+Hacer Copia de Seguridad|Fer còpia de seguretat
+Restaurar Copia de Seguridad|Restaurar còpia de seguretat
+Administracion Permisos|Administració Permisos
+Nro. de copias del preticket|Nro. De còpies del preticket
+Nro. de copias del ticket|Nro. De còpies del tiquet
+Centrado|centrat
+OFF|OFF
+ON|ON
+Enviar Confirmacion Reserva|Enviar Confirmació Reserva
+Enviar email al director / cierre caja|Enviar email al director / tancament caixa
+Realizar cierre caja ciego|Realitzar tancament caixa cec
+Pedir Contraseña Al Entrar Al Programa|Demanar Contrasenya Al Entrada A Programa
+Permisos Usuarios|permisos Usuaris
+Pedir contraseña para las modificaciones / eliminaciones / descuentos ... (Para todos los empleados)|Demanar contrasenya per a les modificacions / eliminacions / descomptes ... (Per a tots els empleats)
+Pedir Contraseña Apertura de Cajetin|Demanar Contrasenya Obertura de Caixetí
+Pedir Contraseña Al Entrar Caja|Demanar Contrasenya Al Entrada Caixa
+Pedir Empleado Al Entrar Caja|Demanar Empleat A l'Entrada Caixa
+Activar Opciones|Activa Opcions
+Pedir Contraseña|demanar Contrasenya
+Pedir Empleado X Cada Venta|Demanar Empleat X Cada Venda
+Utilizar Caja Rapida|Utilitzar Caixa Rapida
+Entrar en modo Direccion|Entrar a manera Direcció
+¿Ha olvidado su contraseña?|¿Ha oblidat la seva contrasenya?
+No ha seleccionado ningun empleado|No ha seleccionat cap empleat
+Ingrese su clave:|Escriu el teu clau:
+SELECCIONE EL EMPLEADO|SELECCIONI L'EMPLEAT
+Nombre de la Empresa|Nom de l'Empresa
+Ingrese el nro. de percha|Introduïu el nro. de perxa
+lb-_Empleado|lb-_Empleado
+Cambio Precio|canvi Preu
+Cierre De Caja|Tancament De Caixa
+Imprimir Resguardo|Imprimir Resguard
+Imprimir Ticket|Imprimir Tiquet
+Abrir Cajetin|obrir Caixetí
+Terminar Venta|acabar Venda
+Importe Total Prendas|Import Total Peces
+Entrega cliente|lliurament client
+Devolucion|Devolució
+Venta Anterior|venda Anterior
+Nro Prendas|Nro Peces
+Caja - Ropero|Caixa - Rober
+Entrada Seleccionada|Entrada Seleccionada
+Entrada + consumicion|Entrada + consumició
+Entrada Seleccionada:|Entrada Seleccionada:
+Seleccion De Entradas|Selecció De Entrades
+Nombre del Visor:|Nom del Visor:
+Utilizar Visor|utilitzar Visor
+Eliminar Impresoras de este teminal|Eliminar Impressores d'aquest teminal
+La impresora se ha dado de alta correctamente|La impressora s'ha donat d'alta correctament
+Seleccione la celda en la interseccion de la impresora y la zona que quiere asociar|Seleccioneu la cel·la en la interseccion de la impressora i la zona que vol associar
+Configuracion de Impresoras|Configuració de Impressores
+Gestion de Impresoras|Gestió de Impressores
+Reenvio de Pedidos A cocina / Barra|Reenviament de Comandes A cuina / Barra
+* click en la linea que desea reimprimir|* Click a la línia que voleu reimprimir
+Zona Impresion|zona Impressió
+Hora|hora
+numPedido|numPedido
+Fecha|data
+enviado|enviat
+Detalles del Pedido|Detalls de la comanda
+Reenviar|Reenviar
+NumPedido =|NumPedido =
+Guardar|Desar
+Descuento a aplicar|Descompte a aplicar
+lblCliente|lblCliente
+Terminar Venta <F12>|Acabar Venda <F12>
+Descuento|descompte
+Buscar Cliente|Cercar Client
+Cambio|canvi
+Cliente entrega Efectivo|Client lliurament Efectiu
+Cliente paga con Tarjeta|Client paga amb Targeta
+Formato de Impresion|Format d'Impresion
+Formato A4|format A4
+Formato A5|format A5
+Tamaño 10 cm.|Mida 10 cm.
+Imprimir factura|Imprimir factura
+SubTotal|Subtotal
+Propina|propina
+Enviar ticket Correo Electronico|Enviar tiquet Correu Electronic
+Cerrar Venta|Tancar Venda
+Imprimir en Cocina|Imprimir en Cuina
+V E R  T I C K E T|V E R T I C K I T
+Tipo de venta|Tipus de venda
+Factura|factura
+Boleta Formato Ticket|Boleta Format Ticket
+Ultima Venta|Ultima Venda
+Diseño de salon|Disseny de saló
+Eliminar Venta Ya Cobrada|Eliminar Venda Ja Cobrada
+Cobro Parcial|cobrament Parcial
+Reservas de Mesas|Reserves de Taules
+Listados Caja|llistats Caixa
+Retirada de Caja|Retirada de Caixa
+Gastos del Dia|Despeses del Dia de
+Activar Precios para este Terminal|Activa Preus per a aquest terminal
+Reimpresion Ticket|reimpresion Ticket
+Modificacion de Tickets|Modificacion de Tiquets
+Conteo y cierre de caja|Recompte i tancament de caixa
+situacion panel opciones|situació panell opcions
+panel_opciones de caja|panel_opciones de caixa
+CONFIGURACION OPCIONES CAJA|CONFIGURACIÓ OPCIONS CAIXA
+Regresar al idioma original|Tornar a l'idioma original
+¿Confirma que desea eliminar el siguiente registro?|¿Confirma que desitja eliminar el següent registre?
+Idiomas|idiomes
+Usted ha seleccionado|Vostè ha seleccionat
+Ninguno|cap
+¿Seleccione el Idioma?|¿Seleccioneu l'Idioma?
+Texto Traducido|text Traduït
+Texto Original|text Original
+id|id
+Texto|text
+Traduccion|traducció
+lineas sin traducir|línies sense traduir
+Click sobre la linea para añadir una traduccion|Click sobre la línia per afegir una traduccio
+Click sobre la linea para modificar la traduccion|Click sobre la línia per modificar la traducció
+Texto sin traducir|Text sense traduir
+Condiciones|condicions
+Registro de Licencias|Registre de Llicències
+Acerca de ...|Sobre ...
+TPV Gratuito|TPV Gratuït
+B. Aires - Argentina|B. Aires - Argentina
+D. F. - Mexico|DF - Mexico
+Santiago de Chile|Santiago de Xile
+Lima - Peru|Lima - Peru
+Costa Rica|Costa Rica
+Puerto Rico|port Ric
+Miami - Florida|Miami - Florida
+Bogota - Colombia|Bogota - Colòmbia
+Mantenimiento registrado hasta:|Manteniment registrat fins:
+Fecha de Caducidad:|Data de caducitat:
+Fecha de Instalacion:|Data d'Instalacion:
+TPV Gratuito, Departamento de Desarrollo|TPV Gratuït, Departament de Desenvolupament
+Ultima actualizacion: XXX|Última actualització: XXX
+Fecha de creacion:  XXX|Data de creació: XXX
+Proyecto: Tpv 123, Version: XXX|Projecte: Tpv 123, Version: XXX
+Paseo de Europa 7, (S.S. de los Reyes - Madrid -España)|Passeig d'Europa 7, (S.S. dels Reis - Madrid -Espanya)
+Buenos Aires - Argentina|Buenos Aires - Argentina
+E-mail: compras@tpvgratuito.com   www.tpvgratuito.com|Correu electrònic: compras@tpvgratuito.com www.tpvgratuito.com
+Servicio de asistencia:|Servei d'assistència:
+Reg. Anual|Reg. Anual
+Usted está utilizando una licencia:|Vostè utilitzeu una llicència:
+SolverMedia|SolverMedia
+SolverMedia, Departamento de Desarrollo|SolverMedia, Departament de Desenvolupament
+Fecha de creacion: XXX|Data de creació: XXX
+Proyecto: Servidor Net, Version: XXX|Projecte: Servidor Net, Version: XXX
+No hay datos para ser mostrados|No hi ha dades per a ser mostrats
+Listado de Empleados|Llistat d'Empleats
+Listado de Familias|Llistat de Famílies
+Listados Generales|llistats Generals
+Ventas NCF Rep. Dominicana|Vendes NCF Rep. Dominicana
+Ventas con Promociones|Vendes amb Promocions
+Productos Bajo Minimo|Productes Sota Minimo
+Reimprimir Factura - Ticket|Reimprimir Factura - Ticket
+Ventas x Clientes|Vendes x Clients
+Imprimir Letreros  y  Etiquetas |Imprimir Rètols i Etiquetes
+Estadisticas|Estadístiques
+Valoracion Stock x Proveedores|Valoració Stock x Proveïdors
+Valoracion Stock General|Valoració Stock General
+Listado de Proveedores|Llistat de Proveïdors
+Listado de Clientes|Llistat de Clients
+Listado de Productos|Llistat de Productes
+Servicios a Domicilio|Serveis a Domicili
+Consumo de Platos Menu|Consum de Plats Menú
+Reservas x Dia|Reserves x Dia
+Pedidos Realizados a Proveedor|Comandes Realitzats a Proveïdor
+Empleado del Mes|Empleat del Mes
+Estadistica x Repartidor|Estadistica x Repartidor
+Retiradas Empleados|retirades Empleats
+Relacion Envios Cocina contra Ventas|Relacion Enviaments Cuina contra Vendes
+Formato Din-A4|Format Din-A4
+Formato Ticket|format Ticket
+Total Diario de Retiradas|Total Diari de Retirades
+Ventas x Zonas|Vendes x Zones
+Caja Total x Dias|Caixa Total x Dies
+Gastos de Caja|Despeses de Caixa
+Descuentos Realizados|descomptes Realitzats
+Ventas en el mes (Acumulado x Horas)|Vendes al mes (acumulat x Hores)
+Reservas Hora/Dia /Mes|Reserves Hora / Dia / Mes
+Ventas x Empleados|Vendes x Empleats
+Impuestos Repercutidos|Impostos repercutits
+Gastos|despeses
+Relacion de Propinas|Relacion de propines
+Ventas x Menus|Vendes x Menús
+Resumen Contable de Facturas|Resum Comptable de Factures
+Productos mas Vendidos|Productes més venuts
+Productos Sin Ventas|Productes Sense Vendes
+Ventas x Horas|Vendes x Hores
+Resumen de Venta x Empleados|Resum de Venda x Empleats
+Ventas Detalladas x Empleados|Vendes amb Detall x Empleats
+Ventas Eliminadas y Descuentos|Vendes Eliminades i Descomptes
+Ventas x Zonas -Totalizado x Productos|Vendes x Zones -Totalizado x Productes
+Ventas Generales x Dia|Vendes Generals x Dia
+Ventas x Familias|Vendes x Famílies
+Ventas x Zonas Formato General|Vendes x Zones Format general
+Ventas x Forma de Pago|Vendes x Forma de Pagament
+Ventas Formato Ticket Resumido|Vendes Format Ticket Resumit
+Ventas Formato Ticket x Empleado|Vendes Format Ticket x Empleat
+Productos Bajo Minimos Formato Ticket|Productes Sota Minimos Format Ticket
+Ventas Eliminadas Formato Ticket|Vendes Eliminades Format Ticket
+Cierres de Caja Formato Ticket|Tancaments de Caixa Format Ticket
+Ventas Formato Ticket Detallado|Vendes Format Ticket Detallat
+Subproductos|subproductes
+Eliminar Datos de Prueba|Eliminar Dades de Prova
+Configuracion Empresa|configuració Empresa
+Datos de la Factura|Dades de la Factura
+Ultimo Nro. Utilizado = |Darrer Nro. Utilitzat =
+Factura Numero|factura Nombre
+Numeracion de factura|Numeracion de factura
+No Incluidos|no Inclosos
+Incluidos|inclosos
+Impuestos|Impostos
+Ancho A5 (14cm)|Ample A5 (14cm)
+Ancho 10 cm|Ample 10 cm
+Ancho A4 (21cm)|Ample A4 (21cm)
+Formato de Factura|Format de Factura
+Logo de la Empresa|Logotip de l'Empresa
+Pagina Web|pàgina Web
+Direccion|Direcció
+Pais|país
+Codigo Postal|Codi postal
+Detalles de la Empresa|Detalls de l'Empresa
+Recuerde que en la carpeta indicada en la linea superior tiene que existir el archivo nomprog.|Recordeu que a la carpeta indicada a la línia superior ha d'existir l'arxiu nomprog.
+Paso1: Confirme que todos sus equipos esten conectados en red.  Paso2: De todos los equipos que tiene, tiene que seleccionar uno que va a hacer de servidor.  Paso3: El equipo que hara de servidor tiene que tener el disco C compartido y con los permiso|Pas1: Confirmeu que tots els seus equips estiguin connectats en xarxa. Pas2: De tots els equips que té, ha de seleccionar un que va a fer de servidor. Pas3: L'equip que farà de servidor ha de tenir el disc C compartit i amb els permís
+Nota: Localice el equipo que hara de servidor que la base de datos la encontrara en |Nota: Localitzeu l'equip que farà de servidor que la base de dades la trobés en
+Conectar con la base de datos|Connectar amb la base de dades
+Como tiene que poner su equipo  en modo red local (varios equipos)|Com ha de posar el seu equip en mode xarxa local (diversos equips)
+Conexion con otro Terminal|Conexion amb un altre terminal
+Permisos de Usuario|Permisos d'Usuari
+Seleccione el empleado al que va a configurar permisos|Seleccioneu l'empleat al qual va a configurar permisos
+Cambio Guardado|canvi Saved
+Cambio de Clave|Canvi de Clau
+* Maximo 8 caracteres|* Màxim 8 caràcters
+Confirmacion|Confirmació
+Nueva|Nova
+Antigua|antiga
+Cambiar Contraseña|canviar Contrasenya
+Cambios guardados|canvis guardats
+Aplicar Cambios para este Empleado|Aplica els Canvis per a aquest Empleat
+Borrar Restricciones|esborrar Restriccions
+Opciones configurables|opcions configurables
+NO Permite acceso al modulo|NO Permet accés al mòdul
+Permite acceso al modulo|Permet accés al mòdul
+Seleccione su pais|Seleccioni el seu pais
+Nombre del Impuesto (IVA, IGIC, IGV, etc.)|Nom de l'Impost (IVA, IGIC, IGV, etc.)
+Si en su pais no se aplica esta normativa, NO ACTIVE esta opcion|Si en el seu país no s'aplica aquesta normativa, NO ACTIVE aquesta opció
+Si ACTIVA esta opcion, en las facturas el num. le aparecera asi: 000- 000-00-0000000X|Si ACTIVA aquesta opció, en les factures el num. li apareixerà així: 000- 000-00-0000000X
+En algunos paises la normativa indica que el numero de facturas tiene que ir precedido por una serie de identificadores.|En alguns països la normativa indica que el nombre de factures ha d'anar precedit per una sèrie d'identificadors.
+INFORMACION SOBRE FACTURAS ESPECIALES|INFORMACIÓ SOBRE FACTURES ESPECIALS
+Moneda|moneda
+Simbolo Moneda|símbol Moneda
+Formato Hora:|Format Hora:
+Numero de decimales ( 0,1,2)|Nombre de decimals (0,1,2)
+Identificacion Fiscal (Cif, Nif, Ruc, Rut, Rnc, etc.)|Identificació Fiscal (CIF, NIF, Ruc, Rut, RNC, etc.)
+h=12 Horas (AM o PM)|h = 12 Hores (AM o PM)
+h=24 Horas |h = 24 Hores
+Otra Moneda|Una altra Moneda
+Btc 1 BitCoin = |Btc 1 Bitcoin =
+€ 1 Euro = |€ 1 Euro =
+$ 1 Dolar = |$ 1 Dòlar =
+Hasta 8 decimales|Fins a 8 decimals
+Numero de credito fiscal|Nombre de crèdit fiscal
+Activar linea propina en preticket|Activa línia propina a preticket
+Guardar Cambios|Desar Canvis
+Ingrese el concepto|Introduïu el concepte
+Activar concepto Propina / Servicio / Otros|Activa concepte Propina / Servei / Altres
+(Opcion utilizada con frecuencia en algunos paises del caribe y sudameria) / No activar en paises en los que no es obligatorio cobrar propina|(Opció utilitzada amb freqüència en alguns països del Carib i sudameria) / No activar en països en els quals no és obligatori cobrar propina
+Secuencia de Apertura|Seqüència d'Obertura
+Para impresoras conexion paralela:|Per a impressores connexió paral·lela:
+Probar / Guardar|Provar / Desar
+* Click para seleccionar la secuencia de apertura|* Click per seleccionar la seqüència d'obertura
+Marca de Impresora|Marca de Impressora
+Modelo de Impresora|Model de Impressora
+Otras secuencias de apertura|Altres seqüències d'obertura
+Nota: Es posible que la impresora realice el corte sin tener que añadir ninguna secuencia de apertura, en ese caso no hace falta que configure esta opcion|Nota: És possible que la impressora faci el tall sense haver d'afegir cap seqüència d'obertura, en aquest cas no cal que configuri aquesta opció
+* Click para seleccionar la secuencia de corte|* Click per seleccionar la seqüència de tall
+Secuencia de Corte|Seqüència de Cort
+Otras secuencias de Corte de Papel|Altres seqüències de Tall de Paper
+Configuracion de corte automatico al final del ticket:|Configuració de tall automàtic al final del tiquet:
+¿Que son comandos adicionales? Despues de instalar los drivers de la impresora en propiedades de la misma encontramos una pestaña de comandos adicionales / desde aqui marcaremos la opcion de apertura de cajon (Open Draw1 o Open Draw2).|Que són ordres addicionals? Després d'instal·lar els drivers de la impressora en propietats de la mateixa trobem una pestanya d'ordres addicionals / des aquí marcarem l'opció d'obertura de calaix (Open Draw1 o Open Draw2).
+Apertura estandar para impresoras USB|Obertura estàndard per a impressores USB
+Para impresoras con comandos adicionales: (serie, paralelo, usb)|Per a impressores amb comandaments addicionals: (sèrie, paral·lel, USB)
+Para impresoras salida serie:|Per a impressores sortida sèrie:
+Configuracion de Apertura de Cajon|Configuració d'Obertura de Calaix
+Si conoce que tipo de conexion tiene su impresora de tickets seleccione la que le corresponde en caso contrario pruebe cada uno de ellos hasta confirmar cual es el que abre.|Si coneix quin tipus de connexió té el seu impressora de tiquets seleccioneu la que li correspon en cas contrari provi cada un d'ells fins a confirmar quin és el que obre.
+Ayuda|ajuda
+Configuracion de Cajetin|Configuració de Caixetí
+Courier New|Courier New
+Seleccione Tamaño Letra: Cuerpo|Seleccioneu Mida Lletra: Cos
+Seleccione Tamaño Letra: Titulo|Seleccioneu Mida Lletra: Títol
+Seleccione Tipo Letra|Seleccioneu Tipus Lletra
+Tipo / Tamaño Letra|Tipus / Mida Lletra
+Nro. de Decimales que quiero utilizar|Nro. De Decimals que vull utilitzar
+Mi impresora imprime|La meva impressora imprimeix
+Nro. de caracteres de su impresora|Nro. De caràcters del seu impressora
+caracteres por linea|caràcters per línia
+Poblacion:|població:
+Direccion:|Direcció:
+Tel:|Tel:
+CIF / DNI:|CIF / DNI:
+Cliente:|Client:
+Empleado:|Empleat:
+Fact. Simpli:|Fact. simpli:
+Codigo Barras|Codi Barres
+Lineas en blanco al final del ticket = |Línies en blanc al final del tiquet =
+Escriba aqui su comentario del final de ticket|Escrigui aquí el seu comentari del final de tiquet
+** Gracias por su visita **|** Gràcies per la seva visita **
+Impuestos Incluidos|Impostos Inclosos
+Varias lineas para descripcion del producto|Diverses línies per descripció del producte
+Añadir codigo de barras en descripcion de producto|Afegir codi de barres en descripció de producte
+Otras Opciones|altres Opcions
+Mostrar P. Unitario|Mostra P. Unitari
+Desglose Impuesto|desglossament Impost
+Total en Letras|Total en Lletres
+Utilizar SubTotal|utilitzar Subtotal
+Cuota|quota
+Base|base
+Tipo IVA|tipus IVA
+Entrega|lliurament
+P. U.|P. O.
+Descripcion|Descripció
+Uds|Vostès
+WEB|WEB
+Puede cambiar|Podeu canviar
+CIF|CIF
+Nombre Empresa|nom Empresa
+Imagen al Principio|Imatge al Principi
+Datos de Cabecera|Dades de Capçalera
+Clic para cambiar Imagen|Clic per canviar Imatge
+Nro Venta/Pie de Ticket|Nro Venda / Peu de Ticket
+Diseño Ticket|disseny Ticket
+Valor de venta en letras|Valor de venda en lletres
+Diseño de Ticket|Disseny de Ticket
+Pie de Ticket|Peu de Ticket
+Detalles del  Ticket|Detalls del Ticket
+Vista Previa|vista Prèvia
+Cabecera  Ticket|capçalera Ticket
+Datos del  Cliente|Dades del Client
+Clave:|clau:
+Usuario: Director|Usuari: Director
+Está a punto de realizar la restauración de sus copias de seguridad de sus bases de datos.  Para ello deberá localizar su copia de seguridad en su disco duro o en su modulo de memoria extraible.  Dicha operación demorará unos segundos, una vez finaliz|Està a punt de realitzar la restauració de les seves còpies de seguretat de les seves bases de dades. Per a això haurà de localitzar la seva còpia de seguretat en el seu disc dur o en la seva mòdul de memòria extraïble. L'esmentada operació demorarà uns segons, un cop va finalitzar
+TPV Hosteleria|TPV Hostaleria
+Grafica de Envios|Grafica de Enviaments
+Relacion Emails Enviados|Relacion Emails Enviats
+Envio Promocion|enviament Promoció
+Crear Plantillas Reservas|Crear Plantilles Reserves
+Envio Puntual|enviament puntual
+Crear Plantillas|crear Plantilles
+Activar Servicio De Correos|Activa Servei De Correus
+Enviados:|enviats:
+Label6|Label6
+Saldo:|saldo:
+Su ID Es|El seu ID És
+Servicio Correo|Servei Correu
+Le hemos asignado  20 correos gratis|Li hem assignat 20 correus gratis
+Su registro se ha realizado con exito|El seu registre s'ha realitzat amb èxit
+Nombre de Usuario|Nom d'usuari
+Correo de Contacto|Correu de Contacte
+Incluir Logo|incloure Logo
+Pie de Correo|Peu de Correu
+Configuracion Correo|configuració Correu
+Mensaje Enviado|missatge Enviat
+Enviar|Enviar
+Envio Puntual de Correo|Enviament puntual de Correu
+toolStrip1|toolStrip1
+Mensaje|missatge
+Remitente|remitent
+Asunto|assumpte
+Destinatario|destinatari
+Seleccione el intervalo de fechas|Seleccioneu l'interval de dates
+Chart1|Chart1
+Grafico|gràfic
+Nueva Plantilla|Nova Plantilla
+Plantillas Promociones|plantilles Promocions
+Guardado Correctamente|Saved Correctament
+No|no
+Sí|sí
+¿Desea cargar el diseño anterior?|Voleu carregar el disseny anterior?
+Nombre Plantilla|nom Plantilla
+Plantilla 3|plantilla 3
+Plantilla 2|plantilla 2
+Plantilla 1|plantilla 1
+Plantilla|plantilla
+<---- Texto que aparece en el cuerpo de la promocion|<---- Text que apareix en el cos de la promoció
+<---- Escriba el  texto que desea que aparezca en la parte inferior de la promocion|<---- Escrigui el text que voleu que aparegui a la part inferior de la promoció
+<---- Escriba el titulo o el texto que desea que aparezca en la cabecera de la promocion|<---- Escrigui el títol o el text que voleu que aparegui a la capçalera de la promoció
+Pie de página|Peu de pàgina
+Titulo|Títol
+<---- Haga un click para insertar la imagen|<---- Feu un clic per inserir la imatge
+Plantilla Guardada|plantilla Guardada
+Cuerpo del Mensaje|Cos del Missatge
+Plantilla Reservas|plantilla Reserves
+<---- Texto que se genera automaticamente|<---- Text que es genera automàticament
+<---- Escriba el  texto que desea que aparezca en la parte inferior de la reserva|<---- Escrigui el text que voleu que aparegui a la part inferior de la reserva
+<---- Escriba el titulo o el texto que desea que aparezca en la cabecera de la reserva|<---- Escrigui el títol o el text que voleu que aparegui a la capçalera de la reserva
+Configurar Email|Configura email
+Mostrar clientes|Mostra clients
+Filtrar Clientes para Enviar Email|Filtrar Clients per Enviar email
+Seleccione una opcion|Seleccioneu una opció
+Menor que|Més petit que
+Mayor que|més gran que
+Consumo|consum
+Ingrese un codigo postal|Introduïu un codi postal
+Todos los clientes|Tots els clients
+Num. Visita|Num. Visita
+Cumpleaños|aniversari
+Enviando Emails|enviant Emails
+Cerrar|Tancar
+Ctrl+C para copiar los correos de esta lista para hacer un envio desde la aplicacion de correo electronico (gmail, hotmail, etc...) que desee.|Ctrl + C per copiar els correus d'aquesta llista per fer un enviament des l'aplicació de correu electrònic (gmail, hotmail, etc ...) que desitgi.
+Lista de correos seleccionados|Llista de correus seleccionats
+Enviar Email a Clientes Seleccionados|Enviar Email a Clients seleccionats
+Lista de clientes|Llista de clients
+ Mostrar Todos| mostrar Tots
+Emails Seleccionados|emails seleccionats
+Marcar Todos|marcar Tots
+Copiar Emails seleccionados  para envio manual|Copia Emails seleccionats per enviament manual
+ Mostrar solo con Email Valido| Mostra només amb email Valido
+Clientes Seleccionados|clients seleccionats
+Cantidad de clientes que cumplen las condiciones|Nombre de clients que compleixen les condicions
+Importe|import
+Visitas|visites
+* Si no pone un correo electronico valido no recibirá respuesta|* Si no posa un correu electrònic valgut no rebrà resposta
+Telefono:|Telèfon:
+Email: *|E-mail: *
+Ingrese sus datos para poder responderle|Introduïu les seves dades per poder respondre-
+Formule su Consulta|Formuleu la seva Consulta
+Aviso de averia|Avís d'averia
+Pregunta o Consulta|Pregunta o Consulta
+Tipo de Consulta|Tipus de Consulta
+Si tiene alguna Incidencia / Pregunta sobre nuestro programa utilice esta opcion siguiendo los pasos:|Si té alguna Incidència / Pregunta sobre el nostre programa utilitzeu aquesta opció seguint els passos:
+Aviso de Averia / Consulta|Avís de Averia / Consulta
+Asistencia y Sugerencias|Assistència i Suggeriments
+Si no tiene contratado este servicio nuestra empresa no tiene la obligacion de dar ningun tipo de servicio o ser responsable de algun cambio de su sistema informatico.|Si no té contractat aquest servei nostra empresa no té l'obligació de donar cap tipus de servei o ser responsable de algun canvi del seu sistema informàtic.
+Si la compra de este producto ha superado el año y tiene caducado la asistencia / actualizaciones del programa, y tiene un problema recuerde, primero contratar nuestro servicio de asistencia para una solucion adecuada.|Si la compra d'aquest producte ha superat l'any i té caducat l'assistència / actualitzacions del programa, i té un problema recordi, primer contractar el nostre servei d'assistència per a una solució adequada.
+Cambio de equipo informatico, cambio de disco duro, formateo de disco duro, etc...|Canvi d'equip informatico, canvi de disc dur, formateig del disc dur, etc ...
+4.- Estimado cliente recuerde que sólo podrá recibir las actualizaciones del programa en caso de tener el contrato de mantenimiento al día.|4.- Benvolgut client recordi que només podrà rebre les actualitzacions del programa en cas de tenir el contracte de manteniment al dia.
+3.- Si se produce alguno de estos casos anteriores, antes de realizar ninguna acción,  pongase en contacto con el departamento técnico de SolverMedia comercial@solvermedia.com para que le ayuden a realizar el cambio.|3.- Si es produeix algun d'aquests casos anteriors, abans de realitzar cap acció, posis en contacte amb el departament tècnic de SolverMedia comercial@solvermedia.com perquè l'ajudin a fer el canvi.
+2.- La empresa SolverMedia no concederá una nueva licencia a aquellos clientes que por problemas ajenos a SolverMedia hallan perdido el registro del programa, esos problemas pueden venir causados por:|2.- L'empresa SolverMedia no concedirà una nova llicència a aquells clients que per problemes aliens a SolverMedia troben perdut el registre del programa, aquests problemes poden venir causats per:
+1.- La empresa SolverMedia no se responsabiliza de la mala manipulación de su registro de licencia así como del numero asignado para su registro.|1.- L'empresa SolverMedia no es responsabilitza de la mala manipulació del seu registre de llicència així com del nombre assignat per al seu registre.
+La contraseña de direccion es: |La contrasenya de direcció és:
+Maximo 8 caracteres|Màxim 8 caràcters
+Confirme la contraseña|Confirmeu la contrasenya
+Ingrese la contraseña nueva|Introduïu la contrasenya nova
+Ingrese la contraseña anterior|Introduïu la contrasenya anterior
+Recordatorio de contraseña de direccion|Recordatori de contrasenya de direcció
+Cambio de contraseña de direccion|Canvi de contrasenya de direcció
+Volver a intentar|Tornar a intentar
+Las respuestas introducidas no son correctas|Les respostes introduïdes no són correctes
+Para poder recordarle la contraseña de direccion es necesario que responda a las siguientes preguntas|Per poder recordar-li la contrasenya de direcció cal que respongui a les següents preguntes
+Año|any
+Mes|Mes
+Dia|dia
+Ingrese el segundo apellido de su madre|Introduïu el segon cognom de la seva mare
+Indique su fecha de nacimiento|Indiqui la seva data de naixement
+Si olvida la contraseña que acaba de introducir podra recuperarla respondiendo a las preguntas anteriores.|Si oblideu la contrasenya que acaba d'introduir podrà recuperar-la responent a les preguntes anteriors.
+La contraseña y las respuestas de recordatorio se han guardado correctamente.|La contrasenya i les respostes de recordatori s'han guardat correctament.
+Boletas|butlletes
+Facturas|factures
+codCliente|codCliente
+Cliente|Client
+F.Pago|F.Pago
+** clic en la lista o introduzca el numero de ticket|** clic a la llista o introduïu el nombre de tiquet
+Ingrese el numero de ticket / factura|Introduïu el nombre de tiquet / factura
+Lista de las ultimas ventas|Llista de les ultimes vendes
+Concepto del gasto|Concepte de la despesa
+Gastos Del Día|Despeses Del Dia
+Ultimos 50 gastos (clic para modificar)|Últims 50 despeses (clic per modificar)
+ESPACIO|ESPAI
+BORRAR|ESBORRAR
+Deja en Caja :|Deixa en Caixa:
+Cerrar Ventas/Imprimir|Tancar Vendes / Imprimir
+Observaciones de caja:|Observacions de caixa:
+Suma/Conteo de caja del turno actual|Suma / Conteo de caixa del torn actual
+Seleccione las monedas de su pais|Seleccioneu les monedes del seu país
+Cargar monedas de la Zona Euro|Carregar monedes de la Zona Euro
+Valor n|valor n
+Terminal = XXX|Terminal = XXX
+Total monedas|total monedes
+Total tarjetas|total targetes
+Total otras formas de pago|Total altres formes de pagament
+Caja Inicial:|Caixa Inicial:
+Num total de operaciones de este terminal|Num total d'operacions d'aquest terminal
+Num total operaciones otras formas pago|Num total operacions altres formes pagament
+Num total operaciones tarjeta|Num total operacions targeta
+Num total operaciones contado|Num total operacions comptat
+Max. 20|Max. 20
+Número de tipos de moneda a utilizar:|Nombre de tipus de moneda a utilitzar:
+Seleccione las monedas en circulacion de su pais|Seleccioneu les monedes en circulació del seu pais
+Tipo 20|tipus 20
+Nota: Esta opcion solo esta pensado para aquellos clientes que en su pais el valor de sus monedas es diferente al establecido para la zona Euro.|Nota: Aquesta opció només està pensat per a aquells clients que al seu país el valor de les seves monedes és diferent a l'establert per a la zona euro.
+Importe a Retirar|Import a Retirar
+Retiradas|retirades
+TELEF|TELEF
+Borrando|esborrant
+Hora Reserva|hora Reserva
+Nro comensales|Nro comensals
+Todos|tots
+Cena|sopar
+Almuerzo|dinar
+Desayuno|esmorzar
+MESAS =|TAULES =
+H O R A S|H O R A S
+Seleccione Horario|Seleccioneu Horari
+*Clic para seleccionar salon|* Clic per seleccionar saló
+R e s e r v a s|R e s i r v e s
+Diseñar Plantilla reserva|Dissenyar Plantilla reserva
+Nueva Reserva|Nova Reserva
+Hora de Reserva|Hora de Reserva
+Nro de Comensales|Nro de Comensals
+Teléfono|telèfon
+* Click en la columna de telefono para ver la direccion|* Click a la columna de telèfon per veure la direcció
+Resultado de la Búsqueda|Resultat de la Cerca
+Movil|mòbil
+C. Postal|C. postal
+Limpiar|netejar
+DNI|DNI
+Puerta:|porta:
+Fijo / Movil|Fix / Mòbil
+Piso:|pis:
+C. Postal:|C. Postal:
+Número:|nombre:
+Email:|E-mail:
+Modificar Datos|modificar Dades
+Nuevo Cliente|nou Client
+Activar Precios para este terminal de venta|Activa Preus per a aquest terminal de venda
+Crear nueva o modificar una lista de precios existente|Crea un o modificar una llista de preus existent
+Listas de Precios|Llistes de Preus
+Listas activa en este terminal|Llistes activa en aquest terminal
+Listas de precios no activa|Llistes de preus no activa
+La lista de precios que ha seleccionado esta fuera del rango actual|La llista de preus que ha seleccionat aquesta fora del rang actual
+Nombre (click para seleccionar/desactivar)|Nom (clic per seleccionar / desactivar)
+activa|activa
+Fecha Alta|data d'alta
+Prod. en Lista|Prod. En Llista
+Codigo Precio|Codi Preu
+C. P.|C. P.
+Cif / Dni|CIF / DNI
+Realizando cambios|realitzant canvis
+alturapanel|alturapanel
+Los mismos pasos 1, 2 para margen comercial o precio de venta.|Els mateixos passos 1, 2 per marge comercial o preu de venda.
+* Clic sobre el impuesto que desea cambiar|* Clic sobre l'impost que voleu canviar
+De:|de:
+Cambio el valor de los impuestos|Canvi el valor dels impostos
+Deseo cambiar|Desitjo canviar
+a:|a:
+Nro. de Productos|Nro. De Productes
+2.-Luego seleccione el proveedor o seleccione la opcion todos.|2.-Després seleccioneu el proveïdor o seleccioneu l'opció tots.
+Con redondeo|amb arrodoniment
+Sin redondeo|sense arrodoniment
+Todos los productos|Tots els productes
+Productos del Proveedor|Productes del Proveïdor
+Coste|cost
+Cambio de Coste / Precio|Canvi de Cost / Preu
+1.-Si desea aumentar el coste, solo debe ingresar el porcentaje en la caja del mismo.|1.-Per augmentar el cost, només ha d'ingressar el percentatge a la caixa del mateix.
+Recuerde que este proceso es irreversible. Confirme y  verifique los porcentajes que está aumentando.|Recordeu que aquest procés és irreversible. Confirmeu i verifiqui els percentatges que està augmentant.
+Este proceso automatiza el aumento de precio, margen comercial y coste de los productos.|Aquest procés automatitza l'augment de preu, marge comercial i cost dels productes.
+Aumento de Precios|Augment de Preus
+Nombre Servidor SQL Server|Nom Servidor SQL Server
+Utilizar  SQL   Server . . . . . |Utilitzar SQL Server. . . . .
+UTILIZAR SQL SERVER|UTILITZAR SQL SERVER
+Más Información|més Informació
+Dirigido para aquellas empresas con volumenes de datos altos o muchas interacciones simultaneas soporta varios PC conectados en red sin problemas de concurrencias y trafico de datos. (si este es su caso nuestro programa funciona perfectamente con este ges|Dirigit per a aquelles empreses amb volums de dades alts o moltes interaccions simultànies suporta diversos PC connectats en xarxa sense problemes de concurrències i tràfic de dades. (Si aquest és el cas nostre programa funciona perfectament amb aquest ges
+SQL SERVER|SQL SERVER
+Indicado para empresas con volumen de datos bajos 1 o 2 PC en red.|Indicat per a empreses amb volum de dades baixos 1 o 2 PC en xarxa.
+ACCESS|ACCESS
+El Tipo de Base De Datos Que Su Negocio Necesita|El Tipus de Base de Dades Que El seu Negoci Necessita
+Pasar a la version Basica o Completa|Passar a la versió Basica o Completa
+Configure los Horarios de su establecimiento|Configureu els Horaris del seu establiment
+Label2|Label2
+a |a
+El Horario del Establecimiento es:|L'Horari de l'Establiment és:
+El Horario de Cocina es:|L'Horari de Cuina és:
+Seleccione el Horario del Establecimiento|Seleccioneu l'Horari de l'Establiment
+Seleccione el Horario de Cocina|Seleccioneu l'Horari de Cuina
+4.- Solo le recomendamos que contrate este servicio y utilice esta opcion si solo si su empresa verdaderamente lo necesita, por nuestra experiencia el 90% de los usuarios de Puntos de Venta del sector retail no necesitan tener esta base de datos instalada|4.- Només li recomanem que contracti aquest servei i utilitzi aquesta opció si només si la seva empresa veritablement ho necessita, per la nostra experiència el 90% dels usuaris de Punts de Venda del sector retail no necessiten tenir aquesta base de dades instal·lada
+3.- Tiene que indicarnos los nombre de los usuarios que utilizaran el programa para crear los usuarios en la base de datos. (este servicio incluye 3 usuarios si desea mas usuarios el coste es de 5 Euros por cada uno)|3.- Ha de indicar-nos els nom dels usuaris que utilitzessin el programa per crear els usuaris a la base de dades. (Aquest servei inclou 3 usuaris si desitja més usuaris el cost és de 5 euros per cada un)
+2.- Tiene que tener instalado el TeamViewer para que un tecnico pueda conectar a instalar la BD y dejarle el programa funcionando en Sql Server|2.- Ha de tenir instal·lat el TeamViewer perquè un tècnic pugui connectar a instal·lar la BD i deixar-li el programa funcionant en Sql Server
+1.- Este servicio tiene un coste de 75 Euros + Iva|1.- Aquest servei té un cost de 75 Euros + Iva
+Si desea utilizar el programa con Sql Server un tecnico de nuestra empresa se lo puede instalar. Pasos que tiene que tomar en cuenta.|Si voleu utilitzar el programa amb Sql Server un tecnico de la nostra empresa s'ho pot instal·lar. Passos que ha de prendre en compte.
+Requisitos Para Usar Sql Server|Requisits Per Utilitza Sql Server
+Numero de Ventas Menores A: |Nombre de Vendes Menors A:
+Seleccione de que terminal quiere obtener la información|Seleccioneu de quina terminal vol obtenir la informació
+Servicios|serveis
+Completo|complet
+Total General|total general
+Total Gastos|total despeses
+C. Inicial|C. Inicial
+Total Retiradas|total Retirades
+Totalizado por Forma de Pago|Totalitzat per Forma de Pagament
+Ventas Generales por Dia|Vendes Generals per Dia
+Esta Forma de Pago es de tipo Tarjeta|Aquesta Forma de Pagament és de tipus Targeta
+Nueva Observación|Nova Observació
+comensal|comensal
+Observacion|observació
+estado|estat
+idenvio|idenvio
+Seleccione la observacion que desea eliminar del panel de arriba|Seleccioneu l'observació que desitja eliminar del panell de dalt
+Observaciones a Cocina|Observacions a Cuina
+Posicion|posició
+Escriba la nueva observacion|Escrigui la nova observació
+Eliminar Observación|eliminar Observació
+Seleccione Mesa Destino|Seleccioneu Taula Destinació
+Total Cuenta Origen|Total Compte Origen
+Seleccione Mesa A Juntar|Seleccioneu Taula A Ajuntar
+Seleccione Salon Destino|Seleccioneu Salon Destinació
+Seleccione Salon|Seleccioneu Salon
+Pedidos en Reserva|Comandes a Reserva
+Fecha Seleccionada|data Seleccionada
+Total Reservas|total Reserves
+Reservas Activas|reserves Actives
+N. Pedido|N. Comanda
+Fecha Entrega|data Lliurament
+Hora Entrega|hora Lliurament
+Observaciones|Observacions
+Fecha de Entrega|Data de Lliurament
+Hora de Entrega|Hora de Lliurament
+Contraseña = |contrasenya =
+Zona|zona
+Venta Original|venda Original
+Total Cuenta Parcial|Total Compte Parcial
+Escriba la clave de gerencia|Introduïu la clau de gerència

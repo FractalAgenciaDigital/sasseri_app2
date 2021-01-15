@@ -164,165 +164,166 @@
                 @endif
                 <!-- End of Sidebar -->
 
-            <!-- Content Wrapper -->
-            <div id="content-wrapper" class="d-flex flex-column">
+                <!-- Content Wrapper -->
+                <div id="content-wrapper" class="d-flex flex-column">
 
-                <!-- Main Content -->
-                <div id="content">
+                    <!-- Main Content -->
+                    <div id="content">
 
-                    <!-- Topbar -->
-                    <nav class="navbar navbar-expand navbar-light topbar mb-4 static-top">
+                        <!-- Topbar -->
+                        <nav class="navbar navbar-expand navbar-light topbar mb-4 static-top">
 
-                        <!-- Sidebar Toggle (Topbar) -->
-                        @if($rol_usu==2)  
-                            <input type="button" v-if="menu==0" class="btn btn-primary btn-crea-factura" value="Ir a Facturas" @click="menu=40">
-                            <input type="button" v-if="menu==40" class="btn btn-primary btn-crea-factura" value="Inicio" @click="menu=0">
-                        @endif
-                        @if($rol_usu==1)  
-                            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                                <i class="fa fa-bars"></i>
-                            </button>
-                        @endif
-                        <!-- Topbar Navbar -->
-                        <div class="p-1 text-center">
-                            <a class="sidebar-brand  d-sm-none align-items-center justify-content-center" href="index.html">
-                                <img style="width:70%;" src="img/logo.png" alt="Sasseri" />
-                            </a>
-                        </div>
-                        <ul class="navbar-nav ml-auto">
-
-                            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                            <li class="nav-item dropdown no-arrow d-sm-none">
-                                
-                                <!-- Dropdown - Messages -->
-                                <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                    aria-labelledby="searchDropdown">
-                                    <!-- <form class="form-inline mr-auto w-100 navbar-search">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control bg-light border-0 small"
-                                                placeholder="Search for..." aria-label="Search"
-                                                aria-describedby="basic-addon2">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-primary" type="button">
-                                                    <i class="fa fa-search fa-sm"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form> -->
-                                </div>
-                            </li>
-
-                            <!-- Nav Item - Alerts -->
-                            <li class="nav-item dropdown no-arrow mx-1">
-                                <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-bell fa-fw"></i>
-                                    <!-- Counter - Alerts -->
-                                    <span class="badge badge-danger badge-counter">3+</span>
+                            <!-- Sidebar Toggle (Topbar) -->
+                            @if($rol_usu==2)  
+                                <input type="button" v-if="menu==0" class="btn btn-primary btn-crea-factura" value="Ir a Facturas" @click="menu=40">
+                                <input type="button" v-if="menu==40" class="btn btn-primary btn-crea-factura" value="Inicio" @click="menu=0">
+                            @endif
+                            @if($rol_usu==1)  
+                                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                                    <i class="fa fa-bars"></i>
+                                </button>
+                            @endif
+                            <!-- Topbar Navbar -->
+                            <div class="p-1 text-center">
+                                <a class="sidebar-brand  d-sm-none align-items-center justify-content-center" href="index.html">
+                                    <img style="width:70%;" src="img/logo.png" alt="Sasseri" />
                                 </a>
-                                <!-- Dropdown - Alerts -->
-                                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                    aria-labelledby="alertsDropdown">
-                                    <h6 class="dropdown-header">
-                                        Alerts Center
-                                    </h6>
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="mr-3">
-                                            <div class="icon-circle bg-primary">
-                                                <i class="fa fa-file-alt text-white"></i>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="small text-gray-500">December 12, 2019</div>
-                                            <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="mr-3">
-                                            <div class="icon-circle bg-success">
-                                                <i class="fa fa-donate text-white"></i>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="small text-gray-500">December 7, 2019</div>
-                                            $290.29 has been deposited into your account!
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="mr-3">
-                                            <div class="icon-circle bg-warning">
-                                                <i class="fa fa-exclamation-triangle text-white"></i>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="small text-gray-500">December 2, 2019</div>
-                                            Spending Alert: We've noticed unusually high spending for your account.
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-                                </div>
-                            </li>
+                            </div>
+                            <ul class="navbar-nav ml-auto">
 
-                            <!-- Nav Item - Messages -->    
-                            <li class="nav-item dropdown no-arrow mx-1">
-                                
-                            </li>
-
-                            <div class="topbar-divider d-none d-sm-block"></div>
-
-                            <!-- Nav Item - User Information -->
-                            <li class="nav-item dropdown no-arrow">
-                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-user text-primary mr-1 h5"></i>
-                                    <span class="mr-2 d-none d-lg-inline">{{Auth::user()->usuario}}</span>
+                                <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                                <li class="nav-item dropdown no-arrow d-sm-none">
                                     
-                                </a>
-                                <!-- Dropdown - User Information -->
-                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                    aria-labelledby="userDropdown">
-                                    
-                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                        <i class="fa fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Logout
+                                    <!-- Dropdown - Messages -->
+                                    <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                        aria-labelledby="searchDropdown">
+                                        <!-- <form class="form-inline mr-auto w-100 navbar-search">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control bg-light border-0 small"
+                                                    placeholder="Search for..." aria-label="Search"
+                                                    aria-describedby="basic-addon2">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-primary" type="button">
+                                                        <i class="fa fa-search fa-sm"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form> -->
+                                    </div>
+                                </li>
+
+                                <!-- Nav Item - Alerts -->
+                                <li class="nav-item dropdown no-arrow mx-1">
+                                    <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-bell fa-fw"></i>
+                                        <!-- Counter - Alerts -->
+                                        <span class="badge badge-danger badge-counter">3+</span>
                                     </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        {{ csrf_field() }}
-                                    </form>
-                                </div>
-                            </li>
+                                    <!-- Dropdown - Alerts -->
+                                    <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                        aria-labelledby="alertsDropdown">
+                                        <h6 class="dropdown-header">
+                                            Alerts Center
+                                        </h6>
+                                        <a class="dropdown-item d-flex align-items-center" href="#">
+                                            <div class="mr-3">
+                                                <div class="icon-circle bg-primary">
+                                                    <i class="fa fa-file-alt text-white"></i>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="small text-gray-500">December 12, 2019</div>
+                                                <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                            </div>
+                                        </a>
+                                        <a class="dropdown-item d-flex align-items-center" href="#">
+                                            <div class="mr-3">
+                                                <div class="icon-circle bg-success">
+                                                    <i class="fa fa-donate text-white"></i>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="small text-gray-500">December 7, 2019</div>
+                                                $290.29 has been deposited into your account!
+                                            </div>
+                                        </a>
+                                        <a class="dropdown-item d-flex align-items-center" href="#">
+                                            <div class="mr-3">
+                                                <div class="icon-circle bg-warning">
+                                                    <i class="fa fa-exclamation-triangle text-white"></i>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="small text-gray-500">December 2, 2019</div>
+                                                Spending Alert: We've noticed unusually high spending for your account.
+                                            </div>
+                                        </a>
+                                        <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                                    </div>
+                                </li>
 
-                        </ul>
+                                <!-- Nav Item - Messages -->    
+                                <li class="nav-item dropdown no-arrow mx-1">
+                                    
+                                </li>
 
-                    </nav>
-                    <!-- End of Topbar -->
-                    
-                    <!-- Begin Page Content -->
-                    <div class="container-fluid">
+                                <div class="topbar-divider d-none d-sm-block"></div>
 
-                        <!-- Page Heading -->
-                        @yield('contenido')
+                                <!-- Nav Item - User Information -->
+                                <li class="nav-item dropdown no-arrow">
+                                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-user text-primary mr-1 h5"></i>
+                                        <span class="mr-2 d-none d-lg-inline">{{Auth::user()->usuario}}</span>
+                                        
+                                    </a>
+                                    <!-- Dropdown - User Information -->
+                                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                        aria-labelledby="userDropdown">
+                                        
+                                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            <i class="fa fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                            Logout
+                                        </a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </div>
+                                </li>
+
+                            </ul>
+
+                        </nav>
                         
+                        <!-- End of Topbar -->
+                        
+                        <!-- Begin Page Content -->
+                        <div class="container-fluid">
+
+                            <!-- Page Heading -->
+                            @yield('contenido')
+                            
+                        </div>
+                        <!-- /.container-fluid -->
+
                     </div>
-                    <!-- /.container-fluid -->
+                    <!-- End of Main Content -->
+
+                    <!-- Footer -->
+                    <footer class="sticky-footer bg-white">
+                        <div class="container my-auto">
+                            <div class="copyright text-center my-auto">
+                                <span><a href="www.fractalagenciadigital.com">AGENCIA DIGITAL FRACTAL</a> | Todos los derechos reservados&copy; </span>
+                            </div>
+                        </div>
+                    </footer>
+                    <!-- End of Footer -->
 
                 </div>
-                <!-- End of Main Content -->
-
-                <!-- Footer -->
-                <footer class="sticky-footer bg-white">
-                    <div class="container my-auto">
-                        <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; Your Website 2020</span>
-                        </div>
-                    </div>
-                </footer>
-                <!-- End of Footer -->
+                <!-- End of Content Wrapper -->
 
             </div>
-            <!-- End of Content Wrapper -->
-
-        </div>
             <!-- End of Page Wrapper -->
 
             <!-- Scroll to Top Button-->
@@ -330,17 +331,18 @@
                 <i class="fa fa-angle-up"></i>
             </a>
         </div>
-    </div>
-    
-        <!-- Main JS-->
-        <script src="js/app.js"></script>
-        <script src="js/plantilla.js"></script>
-        <!-- <script src="js/main.js"></script>     -->
-        <script src = "js/bootstrap-multis.min.js"> </script>
-        <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-        <!-- <script src="js/demo/chart-area-demo.js"></script>
-        <script src="js/demo/chart-pie-demo.js"></script> -->
-
+    <!-- </div> -->
     </body>
+    
+    <!-- Main JS-->
+    <script src="js/app.js"></script>
+    <script src="js/plantilla.js"></script>
+    <!-- <script src="js/main.js"></script>     -->
+    <script src = "js/bootstrap-multis.min.js"> </script>
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <!-- <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script> -->
+
+    <!-- </body> -->
 
 </html>

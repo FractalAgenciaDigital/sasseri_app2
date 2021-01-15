@@ -35,37 +35,45 @@
                         <table class="table table-bordered table-striped table-sm table-responsive table-earning">
                             <thead>
                                 <tr>
-                                    <th class="col-md-11">Nombre</th>
+                                    <th class="col-md-10">Nombre</th>
+                                    <th>Estado</th>
                                     <th>Opciones</th>
                                 </tr>
                             </thead>
                             <tbody v-if="permisosUser.leer && arrayCajasAdmin.length">
+                             
                                 <tr v-for="cajas_admin in arrayCajasAdmin" :key="cajas_admin.id">
                                     <td v-text="cajas_admin.usuario"></td>
-                                    <td>
-                                        <button v-if="permisosUser.actualizar" type="button" @click="abrirModal('cajas_admin','actualizar',cajas_admin)" class="btn btn-warning btn-sm" title="Actualizar">
+                                    <td class="td-estado">
+                                        <template v-if="permisosUser.anular">
+
+                                            <!-- <a href="#" class="btn text-success" v-if="articulo.condicion" @click="desactivarArticulo(articulo.id)" title="Activar">
+                                                <i class="fa fa-check-circle"></i>
+                                            </a> -->
+                                        
+                                            <a v-if="cajas_admin.condicion" href="#" class="btn text-success" @click="desactivarCajasAdmin(cajas_admin.id)" title="Desactivar">
+                                                <i class="fa fa-check-circle"></i>
+                                            </a>
+                                            <a v-else href="#" class="btn text-danger" @click="activarCajasAdmin(cajas_admin.id)" title="Activar">
+                                                <i class="fa fa-times-circle"></i>
+                                            </a>
+                                        </template>
+                                        <template v-else>
+                                            <a v-if="cajas_admin.condicion" href="#" class="btn btn-secondary btn-sm" title="Desactivar (Deshabilitado)">
+                                                 <i class="fa fa-check-circle"></i>
+                                            </a>
+                                            <a v-else href="#" class="btn btn-secondary btn-sm" title="Activar (Deshabilitado)">
+                                              <i class="fa fa-times-circle"></i>
+                                            </a>
+                                        </template>
+                                    </td>
+                                    <td>                                            
+                                        <button v-if="permisosUser.actualizar" type="button" @click="abrirModal('cajas_admin','actualizar',cajas_admin)" class="btn btn-success btn-sm" title="Actualizar">
                                           <i class="icon-pencil"></i>
                                         </button>
                                         <button v-else type="button" class="btn btn-secondary btn-sm" title="Actualizar (Deshabilitado)">
                                           <i class="icon-pencil"></i>
-                                        </button> &nbsp;
-
-                                        <template v-if="permisosUser.anular">
-                                            <button v-if="cajas_admin.estado" type="button" class="btn btn-danger btn-sm" @click="desactivarConcentracion(cajas_admin.id)" title="Desactivar">
-                                                <i class="icon-trash"></i>
-                                            </button>
-                                            <button v-else type="button" class="btn btn-info btn-sm" @click="activarConcentracion(cajas_admin.id)" title="Activar">
-                                                <i class="icon-check"></i>
-                                            </button>
-                                        </template>
-                                        <template v-else>
-                                            <button v-if="cajas_admin.estado" type="button" class="btn btn-secondary btn-sm" title="Desactivar (Deshabilitado)">
-                                                <i class="icon-trash"></i>
-                                            </button>
-                                            <button v-else type="button" class="btn btn-secondary btn-sm" title="Activar (Deshabilitado)">
-                                                <i class="icon-check"></i>
-                                            </button>
-                                        </template>
+                                        </button> &nbsp;                                        
                                     </td>
                                 </tr>                                
                             </tbody>
@@ -266,7 +274,7 @@
                     'to' : 0,
                 },
                 offset : 10,
-                criterio : 'nombre',
+                criterio : 'usuario',
                 buscar : '',
 
                 // variables modal buscar tercero
@@ -314,7 +322,7 @@
                 var url= this.ruta +'/cajas_admin?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
                 axios.get(url).then(function (response) {
                     var respuesta= response.data;
-                    me.arrayCajasAdmin = respuesta.users.data;
+                    me.arrayCajasAdmin = respuesta.cajas_admin.data;
                     me.pagination= respuesta.pagination;
                 })
                 .catch(function (error) {
@@ -329,7 +337,7 @@
                 me.listarCajasAdmin(page,buscar,criterio);
             },
             registrarCajasAdmin(){
-                // if (this.validarConcentracion()){
+                // if (this.validarCajasAdmin()){
                 //     return;
                 // }
                 
@@ -340,13 +348,13 @@
                     'arrayCajasAdmin' : this.arrayCajasModal,
                 }).then(function (response) {
                     me.cerrarModal();
-                    me.listarCajasAdmin(1,'','nombre');
+                    me.listarCajasAdmin(1,'','usuario');
                 }).catch(function (error) {
                     console.log(error);
                 });
             },
             actualizarCajasAdmin(){
-                // if (this.validarConcentracion()){
+                // if (this.validarCajasAdmin()){
                 //     return;
                 // }
                 
@@ -358,24 +366,24 @@
                     'id': this.caja_admin_id
                 }).then(function (response) {
                     me.cerrarModal();
-                    me.listarCajasAdmin(1,'','nombre');
+                    me.listarCajasAdmin(1,'','usuario');
                 }).catch(function (error) {
                     console.log(error);
                 }); 
             },
-            validarConcentracion(){
+            validarCajasAdmin(){
                 this.errorCajasAdmin=0;
                 this.errorMostrarMsjCajasAdmin =[];
 
-                if (!this.nombre) this.errorMostrarMsjCajasAdmin.push("Ingrese el nombre de la concentración.");
+                if (!this.nombre) this.errorMostrarMsjCajasAdmin.push("Ingrese el nombre de la Caja.");
 
                 if (this.errorMostrarMsjCajasAdmin.length) this.errorCajasAdmin = 1;
 
                 return this.errorCajasAdmin;
             },
-            desactivarConcentracion(id){
+            desactivarCajasAdmin(id){
                Swal.fire({
-                title: 'Esta seguro de desactivar esta concentracion?',
+                title: 'Esta seguro de desactivar esta Caja?',
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -393,7 +401,7 @@
                     axios.put(this.ruta +'/cajas_admin/desactivar',{
                         'id': id
                     }).then(function (response) {
-                        me.listarCajasAdmin(1,'','nombre');
+                        me.listarCajasAdmin(1,'','usuario');
                         Swal.fire(
                         'Desactivado!',
                         'El registro ha sido desactivado con éxito.',
@@ -412,9 +420,9 @@
                 }
                 }) 
             },
-            activarConcentracion(id){
+            activarCajasAdmin(id){
                Swal.fire({
-                title: 'Esta seguro de activar esta concentracion?',
+                title: 'Esta seguro de activar esta caja?',
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -432,7 +440,7 @@
                     axios.put(this.ruta +'/cajas_admin/activar',{
                         'id': id
                     }).then(function (response) {
-                        me.listarCajasAdmin(1,'','nombre');
+                        me.listarCajasAdmin(1,'','usuario');
                         Swal.fire(
                         'Activado!',
                         'El registro ha sido activado con éxito.',

@@ -166,7 +166,12 @@
                                     <tr v-for="facturacion in arrayFacturacion" :key="facturacion.id" style="text-align: right;">
                                         <td v-text="facturacion.id"></td>
                                         <td v-if="facturacion.num_factura" v-text="facturacion.num_factura"></td>
-                                        <td v-else ><i class="icon-eye"></i></td>
+                                        <td v-else >
+                                            <!-- <i class="icon-eye"></i> -->
+                                            <button type="button" @click="verFacturacion(facturacion.id)" class="btn btn-success btn-sm" title="Ver factura">
+                                                <i class="icon-eye"></i>
+                                            </button>
+                                        </td>
                                         <td v-text="facturacion.nom_tercero"></td>
                                         <td v-text="facturacion.fecha"></td>
                                         <td v-text="facturacion.subtotal"></td>
@@ -190,15 +195,7 @@
                                                     <i class="icon-pencil"></i>
                                                 </button>
                                             </template>
-                                            
-                                            <!--<template>
-                                                <button type="button" v-if="permisosUser.actualizar && facturacion.estado==1" class="btn btn-warning btn-sm" @click="cambiarEstadoFacturacion(facturacion.id,'registrar')">
-                                                    <i class="fa fa-registered"></i>
-                                                </button>
-                                                <button type="button" v-else class="btn btn-secondary btn-sm">
-                                                    <i class="fa fa-registered"></i>
-                                                </button>
-                                            </template>-->
+                                         
                                             <template>
                                                 <button type="button" v-if="permisosUser.actualizar && facturacion.estado==1" class="btn btn-warning btn-sm" @click="cambiarEstadoFacturacion(facturacion.id,'registrar')" title="Registrar">
                                                     <i class="fa fa-registered"></i>
