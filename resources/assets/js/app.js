@@ -58,6 +58,7 @@ Vue.component('cuentasxpagar', require('./components/CuentasxPagar.vue'));
 Vue.component('punto_venta', require('./components/PuntoVenta.vue'));
 Vue.component('impresora', require('./components/Impresora.vue'));
 Vue.component('cocina', require('./components/Cocina.vue'));
+Vue.component('notification', require('./components/Notification.vue'));
 Vue.component('multiselect', Multiselect);
 
 const app = new Vue({
@@ -74,7 +75,17 @@ const app = new Vue({
             'crear': 1,
             'actualizar': 1,
             'anular': 1,
-        }
+        },
+        notifications: []
+    },
+    created(){
+        let me = this;
+        axios.post('notification/get').then(function(response){
+            // console.log(response.data);
+            me.notifications = response.data;
+        }).catch(function(error){
+            console.log(error);
+        })
     },
     
     mounted() {

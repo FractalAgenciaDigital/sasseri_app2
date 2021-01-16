@@ -1728,7 +1728,7 @@
                                 me.id_tercero=data['id_tercero'];
                                 me.tercero=data['nombre1'] ?  data['nombre1']+' '+data['nombre2']+' '+data['apellido1']+' '+data['apellido2'] : data['nom_tercero'];
                                 me.fec_edita=me.fechaHoraActual;
-                                // me.subtotal=data['subtotal'];
+                                me.subtotal=data['subtotal'];
                                 me.valor_iva=data['valor_iva'];
                                 me.total=data['total'];
                                 me.abono=data['abono'];

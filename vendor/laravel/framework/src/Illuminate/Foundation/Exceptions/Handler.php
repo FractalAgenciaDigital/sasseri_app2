@@ -173,13 +173,12 @@ class Handler implements ExceptionHandlerContract
         }
 
         $e = $this->prepareException($e);
-        
+
         if ($e instanceof HttpResponseException) {
             return $e->getResponse();
         } elseif ($e instanceof AuthenticationException) {
             return $this->unauthenticated($request, $e);
         } elseif ($e instanceof ValidationException) {
-            return redirect('/login');
             return $this->convertValidationExceptionToResponse($e, $request);
         }
 
@@ -202,7 +201,6 @@ class Handler implements ExceptionHandlerContract
             $e = new AccessDeniedHttpException($e->getMessage(), $e);
         } elseif ($e instanceof TokenMismatchException) {
             $e = new HttpException(419, $e->getMessage(), $e);
-            
         }
 
         return $e;

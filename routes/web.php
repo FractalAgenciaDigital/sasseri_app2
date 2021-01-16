@@ -19,6 +19,7 @@ Route::group(['middleware'=>['guest']],function(){
 Route::group(['middleware'=>['auth']],function(){
     
     Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
+    Route::post('/notification/get', 'NotificationController@get');
     
     
     Route::get('/main', function () {
@@ -36,12 +37,6 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/articulo/activar', 'ArticuloController@activar');
         Route::get('/articulo/buscarArticulo', 'ArticuloController@buscarArticulo');
         Route::get('/articulo/listarArticulo', 'ArticuloController@listarArticulo');
-
-        Route::get('/articulo_impresora', 'ArticuloImpresoraController@index');
-        Route::post('/articulo_impresora/registrar', 'ArticuloImpresoraController@store');
-        Route::put('/articulo_impresora/actualizar', 'ArticuloImpresoraController@update');
-        Route::put('/articulo_impresora/desactivar', 'ArticuloImpresoraController@desactivar');
-        Route::put('/articulo_impresora/activar', 'ArticuloImpresoraController@activar');
         
         Route::get('/bancos', 'BancosController@index');
         Route::post('/bancos/registrar', 'BancosController@store');

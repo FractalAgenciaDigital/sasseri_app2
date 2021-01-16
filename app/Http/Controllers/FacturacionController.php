@@ -7,6 +7,9 @@ use App\Facturacion;
 use App\DetalleFacturacion;
 use App\Stock;
 use App\Articulo;
+use App\User;
+use App\Notifications\NotifyAdmin;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -221,6 +224,22 @@ class FacturacionController extends Controller
             $stock->sumatoria = $request->sumatoria;
             $stock->save();
         }
+
+        $fechaActual = date('Y-m-d');
+        $numVentas = DB::table('detalle_facturacion')->whereDate('created_at',$fechaActual)->count();
+        // $numVentas = DB:table('detalle_facturacion')->whereDate('created_at',$fechaActual)->count();
+        $arregloDatos=[
+            'ventas' => [
+                'numero' => $numVentas,
+                'msj' => 'Ventas',
+            ]
+        ];
+
+        $allUsers = User::all();
+
+        foreach ($allUsers as $notificar){
+            User::findOrFail($notificar->id)->notify(new NotifyAdmin($arregloDatos));
+        }
     }
   
 
@@ -284,6 +303,8 @@ class FacturacionController extends Controller
             $detalle->valor_final = $det['valor_subtotal']+$det['valor_iva'];
             $detalle->save();
         }
+
+
         return 'ok';
     }
 
