@@ -14,7 +14,7 @@
             </h6>
             <div v-if="notifications.length">
                 <li v-for="item in listar" :key="item.id">
-                    <a class="dropdown-item d-flex align-items-center" href="#" @click="eliminarNotificacion(item.id)">
+                    <div class="dropdown-item d-flex align-items-center" href="#" @click="eliminarNotificacion(item.id)">
                         <div class="mr-3">
                             <div class="icon-circle bg-primary">
                                 <i class="fa fa-file-alt text-white"></i>
@@ -31,7 +31,7 @@
                             <div class="small text-gray-500" v-text="item.created_at"></div>
                             
                         </div>
-                    </a>
+                    </div>
                 </li>
             </div>
             <div v-else>
@@ -55,8 +55,8 @@ export default {
     methods:{
         nombreProducto(){
         let me = this;
-        var url= 'http://localhost/sasseri_app2/public/articulo';
-        axios.get(url)
+        // var url= this.ruta+'/articulo';
+        axios.get('http://localhost/sasseri_app2/public/articulo')
         .then(function (response){
           var auxProducto = response.data.articulos.data;
           console.log(response.data.articulos.data)
@@ -64,7 +64,16 @@ export default {
         })
       },
       eliminarNotificacion(id){
-
+        let me = this;
+        
+        axios.post('notification/delete',{
+            'id': id
+        }).then(function (response) {
+          alert('ok');
+        }).catch(function (error) {
+            console.log(error);
+        });
+                        
       },
     },
     mounted() {

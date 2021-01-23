@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 // use Illuminate\Support\Facades\Auth;
 use App\Notification;
 use Auth;
@@ -19,5 +20,9 @@ class NotificationController extends Controller
             }
         }
         return Auth::user()->unreadNotifications;
+    }
+    public function eliminarNotificacion(Request $request){
+        Notification::destroy($request->id);
+        return 'eliminado';
     }
 }
