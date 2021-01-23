@@ -1129,7 +1129,8 @@
             listarArticulo (page,buscar,criterio){
                 let me=this;
                 var url= this.ruta + '/articulo/?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
-                axios.get(url).then(function (response) {
+                axios.get(url)
+                .then(function (response) {
                     var respuesta= response.data;
                     me.arrayArticulo = respuesta.articulos.data;
                     me.pagination= respuesta.pagination;

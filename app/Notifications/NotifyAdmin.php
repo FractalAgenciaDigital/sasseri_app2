@@ -32,12 +32,20 @@ class NotifyAdmin extends Notification
     public function via($notifiable)
     {
         // return ['mail'];
-        return ['database'];
+        return ['database','broadcast'];
     }
 
     public function toDatabase($notifiable){
         return [
             'datos' => $this->GlobalDatos,
+        ];
+    }
+    
+    public function toBroadcast($notifiable){
+        return [
+           'data' => [
+                'datos' => $this->GlobalDatos
+           ]
         ];
     }
 
@@ -50,9 +58,9 @@ class NotifyAdmin extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+            ->line('The introduction to the notification.')
+            ->action('Notification Action', url('/'))
+            ->line('Thank you for using our application!');
     }
 
     /**

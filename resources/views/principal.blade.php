@@ -9,6 +9,8 @@
         <meta name="description" content="Software financiero y contable online">
         <meta name="author" content="fractalagenciadigital.com">
         <meta name="keyword" content="Software financiero y contable online">
+        <!-- Id for channel notification -->
+        <meta name="userId" content="{{ Auth::check() ? Auth::user()->id : ''}}">
         <link rel="shortcut icon" href="img/favicon.png">
         <title>Sasseri</title>
         <meta name="csrf-token" content="{{ csrf_token() }}">

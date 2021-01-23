@@ -4,40 +4,89 @@
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-bell fa-fw"></i>
             <!-- Counter - Alerts -->
-            <span class="badge badge-danger badge-counter">3+</span>
+            <span class="badge badge-danger badge-counter">{{notifications.length}}</span>
         </a>
         <!-- Dropdown - Alerts -->
         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
             aria-labelledby="alertsDropdown">
             <h6 class="dropdown-header">
-                Alerts Center
+                Notificaciones
             </h6>
-            <li v-for="item in notifications" :key="item.id">
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                    <div class="mr-3">
-                        <div class="icon-circle bg-primary">
-                            <i class="fa fa-file-alt text-white"></i>
+            <div v-if="notifications.length">
+                <li v-for="item in listar" :key="item.id">
+                    <a class="dropdown-item d-flex align-items-center" href="#" @click="eliminarNotificacion(item.id)">
+                        <div class="mr-3">
+                            <div class="icon-circle bg-primary">
+                                <i class="fa fa-file-alt text-white"></i>
+                            </div>                            
                         </div>
-                    </div>
-                    <div>
-                        <div class="small text-gray-500">December 12, 2019</div>
-                        <span class="font-weight-bold">
-                            {{JSON.parse(item.data).datos.ventas.numero}}
-                        </span>
-                    </div>
-                </a>
-            </li>
-            <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                        <div>
+                            <div class="font-weight-bold">
+                                <span v-text="nombresProductos[item.data.datos.id_producto]"></span>                                
+                            </div>
+                            <div>
+                                <span v-text="item.data.datos.estado"></span>
+                                <!-- <span v-text="item"></span> -->
+                            </div>
+                            <div class="small text-gray-500" v-text="item.created_at"></div>
+                            
+                        </div>
+                    </a>
+                </li>
+            </div>
+            <div v-else>
+                Sin notificaciones
+            </div>
+            <a class="dropdown-item text-center small text-gray-500" href="#">Mostrar lista completa</a>
         </div>
     </li>
 </template>
 
 <script>
+// import func from '../../../../vue-temp/vue-editor-bridge'
 export default {
-    props : ['notifications'],
+    props : ['notifications', 'ruta'],
     data(){
         return{
+            arrayNotifications:[],
+            nombresProductos : []
+        }
+    },
+    methods:{
+        nombreProducto(){
+        let me = this;
+        var url= 'http://localhost/sasseri_app2/public/articulo';
+        axios.get(url)
+        .then(function (response){
+          var auxProducto = response.data.articulos.data;
+          console.log(response.data.articulos.data)
+          auxProducto.forEach(element => me.nombresProductos[element.id] = element.nombre);
+        })
+      },
+      eliminarNotificacion(id){
 
+      },
+    },
+    mounted() {
+        this.nombreProducto()
+    },
+    computed:{
+        listar: function(){
+            // return this.notifications[0];
+            this.arrayNotifications= Object.values(this.notifications);
+            if(this.notifications == ''){
+                return this.arrayNotifications = [];
+            }else{
+                this.arrayNotifications= Object.values(this.notifications);
+                // if(this.arrayNotifications.length>3){
+                //     return Object.values(this.arrayNotifications);
+                // }else{
+                //     return Object.values(this.arrayNotifications);
+                // }
+                return Object.values(this.arrayNotifications);
+            }
+
+            
         }
     }
 }
