@@ -70,6 +70,7 @@ export default {
             'id': id
         }).then(function (response) {
           alert('ok');
+        //   listar();
         }).catch(function (error) {
             console.log(error);
         });
