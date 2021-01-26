@@ -6,12 +6,7 @@
             <div class="card">
                 <div class="card-header">
                     <i class="fa fa-align-justify"></i> Cierres por caja
-                    <!--<button v-if="permisosUser.crear && tipoAccion!=3" type="button" @click="abrirModal('cierres_caja','registrar')" class="btn btn-primary">
-                        <i class="icon-plus"></i>&nbsp;Nuevo
-                    </button>
-                    <button v-else type="button" class="btn btn-secondary">
-                        <i class="icon-plus"></i>&nbsp;Nuevo
-                    </button>-->
+                    
                 </div>
                 <div class="card-body">
                     <div v-if="tipoAccion!=3" class="form-group row">

@@ -76,13 +76,6 @@
                                         </div>
                                     </td>
                                     <td class="td-estado">
-                                        <!-- <div v-if="articulo.condicion">
-                                            <span class="badge badge-success">Activo</span>
-                                        </div>
-                                        <div v-else>
-                                            <span class="badge badge-danger">Desactivado</span>                                            
-                                        </div> -->
-
                                         <template v-if="permisosUser.anular">
                                             <a href="#" class="btn text-success" v-if="articulo.condicion" @click="desactivarArticulo(articulo.id)" title="Activar">
                                                 <i class="fa fa-check-circle"></i>
@@ -1410,19 +1403,19 @@
                     console.log(error);
                 });
 
-                axios.post(this.ruta +'/impresora/registrar', data,{
-                    headers:{'Content-Type':'multipart/form-data'}
-                }).then(function (response) {
-                    me.idArticuloStock = response['id'];
-                    me.cantidadStock = response['stock'];
-                    me.tipoMovimientoStock = 1;
-                    me.sumatoria = response['stock'];
-                    // me.registrarStock();
-                    me.cerrarModal();
-                    me.listarArticulo(1,'','nombre');
-                }).catch(function (error) {
-                    console.log(error);
-                });
+                // axios.post(this.ruta +'/impresora/registrar', data,{
+                //     headers:{'Content-Type':'multipart/form-data'}
+                // }).then(function (response) {
+                //     me.idArticuloStock = response['id'];
+                //     me.cantidadStock = response['stock'];
+                //     me.tipoMovimientoStock = 1;
+                //     me.sumatoria = response['stock'];
+                //     // me.registrarStock();
+                //     me.cerrarModal();
+                //     me.listarArticulo(1,'','nombre');
+                // }).catch(function (error) {
+                //     console.log(error);
+                // });
             },
             registrarStock(){
                 // if (this.validarArticulo()){
