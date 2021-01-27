@@ -1,16 +1,16 @@
 <template>
     <main class="main">
         <div>
-
+            <notifications group="foo" />
             <div class="card" v-show="position==1">  <!-- listado de productos de factura -->
                 <div class="card-header"> 
                     <div class="row mb-1">
                         
-                        <div class="col-9">
+                        <div class="col-10">
                             <input class="form-control" type="search" placeholder="Buscar" aria-label="Search" v-model="buscarA" @keyup="listarArticulo(buscarA,criterioA,buscarCategoriaA)">
                         </div>
-                        <div class="col-3">
-                            <button class="btn btn-success  fa fa-search btn-buscar float-right" type="submit">
+                        <div class="col-2">
+                            <button class="btn btn-success  fa fa-search btn-buscar float-right" type="submit" @click="listarArticulo(buscarA,criterioA,buscarCategoriaA)">
                             </button>
                         </div>
                         
@@ -18,14 +18,9 @@
                     <div class="row">                            
                         <div class="col-12">
                             <div class="form-group">
-                                <select class="mul-select" multiple="true" placeholder="- Categorias -">
-                                    <option value="entradas">Entradas</option>
-                                    <option value="ensaladas">Ensaladas</option>
-                                    <option value="platos fuertes">Platos fuertes</option>
-                                    <option value="postres">Postres</option>
-                                    <option value="bebidas">Bebidas</option>
-                                    <option value="salsas">Salsas</option>
-                                    <option value="aperitivos">Aperitivos</option>
+                                <select size="2" class="form-control" multiple  v-model="buscarCategoriaA"  placeholder="- Categorias -" @change="listarArticulo(buscarA,criterioA,buscarCategoriaA)">
+                                    <option value="">- Categorias -</option>
+                                    <option v-for="categoria in arrayCategoria2" :key="categoria.id" :value="categoria.id" v-text="categoria.nombre"></option>
                                 </select>
                             </div> 
                         </div>  
@@ -36,7 +31,7 @@
                     <div class="form-group">
                         <div class="row">
                             <div v-for="(articulo, index) in arrayArticulo" :key="index" class="col-4 separa-cards">
-                                <div class="card text-center mb-1">
+                                <div class="card text-center mb-1" style="cursor:pointer" @click="agregaDetalleMesero(articulo)">
                                     <div class=" txt-price-prod btn-primary">
                                         <span class="num text-white "> $ {{articulo.precio_venta}} </span>
                                     </div>
@@ -48,26 +43,22 @@
                                     </div>
                                 </div>
                             </div>
-                            
-
                         </div>  
                     </div>
                 </div>
             </div>
-            <div v-show="position==2">  <!-- listado de facturacion -->
+            <div v-show="position==2">  <!-- VISTA NUEVA FACTURA -->
                 
                 <div class="card">
                     <div class="card-header">
                         <div class="row">
-                            <div class="col-8">
-                                <button class="btn btn-info" @click="position=1"><i class="fa fa-arrow-left"></i> Productos 
-                                    </button>
+                            <div class="col-6">
+                                <button class="btn btn-info" @click="position=1"><i class="fa fa-arrow-left"></i> Productos </button>
                             </div>
-                            <div class="col-3 pr-1">
-                                <button class="btn btn-danger" style="margin-left: -31px;">Descartar
+                            <div class="col-5 pr-1">
+                                <button class="btn btn-danger" style="margin-left: -31px;" @click="ocultarDetalle(); position=7;">Descartar <i class="fa fa-trash"></i>
                                 </button>
                             </div>
-                            
                         </div>                                
                     </div>
                     <div class="card-body">
@@ -77,9 +68,15 @@
                                     <div class="col-1">
                                         <h3><i class="fa fa-user"></i></h3>
                                     </div>
-                                    <div class="col-9 nombre-tercero"><small class="text-muted ">CRISTIAM CAMILO MONSALVE PANTOJA</small></div>
+                                    <div class="col-9 nombre-tercero"><small class="text-muted ">{{tercero}}</small></div>
                                     <div class="col-1">
-                                        <h3 style="cursor:pointer" class="text-primary" @click="position=3"><i class="fa fa-plus-circle" href="#59981A"></i></h3>
+                                        <h3  v-if="!tercero" style="cursor:pointer" class="text-primary" @click="position=3">
+                                            <i class="fa fa-plus-circle" href="#59981A"></i>
+                                        </h3>     
+                                        
+                                        <h3 v-else style="cursor:pointer" class="text-primary" @click="quitar(3)">
+                                            <i class="fa fa-times-circle" href="#59981A"></i>
+                                        </h3>
                                     </div>
                                 </div>
                             </div>
@@ -87,79 +84,64 @@
                                 <div class="col-12">
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <label class="input-group-text" for="inputGroupSelect01">Mezas</label>
+                                            <label class="input-group-text" for="inputGroupSelect01">Mesas</label>
                                         </div>
-                                        <select class="custom-select" id="inputGroupSelect01">
-                                            <option selected>Ubicacion...</option>
-                                            <option value="1">meza 1</option>
-                                            <option value="2">meza 2</option>
-                                        </select>
+                                        <select class="custom-select form-control" v-model="lugar" id="inputGroupSelect01">
+                                            <option selected>Ubicacion...</option>                                            
+                                            <option v-for="zonas in arrayZonas" :key="zonas.id" :value="zonas.id" v-text="zonas.zona"></option>
+                                        </select>                                        
                                     </div>
                                 </div>                                            
                             </div>
-                            <div class="row mt-1">
+                            <div class="row ">
                                 <div class="col-12">
-                                    <div class="row border-bottom">
-                                        <div class="col-6">
+                                    <div class="row border-bottom" v-for="(detalle,index) in arrayDetalle" :key="detalle.id">
+                                        <div class="col-5">
                                             <div class="row">
-                                                <div class="col-12"><small class="text-muted">Ensaladas</small></div>
+                                                <div class="col-12" v-if="detalle.padre==null || detalle.padre==''" >
+                                                    <small class="text-muted">{{detalle.articulo+' - '+detalle.nom_presentacion}}</small>
+                                                </div>
+                                                <div class="col-12" v-else >
+                                                    <small class="text-muted">{{detalle.articulo+' - '+detalle.nom_presentacion+' (Presentación asociada)'}}</small>
+                                                </div>
                                             </div>    
                                             <div class="row">
-                                                <div class="col-12"><small > $ 10000 | IVA = $ 1200</small></div>
-                                            </div>    
-                                        </div>
-                                        <div class="col-2 row"><p class="text-right">2</p></div>
-                                        <div class="col-4 float-right"><p class="text-right"> $ 11200 </p></div>
-                                        <div class="col-1 row">
-                                            <h3 class="text-danger"><i class="fa fa-times-circle"></i></h3>
-                                        </div>
-                                    </div>
-                                    <div class="row border-bottom">
-                                        <div class="col-6">
-                                            <div class="row">
-                                                <div class="col-12"><small class="text-muted">Bebidas</small></div>
-                                            </div>    
-                                            <div class="row">
-                                                <div class="col-12"><small > $ 3000 | IVA = $ 500</small></div>
+                                                <div class="col-12">
+                                                    <small > 
+                                                        $ {{detalle.precio}} | IVA = $ {{detalle.valor_iva}}
+                                                    </small>
+                                                </div>
                                             </div>    
                                         </div>
-                                        <div class="col-2 row"><p class="text-right">4</p></div>
-                                        <div class="col-4 float-right"><p class="text-right"> $ 3500 </p></div>
-                                        <div class="col-1 row">
-                                            <h3 class="text-danger"><i class="fa fa-times-circle"></i></h3>
-                                        </div>
-                                    </div>
-                                    <div class="row border-bottom">
-                                        <div class="col-6">
-                                            <div class="row">
-                                                <div class="col-12"><small class="text-muted">Postres</small></div>
-                                            </div>    
-                                            <div class="row">
-                                                <div class="col-12"><small > $ 1800 | IVA = $ 200</small></div>
-                                            </div>    
-                                        </div>
-                                        <div class="col-2 row"><p class="text-right">1</p></div>
-                                        <div class="col-4 float-right"><p class="text-right"> $ 2000 </p></div>
-                                        <div class="col-1 row">
-                                            <h3 class="text-danger"><i class="fa fa-times-circle"></i></h3>
+                                        <div class="col-2 "><p class="text-right">{{detalle.cantidad}}</p></div>
+                                        <div class="col-3 float-right"><p class="text-right"> $ {{Math.round(parseFloat((detalle.precio*detalle.cantidad)))}} </p></div>
+                                        <div class="col-1 ">                                           
+                                            <h3 class="text-danger" v-if="rolusuario==1 || detalle.prod_nuevo==1" @click="eliminarDetalle(detalle,index)" title="Remover"><i class="fa fa-times-circle"></i></h3>
+                                            <!-- <h3 v-else-if="detalle.prod_nuevo==1"  @click="eliminarDetalle(detalle,index)">
+                                                <i class="fa fa-times-circle"></i>
+                                            </h3> -->
+                                             <h3 class="text-secondary" title="Deshabilitado" v-else>
+                                                <i class="fa fa-times-circle"></i>
+                                            </h3>
                                         </div>
                                     </div>
+                                   
                                 </div>
                             </div> 
                             <div class="row mt-1">
-                                <div class="col-8">
+                                <div class="col-6">
                                     <b>Subtotal</b>
                                 </div>
-                                <div class="col-4 text-righ">
-                                    $ 40000
+                                <div class="col-4 text-righ text-right">
+                                    $ {{subtotal=calcularSubtotal}}
                                 </div>
                             </div>
                             <div class="row mt-1">
-                                <div class="col-8">
+                                <div class="col-6">
                                     <b>IVA</b>
                                 </div>
-                                <div class="col-4 text-righ">
-                                    $ 40000
+                                <div class="col-4 text-righ text-right">
+                                    $ {{valor_iva=calcularTotalIva}}
                                 </div>
                             </div>
                         </div>
@@ -172,83 +154,36 @@
 
                     <div class="card-header">
                         <div class="row">
-                            <div class="col-3">
+                            <div class="col-2">
                                 <button @click="position=4" class="btn btn-success fa fa-plus"></button>
                             </div>
-                            <div class="col-3">
+                            <div class="col-2">
                                 <button @click="position=2" class="btn btn-primary fa fa-undo"></button>
                             </div>
                             <div class="col-6 pr-1">
-                               <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
+                               <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search" name="cta_busq" v-model="terc_busq" @keyup="buscarTercero()">
                             </div> 
                         </div>                                
                     </div>
 
-                    <div class="card-body">                        
-                        <div class="row border-bottom resaltar">                                
-                            <div class="col-10">
-                                Margarita Arango Salasar
+                    <div class="card-body">  
+                        
+                        <div class="row " :class=" id_selected_row_acitve==tercero.id ? 'border border-primary ' : 'border-bottom resaltar'" @click="showUserOpts(tercero.id); id_selected_row=tercero.id"  v-for="tercero in arrayTerceros" :key="tercero.id"  v-bind:id="'person_row_'+tercero.id" > 
+                            <div v-if="tercero.nombre && !tercero.nombre1" class="col-8" >
+                                {{ tercero.nombre }} 
                             </div>
-                            <div class="col-2">
-                                <h3 class="text-danger ocultar"><i class="fa fa-times-circle"></i></h3>
-                            </div> 
-                        </div>
-                        <div class="row border-bottom resaltar">                                
-                            <div class="col-10">
-                                Milton Farias Alvarado 
+                            <div v-else class="col-8" >
+                                {{ tercero.nombre1 + ' ' + validarUnder(tercero.nombre2)+' '+tercero.apellido1+' '+validarUnder(tercero.apellido2) }} 
                             </div>
-                            <div class="col-2">
-                                <h3 class="text-danger ocultar"><i class="fa fa-times-circle"></i></h3>
+                            <div class="col-2 text-right">
+                                <h3 v-if="id_selected_row==tercero.id&&id_selected_row_acitve!=tercero.id" class="text-primary" v-bind:id="'person_opts_'+tercero.id" style="margin: auto; font-size: 19px;" @click="cargarTercero(tercero);id_selected_row_acitve=tercero.id;"><i class="fa fa-check"></i></h3>
+                                <h3 v-if="id_selected_row==tercero.id&&id_selected_row_acitve==tercero.id" class="text-danger" v-bind:id="'person_opts_'+tercero.id" style="margin: auto; font-size: 19px;" @click="id_selected_row_acitve='';"><i class="fa fa-times-circle"></i></h3>
+                                 
                             </div> 
-                        </div>
-                        <div class="row border-bottom resaltar">                                
-                            <div class="col-10">
-                                Gregorio Santander Soscue
+                            <div class="col-2 text-center">
+                                <h3 v-if="id_selected_row==tercero.id" class="text-success ex1" v-bind:id="'person_opts_'+tercero.id" style="margin: auto; font-size: 19px;"><i class="fa fa-pencil"></i></h3>
                             </div>
-                            <div class="col-2">
-                                <h3 class="text-danger ocultar"><i class="fa fa-times-circle"></i></h3>
-                            </div> 
-                        </div>
-                        <div class="row border-bottom resaltar">                                
-                            <div class="col-10">
-                                Pintas Revelo Chiaspud
-                            </div>
-                            <div class="col-2">
-                                <h3 class="text-danger ocultar"><i class="fa fa-times-circle"></i></h3>
-                            </div> 
-                        </div>
-                        <div class="row border-bottom resaltar">                                
-                            <div class="col-10">
-                                Efrain Carmelo Lisboa 
-                            </div>
-                            <div class="col-2">
-                                <h3 class="text-danger ocultar"><i class="fa fa-times-circle"></i></h3>
-                            </div> 
-                        </div>
-                        <div class="row border-bottom resaltar">                                
-                            <div class="col-10">
-                                Daineris Targeri Tisoy
-                            </div>
-                            <div class="col-2">
-                                <h3 class="text-danger ocultar"><i class="fa fa-times-circle"></i></h3>
-                            </div> 
-                        </div>
-                        <div class="row border-bottom resaltar">                                
-                            <div class="col-10">
-                                Marco Luisa Balvoa
-                            </div>
-                            <div class="col-2">
-                                <h3 class="text-danger ocultar"><i class="fa fa-times-circle"></i></h3>
-                            </div> 
-                        </div>   
-                        <div class="row border-bottom resaltar">                                
-                            <div class="col-10">
-                                Gerardo Petro Chergas
-                            </div>
-                            <div class="col-2">
-                                <h3 class="text-danger ocultar"><i class="fa fa-times-circle"></i></h3>
-                            </div> 
-                        </div>
+                        </div>                        
                     </div>                    
                 </div>      
             </div>
@@ -272,9 +207,10 @@
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Tipo de documento</label>
                                 <select class="form-control" id="exampleFormControlSelect1">
-                                <option>Cedula Ciudadania</option>
-                                <option>Cedula Extrangera</option>
-                                <option>Tarjeta Identidad</option>
+                                    <option value="0" disabled>Seleccione</option>
+                                    <option>Cedula Ciudadania</option>
+                                    <option>Cedula Extrangera</option>
+                                    <option>Tarjeta Identidad</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -313,30 +249,238 @@
                     </div>                    
                 </div> 
             </div>
-            <div v-show="position==5">
-                VISTA-FACTURA IMPRIMIR
+            <div v-show="position==5"> <!-- tickets imprimir factura -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-3">
+                                <button @click="position=6" class="btn btn-success fa fa-plus"></button>
+                            </div>
+                            <div class="col-3">   
+                            </div>
+                            <div class="col-6 pr-1">  
+                            </div> 
+                        </div>                                  
+                    </div>
+                    <div class="ticket">
+                        <img class="img-logo espacio-1" src="http://localhost/sasseri_app2/public/Empresas/1_empresa/ImgLogos/f4f72620874a541d0113ea86bcf699a8.jpg" alt="img-logo">
+                        <p class="centrado espacio-1">SASSERI_APP_2<br>NIT: 81245875-0<br>BR/DIAGONAL LAS AMERICAS 20_CRA 15-25<br>TEL: 2448484154<br>RES DIAN 100000554554 DE DICIEMBRE 20/2020<br>PERSONA JURUDICA DECLARANTE - REGIMEN COMUN<br>FACTURA DE VENTA N°. 155455<br>FECHA 20/12/2020 - 04:44:42 P.M.</p>
+                        -----------------------------------------
+                        <table class="table table-sm espacio-1">
+                            <thead>
+                                <tr>
+                                    <th scope="col">CANT</th>
+                                    <th colspan="2" scope="col">DESCRIPCION</th>
+                                    <th scope="col">TOTAL</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="centrado">2</td>
+                                    <td colspan="2">LECHE ALQUERIA</td>
+                                    <td>$5000</td>
+                                </tr>
+                                <tr>
+                                    <td class="centrado">1</td>
+                                    <td colspan="2">CAFE NEGRO</td>
+                                    <td>$2500</td>
+                                </tr>
+                                <tr>
+                                    <td class="centrado">1</td>
+                                    <td colspan="2">PAN DE QUESO</td>
+                                    <td>$2000</td>
+                                </tr>    
+                                <tr>
+                                    <th colspan="2" scope="col">SUBTOTAL:</th>
+                                    <th scope="col"></th>
+                                    <td>$9500</td>
+                                </tr>
+                                <tr class="table-borderless">
+                                    <th colspan="2" scope="col">IVA:</th>
+                                    <th scope="col"></th>
+                                    <td>$950</td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" scope="col">TOTAL:</th>
+                                    <th scope="col"></th>
+                                    <th>$10450</th>
+                                </tr>
+                            </tbody>
+                        </table>
+                        -----------------------------------------
+                        <br>
+                        <p class="centrado minimizar espacio-1">POWERED BY - FRACTAL AGENCIA DIGITAL<br>www.fractalagenciadigital.com<br>(CEL. 312-524-2544)</p><br>
+                    </div> 
+                </div>                    
+            </div>  
+            <div v-show="position==6"> <!-- tickets listado preparcion chef -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-3">
+                                <button @click="position=5" class="btn btn-primary fa fa-undo"></button>
+                            </div>
+                            <div class="col-3">
+                                <button @click="position=7" class="btn btn-primary fa fa-list"></button>
+                            </div>
+                            <div class="col-6 pr-1">  
+                            </div> 
+                        </div>                                      
+                    </div>
+                    <div class="ticket">
+                        <img class="img-logo espacio-1" src="http://localhost/sasseri_app2/public/Empresas/1_empresa/ImgLogos/f4f72620874a541d0113ea86bcf699a8.jpg" alt="img-logo">
+                        <p class="centrado espacio-1">FECHA 20/12/2020 - 04:44:42 P.M.</p>
+                        -----------------------------------------
+                        <div class="input-group mb-0">
+                            <div class="col-6">
+                                <p class="espacio-1">MESERO:</p>
+                            </div> 
+                            <div class="col-6">
+                                <p class="espacio-1">ANDRES ALBERTO</p>
+                            </div>
+                        </div>
+                        <div class="input-group mb-0">
+                            <div class="col-6">
+                                <p class="espacio-1">MESA:</p>
+                            </div> 
+                            <div class="col-6">
+                                <p class="espacio-1 centrado">1/4</p>
+                            </div>
+                        </div>
+                        -----------------------------------------
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th scope="col">PRODUCTO</th>
+                                    <th colspan="1">CANTIDAD</th>
+                                    <th scope="col">PRECIO</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(prod_preparado,index) in arrayPreparado" :key="index">
+                                    <td>{{prod_preparado.articulo}}</td>
+                                    <td>{{prod_preparado.cantidad}}</td>
+                                    <td>{{prod_preparado.precio}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        -----------------------------------------
+                        <br>
+                        <p class="centrado minimizar espacio-1">POWERE BY - FRACTAL AGENCIA DIGITAL<br>www.fractalagenciadigital.  com<br>(CEL. 312-524-2544)</p><br> 
+                    </div>                    
+                </div>  
+   
             </div>
-            <div v-show="position==6">
-                VISTA- LISTADO COMIDAS A PREPARAR EL CHEF
+            <div v-show="position==7"> <!-- listado de faturas -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <!--
+                            <div class="col-3">
+                                <button @click="position=6" class="btn btn-primary fa fa-undo"></button>
+                            </div>-->
+                            <div class="col-3">
+                                <div class="input">
+                                    <div class="input-group-prepend">
+                                        <h4  style="margin-left: -23px; margin-left: 13px; margin-top: 6px; font-size: 14px;" for="inputGroupSelect01">Estado</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-8">  
+                                <select class="custom-select" id="inputGroupSelect01">
+                                    <option selected  style="font-size: 14px;">Seleccionar</option>
+                                    <option value="1" style="font-size: 14px;">Abierta</option>
+                                    <option value="2" style="font-size: 14px;">Cerrada</option>
+                                    <option value="3" style="font-size: 14px;">Cancelada</option>
+                                </select>  
+                            </div>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label>Desde:</label>                                   
+                                        <input v-if="permisosUser.leer" type="date" class="form-control" style="border-radius: 7px;" v-model="desdeFiltro">
+                                        <input v-else disabled type="date" class="form-control" v-model="desdeFiltro">
+                                    </div>
+                                    <div class="col-6">
+                                        <label>Hasta:</label>                                   
+                                        <input v-if="permisosUser.leer" type="date" class="form-control" style="border-radius: 7px;" v-model="hastaFiltro">
+                                        <input v-else disabled type="date" class="form-control" v-model="hastaFiltro">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                         
+                    </div>
+                    
+                    <div class="card-header" style="font-size: 13px;">
+                        <div class="row">
+                            <table class="table table-sm table-bordered">
+                                <thead class="thead-light">
+                                    <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Factura</th>
+                                    <th scope="col">Mesa</th>
+                                    <th scope="col">Total</th>
+                                    <th scope="col">Estado</th>
+                                    <th scope="col">Editar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="facturacion in arrayFacturacion" :key="facturacion.id" style="text-align: right;">
+                                        <th scope="row">1</th>
+                                        <td v-text="facturacion.num_factura? facturacion.num_factura: ''"></td>
+                                        <td class="centrado" v-text="facturacion.nom_lugar? facturacion.nom_lugar : ''"></td>
+                                        <td class="text-right" v-text="facturacion.total? '$ '+facturacion.total : ''"></td>
+                                        <td v-if="facturacion.estado==1" class="text-warning">Abierta</td>
+                                        <td v-if="facturacion.estado==2" class="text-success">Cerrada</td>
+                                        <td v-if="facturacion.estado==0" class="text-danger">Cancelada</td>
+                                        <td class="centrado">
+                                            <button v-if="facturacion.estado==1"  @click="mostrarDetalle('facturacion','actualizar',facturacion);position=2;" class="btn-1 btn btn-success rounded-circle">
+                                                <i class="fa fa-pencil btn-edit-factura"></i>
+                                            </button>
+                                             <button v-else class="btn-1 btn btn-secondary rounded-circle">
+                                                <i class="fa fa-pencil btn-edit-factura"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>            
+                        </div>
+                    </div>                      
+                </div>  
             </div>
-            <div class="row mt-1 fixed-bottom mx-auto"> <!-- boton de facturar -->
-                <div class="col-12">
-                    <a @click="position=2" class="btn btn-block btn-lg active btn-success" v-show="position<3" href="#" role="button"><h3 class="text-white">Facturar $ 500000</h3></a>
-                </div>
-            </div>
+        </div>
+        <div>  
             
+            <div class="row mt-1 fixed-bottom mx-auto"> <!-- boton de facturar -->
+                <div class="col-12" v-if="position==1||(position==2 && tipoAccion2==1) ||(position==2 && tipoAccion2==0)">
+                    <button type="button" @click="registrarFacturacion();" class="btn btn-block btn-lg active btn-success" href="#" role="button"><h3 class="text-white">Facturar $ {{valor_final=calcularTotal}}</h3></button>
+                </div>
+                 <button type="button" v-if="(position==2 && tipoAccion2==2)"  class="btn-block btn-lg active btn-success" @click="actualizarFacturacion();">Actualizar</button>
+               
+                <div class="col-12" v-if="position==7">
+                    <a v-if="no_caja==0" @click="position=1;mostrarDetalle()" class="btn btn-block btn-lg active btn-success"  href="#" role="button"><h3 class="text-white">Iniciar Factura</h3></a>
+                    <a v-else  class="btn btn-block btn-lg active btn-secondary"  href="#" role="button"><h3 class="text-white">No tienes una caja abierta</h3></a>
+                </div>
+            </div> 
         </div>  
     </main>
 </template>
-
 <script>
+ alertify.alert('Ready!');
+</script>
+<script>  
 
     import vSelect from 'vue-select';
+    import Notifications from 'vue-notification'
+    import Vue from 'vue'
     export default {
         props : ['ruta'],
         data (){
             return {
-                position: 5,
+                position: 7,
+                no_caja: 1,
+                id_selected_row_acitve: '',
                 ingreso_id: 0,
                 idproveedor:0,
                 proveedor:'',
@@ -352,6 +496,7 @@
                 arrayProveedor: [],
                 arrayDetalle : [],
                 arrayDetalleT : [],
+                arrayPreparado : [],
                 listado:1,
                 modal : 0,
                 tituloModal : '',
@@ -375,12 +520,13 @@
                     'actualizar':1,
                     'anular':1,
                 },
+                rolusuario:0,
                 offset : 3,
                 criterio : 'num_comprobante',
                 buscar : '',
                 criterioA:'nombre',
                 buscarA: '',
-                buscarCategoriaA : '',
+                buscarCategoriaA : [],
                 arrayCategoria2 : [],
                 arrayArticulo: [],
                 idarticulo: 0,
@@ -393,7 +539,6 @@
                 padreDetalle : '',
                 idDetalleAsociado : 0,
                 tipo_vista_articulo:1,
-
                 // variables modal buscar tercero
                 modal2 : '',
                 tercero :'',
@@ -406,7 +551,7 @@
                 terc_busq : '',
                 tipo_ingreso: '',
                 arrayTerceros : [],
-
+                id_selected_row: '',
                 cuenta_ini : '',
                 id_cuenta_ini : '',
                 cuenta_fin : '',
@@ -439,12 +584,10 @@
 
                 arrayFacturacion : [],
                 arrayFacturacionT : [],
-
                 iva:0,
 
                 fechaActual: '',
                 fechaHoraActual:'',
-
                 estado: 0,
                 cambiarEstado: 0,
 
@@ -499,7 +642,9 @@
                     vr_inicial_cierre : 0,
                     vr_gastos_cierre : 0,
                     vr_final_cierre : 0,
-                }
+                },
+
+                prod_nuevo : 0,
             }
         },
         components: {
@@ -555,13 +700,7 @@
                 return resultado;
             },
             calcularTotalIva: function(){
-                var resultado=0.0;
-                for(var i=0;i<this.arrayDetalle.length;i++){
-                    resultado += this.arrayDetalle[i].valor_iva;
-                }
-                // resultado = this.total-resultado;
-                resultado = Math.round(resultado);
-                return resultado;
+               return this.ivaProces();
             },
             calcularSaldo: function(){
                 var resultado=0.0;
@@ -572,6 +711,20 @@
             },
         },
         methods : {
+            showUserOpts(id_resaltar){
+                console.log(id_resaltar);
+            },
+            ivaProces(){
+                 
+                var resultado=0.0;
+                for(var i=0;i<this.arrayDetalle.length;i++){                    
+                    resultado += this.arrayDetalle[i].valor_iva;                    
+                }
+                // resultado = this.total-resultado;
+                resultado = Math.round(resultado);
+                this.valor_iva = resultado;
+                return resultado;
+            },
             listarFacturacion (page,numFacturaFiltro,estadoFiltro,idTerceroFiltro,ordenFiltro,desdeFiltro,hastaFiltro,idVendedorFiltro){
                 let me=this;
 
@@ -579,24 +732,13 @@
                 axios.get(url).then(function (response) {
                     var respuesta= response.data;
                     me.arrayFacturacion = respuesta.facturacion.data;
+                    me.rolusuario = respuesta.idrol;
                     me.pagination= respuesta.pagination;
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
-            },
-            listarDetalle(id_factura){
-                let me=this;
-                var url= this.ruta +'/detalle_facturacion/buscarDetalleFacturacion?id_factura=' + id_factura;
-                axios.get(url).then(function (response) {
-                    var respuesta= response.data;
-                    me.arrayDetalle = respuesta.detalles;
-                    me.arrayDetalleT = respuesta.detalles;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            },
+            },            
             selectProveedor(search,loading){
                 let me=this;
                 loading(true)
@@ -635,114 +777,19 @@
                     console.log(error);
                 });
             },
-            /*listarCajas(page,buscar,criterio){
-                let me=this;
-                var ban1 = 0;
-                var ban2 = 0;
-                var url= this.ruta +'/cierres_caja?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio+ '&fec_desde=&fec_hasta=';
-                axios.get(url).then(function (response) {
-                    var respuesta= response.data;
-                    me.arrayCierresXCajas = respuesta.cierres_caja.data;
-
-                    if(!me.arrayCierresXCajas.length){
-                        me.mostrarDetalle('cierres_caja','registrar');
-                    }
-                    else
-                    {
-                        me.arrayCierresXCajas.forEach(function(cierre){
-                            if(cierre['usu_crea']==respuesta.id_usuario)
-                            {
-                                ban1 = 1;
-                                if(cierre['estado']==1)
-                                {
-                                    ban2 = 1;
-                                    
-                                    var d = new Date;
-                                    var dd = d.getDate(); var mm = d.getMonth()+1; var yyyy = d.getFullYear();
-                                    var h = d.getHours(); var min = d.getMinutes(); var sec = d.getSeconds();
-                                    
-                                    if(dd<10){dd='0'+dd;}  if(mm<10){mm='0'+mm;} if(h<10){h='0'+h;} if(min<10){min='0'+min;} if(sec<10){sec='0'+sec;}
-
-                                    var fechaHora = yyyy+'-'+mm+'-'+dd+' '+h+':'+min+':'+sec;
-                                    var fecha = yyyy+'-'+mm+'-'+dd;
-
-                                    var n1 = cierre['created_at'].split(" "); var n2 = n1[0].split("-"); var n3 = n1[1].split(":");
-                                                                        
-                                    if(yyyy == n2[0])
-                                    {
-                                        if(mm == n2[1])
-                                        {
-                                            var restaDia = parseFloat(dd)-parseFloat(n2[2]);
-                                            if(restaDia<=1)
-                                            {
-                                                if(restaDia==1)
-                                                {
-                                                    var horasDiaAnterior = 24-n3[0]
-                                                    var sumaHoras = horasDiaAnterior+h;
-                                                    if(sumaHoras<24)
-                                                    {
-                                                        me.id_cierre_caja_facturacion = cierre['id'];
-                                                        me.nom_caja_cierre_facturacion = cierre['nombre'];
-                                                        me.cierre_caja_id = cierre['id'];
-                                                        me.id_caja_cierre = cierre['id_caja'];
-                                                        me.nom_caja_cierre = cierre['nombre'];
-                                                        me.vr_inicial_cierre = cierre['vr_inicial'];
-                                                        me.obs_inicial_cierre = cierre['obs_inicial'];
-                                                        
-                                                        me.listarFacturacion(1,me.numFacturaFiltro,me.estadoFiltro,me.idTerceroFiltro,me.ordenFiltro,me.desdeFiltro,me.hastaFiltro,me.idVendedorFiltro);
-                                                    }
-                                                    else{ me.mostrarDetalle('cierres_caja','listar_cierres',cierre); }
-                                                }
-                                                else
-                                                {
-                                                    me.id_cierre_caja_facturacion = cierre['id'];
-                                                    me.nom_caja_cierre_facturacion = cierre['nombre'];
-                                                    me.cierre_caja_id = cierre['id'];
-                                                    me.id_caja_cierre = cierre['id_caja'];
-                                                    me.nom_caja_cierre = cierre['nombre'];
-                                                    me.vr_inicial_cierre = cierre['vr_inicial'];
-                                                    me.obs_inicial_cierre = cierre['obs_inicial'];
-
-                                                    me.listarFacturacion(1,me.numFacturaFiltro,me.estadoFiltro,me.idTerceroFiltro,me.ordenFiltro,me.desdeFiltro,me.hastaFiltro,me.idVendedorFiltro);
-                                                }
-                                            }
-                                            else{ me.mostrarDetalle('cierres_caja','listar_cierres',cierre); }
-                                        }
-                                        else{ me.mostrarDetalle('cierres_caja','listar_cierres',cierre); }
-                                    }
-                                    else{ me.mostrarDetalle('cierres_caja','listar_cierres',cierre); }
-                                }
-                            }
-                        });
-
-                        if(ban1 == 1)
-                        {
-                            if(ban2 == 0)
-                            {
-                                me.mostrarDetalle('cierres_caja','registrar');
-                            }
-                        }
-                        else
-                        {
-                            me.mostrarDetalle('cierres_caja','registrar');
-                        }
-                    }
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            },*/
             listarCajas(){
                 let me=this;
                 var url= this.ruta +'/cierres_caja/validarCierreCaja';
                 axios.get(url).then(function (response) {
+                    //console.log(response.data);
                     var respuesta= response.data;
                     var ban = respuesta.ban;
                     me.arrayCierresXCajas = respuesta.cierres_cajas;
 
                     if(ban==0 || ban==1)
                     {
-                        // me.mostrarDetalle('cierres_caja','registrar');
+                        me.no_caja = 1;
+                        
                         Swal.fire({
                             // toast: true,
                             // position: 'top-end',
@@ -757,6 +804,7 @@
                     {
                         if(ban==3)
                         {
+                            me.no_caja = 0;
                             me.id_caja_facturacion = me.arrayCierresXCajas[0]['id'];
                             me.id_cierre_caja_facturacion = me.arrayCierresXCajas[0]['id'];
                             me.nom_caja_cierre_facturacion = me.arrayCierresXCajas[0]['nombre'];
@@ -765,13 +813,14 @@
                             me.nom_caja_cierre = me.arrayCierresXCajas[0]['nombre'];
                             me.vr_inicial_cierre = me.arrayCierresXCajas[0]['vr_inicial'];
                             me.obs_inicial_cierre = me.arrayCierresXCajas[0]['obs_inicial'];
-                            
+                            //console.log("entra al ban 3");
                             me.listarFacturacion(1,me.numFacturaFiltro,me.estadoFiltro,me.idTerceroFiltro,me.ordenFiltro,me.desdeFiltro,me.hastaFiltro,me.idVendedorFiltro);
                         }
 
                         if(ban==2)
                         {
-                            // me.mostrarDetalle('cierres_caja','listar_cierres',me.arrayCierresXCajas[0]);
+                            me.no_caja = 1;
+                            
                             Swal.fire({
                                 // toast: true,
                                 // position: 'top-end',
@@ -1249,9 +1298,103 @@
                 }
                 return sw;
             },
-            eliminarDetalle(index){
+            eliminarDetalle(detalle,index){
                 let me = this;
-                me.arrayDetalle.splice(index, 1);
+                if(detalle.cantidad2){
+                    if (detalle.cantidad != detalle.cantidad2) {
+                        detalle.cantidad = detalle.cantidad2
+                        detalle.prod_nuevo = 0; 
+                    }
+                }
+                else{
+                    me.arrayDetalle.splice(index, 1);
+                }
+             
+            },
+           
+            agregaDetalleMesero(producto){
+                //console.log(producto);
+                let me=this;
+                var p = '';
+                if(producto.padre='') {p = ' '+producto.nom_presentacion+' (Presentacion asociada)';}
+                else {p = ' - '+producto.nom_presentacion;}
+                var ivaVenta = 0;
+                producto.productos_iva.forEach(function(iva){
+                    if(iva.tipo_iva =='Venta'){ivaVenta=iva.porcentaje;}
+                });
+                var ivaVenta_vr=0;
+                if(ivaVenta>0) {
+                    ivaVenta_vr = Math.round(parseFloat(producto.precio_venta)-parseFloat((producto.precio_venta)/((ivaVenta/100)+1)));
+                }
+                
+                console.log("ivaVenta_vr"+ivaVenta_vr);
+                let auxPosition = me.arrayDetalle.indexOf(me.arrayDetalle.find(({codigo}) => codigo === producto.codigo));
+
+                let auxPreparado = me.arrayPreparado.indexOf(me.arrayPreparado.find(({codigo}) => codigo === producto.codigo));
+                if(producto.tipo_articulo == 4) {
+                    if(auxPreparado >= 0) {
+                        me.arrayPreparado[auxPreparado].cantidad+=1;
+                        me.arrayPreparado[auxPreparado].valor_iva+=ivaVenta_vr;
+                        me.arrayPreparado[auxPreparado].valor_subtotal +=  me.arrayPreparado[auxPreparado].precio_venta - ivaVenta_vr;
+                    }else {
+                        me.arrayPreparado.push({
+                            codigo: producto.codigo,
+                            idarticulo: producto.id_articulo,
+                            id_asociado: producto.id_asociado,
+                            articulo: producto.nombre,
+                            cantidad: 1,
+                            tipo: producto.tipo_articulo,
+                            valor_descuento: 0,
+                            precio: producto.precio_venta,
+                            precio_venta: producto.precio_venta,
+                            iva: ivaVenta,
+                            valor_iva: ivaVenta_vr,
+                            valor_subtotal: Math.round(parseFloat(producto.precio_venta-ivaVenta_vr)),
+                            stock : producto.stock,
+                            descuento : 0,
+                            nom_presentacion : producto.nom_presentacion,
+                            id_presentacion : producto.id_presentacion,
+                            padre : producto.padre,
+                            
+                        });
+                    }
+                }
+                
+
+                if(auxPosition >= 0) {
+                    me.arrayDetalle[auxPosition].cantidad+=1;
+                    me.arrayDetalle[auxPosition].valor_iva+=ivaVenta_vr;
+                    me.arrayDetalle[auxPosition].valor_subtotal +=  me.arrayDetalle[auxPosition].precio_venta - ivaVenta_vr;
+                    me.arrayDetalle[auxPosition].prod_nuevo = 1
+                    
+                }else {
+                    
+                    me.arrayDetalle.push({
+                        codigo: producto.codigo,
+                        idarticulo: producto.id_articulo,
+                        id_asociado: producto.id_asociado,
+                        articulo: producto.nombre,
+                        cantidad: 1,
+                        tipo: producto.tipo_articulo,
+                        valor_descuento: 0,
+                        precio: producto.precio_venta,
+                        precio_venta: producto.precio_venta,
+                        iva: ivaVenta,
+                        valor_iva: ivaVenta_vr,
+                        valor_subtotal: Math.round(parseFloat(producto.precio_venta-ivaVenta_vr)),
+                        stock : producto.stock,
+                        descuento : 0,
+                        nom_presentacion : producto.nom_presentacion,
+                        id_presentacion : producto.id_presentacion,
+                        padre : producto.padre,
+                        prod_nuevo:1,
+                    });
+                }
+              
+                
+                this.llamarMensaje(producto.nombre);
+
+                this.ivaProces();
             },
             agregarDetalle(){
                 let me=this;
@@ -1389,77 +1532,67 @@
                 });
             },
             registrarFacturacion(){
-                if (this.validarFacturacion()){
-                    return;
-                }
-                
-                let me = this;
-                
-                // for(var i=0; i<me.arrayDetalle.length; i++)
-                // {
-                //     me.descuento += parseFloat(me.arrayDetalle[i]['valor_descuento']);
-                //     me.iva += parseFloat(me.arrayDetalle[i]['valor_iva']);
-                //     me.subtotal += parseFloat(me.arrayDetalle[i]['valor_subtotal']);
-                // }
-                // me.total += parseFloat(me.subtotal)+parseFloat(me.iva);
-                // me.sugerirNumFactura();
+                //console.log(this.validarFacturacion());
+                if (!this.validarFacturacion()){
 
-                axios.post(this.ruta +'/facturacion/registrar',{
-                    'num_factura': null,
-                    'id_tercero': me.id_tercero,
-                    'fec_edita': null,
-                    'usu_edita': null,
-                    'subtotal': me.subtotal,
-                    'valor_iva': me.valor_iva,
-                    'total': me.valor_final,
-                    'abono': me.abono,
-                    'saldo': me.saldo,
-                    'detalle': me.detalle,
-                    'lugar': me.lugar,
-                    'descuento': me.calcularDescuento,
-                    'fec_registra': null,
-                    'fec_envia': null,
-                    'fec_anula': null,
-                    'usu_registra': null,
-                    'usu_envia': null,
-                    'usu_anula': null,
-                    'fecha': me.fecha,
-                    'id_tarifario': me.id_tarifario,
-                    'id_cierre_caja': me.id_cierre_caja_facturacion,
-                    'data': me.arrayDetalle,
-                    'tipo_movimiento' : 4,
-                    'sumatoria' : 0
-                }).then(function (response) {
-                    me.ocultarDetalle();
-                    me.listarFacturacion(1,'','','','','','','');
-                }).catch(function (error) {
-                    console.log(error);
-                });
-            },
-            actualizarFacturacion(){
-                if (this.validarFacturacion()){
                     return;
                 }
-                
-                let me = this;
-                
-                // me.subtotal = 0;
-                // me.iva = 0;
-                // me.descuento = 0;
-                // me.total = 0;
-                // for(var i=0; i<me.arrayDetalle.length; i++)
-                // {
-                //     me.descuento += parseFloat(me.arrayDetalle[i].valor_descuento);
-                //     me.iva += parseFloat(me.arrayDetalle[i].valor_iva);
-                //     me.subtotal += parseFloat(me.arrayDetalle[i].valor_subtotal);
-                // }
-                
-                // me.total = parseFloat(me.subtotal)+parseFloat(me.iva);
-                if(me.estado==2)
-                {
-                    me.sugerirNumFactura();
+                else {                
+                    let me = this;
+                    axios.post(this.ruta +'/facturacion/registrar',{
+                        'num_factura': null,
+                        'id_tercero': me.id_tercero,
+                        'fec_edita': null,
+                        'usu_edita': null,
+                        'subtotal': me.subtotal,
+                        'valor_iva': me.valor_iva,
+                        'total': me.valor_final,
+                        'abono': me.abono,
+                        'saldo': me.saldo,
+                        'detalle': me.detalle,
+                        'lugar': me.lugar,
+                        'descuento': me.calcularDescuento,
+                        'fec_registra': null,
+                        'fec_envia': null,
+                        'fec_anula': null,
+                        'usu_registra': null,
+                        'usu_envia': null,
+                        'usu_anula': null,
+                        'fecha': me.fecha,
+                        'id_tarifario': me.id_tarifario,
+                        'id_cierre_caja': me.id_cierre_caja_facturacion,
+                        'data': me.arrayDetalle,
+                        'tipo_movimiento' : 4,
+                        'sumatoria' : 0
+                    }).then(function (response) {
+                        var toFind = "4";
+                        var filtered = me.arrayDetalle.filter(function(el) {
+                            return el.tipo === toFind;
+                        });
+                        me.arrayDetalle = [];
+                        me.id_tercero = '';
+                        me.tercero = '';
+                        me.lugar = '';
+                        me.ocultarDetalle();
+                        me.listarArticulo(me.buscarA,me.criterioA,me.buscarCategoriaA);
+                        me.listarFacturacion(1,'','','','','','','');
+                        if(filtered)
+                            me.position = 6;
+                        else 
+                            me.position = 7;
+                        
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
                 }
-                
+            },
+            
+            actualizarFacturacion(){
+                console.log('hola0');
+                if (!this.id_tercero) this.errorMostrarMsjFacturacion.push("Seleccione un tercero");
+                if (!this.lugar) this.errorMostrarMsjFacturacion.push("Seleccione un lugar");
+                let me = this;
+
                 axios.put(this.ruta +'/facturacion/actualizar',{
                     'num_factura': me.num_factura,
                     'id_tercero': me.id_tercero,
@@ -1488,23 +1621,59 @@
                 }).then(function (response) {
                     me.ocultarDetalle();
                     me.listarFacturacion(1,'','','','','','','');
+                    this.listarArticulo(me.buscarA,me.criterioA,me.buscarCategoriaA);
+                    me.tipoAccion2 =1;
+                    position = 7;
+                  
                 }).catch(function (error) {
                     console.log(error);
+                  
                 });
             },
             validarFacturacion(){
-                this.errorFacturacion=0;
-                this.errorMostrarMsjFacturacion =[];
+                this.errorFacturacion=0;               
+                if(this.position!=2) {
+                    this.position = 2;
+                    return false;
+                } else {
+                
+                    this.errorMostrarMsjFacturacion =[];
 
-                if (this.fecha==0) this.errorMostrarMsjFacturacion.push("Ingrese la fecha");
-                // if (this.num_factura==0) this.errorMostrarMsjFacturacion.push("Seleccione el comprobante");
-                if (!this.id_tercero) this.errorMostrarMsjFacturacion.push("Seleccione un tercero");
-                if (!this.lugar) this.errorMostrarMsjFacturacion.push("Seleccione un lugar");
-                if (this.arrayDetalle.length<=0) this.errorMostrarMsjFacturacion.push("Ingrese detalles");
-
-                if (this.errorMostrarMsjFacturacion.length) this.errorFacturacion = 1;
-
-                return this.errorFacturacion;
+                    if (!this.id_tercero) {
+                        this.$notify({
+                            group: 'foo',
+                            duration: 10000,
+                            position: 'top right',
+                            title: 'Seleccione Cliente',
+                            type: 'error',
+                            text: 'Debes seleccion un cliente'
+                        });
+                        return false;
+                    }
+                    if (!this.lugar) { 
+                         this.$notify({
+                            group: 'foo',
+                            duration: 10000,
+                            position: 'top right',
+                            title: 'Seleccione Mesa',
+                            type: 'error',
+                            text: 'Debes selecciona una mesa'
+                        });
+                        return false;
+                    }
+                    if (this.arrayDetalle.length<=0) {
+                       this.$notify({
+                            group: 'foo',
+                            duration: 10000,
+                            position: 'top right',
+                            title: 'Seleccione Mesa',
+                            type: 'error',
+                            text: 'Debes agregar productos'
+                        });
+                    }
+                    return true;
+                }
+               
             },
             selectZonas(){
                 let me=this;
@@ -1557,7 +1726,7 @@
                                 me.facturacion_id=data['id'];
                                 me.num_factura=data['num_factura'];
                                 me.id_tercero=data['id_tercero'];
-                                me.tercero=data['nom_tercero'];
+                                me.tercero=data['nombre1'] ?  data['nombre1']+' '+data['nombre2']+' '+data['apellido1']+' '+data['apellido2'] : data['nom_tercero'];
                                 me.fec_edita=me.fechaHoraActual;
                                 me.subtotal=data['subtotal'];
                                 me.valor_iva=data['valor_iva'];
@@ -1712,7 +1881,7 @@
                 me.fec_envia='',
                 me.fec_anula='',
                 // me.fecha = '',
-                me.id_tarifario = 0;
+                //me.id_tarifario = 0;
                 me.estado = 0,
                 // me.arrayFacturacion=[];
                 // me.arrayFacturacionT=[];
@@ -1749,6 +1918,18 @@
 
                 //Obtener los datos de los detalles 
                 me.listarDetalle(id);
+            },
+            listarDetalle(id_factura){
+                let me=this;
+                var url= this.ruta +'/detalle_facturacion/buscarDetalleFacturacion?id_factura=' + id_factura;
+                axios.get(url).then(function (response) {
+                    var respuesta= response.data;
+                    me.arrayDetalle = respuesta.detalles;
+                    me.arrayDetalleT = respuesta.detalles;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
             },
             cerrarModal(){
                 this.modal=0;
@@ -1820,7 +2001,6 @@
                 }
                 }) 
             },
-
             // funcion abrir modal proveedores
             abrirModalT(accion){               
                 this.arrayTerceros=[];
@@ -1849,23 +2029,11 @@
                 this.terc_busq = '';
             },
             cargarTercero(tercero){
-                if(this.tipoAccionModalTerceros==1)
-                {
-                    this.tercero = tercero['num_documento'];
-                    this.id_tercero = tercero['id'];
-                }
-                if(this.tipoAccionModalTerceros==2)
-                {
-                    this.terceroFiltro = tercero['num_documento'];
-                    this.idTerceroFiltro = tercero['id'];
-                }
-                if(this.tipoAccionModalTerceros==3)
-                {
-                    this.vendedorFiltro = tercero['num_documento'];
-                    this.idVendedorFiltro = tercero['id'];
-                }
-
-                this.cerrarModalT();
+             
+                console.log("llegando");
+                this.tercero = tercero['nombre1']+" "+tercero['nombre2']+" "+tercero['apellido1']+" "+tercero['apellido2'];
+                 this.id_tercero = tercero['id'];
+                this.position=2;
             },
             buscarTercero(){
                 let me=this;
@@ -1912,6 +2080,15 @@
             pdfFormato(id){
                 window.open(this.ruta +'/facturacion/pdfFacturacion/'+ id);
             },
+            llamarMensaje(producto) {
+                this.$notify({
+                    group: 'foo',
+                    duration: 500,
+                    title: 'Product agregado',
+                    type: 'success',
+                    text: 'Agregado '+producto
+                });
+            }
         },
         mounted() {
             $(".mul-select").select2({
@@ -1921,17 +2098,19 @@
                 tokenSeparators: ['/',',',';'," "] 
             });
             //console.log( $(".mul-select"));
-            // $(".mul-select").on("change", function (e) { log("change"); });
+             
             let me= this;
             var d = new Date();
-            
+            $(".mul-select").on("change", function (e) { 
+                me.listarArticulo(me.buscarA,me.criterioA,me.buscarCategoriaA) 
+            });
             var dd = d.getDate();
             var mm = d.getMonth()+1;
             var yyyy = d.getFullYear();
             var h = d.getHours();
             var min = d.getMinutes();
             var sec = d.getSeconds();
-            
+           
             if(dd<10){
                 dd='0'+dd;
             } 
@@ -1941,16 +2120,56 @@
             d = yyyy+'-'+mm+'-'+dd;
             me.fechaActual = d;
             me.hastaFiltro = d;
+            me.desdeFiltro = d;
             me.fecha = d;
             me.fechaHoraActual = d+' '+h+':'+min+':'+sec;
-
-            //me.listarCajas();
+            this.ocultarDetalle();
+            this.selectCategoria2();
+            me.listarCajas();
+            me.buscarTercero();
+            me.selectZonas();
+           // me.llamarMensaje();
             this.listarArticulo(this.buscarA,this.criterioA,this.buscarCategoriaA);
-            // me.listarFacturacion(1,me.numFacturaFiltro,me.estadoFiltro,me.idTerceroFiltro,me.ordenFiltro,me.desdeFiltro,me.hastaFiltro,me.idVendedorFiltro);
+             me.listarFacturacion(1,me.numFacturaFiltro,me.estadoFiltro,me.idTerceroFiltro,me.ordenFiltro,me.desdeFiltro,me.hastaFiltro,me.idVendedorFiltro);
+             
         }
     }
 </script>
 <style> 
+    /* {
+            font-size: 12px;
+            font-family: 'Times New Roman';
+    }*/
+    .ex1 {
+        border: 1px solid rgb(49, 173, 45);
+        outline-style: solid;
+        outline-color: rgba(45, 189, 76, 0.87);
+        outline-width: thin;
+}
+    .btn-edit-factura {
+        font-size: 15px !important;
+    }
+    .minimizar {
+        font-size: 9px;
+    }
+    .espacio-1 {
+        margin-top: 0 !important; 
+        margin-bottom: 0rem !important;
+    }
+    .centrado {
+        text-align: center;
+        align-content: center;
+    }
+    .ticket {
+        width: 288px;
+        max-width: 320px;
+        margin: auto;
+        line-height: 1;
+    }
+     .img-logo {
+        max-width: 87px;
+        margin-left: 100px;
+    }
     .select2-search__field {
             width: 100% !important;
     }
@@ -1958,7 +2177,7 @@
             width: 100% !important
     }
     .nombre-tercero {
-        font-size: 13px !important;
+        font-size: 16px !important;
     }
     .txt-nom-prod {
         line-height: 1 !important;
@@ -1977,17 +2196,14 @@
         font-size: 12px;
         border-radius: 3px !important;
     }
-    
+
     h3.ocultar{
         display: none !important;
     }
-    h3.ocultar:hover, h3.ocultar:hover{
-        display: block !important;
-    }
-    div.resaltar:hover, div.active:hover, div>h3.resaltar:hover, div>h3.active:hover  {
-       color: #fff!important;
-       background-color: #343a40!important;
-       display: block !important;
+    
+    div.resaltar:hover, div.active:hover, div h3.resaltar:hover, div>h3.active:hover  {
+        background-color: #d1d3e2!important;
+       
     }
     .mul-select  {
          width: 100%;

@@ -7,6 +7,9 @@ use App\Facturacion;
 use App\DetalleFacturacion;
 use App\Stock;
 use App\Articulo;
+use App\User;
+use App\Notifications\NotifyAdmin;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -34,16 +37,18 @@ class FacturacionController extends Controller
         $desdeFiltro = $request->desdeFiltro;
         $hastaFiltro = $request->hastaFiltro;
         $idVendedorFiltro = $request->idVendedorFiltro;
-
+        
         if(isset($request->filtroInformes))
         {
+            
             $n = '';
             $facturacion = Facturacion::join('personas', 'facturacion.id_tercero','=','personas.id')
-            ->join('zona', 'facturacion.lugar','=','zona.id');
+            ->join('zona', 'facturacion.lugar','=','zona.id')
+            ->join('users', 'facturacion.id_usuario','=','users.id');
             if(isset($request->idCajaInformes) && $request->idCajaInformes!='' && $request->idCajaInformes!=0){
             $facturacion = $facturacion->join('cajas_cierres','facturacion.id_cierre_caja','=','cajas_cierres.id');}
 
-            $facturacion = $facturacion->select('facturacion.id','facturacion.num_factura','facturacion.id_tercero','personas.nombre as nom_tercero','facturacion.id_usuario','facturacion.fec_crea','facturacion.fec_edita','facturacion.usu_edita','facturacion.subtotal','facturacion.valor_iva','facturacion.total','abono','facturacion.saldo','facturacion.detalle','facturacion.lugar','zona.zona as nom_lugar','facturacion.descuento','facturacion.fec_registra','facturacion.fec_envia','facturacion.fec_anula','facturacion.usu_registra','facturacion.usu_envia','facturacion.usu_anula','facturacion.fecha','facturacion.id_tarifario','facturacion.estado');
+            $facturacion = $facturacion->select('facturacion.id','facturacion.num_factura','facturacion.id_tercero','personas.nombre as nom_tercero','facturacion.id_usuario','facturacion.fec_crea','facturacion.fec_edita','facturacion.usu_edita','facturacion.subtotal','facturacion.valor_iva','facturacion.total','abono','facturacion.saldo','facturacion.detalle','facturacion.lugar','zona.zona as nom_lugar','facturacion.descuento','facturacion.fec_registra','facturacion.fec_envia','facturacion.fec_anula','facturacion.usu_registra','facturacion.usu_envia','facturacion.usu_anula','facturacion.fecha','facturacion.id_tarifario','facturacion.estado','personas.nombre1','personas.nombre2','personas.apellido1','personas.apellido2','users.idrol');
             
             if(isset($request->idCajaInformes) && $request->idCajaInformes!='' && $request->idCajaInformes!=0){$facturacion = $facturacion->where('cajas_cierres.id_caja','=',$request->idCajaInformes);}
             if(isset($request->idCajeroInformes) && $request->idCajeroInformes!='' && $request->idCajeroInformes!=0){$facturacion = $facturacion->where('facturacion.id_usuario','=',$request->idCajeroInformes);}
@@ -73,9 +78,10 @@ class FacturacionController extends Controller
         }
         else
         {
+            
             $facturacion = Facturacion::join('personas', 'facturacion.id_tercero','=','personas.id')
-            ->join('zona', 'facturacion.lugar','=','zona.id')
-            ->select('facturacion.id','facturacion.num_factura','facturacion.id_tercero','personas.nombre as nom_tercero','facturacion.id_usuario','facturacion.fec_crea','facturacion.fec_edita','facturacion.usu_edita','facturacion.subtotal','facturacion.valor_iva','facturacion.total','abono','facturacion.saldo','facturacion.detalle','facturacion.lugar','zona.zona as nom_lugar','facturacion.descuento','facturacion.fec_registra','facturacion.fec_envia','facturacion.fec_anula','facturacion.usu_registra','facturacion.usu_envia','facturacion.usu_anula','facturacion.fecha','facturacion.id_tarifario','facturacion.estado');
+            ->join('zona', 'facturacion.lugar','=','zona.id')->join('users', 'facturacion.id_usuario','=','users.id')
+            ->select('facturacion.id','facturacion.num_factura','facturacion.id_tercero','personas.nombre as nom_tercero','facturacion.id_usuario','facturacion.fec_crea','facturacion.fec_edita','facturacion.usu_edita','facturacion.subtotal','facturacion.valor_iva','facturacion.total','abono','facturacion.saldo','facturacion.detalle','facturacion.lugar','zona.zona as nom_lugar','facturacion.descuento','facturacion.fec_registra','facturacion.fec_envia','facturacion.fec_anula','facturacion.usu_registra','facturacion.usu_envia','facturacion.usu_anula','facturacion.fecha','facturacion.id_tarifario','facturacion.estado','personas.nombre1','personas.nombre2','personas.apellido1','personas.apellido2','users.idrol');
             
             if($numFacturaFiltro!='' && $numFacturaFiltro!='0')
             {
@@ -123,8 +129,9 @@ class FacturacionController extends Controller
                     'last_page'    => $facturacion->lastPage(),
                     'from'         => $facturacion->firstItem(),
                     'to'           => $facturacion->lastItem(),
-                ],
+                ],               
                 'facturacion' => $facturacion,
+                'idrol' => Auth::user()->idrol,
             ];
         }
     }
@@ -135,7 +142,7 @@ class FacturacionController extends Controller
 
         $filtro = $request->filtro;
         $facturacion = Facturacion::join('personas', 'facturacion.id_tercero','=','personas.id')
-        ->select('facturacion.id','facturacion.num_factura','facturacion.id_tercero','personas.nombre as nom_tercero','facturacion.id_usuario','facturacion.fec_crea','facturacion.fec_edita','facturacion.usu_edita','facturacion.subtotal','facturacion.valor_iva','facturacion.total','abono','facturacion.saldo','facturacion.detalle','facturacion.lugar','facturacion.descuento','facturacion.fec_registra','facturacion.fec_envia','facturacion.fec_anula','facturacion.usu_registra','facturacion.usu_envia','facturacion.usu_anula','facturacion.fecha','facturacion.estado')
+        ->select('facturacion.id','facturacion.num_factura','facturacion.id_tercero','personas.nombre as nom_tercero','facturacion.id_usuario','facturacion.fec_crea','facturacion.fec_edita','facturacion.usu_edita','facturacion.subtotal','facturacion.valor_iva','facturacion.total','abono','facturacion.saldo','facturacion.detalle','facturacion.lugar','facturacion.descuento','facturacion.fec_registra','facturacion.fec_envia','facturacion.fec_anula','facturacion.usu_registra','facturacion.usu_envia','facturacion.usu_anula','facturacion.fecha','facturacion.estado','personas.nombre1','personas.nombre2','personas.apellido1','personas.apellido2')
         ->where('id_empresa','=',$id_empresa)
         ->where('facturacion.id','=', $filtro)
         ->get();
@@ -208,6 +215,9 @@ class FacturacionController extends Controller
             $detalle->valor_final = $det['valor_subtotal']+$det['valor_iva'];
             $detalle->save();
 
+            $fechaActual = date('Y-m-d');
+            $numVentas = DB::table('detalle_facturacion')->whereDate('created_at',$fechaActual)->count();
+
             $stock = new Stock();
             $stock->id_producto = $det['idarticulo'];
             $stock->id_usuario = $id_usuario;
@@ -216,7 +226,27 @@ class FacturacionController extends Controller
             $stock->tipo_movimiento = $request->tipo_movimiento;
             $stock->sumatoria = $request->sumatoria;
             $stock->save();
+           
+            $arregloDatos=[
+               
+                'numero' => $numVentas,
+                'id_detalle_facturacion' => $detalle->id,
+                'cantidad' => $detalle->cantidad,
+                'id_producto' => $detalle->id_producto,
+                'id_factura' => $detalle->id_factura,
+                'estado' => 'Preparando'
+            ];
+
+            $allUsers = User::all();
+
+            foreach ($allUsers as $notificar){
+                User::findOrFail($notificar->id)->notify(new NotifyAdmin($arregloDatos));
+            }
+
+           
         }
+
+        
     }
   
 
@@ -280,6 +310,9 @@ class FacturacionController extends Controller
             $detalle->valor_final = $det['valor_subtotal']+$det['valor_iva'];
             $detalle->save();
         }
+
+
+        return 'ok';
     }
 
     public function cambiarEstado(Request $request)

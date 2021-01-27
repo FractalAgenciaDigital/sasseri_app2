@@ -55,7 +55,7 @@ $menu_usuario = Session::get('menu_usu');
 					@endforeach
 			
 					
-                    <!--<li class="nav-item nav-dropdown">
+                    <li class="nav-item nav-dropdown">
                         <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-bag"></i> Contabilidad</a>
                         <ul class="nav-dropdown-items">
                             <li @click="menu=16" class="nav-item">

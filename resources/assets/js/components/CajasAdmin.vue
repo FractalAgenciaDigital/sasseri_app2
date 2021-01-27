@@ -35,37 +35,45 @@
                         <table class="table table-bordered table-striped table-sm table-responsive table-earning">
                             <thead>
                                 <tr>
-                                    <th class="col-md-11">Nombre</th>
+                                    <th class="col-md-10">Nombre</th>
+                                    <th>Estado</th>
                                     <th>Opciones</th>
                                 </tr>
                             </thead>
                             <tbody v-if="permisosUser.leer && arrayCajasAdmin.length">
+                             
                                 <tr v-for="cajas_admin in arrayCajasAdmin" :key="cajas_admin.id">
                                     <td v-text="cajas_admin.usuario"></td>
-                                    <td>
-                                        <button v-if="permisosUser.actualizar" type="button" @click="abrirModal('cajas_admin','actualizar',cajas_admin)" class="btn btn-warning btn-sm" title="Actualizar">
+                                    <td class="td-estado">
+                                        <template v-if="permisosUser.anular">
+
+                                            <!-- <a href="#" class="btn text-success" v-if="articulo.condicion" @click="desactivarArticulo(articulo.id)" title="Activar">
+                                                <i class="fa fa-check-circle"></i>
+                                            </a> -->
+                                        
+                                            <a v-if="cajas_admin.condicion" href="#" class="btn text-success" @click="desactivarCajasAdmin(cajas_admin.id)" title="Desactivar">
+                                                <i class="fa fa-check-circle"></i>
+                                            </a>
+                                            <a v-else href="#" class="btn text-danger" @click="activarCajasAdmin(cajas_admin.id)" title="Activar">
+                                                <i class="fa fa-times-circle"></i>
+                                            </a>
+                                        </template>
+                                        <template v-else>
+                                            <a v-if="cajas_admin.condicion" href="#" class="btn btn-secondary btn-sm" title="Desactivar (Deshabilitado)">
+                                                 <i class="fa fa-check-circle"></i>
+                                            </a>
+                                            <a v-else href="#" class="btn btn-secondary btn-sm" title="Activar (Deshabilitado)">
+                                              <i class="fa fa-times-circle"></i>
+                                            </a>
+                                        </template>
+                                    </td>
+                                    <td>                                            
+                                        <button v-if="permisosUser.actualizar" type="button" @click="abrirModal('cajas_admin','actualizar',cajas_admin)" class="btn btn-success btn-sm" title="Actualizar">
                                           <i class="icon-pencil"></i>
                                         </button>
                                         <button v-else type="button" class="btn btn-secondary btn-sm" title="Actualizar (Deshabilitado)">
                                           <i class="icon-pencil"></i>
-                                        </button> &nbsp;
-
-                                        <template v-if="permisosUser.anular">
-                                            <button v-if="cajas_admin.estado" type="button" class="btn btn-danger btn-sm" @click="desactivarConcentracion(cajas_admin.id)" title="Desactivar">
-                                                <i class="icon-trash"></i>
-                                            </button>
-                                            <button v-else type="button" class="btn btn-info btn-sm" @click="activarConcentracion(cajas_admin.id)" title="Activar">
-                                                <i class="icon-check"></i>
-                                            </button>
-                                        </template>
-                                        <template v-else>
-                                            <button v-if="cajas_admin.estado" type="button" class="btn btn-secondary btn-sm" title="Desactivar (Deshabilitado)">
-                                                <i class="icon-trash"></i>
-                                            </button>
-                                            <button v-else type="button" class="btn btn-secondary btn-sm" title="Activar (Deshabilitado)">
-                                                <i class="icon-check"></i>
-                                            </button>
-                                        </template>
+                                        </button> &nbsp;                                        
                                     </td>
                                 </tr>                                
                             </tbody>
@@ -104,34 +112,37 @@
                             <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                                 <div class="form-group row">
                                     <div class="col-md-5">
-                                        <label class="col-md-3 form-control-label" for="text-input">Nombre</label>
-                                        <div class="form-inline float-right col-md-9">
-                                            <input type="text" readonly style="max-width: 130px;" class="form-control" name="cuenta_fin" v-model="tercero">
+                                        <label class="form-control-label" for="text-input">Nombre</label>
+                                        <div class="input-group">
+                                            <input type="text" readonly class="form-control" name="cuenta_fin" v-model="tercero">
+                                            <div class="input-group-append">
+                                                <button type="button" v-if="permisosUser.leer" @click="abrirModalT()" class="btn btn-primary">...</button>
+                                                <button v-else  class="btn btn-secondary">...</button>
 
-                                            <button type="button" v-if="permisosUser.leer" @click="abrirModalT()" style="min-width: 30px;" class="btn btn-primary form-control">...</button>
-                                            <button v-else  style="min-width: 30px;" class="btn btn-secondary form-control">...</button>
-
-                                            <button v-if="permisosUser.leer" type="button" @click="quitar(4)" style="min-width: 30px;" class="btn btn-danger form-control">
-                                                <i class="icon-trash"></i>
-                                            </button>
-                                            <button v-else type="button" style="min-width: 30px;" class="btn btn-secondary form-control">
-                                                <i class="icon-trash"></i>
-                                            </button>
+                                                <button v-if="permisosUser.leer" type="button" @click="quitar(4)" class="btn btn-danger">
+                                                    <i class="icon-trash"></i>
+                                                </button>
+                                                <button v-else type="button" class="btn btn-secondary">
+                                                    <i class="icon-trash"></i>
+                                                </button>
+                                            </div>
                                         </div>
+                                    
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-5 form-group">
+                                        <label class="form-control-label" for="text-input">Caja</label>
                                         <select class="form-control" v-model="idCajaAgregar">
                                             <option>Buscar <input type="text" value=""></option>
                                             <option value="0">Seleccione</option>
-                                            <option v-for="(caja, index) in arrayCajas" :value="caja.id" v-text="caja.nombre"></option>
+                                            <option v-for="(caja, index) in arrayCajas" :value="caja.id" v-text="caja.nombre" :key="index"></option>
                                         </select>
                                     </div>
-                                    <div class="col-md-1">
+                                    <div class="col-md-2 form-group mt-2">
                                         <button type="button" v-if="idCajaAgregar!=0" class="btn btn-success btn-sm" @click="agregarDetalleCajasAdmin()">
-                                            <i class="fas fa-plus-circle"></i>
+                                            <i class="fa fa-plus-circle"></i>
                                         </button>
                                         <button type="button" v-else class="btn btn-secondary btn-sm">
-                                            <i class="fas fa-plus-circle"></i>
+                                            <i class="fa fa-plus-circle"></i>
                                         </button>
                                     </div>
                                 </div>
@@ -141,7 +152,7 @@
                                             <tr>
                                                 <th>Nombre</th>
                                             </tr>
-                                            <tr v-for="(cajamodal, index) in arrayCajasModal">
+                                            <tr v-for="(cajamodal, index) in arrayCajasModal" :key="index">
                                                 <td v-text="cajamodal.nom_caja"></td>
                                             </tr>
                                         </table>
@@ -199,9 +210,19 @@
                                 <div>
                                     <table class="table table-bordered table-striped table-sm table-responsive table-earning">
                                         
-                                            <tr><th>Documento</th><th>Nombre</th><th style="    width: 35px;">-</th></tr>
-                                        
-                                            <tr v-for="tercero in arrayTerceros" :key="tercero.id">
+                                            <!--<tr><th>Documento</th><th>Nombre</th><th style="    width: 35px;">-</th></tr>-->
+                                            <tr><th>Usuario</th><th>-</th></tr>
+                                                <tr v-for="tercero in arrayTerceros" :key="tercero.id">
+                                                    <td>
+                                                        {{tercero.usuario}}
+                                                    </td>
+                                                    <td>
+                                                    <button type="button" style=" margin-right: -8px;" @click="cargarTercero(tercero)" class="btn btn-success btn-sm" title='Ver formato'>
+                                                        <i class="icon-check"></i>
+                                                    </button>
+                                                </td>
+                                                </tr>
+                                            <!-- <tr v-for="tercero in arrayTerceros" :key="tercero.id">
                                                 <td v-text="tercero.num_documento"></td>
                                                 <td v-if="tercero.nombre && !tercero.nombre1">{{ tercero.nombre }}  </td>
                                                 <td v-else>{{ tercero.nombre1 + ' ' + validarUnder(tercero.nombre2)+' '+tercero.apellido1+' '+validarUnder(tercero.apellido2) }} </td>
@@ -210,7 +231,7 @@
                                                         <i class="icon-check"></i>
                                                     </button>
                                                 </td>
-                                            </tr>
+                                            </tr> -->
                                     </table>
                                 </div>
                             </div>
@@ -256,7 +277,7 @@
                     'to' : 0,
                 },
                 offset : 10,
-                criterio : 'nombre',
+                criterio : 'usuario',
                 buscar : '',
 
                 // variables modal buscar tercero
@@ -304,7 +325,7 @@
                 var url= this.ruta +'/cajas_admin?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
                 axios.get(url).then(function (response) {
                     var respuesta= response.data;
-                    me.arrayCajasAdmin = respuesta.users.data;
+                    me.arrayCajasAdmin = respuesta.cajas_admin.data;
                     me.pagination= respuesta.pagination;
                 })
                 .catch(function (error) {
@@ -319,7 +340,7 @@
                 me.listarCajasAdmin(page,buscar,criterio);
             },
             registrarCajasAdmin(){
-                // if (this.validarConcentracion()){
+                // if (this.validarCajasAdmin()){
                 //     return;
                 // }
                 
@@ -330,13 +351,13 @@
                     'arrayCajasAdmin' : this.arrayCajasModal,
                 }).then(function (response) {
                     me.cerrarModal();
-                    me.listarCajasAdmin(1,'','nombre');
+                    me.listarCajasAdmin(1,'','usuario');
                 }).catch(function (error) {
                     console.log(error);
                 });
             },
             actualizarCajasAdmin(){
-                // if (this.validarConcentracion()){
+                // if (this.validarCajasAdmin()){
                 //     return;
                 // }
                 
@@ -348,24 +369,24 @@
                     'id': this.caja_admin_id
                 }).then(function (response) {
                     me.cerrarModal();
-                    me.listarCajasAdmin(1,'','nombre');
+                    me.listarCajasAdmin(1,'','usuario');
                 }).catch(function (error) {
                     console.log(error);
                 }); 
             },
-            validarConcentracion(){
+            validarCajasAdmin(){
                 this.errorCajasAdmin=0;
                 this.errorMostrarMsjCajasAdmin =[];
 
-                if (!this.nombre) this.errorMostrarMsjCajasAdmin.push("Ingrese el nombre de la concentración.");
+                if (!this.nombre) this.errorMostrarMsjCajasAdmin.push("Ingrese el nombre de la Caja.");
 
                 if (this.errorMostrarMsjCajasAdmin.length) this.errorCajasAdmin = 1;
 
                 return this.errorCajasAdmin;
             },
-            desactivarConcentracion(id){
+            desactivarCajasAdmin(id){
                Swal.fire({
-                title: 'Esta seguro de desactivar esta concentracion?',
+                title: 'Esta seguro de desactivar esta Caja?',
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -383,7 +404,7 @@
                     axios.put(this.ruta +'/cajas_admin/desactivar',{
                         'id': id
                     }).then(function (response) {
-                        me.listarCajasAdmin(1,'','nombre');
+                        me.listarCajasAdmin(1,'','usuario');
                         Swal.fire(
                         'Desactivado!',
                         'El registro ha sido desactivado con éxito.',
@@ -402,9 +423,9 @@
                 }
                 }) 
             },
-            activarConcentracion(id){
+            activarCajasAdmin(id){
                Swal.fire({
-                title: 'Esta seguro de activar esta concentracion?',
+                title: 'Esta seguro de activar esta caja?',
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -422,7 +443,7 @@
                     axios.put(this.ruta +'/cajas_admin/activar',{
                         'id': id
                     }).then(function (response) {
-                        me.listarCajasAdmin(1,'','nombre');
+                        me.listarCajasAdmin(1,'','usuario');
                         Swal.fire(
                         'Activado!',
                         'El registro ha sido activado con éxito.',
@@ -553,14 +574,14 @@
                 this.arrayTerceros = [];
             },
             cargarTercero(tercero){
-                this.tercero = tercero['num_documento'];
+                this.tercero = tercero['usuario'];
                 this.id_tercero = tercero['id'];
                 this.cerrarModalT();
             },
             buscarTercero(){
                 let me=this;
                 var search = this.terc_busq;
-                var url= this.ruta +'/cliente/selectCliente?filtro='+search;
+                var url= this.ruta +'/cajas_admin/listarVendedores?filtro='+search;
                  axios.get(url).then(function (response) {
                     var respuesta = response.data;
                     me.arrayTerceros = respuesta.clientes;                    

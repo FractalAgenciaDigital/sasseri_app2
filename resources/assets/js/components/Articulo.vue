@@ -71,18 +71,31 @@
                                         <div v-else-if="articulo.tipo_articulo==3">
                                             <span>Producto simple</span>
                                         </div>
-                                    </td>
-                                    <td>
-                                        <div v-if="articulo.condicion">
-                                            <span class="badge badge-success">Activo</span>
-                                        </div>
-                                        <div v-else>
-                                            <span class="badge badge-danger">Desactivado</span>
+                                         <div v-else-if="articulo.tipo_articulo==4">
+                                            <span>Producto preparado</span>
                                         </div>
                                     </td>
-                                    <td>
+                                    <td class="td-estado">
+                                        <template v-if="permisosUser.anular">
+                                            <a href="#" class="btn text-success" v-if="articulo.condicion" @click="desactivarArticulo(articulo.id)" title="Activar">
+                                                <i class="fa fa-check-circle"></i>
+                                            </a>
+                                            <a href="#" class="btn text-danger" v-else @click="activarArticulo(articulo.id)" title="Desactivar">
+                                                <i class="fa fa-times-circle"></i>
+                                            </a>                                           
+                                        </template>
+                                        <template v-else>
+                                            <a href="#" class="btn text-success" v-if="articulo.condicion" title="Activar">
+                                                <i class="fa fa-check-circle"></i>
+                                            </a>
+                                            <a href="#" class="btn text-danger" v-else title="Anular">
+                                                <i class="fa fa-times-circle"></i>
+                                            </a>
+                                        </template>
+                                    </td>
+                                    <td>                                        
                                         <template>
-                                            <button v-if="permisosUser.actualizar && articulo.condicion" type="button" @click="abrirModal('articulo','actualizar',articulo)" class="btn btn-warning btn-sm" title="Actualizar">
+                                            <button v-if="permisosUser.actualizar && articulo.condicion" type="button" @click="abrirModal('articulo','actualizar',articulo)" class="btn btn-success btn-sm" title="Actualizar">
                                                 <i class="icon-pencil"></i>
                                             </button>
                                             <button v-else type="button" class="btn btn-secondary btn-sm" title="Actualizar">
@@ -90,37 +103,46 @@
                                             </button>
                                         </template>
 
-                                        <template v-if="permisosUser.anular">
-                                            <button v-if="articulo.condicion" type="button" class="btn btn-danger btn-sm" @click="desactivarArticulo(articulo.id)" title="Anular">
-                                                <i class="icon-trash"></i>
-                                            </button>
-                                            <button v-else type="button" class="btn btn-info btn-sm" @click="activarArticulo(articulo.id)" title="Anular">
-                                                <i class="icon-check"></i>
-                                            </button>
-                                        </template>
-                                        <template v-else>
-                                            <button v-if="articulo.condicion" type="button" class="btn btn-secondary btn-sm" title="Anular">
-                                                <i class="icon-trash"></i>
-                                            </button>
-                                            <button v-else type="button" class="btn btn-secondary btn-sm" title="Anular">
-                                                <i class="icon-check"></i>
-                                            </button>
-                                        </template>
-
-                                        <template>
-                                            <button type="button" class="btn btn-info btn-sm" @click="abrirModalStock('ver', articulo.id)" title="Ver stock">
-                                                <i class="fa fa-archive"></i>
-                                            </button>
-                                        </template>
                                         
-                                        <template>
-                                            <button v-if="permisosUser.actualizar && articulo.condicion" @click="abrirModal('articulo','productos_asociados',articulo)" type="button" class="btn btn-success btn-sm" title="Presentación asociada">
-                                                <i class="fa fa-align-justify"></i>
-                                            </button>
-                                            <button v-else type="button" class="btn btn-secondary btn-sm" title="Presentación asociada">
-                                                <i class="fa fa-align-justify"></i>
-                                            </button>
-                                        </template>
+                                        <div class="btn-group dropleft">
+                                            <a href="" class="btn-link btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fa fa-ellipsis-v"></i>
+                                            </a>
+                                            <div class="dropdown-menu">
+                                                <!-- Dropdown menu links -->
+                                                <template v-if="permisosUser.anular">
+                                                    <a href="#" v-if="articulo.condicion" class="dropdown-item" @click="desactivarArticulo(articulo.id)" title="Anular">
+                                                        <i class="icon-trash"></i>&nbsp;Desactivar
+                                                    </a>
+                                                    <a href="#" v-else class="dropdown-item" @click="activarArticulo(articulo.id)" title="Anular">
+                                                        <i class="icon-check"></i>&nbsp;Activar  
+                                                    </a>
+                                                </template>
+                                                <template v-else>
+                                                    <a href="#" v-if="articulo.condicion" class="dropdown-item" title="Anular">
+                                                        <i class="icon-trash"></i>&nbsp;Desactivar
+                                                    </a>
+                                                    <a href="#" v-else class="dropdown-item" title="Anular">
+                                                        <i class="icon-check"></i>&nbsp;Activar  
+                                                    </a>
+                                                </template>
+
+                                                <template>
+                                                    <a href="#" class="dropdown-item" @click="abrirModalStock('ver', articulo.id)" title="Ver stock">
+                                                    <i class="fa fa-archive"></i>&nbsp;Ver stock  
+                                                    </a>
+                                                </template>
+                                                
+                                                <template>
+                                                    <a href="#" v-if="permisosUser.actualizar && articulo.condicion" @click="abrirModal('articulo','productos_asociados',articulo)" class="dropdown-item" title="Presentación asociada">
+                                                        <i class="fa fa-align-justify"></i>&nbsp;Presentación asociados
+                                                    </a>
+                                                    <a href="#" v-else class="dropdown-item" title="Presentación asociada">
+                                                        <i class="fa fa-align-justify"></i>&nbsp;Presentación asociados
+                                                    </a>
+                                                </template>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>                                
                             </tbody>
@@ -169,6 +191,10 @@
                                             <option value="1">Suministro</option>
                                             <option value="2">Servicio</option>
                                             <option value="3">Producto simple</option>
+<<<<<<< HEAD
+=======
+                                            <option value="4">Preparado</option>
+>>>>>>> dev_puntos_venta
                                         </select>                                   
                                     </div>   
                                     <div class="form-group col-md-6 mb-2">
@@ -176,7 +202,6 @@
                                         <div class="input-group">
                                             <select class="form-control custom-select" v-model="idcategoria2" v-bind:class="{ 'is-invalid': hasError.idcategoria2==1 }">
                                                 <option value="0" disabled>Seleccione</option>
-                                                <option value="." disabled>.</option>
                                                 <option v-for="categoria in arrayCategoria2" :key="categoria.id" :value="categoria.id" v-text="categoria.nombre"></option>
                                             </select>
                                             <div class="input-group-append">
@@ -185,6 +210,7 @@
                                             </div>
                                         </div>
                                     </div>
+<<<<<<< HEAD
                                     <div style="display:none;background-color:#cacbc7" :class="{'col-md-12 p-1 mostrar-crear' : modalCrear==1}">
                                         <div class="col-md-10 float-left">
                                             <div class="col-md-6 float-left">
@@ -200,6 +226,24 @@
                                             <button type="button" class="btn btn-primary" @click="crearExtras('categoria')" title="Guardar"><i class="fa fa-save"></i></button>
                                             <button type="button" class="btn btn-danger" @click="cerrarModalCrear()" title="Cancelar"><i class="fa fa-times-circle"></i></button>
                                         </div>
+=======
+                                    <div style="display:none;background-color:#f4f4f4" :class="{'col-md-12 p-1 mostrar-crear' : modalCrear==1}">
+                                        <div class="col-md-12 row">
+                                            <div class="col-md-5">
+                                                <span v-text="tituloModalCrear" class="form-control-label"></span>
+                                                <input type="text" class="form-control" v-model="nombre_crear">
+                                            </div>
+                                            <div class="col-md-5">
+                                                <span class="form-control-label">Descripción</span>
+                                                <input type="text" class="form-control" v-model="descripcion_crear">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <button type="button" class="btn btn-primary" @click="crearExtras('categoria')" title="Guardar"><i class="fa fa-save"></i></button>
+                                                <button type="button" class="btn btn-danger" @click="cerrarModalCrear()" title="Cancelar"><i class="fa fa-times-circle"></i></button>
+                                            </div>
+                                        </div>
+                                      
+>>>>>>> dev_puntos_venta
                                     </div>                                                              
                                 
                                     <div class="form-group col-md-6">
@@ -218,12 +262,28 @@
                                         <label for="desc-input">Descripción</label>
                                         <input type="text" v-model="descripcion" class="form-control" placeholder="Ingrese descripción">                                        
                                     </div>
+<<<<<<< HEAD
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-3">
                                         <label for="text-input">Precio Venta</label>                                      
                                         <input type="number" v-model="precio_venta" :min="1" @blur="function(){ if(precio_venta<1) precio_venta=1; }" class="form-control" placeholder="" v-bind:class="{ 'is-invalid': hasError.precio_venta==1 }">
                                     </div>
+=======
+                                    <div class="form-group col-md-6">
+                                        <label for="imp-input">Impresora asignada</label>
+                                        <select class="form-control custom-select" v-model="id_impresora" v-bind:class="{ 'is-invalid': hasError.id_impresora==1 }">
+                                            <option value="">Seleccione</option>
+                                            <option v-for="impresora in arrayImpresora" :key="impresora.id" v-text="impresora.nombre_impresora + ' - '+ impresora.codigo" :value="impresora.id"></option>
+                                        </select>                                 
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-3">
+                                        <label for="text-input">Precio Venta</label>                                      
+                                        <input type="number" v-model="precio_venta" :min="1" @blur="function(){ if(precio_venta<1) precio_venta=1; }" class="form-control" placeholder="" v-bind:class="{ 'is-invalid': hasError.precio_venta==1 }">
+                                    </div>
+>>>>>>> dev_puntos_venta
                                     <div class="form-group col-md-3" v-if="tipo_articulo!=2">
                                         <label for="text-input">Stock</label>                                        
                                         <input type="number" v-model="stock" :min="1" @blur="function(){ if(stock<1) stock=1; }" class="form-control" placeholder="" v-bind:class="{ 'is-invalid': hasError.stock==1 }">
@@ -233,9 +293,13 @@
                                         <input type="text" v-model="cod_invima" class="form-control" placeholder="Código invima" v-bind:class="{ 'is-invalid': hasError.cod_invima==1 }">
                                     </div>
                                 </div>
+<<<<<<< HEAD
                                 <div class="form-row">                                   
                                    
                                 </div>
+=======
+                                
+>>>>>>> dev_puntos_venta
                                 <div class="form-row">  
                                     <div class="form-group col-md-6" v-if="tipo_articulo==1 || tipo_articulo==3">
                                         <label for="text-input">Lote</label>
@@ -246,8 +310,12 @@
                                         <input type="number" v-model="minimo" :min="1" @blur="(function(){
                                             if(minimo<1) minimo=1;})" class="form-control" placeholder="" v-bind:class="{ 'is-invalid': hasError.minimo==1 }">
                                     </div>
+<<<<<<< HEAD
                                     <div v-else class="form-group col-md-6">
                                     </div>
+=======
+                                    <!-- <div v-else></div> -->
+>>>>>>> dev_puntos_venta
                                     <div class="form-group col-md-6">
                                         <label for="text-input">Código</label>                                        
                                         <input type="text" v-model="codigo" class="form-control" placeholder="Código de barras" v-bind:class="{ 'is-invalid': hasError.codigo==1 }"> 
@@ -256,17 +324,28 @@
                                         <label for="text-input">Talla</label>
                                         <input type="text" v-model="talla" class="form-control" placeholder="Talla del producto" v-bind:class="{ 'is-invalid': hasError.talla==1 }">
                                     </div>
+<<<<<<< HEAD
                                     <div class="form-group col-md-6" v-else>
                                     </div>
+=======
+                                    <!-- <div v-else></div> -->
+>>>>>>> dev_puntos_venta
                                     <div class="form-group col-md-6" v-if="tipo_articulo!=2 && tipo_articulo!=3">
                                         <label for="text-input">Fecha vencimiento</label>
                                         <input type="date" v-model="fec_vence" class="form-control" placeholder="" v-bind:class="{ 'is-invalid': hasError.fec_vence==1 }">
                                     </div>
+<<<<<<< HEAD
                                     <div class="form-group col-md-6" v-else>
                                     </div>
                                 </div>
                                    
                                 <div class="form-row">
+=======
+                                    <!-- <div v-else></div> -->
+                                <!-- </div>
+                                   
+                                <div class="form-row"> -->
+>>>>>>> dev_puntos_venta
                                     <div class="form-group col-md-6" v-if="tipo_articulo==1 || tipo_articulo==3">
                                         <label for="text-input">Und. medida</label>
                                         <div class="input-group">
@@ -280,8 +359,13 @@
                                     </div>
                                     
                                     <div style="display:none; background:#cacbc7" :class="{'form-group p-1 col-md-12 mostrar-crear' : modalCrear==2}">
+<<<<<<< HEAD
                                         <div class="col-md-10 float-left">
                                             <span class="col-md-3 form-control-label float-left" v-text="tituloModalCrear"></span>
+=======
+                                        <div class="col-md-10">
+                                            <span class="col-md-3 form-control-label" v-text="tituloModalCrear"></span>
+>>>>>>> dev_puntos_venta
                                             <input type="text" class="form-control col-md-9 float-right" v-model="nombre_crear">
                                         </div>
                                         <div class="col-md-2 float-right">
@@ -290,8 +374,13 @@
                                         </div>
                                     </div>
                                     <div style="display:none;background:#cacbc7" :class="{'form-group p-1 col-md-12 mostrar-crear' : modalCrear==3}">
+<<<<<<< HEAD
                                         <div class="col-md-10 float-left">
                                             <span class="col-md-3 form-control-label float-left" v-text="tituloModalCrear"></span>
+=======
+                                        <div class="col-md-10">
+                                            <span class="col-md-3 form-control-label" v-text="tituloModalCrear"></span>
+>>>>>>> dev_puntos_venta
                                             <input type="text" class="col-md-9 form-control float-right" v-model="nombre_crear">
                                         </div>
                                         <div class="col-md-2 float-right">
@@ -314,8 +403,13 @@
                                         </div>                   
                                     </div>
                                     <div style="display:none;background:#cacbc7" :class="{'form-group p-1 col-md-12 mostrar-crear' : modalCrear==4}">
+<<<<<<< HEAD
                                         <div class="col-md-10 float-left">
                                             <span class="col-md-3 form-control-label float-left" v-text="tituloModalCrear"></span>
+=======
+                                        <div class="col-md-10">
+                                            <span class="col-md-3 form-control-label" v-text="tituloModalCrear"></span>
+>>>>>>> dev_puntos_venta
                                             <input type="text" class="col-md-9 form-control float-right" v-model="nombre_crear">
                                         </div>
                                         <div class="col-md-2 float-right">
@@ -323,6 +417,7 @@
                                             <button type="button" class="btn btn-danger" @click="cerrarModalCrear()" title="Cancelar"><i class="fa fa-times-circle"></i></button>
                                         </div>
                                     </div>
+<<<<<<< HEAD
                                       
 
                                         <!--<label class="col-md-3 form-control-label float-left" for="text-input">Concentración</label>
@@ -355,25 +450,35 @@
                                         </div>
                                         <div class="form-group col-md-6">
                                         </div>
+=======
+                                    <div class="form-group col-md-6">
+                                        <label>Marca</label>                                        
+                                        <input type="text" v-model="marca" class="form-control" v-bind:class="{ 'is-invalid': hasError.marca==1 }">                                        
+>>>>>>> dev_puntos_venta
                                     </div>
-                                    <!--<div class="row">
-                                        <div class="form-group col-md-6">
-                                            <label class="col-md-3 form-control-label float-left" for="text-input">Código</label>
-                                            <div class="col-md-9 float-right">
-                                                <input type="text" v-model="codigo" class="form-control" placeholder="Código de barras"> 
-                                            </div>
+                                    <div class="form-group col-md-6">
+                                        <label>Linea</label>                                        
+                                        <input type="text" v-model="linea" class="form-control" v-bind:class="{ 'is-invalid': hasError.linea==1 }">                                        
+                                    </div>
+                               
+                                    <div class="form-group col-md-6">
+                                        <label class="form-control-label">Imagen</label>                                            
+                                        <div class="custom-file">                                        
+                                            <input type="file" class="custom-file-input" id="img" name="img" ref="inputFileImg"  @change="cargarImg"  v-bind:class="{ 'is-invalid': hasError.img==1 }">
+                                            <label class="custom-file-label" fors="validatedCustomFile">Choose file...</label>
+                                            <div class="invalid-feedback">Example invalid custom file feedback</div>
                                         </div>
-                                        <div class="form-group col-md-6">
-                                            <barcode :value="codigo" :options="{ format: 'EAN-13' }" >Generando código de barras...</barcode>
-                                        </div>
-                                    </div>-->
-                                    <div v-show="errorArticulo" class="form-group row div-error">
-                                        <div class="text-center text-error">
-                                            <div v-for="error in errorMostrarMsjArticulo" :key="error" v-text="error">
-
-                                            </div>
+                                    </div>                                    
+                                </div>
+                                <div v-show="errorArticulo" class="form-group row div-error">
+                                    <div class="text-center text-error">
+                                        <div v-for="error in errorMostrarMsjArticulo" :key="error" v-text="error">
                                         </div>
                                     </div>
+<<<<<<< HEAD
+=======
+                                </div>
+>>>>>>> dev_puntos_venta
                                 
                             </form>
                         </div>
@@ -405,13 +510,13 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="form-group col-md-5">
-                                        <label class="col-md-4 float-left">Fec. Inicia</label>
+                                        <label class="col-md-4">Fec. Inicia</label>
                                         <div class="col-md-8 float-right">
                                             <input type="date" class="form-control" v-model="fecIni">
                                         </div>
                                     </div>
                                     <div class="col-md-5">
-                                        <label class="col-md-4 float-left">Fec. Finaliza</label>
+                                        <label class="col-md-4">Fec. Finaliza</label>
                                         <div class="col-md-8 float-right">
                                             <input type="date" class="form-control" v-model="fecFin">
                                         </div>
@@ -479,7 +584,7 @@
             <!-- Inicio modal tarifarios -->
             <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal3}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog modal-primary modal-lg" role="document">
-                    <div class="modal-content" style="width:80% !important;margin-left: 22% !important;">
+                    <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title" v-text="tituloModal3"></h4>
                             <button type="button" class="close" @click="cerrarModalTarifario()" aria-label="Close">
@@ -497,7 +602,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr v-for="(tarifario, index) in arrayTarifarios">
+                                            <tr v-for="(tarifario, index) in arrayTarifarios" :key="index">
                                                 <td v-text="tarifario.nombre"></td>
                                                 <td style="text-align: right;">
                                                     <input type="number" v-if="tipoAccionModal3==2" style="text-align: right;" v-model="tarifario.valor" :min="1" @blur="(function(){if(tarifario.valor<1) tarifario.valor=1;})">
@@ -536,7 +641,7 @@
                             <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                                 <div class="form-group row">
                                     <div class="col-md-12">
-                                        <label class="col-md-1 form-control-label float-left" for="text-input">Nombre</label>
+                                        <label class="col-md-1 form-control-label" for="text-input">Nombre</label>
                                         <div class="col-md-11 float-right">
                                             <input type="text" v-model="nombreModeloContable" class="form-control float-right" placeholder="Nombre del modelo contable" v-bind:class="{ 'is-invalid' : hasError.nombreModeloContable==1}">
                                         </div>
@@ -544,7 +649,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-12">
-                                        <label class="col-md-1 form-control-label float-left" for="email-input">Descripción</label>
+                                        <label class="col-md-1 form-control-label" for="email-input">Descripción</label>
                                         <div class="col-md-11 float-right">
                                             <textarea v-model="descripcionModeloContable" class="form-control float-right"></textarea>
                                         </div>
@@ -552,21 +657,21 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-4">
-                                        <label class="col-md-3 form-control-label float-left">Cuenta compra <span style="color:red;" v-show="idCuentaProductos==''">(*)</span></label>
+                                        <label class="col-md-3 form-control-label">Cuenta compra <span style="color:red;" v-show="idCuentaProductos==''">(*)</span></label>
                                         <div class="form-inline col-md-9 float-right">
                                             <input type="text" readonly class="form-control" style="width: 85%;" v-model="cuentaProductos" v-bind:class="{ 'is-invalid' : hasError.idCuentaProductos==1}">
                                             <button type="button" @click="abrirModalCuentas('productos')" title="Agragar cuenta" class="btn btn-primary">...</button>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label class="col-md-3 form-control-label float-left">Cuenta Salida <span style="color:red;" v-show="idCuentaSalidaProductos==''">(*)</span></label>
+                                        <label class="col-md-3 form-control-label">Cuenta Salida <span style="color:red;" v-show="idCuentaSalidaProductos==''">(*)</span></label>
                                         <div class="form-inline col-md-9 float-right">
                                             <input type="text" readonly class="form-control" style="width: 85%;" v-model="cuentaSalidaProductos" v-bind:class="{ 'is-invalid' : hasError.idCuentaSalidaProductos==1}">
                                             <button type="button" @click="abrirModalCuentas('salida_productos')" title="Agragar cuenta" class="btn btn-primary">...</button>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label class="col-md-3 form-control-label float-left">Saldos iniciales <span style="color:red;" v-show="idCuentaSaldosIniciales==''">(*)</span></label>
+                                        <label class="col-md-3 form-control-label">Saldos iniciales <span style="color:red;" v-show="idCuentaSaldosIniciales==''">(*)</span></label>
                                         <div class="form-inline col-md-9 float-right">
                                             <input type="text" readonly class="form-control" style="width: 85%;" v-model="cuentaSaldosIniciales" v-bind:class="{ 'is-invalid' : hasError.idCuentaSaldosIniciales==1}">
                                             <button type="button" @click="abrirModalCuentas('saldos_iniciales')" title="Agragar cuenta" class="btn btn-primary">...</button>
@@ -575,21 +680,21 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-4">
-                                        <label class="col-md-3 form-control-label float-left">Cuenta Donaciones <span style="color:red;" v-show="idCuentaDonaciones==''">(*)</span></label>
+                                        <label class="col-md-3 form-control-label">Cuenta Donaciones <span style="color:red;" v-show="idCuentaDonaciones==''">(*)</span></label>
                                         <div class="form-inline col-md-9 float-right">
                                             <input type="text" readonly class="form-control" style="width: 85%;" v-model="cuentaDonaciones" v-bind:class="{ 'is-invalid' : hasError.idCuentaDonaciones==1}">
                                             <button type="button" @click="abrirModalCuentas('donaciones')" title="Agragar cuenta" class="btn btn-primary">...</button>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label class="col-md-3 form-control-label float-left">Cuenta devoluciones ventas <span style="color:red;" v-show="idCuentaDevolucionesVentas==''">(*)</span></label>
+                                        <label class="col-md-3 form-control-label">Cuenta devoluciones ventas <span style="color:red;" v-show="idCuentaDevolucionesVentas==''">(*)</span></label>
                                         <div class="form-inline col-md-9 float-right">
                                             <input type="text" readonly class="form-control" style="width: 85%;" v-model="cuentaDevolucionesVentas" v-bind:class="{ 'is-invalid' : hasError.idCuentaDevolucionesVentas==1}">
                                             <button type="button" @click="abrirModalCuentas('devoluciones_ventas')" title="Agragar cuenta" class="btn btn-primary">...</button>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label class="col-md-3 form-control-label float-left">Cuenta devoluciones compras <span style="color:red;" v-show="idCuentaDevolucionesCompras==''">(*)</span></label>
+                                        <label class="col-md-3 form-control-label">Cuenta devoluciones compras <span style="color:red;" v-show="idCuentaDevolucionesCompras==''">(*)</span></label>
                                         <div class="form-inline col-md-9 float-right">
                                             <input type="text" readonly class="form-control" style="width: 85%;" v-model="cuentaDevolucionesCompras" v-bind:class="{ 'is-invalid' : hasError.idCuentaDevolucionesCompras==1}">
                                             <button type="button" @click="abrirModalCuentas('devoluciones_compras')" title="Agragar cuenta" class="btn btn-primary">...</button>
@@ -598,47 +703,47 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-4">
-                                        <label class="col-md-3 form-control-label float-left">Cuenta impuesto al consumo en ventas <span style="color:red;" v-show="idCuentaImpuestoConsumoVentas==''">(*)</span></label>
+                                        <label class="col-md-3 form-control-label">Cuenta impuesto al consumo en ventas <span style="color:red;" v-show="idCuentaImpuestoConsumoVentas==''">(*)</span></label>
                                         <div class="form-inline col-md-9 float-right">
                                             <input type="text" readonly class="form-control" style="width: 85%;" v-model="cuentaImpuestoConsumoVentas" v-bind:class="{ 'is-invalid' : hasError.idCuentaImpuestoConsumoVentas==1}">
                                             <button type="button" @click="abrirModalCuentas('impuesto_consumo_ventas')" title="Agragar cuenta" class="btn btn-primary">...</button>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label class="col-md-3 form-control-label float-left">Iva Compras<span style="color:red;" v-show="idIvaCompras==0">(*)</span></label>
+                                        <label class="col-md-3 form-control-label">Iva Compras<span style="color:red;" v-show="idIvaCompras==0">(*)</span></label>
                                         <div class="col-md-9 float-right">
                                             <select class="form-control" v-model="idIvaCompras" v-bind:class="{ 'is-invalid' : hasError.idIvaCompras==1}">
                                                 <option value="0">Seleccione</option>
-                                                <option v-for="(iva, index) in arrayIvasCompras" :value="iva.id" v-text="iva.nombre"></option>
+                                                <option v-for="(iva, index) in arrayIvasCompras" :value="iva.id" v-text="iva.nombre" :key="index"></option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label class="col-md-3 form-control-label float-left">Iva Ventas<span style="color:red;" v-show="idIvaVentas==0">(*)</span></label>
+                                        <label class="col-md-3 form-control-label">Iva Ventas<span style="color:red;" v-show="idIvaVentas==0">(*)</span></label>
                                         <div class="col-md-9 float-right">
                                             <select class="form-control" v-model="idIvaVentas" v-bind:class="{ 'is-invalid' : hasError.idIvaVentas==1}">
                                                 <option value="0">Seleccione</option>
-                                                <option v-for="(iva, index) in arrayIvasVentas" :value="iva.id" v-text="iva.nombre"></option>
+                                                <option v-for="(iva, index) in arrayIvasVentas" :value="iva.id" :key="index" v-text="iva.nombre"></option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-4">
-                                        <label class="col-md-3 form-control-label float-left">Iva Devolucion En Compras<span style="color:red;" v-show="idIvaDevolucionCompras==0">(*)</span></label>
+                                        <label class="col-md-3 form-control-label">Iva Devolucion En Compras<span style="color:red;" v-show="idIvaDevolucionCompras==0">(*)</span></label>
                                         <div class="col-md-9 float-right">
                                             <select class="form-control" v-model="idIvaDevolucionCompras" v-bind:class="{ 'is-invalid' : hasError.idIvaDevolucionCompras==1}">
                                                 <option value="0">Seleccione</option>
-                                                <option v-for="(iva, index) in arrayIvasDevolucionCompras" :value="iva.id" v-text="iva.nombre"></option>
+                                                <option v-for="(iva, index) in arrayIvasDevolucionCompras" :value="iva.id" :key="index" v-text="iva.nombre"></option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label class="col-md-3 form-control-label float-left">Iva Devolucion En Ventas<span style="color:red;" v-show="idIvaDevolucionVentas==0">(*)</span></label>
+                                        <label class="col-md-3 form-control-label">Iva Devolucion En Ventas<span style="color:red;" v-show="idIvaDevolucionVentas==0">(*)</span></label>
                                         <div class="col-md-9 float-right">
                                             <select class="form-control" v-model="idIvaDevolucionVentas" v-bind:class="{ 'is-invalid' : hasError.idIvaDevolucionVentas==1}">
                                                 <option value="0">Seleccione</option>
-                                                <option v-for="(iva, index) in arrayIvasDevolucionVentas" :value="iva.id" v-text="iva.nombre"></option>
+                                                <option v-for="(iva, index) in arrayIvasDevolucionVentas" :value="iva.id" :key="index" v-text="iva.nombre"></option>
                                             </select>
                                         </div>
                                     </div>
@@ -722,9 +827,9 @@
                             <form v-if="tipoAccion6==1" action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                                 <div class="form-group row">
                                     <div class="col-md-6">
-                                        <label class="col-md-3 form-control-label float-left" for="text-input">Presentación</label>
+                                        <label class="col-md-3 form-control-label" for="text-input">Presentación</label>
                                         <div class="col-md-9 float-right form-inline">
-                                            <select class="form-control col-md-10 float-left custom-select" v-model="idPresentacionAsociada" v-bind:class="{ 'is-invalid' : hasError.idPresentacionAsociada==1 }">
+                                            <select class="form-control col-md-10 custom-select" v-model="idPresentacionAsociada" v-bind:class="{ 'is-invalid' : hasError.idPresentacionAsociada==1 }">
                                                 <option value="0" disabled>Seleccione</option>
                                                 <option v-for="id_presentacion in arrayPresentacion" :key="id_presentacion.id" :value="id_presentacion.id" v-text="id_presentacion.nombre"></option>
                                             </select> 
@@ -733,7 +838,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="col-md-3 form-control-label float-left" for="text-input">Código</label>
+                                        <label class="col-md-3 form-control-label" for="text-input">Código</label>
                                         <div class="col-md-9 float-right">
                                             <input type="text" v-model="codigoPresentacionAsociada" class="form-control" v-bind:class="{ 'is-invalid' : hasError.codigoPresentacionAsociada==1 }">
                                         </div>
@@ -741,7 +846,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-6">
-                                        <label class="col-md-3 form-control-label float-left" for="text-input">Unidades</label>
+                                        <label class="col-md-3 form-control-label" for="text-input">Unidades</label>
                                         <div class="col-md-9 float-right">
                                             <input type="number" v-model="unidadesPresentacionAsociada" class="form-control" v-bind:class="{ 'is-invalid' : hasError.unidadesPresentacionAsociada==1 }">
                                         </div>
@@ -750,8 +855,8 @@
                                     </div>
                                 </div>
                                 <!--<div style="display:none;" :class="{'form-group col-md-12 mostrar-crear' : modalCrear==4}">
-                                    <div class="col-md-10 float-left">
-                                        <span class="col-md-3 form-control-label float-left" v-text="tituloModalCrear"></span>
+                                    <div class="col-md-10">
+                                        <span class="col-md-3 form-control-label" v-text="tituloModalCrear"></span>
                                         <input type="text" class="col-md-9 form-control-label float-right" v-model="nombre_crear">
                                     </div>
                                     <div class="col-md-2 float-right">
@@ -760,8 +865,8 @@
                                     </div>
                                 </div>-->
                                 <div class="row pb-3" v-if="modalCrear==4">
-                                    <div class="col-md-10 float-left">
-                                        <span class="col-md-3 form-control-label float-left" v-text="tituloModalCrear"></span>
+                                    <div class="col-md-10">
+                                        <span class="col-md-3 form-control-label" v-text="tituloModalCrear"></span>
                                         <input type="text" class="col-md-9 form-control-label float-right" v-model="nombre_crear">
                                     </div>
                                     <div class="col-md-2 float-right">
@@ -779,7 +884,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr v-for="(tarifario, index) in arrayTarifarios">
+                                                <tr v-for="(tarifario, index) in arrayTarifarios" :key="index">
                                                     <td v-text="tarifario.nombre"></td>
                                                     <td style="text-align: right;"><input type="number" style="text-align: right;" v-model="tarifario.valor" :min="0" @blur="function(){ if(tarifario.valor<0){tarifario.valor=0;}}"></td>
                                                 </tr>
@@ -873,6 +978,7 @@
                 id_und_medida : '',
                 id_concentracion : '',
                 id_presentacion : '',
+                id_impresora : '',
                 nombre_und_medida : '',
                 nombre_concentracion : '',
                 nombre_presentacion : '',
@@ -1036,6 +1142,7 @@
                     linea : 0,
                     id_und_medida : 0,
                     id_presentacion : 0,
+                    id_impresora : 0,
                     codigo : 0,
                     img : 0,
 
@@ -1056,7 +1163,10 @@
                     idPresentacionAsociada : 0,
                     unidadesPresentacionAsociada : 0,
                     codigoPresentacionAsociada : 0,
-                }
+                },
+
+                // Impresoras
+                arrayImpresora :[],
             }
         },
         components: {
@@ -1120,7 +1230,8 @@
             listarArticulo (page,buscar,criterio){
                 let me=this;
                 var url= this.ruta + '/articulo/?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
-                axios.get(url).then(function (response) {
+                axios.get(url)
+                .then(function (response) {
                     var respuesta= response.data;
                     me.arrayArticulo = respuesta.articulos.data;
                     me.pagination= respuesta.pagination;
@@ -1176,6 +1287,18 @@
                     me.arrayIvasVentas = respuesta.ivaVenta;
                     me.arrayIvasDevolucionCompras = respuesta.ivaDevolucionCompra;
                     me.arrayIvasDevolucionVentas = respuesta.ivaDevolucionVenta;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },           
+            listarImpresoras (page,buscar,criterio){
+                let me=this;
+                var url= this.ruta +'/impresora?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
+                axios.get(url).then(function (response) {
+                    var respuesta= response.data;
+                    me.arrayImpresora = respuesta.impresoras.data;
+                    // me.pagination= respuesta.pagination;
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -1341,45 +1464,7 @@
                 //Envia la petición para visualizar la data de esa página
                 me.listarStock(page_stock,id_articulo);
             },
-            /*registrarArticulo(){
-                if (this.validarArticulo()){
-                    return;
-                }
-                
-                let me = this;
-
-                axios.post(this.ruta + '/articulo/registrar',{
-                    'idcategoria': this.idcategoria,
-                    'idcategoria2': this.idcategoria2,
-                    'nombre' : this.nombre,
-                    'codigo': this.codigo,
-                    'precio_venta': this.precio_venta,
-                    'stock': this.stock,
-                    'cod_invima': this.cod_invima,
-                    'lote': this.lote,
-                    'fec_vence': this.fec_vence,
-                    'id_und_medida': this.id_und_medida,
-                    'id_concentracion': this.id_concentracion,
-                    'id_presentacion': this.id_presentacion,
-                    'minimo': this.minimo,
-                    'tipo_articulo': this.tipo_articulo,
-                    'iva': this.iva,
-                    'descripcion': this.descripcion,
-                    'talla': this.talla,
-                    'arrayTarifarios': this.arrayTarifarios,
-                    'tipo_movimiento' : 1,
-                }).then(function (response) {
-                    me.idArticuloStock = response['id'];
-                    me.cantidadStock = response['stock'];
-                    me.tipoMovimientoStock = 1;
-                    me.sumatoria = response['stock'];
-                    // me.registrarStock();
-                    me.cerrarModal();
-                    me.listarArticulo(1,'','nombre');
-                }).catch(function (error) {
-                    console.log(error);
-                });
-            },*/
+            
             registrarArticulo(){
                 this.active=true;
                 if (this.validarArticulo()){
@@ -1400,13 +1485,14 @@
                 data.append('id_und_medida', this.id_und_medida);
                 data.append('id_concentracion', this.id_concentracion);
                 data.append('id_presentacion', this.id_presentacion);
+                data.append('id_impresora', this.id_impresora);
                 data.append('minimo', this.minimo);
                 data.append('tipo_articulo', this.tipo_articulo);
                 data.append('descripcion', this.descripcion);
                 data.append('talla', this.talla);
                 data.append('marca', this.marca);
                 data.append('linea', this.linea);
-                data.append('arrayTarifarios', JSON.stringify(this.arrayTarifarios));
+                data.append('evidencias_ingresos', JSON.stringify(this.arrayTarifarios));
                 data.append('tipo_movimiento', 1);
                 data.append('img', this.arrayImg);
 
@@ -1423,6 +1509,20 @@
                 }).catch(function (error) {
                     console.log(error);
                 });
+
+                // axios.post(this.ruta +'/impresora/registrar', data,{
+                //     headers:{'Content-Type':'multipart/form-data'}
+                // }).then(function (response) {
+                //     me.idArticuloStock = response['id'];
+                //     me.cantidadStock = response['stock'];
+                //     me.tipoMovimientoStock = 1;
+                //     me.sumatoria = response['stock'];
+                //     // me.registrarStock();
+                //     me.cerrarModal();
+                //     me.listarArticulo(1,'','nombre');
+                // }).catch(function (error) {
+                //     console.log(error);
+                // });
             },
             registrarStock(){
                 // if (this.validarArticulo()){
@@ -1462,6 +1562,7 @@
                 data2.append('id_und_medida', this.id_und_medida);
                 data2.append('id_concentracion', this.id_concentracion);
                 data2.append('id_presentacion', this.id_presentacion);
+                data2.append('id_impresora', this.id_impresora);
                 data2.append('minimo', this.minimo);
                 data2.append('tipo_articulo', this.tipo_articulo);
                 data2.append('descripcion', this.descripcion);
@@ -1572,6 +1673,7 @@
                 this.hasError['linea'] = 0;
                 this.hasError['id_und_medida'] = 0;
                 this.hasError['id_presentacion'] = 0;
+                this.hasError['id_impresora'] = 0;
                 this.hasError['codigo'] = 0;
                 this.hasError['img'] = 0;
                 
@@ -1615,9 +1717,10 @@
                 }
 
                 if(!this.id_presentacion) {error=1; this.hasError['id_presentacion']=1;}
+                if(!this.id_impresora) {error=1; this.hasError['id_impresora']=1;}
                 if(!this.codigo) {error=1; this.hasError['codigo']=1;}
                 if(this.tipoAccion==1 && this.$refs.inputFileImg.value=='') {error=1; this.hasError['img']=1;}
-
+                
                 this.errorTarifario = 0;
                 for(var i=0; i<this.arrayTarifarios.length; i++)
                 {
@@ -1702,6 +1805,7 @@
                                 this.id_und_medida='';
                                 this.id_concentracion='';
                                 this.id_presentacion='';
+                                this.id_impresora='';
                                 this.minimo='';
                                 this.tipo_articulo='';
                                 this.descripcion = '';
@@ -1731,6 +1835,7 @@
                                 this.id_und_medida=data['id_und_medida'];
                                 this.id_concentracion=data['id_concentracion'];
                                 this.id_presentacion=data['id_presentacion'];
+                                this.id_impresora=data['id_impresora'];
                                 this.minimo=data['minimo'];
                                 this.tipo_articulo=data['tipo_articulo'];
                                 this.descripcion= data['descripcion'];
@@ -1764,6 +1869,8 @@
                         this.selectUndMedida();
                         this.selectConcentracion();
                         this.selectPresentacion();
+                        this.listarImpresoras();
+
                     }
                 }
                 
@@ -2123,10 +2230,7 @@
         }
     }
 </script>
-<style>    
-    .modal-content{
-        position: absolute !important;
-    }
+<style>   
     .mostrar{
         display: list-item !important;
         opacity: 1 !important;
@@ -2149,3 +2253,5 @@
         position: absolute !important;
     }
 </style>
+
+

@@ -21,6 +21,7 @@
                             <div class="col-md-6">
                                 <div class="input-group">
                                     <select v-if="permisosUser.leer" class="form-control col-md-3" v-model="criterio" @change="listarIngreso(1,buscar,criterio)">
+                                        <option value="">Seleccionar</option>
                                       <option value="tipo_comprobante">Tipo Comprobante</option>
                                       <option value="num_comprobante">Número Comprobante</option>
                                       <option value="fecha_hora">Fecha-Hora</option>
@@ -36,7 +37,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="table-responsive">
+                        <div>
                             <table class="table table-bordered table-striped table-sm  table-responsive table-earning">
                                 <thead>
                                     <tr>
@@ -57,46 +58,56 @@
                                 <tbody v-if="permisosUser.leer && arrayIngreso.length">
                                     <tr v-for="ingreso in arrayIngreso" :key="ingreso.id">
                                         <td v-text="ingreso.usuario"></td>
-                                        <td v-text="ingreso.nombre"></td>
+                                        <td v-text="ingreso.nombre1"></td>
                                         <!--
                                         <td v-text="ingreso.tipo_comprobante"></td>
                                         <td v-text="ingreso.serie_comprobante"></td>
                                         <td v-text="ingreso.num_comprobante"></td>
                                         -->
-                                        <td v-text="ingreso.fecha_hora"></td>
+                                        <td v-text="ingreso.fecha_hora"></td>                                       
                                         <td v-text="ingreso.total"></td>
                                         <!-- <td v-text="ingreso.impuesto"></td> -->
-                                        <td v-text="ingreso.estado"></td>
-                                        <td>
+                                        <td class="td-estado">{{ingreso.estado}}</td>
+                                        <td class="td-opciones">
                                             <button v-if="permisosUser.leer" type="button" @click="verIngreso(ingreso.id)" class="btn btn-success btn-sm" title="Ver ingreso">
-                                            <i class="icon-eye"></i>
+                                            <i class="icon-eye"></i>                                            
                                             </button>
                                             <button v-else type="button" class="btn btn-secondary btn-sm" title="Ver ingreso (Deshabilitado)">
                                             <i class="icon-eye"></i>
-                                            </button> &nbsp;
-
-                                            <button v-if="permisosUser.actualizar && ingreso.estado=='Registrado'" type="button" @click="abrirModalActualizarIngreso(ingreso)" class="btn btn-warning btn-sm" title="Actualizar"><i class="icon-pencil"></i></button>
-                                            <button v-else type="button" class="btn btn-secondary btn-sm"><i class="icon-pencil" title="Actualizar (Deshabilitado)"></i></button> &nbsp;
-
-                                            <template>
-                                                <button v-if="permisosUser.anular && ingreso.estado=='Registrado'" type="button" class="btn btn-danger btn-sm" @click="desactivarIngreso(ingreso.id)" title="Anular">
-                                                    <i class="icon-trash"></i>
-                                                </button>
-                                                <button v-else type="button" class="btn btn-secondary btn-sm" title="Anular (Deshabilitado)">
-                                                    <i class="icon-trash"></i>
-                                                </button>
-                                            </template> &nbsp;
-
-                                            <button type="button" @click="abrirModal3('ver',ingreso)" class="btn btn-info btn-sm" title="Evidencias">
-                                                <i class="fa fa-align-justify"></i>
-                                            </button> &nbsp;
-
-                                            <button type="button" v-if="permisosUser.actualizar && ingreso.estado=='Registrado'" class="btn btn-danger btn-sm" @click="cerrarIngreso(ingreso)" title="Cerrar Egreso">
-                                                <i class="fa fa-window-close"></i>
                                             </button>
-                                            <button type="button" v-else class="btn btn-secondary btn-sm" title="Cerrar Egreso (Deshabilidado)">
-                                                <i class="fa fa-window-close"></i>
-                                            </button> &nbsp;
+
+                                            <div class="btn-group dropleft">
+                                                <a href="#" class="btn-link btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fa fa-ellipsis-v"></i>
+                                                </a>
+                                                <div class="dropdown-menu">
+                                                    <a v-if="permisosUser.actualizar && ingreso.estado=='Registrado'" href="#" @click="abrirModalActualizarIngreso(ingreso)" class="dropdown-item" title="Actualizar">
+                                                        <i class="icon-pencil"></i>Actualizar
+                                                    </a>
+                                                    <a v-else href="#" class="dropdown-item">
+                                                        <i class="icon-pencil" title="Actualizar (Deshabilitado)"></i>Actualizar (Deshabilitado)
+                                                    </a>
+                                                    <template>
+                                                        <a  href="#" v-if="permisosUser.anular && ingreso.estado=='Registrado'" class="dropdown-item" @click="desactivarIngreso(ingreso.id)" title="Anular">
+                                                            <i class="icon-trash"></i>Anular
+                                                        </a>
+                                                        <a v-else href="#" class="dropdown-item" title="Anular (Deshabilitado)">
+                                                            <i class="icon-trash"></i> Activar
+                                                        </a>
+                                                    </template>
+
+                                                    <a @click="abrirModal3('ver',ingreso)" href="#" class="dropdown-item" title="Evidencias">
+                                                        <i class="fa fa-align-justify"></i> Evidencias
+                                                    </a>
+
+                                                    <a v-if="permisosUser.actualizar && ingreso.estado=='Registrado'" href="#" class="dropdown-item" @click="cerrarIngreso(ingreso)" title="Cerrar Egreso">
+                                                        <i class="fa fa-window-close"></i> Cerrar Egreso
+                                                    </a>
+                                                    <a v-else  class="dropdown-item disabled" href="#" title="Cerrar Egreso (Deshabilitado)">
+                                                        <i class="fa fa-window-close"></i> Cerrar Egreso (Deshabilitado)
+                                                    </a>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -125,17 +136,19 @@
                     <template v-else-if="listado==0">
                     <div class="card-body">
                         <div class="form-group row border">
-                            <div class="form-group col-md-3" v-if="tipo_ingreso!='Saldos iniciales'">
+                            <div class="form-group col-md-6 col-lg-3 " v-if="tipo_ingreso!='Saldos iniciales'">
                                 <label for="">Proveedor(*)</label>
-                                <div class="form-inline">
-                                    <input type="text" readonly style="max-width: 68%;width: 68%;" class="form-control" name="cuenta_fin" v-model="tercero">
-                                    <button @click="abrirModalT()" style="min-width: 30px;" class="btn btn-primary form-control">...</button>
-                                    <button @click="quitar(3)" style="min-width: 30px;" class="btn btn-danger form-control">
-                                        <i class="icon-trash"></i>
-                                    </button>
-                                </div>
+                                <div class="input-group">
+                                    <input type="text" readonly class="form-control" name="cuenta_fin" v-model="tercero">
+                                    <div class="input-group-append">
+                                        <button @click="abrirModalT()" class="btn btn-primary">...</button>
+                                        <button @click="quitar(3)" class="btn btn-danger">
+                                            <i class="icon-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>                               
                             </div>
-                            <div class="form-group col-md-3" v-else>
+                            <div class="form-group col-md-6 col-lg-3" v-else>
                                 <label for="">Proveedor(*)</label>
                                 <div class="form-inline">
                                     <input type="text" readonly style="max-width: 68%;width: 68%;" class="form-control" name="cuenta_fin">
@@ -145,10 +158,11 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-6 col-lg-3">
                                 <label>Tipo ingreso</label>
                                 <div>
                                     <select class="form-control" v-model="tipo_ingreso" @change="if(tipo_ingreso!='Compras'){forma_pago='';}">
+                                        <option value="0" disabled>Seleccione</option>
                                         <option value="Compras">Compras</option>
                                         <option value="Devoluciones">Devoluciones</option>
                                         <option value="Donaciones">Donaciones</option>
@@ -156,7 +170,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-6 col-lg-3">
                                 <label><b>Fuente</b></label>
                                 <div>
                                     <select v-if="tipo_ingreso=='Compras'" v-model="forma_pago" class="form-control">
@@ -167,7 +181,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-6 col-lg-3">
                                 <label><b>Fecha ingreso</b></label>
                                 <div>
                                     <input type="date" class="form-control" v-model="fecha_ingreso">
@@ -235,31 +249,33 @@
                             </div>
                         </div>
                         <div class="form-group row border">
-                            <div class="col-md-4">
+                            <div class="col-lg-4 col-md-6">
                                 <div class="form-group">
-                                    <label>Artículo <span style="color:red;" v-show="idarticulo==0">(*Seleccione)</span></label>
-                                    <div class="form-inline">
-                                        <input type="text" class="form-control col-md-10" v-model="codigo" @keyup.enter="buscarArticulo()" placeholder="Ingrese artículo">
-                                        <button @click="abrirModal()" class="btn btn-primary col-md-2">...</button>
-                                        <input type="text" readonly class="form-control col-md-12" v-model="articulo">
-                                    </div>                                    
+                                    <label>Artículo <span class="text-danger" v-show="idarticulo==0">(*Seleccione)</span></label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" v-model="codigo" @keyup.enter="buscarArticulo()" placeholder="Ingrese artículo">
+                                        <div class="input-group-prepend">
+                                            <button @click="abrirModal()" class="btn btn-primary" id="basic-addon1">...</button>
+                                        </div>
+                                   </div>                              
+                                    <input type="text" readonly class="form-control col-md-12" v-model="articulo">                                 
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-lg-2 col-md-3">
                                 <div class="form-group">
                                     <label>Precio Und <span style="color:red;" v-if="!saldo_parcial" v-show="precio==0">(*)</span></label>
                                     <input v-if="!saldo_parcial && codigo!='' && idarticulo!=0" type="number" :min="1" step="any" class="form-control" v-model="precio">
                                     <input v-else disabled type="number" :min="0" step="any" class="form-control" v-model="precio">
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-lg-2 col-md-3">
                                 <div class="form-group">
                                     <label>Cantidad <span style="color:red;" v-show="cantidad==0">(*)</span></label>
                                     <input type="number" v-if="codigo!='' && idarticulo!=0" :min="1" class="form-control" v-model="cantidad">
                                     <input type="number" v-else :min="0" disabled class="form-control" v-model="cantidad">
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-lg-2 col-md-3">
                                 <div class="form-group">
                                     <label>Precio parcial <span style="color:red;" v-if="saldo_parcial" v-show="precio==0">(*)</span></label>
                                     <input v-if="saldo_parcial && codigo!='' && idarticulo!=0" type="number" :min="1" step="any" class="form-control" v-model="precio_parcial">
@@ -384,30 +400,7 @@
                                     <p v-text="proveedor"></p>
                                 </div>
                             </div>
-                            <!--
-                            <div class="col-md-3">
-                                <label for="">Impuesto</label>
-                                <p v-text="impuesto"></p>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Tipo Comprobante</label>
-                                    <p v-text="tipo_comprobante"></p>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Serie Comprobante</label>
-                                    <p v-text="serie_comprobante"></p>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Número Comprobante</label>
-                                    <p v-text="num_comprobante"></p>
-                                </div>
-                            </div>
-                            -->
+                         
                         </div>
                         <div class="form-group row border">
                             <div class="table-responsive col-md-12">
@@ -455,20 +448,7 @@
                                                 {{ detalle.precio*detalle.cantidad }}
                                             </td>
                                         </tr>
-                                        <!--
-                                        <tr style="background-color: #CEECF5;">
-                                            <td colspan="3" align="right"><strong>Total Parcial:</strong></td>
-                                            <td>$ {{totalParcial=(total-totalImpuesto).toFixed(2)}}</td>
-                                        </tr>
-                                        <tr style="background-color: #CEECF5;">
-                                            <td colspan="3" align="right"><strong>Total Impuesto:</strong></td>
-                                            <td>$ {{totalImpuesto=((total*impuesto)).toFixed(2)}}</td>
-                                        </tr>
-                                        -->
-                                        <!--<tr style="background-color: #CEECF5;">
-                                            <td colspan="3" align="right"><strong>Flete:</strong></td>
-                                            <td>$ {{flete}}</td>
-                                        </tr>-->
+                                    
                                         <tr style="background-color: #CEECF5;" @click="retornariva()">
                                             <td colspan="5" align="right"><strong>Total Iva:</strong></td>
                                             <td>$ {{total_iva=calcularTotalIva}}</td>
@@ -522,7 +502,7 @@
                                 <div class="col-sm-9 col-md-5">
                                     <label class="control-label col-sm-4 col-md-4 float-left"><i class="fa fa-search"></i> Categoría</label>
                                     <select class="form-control col-sm-8 col-md-8 float-right" v-model="buscarCategoriaA" @change="listarArticulo(buscarA,criterioA,buscarCategoriaA)">
-                                        <option value="">Seleccione</option>
+                                        <option value="" disabled>Seleccione</option>
                                         <option v-for="categoria in arrayCategoria2" :key="categoria.id" :value="categoria.id" v-text="categoria.nombre"></option>
                                     </select>
                                 </div>

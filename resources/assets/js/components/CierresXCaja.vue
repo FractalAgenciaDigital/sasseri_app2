@@ -6,37 +6,33 @@
             <div class="card">
                 <div class="card-header">
                     <i class="fa fa-align-justify"></i> Cierres por caja
-                    <!--<button v-if="permisosUser.crear && tipoAccion!=3" type="button" @click="abrirModal('cierres_caja','registrar')" class="btn btn-primary">
-                        <i class="icon-plus"></i>&nbsp;Nuevo
-                    </button>
-                    <button v-else type="button" class="btn btn-secondary">
-                        <i class="icon-plus"></i>&nbsp;Nuevo
-                    </button>-->
+                    
                 </div>
                 <div class="card-body">
                     <div v-if="tipoAccion!=3" class="form-group row">
-                        <div class="col-md-4">
+                        <div class="form-group col-md-4">
+                            <label for="">Buscar</label>
                             <input v-if="permisosUser.leer" type="text" v-model="buscar" @keyup="listarCajas(1,buscar,criterio,fec_desde,fec_hasta)" class="form-control" placeholder="Texto a buscar">
                             <input v-else disabled type="text" v-model="buscar" class="form-control" placeholder="Texto a buscar">
                         </div>
-                        <div class="col-md-4">
-                            <label class="col-md-3 float-left">Desde: </label>
-                            <input v-if="permisosUser.leer" type="date" v-model="fec_desde" @change="listarCajas(1,buscar,criterio,fec_desde,fec_hasta)" class="form-control col-md-9 float-right">
-                            <input v-else disabled type="date" v-model="fec_desde" class="form-control col-md-9 float-right">
+                        <div class="form-group col-md-4">
+                            <label class="">Desde: </label>
+                            <input v-if="permisosUser.leer" type="date" v-model="fec_desde" @change="listarCajas(1,buscar,criterio,fec_desde,fec_hasta)" class="form-control">
+                            <input v-else disabled type="date" v-model="fec_desde" class="form-control">
                         </div>
-                        <div class="col-md-4">
-                            <label class="col-md-3 float-left">Hasta: </label>
-                            <input v-if="permisosUser.leer" type="date" v-model="fec_hasta" @change="listarCajas(1,buscar,criterio,fec_desde,fec_hasta)" class="form-control col-md-9 float-right">
-                            <input v-else disabled type="date" v-model="fec_hasta" class="form-control col-md-9 float-right">
+                        <div class="form-group col-md-4">
+                            <label class="">Hasta: </label>
+                            <input v-if="permisosUser.leer" type="date" v-model="fec_hasta" @change="listarCajas(1,buscar,criterio,fec_desde,fec_hasta)" class="form-control">
+                            <input v-else disabled type="date" v-model="fec_hasta" class="form-control">
                         </div>
                     </div>
                     <table v-if="tipoAccion!=3" class="table table-bordered table-striped table-sm table-responsive table-earning">
                         <thead>
                             <tr>
-                                <th class="col-md-19">Nombre</th>
-                                <th class="col-md-1">Fecha</th>
-                                <th class="col-md-1">Cajero</th>
-                                <th class="col-md-1">Opciones</th>
+                                <th class="col-md-6">Nombre</th>
+                                <th class="col-md-2">Fecha</th>
+                                <th class="col-md-">Cajero</th>
+                                <th class="col-md-2">Opciones</th>
                             </tr>
                         </thead>
                         <tbody v-if="permisosUser.leer && arrayCierresXCajas.length">
@@ -393,7 +389,7 @@
                 if(!this.vr_inicial || this.vr_inicial==0) this.errorMostrarMsjCierreXCaja.push("Ingrese valor inicial");
                 if(this.tipoAccion==2)
                 {
-                    if(!this.vr_gastos || this.vr_gastos==0) this.errorMostrarMsjCierreXCaja.push("Ingrese valor gastos");
+                    // if(!this.vr_gastos || this.vr_gastos==0) this.errorMostrarMsjCierreXCaja.push("Ingrese valor gastos");
                     if(!this.vr_final || this.vr_final==0) this.errorMostrarMsjCierreXCaja.push("Ingrese valor final");
                 }
 
@@ -481,7 +477,8 @@
             },
             cerrarCierreXCaja(){
                 let me = this;
-                if(me.id_caja!=0 && me.vr_inicial!=0 && me.vr_final!=0 && me.vr_gastos!=0)
+                // && me.vr_gastos!=0
+                if(me.id_caja!=0 && me.vr_inicial!=0 && me.vr_final!=0 )
                 {
                     Swal.fire({
                         title: 'Esta seguro de cerrar esta caja?',

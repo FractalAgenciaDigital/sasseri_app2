@@ -45,38 +45,42 @@
                             <tr v-for="categoria in arrayCategoria" :key="categoria.id">
                                 <td v-text="categoria.nombre"></td>
                                 <td v-text="categoria.descripcion"></td>
-                                <td>
-                                    <div v-if="categoria.condicion">
+                                <td class="td-estado">
+                                    <!-- <div v-if="categoria.condicion">
                                         <span class="badge badge-success">Activo</span>
                                     </div>
                                     <div v-else>
                                         <span class="badge badge-danger">Desactivado</span>
-                                    </div>
+                                    </div> -->
+                                    <template v-if="permisosUser.anular">
+                                        <a href="#" v-if="categoria.condicion" type="button" class="btn text-success" @click="desactivarCategoria(categoria.id)" title="Desactivar">
+                                            <i class="fa fa-check-circle"></i>&nbsp;
+                                        </a>
+                                        <a v-else href="#" class="btn text-danger" @click="activarCategoria(categoria.id)" title="Activar">
+                                            <i class="fa fa-times-circle"></i>&nbsp;
+                                        </a>
+                                    </template>
+                                    <template v-else>
+                                        <a v-if="categoria.condicion" href="#" class="btn text-success" title="Desactivar (Deshabilitado)">
+                                            <i class="fa fa-check-circle"></i>&nbsp;
+                                        </a>
+                                        <a v-else href="#" class="btn text-danger" title="Activar (Deshabilitado)">
+                                            <i class="fa fa-times-circle"></i>&nbsp;
+                                        </a>
+                                    </template>
                                 </td>
                                 <td>
-                                    <button v-if="permisosUser.actualizar && categoria.condicion" type="button" @click="abrirModal('categoria','actualizar',categoria)" class="btn btn-warning btn-sm" title="Actualizar">
+                                    <button 
+                                        v-if="permisosUser.actualizar && categoria.condicion" type="button" 
+                                        @click="abrirModal('categoria','actualizar',categoria)" 
+                                        class="btn btn-success btn-sm"
+                                        title="Actualizar"
+                                    >
                                         <i class="icon-pencil"></i>
                                     </button>
                                     <button v-else type="button" class="btn btn-secondary btn-sm" title="Actualizar (Deshabilitado)">
                                         <i class="icon-pencil"></i>
-                                    </button> &nbsp;
-
-                                    <template v-if="permisosUser.anular">
-                                        <button v-if="categoria.condicion" type="button" class="btn btn-danger btn-sm" @click="desactivarCategoria(categoria.id)" title="Desactivar">
-                                            <i class="icon-trash"></i>
-                                        </button>
-                                        <button v-else type="button" class="btn btn-info btn-sm" @click="activarCategoria(categoria.id)" title="Activar">
-                                            <i class="icon-check"></i>
-                                        </button>
-                                    </template>
-                                    <template v-else>
-                                        <button v-if="categoria.condicion" type="button" class="btn btn-secondary btn-sm" title="Desactivar (Deshabilitado)">
-                                            <i class="icon-trash"></i>
-                                        </button>
-                                        <button v-else type="button" class="btn btn-secondary btn-sm" title="Activar (Deshabilitado)">
-                                            <i class="icon-check"></i>
-                                        </button>
-                                    </template>
+                                    </button> &nbsp;      
                                 </td>
                             </tr>                                
                         </tbody>
@@ -304,7 +308,7 @@
                     result.dismiss === Swal.DismissReason.cancel
                 ) {
                     
-                }
+                    }
                 }) 
             },
             activarCategoria(id){

@@ -14,25 +14,7 @@
                             <i class="icon-plus"></i>&nbsp;Nuevo
                         </button>
                     </div>
-                    <div class="card-body">
-                        <div class="form-group row">
-                            <div class="col-md-6">
-                                <!--<div class="input-group">
-                                    <select v-if="permisosUser.crear" class="form-control col-md-3" v-model="criterio">
-                                      <option value="nombre">Nombre</option>>
-                                    </select>
-                                    <select v-else disabled class="form-control col-md-3" v-model="criterio">
-                                      <option value="nombre">Nombre</option>>
-                                    </select>
-
-                                    <input v-if="permisosUser.leer" type="text" v-model="buscar" @keyup="listarConfigGenerales(1,buscar,criterio)" class="form-control" placeholder="Texto a buscar" title="Texto a buscar">
-                                    <input v-else disabled type="text" v-model="buscar" class="form-control" placeholder="Texto a buscar" title="Texto a buscar">
-
-                                    <button v-if="permisosUser.leer" type="submit" @click="listarConfigGenerales(1,buscar,criterio)" class="btn btn-primary" title="Buscar"><i class="fa fa-search"></i> Buscar</button>
-                                    <button v-else type="submit" class="btn btn-secondary" title="Buscar"><i class="fa fa-search"></i> Buscar</button>
-                                </div>-->
-                            </div>
-                        </div>
+                    <div class="card-body">                        
                         <table class="table table-bordered table-striped table-sm table-responsive table-earning">
                             <thead>
                                 <tr>
@@ -79,24 +61,12 @@
                                 <tr colspan="11">No hay registros para mostrar</tr>
                             </tbody>
                         </table>
-                        <!--<nav>
-                            <ul class="pagination">
-                                <li class="page-item" v-if="pagination.current_page > 1" title={{current_page-1}}>
-                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)">Ant</a>
-                                </li>
-                                <li class="page-item" v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
-                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(page,buscar,criterio)" v-text="page"></a>
-                                </li>
-                                <li class="page-item" v-if="pagination.current_page < pagination.last_page">
-                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1,buscar,criterio)">Sig</a>
-                                </li>
-                            </ul>
-                        </nav>-->
+                        
                     </div>
                 </div>
                 <!-- Fin ejemplo de tabla Listado -->
                 <div class="card border-success" v-if="superAdmin==0">
-                    <div class="card-header bg-dark">
+                    <div class="card-header bg-blue">
                         <i class="fa fa-align-justify"></i> Configuraciones generales
                         <!--<button v-if="permisosUser.crear && !arrayConfigGenerales.length" type="button" @click="abrirModal('configgenerales','registrar')" class="btn btn-primary" title="Nuevo">
                             <i class="icon-plus"></i>&nbsp;Nuevo
@@ -118,7 +88,7 @@
                                     <div class="col-md-12 mb-2"><span v-text="'CELULAR : '+configgenerales.celular"></span></div>
                                     <div class="col-md-12 mb-4"><span v-text="'TELÉFONO : '+configgenerales.telefono"></span></div>
                                     <div class="col-md-12">
-                                        <button type="button" class="btn btn-warning btn-sm" @click="abrirModal('configgenerales','actualizar',configgenerales)" title="Actualizar">
+                                        <button type="button" class="btn btn-success btn-sm" @click="abrirModal('configgenerales','actualizar',configgenerales)" title="Actualizar">
                                             Actualizar <i class="icon-pencil"></i>
                                         </button>
                                     </div>
@@ -149,72 +119,72 @@
                             <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                                 <div class="row">
                                     <div class="form-group col-md-12">
-                                        <label class="col-md-1 form-control-label float-left" for="text-input">Nombre</label>
-                                        <div class="col-md-11 float-right">
+                                        <label class="col-lg-2 col-md-12 form-control-label float-left" for="text-input">Nombre</label>
+                                        <div class="col-lg-10 col-md-12 float-right">
                                             <input type="text" v-model="nombre" class="form-control float-right" placeholder="Nombre de la empresa">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-6">
-                                        <label class="col-md-3 form-control-label float-left">Logo</label>
-                                        <div class="col-md-9 float-right">
+                                        <label class="col-lg-3 col-md-12 form-control-label float-left">Logo</label>
+                                        <div class="col-lg-9 col-md-12 float-right">
                                             <input type="file" id="logo" name="logo"  ref="inputFileImg" @change="cargarLogo" class="form-control">
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label class="col-md-3 form-control-label float-left">Rep. legal</label>
-                                        <div class="col-md-9 float-right">
+                                        <label class="col-lg-3 col-md-12 form-control-label float-left">Rep. legal</label>
+                                        <div class="col-lg-9 col-md-12 float-right">
                                             <input type="text" v-model="repre_legal" class="form-control" placeholder="Nombre de la empresa">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-6">
-                                        <label class="col-md-3 form-control-label float-left">NIT</label>
-                                        <div class="col-md-9 float-right">
+                                        <label class="col-lg-3 col-md-12 form-control-label float-left">NIT</label>
+                                        <div class="col-lg-9 col-md-12 float-right">
                                             <input type="text" v-model="nit" class="form-control" placeholder="Nombre de la empresa">
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label class="col-md-3 form-control-label float-left">Direccion</label>
-                                        <div class="col-md-9 float-right">
+                                        <label class="col-lg-3 col-md-12 form-control-label float-left">Direccion</label>
+                                        <div class="col-lg-9 col-md-12 float-right">
                                             <input type="text" v-model="direccion" class="form-control" placeholder="Nombre de la empresa">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-6">
-                                        <label class="col-md-3 form-control-label float-left">Res. facturacion electronica</label>
-                                        <div class="col-md-9 float-right">
+                                        <label class="col-lg-3 col-md-12 form-control-label float-left">Res. facturacion electronica</label>
+                                        <div class="col-lg-9 col-md-12 float-right">
                                             <input type="text" v-model="res_fact_elect" class="form-control" placeholder="Nombre de la empresa">
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label class="col-md-3 form-control-label float-left">Res. factura POS</label>
-                                        <div class="col-md-9 float-right">
+                                        <label class="col-lg-3 col-md-12 form-control-label float-left">Res. factura POS</label>
+                                        <div class="col-lg-9 col-md-12 float-right">
                                             <input type="text" v-model="res_fact_pos" class="form-control" placeholder="Nombre de la empresa">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-6">
-                                        <label class="col-md-3 form-control-label float-left">Correo</label>
-                                        <div class="col-md-9 float-right">
+                                        <label class="col-lg-3 col-md-12 form-control-label float-left">Correo</label>
+                                        <div class="col-lg-9 col-md-12 float-right">
                                             <input type="text" v-model="correo" class="form-control" placeholder="Nombre de la empresa">
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label class="col-md-3 form-control-label float-left">Celular</label>
-                                        <div class="col-md-9 float-right">
+                                        <label class="col-lg-3 col-md-12 form-control-label float-left">Celular</label>
+                                        <div class="col-lg-9 col-md-12 float-right">
                                             <input type="text" v-model="celular" class="form-control" placeholder="Nombre de la empresa">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-6">
-                                        <label class="col-md-3 form-control-label float-left">Telefono</label>
-                                        <div class="col-md-9 float-right">
+                                        <label class="col-lg-3 col-md-12 form-control-label float-left">Telefono</label>
+                                        <div class="col-lg-9 col-md-12 float-right">
                                             <input type="text" v-model="telefono" class="form-control" placeholder="Nombre de la empresa">
                                         </div>
                                     </div>

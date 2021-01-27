@@ -1,0 +1,992 @@
+﻿Configuracion Inicial|Erstkonfiguration
+Seleccione el Idioma / Select the Language|Wählen Sie Sprache / Wählen Sie die Sprache
+Color|Farbe
+Movimiento|Bewegung
+Otros|Andere
+Indiquenos desde que sitio ha descargado este programa|Geben Sie an, von welcher Seite Sie dieses Programm heruntergeladen haben
+Correo Electronico|E-Mail
+2 decimales|2 Dezimalstellen
+0 decimales|0 Dezimalstellen
+Seleccione el Numero de Decimales|Wählen Sie die Anzahl der Dezimalstellen
+Seleccione el Impuesto|Wähle die Steuer aus
+Seleccione su Bandera|Wählen Sie Ihre Flagge
+Seleccione la Moneda|Wählen Sie die Währung
+Seleccione el Pais|Wählen Sie das Land aus
+Nombre de Empresa|Firmenname
+Continuar|Fortfahren
+Programa|Programm
+Continuar / Continue|Weiter / Weiter
+Este boton le permitira cambiar la configuracion regional|Mit dieser Schaltfläche können Sie die regionalen Einstellungen ändern
+Con este boton cambiara el tamaño de la ventana.|Mit dieser Schaltfläche ändern Sie die Größe des Fensters.
+Con este boton podra ver datos de su licencia|Mit dieser Schaltfläche können Sie Ihre Lizenzdaten sehen
+Este boton le servira para cambiar el idioma|Diese Schaltfläche dient zum Ändern der Sprache
+Con este boton cambiara el color de la pantalla|Mit dieser Schaltfläche ändert sich die Farbe des Bildschirms
+Programa protegido por los derechos de propiedad intelectual en Marcas y Patentes en cuanto a contenido y diseño.|Programm geschützt durch geistige Eigentumsrechte an Marken und Patenten in Bezug auf Inhalt und Design.
+Madrid - España|Madrid - Spanien
+Tpv|Tpv
+** Bienvenido **|** Willkommen **
+Salir|Beenden
+Caja Entradas|Tickets Box
+Seleccione Su Opcion|Wählen Sie Ihre Option
+Caja Ropero|Kleiderschrank Box
+Comprar|Kaufen
+¡Tiempo Limitado!|Begrenzte Zeit!
+6 Comprados|6 Gekauft
+Horas:|Stunden:
+Cod Promocion: XXXXX|Kabeljau-Förderung: XXXXX
+Tiene un descuento de|Es hat einen Rabatt von
+Precios|Preise
+* Recuerde que para poder tener asistencia telefonica tiene que tener contratado la version Completa, en caso contrario haga su consulta directamente desde el programa.|* Denken Sie daran, dass Sie für die telefonische Unterstützung die Vollversion haben müssen, andernfalls konsultieren Sie direkt aus dem Programm.
+* Consulte nuestra pagina web, para confirmar los precios que es posible que hayan sufrido algun cambio|* Überprüfen Sie unsere Website, um die Preise zu bestätigen, die möglicherweise geändert wurden
+<Tipo de Licencia>|<Lizenztyp>
+Estoy utilizando una licencia|Ich benutze eine Lizenz
+Diferencias entre tipos de licencia|Unterschiede zwischen den Lizenztypen
+Pasar de la version Gratuita a la Basica|Wechseln Sie von Free zu Basic-Version
+Promociones / Envio Email|Werbeaktionen / E-Mail
+Admisitracion Permisos|Zulassungsgenehmigungen
+Tipos de licencia|Lizenztypen
+Conectar en Red|Verbinden Sie sich im Netzwerk
+Activar Gratis la version Basica|Aktivieren Sie die Basic-Version kostenlos
+Registrar|Registrieren
+<Terminal>|<Terminal>
+Acerca de|Über
+Asistencia|Hilfe
+Configuracion|Konfiguration
+Listados|Einträge
+Caja|Kasten
+Conexion con dispositivo movil - android|Verbindung mit Mobilgerät - Android
+Niveles de Acceso|Zugriffsebenen
+Almacenes|Lagerhäuser
+Mantenimiento|Wartung
+Actualizaciones Activadas|Aktivierte Updates
+Tpv 123 Hosteleria (Version: 8.5.1)|Tpv 123 Hosteleria (Version: 8.5.1)
+Serie: XXX|Serie: XXX
+Licencia: XXX|Lizenz: XXX
+PROGRAMA REGISTRADO|Registriertes Programm
+nombre restaurante|Name des Restaurants
+Tpv 123 Hosteleria|Tpv 123 Gastfreundschaft
+ADVERTENCIAS IMPORTANTES|WICHTIGE WARNUNGEN
+- El desconocimiento de estas condiciones no le exime del cumplimiento de las mismas.|- Die Unkenntnis dieser Bedingungen befreit Sie nicht von der Einhaltung dieser Bedingungen.
+- Solo los clientes con la version COMPLETA tienen incluida la asistencia telefonica|- Nur Kunden mit der COMPLETE-Version haben eine telefonische Unterstützung
+---- En la modalidad COMPLETA, realizando un pago anual, ademas de las opciones incluidas en la version BASICA, tendra derecho a la asistencia de forma telefonica.|---- Im Vollmodus, so dass sie eine jährliche Zahlung, sowie in der Basisversion enthalten Optionen sind so nennen Anspruch auf Unterstützung.
+---- En la modalidad BASICA, con una reducida cuota anual usted tendra habilitada las opciones del programa que le permitiran realizar todas gestiones necesarias para su negocio, para mayor detalle recuerde consultar la opcion de Tipos de Licencia.|---- Im BASICA-Modus haben Sie mit einer reduzierten Jahresgebühr die Programmoptionen aktiviert, mit denen Sie alle notwendigen Schritte für Ihr Unternehmen ausführen können, für weitere Details beachten Sie bitte die Option Lizenztypen.
+Si decide utilizar la version GRATUITA recuerde que tiene algunas limitaciones, consulte la opcion de Tipos de Licencia para una descripcion mas detallada de la version GRATUITA, BASICA y COMPLETA.|Wenn Sie sich entscheiden, denken Sie daran zu verwenden, dass die kostenlose Version hat einige Einschränkungen, Lizenztypen Option für eine detailliertere Beschreibung der FREE, Grund- und Vollversion sehen.
+---- En la modalidad GRATUITA, durante los primeros 90 dias usted podra probar y trabajar con la version BASICA, pasado ese periodo podra volver a la version gratuita o pasar a la version BASICA o COMPLETA. Recuerde que esta version GRATUITA  es para empr|---- Im FREE-Modus können Sie in den ersten 90 Tagen versuchen, mit der BASIC-Version zu arbeiten, danach können Sie zur kostenlosen Version zurückkehren oder zur BASIC- oder COMPLETE-Version wechseln. Denken Sie daran, dass diese kostenlose Version für Unternehmen gedacht ist
+- La empresa Tpv 123 - Gratuito no es responsable si el cliente formatea el equipo o es atacado por algun tipo de virus que provoque la perdida de informacion o de licencia.|- Das Unternehmen Tpv 123 - Free ist nicht verantwortlich, wenn der Kunde den Computer initialisiert oder wird von einem Virus angegriffen, die zu Datenverlust oder Lizenz verursacht.
+- Tpv 123 - Gratuito recomienda la compra, para el buen funcionamiento del programa, de una impresora de tickets EPSON/SAMSUNG/Star o cualquier modelo de impresora, siempre que se instale junto con los drivers de dicha impresora. (Tipo de conexion recomen|- Tpv 123 - Free empfiehlt den Kauf eines EPSON / SAMSUNG / Star-Ticketdruckers oder eines anderen Druckermodells, sofern dieses zusammen mit den Druckertreibern installiert wird. (Verbindungstyp recomen
+- Este es un programa estandar, no se hacen modificaciones a medida o personalizaciones, nuestros clientes en version BASICA y COMPLETA si pueden sugerirnos algunos cambios que nosotros sin ningun coste añadido incluiremos en siguientes versiones.|- Dies ist ein Standard-Programm, keine benutzerdefinierten Änderungen oder Anpassungen vorgenommen werden, unsere Kunden in BASIC und COMPLETE-Version, wenn sie einige Änderungen vorschlagen können, die wir in den folgenden Versionen ohne zusätzliche Kosten enthalten.
+- Si usted esta utilizando la version GRATUITA y necesita algun tipo de asistencia recuerde que tiene que contratar la version BASICA o COMPLETA dependiendo de su incidencia.|- Wenn Sie die kostenlose Version verwenden und muss einige Unterstützung erinnern die Basisversion oder vollständig abhängig von seiner Häufigkeit zu mieten.
+Al instalar este programa,usted acepta las siguientes condiciones:|Mit der Installation dieses Programms akzeptieren Sie die folgenden Bedingungen:
+CONDICIONES DE USO DEL PROGRAMA|Nutzungsbedingungen für das Programm
+Promociones Fast Food|Fast-Food-Angebote
+Zonas|Bereiche
+SubFamilias|Unterfamilien
+Productos Elaborados|Verarbeitete Produkte
+Productos|Produkte
+Familias|Familien
+Varios Precios|Verschiedene Preise
+Formas de Pago|Zahlungsformen
+Empleados|Mitarbeiter
+Clientes|Kunden
+Proveedores|Lieferanten
+Aceptar|Akzeptieren
+Cancelar|Abbrechen
+Eliminar|Löschen
+Modificar|Ändern
+Nuevo|Neu
+No Movimiento|Keine Bewegung
+Productos relacionados con el proveedor:|Produkte im Zusammenhang mit dem Lieferanten:
+Dia de Visita:|Besuchstag:
+Número de Cuenta:|Kontonummer:
+Nombre del Banco|Name der Bank
+Dia de Pago:|Zahlungstag:
+Forma de Pago:|Zahlungsmethode:
+Observaciones:|Beobachtungen:
+Correo Electrónico:|E-Mail:
+Móvil / Celular:|Mobil / Mobilfunk:
+Teléfono:|Telefon:
+Dirección:|Adresse:
+Población:|Bevölkerung:
+Código Postal:|Postleitzahl:
+Provincia:|Provinz:
+País:|Land:
+DNI / CIF|DNI / CIF
+Contacto:|Kontakt:
+Nombre|Name
+Gestion de Proveedores|Lieferantenmanagement
+Lista de Proveedores|Liste der Anbieter
+Ver Ingredientes|Siehe Zutaten
+Ver Productos Venta|Siehe Produkte Verkauf
+Zona:|Zone:
+    Buscar Por Nombre:|Suche nach Name:
+Codigoproducto|Codigo Produkt
+Barra|Barra
+Cocina|Kochen
+Ambos|Beides
+situaciongrid|Situationsgrid
+Posicion  en Pantalla:|Bildschirmposition:
+Ingredientes|Zutaten
+Producto para Venta|Produkt zum Verkauf
+Mostrar en Pantalla de Caja:|Im Box-Bildschirm anzeigen:
+Precio de Venta:|Verkaufspreis:
+Impuesto:|Steuern:
+grid_ingredientes|grid_ingredientes
+grid_productosventas|grid_productosventas
+Descripcion Numerica:|Numerica Beschreibung:
+Seleccionar Color:|Wählen Sie Farbe:
+Insertar Imagen|Bild einfügen
+Tipo de Producto:|Art des Produkts:
+Producto preparado en:|Produkt zubereitet in:
+Coste:|Kosten:
+Stock Actual:|Aktueller Vorrat:
+Stock Minimo:|Mindestbestand:
+Proveedor:|Anbieter:
+Codigo de Barras:|Strichcode:
+Unidades de medida:|Maßeinheiten:
+Nombre del Producto:|Produktname:
+Gestion de Productos|Produktmanagement
+Buscar|Suche
+Resultados de la Busqueda|Ergebnisse der Suche
+panel de busqueda de clientes|Kundensuche-Panel
+Buscar Clientes|Kunden suchen
+** DOBLE CLIC EN EL CLIENTE DESEADO|** DOPPELKLICKEN SIE AUF DEN GEWÜNSCHTEN KUNDEN
+Rellene algun campo para la busqueda|Füllen Sie einige Felder für die Suche aus
+DNI/ CIF|DNI / CIF
+Tlf Movil|Handy
+Telefono|Telefon
+Email|E-Mail
+Provincia|Provinz
+Poblacion|Bevölkerung
+Apellidos|Nachname
+CP|CP
+Codigo Cliente|Kundencode
+situacion|Situation
+Descuento %|Rabatt%
+historico ventas|historische Verkäufe
+datos|Daten
+Lista Ultimos 50 Clientes|Letzte 50 Kundenliste
+Puerta|Tür
+Numero|Nummer
+Piso|Boden
+Direcccion|Richtung
+Nombre *|Name *
+situacion buscar|Situationsuche
+Gestion de Clientes|Kundenmanagement
+Familia Tipo Menu Combo|Familientyp Menü Combo
+Familia Tipo Menu|Familientyp Menü
+Familia Generica|Generische Familie
+Gestion de Familias|Familienmanagement
+Clic sobre la familia para ver mas detalles|Klicken Sie auf die Familie, um weitere Details anzuzeigen
+Lista de Familias|Liste der Familien
+*Pulse en la familia para ver los productos agregados a la misma|* Klicken Sie auf die Familie, um die hinzugefügten Produkte zu sehen
+Seleccione el tipo de familia|Wählen Sie die Art der Familie
+Lb_stopanelproductos|Lb_stopanelproducts
+Esta familia no tiene productos relacionados|Diese Familie hat keine verwandten Produkte
+lista productos|Produkte auflisten
+Clic en el producto que desee incluir en su familia|Klicken Sie auf das Produkt, das Sie in Ihre Familie aufnehmen möchten
+Lista de Productos |Liste der Produkte
+Añadir Productos|Produkte hinzufügen
+Tipo de Familia:|Art der Familie:
+Label5|Label5
+datos generica|generische Daten
+datos familia generica|generische Familiendaten
+Imagen|Bild
+Datos de la Familia|Familiendaten
+Mostrar en Caja |In Schachtel zeigen
+Posicion en Pantalla|Bildschirmposition
+Descripcion Numerica|Numerische Beschreibung
+Productos Incluidos|Enthaltene Produkte
+panel menu familia|Panel-Menü-Familie
+Producto incluido en otra familia|Produkt in einer anderen Familie enthalten
+Productos Tercer Plato/ Postre|Dritte Dish / Dessert Produkte
+Productos Segundo Plato|Zweite Platte Produkte
+Productos Primer Plato|Erste Plattenprodukte
+Añadir Postre|Nachtisch hinzufügen
+Añadir Segundo|Zweite hinzufügen
+Añadir Primero|Füge zuerst hinzu
+Impuesto|Steuern
+Precio de Venta|Verkaufspreis
+tipo|eingeben
+NO BORRAR|LÖSCH NICHT
+situacion paneles|Situationspanels
+Añadir + Productos a la SubFamilia|Fügen Sie der Unterfamilie + Produkte hinzu
+Clic en el producto que desee incluir en el subproducto|Klicken Sie auf das Produkt, das Sie in das Unterprodukt aufnehmen möchten
+Familia a la que pertenece|Familie, zu der es gehört
+datos subfamilia|Unterfamiliedaten
+Datos de la SubFamilia|Daten der Unterfamilie
+SubFamilias Existentes|Vorhandene Unterfamilien
+Num S.S.:|Num S. S.:
+Repartidor:|Händler:
+Apellidos:|Nachname:
+Color en Caja:|Farbe in der Box:
+Número de  Cuenta:|Kontonummer:
+Nombre  del Banco:|Name der Bank:
+Foto:|Foto:
+Correo  Electrónico:|E-Mail:
+NIF/ CIF:|NIF / CIF:
+Nombre:|Name:
+Lista de Empleados|Liste der Mitarbeiter
+Gestion de Empleados|Mitarbeiterverwaltung
+*clic para ver datos del producto|* klicken, um Produktdaten zu sehen
+top grid|oberes Raster
+Sirve para que en lugar de que  aparezca una imagen en el boton  del producto aparezca un numero.|Es dient dazu, dass anstelle eines Bildes auf der Produkttaste eine Nummer erscheint.
+alturacandidadingredientes|höheCandityingients
+Es el lugar donde queremos que se  muestre el producto en caja cuando hacemos clic sobre su familia.|Es ist der Ort, wo wir das Produkt in der Box zeigen möchten, wenn wir auf Ihre Familie klicken.
+nombreproducto|Produktname
+Codigo|Code
+CantidaddeIngredientes|Menge der Zutaten
+Cantidad|Betrag
+Ingredientes Incluidos en el Producto: |Zutaten im Produkt enthalten:
+Ver Datos Completos|Siehe vollständige Daten
+¿cuantos|Wie viele
+sto ingredientes|sto Zutaten
+Producto Elaborado|Verarbeitetes Produkt
+Producto preparado en|Produkt vorbereitet in
+Descripcion  Numerica:|Numerica Beschreibung:
+situacion izquierda|linke Situation
+situacion derecha|richtige Situation
+alturagrid|Alturagrid
+Seleccione el producto o el ingrediente a utilizar|Wählen Sie das zu verwendende Produkt oder die Zutat aus
+Ver Productos|Siehe Produkte
+Gestion de Productos Elaborados|Verwaltung verarbeiteter Produkte
+Ver Ingredientes Incluidos|Siehe Zutaten enthalten
+Añadir Producto|Produkt hinzufügen
+Nuevo Precio|Neuer Preis
+Precio Actual|Aktueller Preis
+Añadir Nuevos Productos|Neue Produkte hinzufügen
+Producto|Produkt
+Precio Original|Ursprünglicher Preis
+Precios Validos entre los siguientes dias y horas|Gültige Preise zwischen den folgenden Tagen und Stunden
+Hora Hasta|Stunde bis
+Hora Desde|Zeit von
+Fecha Hasta|Datum bis
+Fecha Desde|Datum von
+Nombre de la lista|Name der Liste
+SITUACION DE LOS PANELES|SITUATION DER PANEELE
+Id lista|ID-Liste
+Fecha de Alta|Datum der Registrierung
+Desde|Von
+Hasta|Bis
+Horario Desde|Zeitplan von
+Horario Hasta|Planen Sie ein
+Ver Lista|Siehe Liste
+Lista de Precios Existentes|Bestehende Preisliste
+Volver Lista de Precios|Zurück Preisliste
+Lista de Precios|Preisliste
+Productos de Barra|Produkte von Barra
+Productos de cocina|Küchenprodukte
+Esta zona la voy a utilizar para|Ich werde diesen Bereich nutzen um
+Zonas Existentes|Vorhandene Bereiche
+Zonas de Impresion|Bereiche des Eindrucks
+Diseño|Design
+Otro Terminal|Anderes Terminal
+Reservada|Reserviert
+Ocupada|Beschäftigt
+Libre|Kostenlos
+Panel Mesas|Paneltabellen
+Mesas|Tabellen
+Diseño Salon|Salon Design
+Reservas|Reservierungen
+Salones|Zimmer
+Reserva|Reservierung
+Total|Summe
+Tablet Activada|Aktivierte Tablette
+Visor Pedidos|Auftragsanzeige
+Bit|Bit
+Pedido Telefonico|Telefon Bestellung
+Envio|Versand
+Juntar Cuentas|Konten beitreten
+SALON|SALON
+EMPLEADO|MITARBEITER
+codigoempleado|Mitarbeitercode
+PEDIDO|Anfrage
+H. INICIO|H. HOME
+MESA|MESA
+Cant.|Nicht.
+Precio|Preis
+Primero|Erstens
+Segundo|Zweitens
+Postre|Nachtisch
+Desc|Desc
+Num_Factura|Num_Factura
+Recargo|Aufpreis
+Producto de Menu|Produkt des Menüs
+Menu|Menü
+Codigo del Menu|Menücode
+Servido|Serviert
+Tipo de Impuesto|Steuerart
+Cod Empleado|Kabeljau-Mitarbeiter
+codigo Familia|Familiencode
+Indice|Index
+Cod. Prod.|Cod. Prod.
+Orden Menu|Bestellmenü
+ZonaImpresion|Impressionsbereich
+BEBIDAS/ POSTRES|GETRÄNKE / DESSERTS
+PRIMER PLATO|ERSTE PLATTE
+SEGUNDO PLATO|ZWEITE PLATTE
+situacion panel producto|Produktpaneelsituation
+Opciones|Optionen
+Cobrar|Gebühr
+Abrir  Cajetin|Öffnen Sie Cajetin
+Preticket|Pre-Ticket
+Enviar a cocina|In die Küche schicken
+Borrar Venta|Verkauf löschen
+Observ. Pedido|Ich habe es beobachtet Bestellung
+Crear/Modificar Salones|Räume erstellen / ändern
+Diseño de Salones|Design von Räumen
+Elementos para  el diseño|Elemente für das Design
+Posicion del objeto/mesa|Position des Objekts / der Tabelle
+Eliminar Mesa|Entfernen Sie die Tabelle
+Eliminar Objeto|Objekt löschen
+Guardar Numero|Nummer speichern
+Numero Mesa|Nummer Tabelle
+Eliminar Diseño Salon|Entfernen Sie Design Salon
+Boton Pulsado|Gepulster Knopf
+Objeto Pulsado|Gepulstes Objekt
+Esta diseñando el:|Entwirft das:
+Alta Salones/ Barra|Hohe Hallen / Bar
+Lista de Salones - Barras|Liste der Zimmer - Bars
+Recargo:|Aufpreis:
+Posicion En Pantalla:|Bildschirmposition:
+Color Salon|Farbsalon
+Imagen Mesas|Bildtabellen
+Nro de Mesas:|Anzahl der Tabellen:
+Imagen Salon|Salon Bild
+Cambiar Idioma / Change Language|Sprache ändern / Sprache ändern
+Base De Datos|Datenbank
+Contraseña Director|Director-Passwort
+Importar Imagenes del Servidor|Importieren Sie Bilder vom Server
+Permisos Usuario|Benutzerberechtigungen
+Importar Datos|Daten importieren
+Cierre Año|Jahr nah
+Envio Informes|Versandberichte
+Conexion en Red|Netzwerkverbindung
+Aumento Precio|Erhöhen Sie den Preis
+Horario|Zeitplan
+Diseño Ticket / Factura|Ticket Design / Rechnung
+Cajetin|Cajetin
+Impresoras|Drucker
+Copia de Seguridad|Sicherungskopie
+Configuracion Regional|Regionale Einstellungen
+Datos de la empresa|Daten des Unternehmens
+situacionpaneles|Situacionpanele
+Esta a punto de restaurar una copia de seguridad, recuerde que este proceso es irreversible y cambiara la base de datos con la que trabaja en estos momentos por la seleccionada |Sie sind dabei, eine Sicherungskopie wiederherzustellen, denken Sie daran, dass dieser Vorgang nicht rückgängig gemacht werden kann und ändern Sie die Datenbank, mit der Sie gerade arbeiten, für die ausgewählte
+Hacer Copia de Seguridad|Backup erstellen
+Restaurar Copia de Seguridad|Backup wiederherstellen
+Administracion Permisos|Berechtigungen Verwaltung
+Nro. de copias del preticket|Anzahl der Pre-Ticket-Kopien
+Nro. de copias del ticket|Anzahl der Kopien des Tickets
+Centrado|Zentriert
+OFF|Aus
+ON|EIN
+Enviar Confirmacion Reserva|Bestätigungsreservierung senden
+Enviar email al director / cierre caja|E-Mail an Regisseur senden / Box schließen
+Realizar cierre caja ciego|Schließen Sie die Blindbox
+Pedir Contraseña Al Entrar Al Programa|Passwort beim Eingeben des Programms anfordern
+Permisos Usuarios|Benutzerberechtigungen
+Pedir contraseña para las modificaciones / eliminaciones / descuentos ... (Para todos los empleados)|Passwort für Änderungen / Löschungen / Rabatte anfordern ... (Für alle Mitarbeiter)
+Pedir Contraseña Apertura de Cajetin|Anfrage Passwort Cajetin Eröffnung
+Pedir Contraseña Al Entrar Caja|Beim Eingeben der Box nach dem Passwort fragen
+Pedir Empleado Al Entrar Caja|Fragen Sie Mitarbeiter beim Eingeben der Box
+Activar Opciones|Aktivieren Sie Optionen
+Pedir Contraseña|Passwort abfragen
+Pedir Empleado X Cada Venta|Fragen Sie nach Mitarbeiter X Every Sale
+Utilizar Caja Rapida|Verwenden Sie die Quick Box
+Entrar en modo Direccion|Geben Sie den Adressmodus ein
+¿Ha olvidado su contraseña?|Hast du dein Passwort vergessen?
+No ha seleccionado ningun empleado|Sie haben keinen Mitarbeiter ausgewählt
+Ingrese su clave:|Gib dein Passwort ein:
+SELECCIONE EL EMPLEADO|WÄHLEN SIE DEN MITARBEITER AUS
+Nombre de la Empresa|Firmenname
+Ingrese el nro. de percha|Geben Sie die Nummer ein von Aufhänger
+lb-_Empleado|lb-_Mitarbeiter
+Cambio Precio|Preis ändern
+Cierre De Caja|Box Schließung
+Imprimir Resguardo|Drucken Resguardo
+Imprimir Ticket|Ticket drucken
+Abrir Cajetin|Öffnen Sie Cajetin
+Terminar Venta|Verkauf beenden
+Importe Total Prendas|Gesamtbetrag Kleider
+Entrega cliente|Kundenlieferung
+Devolucion|Zurück
+Venta Anterior|Vorheriger Verkauf
+Nro Prendas|Keine Kleider
+Caja - Ropero|Box - Kleiderschrank
+Entrada Seleccionada|Ausgewählter Eintrag
+Entrada + consumicion|Eintrag + Verbrauch
+Entrada Seleccionada:|Ausgewählter Eintrag:
+Seleccion De Entradas|Auswahl der Tickets
+Nombre del Visor:|Name des Betrachters:
+Utilizar Visor|Verwenden Sie den Viewer
+Eliminar Impresoras de este teminal|Entfernen Sie Drucker von diesem Terminal
+La impresora se ha dado de alta correctamente|Der Drucker hat sich erfolgreich registriert
+Seleccione la celda en la interseccion de la impresora y la zona que quiere asociar|Wählen Sie die Zelle an der Schnittstelle des Druckers und des Bereichs aus, den Sie zuordnen möchten
+Configuracion de Impresoras|Druckerkonfiguration
+Gestion de Impresoras|Druckerverwaltung
+Reenvio de Pedidos A cocina / Barra|Weiterleitung von Bestellungen an Küche / Bar
+* click en la linea que desea reimprimir|* Klicken Sie auf die Zeile, die Sie erneut drucken möchten
+Zona Impresion|Impressionszone
+Hora|Stunde
+numPedido|numPedido
+Fecha|Datum
+enviado|gesendet
+Detalles del Pedido|Details der Bestellung
+Reenviar|Erneut senden
+NumPedido =|Bestellnummer =
+Guardar|Speichern
+Descuento a aplicar|Rabatt, um zu gelten
+lblCliente|lblClient
+Terminar Venta <F12>|Fertigverkauf <F12>
+Descuento|Rabatt
+Buscar Cliente|Kunden suchen
+Cambio|Ändern
+Cliente entrega Efectivo|Bargeldlieferkunde
+Cliente paga con Tarjeta|Kunde zahlt mit Karte
+Formato de Impresion|Druckformat
+Formato A4|Format A4
+Formato A5|Format A5
+Tamaño 10 cm.|Größe 10 cm.
+Imprimir factura|Rechnung drucken
+SubTotal|Zwischensumme
+Propina|Tipp
+Enviar ticket Correo Electronico|Sende Ticket E-Mail
+Cerrar Venta|Schlussverkauf
+Imprimir en Cocina|Druck in der Küche
+V E R  T I C K E T|V E R T I C K E T
+Tipo de venta|Art des Verkaufs
+Factura|Rechnung
+Boleta Formato Ticket|Ticketformatticket
+Ultima Venta|Letzter Verkauf
+Diseño de salon|Salon-Design
+Eliminar Venta Ya Cobrada|Löschen Verkauf bereits gesammelt
+Cobro Parcial|Teilweise Sammlung
+Reservas de Mesas|Tischreservierungen
+Listados Caja|Auflistungsfeld
+Retirada de Caja|Abhebung von Bargeld
+Gastos del Dia|Tagesausgaben
+Activar Precios para este Terminal|Aktivieren Sie Preise für dieses Terminal
+Reimpresion Ticket|Ticket erneut drucken
+Modificacion de Tickets|Änderung von Tickets
+Conteo y cierre de caja|Zählen und Schließen von Bargeld
+situacion panel opciones|Panelsituation Optionen
+panel_opciones de caja|panel_optionen
+CONFIGURACION OPCIONES CAJA|KONFIGURATION BOX OPTIONEN
+Regresar al idioma original|Zurück zur Originalsprache
+¿Confirma que desea eliminar el siguiente registro?|Möchten Sie den nächsten Datensatz wirklich löschen?
+Idiomas|Sprachen
+Usted ha seleccionado|Sie haben ausgewählt
+Ninguno|Keine
+¿Seleccione el Idioma?|Wählen Sie die Sprache?
+Texto Traducido|Übersetzter Text
+Texto Original|Originaltext
+id|ID
+Texto|Text
+Traduccion|Übersetzung
+lineas sin traducir|unübersetzte Zeilen
+Click sobre la linea para añadir una traduccion|Klicken Sie auf die Zeile, um eine Übersetzung hinzuzufügen
+Click sobre la linea para modificar la traduccion|Klicken Sie auf die Zeile, um die Übersetzung zu ändern
+Texto sin traducir|Nicht übersetzter Text
+Condiciones|Bedingungen
+Registro de Licencias|Registrierung von Lizenzen
+Acerca de ...|Über ...
+TPV Gratuito|Kostenlose POS
+B. Aires - Argentina|B. Aires - Argentinien
+D. F. - Mexico|D. F. - Mexiko
+Santiago de Chile|Santiago, Chile
+Lima - Peru|Lima - Peru
+Costa Rica|Costa Rica
+Puerto Rico|Puerto Rico
+Miami - Florida|Miami - Florida
+Bogota - Colombia|Bogotá - Kolumbien
+Mantenimiento registrado hasta:|Registrierte Wartung bis:
+Fecha de Caducidad:|Ablaufdatum:
+Fecha de Instalacion:|Installationsdatum:
+TPV Gratuito, Departamento de Desarrollo|Kostenlose POS, Entwicklungsabteilung
+Ultima actualizacion: XXX|Letztes Update: XXX
+Fecha de creacion:  XXX|Erstellungsdatum: XXX
+Proyecto: Tpv 123, Version: XXX|Projekt: Tpv 123, Version: XXX
+Paseo de Europa 7, (S.S. de los Reyes - Madrid -España)|Walk of Europe 7, (S. S. de Reyes - Madrid-Spanien)
+Buenos Aires - Argentina|Buenos Aires - Argentinien
+E-mail: compras@tpvgratuito.com   www.tpvgratuito.com|E-Mail: compras@tpvgratuito.com www.tpvgratuito.com
+Servicio de asistencia:|Helpdesk:
+Reg. Anual|Jährliche Reg
+Usted está utilizando una licencia:|Sie verwenden eine Lizenz:
+SolverMedia|SolverMedia
+SolverMedia, Departamento de Desarrollo|SolverMedia, Entwicklungsabteilung
+Fecha de creacion: XXX|Erstellungsdatum: XXX
+Proyecto: Servidor Net, Version: XXX|Projekt: Net Server, Version: XXX
+No hay datos para ser mostrados|Es müssen keine Daten angezeigt werden
+Listado de Empleados|Liste der Mitarbeiter
+Listado de Familias|Liste der Familien
+Listados Generales|Allgemeine Einträge
+Ventas NCF Rep. Dominicana|Verkauf NCF Rep. Dominicana
+Ventas con Promociones|Verkäufe mit Promotions
+Productos Bajo Minimo|Produkte Niedrig Minimum
+Reimprimir Factura - Ticket|Rechnung erneut drucken - Ticket
+Ventas x Clientes|Vertrieb x Kunden
+Imprimir Letreros  y  Etiquetas |Drucken Schilder und Etiketten
+Estadisticas|Statistiken
+Valoracion Stock x Proveedores|Bewertungsbestand x Lieferanten
+Valoracion Stock General|Allgemeine Bestandsbewertung
+Listado de Proveedores|Liste der Anbieter
+Listado de Clientes|Liste der Kunden
+Listado de Productos|Liste der Produkte
+Servicios a Domicilio|Hausdienste
+Consumo de Platos Menu|Gericht Verbrauch Menü
+Reservas x Dia|Reservierungen x Tag
+Pedidos Realizados a Proveedor|Bestellungen an den Lieferanten
+Empleado del Mes|Mitarbeiter des Monats
+Estadistica x Repartidor|Statistik x Händler
+Retiradas Empleados|Zurückgezogene Mitarbeiter
+Relacion Envios Cocina contra Ventas|Versandbeziehung Küche vs. Verkauf
+Formato Din-A4|Din-A4-Format
+Formato Ticket|Ticketformat
+Total Diario de Retiradas|Tägliche Auszahlungen insgesamt
+Ventas x Zonas|Verkauf x Bereiche
+Caja Total x Dias|Gesamtkiste x Tage
+Gastos de Caja|Barausgaben
+Descuentos Realizados|Rabatte gemacht
+Ventas en el mes (Acumulado x Horas)|Verkäufe im Monat (kumuliert x Stunden)
+Reservas Hora/Dia /Mes|Reservierungen Zeit / Tag / Monat
+Ventas x Empleados|Verkauf x Mitarbeiter
+Impuestos Repercutidos|Steuern besteuert
+Gastos|Ausgaben
+Relacion de Propinas|Spitzenverhältnis
+Ventas x Menus|Verkauf x Menüs
+Resumen Contable de Facturas|Rechnung Buchhaltungszusammenfassung
+Productos mas Vendidos|Meistverkaufte Produkte
+Productos Sin Ventas|Produkte ohne Verkauf
+Ventas x Horas|Verkäufe x Stunden
+Resumen de Venta x Empleados|Zusammenfassung des Verkaufs x Mitarbeiter
+Ventas Detalladas x Empleados|Detailverkauf x Mitarbeiter
+Ventas Eliminadas y Descuentos|Gelöschte Verkäufe und Rabatte
+Ventas x Zonas -Totalizado x Productos|Umsatz x Bereiche - Gesamtbetrag x Produkte
+Ventas Generales x Dia|Allgemeine Verkäufe x Tag
+Ventas x Familias|Verkäufe x Familien
+Ventas x Zonas Formato General|Verkäufe x Bereiche Allgemeines Format
+Ventas x Forma de Pago|Verkauf x Zahlungsweise
+Ventas Formato Ticket Resumido|Verkaufszusammenfassung Ticket Format
+Ventas Formato Ticket x Empleado|Verkaufsformat Ticket x Mitarbeiter
+Productos Bajo Minimos Formato Ticket|Produkte unter Minimalformat Ticket
+Ventas Eliminadas Formato Ticket|Sales Deleted Format Ticket
+Cierres de Caja Formato Ticket|Kassenschließfächer Format Ticket
+Ventas Formato Ticket Detallado|Detaillierte Ticketformatierung
+Subproductos|Nebenprodukte
+Eliminar Datos de Prueba|Testdaten löschen
+Configuracion Empresa|Firmenkonfiguration
+Datos de la Factura|Rechnungsdaten
+Ultimo Nro. Utilizado = |Zuletzt verwendet Nein =
+Factura Numero|Rechnungsnummer
+Numeracion de factura|Rechnungsnummer
+No Incluidos|Nicht enthalten
+Incluidos|Enthalten
+Impuestos|Steuern
+Ancho A5 (14cm)|Breite A5 (14cm)
+Ancho 10 cm|Breite 10 cm
+Ancho A4 (21cm)|Breite A4 (21cm)
+Formato de Factura|Rechnungsformat
+Logo de la Empresa|Firmenlogo
+Pagina Web|Website
+Direccion|Adresse
+Pais|Land
+Codigo Postal|Postleitzahl
+Detalles de la Empresa|Firmendaten
+Recuerde que en la carpeta indicada en la linea superior tiene que existir el archivo nomprog.|Denken Sie daran, dass in dem in der oberen Zeile angegebenen Ordner die Nomprog-Datei vorhanden sein muss.
+Paso1: Confirme que todos sus equipos esten conectados en red.  Paso2: De todos los equipos que tiene, tiene que seleccionar uno que va a hacer de servidor.  Paso3: El equipo que hara de servidor tiene que tener el disco C compartido y con los permiso|Schritt 1: Bestätigen Sie, dass alle Ihre Computer in einem Netzwerk verbunden sind. Schritt 2: Von all den Geräten, die Sie haben, müssen Sie einen auswählen, der ein Server sein wird. Schritt 3: Das Team, das den Server erstellt, muss die gemeinsame Festplatte C und die Berechtigung haben
+Nota: Localice el equipo que hara de servidor que la base de datos la encontrara en |Hinweis: Suchen Sie den Computer, auf dem der Server die Datenbank finden wird
+Conectar con la base de datos|Verbinde dich mit der Datenbank
+Como tiene que poner su equipo  en modo red local (varios equipos)|Wie Sie Ihren Computer in den lokalen Netzwerkmodus versetzen (mehrere Computer)
+Conexion con otro Terminal|Verbindung mit einem anderen Terminal
+Permisos de Usuario|Benutzerberechtigungen
+Seleccione el empleado al que va a configurar permisos|Wählen Sie den Mitarbeiter aus, für den Sie Berechtigungen festlegen möchten
+Cambio Guardado|Gespeicherte Änderung
+Cambio de Clave|Passwortänderung
+* Maximo 8 caracteres|* Maximal 8 Zeichen
+Confirmacion|Bestätigung
+Nueva|Neu
+Antigua|Antigua
+Cambiar Contraseña|Passwort ändern
+Cambios guardados|Gespeicherte Änderungen
+Aplicar Cambios para este Empleado|Übernehmen Sie Änderungen für diesen Mitarbeiter
+Borrar Restricciones|Einschränkungen löschen
+Opciones configurables|Konfigurierbare Optionen
+NO Permite acceso al modulo|NEIN Erlaubt den Zugriff auf das Modul
+Permite acceso al modulo|Ermöglicht den Zugriff auf das Modul
+Seleccione su pais|Wählen Sie Ihr Land aus
+Nombre del Impuesto (IVA, IGIC, IGV, etc.)|Name der Steuer (Mehrwertsteuer, IGIC, IGV usw.)
+Si en su pais no se aplica esta normativa, NO ACTIVE esta opcion|Wenn diese Vorschrift in Ihrem Land nicht gilt, aktivieren Sie diese Option NICHT
+Si ACTIVA esta opcion, en las facturas el num. le aparecera asi: 000- 000-00-0000000X|Wenn Sie diese Option aktivieren, erscheint in den Rechnungen die Nummer. Es wird so aussehen: 000-000-00-0000000X
+En algunos paises la normativa indica que el numero de facturas tiene que ir precedido por una serie de identificadores.|In einigen Ländern gibt es Vorschriften, nach denen der Anzahl der Rechnungen eine Reihe von Kennungen vorausgehen muss.
+INFORMACION SOBRE FACTURAS ESPECIALES|INFORMATIONEN ÜBER SPEZIELLE RECHNUNGEN
+Moneda|Währung
+Simbolo Moneda|Währungssymbol
+Formato Hora:|Zeitformat:
+Numero de decimales ( 0,1,2)|Anzahl der Dezimalstellen (0,1,2)
+Identificacion Fiscal (Cif, Nif, Ruc, Rut, Rnc, etc.)|Steueridentifikation (Cif, Nif, Ruc, Rut, Rnc usw.)
+h=12 Horas (AM o PM)|h = 12 Stunden (AM oder PM)
+h=24 Horas |h = 24 Stunden
+Otra Moneda|Andere Währung
+Btc 1 BitCoin = |Btc 1 BitCoin =
+€ 1 Euro = |1 Euro =
+$ 1 Dolar = |$ 1 Dollar =
+Hasta 8 decimales|Bis zu 8 Dezimalstellen
+Numero de credito fiscal|Steuernummer
+Activar linea propina en preticket|Aktivieren Sie die Tippzeile im Preticket
+Guardar Cambios|Änderungen speichern
+Ingrese el concepto|Gib das Konzept ein
+Activar concepto Propina / Servicio / Otros|Aktivieren Sie das Konzept Trinkgeld / Service / Sonstiges
+(Opcion utilizada con frecuencia en algunos paises del caribe y sudameria) / No activar en paises en los que no es obligatorio cobrar propina|(Option häufig in einigen Ländern der Karibik und sudameria verwendet) / nicht in Ländern aktiviert, in denen es nicht zwingend notwendig ist Gratifikation Ladung
+Secuencia de Apertura|Öffnungssequenz
+Para impresoras conexion paralela:|Für Drucker mit parallelen Verbindungen:
+Probar / Guardar|Test / Speichern
+* Click para seleccionar la secuencia de apertura|* Klicken Sie, um die Eröffnungssequenz auszuwählen
+Marca de Impresora|Druckermarke
+Modelo de Impresora|Druckermodell
+Otras secuencias de apertura|Andere Öffnungssequenzen
+Nota: Es posible que la impresora realice el corte sin tener que añadir ninguna secuencia de apertura, en ese caso no hace falta que configure esta opcion|Hinweis: Der Drucker den Schnitt ohne Zugabe von Anfangssequenz machen kann, in diesem Fall, dass Sie nicht brauchen, um diese Option zu konfigurieren
+* Click para seleccionar la secuencia de corte|* Klicken Sie, um die Schnittsequenz auszuwählen
+Secuencia de Corte|Schnittsequenz
+Otras secuencias de Corte de Papel|Andere Sequenzen von Papier schneiden
+Configuracion de corte automatico al final del ticket:|Automatische Schnittkonfiguration am Ende des Tickets:
+¿Que son comandos adicionales? Despues de instalar los drivers de la impresora en propiedades de la misma encontramos una pestaña de comandos adicionales / desde aqui marcaremos la opcion de apertura de cajon (Open Draw1 o Open Draw2).|Was sind zusätzliche Befehle? Nach der Installation der Druckertreiber auf den gleichen Eigenschaften fanden wir eine zusätzliche Registerkarte / Befehle von hier wird die Möglichkeit der Öffnung Schublade (aufnahme1 öffnen oder Open Draw2) markieren.
+Apertura estandar para impresoras USB|Standardöffnung für USB-Drucker
+Para impresoras con comandos adicionales: (serie, paralelo, usb)|Für Drucker mit zusätzlichen Befehlen: (seriell, parallel, USB)
+Para impresoras salida serie:|Für Drucker mit serieller Ausgabe:
+Configuracion de Apertura de Cajon|Cajon Öffnungskonfiguration
+Si conoce que tipo de conexion tiene su impresora de tickets seleccione la que le corresponde en caso contrario pruebe cada uno de ellos hasta confirmar cual es el que abre.|Wenn Sie, welche Art von Verbindung wissen, haben Sie Ihr Ticket Drucker auswählen, welche ansonsten versuchen entspricht jeder von ihnen, was die Öffnung zu bestätigen.
+Ayuda|Hilfe
+Configuracion de Cajetin|Cajetin Konfiguration
+Courier New|Kurier Neu
+Seleccione Tamaño Letra: Cuerpo|Wählen Sie Buchstabengröße: Körper
+Seleccione Tamaño Letra: Titulo|Wählen Sie Buchstabengröße: Titel
+Seleccione Tipo Letra|Wählen Sie Brief eingeben
+Tipo / Tamaño Letra|Typ / Größe Buchstabe
+Nro. de Decimales que quiero utilizar|Anzahl der Dezimalstellen, die ich verwenden möchte
+Mi impresora imprime|Mein Drucker druckt
+Nro. de caracteres de su impresora|Anzahl der Zeichen Ihres Druckers
+caracteres por linea|Zeichen pro Zeile
+Poblacion:|Bevölkerung:
+Direccion:|Adresse:
+Tel:|Tel:
+CIF / DNI:|CIF / DNI:
+Cliente:|Kunde:
+Empleado:|Mitarbeiter:
+Fact. Simpli:|Tatsache. Simpli:
+Codigo Barras|Strichcode
+Lineas en blanco al final del ticket = |Leerzeilen am Ende des Tickets =
+Escriba aqui su comentario del final de ticket|Schreiben Sie hier Ihren Kommentar zum Ticketende
+** Gracias por su visita **|** Danke für Ihren Besuch **
+Impuestos Incluidos|Steuern enthalten
+Varias lineas para descripcion del producto|Mehrere Zeilen zur Produktbeschreibung
+Añadir codigo de barras en descripcion de producto|Fügen Sie den Barcode in der Produktbeschreibung hinzu
+Otras Opciones|Andere Optionen
+Mostrar P. Unitario|Zeigen Sie P. Einheitlich
+Desglose Impuesto|Steueraufschlüsselung
+Total en Letras|Insgesamt in Buchstaben
+Utilizar SubTotal|Verwenden Sie Zwischensumme
+Cuota|Gebühr
+Base|Basis
+Tipo IVA|Mehrwertsteuerart
+Entrega|Lieferung
+P. U.|P. U.
+Descripcion|Beschreibung
+Uds|Du
+WEB|WEB
+Puede cambiar|Sie können ändern
+CIF|CIF
+Nombre Empresa|Firmenname
+Imagen al Principio|Bild am Anfang
+Datos de Cabecera|Kopfdaten
+Clic para cambiar Imagen|Klicken Sie, um das Bild zu ändern
+Nro Venta/Pie de Ticket|Kein Verkauf / Foot of Ticket
+Diseño Ticket|Ticket Design
+Valor de venta en letras|Verkaufswert in Buchstaben
+Diseño de Ticket|Ticket-Design
+Pie de Ticket|Ticketfuß
+Detalles del  Ticket|Ticketdetails
+Vista Previa|Vorschau
+Cabecera  Ticket|Ticketkopf
+Datos del  Cliente|Kundendaten
+Clave:|Passwort:
+Usuario: Director|Benutzer: Regisseur
+Está a punto de realizar la restauración de sus copias de seguridad de sus bases de datos.  Para ello deberá localizar su copia de seguridad en su disco duro o en su modulo de memoria extraible.  Dicha operación demorará unos segundos, una vez finaliz|Sie sind dabei, Ihre Sicherungskopien Ihrer Datenbanken wiederherzustellen. Um dies zu tun, müssen Sie Ihre Sicherungskopie auf Ihrer Festplatte oder dem Wechselspeichermodul finden. Dieser Vorgang dauert einige Sekunden, sobald er beendet ist
+TPV Hosteleria|POS-Terminal Hosteleria
+Grafica de Envios|Versand Grafiken
+Relacion Emails Enviados|Beziehungs-E-Mails gesendet
+Envio Promocion|Versandaktion
+Crear Plantillas Reservas|Vorlagenreservierungen erstellen
+Envio Puntual|Rechtzeitige Lieferung
+Crear Plantillas|Erstellen Sie Vorlagen
+Activar Servicio De Correos|Aktivieren Sie den Post-Service
+Enviados:|Gesendet:
+Label6|Label6
+Saldo:|Guthaben:
+Su ID Es|Ihre ID ist
+Servicio Correo|Postdienst
+Le hemos asignado  20 correos gratis|Wir haben Ihnen 20 kostenlose E-Mails zugewiesen
+Su registro se ha realizado con exito|Ihre Registrierung wurde erfolgreich abgeschlossen
+Nombre de Usuario|Benutzername
+Correo de Contacto|Kontakt E-Mail
+Incluir Logo|Logo einbinden
+Pie de Correo|Fußpost
+Configuracion Correo|Mail-Konfiguration
+Mensaje Enviado|Gesendete Nachricht
+Enviar|Senden
+Envio Puntual de Correo|Mail senden
+toolStrip1|WerkzeugStrip1
+Mensaje|Nachricht
+Remitente|Absender
+Asunto|Thema
+Destinatario|Empfänger
+Seleccione el intervalo de fechas|Wählen Sie den Datumsbereich aus
+Chart1|Diagramm1
+Grafico|Grafik
+Nueva Plantilla|Neue Vorlage
+Plantillas Promociones|Angebotsvorlagen
+Guardado Correctamente|Richtig gespeichert
+No|Nein
+Sí|Ja
+¿Desea cargar el diseño anterior?|Möchten Sie das vorherige Design laden?
+Nombre Plantilla|Vorlagenname
+Plantilla 3|Vorlage 3
+Plantilla 2|Vorlage 2
+Plantilla 1|Vorlage 1
+Plantilla|Vorlage
+<---- Texto que aparece en el cuerpo de la promocion|<---- Text, der im Hauptteil der Aktion erscheint
+<---- Escriba el  texto que desea que aparezca en la parte inferior de la promocion|<---- Schreiben Sie den Text, der am Ende der Aktion erscheinen soll
+<---- Escriba el titulo o el texto que desea que aparezca en la cabecera de la promocion|<---- Schreiben Sie den Titel oder Text, der in der Kopfzeile der Aktion erscheinen soll
+Pie de página|Fußzeile
+Titulo|Titel
+<---- Haga un click para insertar la imagen|<---- Klicken Sie, um das Bild einzufügen
+Plantilla Guardada|Gespeicherte Vorlage
+Cuerpo del Mensaje|Körper der Nachricht
+Plantilla Reservas|Vorlagen Reservierungen
+<---- Texto que se genera automaticamente|<---- Text, der automatisch generiert wird
+<---- Escriba el  texto que desea que aparezca en la parte inferior de la reserva|<---- Schreiben Sie den Text, der am Ende der Reservierung angezeigt werden soll
+<---- Escriba el titulo o el texto que desea que aparezca en la cabecera de la reserva|<---- Geben Sie den Titel oder den Text ein, der in der Kopfzeile der Reservierung angezeigt werden soll
+Configurar Email|Konfigurieren Sie E-Mail
+Mostrar clientes|Zeige Kunden
+Filtrar Clientes para Enviar Email|Kunden filtern, um E-Mails zu senden
+Seleccione una opcion|Wählen Sie eine Option
+Menor que|Weniger als
+Mayor que|Größer als
+Consumo|Verbrauch
+Ingrese un codigo postal|Geben Sie eine Postleitzahl ein
+Todos los clientes|Alle Kunden
+Num. Visita|Nummer besuchen
+Cumpleaños|Geburtstag
+Enviando Emails|E-Mails senden
+Cerrar|Schließen
+Ctrl+C para copiar los correos de esta lista para hacer un envio desde la aplicacion de correo electronico (gmail, hotmail, etc...) que desee.|Strg + C, um die E-Mails aus dieser Liste zu kopieren, um eine Sendung aus der gewünschten E-Mail-Anwendung (Gmail, Hotmail usw.) zu erstellen.
+Lista de correos seleccionados|Liste ausgewählter E-Mails
+Enviar Email a Clientes Seleccionados|Senden Sie eine E-Mail an ausgewählte Kunden
+Lista de clientes|Liste der Kunden
+ Mostrar Todos| Alle anzeigen
+Emails Seleccionados|Ausgewählte E-Mails
+Marcar Todos|Alle markieren
+Copiar Emails seleccionados  para envio manual|Kopieren Sie ausgewählte E-Mails für die manuelle Zustellung
+ Mostrar solo con Email Valido| Nur mit gültiger E-Mail anzeigen
+Clientes Seleccionados|Ausgewählte Kunden
+Cantidad de clientes que cumplen las condiciones|Anzahl der Clients, die die Bedingungen erfüllen
+Importe|Betrag
+Visitas|Besuche
+* Si no pone un correo electronico valido no recibirá respuesta|* Wenn Sie keine gültige E-Mail-Adresse angeben, erhalten Sie keine Antwort
+Telefono:|Telefon:
+Email: *|E-Mail: *
+Ingrese sus datos para poder responderle|Geben Sie Ihre Informationen ein, um antworten zu können
+Formule su Consulta|Stellen Sie Ihre Frage
+Aviso de averia|Aufschlüsselung
+Pregunta o Consulta|Frage oder Beratung
+Tipo de Consulta|Art der Konsultation
+Si tiene alguna Incidencia / Pregunta sobre nuestro programa utilice esta opcion siguiendo los pasos:|Wenn Sie irgendeine Inzidenz / Frage zu unserem Programm haben, verwenden Sie diese Option, indem Sie die folgenden Schritte ausführen:
+Aviso de Averia / Consulta|Warnung / Beratung
+Asistencia y Sugerencias|Hilfe und Vorschläge
+Si no tiene contratado este servicio nuestra empresa no tiene la obligacion de dar ningun tipo de servicio o ser responsable de algun cambio de su sistema informatico.|Wenn Sie diesen Service nicht vertraglich vereinbart haben, ist unser Unternehmen nicht verpflichtet, irgendeine Art von Service zu erbringen oder für eine Änderung Ihres Computersystems verantwortlich zu sein.
+Si la compra de este producto ha superado el año y tiene caducado la asistencia / actualizaciones del programa, y tiene un problema recuerde, primero contratar nuestro servicio de asistencia para una solucion adecuada.|Wenn der Kauf dieses Produkts das Jahr überschritten hat und Hilfe / Programm-Updates abgelaufen und hat ein Problem erinnern, zunächst unsere Unterstützung für eine geeignete Lösung rekrutieren.
+Cambio de equipo informatico, cambio de disco duro, formateo de disco duro, etc...|Wechsel der Computerausrüstung, Festplattenwechsel, Festplattenformat, etc ...
+4.- Estimado cliente recuerde que sólo podrá recibir las actualizaciones del programa en caso de tener el contrato de mantenimiento al día.|4. Sehr geehrter Kunde, denken Sie daran, dass Sie Programmaktualisierungen nur erhalten können, wenn Sie den Wartungsvertrag auf dem neuesten Stand haben.
+3.- Si se produce alguno de estos casos anteriores, antes de realizar ninguna acción,  pongase en contacto con el departamento técnico de SolverMedia comercial@solvermedia.com para que le ayuden a realizar el cambio.|3. Wenn eine der oben genannten Fälle auftritt, bevor sie Maßnahmen, benutzen Sie bitte die technische Abteilung von SolverMedia comercial@solvermedia.com kontaktieren Sie die Änderung vornehmen zu helfen.
+2.- La empresa SolverMedia no concederá una nueva licencia a aquellos clientes que por problemas ajenos a SolverMedia hallan perdido el registro del programa, esos problemas pueden venir causados por:|2. Das Unternehmen SolverMedia keine neue Lizenz für Kunden gewähren, die SolverMedia Probleme außerhalb des Programmprotokoll verloren, können diese Probleme kommen, verursacht durch:
+1.- La empresa SolverMedia no se responsabiliza de la mala manipulación de su registro de licencia así como del numero asignado para su registro.|1.- Die Firma SolverMedia ist nicht verantwortlich für die schlechte Manipulation ihres Lizenz-Datensatzes sowie die Nummer, die für ihre Registrierung zugewiesen wurde.
+La contraseña de direccion es: |Das Adress-Passwort lautet:
+Maximo 8 caracteres|Maximal 8 Zeichen
+Confirme la contraseña|Bestätigen Sie das Passwort
+Ingrese la contraseña nueva|Geben Sie das neue Passwort ein
+Ingrese la contraseña anterior|Geben Sie das vorherige Passwort ein
+Recordatorio de contraseña de direccion|Adresspasswort Erinnerung
+Cambio de contraseña de direccion|Änderung des Adress-Passwortes
+Volver a intentar|Versuchen Sie es erneut
+Las respuestas introducidas no son correctas|Die eingegebenen Antworten sind nicht korrekt
+Para poder recordarle la contraseña de direccion es necesario que responda a las siguientes preguntas|Um Sie an das Adresspasswort erinnern zu können, müssen Sie die folgenden Fragen beantworten
+Año|Jahr
+Mes|Monat
+Dia|Tag
+Ingrese el segundo apellido de su madre|Geben Sie den zweiten Nachnamen Ihrer Mutter ein
+Indique su fecha de nacimiento|Geben Sie Ihr Geburtsdatum an
+Si olvida la contraseña que acaba de introducir podra recuperarla respondiendo a las preguntas anteriores.|Wenn Sie das gerade eingegebene Passwort vergessen haben, können Sie es wiederherstellen, indem Sie die vorherigen Fragen beantworten.
+La contraseña y las respuestas de recordatorio se han guardado correctamente.|Die Antworten für das Passwort und die Erinnerung wurden korrekt gespeichert.
+Boletas|Stimmzettel
+Facturas|Rechnungen
+codCliente|codClient
+Cliente|Kunde
+F.Pago|F. Zahlung
+** clic en la lista o introduzca el numero de ticket|** Klicken Sie auf die Liste oder geben Sie die Ticketnummer ein
+Ingrese el numero de ticket / factura|Geben Sie die Ticketnummer / Rechnung ein
+Lista de las ultimas ventas|Liste der letzten Verkäufe
+Concepto del gasto|Ausgaben-Konzept
+Gastos Del Día|Tagesausgaben
+Ultimos 50 gastos (clic para modificar)|Letzte 50 Ausgaben (zum Ändern klicken)
+ESPACIO|RAUM
+BORRAR|LÖSCHEN
+Deja en Caja :|Leave in Box:
+Cerrar Ventas/Imprimir|Verkauf schließen / Drucken
+Observaciones de caja:|Cash Beobachtungen:
+Suma/Conteo de caja del turno actual|Summe / Aktuelle Anzahl der Fälle
+Seleccione las monedas de su pais|Wählen Sie die Währungen Ihres Landes aus
+Cargar monedas de la Zona Euro|Laden Sie Münzen aus der Eurozone
+Valor n|Wert n
+Terminal = XXX|Terminal = XXX
+Total monedas|Gesamtmünzen
+Total tarjetas|Gesamtanzahl der Karten
+Total otras formas de pago|Total andere Zahlungsmethoden
+Caja Inicial:|Anfangsgeld:
+Num total de operaciones de este terminal|Gesamtzahl der Operationen dieses Terminals
+Num total operaciones otras formas pago|Num totale Operationen andere Formen Zahlung
+Num total operaciones tarjeta|Anzahl der Kartenoperationen insgesamt
+Num total operaciones contado|Gesamtzahl der gezählten Transaktionen
+Max. 20|Max. 20
+Número de tipos de moneda a utilizar:|Anzahl der zu verwendenden Währungstypen:
+Seleccione las monedas en circulacion de su pais|Wählen Sie die Währungen Ihres Landes aus
+Tipo 20|Geben Sie 20 ein
+Nota: Esta opcion solo esta pensado para aquellos clientes que en su pais el valor de sus monedas es diferente al establecido para la zona Euro.|Hinweis: Diese Option ist nur für diejenigen Kunden gedacht, die in ihrem Land den Wert ihrer Währungen von denen abweichen, die für die Eurozone festgelegt wurden.
+Importe a Retirar|Betrag zum Zurückziehen
+Retiradas|Zurückgezogen
+TELEF|TELEF
+Borrando|Löschen
+Hora Reserva|Reservierungszeit
+Nro comensales|Keine Gäste
+Todos|Alles
+Cena|Abendessen
+Almuerzo|Mittagessen
+Desayuno|Frühstück
+MESAS =|TABELLEN =
+H O R A S|H O R A S
+Seleccione Horario|Wählen Sie Fahrplan
+*Clic para seleccionar salon|* Klicken Sie, um den Raum auszuwählen
+R e s e r v a s|R e s e r v a s
+Diseñar Plantilla reserva|Design-Vorlagenbuch
+Nueva Reserva|Neue Reserve
+Hora de Reserva|Reservierungszeit
+Nro de Comensales|Anzahl der Gäste
+Teléfono|Telefon
+* Click en la columna de telefono para ver la direccion|* Klicken Sie auf die Telefonspalte, um die Adresse zu sehen
+Resultado de la Búsqueda|Ergebnis der Suche
+Movil|Mobil
+C. Postal|C. Post
+Limpiar|Sauber
+DNI|ID
+Puerta:|Tür:
+Fijo / Movil|Festnetz / Mobil
+Piso:|Boden:
+C. Postal:|C. Post:
+Número:|Nummer:
+Email:|E-Mail:
+Modificar Datos|Daten ändern
+Nuevo Cliente|Neuer Kunde
+Activar Precios para este terminal de venta|Aktivieren Sie Preise für dieses Verkaufsterminal
+Crear nueva o modificar una lista de precios existente|Erstellen Sie neue oder ändern Sie eine bestehende Preisliste
+Listas de Precios|Preislisten
+Listas activa en este terminal|Aktive Listen in diesem Terminal
+Listas de precios no activa|Preislisten nicht aktiv
+La lista de precios que ha seleccionado esta fuera del rango actual|Die von Ihnen gewählte Preisliste liegt außerhalb des aktuellen Bereichs
+Nombre (click para seleccionar/desactivar)|Name (zum Auswählen / Deaktivieren klicken)
+activa|aktiv
+Fecha Alta|Datum hoch
+Prod. en Lista|Prod. In Liste
+Codigo Precio|Preiscode
+C. P.|C. P.
+Cif / Dni|CIF / Dni
+Realizando cambios|Änderungen vornehmen
+alturapanel|alturapanel
+Los mismos pasos 1, 2 para margen comercial o precio de venta.|Die gleichen Schritte 1, 2 für Handelsspanne oder Verkaufspreis.
+* Clic sobre el impuesto que desea cambiar|* Klicken Sie auf die Steuer, die Sie ändern möchten
+De:|Von:
+Cambio el valor de los impuestos|Ändern Sie den Wert von Steuern
+Deseo cambiar|Ich möchte mich ändern
+a:|a:
+Nro. de Productos|Anzahl der Produkte
+2.-Luego seleccione el proveedor o seleccione la opcion todos.|2. Wählen Sie dann den Anbieter aus oder wählen Sie die Option Alle.
+Con redondeo|Mit Rundung
+Sin redondeo|Ohne Rundung
+Todos los productos|Alle Produkte
+Productos del Proveedor|Produkte des Lieferanten
+Coste|Kosten
+Cambio de Coste / Precio|Änderung von Kosten / Preis
+1.-Si desea aumentar el coste, solo debe ingresar el porcentaje en la caja del mismo.|1.-Wenn Sie die Kosten erhöhen möchten, geben Sie einfach den Prozentsatz in das Feld ein.
+Recuerde que este proceso es irreversible. Confirme y  verifique los porcentajes que está aumentando.|Denken Sie daran, dass dieser Prozess irreversibel ist. Bestätigen und überprüfen Sie die Prozentsätze, die sich erhöhen.
+Este proceso automatiza el aumento de precio, margen comercial y coste de los productos.|Dieser Prozess automatisiert den Preisanstieg, die kommerzielle Marge und die Kosten der Produkte.
+Aumento de Precios|Preiserhöhung
+Nombre Servidor SQL Server|Servername SQL Server
+Utilizar  SQL   Server . . . . . |Verwenden Sie SQL Server . . . .
+UTILIZAR SQL SERVER|NUTZEN SQL SERVER
+Más Información|Weitere Informationen
+Dirigido para aquellas empresas con volumenes de datos altos o muchas interacciones simultaneas soporta varios PC conectados en red sin problemas de concurrencias y trafico de datos. (si este es su caso nuestro programa funciona perfectamente con este ges|Gezielt für Unternehmen mit hohen Datenmengen oder vielen gleichzeitigen Interaktionen werden mehrere vernetzte PCs ohne Nebenläufigkeitsprobleme und Datenverkehr unterstützt. (Wenn dies der Fall ist, funktioniert unser Programm perfekt mit diesem Ges
+SQL SERVER|SQL-SERVER
+Indicado para empresas con volumen de datos bajos 1 o 2 PC en red.|Angezeigt für Firmen mit geringem Datenvolumen 1 oder 2 PCs im Netzwerk.
+ACCESS|Zugriff
+El Tipo de Base De Datos Que Su Negocio Necesita|Die Art der Datenbank, die Ihr Unternehmen benötigt
+Pasar a la version Basica o Completa|Gehe zur Basic oder Complete Version
+Configure los Horarios de su establecimiento|Konfigurieren Sie die Zeitpläne Ihrer Einrichtung
+Label2|Label2
+a |a
+El Horario del Establecimiento es:|Der Einrichtungsplan ist:
+El Horario de Cocina es:|Der Küchenplan ist:
+Seleccione el Horario del Establecimiento|Wählen Sie den Einrichtungsplan aus
+Seleccione el Horario de Cocina|Wählen Sie den Küchenplan
+4.- Solo le recomendamos que contrate este servicio y utilice esta opcion si solo si su empresa verdaderamente lo necesita, por nuestra experiencia el 90% de los usuarios de Puntos de Venta del sector retail no necesitan tener esta base de datos instalada|4.- Wir empfehlen Ihnen nur, diesen Service zu mieten und diese Option zu nutzen, wenn Ihr Unternehmen es wirklich benötigt. Nach unserer Erfahrung brauchen 90% der Benutzer von Verkaufsstellen im Einzelhandel diese Datenbank nicht installieren
+3.- Tiene que indicarnos los nombre de los usuarios que utilizaran el programa para crear los usuarios en la base de datos. (este servicio incluye 3 usuarios si desea mas usuarios el coste es de 5 Euros por cada uno)|3.- Sie müssen die Namen der Benutzer angeben, die das Programm verwenden werden, um die Benutzer in der Datenbank zu erstellen. (Dieser Service umfasst 3 Benutzer, wenn Sie mehr Benutzer wollen, kostet der Preis 5 Euro)
+2.- Tiene que tener instalado el TeamViewer para que un tecnico pueda conectar a instalar la BD y dejarle el programa funcionando en Sql Server|2.- Sie müssen TeamViewer installiert haben, damit ein Techniker eine Verbindung herstellen kann, um die BD zu installieren und das Programm auf Sql Server laufen zu lassen
+1.- Este servicio tiene un coste de 75 Euros + Iva|1.- Dieser Service kostet 75 Euro + MwSt
+Si desea utilizar el programa con Sql Server un tecnico de nuestra empresa se lo puede instalar. Pasos que tiene que tomar en cuenta.|Wenn Sie das Programm mit Sql Server verwenden möchten, kann ein Techniker unserer Firma es installieren. Schritte, die Sie beachten müssen.
+Requisitos Para Usar Sql Server|Voraussetzungen für die Verwendung von SQL Server
+Numero de Ventas Menores A: |Anzahl der Nebenverkäufe A:
+Seleccione de que terminal quiere obtener la información|Wählen Sie aus, von welchem ​​Terminal Sie die Informationen erhalten möchten
+Servicios|Dienstleistungen
+Completo|Fertig
+Total General|Insgesamt Allgemein
+Total Gastos|Gesamtkosten
+C. Inicial|C. Anfänglich
+Total Retiradas|Abhebungen insgesamt
+Totalizado por Forma de Pago|Summiert nach Zahlungsformular
+Ventas Generales por Dia|Allgemeine Verkäufe pro Tag
+Esta Forma de Pago es de tipo Tarjeta|Diese Zahlungsmethode ist Kartentyp
+Nueva Observación|Neue Beobachtung
+comensal|Abendessen
+Observacion|Beobachtung
+estado|Status
+idenvio|idenvio
+Seleccione la observacion que desea eliminar del panel de arriba|Wählen Sie die Beobachtung aus, die Sie aus dem obigen Bedienfeld entfernen möchten
+Observaciones a Cocina|Beobachtungen in der Küche
+Posicion|Position
+Escriba la nueva observacion|Schreibe die neue Beobachtung
+Eliminar Observación|Beobachtung löschen
+Seleccione Mesa Destino|Wählen Sie Zieltabelle
+Total Cuenta Origen|Gesamtkontoursprung
+Seleccione Mesa A Juntar|Wählen Sie die zu verbindende Tabelle aus
+Seleccione Salon Destino|Wählen Sie Ziel Salon
+Seleccione Salon|Wählen Sie Salon
+Pedidos en Reserva|Bestellungen in Reserve
+Fecha Seleccionada|Ausgewähltes Datum
+Total Reservas|Gesamte Reservierungen
+Reservas Activas|Aktive Reserven
+N. Pedido|N. Bestellung
+Fecha Entrega|Lieferdatum
+Hora Entrega|Lieferzeit
+Observaciones|Beobachtungen
+Fecha de Entrega|Lieferdatum
+Hora de Entrega|Lieferzeit
+Contraseña = |Passwort =
+Zona|Zone
+Venta Original|Ursprünglicher Verkauf
+Total Cuenta Parcial|Total Teilkonto
+Escriba la clave de gerencia|Geben Sie den Verwaltungsschlüssel ein

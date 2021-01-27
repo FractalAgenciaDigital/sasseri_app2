@@ -128,7 +128,7 @@
                                     <label class="float-left">Caja</label>
                                     <div class="float-right col-md-10">
                                         <select class="form-control" v-model="idCajaInformes" @change="listarFacturacion(1,idCajaInformes,id_tercero,saldoInformes,estadoInformes)">
-                                            <option value="0">Seleccione</option>
+                                            <option value="0" disabled>Seleccione</option>
                                             <option v-for="(cajas,index) in arrayCajas" :key="index" :value="cajas.id" v-text="cajas.nombre"></option>
                                         </select>
                                     </div>
@@ -149,6 +149,7 @@
                                     <label class="float-left">Saldo</label>
                                     <div class="float-right col-md-10">
                                         <select class="form-control" v-model="saldoInformes" @change="listarFacturacion(1,idCajaInformes,id_tercero,saldoInformes,estadoInformes)">
+                                            <option value="0" disabled>Seleccione</option>
                                             <option value="Ambos">Ambos</option>
                                             <option value="Saldo">Saldo</option>
                                             <option value="Sin Saldo">Sin Saldo</option>
@@ -159,6 +160,7 @@
                                     <label class="float-left">Estado</label>
                                     <div class="float-right col-md-10">
                                         <select class="form-control" v-model="estadoInformes" @change="listarFacturacion(1,idCajaInformes,id_tercero,saldoInformes,estadoInformes)">
+                                            <option value="" disabled>Seleccione</option>
                                             <option value="0">N/A</option>
                                             <option value="1">Activa</option>
                                             <option value="2">Registrada</option>

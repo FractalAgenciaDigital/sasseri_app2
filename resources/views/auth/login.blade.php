@@ -9,6 +9,9 @@
           {{ csrf_field() }}
               <div class="card-body">
               <h1 class="text-center">Acceder</h1>
+              <!-- <div class="text-center">
+                <img style="width:200px" src="img/logo.png" alt="Sasseri"/>
+              </div> -->
               <p class="text-muted">Control de acceso al sistema</p>
 
               <div class="input-group form-group input-group-joined {{$errors->has('usuario' ? 'is-invalid' : '')}}">
@@ -17,7 +20,7 @@
                     <i class="icon-user"></i>
                   </span>                  
                 </div>
-                <input class="form-control" type="text" value="{{old('usuario')}}" name="usuario" id="usuario" placeholder="Usuario">
+                <input class="form-control" type="text" value="{{old('usuario')}}" name="usuario" id="usuario" placeholder="Usuario" autofocus>
                   {!!$errors->first('usuario','<span class="invalid-feedback">:message</span>')!!}
               </div>
 
