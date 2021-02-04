@@ -165,6 +165,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/detalle_facturacion', 'DetalleFacturacionController@index');               
         Route::get('/detalle_facturacion/buscarDetalleFacturacion', 'DetalleFacturacionController@buscarDetalleFacturacion');
         Route::get('/detalle_facturacion/productosPreparados', 'DetalleFacturacionController@productosPreparados');
+        Route::get('/detalle_facturacion/imprimir-ticket', 'DetalleFacturacionController@imprimirTicket'); 
         Route::post('/detalle_facturacion/registrar', 'DetalleFacturacionController@store'); 
         Route::put('/detalle_facturacion/actualizar', 'DetalleFacturacionController@update');
         Route::put('/detalle_facturacion/cocinado', 'DetalleFacturacionController@cocinado');
@@ -263,7 +264,6 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/modelo_contable/desactivar', 'ModeloContableController@desactivar');
         Route::put('/modelo_contable/activar', 'ModeloContableController@activar');
         Route::get('/modelo_contable/selectModeloContable', 'ModeloContableController@selectModeloContable');
-
   
         Route::get('/modulo', 'ModuloController@index');
         Route::post('/modulo/registrar', 'ModuloController@store');
@@ -362,8 +362,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/zona/actualizar', 'ZonaController@update');
         Route::get('/zona/selectZona', 'ZonaController@selectZona');
         Route::put('/zona/desactivar', 'ZonaController@desactivar');
-        Route::put('/zona/activar', 'ZonaController@activar');
-        
+        Route::put('/zona/activar', 'ZonaController@activar');        
     });
 
 });
