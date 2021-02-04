@@ -116,6 +116,7 @@
                                     <div class="form-group col-md-6">
                                         <label for="text-input">Tipo documento</label>                                       
                                         <select v-model="tipo_documento" class="form-control">
+                                            <option value="">--Seleccionar--</option>
                                             <option value="DNI">DNI</option>
                                             <option value="RUC">RUC</option>
                                             <option value="CEDULA">CEDULA</option>

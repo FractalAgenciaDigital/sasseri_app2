@@ -217,6 +217,7 @@ $id_empresa = $request->session()->get('id_empresa');
         $impresora->text("Gracias por su compra\n");
         $impresora->text("\n===============================\n");
         $impresora->setEmphasis(false);
+        $impresora->text("Sasseri - Software contable");
         $impresora->text("\nwww.fractalagenciadigital.com\n");
         $impresora->text("\n===============================\n");
         $impresora->feed(5);
