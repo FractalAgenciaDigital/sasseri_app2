@@ -317,9 +317,9 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="row">
-                            <div class="col-3">
+                            <!-- <div class="col-3">
                                 <button @click="position=5" class="btn btn-primary fa fa-undo"></button>
-                            </div>
+                            </div> -->
                             <div class="col-3">
                                 <button @click="position=7" class="btn btn-primary fa fa-list"></button>
                             </div>
@@ -1597,7 +1597,7 @@
                     'num_factura': me.num_factura,
                     'id_tercero': me.id_tercero,
                     'fec_edita': me.fechaHoraActual,
-                    'subtotal': me.subtotal,
+                    // 'subtotal': me.subtotal,
                     'valor_iva': me.valor_iva,
                     'total': me.valor_final,
                     'abono': me.abono,

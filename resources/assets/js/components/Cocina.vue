@@ -503,7 +503,7 @@
                 let me = this;
                 console.log(id);
                 axios.get(this.ruta+'/detalle_facturacion/imprimir-ticket?id='+id).then(function(response){
-                    console.log(reponse)
+                    console.log(response)
 
                 })
             },         
