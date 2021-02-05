@@ -19,13 +19,13 @@ class UserController extends Controller
         if ($buscar==''){
             $personas = User::join('personas','users.id','=','personas.id')
             ->join('roles','users.idrol','=','roles.id')
-            ->select('personas.id','personas.nombre','personas.tipo_documento','personas.num_documento','personas.direccion','personas.telefono1','personas.email','users.usuario','users.password','users.condicion','users.idrol','roles.nombre as rol')
+            ->select('personas.id','personas.nombre','personas.tipo_documento','personas.num_documento','personas.direccion','personas.telefono1','personas.email','users.usuario','users.password','users.condicion','users.idrol','roles.nombre as rol', 'id_impresora')
             ->orderBy('personas.id', 'desc')->paginate(6);
         }
         else{
             $personas = User::join('personas','users.id','=','personas.id')
             ->join('roles','users.idrol','=','roles.id')
-            ->select('personas.id','personas.nombre','personas.tipo_documento','personas.num_documento','personas.direccion','personas.telefono1','personas.email','users.usuario','users.password','users.condicion','users.idrol','roles.nombre as rol')
+            ->select('personas.id','personas.nombre','personas.tipo_documento','personas.num_documento','personas.direccion','personas.telefono1','personas.email','users.usuario','users.password','users.condicion','users.idrol','roles.nombre as rol', 'id_impresora')
             ->where('personas.'.$criterio, 'like', '%'. $buscar . '%')->orderBy('id', 'desc')->paginate(6);
         }
         
@@ -44,6 +44,7 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        $id_empresa = $request->session()->get('id_empresa');
         if (!$request->ajax()) return redirect('/');
 
         try{
@@ -63,7 +64,9 @@ class UserController extends Controller
             $user->idrol = $request->idrol;
             $user->usuario = $request->usuario;
             $user->password = bcrypt( $request->password);
-            $user->condicion = '1';            
+            $user->condicion = '1';
+            $user->id_impresora = '1';
+            $user->empresas_id = $id_empresa;      
             $user->save();
 
             DB::commit();
@@ -74,6 +77,7 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
+        $id_empresa = $request->session()->get('id_empresa');
         if (!$request->ajax()) return redirect('/');
 
         try{
@@ -93,7 +97,9 @@ class UserController extends Controller
             $user->usuario = $request->usuario;
             $user->password = bcrypt( $request->password);
             $user->condicion = '1';
+            $user->id_impresora = '1';
             $user->idrol = $request->idrol;
+            $user->empresas_id = $id_empresa;
             $user->save();
 
             DB::commit();

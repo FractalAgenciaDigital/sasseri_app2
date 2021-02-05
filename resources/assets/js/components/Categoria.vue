@@ -80,24 +80,7 @@
                                     </button>
                                     <button v-else type="button" class="btn btn-secondary btn-sm" title="Actualizar (Deshabilitado)">
                                         <i class="icon-pencil"></i>
-                                    </button> &nbsp;
-
-                                    <!--<template v-if="permisosUser.anular">
-                                        <button v-if="categoria.condicion" type="button" class="btn btn-danger btn-sm" @click="desactivarCategoria(categoria.id)" title="Desactivar">
-                                            <i class="icon-trash"></i>
-                                        </button>
-                                        <button v-else type="button" class="btn btn-info btn-sm" @click="activarCategoria(categoria.id)" title="Activar">
-                                            <i class="icon-check"></i>
-                                        </button>
-                                    </template>
-                                    <template v-else>
-                                        <button v-if="categoria.condicion" type="button" class="btn btn-secondary btn-sm" title="Desactivar (Deshabilitado)">
-                                            <i class="icon-trash"></i>
-                                        </button>
-                                        <button v-else type="button" class="btn btn-secondary btn-sm" title="Activar (Deshabilitado)">
-                                            <i class="icon-check"></i>
-                                        </button>
-                                    </template>-->
+                                    </button> &nbsp;      
                                 </td>
                             </tr>                                
                         </tbody>
@@ -325,7 +308,7 @@
                     result.dismiss === Swal.DismissReason.cancel
                 ) {
                     
-                }
+                    }
                 }) 
             },
             activarCategoria(id){

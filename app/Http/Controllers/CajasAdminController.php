@@ -124,12 +124,7 @@ class CajasAdminController extends Controller
     }
 
     public function listarCajerosAdmin(Request $request){
-        // if(!$request->ajax()) return redirect('/');
-
-        // $cajas_admin = CajasAdmin::rightJoin('users','cajas_admin.id_usuario','users.id')
-        // ->select('users.id','users.usuario','cajas_admin.id_caja')
-        // ->where('cajas_admin.id_caja','=',$request->id)
-        // ->get();
+    
         $id_empresa = $request->session()->get('id_empresa');
         $cajas_admin = CajasAdmin::leftJoin('users','cajas_admin.id_usuario','users.id')
         ->select('users.id','cajas_admin.id_caja','cajas_admin.id_usuario','users.usuario as nombre')

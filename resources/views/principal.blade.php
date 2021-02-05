@@ -27,6 +27,9 @@
         </style>
     </head>
     <?php $rol_usu = Auth::user()->idrol; ?>
+    <script>
+      
+    </script>
     <body id="page-top">
         <div id="app">
             <!-- Page Wrapper -->
@@ -78,14 +81,19 @@
                                 </div>
                             </ul>
                         </li>
-                        <li @click="menu=40" class="nav-item">
+                        <!-- <li @click="menu=40" class="nav-item">
                             <a href="#" class="nav-link"><i class="icon-screen-desktop"></i> <span>Punto de venta</span></a>
-                        </li>
+                        </li> -->
                         <li @click="menu=14" class="nav-item">
                             <a href="#" class="nav-link"><i class="icon-calculator"></i><span>Facturación</span> </a>
                         </li>                       
-                        
-                        
+                        <li @click="menu=42" class="nav-item">
+                            <a href="#" class="nav-link">
+                            <i class="fa fa-utensils"></i>
+                                <span>Cocina</span>
+                            </a>
+                        </li>  
+                            
                         <li class="nav-item">
                             <a 
                                 class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCajas"
@@ -155,13 +163,24 @@
                                     </li>
                                     <li @click="menu=27" class="collapse-item">
                                         <a href="#"><i class="fa fa-percent"></i> IVAs</a>
+                                    </li>   
+                                    <li @click="menu=41" class="collapse-item">
+                                        <a href="#"><i class="fa fa-print"></i> Impresoras</a>
                                     </li>                                    
                                 </div>
 
                             </ul>
                         </li>
                     </ul>
+                
+                
+                @elseif($rol_usu==3)
+                    <li @click="menu=42" class="nav-item">
+                        <a href="#" class="nav-link"><i class="icon-calculator"></i><span>Cocina</span> </a>
+                    </li>    
                 @endif
+                
+
                 <!-- End of Sidebar -->
 
                 <!-- Content Wrapper -->
@@ -314,7 +333,7 @@
                     <footer class="sticky-footer bg-white">
                         <div class="container my-auto">
                             <div class="copyright text-center my-auto">
-                                <span><a href="www.fractalagenciadigital.com">AGENCIA DIGITAL FRACTAL</a> | Todos los derechos reservados&copy; </span>
+                                <span><a href="https://www.fractalagenciadigital.com">AGENCIA DIGITAL FRACTAL</a> | Todos los derechos reservados&copy; </span>
                             </div>
                         </div>
                     </footer>

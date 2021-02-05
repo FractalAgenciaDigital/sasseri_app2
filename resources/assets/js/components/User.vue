@@ -12,10 +12,10 @@
                         </button>
                     </div>
                     <div class="card-body">
-                        <div class="form-group row">
-                            <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-md-12 col-lg-6">
                                 <div class="input-group">
-                                    <select class="form-control col-md-3" v-model="criterio">
+                                    <select class="form-control" v-model="criterio">
                                       <option value="nombre">Nombre</option>
                                       <option value="num_documento">Documento</option>
                                       <option value="email">Email</option>
@@ -37,6 +37,7 @@
                                     <th>Email</th>
                                     <th>Usuario</th>
                                     <th>Role</th>
+                                    <th>Impresora</th>
                                     <th>Estado</th>
                                     <th>Opciones</th>
                                 </tr>
@@ -51,6 +52,7 @@
                                     <td v-text="persona.email"></td>
                                     <td v-text="persona.usuario"></td>
                                     <td v-text="persona.rol"></td>
+                                    <td v-text="persona.id_impresora"></td>
                                     <td class="td-estado">
                                         <template v-if="persona.condicion">
                                             <a href="#" class="btn text-success" title="Desactivar usuario" @click="desactivarUsuario(persona.id)">
@@ -134,8 +136,8 @@
                                         <label for="email-input">Teléfono</label>                                        
                                         <input type="tel" v-model="telefono" class="form-control" placeholder="Teléfono">
                                     </div>
-                                </div>
-                                <div class="form-row">
+                                <!-- </div>
+                                <div class="form-row"> -->
                                     <div class="form-group col-md-6">
                                         <label for="email-input">Email</label>                                       
                                         <input type="email" v-model="email" class="form-control" placeholder="Email">
@@ -145,8 +147,14 @@
                                         <select v-model="idrol" class="form-control">
                                             <option value="0" disabled>Seleccione</option>
                                             <option v-for="role in arrayRol" :key="role.id" :value="role.id" v-text="role.nombre"></option>
-                                        </select>
-                                       
+                                        </select>                                       
+                                    </div>
+                                     <div class="form-group col-md-6">
+                                        <label for="impresora-input">Impresora asignada</label>                                       
+                                        <select class="form-control custom-select" v-model="id_impresora">
+                                            <option value="">Seleccione</option>
+                                            <option v-for="impresora in arrayImpresora" :key="impresora.id" v-text="impresora.nombre_impresora + ' - '+ impresora.codigo" :value="impresora.id"></option>
+                                        </select>                                          
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -196,13 +204,13 @@
                                         <h5 class="col-md-4">Marcar permisos como</h5>
                                         <select class="col-md-4 custom-select custom-select-sm" @change="marcarPermisosRol" v-model="idrol">
                                             <option value="" disabled>Seleccione un rol</option>
-                                            <option v-for="rol in arrRolesEmpresa" :value="rol.id" v-text="rol.nombre"></option>
+                                            <option v-for="rol in arrRolesEmpresa" :key="rol.id" :value="rol.id" v-text="rol.nombre"></option>
                                         </select>
                                     </div>
                                 <!-- Inicio tabla permisos -->
                                 <!--<div class="card">
                                     <div class="card-header">
-                                    <!--</div>-->
+                                    </div>-->
                                     <!--<div class="card-body">-->
                                         <table class="table table-bordered table-sm" style="overflow-y: auto;max-height: 26em !important;display: block;border: none;">
                                             <thead>
@@ -277,6 +285,7 @@
                 usuario: '',
                 password:'',
                 idrol: '',
+                id_impresora: '',
                 arrayPersona : [],
                 arrayRol : [],
                 arrRolesEmpresa: [],
@@ -299,7 +308,9 @@
                 },
                 offset : 3,
                 criterio : 'nombre',
-                buscar : ''
+                buscar : '',
+                arrayImpresora :[],
+
             }
         },
         computed :
@@ -364,6 +375,18 @@
                     me.arrModulosPermisos.forEach((moduloPermisos) => {
                             moduloPermisos.usuarios_id = usuario_id;
                     });
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
+             listarImpresoras (page,buscar,criterio){
+                let me=this;
+                var url= this.ruta +'/impresora?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
+                axios.get(url).then(function (response) {
+                    var respuesta= response.data;
+                    me.arrayImpresora = respuesta.impresoras.data;
+                    // me.pagination= respuesta.pagination;
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -549,6 +572,7 @@
             abrirModal (modelo, accion, data = [])
             {
                 this.selectRol();
+                this.listarImpresoras();
                 switch(modelo){
                     case "persona":
                     {

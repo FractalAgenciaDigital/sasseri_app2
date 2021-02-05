@@ -25,14 +25,14 @@ class ArticuloController extends Controller
         if ($buscar=='' || $buscar==null){
             $articulos = Articulo::leftJoin('presentacion','articulos.id_presentacion','=','presentacion.id')
             ->leftJoin('categorias','articulos.idcategoria2','=','categorias.id')
-            ->select('articulos.id','articulos.id as id_articulo','articulos.idcategoria','articulos.idcategoria2','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','articulos.precio_venta','articulos.stock','id_und_medida','id_concentracion','articulos.cod_invima','articulos.lote','articulos.fec_vence','articulos.minimo','tipo_articulo','articulos.descripcion','articulos.condicion','articulos.id_presentacion','articulos.talla','articulos.marca','articulos.linea','articulos.img','articulos.id_empresa','presentacion.nombre as nom_presentacion')
+            ->select('articulos.id','articulos.id as id_articulo','articulos.idcategoria','articulos.idcategoria2','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','articulos.precio_venta','articulos.stock','id_und_medida','id_concentracion','articulos.cod_invima','articulos.lote','articulos.fec_vence','articulos.minimo','tipo_articulo','articulos.descripcion','articulos.condicion','articulos.id_presentacion','articulos.talla','articulos.marca','articulos.linea','articulos.img','articulos.id_empresa','presentacion.nombre as nom_presentacion', 'id_impresora')
             ->where('articulos.id_empresa','=',$id_empresa)
             ->orderBy('articulos.id', 'desc')->paginate(10);
         }
         else{
             $articulos = Articulo::leftJoin('presentacion','articulos.id_presentacion','=','presentacion.id')
             ->leftJoin('categorias','articulos.idcategoria2','=','categorias.id')
-            ->select('articulos.id','articulos.id as id_articulo','articulos.idcategoria','articulos.idcategoria2','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','articulos.precio_venta','articulos.stock','id_und_medida','id_concentracion','articulos.cod_invima','articulos.lote','articulos.fec_vence','articulos.minimo','tipo_articulo','articulos.descripcion','articulos.condicion','articulos.id_presentacion','articulos.talla','articulos.marca','articulos.linea','articulos.img','articulos.id_empresa','presentacion.nombre as nom_presentacion')
+            ->select('articulos.id','articulos.id as id_articulo','articulos.idcategoria','articulos.idcategoria2','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','articulos.precio_venta','articulos.stock','id_und_medida','id_concentracion','articulos.cod_invima','articulos.lote','articulos.fec_vence','articulos.minimo','tipo_articulo','articulos.descripcion','articulos.condicion','articulos.id_presentacion','articulos.talla','articulos.marca','articulos.linea','articulos.img','articulos.id_empresa','presentacion.nombre as nom_presentacion', 'id_impresora')
             ->where('articulos.id_empresa','=',$id_empresa)
             ->where('articulos.'.$criterio, 'like', '%'. $buscar . '%')
             ->orWhere('articulos.codigo', 'like', '%'. $buscar . '%')
@@ -81,7 +81,14 @@ class ArticuloController extends Controller
             $cons_tarifario = '';
         }
 
-        $cons = "SELECT articulos.id,articulos.id as id_articulo,'' as id_asociado,articulos.idcategoria,articulos.idcategoria2,articulos.codigo,articulos.nombre,modelo_contable.nombre as nom_modelo_contable,modelo_contable.idIvaCompras,modelo_contable.idIvaVentas,modelo_contable.idIvaDevolucionCompras,modelo_contable.idIvaDevolucionVentas,categorias.nombre as nom_categoria,productos_tarifarios.valor as precio_venta,articulos.stock,articulos.descripcion,articulos.cod_invima,articulos.lote,articulos.minimo,articulos.tipo_articulo,articulos.condicion,articulos.id_presentacion,articulos.talla,articulos.marca,articulos.linea,articulos.img,articulos.id_empresa,presentacion.nombre as nom_presentacion,'' as padre FROM `articulos`,`modelo_contable`,`categorias`,`presentacion`,`productos_tarifarios` WHERE articulos.idcategoria=modelo_contable.id AND articulos.condicion = 1 AND articulos.idcategoria2=categorias.id AND articulos.id_presentacion=presentacion.id AND productos_tarifarios.id_producto=articulos.id ".$cons_tarifario." AND productos_tarifarios.asociado=0 AND (articulos.nombre LIKE '%".$buscar."%' OR articulos.codigo LIKE '%".$buscar."%') ".$cons_categoria." AND articulos.id_empresa=".$id_empresa." GROUP BY articulos.id ORDER BY articulos.id DESC";
+        $cons = "SELECT articulos.id,articulos.id as id_articulo,'' as id_asociado,articulos.idcategoria,articulos.idcategoria2,articulos.codigo,articulos.nombre,modelo_contable.nombre as nom_modelo_contable,modelo_contable.idIvaCompras,modelo_contable.idIvaVentas,modelo_contable.idIvaDevolucionCompras,modelo_contable.idIvaDevolucionVentas,categorias.nombre as nom_categoria,productos_tarifarios.valor as precio_venta,articulos.stock,articulos.descripcion,articulos.cod_invima,articulos.lote,articulos.minimo,articulos.tipo_articulo,articulos.condicion,articulos.id_presentacion,articulos.talla,articulos.marca,articulos.linea,articulos.img,articulos.id_empresa,presentacion.nombre as nom_presentacion,'' as padre FROM `articulos`,`modelo_contable`,`categorias`,`presentacion`,`productos_tarifarios` WHERE articulos.idcategoria=modelo_contable.id AND 
+        articulos.condicion = 1 AND 
+        articulos.idcategoria2=categorias.id AND 
+        articulos.id_presentacion=presentacion.id AND 
+        productos_tarifarios.id_producto=articulos.id ".$cons_tarifario." AND 
+        productos_tarifarios.asociado=0 AND 
+        (articulos.nombre LIKE '%".$buscar."%' OR articulos.codigo LIKE '%".$buscar."%') ".$cons_categoria." AND 
+        articulos.id_empresa=".$id_empresa." GROUP BY articulos.id ORDER BY articulos.id DESC";
 
         $articulos = DB::select($cons);
 
@@ -245,6 +252,7 @@ class ArticuloController extends Controller
                 'id_und_medida' => $request->id_und_medida,
                 'id_concentracion' => $request->id_concentracion,
                 'id_presentacion' => $request->id_presentacion,
+                'id_impresora' => $request->id_impresora,
                 'id_usuario' => $id_usuario,
                 'id_empresa' => $id_empresa,
                 'condicion' => '1',
@@ -338,21 +346,7 @@ class ArticuloController extends Controller
             $dirEmpresa = public_path("Empresas/$carpetaEmpresa/ImgProductos");
             if (!file_exists($dirEmpresa)) mkdir($dirEmpresa, 0777);
 
-            /*if(isset($request->img) && $request->img != null){
-                if(is_uploaded_file($_FILES['img']['tmp_name']))
-                {
-                    $nombreImg = $_FILES['img']['name'];
-                    if($_FILES['img']['type'] == "image/jpg" || $_FILES['img']['type'] == "image/jpeg" || $_FILES['img']['type'] == "image/png")
-                    {
-                        // copy($_FILES['img']['tmp_name'],$dirEmpresa.'/'.$_FILES['img']['name']);
-                    }
-                }else{ $nombreImg = $articulo->img; }
-            }
-            else
-            {
-                $nombreImg = $articulo->img;
-            }*/
-
+           
             $arrayExtensiones = array('image/jpg','image/jpeg','image/png','jpg','jpeg','png');
             if($request->hasFile('img'))
             {
@@ -390,6 +384,7 @@ class ArticuloController extends Controller
                 'id_und_medida' => $request->id_und_medida,
                 'id_concentracion' => $request->id_concentracion,
                 'id_presentacion' => $request->id_presentacion,
+                'id_impresora' => $request->id_impresora,
                 'img' => $nombreImg,
                 'condicion' => '1',
             ];

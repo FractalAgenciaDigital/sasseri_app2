@@ -15,19 +15,20 @@
                 </div>
                 <div class="card-body">
                     <div v-if="tipoAccion!=3" class="form-group row">
-                        <div class="col-md-4">
+                        <div class="form-group col-md-4">
+                            <label for="">Buscar</label>
                             <input v-if="permisosUser.leer" type="text" v-model="buscar" @keyup="listarCajas(1,buscar,criterio,fec_desde,fec_hasta)" class="form-control" placeholder="Texto a buscar">
                             <input v-else disabled type="text" v-model="buscar" class="form-control" placeholder="Texto a buscar">
                         </div>
-                        <div class="col-md-4">
-                            <label class="col-md-3 float-left">Desde: </label>
-                            <input v-if="permisosUser.leer" type="date" v-model="fec_desde" @change="listarCajas(1,buscar,criterio,fec_desde,fec_hasta)" class="form-control col-md-9 float-right">
-                            <input v-else disabled type="date" v-model="fec_desde" class="form-control col-md-9 float-right">
+                        <div class="form-group col-md-4">
+                            <label class="">Desde: </label>
+                            <input v-if="permisosUser.leer" type="date" v-model="fec_desde" @change="listarCajas(1,buscar,criterio,fec_desde,fec_hasta)" class="form-control">
+                            <input v-else disabled type="date" v-model="fec_desde" class="form-control">
                         </div>
-                        <div class="col-md-4">
-                            <label class="col-md-3 float-left">Hasta: </label>
-                            <input v-if="permisosUser.leer" type="date" v-model="fec_hasta" @change="listarCajas(1,buscar,criterio,fec_desde,fec_hasta)" class="form-control col-md-9 float-right">
-                            <input v-else disabled type="date" v-model="fec_hasta" class="form-control col-md-9 float-right">
+                        <div class="form-group col-md-4">
+                            <label class="">Hasta: </label>
+                            <input v-if="permisosUser.leer" type="date" v-model="fec_hasta" @change="listarCajas(1,buscar,criterio,fec_desde,fec_hasta)" class="form-control">
+                            <input v-else disabled type="date" v-model="fec_hasta" class="form-control">
                         </div>
                     </div>
                     <table v-if="tipoAccion!=3" class="table table-bordered table-striped table-sm table-responsive table-earning">

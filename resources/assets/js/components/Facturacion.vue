@@ -1,8 +1,5 @@
 <template>
         <main class="main">
-            <!--<cierresCaja></cierresCaja>-->
-            <!-- Breadcrumb -->
-            
             <div class="container-fluid">
                 <!-- Ejemplo de tabla Listado -->
                 <div class="card">
@@ -16,22 +13,7 @@
                                 <i class="icon-plus"></i>&nbsp;Nuevo
                             </button>
 
-                            <!--<template v-if="permisosUser.actualizar">
-                                <button v-if="id_caja_facturacion!=0" type="button" @click="mostrarDetalle('cierres_caja','cerrar_caja')" v-show="listado==1" class="btn btn-primary">
-                                    <i class="icon-plus"></i>&nbsp;Cerrar caja
-                                </button>
-                                <button v-else type="button" v-show="listado==1" class="btn btn-primary" @click="listarCajas()">
-                                    <i class="icon-plus"></i>&nbsp;Abrir caja
-                                </button>
-                            </template>
-                            <template v-else>
-                                <button v-if="id_caja_facturacion!=0" type="button"  v-show="listado==1" class="btn btn-secondary">
-                                    <i class="icon-plus"></i>&nbsp;Cerrar caja
-                                </button>
-                                <button v-else type="button" v-show="listado==1" class="btn btn-secondary">
-                                    <i class="icon-plus"></i>&nbsp;Abrir caja
-                                </button>
-                            </template>-->
+                        
                         </div>
                         <div class="col-md-6 float-right">
                             <span v-if="nom_caja_cierre_facturacion && nom_caja_cierre_facturacion!=''" v-text="'Usted esta en la caja: '+nom_caja_cierre_facturacion"></span>
@@ -43,17 +25,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <div class="row">
-                                <!--
-                                <div class="input-group">
-                                    <select class="form-control col-md-3" v-model="criterio">
-                                        <option value="tipo_comprobante">Tipo Comprobante</option>
-                                        <option value="num_comprobante">Número Comprobante</option>
-                                        <option value="fecha_hora">Fecha-Hora</option>
-                                    </select>
-                                    <input type="text" v-model="buscar" @keyup.enter="listarFacturacion(1,buscar,criterio)" class="form-control" placeholder="Texto a buscar">
-                                    <button type="submit" @click="listarFacturacion(1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
-                                </div>
-                                -->
+                              
                                 <div class="form-group col-md-3">
                                     <label>N° factura</label>
                                     <div class="">
@@ -184,56 +156,56 @@
                                         <td v-else-if="facturacion.estado==3"><span>Enviada</span></td>
                                         <td v-else-if="facturacion.estado==4"><span>Anulada</span></td>
                                         <td>
-                                            <button type="button" @click="verFacturacion(facturacion.id)" class="btn btn-success btn-sm" title="Ver factura">
-                                                <i class="icon-eye"></i>
-                                            </button>
                                             <template>
-                                                <button type="button" @click="mostrarDetalle('facturacion','actualizar',facturacion)" class="btn btn-warning btn-sm" v-if="permisosUser.actualizar  && facturacion.estado==1" title="Actualizar">
+                                                <button href="#" @click="mostrarDetalle('facturacion','actualizar',facturacion)" class="btn btn-success btn-sm" v-if="permisosUser.actualizar  && facturacion.estado==1" title="Actualizar">
                                                     <i class="icon-pencil"></i>
                                                 </button>
-                                                <button type="button" class="btn btn-secondary btn-sm" v-else title="Actualizar (Deshabilitado)">
+                                                <button href="#" class="btn btn-secondary btn-sm" v-else title="Actualizar (Deshabilitado)">
                                                     <i class="icon-pencil"></i>
                                                 </button>
                                             </template>
-                                         
-                                            <template>
-                                                <button type="button" v-if="permisosUser.actualizar && facturacion.estado==1" class="btn btn-warning btn-sm" @click="cambiarEstadoFacturacion(facturacion.id,'registrar')" title="Registrar">
-                                                    <i class="fa fa-registered"></i>
-                                                </button>
 
-                                                <button type="button" v-else-if="permisosUser.actualizar && facturacion.estado==2" @click="pdfFormato(facturacion.id)" class="btn btn-info btn-sm" title="PDF">
-                                                    <i class="icon-doc"></i>
+                                            <div class="btn-group dropright">
+                                                <button type="button" class="btn btn-light text-secondary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                   <i class="fa fa-ellipsis-v"></i>
                                                 </button>
+                                                <div class="dropdown-menu" style="top:5px;">   
+                                                    <button type="button" @click="verFacturacion(facturacion.id)" class="dropdown-item" title="Ver factura">
+                                                        <i class="icon-eye"></i> Ver factura
+                                                    </button>                                                 
+                                                
+                                                    <template>
+                                                        <button type="button" v-if="permisosUser.actualizar && facturacion.estado==1" class="dropdown-item" @click="cambiarEstadoFacturacion(facturacion.id,'registrar')" title="Registrar">
+                                                            <i class="fa fa-registered"></i> Registrar
+                                                        </button>
 
-                                                <button type="button" v-else class="btn btn-secondary btn-sm" title="Registrar (Deshabilitado)">
-                                                    <i class="fa fa-registered"></i>
-                                                </button>
-                                            </template>
-                                            <!--
-                                            <template v-else-if="facturacion.estado==2">
-                                                <button type="button" class="btn btn-primary btn-sm" @click="cambiarEstadoFacturacion(facturacion.id,'enviar')">
-                                                    <i class="fa fa-share-square"></i>
-                                                </button>
-                                            </template>
-                                            <template v-if="facturacion.estado==3">
-                                                <button type="button" class="btn btn-default btn-sm">
-                                                    <i class="fa fa-share-square"></i>
-                                                </button>
-                                            </template>
-                                            -->
-                                            <template v-if="permisosUser.anular && facturacion.estado==1">
-                                                <button type="button" class="btn btn-danger btn-sm" @click="cambiarEstadoFacturacion(facturacion.id,'anular')" v-if="facturacion.estado!=4 && facturacion.estado!=3" title="Anular">
-                                                    <i class="icon-trash"></i>
-                                                </button>
-                                                <button type="button" class="btn btn-secondary btn-sm" v-else title="Anular (Deshabilitado)">
-                                                    <i class="icon-trash"></i>
-                                                </button>
-                                            </template>
-                                            <template v-else>
-                                                <button type="button" class="btn btn-secondary btn-sm" title="Anular (Deshabilitado)">
-                                                    <i class="icon-trash"></i>
-                                                </button>
-                                            </template>
+                                                        <button type="button" v-else-if="permisosUser.actualizar && facturacion.estado==2" @click="pdfFormato(facturacion.id)" class="btn btn-info btn-sm" title="PDF">
+                                                            <i class="icon-doc"></i> Descargar PDF
+                                                        </button>
+
+                                                        <button type="button" v-else class="dropdown-item" title="Registrar (Deshabilitado)">
+                                                            <i class="fa fa-registered"></i>  Registrar
+                                                        </button>
+                                                    </template>
+                                                
+                                                    <template v-if="permisosUser.anular && facturacion.estado==1">
+                                                        <button type="button" class="dropdown-item" @click="cambiarEstadoFacturacion(facturacion.id,'anular')" v-if="facturacion.estado!=4 && facturacion.estado!=3" title="Anular">
+                                                            <i class="icon-trash"></i> Anular
+                                                        </button>
+                                                        <button type="button" class="dropdown-item" v-else title="Anular (Deshabilitado)">
+                                                            <i class="icon-trash"></i>  Anular (Deshabilitado)
+                                                        </button>
+                                                    </template>
+                                                    <template v-else>
+                                                        <button type="button" class="dropdown-item" title="Anular (Deshabilitado)">
+                                                            <i class="icon-trash"></i> Anular (Deshabilitado)
+                                                        </button>
+                                                    </template>
+                                                   
+
+                                                </div>
+                                            </div>                                            
+                                            
                                         </td>
                                     </tr>                                
                                 </tbody>
@@ -290,6 +262,7 @@
                                 <div class="form-group">
                                     <label>Tarifario</label>
                                     <select v-model="id_tarifario" class="form-control" @change="cargarPreciosTarifarios(id_tarifario)">
+                                        <option value="" disabled>--Seleccionar--</option>
                                         <option v-for="tarifario in arrayTarifario" :key="tarifario.id" :value="tarifario.id" v-text="tarifario.nombre"></option>
                                     </select>
                                 </div>
@@ -298,6 +271,7 @@
                                 <div class="form-group">
                                     <label>Lugar</label>
                                     <select v-model="lugar" class="form-control">
+                                        <option value="" disabled>--Seleccionar--</option>
                                         <option v-for="zonas in arrayZonas" :key="zonas.id" :value="zonas.id" v-text="zonas.zona"></option>
                                     </select>
                                 </div>
@@ -345,7 +319,7 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>Cantidad <span style="color:red;" v-show="cantidad==0 && idarticulo!=0">(*Ingrese)</span></label>
-                                    <!--<input type="number" v-if="stock!=0" :min="1" :max="stock" class="form-control" v-model="cantidad" @blur="if(cantidad>stock) cantidad=stock">-->
+                              
                                     <input type="number" v-if="stock!=0 && idarticulo!=0" :min="1" :max="stock" class="form-control" v-model="cantidad" @blur="function(){if(cantidad>stock) {cantidad=stock;}else if(cantidad<=0){cantidad=1;}}">
                                     <input type="number" v-else disabled class="form-control" v-model="cantidad">
                                     <span  v-if="stock!=0" v-text="'Cantidad en stock: '+stock"></span>
@@ -383,9 +357,14 @@
                                     <tbody v-if="arrayDetalle.length">
                                         <tr v-for="(detalle,index) in arrayDetalle" :key="detalle.id">
                                             <td>
-                                                <button @click="eliminarDetalle(index)" type="button" class="btn btn-danger btn-sm">
+                                          
+                                                 <button v-if="rolusuario==1" @click="eliminarDetalle(index)" type="button" class="btn btn-danger btn-sm">
                                                     <i class="icon-close"></i>
                                                 </button>
+                                                <h3 class="text-secondary" title="Deshabilitado" v-else>
+                                                    <i class="fa fa-times-circle"></i>
+                                                </h3>
+                                               
                                             </td>
                                             <td v-if="detalle.padre==null || detalle.padre==''" v-text="detalle.codigo+' - '+detalle.articulo+' - '+detalle.nom_presentacion">
                                             </td>
@@ -394,11 +373,8 @@
                                             <td style="text-align: right;">
                                                 $ {{detalle.precio}}
                                             </td>
-                                            <!--<td>
-                                                <input v-model="detalle.cantidad" type="number" class="form-control" :min="1" :max="detalle.stock" @blur="if(detalle.cantidad>detalle.stock)
-                                                detalle.cantidad=detalle.stock">
-                                                <span v-text="'Disponible: '+detalle.stock"></span>
-                                            </td>-->
+                                    
+                                    
                                             <td style="text-align: right;">
                                                 {{detalle.cantidad}}
                                             </td>
@@ -409,12 +385,6 @@
                                                         else{ detalle.valor_descuento=0;}
                                                     }
                                                 ">
-
-                                                <!--<input v-model="detalle.valor_descuento" v-else-if="tipoAccion2==2" type="number" value="0" class="form-control" :min="detalle.valor_descuento2" :max="((detalle.precio*detalle.cantidad)-detalle.valor_iva)" @blur="
-                                                if(detalle.valor_descuento>((detalle.precio*detalle.cantidad)-detalle.valor_iva)) 
-                                                detalle.valor_descuento=((detalle.precio*detalle.cantidad)-detalle.valor_iva) || (detalle.valor_descuento<detalle.valor_descuento2)
-                                                detalle.valor_descuento=detalle.valor_descuento2
-                                                ">-->
 
                                                 <input v-model="detalle.valor_descuento" v-else-if="tipoAccion2==2" type="number" value="0" class="form-control" :min="0" :max="((detalle.precio*detalle.cantidad)-detalle.valor_iva)" @blur="function(){
                                                     if(detalle.valor_descuento>((detalle.precio*detalle.cantidad)-detalle.valor_iva) || detalle.valor_descuento>0) 
@@ -596,7 +566,7 @@
             </div>
             <!--Inicio del modal agregar/actualizar-->
             <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
-                <div class="modal-dialog modal-primary modal-lg" role="document">
+                <div class="modal-dialog modal-primary modal-xl" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title" v-text="tituloModal"></h4>
@@ -913,6 +883,7 @@
 
                 arrayFacturacion : [],
                 arrayFacturacionT : [],
+                rolusuario:0,
 
                 iva:0,
 
@@ -1053,6 +1024,7 @@
                 axios.get(url).then(function (response) {
                     var respuesta= response.data;
                     me.arrayFacturacion = respuesta.facturacion.data;
+                    me.rolusuario = respuesta.idrol;
                     me.pagination= respuesta.pagination;
                 })
                 .catch(function (error) {
@@ -1109,103 +1081,7 @@
                     console.log(error);
                 });
             },
-            /*listarCajas(page,buscar,criterio){
-                let me=this;
-                var ban1 = 0;
-                var ban2 = 0;
-                var url= this.ruta +'/cierres_caja?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio+ '&fec_desde=&fec_hasta=';
-                axios.get(url).then(function (response) {
-                    var respuesta= response.data;
-                    me.arrayCierresXCajas = respuesta.cierres_caja.data;
-
-                    if(!me.arrayCierresXCajas.length){
-                        me.mostrarDetalle('cierres_caja','registrar');
-                    }
-                    else
-                    {
-                        me.arrayCierresXCajas.forEach(function(cierre){
-                            if(cierre['usu_crea']==respuesta.id_usuario)
-                            {
-                                ban1 = 1;
-                                if(cierre['estado']==1)
-                                {
-                                    ban2 = 1;
-                                    
-                                    var d = new Date;
-                                    var dd = d.getDate(); var mm = d.getMonth()+1; var yyyy = d.getFullYear();
-                                    var h = d.getHours(); var min = d.getMinutes(); var sec = d.getSeconds();
-                                    
-                                    if(dd<10){dd='0'+dd;}  if(mm<10){mm='0'+mm;} if(h<10){h='0'+h;} if(min<10){min='0'+min;} if(sec<10){sec='0'+sec;}
-
-                                    var fechaHora = yyyy+'-'+mm+'-'+dd+' '+h+':'+min+':'+sec;
-                                    var fecha = yyyy+'-'+mm+'-'+dd;
-
-                                    var n1 = cierre['created_at'].split(" "); var n2 = n1[0].split("-"); var n3 = n1[1].split(":");
-                                                                        
-                                    if(yyyy == n2[0])
-                                    {
-                                        if(mm == n2[1])
-                                        {
-                                            var restaDia = parseFloat(dd)-parseFloat(n2[2]);
-                                            if(restaDia<=1)
-                                            {
-                                                if(restaDia==1)
-                                                {
-                                                    var horasDiaAnterior = 24-n3[0]
-                                                    var sumaHoras = horasDiaAnterior+h;
-                                                    if(sumaHoras<24)
-                                                    {
-                                                        me.id_cierre_caja_facturacion = cierre['id'];
-                                                        me.nom_caja_cierre_facturacion = cierre['nombre'];
-                                                        me.cierre_caja_id = cierre['id'];
-                                                        me.id_caja_cierre = cierre['id_caja'];
-                                                        me.nom_caja_cierre = cierre['nombre'];
-                                                        me.vr_inicial_cierre = cierre['vr_inicial'];
-                                                        me.obs_inicial_cierre = cierre['obs_inicial'];
-                                                        
-                                                        me.listarFacturacion(1,me.numFacturaFiltro,me.estadoFiltro,me.idTerceroFiltro,me.ordenFiltro,me.desdeFiltro,me.hastaFiltro,me.idVendedorFiltro);
-                                                    }
-                                                    else{ me.mostrarDetalle('cierres_caja','listar_cierres',cierre); }
-                                                }
-                                                else
-                                                {
-                                                    me.id_cierre_caja_facturacion = cierre['id'];
-                                                    me.nom_caja_cierre_facturacion = cierre['nombre'];
-                                                    me.cierre_caja_id = cierre['id'];
-                                                    me.id_caja_cierre = cierre['id_caja'];
-                                                    me.nom_caja_cierre = cierre['nombre'];
-                                                    me.vr_inicial_cierre = cierre['vr_inicial'];
-                                                    me.obs_inicial_cierre = cierre['obs_inicial'];
-
-                                                    me.listarFacturacion(1,me.numFacturaFiltro,me.estadoFiltro,me.idTerceroFiltro,me.ordenFiltro,me.desdeFiltro,me.hastaFiltro,me.idVendedorFiltro);
-                                                }
-                                            }
-                                            else{ me.mostrarDetalle('cierres_caja','listar_cierres',cierre); }
-                                        }
-                                        else{ me.mostrarDetalle('cierres_caja','listar_cierres',cierre); }
-                                    }
-                                    else{ me.mostrarDetalle('cierres_caja','listar_cierres',cierre); }
-                                }
-                            }
-                        });
-
-                        if(ban1 == 1)
-                        {
-                            if(ban2 == 0)
-                            {
-                                me.mostrarDetalle('cierres_caja','registrar');
-                            }
-                        }
-                        else
-                        {
-                            me.mostrarDetalle('cierres_caja','registrar');
-                        }
-                    }
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            },*/
+            
             listarCajas(){
                 let me=this;
                 var url= this.ruta +'/cierres_caja/validarCierreCaja';
@@ -1222,10 +1098,10 @@
                             // toast: true,
                             // position: 'top-end',
                             type: 'error',
-                            title: 'Abir caja',
+                            title: 'Abrir caja',
                             position: 'center',
                             showConfirmButton: false,
-                            timer: 1700
+                            timer: 2000
                         })
                     }
                     else
@@ -1251,7 +1127,7 @@
                                 // toast: true,
                                 // position: 'top-end',
                                 type: 'error',
-                                title: 'Abir caja',
+                                title: 'Abrir caja',
                                 position: 'center',
                                 showConfirmButton: false,
                                 timer: 1700
@@ -1496,14 +1372,6 @@
             cerrarModalCierreCaja(){
                 this.modalCierreCaja=0;
                 this.tituloModalCierre='';
-                // this.id_caja_cierre='';
-                // this.vr_inicial_cierre=0;
-                // this.obs_inicial_cierre = '';
-                // this.vr_gastos_cierre = 0;
-                // this.obs_gastos_cierre = '';
-                // this.vr_software_cierre = 0;
-                // this.vr_final_cierre = 0;
-                // this.cierre_caja_id = 0;
                 this.arrayCierresUsuario = 0;
                 this.arrayCierresXCajas = 0;
                 this.ban=0;
@@ -1701,15 +1569,7 @@
                 //Envia la petición para visualizar la data de esa página
                 me.listarFacturacion(1,numFacturaFiltro,estadoFiltro,idTerceroFiltro,ordenFiltro,desdeFiltro,hastaFiltro,idVendedorFiltro);
             },
-            /*encuentra(id,presentacion){
-                var sw=0;
-                for(var i=0;i<this.arrayDetalle.length;i++){
-                    if(this.arrayDetalle[i].id==id && this.arrayDetalle[i].id_presentacion==presentacion){
-                        sw=true;
-                    }
-                }
-                return sw;
-            },*/
+           
             encuentra(id,id_asociado){
                 let me=this;
                 var sw=0;
@@ -1870,16 +1730,7 @@
                 }
                 
                 let me = this;
-                
-                // for(var i=0; i<me.arrayDetalle.length; i++)
-                // {
-                //     me.descuento += parseFloat(me.arrayDetalle[i]['valor_descuento']);
-                //     me.iva += parseFloat(me.arrayDetalle[i]['valor_iva']);
-                //     me.subtotal += parseFloat(me.arrayDetalle[i]['valor_subtotal']);
-                // }
-                // me.total += parseFloat(me.subtotal)+parseFloat(me.iva);
-                // me.sugerirNumFactura();
-
+            
                 axios.post(this.ruta +'/facturacion/registrar',{
                     'num_factura': null,
                     'id_tercero': me.id_tercero,
@@ -1915,24 +1766,10 @@
             actualizarFacturacion(){
                 if (this.validarFacturacion()){
                     return;
-                }
-                
+                }                
                 let me = this;
-                
-                // me.subtotal = 0;
-                // me.iva = 0;
-                // me.descuento = 0;
-                // me.total = 0;
-                // for(var i=0; i<me.arrayDetalle.length; i++)
-                // {
-                //     me.descuento += parseFloat(me.arrayDetalle[i].valor_descuento);
-                //     me.iva += parseFloat(me.arrayDetalle[i].valor_iva);
-                //     me.subtotal += parseFloat(me.arrayDetalle[i].valor_subtotal);
-                // }
-                
-                // me.total = parseFloat(me.subtotal)+parseFloat(me.iva);
-                if(me.estado==2)
-                {
+               
+                if(me.estado==2){
                     me.sugerirNumFactura();
                 }
                 

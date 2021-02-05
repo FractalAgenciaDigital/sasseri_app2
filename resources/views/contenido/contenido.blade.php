@@ -33,8 +33,11 @@
             <template v-if="menu==40">
                 <punto_venta :ruta="ruta"></punto_venta>
             </template>
-
         @endif
+       
+            
+
+      
 
                    
             
@@ -112,9 +115,9 @@
                 <template v-if="menu==34">
                     <cuentasxpagar :ruta="ruta"></cuentasxpagar>
                 </template>
-
-
-
+                <template v-if="menu==41">
+                    <impresora :ruta="ruta"></impresora>
+                </template>
 
             <template v-if="menu==999992">
                 <rol :ruta="ruta"></rol>
@@ -124,13 +127,18 @@
                 <modulo :ruta="ruta"></modulo>
             </template>
             
+            
             <!-- <template v-if="menu==11">
                 <h1>Ayuda</h1>
             </template> -->
         @endif
+            <template v-if="menu==42">
+                <cocina :ruta="ruta"></cocina>
+            </template>
             <template v-if="menu==999994">
                 <h1>Acerca de</h1>
             </template>   
+            
 
 
     @endif
