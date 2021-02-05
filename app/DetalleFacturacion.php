@@ -8,7 +8,7 @@ class DetalleFacturacion extends Model
 {
     protected $table = 'detalle_facturacion';
     protected $fillable =[
-        'id','id_factura','id_producto','valor_venta','cantidad','valor_iva','valor_descuento','procentaje_iva','valor_subtotal','valor_final','preparado'
+        'id','id_factura','id_producto','valor_venta','cantidad','valor_iva','valor_descuento','procentaje_iva','valor_subtotal','valor_final','preparado, observaciones'
     ];
     public function factura(){
         return $this->hasOne('App\Facturacion');

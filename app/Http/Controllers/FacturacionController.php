@@ -213,6 +213,7 @@ class FacturacionController extends Controller
             $detalle->porcentaje_iva = $det['iva'];
             $detalle->valor_subtotal = $det['valor_subtotal'];  
             $detalle->valor_final = $det['valor_subtotal']+$det['valor_iva'];
+            $detalle->observaciones = $det['observaciones'];
             $detalle->save();
 
             $fechaActual = date('Y-m-d');
@@ -308,6 +309,7 @@ class FacturacionController extends Controller
             $detalle->porcentaje_iva = $det['iva'];
             $detalle->valor_subtotal = $det['valor_subtotal'];  
             $detalle->valor_final = $det['valor_subtotal']+$det['valor_iva'];
+            $detalle->observaciones = $det['observaciones'];
             $detalle->save();
         }
 

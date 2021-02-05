@@ -31,7 +31,8 @@
                     <div class="form-group">
                         <div class="row">
                             <div v-for="(articulo, index) in arrayArticulo" :key="index" class="col-4 separa-cards">
-                                <div class="card text-center mb-1" style="cursor:pointer" @click="agregaDetalleMesero(articulo)">
+                                <!--<div class="card text-center mb-1" style="cursor:pointer" @click="agregaDetalleMesero(articulo)">-->
+                                <div class="card text-center mb-1" style="cursor:pointer" @click="abrirModal(articulo)">
                                     <div class=" txt-price-prod btn-primary">
                                         <span class="num text-white "> $ {{articulo.precio_venta}} </span>
                                     </div>
@@ -112,6 +113,7 @@
                                                     </small>
                                                 </div>
                                             </div>    
+                                            
                                         </div>
                                         <div class="col-2 "><p class="text-right">{{detalle.cantidad}}</p></div>
                                         <div class="col-3 float-right"><p class="text-right"> $ {{Math.round(parseFloat((detalle.precio*detalle.cantidad)))}} </p></div>
@@ -123,6 +125,11 @@
                                              <h3 class="text-secondary" title="Deshabilitado" v-else>
                                                 <i class="fa fa-times-circle"></i>
                                             </h3>
+                                        </div>
+                                        <div v-if="detalle.observaciones" class="col-12">
+                                            
+                                                <strong>Obseraciones: </strong> <small >{{detalle.observaciones}} </small>
+                                            
                                         </div>
                                     </div>
                                    
@@ -449,6 +456,80 @@
                     </div>                      
                 </div>  
             </div>
+            <!-- MODAL AGREGAR PRODUCTO Y DETALLE -->
+            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none; overflow: auto !important;" aria-hidden="true">
+                <div class="modal-dialog modal-primary modal-xl" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title"></h4>
+                            <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
+                              <span aria-hidden="true" title="Cerrar">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-4 separa-cards">
+                                    <!--<div class="card text-center mb-1" style="cursor:pointer" @click="agregaDetalleMesero(articulo)">-->
+                                    <div class="card text-center mb-1" style="cursor:pointer" @click="cantidad++">
+                                        <div class=" txt-price-prod btn-primary">
+                                            <span class="num text-white "> $ {{auxProd.precio_venta}} </span>
+                                        </div>
+                                        <div class="card mx-auto" v-if="auxProd">
+                                            <img sv-if="`${auxProd.img}`!='default.png'" :src="`${ruta}/Empresas/${auxProd.id_empresa}_empresa/ImgProductos/${auxProd.img}`" class="img-prods">
+                                        </div>
+                                        <div class="txt-nom-prod bg-success">
+                                            <small class="mb-0 text-white">{{auxProd.nombre}}</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-1">
+                                    <h4 class="mt-5"> X </h4>
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" min="1" style="font-size: 30px !important;" v-model="cantidad" class="display-3 form-control text-right mt-4" aria-label="Large" aria-describedby="inputGroup-sizing-xl" required readonly>
+                                </div>
+                                <div class="col-2 text-center mt-4 ">
+                                    <input type="button" class="btn text-center btn-lg btn-primary mt-2 align-middle"  value="+" @click="cantidad++">
+                                </div>
+                                
+                                <div v-if="cantidad>1" class="text-center col-2 mt-4">
+                                    <input type="button" class="btn btn-lg text-center btn-danger mt-2"  value="-" @click="cantidad--">
+                                </div>
+                            </div>
+                           
+
+                            <div class="input-group input-group-lg">
+                               
+                                <div class=" row col-12 text-center pt-1 ">
+                                    <div class="col-6  pb-sm-1 ">
+                                        <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
+                            
+                                    </div>
+                                    <div class="col-6  pb-sm-1 ">
+                                        <button type="button" class="btn btn-success" @click="agregaDetalleMesero()">Agregar</button>
+                                    </div>
+                                </div>
+                                <div style="margin-left: -8px;" class=" row col-12 text-center ">
+                                    <div class="col-12 ">
+                                        <h3><strong>Observaciones</strong></h3>
+                                    </div>
+                                    <div class="col-12  ">
+                                        <textarea name="auxObser" id="auxObser" v-model="auxObser" cols="38" rows="2" class="form-group"></textarea>                                        
+                                    </div>
+                                </div>
+                                <div v-if="auxProd.observaciones" class=" row col-12 text-center pd-3 mt-2 mb-2 pb-3">
+                                    <div class="col-6  mb-3" v-for="observ in auxProd.observaciones" :key="observ.id">
+                                       <button v-if="auxObser==''" type="button" class="btn btn-primary" @click="auxObser=auxObser+' '+ observ.observacion">{{observ.observacion}}</button>
+                                       <button v-else type="button" class="btn btn-primary" @click="auxObser=auxObser+', '+ observ.observacion">{{observ.observacion}}</button>
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div>  
             
@@ -643,7 +724,8 @@
                     vr_gastos_cierre : 0,
                     vr_final_cierre : 0,
                 },
-
+                auxProd : {},
+                auxObser : '',
                 prod_nuevo : 0,
             }
         },
@@ -1312,9 +1394,11 @@
              
             },
            
-            agregaDetalleMesero(producto){
-                //console.log(producto);
+            agregaDetalleMesero(){
+                
                 let me=this;
+                let producto = {};
+                producto = this.auxProd;
                 var p = '';
                 if(producto.padre='') {p = ' '+producto.nom_presentacion+' (Presentacion asociada)';}
                 else {p = ' - '+producto.nom_presentacion;}
@@ -1327,45 +1411,47 @@
                     ivaVenta_vr = Math.round(parseFloat(producto.precio_venta)-parseFloat((producto.precio_venta)/((ivaVenta/100)+1)));
                 }
                 
-                console.log("ivaVenta_vr"+ivaVenta_vr);
+                //console.log("ivaVenta_vr"+ivaVenta_vr);
                 let auxPosition = me.arrayDetalle.indexOf(me.arrayDetalle.find(({codigo}) => codigo === producto.codigo));
 
                 let auxPreparado = me.arrayPreparado.indexOf(me.arrayPreparado.find(({codigo}) => codigo === producto.codigo));
                 if(producto.tipo_articulo == 4) {
                     if(auxPreparado >= 0) {
-                        me.arrayPreparado[auxPreparado].cantidad+=1;
-                        me.arrayPreparado[auxPreparado].valor_iva+=ivaVenta_vr;
-                        me.arrayPreparado[auxPreparado].valor_subtotal +=  me.arrayPreparado[auxPreparado].precio_venta - ivaVenta_vr;
+                        me.arrayPreparado[auxPreparado].cantidad+=this.cantidad;
+                        me.arrayPreparado[auxPreparado].valor_iva+=(ivaVenta_vr * this.cantidad);
+                        me.arrayPreparado[auxPreparado].valor_subtotal +=  Math.round(parseFloat((me.arrayPreparado[auxPreparado].precio_venta - ivaVenta_vr) * this.cantidad));
+                        me.arrayPreparado[auxPreparado].observaciones+=this.auxObser ? ' - '+this.auxObser: '';
                     }else {
                         me.arrayPreparado.push({
                             codigo: producto.codigo,
                             idarticulo: producto.id_articulo,
                             id_asociado: producto.id_asociado,
                             articulo: producto.nombre,
-                            cantidad: 1,
+                            cantidad: this.cantidad,
                             tipo: producto.tipo_articulo,
                             valor_descuento: 0,
                             precio: producto.precio_venta,
                             precio_venta: producto.precio_venta,
                             iva: ivaVenta,
-                            valor_iva: ivaVenta_vr,
-                            valor_subtotal: Math.round(parseFloat(producto.precio_venta-ivaVenta_vr)),
+                            valor_iva: ivaVenta_vr * this.cantidad,
+                            valor_subtotal: Math.round(parseFloat((producto.precio_venta - ivaVenta_vr)* this.cantidad)),
                             stock : producto.stock,
                             descuento : 0,
                             nom_presentacion : producto.nom_presentacion,
                             id_presentacion : producto.id_presentacion,
                             padre : producto.padre,
-                            
+                            observaciones : this.auxObser
                         });
                     }
                 }
                 
 
                 if(auxPosition >= 0) {
-                    me.arrayDetalle[auxPosition].cantidad+=1;
-                    me.arrayDetalle[auxPosition].valor_iva+=ivaVenta_vr;
-                    me.arrayDetalle[auxPosition].valor_subtotal +=  me.arrayDetalle[auxPosition].precio_venta - ivaVenta_vr;
-                    me.arrayDetalle[auxPosition].prod_nuevo = 1
+                    me.arrayDetalle[auxPosition].cantidad+=this.cantidad;
+                    me.arrayDetalle[auxPosition].valor_iva+=(ivaVenta_vr * this.cantidad);                    
+                    me.arrayDetalle[auxPosition].valor_subtotal +=  Math.round(parseFloat((me.arrayDetalle[auxPosition].precio_venta - ivaVenta_vr) * this.cantidad));
+                    me.arrayDetalle[auxPosition].prod_nuevo = 1;
+                    me.arrayDetalle[auxPosition].observaciones+=this.auxObser ? ' - '+this.auxObser: ''
                     
                 }else {
                     
@@ -1374,24 +1460,25 @@
                         idarticulo: producto.id_articulo,
                         id_asociado: producto.id_asociado,
                         articulo: producto.nombre,
-                        cantidad: 1,
+                        cantidad: this.cantidad,
                         tipo: producto.tipo_articulo,
                         valor_descuento: 0,
                         precio: producto.precio_venta,
                         precio_venta: producto.precio_venta,
                         iva: ivaVenta,
-                        valor_iva: ivaVenta_vr,
-                        valor_subtotal: Math.round(parseFloat(producto.precio_venta-ivaVenta_vr)),
+                        valor_iva: ivaVenta_vr * this.cantidad,
+                        valor_subtotal: Math.round(parseFloat((producto.precio_venta -ivaVenta_vr)* this.cantidad)),
                         stock : producto.stock,
                         descuento : 0,
                         nom_presentacion : producto.nom_presentacion,
                         id_presentacion : producto.id_presentacion,
                         padre : producto.padre,
                         prod_nuevo:1,
+                        observaciones : this.auxObser
                     });
                 }
               
-                
+                this.cerrarModal();
                 this.llamarMensaje(producto.nombre);
 
                 this.ivaProces();
@@ -1933,19 +2020,23 @@
             },
             cerrarModal(){
                 this.modal=0;
-                this.tituloModal='';
+                this.cantidad = 1;
+                this.auxProd = {};
+               /* this.tituloModal='';
                 this.buscar = '';
                 this.arrayArticulo = [];
                 this.buscarA = '';
                 this.buscarCategoriaA = '';
-                this.tipo_vista_articulo = 1;
+                this.tipo_vista_articulo = 1;*/
             }, 
-            abrirModal(){               
-                this.arrayArticulo=[];
+            abrirModal(producto){               
+               // this.arrayArticulo=[];
+                this.auxProd = producto;
+                this.auxObser = '';
                 this.modal = 1;
-                this.tituloModal = 'Seleccione uno o varios artículos';
-                this.selectCategoria2();
-                this.listarArticulo(this.buscarA,this.criterioA,this.buscarCategoriaA)
+                //this.tituloModal = 'Seleccione uno o varios artículos';
+                //this.selectCategoria2();
+                //this.listarArticulo(this.buscarA,this.criterioA,this.buscarCategoriaA)
             },
             cerrarModalCantidadArticulo(){
                 this.modalCantidadArticulo=0;
@@ -2220,6 +2311,7 @@
     .modal-content{
         width: 100% !important;
         position: absolute !important;
+        margin-top: 5em;
     }
     .mostrar{
         display: list-item !important;
