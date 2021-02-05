@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '4a923b434fd7ea240392309dcb7fcacb0b10cb90',
+    'reference' => 'dd37af94e3a112a131fb850c11463e59119b280d',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -388,7 +388,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '4a923b434fd7ea240392309dcb7fcacb0b10cb90',
+      'reference' => 'dd37af94e3a112a131fb850c11463e59119b280d',
     ),
     'laravel/tinker' => 
     array (
@@ -452,6 +452,24 @@
       array (
       ),
       'reference' => '9567d9c4c519fbe40de01dbd1e4469dbbb66f46a',
+    ),
+    'mike42/escpos-php' => 
+    array (
+      'pretty_version' => 'v3.0',
+      'version' => '3.0.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'dcb569a123d75f9f6a4a927aae7625ca6b7fdcf3',
+    ),
+    'mike42/gfx-php' => 
+    array (
+      'pretty_version' => 'v0.6',
+      'version' => '0.6.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'ed9ded2a9298e4084a9c557ab74a89b71e43dbdb',
     ),
     'mockery/mockery' => 
     array (

@@ -200,10 +200,10 @@
 
                     <div class="card-header">
                         <div class="row">
-                            <div class="col-3">
-                                <button  class="btn btn-success fa fa-save"></button>
+                            <div class="col-6">
+                                <!-- <button  class="btn btn-success fa fa-save"></button> -->
                             </div>
-                            <div class="col-8">
+                            <div class="col-6">
                                 <button @click="position=2" class="btn btn-primary fa fa-undo"></button>
                             </div>
                         </div>                                
@@ -211,48 +211,53 @@
 
                     <div class="card-body">                                                       
                         <form>
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect1">Tipo de documento</label>
-                                <select class="form-control" id="exampleFormControlSelect1">
-                                    <option value="0" disabled>Seleccione</option>
-                                    <option>Cedula Ciudadania</option>
-                                    <option>Cedula Extrangera</option>
-                                    <option>Tarjeta Identidad</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputDocument">Documento</label>
-                                <input type="num" class="form-control" id="exampleInputDocument" aria-describedby="documentHelp" placeholder="document">
+                            <div class="form-row">
+                                <div class="form-group col-6">
+                                    <label for="exampleFormControlSelect1">Tipo de documento</label>
+                                    <select class="form-control" v-model="tipo_documento">
+                                        <option value="0" disabled>Seleccione</option>
+                                        <option>Cedula Ciudadania</option>
+                                        <option>Cedula Extranjera</option>
+                                        <option>Tarjeta Identidad</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="nro documento">Documento</label>
+                                    <input type="num" class="form-control" v-model="num_documento" aria-describedby="documentHelp" placeholder="document">
+                                </div>
                             </div>
                             <div class="form-row">
                                 <div class="col">
                                     <label for="exampleInputNombre1">Nombre 1</label>
-                                    <input type="text" class="form-control" placeholder="First name">
+                                    <input type="text" class="form-control" v-model="nombre1" placeholder="First name">
                                 </div>
                                 <div class="col">
                                     <label for="exampleInputNombre2">Nombre 2</label>
-                                    <input type="text" class="form-control" placeholder="First name">
+                                    <input type="text" class="form-control" v-model="nombre2" placeholder="First name">
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col">
                                     <label for="exampleInputApellido1">Apellido 1</label>
-                                    <input type="text" class="form-control" placeholder="Last name">
+                                    <input type="text" class="form-control" v-model="apellido1" placeholder="Last name">
                                 </div>
                                 <div class="col">
                                     <label for="exampleInputApellido2">Apellido 2</label>
-                                    <input type="text" class="form-control" placeholder="Last name">
+                                    <input type="text" class="form-control" v-model="apellido2" placeholder="Last name">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPhone">Celular</label>
-                                <input type="num" class="form-control" id="exampleInputPhone" aria-describedby="phoneHelp" placeholder="57+">
+                                <input type="num" class="form-control" v-model="celular" aria-describedby="phoneHelp" placeholder="57+">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Correo electronico</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="email@example.com">
+                                <input type="email" class="form-control" v-model="email" aria-describedby="emailHelp" placeholder="email@example.com">
                             </div>
                         </form> 
+                        <div class="col-6">
+                            <button @click="registrarCliente();"  class="btn btn-success text-white"><i class="fa fa-save"></i>Guardar</button>
+                        </div>
                     </div>                    
                 </div> 
             </div>
@@ -324,9 +329,9 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="row">
-                            <div class="col-3">
+                            <!-- <div class="col-3">
                                 <button @click="position=5" class="btn btn-primary fa fa-undo"></button>
-                            </div>
+                            </div> -->
                             <div class="col-3">
                                 <button @click="position=7" class="btn btn-primary fa fa-list"></button>
                             </div>
@@ -559,6 +564,53 @@
         props : ['ruta'],
         data (){
             return {
+                //Datos de cliente
+                persona_id: 0,
+                // nombre : '',
+                tipo_documento : 'DNI',
+                num_documento : '',
+                direccion : '',
+                telefono1 : '',
+                telefono2 : '',
+                celular : '',
+                email : '',
+                email2 : '',
+                sexo: '',
+                regimen: '',
+                fec_nac: '',
+                reside: '',
+                tipo_persona: 'Natural',
+                representante: '',
+                nombre1: '',
+                nombre2: '',
+                apellido1: '',
+                apellido2: '',
+                autoretenedor: '',
+                declarante : '',
+                cliente : false,
+                proveedor : false,
+                id_vendedor : '',
+                id_zona : '',
+                plazo_pago : '',
+                bloquear : '',
+                cupo_credito : '',
+                vr_cupo_credito : 0,
+                retenedor_fuente : '',
+                retenedor_iva : '',
+                excluido_iva : '',
+                autoretefuente : '',
+                autoreteiva : '',
+                autoreteica : '',
+                id_banco : 0,
+                num_cuenta_banco : '',
+                tipo_cuenta : '',
+                representante_cuenta : '',
+                tipo_nacionalidad : '',
+                img: '',
+                arrayImg: '',
+
+
+
                 position: 7,
                 no_caja: 1,
                 id_selected_row_acitve: '',
@@ -1152,20 +1204,9 @@
             cerrarModalCierreCaja(){
                 this.modalCierreCaja=0;
                 this.tituloModalCierre='';
-                // this.id_caja_cierre='';
-                // this.vr_inicial_cierre=0;
-                // this.obs_inicial_cierre = '';
-                // this.vr_gastos_cierre = 0;
-                // this.obs_gastos_cierre = '';
-                // this.vr_software_cierre = 0;
-                // this.vr_final_cierre = 0;
-                // this.cierre_caja_id = 0;
                 this.arrayCierresUsuario = 0;
                 this.arrayCierresXCajas = 0;
                 this.ban=0;
-
-                // this.id_caja_facturacion = 0;
-                // this.nom_caja_cierre_facturacion = '';
             },
             getDatosProveedor(val1){
                 let me = this;
@@ -1357,15 +1398,7 @@
                 //Envia la petición para visualizar la data de esa página
                 me.listarFacturacion(1,numFacturaFiltro,estadoFiltro,idTerceroFiltro,ordenFiltro,desdeFiltro,hastaFiltro,idVendedorFiltro);
             },
-            /*encuentra(id,presentacion){
-                var sw=0;
-                for(var i=0;i<this.arrayDetalle.length;i++){
-                    if(this.arrayDetalle[i].id==id && this.arrayDetalle[i].id_presentacion==presentacion){
-                        sw=true;
-                    }
-                }
-                return sw;
-            },*/
+            
             encuentra(id,id_asociado){
                 let me=this;
                 var sw=0;
@@ -1684,7 +1717,7 @@
                     'num_factura': me.num_factura,
                     'id_tercero': me.id_tercero,
                     'fec_edita': me.fechaHoraActual,
-                    'subtotal': me.subtotal,
+                    // 'subtotal': me.subtotal,
                     'valor_iva': me.valor_iva,
                     'total': me.valor_final,
                     'abono': me.abono,
@@ -2179,7 +2212,67 @@
                     type: 'success',
                     text: 'Agregado '+producto
                 });
-            }
+            },           
+            registrarCliente(){
+               
+                let me = this;
+                var data = new FormData();
+                data.append('nombre', this.nombre);
+                data.append('tipo_documento', this.tipo_documento);
+                data.append('num_documento' , this.num_documento);
+                data.append('direccion' , this.direccion);
+                data.append('telefono1' , this.telefono1);
+                data.append('telefono2' , this.telefono2);
+                data.append('celular' , this.celular);
+                data.append('email' , this.email);
+                data.append('sexo', this.sexo ? this.sexo : 'Undefined');
+                data.append('regimen', this.regimen? this.regimen : 'Comun');
+                data.append('fec_nac', this.fec_nac);
+                data.append('reside', this.reside ?  this.reside : 'B/');
+                data.append('representante', this.representante);
+                data.append('tipo_persona' , this.tipo_persona ? this.tipo_persona : 'Natural');
+                data.append('nombre1' , this.nombre1);
+                data.append('nombre2' , this.nombre2);
+                data.append('apellido1' , this.apellido1);
+                data.append('apellido2' , this.apellido2);
+                data.append('digito_verif' , JSON.stringify(this.digito_verif) ? JSON.stringify(this.digito_verif) : 0 );
+                data.append('entidad' , this.entidad);
+                data.append('num_verif' , this.num_verif ? this.num_verif : 0);
+                data.append('autoretenedor' , this.autoretenedor ? this.autoretenedor : '0');
+                data.append('declarante' , this.declarante ? this.declarante : '0');
+                data.append('cliente' , JSON.stringify(this.cliente));
+                data.append('proveedor' , JSON.stringify(this.proveedor));
+                data.append('id_vendedor' , this.id_vendedor);
+                data.append('id_zona' , this.id_zona);
+                data.append('plazo_pago' , this.plazo_pago);
+                data.append('bloquear' , this.bloquear);
+                data.append('cupo_credito' , this.cupo_credito);
+                data.append('vr_cupo_credito' , this.vr_cupo_credito);
+                data.append('retenedor_fuente' , this.retenedor_fuente);
+                data.append('retenedor_iva' , this.retenedor_iva);
+                data.append('excluido_iva' , this.excluido_iva);
+                data.append('autoretefuente' , this.autoretefuente);
+                data.append('autoreteiva' , this.autoreteiva);
+                data.append('autoreteica' , this.autoreteica);
+                data.append('id_banco' , this.id_banco);
+                data.append('num_cuenta_banco' , this.num_cuenta_banco);
+                data.append('tipo_cuenta' , this.tipo_cuenta);
+                data.append('representante_cuenta' , this.representante_cuenta);
+                data.append('tipo_nacionalidad' , this.tipo_nacionalidad ? this.tipo_nacionalidad : 'Colombia');
+                data.append('departamento' , this.departamento ? this.departamento : 'Putumayo');
+                data.append('municipio' , this.municipio ? this.municipio : 'Mocoa');
+                data.append('img', this.arrayImg);
+
+                axios.post( this.ruta +'/cliente/registrar',data,{
+                    headers:{'Content-Type':'multipart/form-data'}
+                }).then(function (response) {
+                    // me.cerrarModal();
+                    // me.listarPersona(1,'','nombre');
+                    me.buscarTercero();
+                }).catch(function (error) {
+                    console.log(error); 
+                });
+            },
         },
         mounted() {
             $(".mul-select").select2({
