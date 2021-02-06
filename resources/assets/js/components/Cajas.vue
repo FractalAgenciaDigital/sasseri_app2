@@ -762,7 +762,7 @@
                 if(this.tipoAccionCierre==2)
                 {
                     // if(!this.vr_gastos_cierre || this.vr_gastos_cierre<=0){error=1; this.hasError['vr_gastos_cierre']=1;}
-                    if(!this.vr_final_cierre || this.vr_final_cierre<=0){error=1; this.hasError['vr_final_cierre']=1;}
+                    if(this.vr_final_cierre<0){error=1; this.hasError['vr_final_cierre']=1;}
                 }
 
                 return error;

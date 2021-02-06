@@ -100,6 +100,9 @@ class ArticuloController extends Controller
                 $consIvas= "SELECT productos_iva.id_iva,productos_iva.tipo_iva,productos_iva.id_producto,iva.porcentaje FROM productos_iva,iva WHERE productos_iva.id_producto=".$a->id." AND productos_iva.id_iva=iva.id";
                 $a->productos_iva = DB::select($consIvas);
 
+                $consObservs= "SELECT observacion FROM observaciones WHERE id_articulo =".$a->id." AND estado = '1'";
+                $a->observaciones = DB::select($consObservs);
+
                 $total[] = $a;
                 $articulos2 = array();
                 $cons2 = "SELECT * FROM productos_asociados WHERE id_producto = ".$a->id_articulo;
@@ -119,6 +122,9 @@ class ArticuloController extends Controller
                             {
                                 $consIvas2= "SELECT productos_iva.id_iva,productos_iva.tipo_iva,productos_iva.id_producto,iva.porcentaje FROM productos_iva,iva WHERE productos_iva.id_producto=".$a3->id." AND productos_iva.id_iva=iva.id";
                                 $a3->productos_iva = DB::select($consIvas2);
+
+                                $consObservs2= "SELECT observacion FROM observaciones WHERE id_articulo =".$a3->id." AND estado = '1'";
+                                $a3->observaciones = DB::select($consObservs2);
                             }
 
                             $total[] = $articulos3[0];

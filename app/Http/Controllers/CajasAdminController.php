@@ -130,7 +130,13 @@ class CajasAdminController extends Controller
         ->select('users.id','cajas_admin.id_caja','cajas_admin.id_usuario','users.usuario as nombre')
         ->where('cajas_admin.id_caja','=',$request->id)->get();
         
-        $users = User::where('empresas_id','=',$id_empresa)->where('condicion','1')->where('idrol','2')->orderBy('usuario')->paginate(10);
+        $users = User::where('empresas_id','=',$id_empresa)
+        ->where('condicion','1')
+        ->where(function($query) {
+            $query->where('idrol','2')
+                  ->orWhere('idrol','1');
+        })
+        ->orderBy('usuario')->paginate(10);
 
         
        //return ['cajas_admin' => $cajas_admin];
