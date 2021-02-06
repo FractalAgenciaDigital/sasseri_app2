@@ -20,9 +20,6 @@
                                 <div class="input-group">
                                     <input v-if="permisosUser.leer" type="text" v-model="buscar" @keyup="listarArticulo(1,buscar,criterio)" class="form-control" placeholder="Texto a buscar">
                                     <input v-else disabled type="text" class="form-control" placeholder="Texto a buscar">
-
-                                    <!--<button v-if="permisosUser.leer" type="submit" @click="listarArticulo(1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
-                                    <button v-else type="submit" class="btn btn-secondary"><i class="fa fa-search"></i> Buscar</button>-->
                                 </div>
                             </div>
                         </div>
@@ -131,6 +128,11 @@
                                                     <a href="#" class="dropdown-item" @click="abrirModalStock('ver', articulo.id)" title="Ver stock">
                                                     <i class="fa fa-archive"></i>&nbsp;Ver stock  
                                                     </a>
+                                                </template>
+
+                                                <template>
+                                                    <a href="#" class="dropdown-item" @click="abrirModalObservacion('observacion','registrar',articulo)" ><i class="icon-note"></i>
+                                                    Añadir observaciones</a>
                                                 </template>
                                                 
                                                 <template>
@@ -746,17 +748,7 @@
                                     </div>
                                     <div class="col-md-6">
                                     </div>
-                                </div>
-                                <!--<div style="display:none;" :class="{'form-group col-md-12 mostrar-crear' : modalCrear==4}">
-                                    <div class="col-md-10">
-                                        <span class="col-md-3 form-control-label" v-text="tituloModalCrear"></span>
-                                        <input type="text" class="col-md-9 form-control-label float-right" v-model="nombre_crear">
-                                    </div>
-                                    <div class="col-md-2 float-right">
-                                        <button type="button" class="btn btn-primary" @click="crearExtras('presentacion')" title="Guardar"><i class="fa fa-save"></i></button>
-                                        <button type="button" class="btn btn-secondary" @click="cerrarModalCrear()" title="Cancelar"><i class="fa fa-times-circle"></i></button>
-                                    </div>
-                                </div>-->
+                                </div>                             
                                 <div class="row pb-3" v-if="modalCrear==4">
                                     <div class="col-md-10">
                                         <span class="col-md-3 form-control-label" v-text="tituloModalCrear"></span>
@@ -791,13 +783,6 @@
                                         <button type="button" class="btn btn-primary" @click="registrarProductosAsociados()">Guardar</button>
                                     </div>
                                 </div>
-                                <!--<div v-show="errorProductosAsociados" class="form-group row div-error">
-                                    <div class="text-center text-error">
-                                        <div v-for="error in errorMostrarMsjProductosAsociados" :key="error" v-text="error">
-                                        </div>
-                                    </div>
-                                </div>-->
-
                             </form>
 
                             <div v-if="tipoAccion6==0">
@@ -841,6 +826,47 @@
                 </div>
             </div>
             <!--Fin del modal-->
+
+
+            <!-- Modal Observaciones -->
+            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modalObs}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog modal-primary modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" v-text="tituloModalObservacion"></h4>
+                            <button type="button" class="close" @click="cerrarModalObservacion()" aria-label="Close">
+                              <span aria-hidden="true" title="Cerrar">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                <div class="form-row">
+                                    <div class="form-group col-12">
+                                        <label class="form-control-label" for="text-input">Nombre</label>
+                                        <input type="text" v-model="observacion" class="form-control">                                       
+                                    </div>                                                                    
+                                </div>
+                                <div v-show="errorObservacion" class="form-group row div-error">
+                                    <div class="text-center text-error">
+                                        <div v-for="error in errorMostrarMsjObservacion" :key="error" v-text="error">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" @click="cerrarModalObservacion()">Cerrar</button>
+                            <button type="button" v-if="tipoAccionObservacion==1" class="btn btn-success" @click="registrarObservacion()">Guardar</button>
+                            <button type="button" v-if="tipoAccionObservacion==2" class="btn btn-success" @click="actualizarObservacion()">Actualizar</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- Fin modal observaciones -->
         </main>
 </template>
 
@@ -1060,6 +1086,17 @@
 
                 // Impresoras
                 arrayImpresora :[],
+
+                //observaciones
+                observacion: '',
+                observacion_id: 0,
+                id_articulo_obs : 0,
+                errorObservacion : 0,
+                errorMostrarMsjObservacion : [],
+                tituloModalObservacion : '',
+                tipoAccionObservacion : 0,
+                modalObs:0
+                
             }
         },
         components: {
@@ -1120,6 +1157,11 @@
             },
         },
         methods : {
+            modalObservacion(id){
+                let me = this;
+                this.id_articulo_obs = id;
+            },
+            
             listarArticulo (page,buscar,criterio){
                 let me=this;
                 var url= this.ruta + '/articulo/?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
@@ -1403,25 +1445,9 @@
                     console.log(error);
                 });
 
-                // axios.post(this.ruta +'/impresora/registrar', data,{
-                //     headers:{'Content-Type':'multipart/form-data'}
-                // }).then(function (response) {
-                //     me.idArticuloStock = response['id'];
-                //     me.cantidadStock = response['stock'];
-                //     me.tipoMovimientoStock = 1;
-                //     me.sumatoria = response['stock'];
-                //     // me.registrarStock();
-                //     me.cerrarModal();
-                //     me.listarArticulo(1,'','nombre');
-                // }).catch(function (error) {
-                //     console.log(error);
-                // });
             },
             registrarStock(){
-                // if (this.validarArticulo()){
-                //     return;
-                // }
-                
+                           
                 let me = this;
 
                 axios.post(this.ruta + '/stock/registrar',{
@@ -1582,28 +1608,21 @@
                 if(!this.tipo_articulo) {error=1; this.hasError['tipo_articulo']=1;}
 
                 if(this.tipo_articulo==1){
-                    if (!this.stock || this.stock<=0) {error=1; this.hasError['stock']=1;}
-                    // if(!this.cod_invima) {error=1; this.hasError['cod_invima']=1;}
-                    // if(!this.lote) {error=1; this.hasError['lote']=1;}
+                    if (!this.stock || this.stock<=0) {error=1; this.hasError['stock']=1;}                 
                     if(!this.fec_vence) {error=1; this.hasError['fec_vence']=1;}
                     if(this.minimo<=0) {error=1; this.hasError['minimo']=1;}
-                    // if(!this.talla) {error=1; this.hasError['']=1;}
                     if(this.id_und_medida==0) {error=1; this.hasError['id_und_medida']=1;}
                     if(!this.marca || this.marca=='' || this.marca==null) {error=1; this.hasError['marca']=1;}
                     if(!this.linea || this.linea=='' || this.linea==null) {error=1; this.hasError['linea']=1;}
                 }
 
                 if(this.tipo_articulo==2){
-                    // if(!this.cod_invima) {error=1; this.hasError['cod_invima']=1;}
                     if(!this.marca || this.marca=='' || this.marca==null) {error=1; this.hasError['marca']=1;}
                 }
 
                 if(this.tipo_articulo==3){
                     if (!this.stock || this.stock<=0) {error=1; this.hasError['stock']=1;}
-                    // if(!this.cod_invima) {error=1; this.hasError['cod_invima']=1;}
-                    // if(!this.lote) {error=1; this.hasError['lote']=1;}
                     if(this.minimo<=0) {error=1; this.hasError['minimo']=1;}
-                    // if(!this.talla) {error=1; this.hasError['talla']=1;}
                     if(this.id_und_medida==0) {error=1; this.hasError['id_und_medida']=1;}
                     if(!this.marca || this.marca=='' || this.marca==null) {error=1; this.hasError['marca']=1;}
                     if(!this.linea || this.linea=='' || this.linea==null) {error=1; this.hasError['linea']=1;}
@@ -1677,6 +1696,13 @@
 
                 this.cerrarModalCrear();
                 this.active=false;
+            },
+            cerrarModalObservacion(){
+                this.modalObs=0;
+                this.tituloModalObservacion='';
+                this.observacion='';
+                this.errorObservacion = 0;
+                this.errorMostrarMsjObservacion = [];
             },
             abrirModal(modelo, accion, data = []){
                 switch(modelo){
@@ -1916,6 +1942,50 @@
                         break;
                     }
                 }
+            },
+            abrirModalObservacion(modelo, accion, data = []){
+                switch(modelo){
+                    case "observacion":
+                    {
+                        // console.log(data);
+                        switch(accion){
+                            case 'registrar':
+                            {
+                                this.modalObs = 1;
+                                this.tituloModalObservacion = 'Registrar Observacion';
+                                this.observacion= '';
+                                this.id_articulo_obs= data.id;
+                                this.tipoAccionObservacion = 1;
+                                break;
+                            }
+                            case 'actualizar': 
+                            {
+                                //console.log(data);
+                                this.modalObs=1;
+                                this.tituloModalObservacion='Actualizar Observacion';
+                                this.tipoAccionObservacion=2;
+                                this.observacion_id=data['id'];
+                                this.observacion = data['observacion'];
+                                this.id_articulo_obs = data['id_articulo_obs'];
+                                break;
+                            }
+                        }
+                    }
+                }
+            },
+             registrarObservacion(){
+                
+                let me = this;
+
+                axios.post(this.ruta +'/observacion/registrar',{
+                    'observacion': this.observacion,
+                    'id_articulo_obs': this.id_articulo_obs,
+                }).then(function (response) {
+                    me.cerrarModalObservacion();
+                    me.listarObservacion(1,'','nombre');
+                }).catch(function (error) {
+                    console.log(error);
+                });
             },
             cerrarModalCuentas(){
                 this.modal5=0;

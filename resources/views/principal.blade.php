@@ -148,6 +148,12 @@
                         <li @click="menu=10" class="nav-item">
                             <a href="#" class="nav-link"><i class="icon-user"></i> <span>Terceros</span></a>
                         </li>
+                        <li @click="menu=31" class="nav-item">
+                            <a href="#" class="nav-link"><i class="icon-notebook"></i> <span>Informes</span></a>
+                        </li>
+                        <li @click="menu=43" class="nav-item">
+                            <a href="#" class="nav-link"><i class="icon-note"></i> <span>Observaciones</span></a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseConfig"
                             aria-expanded="true" aria-controls="collapseConfig" >

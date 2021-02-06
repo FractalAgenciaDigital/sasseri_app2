@@ -91,6 +91,9 @@
                 <template v-if="menu==30">
                     <cierrescaja :ruta="ruta"></cierrescaja>
                 </template>
+                <template v-if="menu==31">
+                    <informes :ruta="ruta"></informes>
+                </template>
             <!-- Cartera -->
                 <template v-if="menu==33">
                     <cuentasxcobrar :ruta="ruta"></cuentasxcobrar>
@@ -100,6 +103,9 @@
                 </template>
                 <template v-if="menu==41">
                     <impresora :ruta="ruta"></impresora>
+                </template>
+                <template v-if="menu==43">
+                    <observacion :ruta="ruta"></observacion>
                 </template>
 
             <template v-if="menu==999992">
