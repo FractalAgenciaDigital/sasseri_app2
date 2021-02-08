@@ -2149,7 +2149,7 @@
              
                 console.log("llegando");
                 this.tercero = tercero['nombre1']+" "+tercero['nombre2']+" "+tercero['apellido1']+" "+tercero['apellido2'];
-                 this.id_tercero = tercero['id'];
+                this.id_tercero = tercero['id'];
                 this.position=2;
             },
             buscarTercero(){
