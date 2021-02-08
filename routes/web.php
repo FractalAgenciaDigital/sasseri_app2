@@ -19,6 +19,8 @@ Route::group(['middleware'=>['guest']],function(){
 Route::group(['middleware'=>['auth']],function(){
     
     Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
+    Route::post('/notification/get', 'NotificationController@get');
+    Route::post('/notification/delete', 'NotificationController@eliminarNotificacion');
     
     
     Route::get('/main', function () {
@@ -36,12 +38,6 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/articulo/activar', 'ArticuloController@activar');
         Route::get('/articulo/buscarArticulo', 'ArticuloController@buscarArticulo');
         Route::get('/articulo/listarArticulo', 'ArticuloController@listarArticulo');
-
-        Route::get('/articulo_impresora', 'ArticuloImpresoraController@index');
-        Route::post('/articulo_impresora/registrar', 'ArticuloImpresoraController@store');
-        Route::put('/articulo_impresora/actualizar', 'ArticuloImpresoraController@update');
-        Route::put('/articulo_impresora/desactivar', 'ArticuloImpresoraController@desactivar');
-        Route::put('/articulo_impresora/activar', 'ArticuloImpresoraController@activar');
         
         Route::get('/bancos', 'BancosController@index');
         Route::post('/bancos/registrar', 'BancosController@store');
@@ -169,6 +165,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/detalle_facturacion', 'DetalleFacturacionController@index');               
         Route::get('/detalle_facturacion/buscarDetalleFacturacion', 'DetalleFacturacionController@buscarDetalleFacturacion');
         Route::get('/detalle_facturacion/productosPreparados', 'DetalleFacturacionController@productosPreparados');
+        Route::get('/detalle_facturacion/imprimir-ticket', 'DetalleFacturacionController@imprimirTicket'); 
         Route::post('/detalle_facturacion/registrar', 'DetalleFacturacionController@store'); 
         Route::put('/detalle_facturacion/actualizar', 'DetalleFacturacionController@update');
         Route::put('/detalle_facturacion/cocinado', 'DetalleFacturacionController@cocinado');
@@ -267,7 +264,6 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/modelo_contable/desactivar', 'ModeloContableController@desactivar');
         Route::put('/modelo_contable/activar', 'ModeloContableController@activar');
         Route::get('/modelo_contable/selectModeloContable', 'ModeloContableController@selectModeloContable');
-
   
         Route::get('/modulo', 'ModuloController@index');
         Route::post('/modulo/registrar', 'ModuloController@store');
@@ -366,8 +362,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/zona/actualizar', 'ZonaController@update');
         Route::get('/zona/selectZona', 'ZonaController@selectZona');
         Route::put('/zona/desactivar', 'ZonaController@desactivar');
-        Route::put('/zona/activar', 'ZonaController@activar');
-        
+        Route::put('/zona/activar', 'ZonaController@activar');        
     });
 
 });

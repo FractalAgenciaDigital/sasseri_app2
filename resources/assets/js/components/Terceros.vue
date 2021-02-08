@@ -228,22 +228,6 @@
                                         <input type="date" v-model="fec_nac" class="form-control" placeholder="Fecha Nacimento" v-bind:class="{ 'is-invalid': hasError.fec_nac==1 }">
                                     </div>
                                     
-                                
-
-                                <!--<div class="form-group row">
-                                    <label class="col-md-1 form-control-label" for="number-input">Teléfono 2</label>
-                                    <div class="col-md-2">
-                                        <input type="number" id="telefono2" v-model="telefono2" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" placeholder="Teléfono 2">
-                                    </div>
-                                    <label class="col-md-1 form-control-label" for="number-input">Celular</label>
-                                    <div class="col-md-2">
-                                        <input type="number" id="celular" v-model="celular" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" placeholder="Celular">
-                                    </div>
-                                    <div class="col-md-3">
-                                    </div>
-                                </div>-->
-
-                                
                                     <div class="form-group col-lg-4">
                                         <label for="text-input">Ubicación</label>
                                         <input type="text" v-model="reside" class="form-control" placeholder="Ubicacion" v-bind:class="{ 'is-invalid': hasError.reside==1 }">

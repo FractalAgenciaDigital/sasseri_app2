@@ -76,13 +76,6 @@
                                         </div>
                                     </td>
                                     <td class="td-estado">
-                                        <!-- <div v-if="articulo.condicion">
-                                            <span class="badge badge-success">Activo</span>
-                                        </div>
-                                        <div v-else>
-                                            <span class="badge badge-danger">Desactivado</span>                                            
-                                        </div> -->
-
                                         <template v-if="permisosUser.anular">
                                             <a href="#" class="btn text-success" v-if="articulo.condicion" @click="desactivarArticulo(articulo.id)" title="Activar">
                                                 <i class="fa fa-check-circle"></i>
@@ -214,21 +207,22 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div style="display:none;background-color:#cacbc7" :class="{'col-md-12 p-1 mostrar-crear' : modalCrear==1}">
-                                        <div class="col-md-10">
-                                            <div class="col-md-6">
-                                                <span v-text="tituloModalCrear" class="form-control-label col-md-4"></span>
-                                                <input type="text" class="form-control col-md-8 float-right" v-model="nombre_crear">
+                                    <div style="display:none;background-color:#f4f4f4" :class="{'col-md-12 p-1 mostrar-crear' : modalCrear==1}">
+                                        <div class="col-md-12 row">
+                                            <div class="col-md-5">
+                                                <span v-text="tituloModalCrear" class="form-control-label"></span>
+                                                <input type="text" class="form-control" v-model="nombre_crear">
                                             </div>
-                                            <div class="col-md-12">
-                                                <span class="form-control-label col-md-4">Descripción</span>
-                                                <input type="text" class="form-control col-md-8 float-right" v-model="descripcion_crear">
+                                            <div class="col-md-5">
+                                                <span class="form-control-label">Descripción</span>
+                                                <input type="text" class="form-control" v-model="descripcion_crear">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <button type="button" class="btn btn-primary" @click="crearExtras('categoria')" title="Guardar"><i class="fa fa-save"></i></button>
+                                                <button type="button" class="btn btn-danger" @click="cerrarModalCrear()" title="Cancelar"><i class="fa fa-times-circle"></i></button>
                                             </div>
                                         </div>
-                                        <div class="col-md-2 float-right">
-                                            <button type="button" class="btn btn-primary" @click="crearExtras('categoria')" title="Guardar"><i class="fa fa-save"></i></button>
-                                            <button type="button" class="btn btn-danger" @click="cerrarModalCrear()" title="Cancelar"><i class="fa fa-times-circle"></i></button>
-                                        </div>
+                                      
                                     </div>                                                              
                                 
                                     <div class="form-group col-md-6">
@@ -1129,7 +1123,8 @@
             listarArticulo (page,buscar,criterio){
                 let me=this;
                 var url= this.ruta + '/articulo/?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
-                axios.get(url).then(function (response) {
+                axios.get(url)
+                .then(function (response) {
                     var respuesta= response.data;
                     me.arrayArticulo = respuesta.articulos.data;
                     me.pagination= respuesta.pagination;
@@ -1408,19 +1403,19 @@
                     console.log(error);
                 });
 
-                axios.post(this.ruta +'/impresora/registrar', data,{
-                    headers:{'Content-Type':'multipart/form-data'}
-                }).then(function (response) {
-                    me.idArticuloStock = response['id'];
-                    me.cantidadStock = response['stock'];
-                    me.tipoMovimientoStock = 1;
-                    me.sumatoria = response['stock'];
-                    // me.registrarStock();
-                    me.cerrarModal();
-                    me.listarArticulo(1,'','nombre');
-                }).catch(function (error) {
-                    console.log(error);
-                });
+                // axios.post(this.ruta +'/impresora/registrar', data,{
+                //     headers:{'Content-Type':'multipart/form-data'}
+                // }).then(function (response) {
+                //     me.idArticuloStock = response['id'];
+                //     me.cantidadStock = response['stock'];
+                //     me.tipoMovimientoStock = 1;
+                //     me.sumatoria = response['stock'];
+                //     // me.registrarStock();
+                //     me.cerrarModal();
+                //     me.listarArticulo(1,'','nombre');
+                // }).catch(function (error) {
+                //     console.log(error);
+                // });
             },
             registrarStock(){
                 // if (this.validarArticulo()){

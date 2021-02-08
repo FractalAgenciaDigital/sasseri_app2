@@ -7,6 +7,9 @@ use App\Facturacion;
 use App\DetalleFacturacion;
 use App\Stock;
 use App\Articulo;
+use App\User;
+use App\Notifications\NotifyAdmin;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -212,6 +215,9 @@ class FacturacionController extends Controller
             $detalle->valor_final = $det['valor_subtotal']+$det['valor_iva'];
             $detalle->save();
 
+            $fechaActual = date('Y-m-d');
+            $numVentas = DB::table('detalle_facturacion')->whereDate('created_at',$fechaActual)->count();
+
             $stock = new Stock();
             $stock->id_producto = $det['idarticulo'];
             $stock->id_usuario = $id_usuario;
@@ -220,7 +226,27 @@ class FacturacionController extends Controller
             $stock->tipo_movimiento = $request->tipo_movimiento;
             $stock->sumatoria = $request->sumatoria;
             $stock->save();
+           
+            $arregloDatos=[
+               
+                'numero' => $numVentas,
+                'id_detalle_facturacion' => $detalle->id,
+                'cantidad' => $detalle->cantidad,
+                'id_producto' => $detalle->id_producto,
+                'id_factura' => $detalle->id_factura,
+                'estado' => 'Preparando'
+            ];
+
+            $allUsers = User::all();
+
+            foreach ($allUsers as $notificar){
+                User::findOrFail($notificar->id)->notify(new NotifyAdmin($arregloDatos));
+            }
+
+           
         }
+
+        
     }
   
 
@@ -284,6 +310,8 @@ class FacturacionController extends Controller
             $detalle->valor_final = $det['valor_subtotal']+$det['valor_iva'];
             $detalle->save();
         }
+
+
         return 'ok';
     }
 

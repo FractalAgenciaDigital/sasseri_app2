@@ -4,13 +4,18 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-import './bootstrap';
-import Multiselect from 'vue-multiselect';
+require ('./bootstrap');
 
+window.$ = window.jQuery =  require('jquery');
+window.Vue = require('vue');
+
+import Multiselect from 'vue-multiselect';
 // ES6 Modules or TypeScript
 import Swal from 'sweetalert2';
 import Notifications from 'vue-notification'
-window.Vue = require('vue');
+// import Echo from 'laravel-echo';
+
+
 window.Swal = Swal;
 //window.Notifications = Notifications;
 Vue.use(Notifications);
@@ -24,10 +29,6 @@ Vue.component('rol', require('./components/Rol.vue'));
 Vue.component('user', require('./components/User.vue'));
 Vue.component('terceros', require('./components/Terceros.vue'));
 Vue.component('modulo', require('./components/Modulo.vue'));
-// Vue.component('plancuentas', require('./components/PlanCuentas.vue'));
-// Vue.component('conformatos', require('./components/ConFormatos.vue'));
-// Vue.component('formatos', require('./components/Formatos.vue'));
-// Vue.component('registroconta', require('./components/RegistroConta.vue'));
 Vue.component('configgenerales', require('./components/ConfigGenerales.vue'));
 // Vue.component('auxiliares_conta', require('./components/AuxiliaresConta.vue'));
 // Vue.component('retenciones', require('./components/Retenciones.vue'));
@@ -58,6 +59,7 @@ Vue.component('cuentasxpagar', require('./components/CuentasxPagar.vue'));
 Vue.component('punto_venta', require('./components/PuntoVenta.vue'));
 Vue.component('impresora', require('./components/Impresora.vue'));
 Vue.component('cocina', require('./components/Cocina.vue'));
+Vue.component('notification', require('./components/Notification.vue'));
 Vue.component('multiselect', Multiselect);
 
 const app = new Vue({
@@ -74,17 +76,31 @@ const app = new Vue({
             'crear': 1,
             'actualizar': 1,
             'anular': 1,
-        }
+        },
+        notifications: []
+    },
+    created(){
+        let me = this;
+        axios.post('notification/get').then(function(response){
+            me.notifications = response.data;
+        }).catch(function(error){
+            console.log(error);
+        });
+        var userId = $('meta[name="userId"]').attr('content');
+      
+        Echo.private('App.User.' + userId).notification((notification)=>{
+            me.notifications.unshift(notification);
+        });
     },
     
     mounted() {
         let me = this;
         var url = this.ruta + '/permisos/listarPermisosLogueado';
         axios.get(url).then(function(response) {
-                me.permisosUser = response.data.permisosLogueado;
-            })
-            .catch(function(error) {
-                console.log(error);
-            });
+            me.permisosUser = response.data.permisosLogueado;
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
     }
 });

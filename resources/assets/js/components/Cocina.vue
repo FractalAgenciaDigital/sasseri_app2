@@ -28,7 +28,7 @@
                                                 <th>Producto</th>
                                                 <th>Cantidad</th>
                                                 <th>Preparado</th>
-                                                <th>Estado de impresion</th>
+                                                <!-- <th>Estado de impresion</th> -->
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -48,7 +48,7 @@
                                                         <i class="fa fa-check"></i>
                                                     </button>
                                                 </td>
-                                                <td></td>
+                                               
                                             </tr>
                                         </tbody>
                                     </table>                                 
@@ -69,12 +69,14 @@
                             <table class="table table-sm table-bordered">
                                 <thead class="thead-light">
                                     <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Factura</th>
-                                    <th scope="col">Mesa</th>
-                                    <th scope="col">Total</th>
-                                    <th scope="col">Estado</th>
-                                    <th scope="col">Editar</th>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Factura</th>
+                                        <th scope="col">Mesa</th>
+                                        <th scope="col">Total</th>
+                                        <th scope="col">Estado</th>
+                                        <th scope="col">Editar</th>
+                                        <th> Imprimir</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -92,6 +94,11 @@
                                             </button>
                                              <button v-else class="btn-1 btn btn-secondary rounded-circle">
                                                 <i class="fa fa-pencil btn-edit-factura"></i>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button @click="imprimirTicket(facturacion.id)" class="btn btn-light">
+                                                Imprimir
                                             </button>
                                         </td>
                                     </tr>
@@ -173,6 +180,7 @@
         
         },
         methods : {
+           
             
             listarFacturacion (page,numFacturaFiltro,estadoFiltro,idTerceroFiltro,ordenFiltro,desdeFiltro,hastaFiltro,idVendedorFiltro){
                 let me=this;
@@ -491,7 +499,14 @@
                 me.arrayDetalle=[];
                 me.arrayTerceros=[];       
             },
-         
+             imprimirTicket(id){
+                let me = this;
+                console.log(id);
+                axios.get(this.ruta+'/detalle_facturacion/imprimir-ticket?id='+id).then(function(response){
+                    console.log(response)
+
+                })
+            },         
             listarDetalle(id_factura){
                 let me=this;
                 var url= this.ruta +'/detalle_facturacion/productosPreparados?id_factura=' + id_factura;
