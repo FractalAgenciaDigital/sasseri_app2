@@ -283,6 +283,13 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/novedades/listarNovedades', 'NovedadesController@listarNovedades');
         Route::put('/novedades/eliminarNovedad', 'NovedadesController@eliminarNovedad');
 
+        Route::get('/observacion', 'ObservacionController@index');
+        Route::post('/observacion/registrar', 'ObservacionController@store');
+        Route::put('/observacion/actualizar', 'ObservacionController@update');
+        Route::get('/observacion/selectZona', 'ObservacionController@selectZona');
+        Route::put('/observacion/desactivar', 'ObservacionController@desactivar');
+        Route::put('/observacion/activar', 'ObservacionController@activar');    
+
         Route::post('/permisos', 'PermisosController@insertar');
         Route::post('/listar_permisos', 'PermisosController@listarPermisos');
         Route::get('/listar_permisos2', 'PermisosController@listarPermisos2');

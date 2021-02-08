@@ -59,6 +59,7 @@ Vue.component('cuentasxpagar', require('./components/CuentasxPagar.vue'));
 Vue.component('punto_venta', require('./components/PuntoVenta.vue'));
 Vue.component('impresora', require('./components/Impresora.vue'));
 Vue.component('cocina', require('./components/Cocina.vue'));
+Vue.component('observacion', require('./components/Observacion.vue'));
 Vue.component('notification', require('./components/Notification.vue'));
 Vue.component('multiselect', Multiselect);
 

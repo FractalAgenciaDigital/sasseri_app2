@@ -571,9 +571,9 @@
                 <!-- Fin ejemplo de tabla Listado -->
             </div>
             <!--Inicio del modal agregar/actualizar-->
-            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+            <div class="modal fade" tabindex="-1"  :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog modal-primary modal-xl" role="document">
-                    <div class="modal-content">
+                    <div class="modal-content  mt-4">
                         <div class="modal-header">
                             <h4 class="modal-title" v-text="tituloModal"></h4>
                             <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
@@ -2071,12 +2071,12 @@
             },
             cerrarModal(){
                 this.modal=0;
-                this.tituloModal='';
+               /* this.tituloModal='';
                 this.buscar = '';
                 this.arrayArticulo = [];
                 this.buscarA = '';
                 this.buscarCategoriaA = '';
-                this.tipo_vista_articulo = 1;
+                this.tipo_vista_articulo = 1;*/
             }, 
             abrirModal(){               
                 this.arrayArticulo=[];
@@ -2265,6 +2265,7 @@
     .modal-content{
         width: 100% !important;
         position: absolute !important;
+        margin-top: 5em;
     }
     .mostrar{
         display: list-item !important;

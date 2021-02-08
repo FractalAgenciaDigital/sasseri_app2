@@ -179,49 +179,71 @@ $id_empresa = $request->session()->get('id_empresa');
         $infoEmpresa = ConfigGenerales::select()->where('id','=', $id_empresa)->limit(1)->get();
         
 
-        $connector = new WindowsPrintConnector('pdf');
+        $connector = new WindowsPrintConnector('cocina');
         $impresora = new Printer($connector);
         // $impresora->lineSpacing(19);
         $impresora->setJustification(Printer::JUSTIFY_CENTER)
         ;
+        $impresora->text("\n===============================\n");
         $impresora->setEmphasis(true);
-        $impresora->text("Ticket de venta\n");
         $impresora->text($infoEmpresa[0]->nombre."\n");
         $impresora->setEmphasis(false);
         $impresora->text("NIT: ");
         $impresora->text($infoEmpresa[0]->nit."\n");
         $impresora->text("Dirección: ");
         $impresora->text($infoEmpresa[0]->direccion."\n");
-
+        
         $impresora->text("Cliente: ");
         $impresora->text(" Camilo Monsalve \n");
 
-        $impresora->text($facturacion[0]->fec_crea."\n");
-        
+        $impresora->text($facturacion[0]->fec_crea."\n"."\n");
+        $impresora->setLineSpacing(2);
+ 
+        $impresora->setJustification(Printer::JUSTIFY_LEFT);
+        $impresora->text("|     ARTICULO    |");
+        $impresora->setJustification(Printer::JUSTIFY_CENTER);
+        $impresora->text("  CANTIDAD ");
+        $impresora->setJustification(Printer::JUSTIFY_RIGHT);
+        $impresora->text("  |   PRECIO     |\n");
+
+        $impresora->setJustification(Printer::JUSTIFY_CENTER);
+        $impresora->text("______________________________________\n"."\n");
+
         foreach($detalle_facturacion as $df)
         {
             
             $impresora->setJustification(Printer::JUSTIFY_LEFT);
-            $impresora->text(sprintf( $df->nombre_articulo . "-" . $df->nom_presentacion,$df->cantidad ));
+            $impresora->text(sprintf( $df->nombre_articulo . "-" . $df->nom_presentacion . "\n"));
+            $impresora->setJustification(Printer::JUSTIFY_CENTER);
+            $impresora->text($df->cantidad. "\n");
             $impresora->setJustification(Printer::JUSTIFY_RIGHT);
             $impresora->text('$' . number_format($df->cantidad * $df->precio, 2) . "\n");
         }
 
         $impresora->setJustification(Printer::JUSTIFY_CENTER);
-        $impresora->text("\n===============================\n");
+        $impresora->text("\n_________________________________\n");
         $impresora->setJustification(Printer::JUSTIFY_RIGHT);
         $impresora->setEmphasis(true);
-        $impresora->text("Total: $" . number_format($facturacion[0]->total, 2) . "\n");
+        $impresora->setLineSpacing(2);
+
+        $impresora->text("\nTotal: $" . number_format($facturacion[0]->total, 2) . "\n");
         $impresora->setJustification(Printer::JUSTIFY_CENTER);
+       
         $impresora->setTextSize(1, 1);
-        $impresora->text("Gracias por su compra\n");
+        $impresora->setLineSpacing(2);
         $impresora->text("\n===============================\n");
         $impresora->setEmphasis(false);
+        $impresora->setFont(Printer::FONT_C);
         $impresora->text("Sasseri - Software contable");
         $impresora->text("\nwww.fractalagenciadigital.com\n");
         $impresora->text("\n===============================\n");
-        $impresora->feed(5);
+        $impresora->text("Gracias por su compra\n");
+        $impresora->text("\n===============================\n");
+
+        
+        $impresora->feed(5);$impresora->cut();
         $impresora->close();
+        
         return redirect()->back()->with("mensaje", "Ticket impreso");
         
     }

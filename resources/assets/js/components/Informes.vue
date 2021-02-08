@@ -1035,9 +1035,16 @@
     import vSelect from 'vue-select';
     import moment from 'moment';
     export default {
-        props : ['ruta','permisosUser'],
+        props : ['ruta'],
         data (){
             return {
+                permisosUser : {
+                    'leer' : 1,
+                    'escribir' : 1,
+                    'crear' : 1,
+                    'actualizar' : 1,
+                    'anular' : 1,
+                },
                 ingreso_id: 0,
                 idproveedor:0,
                 proveedor:'',
