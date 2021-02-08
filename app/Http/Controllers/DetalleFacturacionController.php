@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\DetalleFacturacion;
 use App\Facturacion;
+use App\Impresora;
 use App\ConfigGenerales;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -140,7 +141,10 @@ $id_empresa = $request->session()->get('id_empresa');
     {
         $id_factura = $request->id;
         $id_empresa = $request->session()->get('id_empresa');
-       
+        $id_impresora = Auth::user()->id_impresora;
+        
+       $imprimir = Impresora::where('id', $id_impresora)->first();
+
         // $detalle_facturacion = DetalleFacturacion::findOrFail($id_factura);
         // $nombreImpresora = env("NOMBRE_IMPRESORA");
 
@@ -179,7 +183,7 @@ $id_empresa = $request->session()->get('id_empresa');
         $infoEmpresa = ConfigGenerales::select()->where('id','=', $id_empresa)->limit(1)->get();
         
 
-        $connector = new WindowsPrintConnector('cocina');
+        $connector = new WindowsPrintConnector($imprimir->nombre_impresora);
         $impresora = new Printer($connector);
         // $impresora->lineSpacing(19);
         $impresora->setJustification(Printer::JUSTIFY_CENTER)
