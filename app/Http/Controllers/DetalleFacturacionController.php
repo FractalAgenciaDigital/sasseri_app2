@@ -61,7 +61,7 @@ class DetalleFacturacionController extends Controller
         // if (!$request->ajax()) return redirect('/');
 
         $id_factura = $request->id_factura;
-$id_empresa = $request->session()->get('id_empresa');
+        $id_empresa = $request->session()->get('id_empresa');
 
         $detalle_facturacion = DetalleFacturacion::leftJoin('facturacion', 'detalle_facturacion.id_factura','=','facturacion.id')
         ->leftJoin('articulos', 'detalle_facturacion.id_producto','=','articulos.id')

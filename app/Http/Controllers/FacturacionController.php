@@ -240,12 +240,13 @@ class FacturacionController extends Controller
 
             $allUsers = User::all();
 
-            foreach ($allUsers as $notificar){
-                User::findOrFail($notificar->id)->notify(new NotifyAdmin($arregloDatos));
-            }
+            // foreach ($allUsers as $notificar){
+            //     User::findOrFail($notificar->id)->notify(new NotifyAdmin($arregloDatos));
+            // }
 
            
         }
+        return ['id_facturacion' => $facturacion->id];
 
         
     }

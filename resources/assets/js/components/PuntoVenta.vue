@@ -337,6 +337,12 @@
                             </div>
                             <div class="col-6 pr-1">  
                             </div> 
+                            <div class="col-3">  
+                                <button @click="imprimirTicket()" class="btn btn-light">
+                                    Imprimir
+                                </button>
+                            </div> 
+                            
                         </div>                                      
                     </div>
                     <div class="ticket">
@@ -378,7 +384,7 @@
                         </table>
                         -----------------------------------------
                         <br>
-                        <p class="centrado minimizar espacio-1">POWERE BY - FRACTAL AGENCIA DIGITAL<br>www.fractalagenciadigital.  com<br>(CEL. 312-524-2544)</p><br> 
+                        <p class="centrado minimizar espacio-1">POWERE BY - FRACTAL AGENCIA DIGITAL<br>www.fractalagenciadigital.  com</p><br> 
                     </div>                    
                 </div>  
    
@@ -779,6 +785,7 @@
                 auxProd : {},
                 auxObser : '',
                 prod_nuevo : 0,
+                factura_imprimir:0,
             }
         },
         components: {
@@ -1352,14 +1359,6 @@
                 }
                 }) 
 
-                // axios.put(this.ruta +'/facturacion/cambiarEstado',{
-                //     'estado': cambiarEstado,
-                //     'id': id_factura
-                // }).then(function (response) {
-                //     me.listarFacturacion(1,'','','','','','','');
-                // }).catch(function (error) {
-                //     console.log(error);
-                // });
             },
             cargarPreciosTarifarios(id){
                 let me = this;
@@ -1685,6 +1684,9 @@
                         'tipo_movimiento' : 4,
                         'sumatoria' : 0
                     }).then(function (response) {
+                        me.factura_imprimir = response.data.id_facturacion;
+                        // console.log(response);
+
                         var toFind = "4";
                         var filtered = me.arrayDetalle.filter(function(el) {
                             return el.tipo === toFind;
@@ -1795,6 +1797,14 @@
                 }
                
             },
+            imprimirTicket(){
+                let me = this;
+                // console.log(id);
+                axios.get(this.ruta+'/detalle_facturacion/imprimir-ticket?id='+me.factura_imprimir).then(function(response){
+                    console.log(response)
+
+                })
+            },  
             selectZonas(){
                 let me=this;
                 var url= this.ruta + '/zona/selectZona';
