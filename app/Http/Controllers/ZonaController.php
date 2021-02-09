@@ -18,10 +18,10 @@ class ZonaController extends Controller
         $criterio = $request->criterio;
         
         if ($buscar==''){
-            $zona = Zona::where('id_empresa','=',$id_empresa)->orderBy('id', 'desc')->paginate(3);
+            $zona = Zona::where('id_empresa','=',$id_empresa)->orderBy('id', 'desc')->paginate(10);
         }
         else{
-            $zona = Zona::where($criterio, 'like', '%'. $buscar . '%')->where('id_empresa','=',$id_empresa)->orderBy('id', 'desc')->paginate(3);
+            $zona = Zona::where($criterio, 'like', '%'. $buscar . '%')->where('id_empresa','=',$id_empresa)->orderBy('id', 'desc')->paginate(10);
         }
         
 

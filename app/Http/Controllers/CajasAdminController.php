@@ -10,37 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class CajasAdminController extends Controller
 {
-    /*public function index(Request $request)
-    {
-        // if (!$request->ajax()) return redirect('/');
-
-        $buscar = $request->buscar;
-        $criterio = $request->criterio;
-        $id_empresa = $request->session()->get('id_empresa');
-        
-        // $cajas_admin = CajasAdmin::where('id_empresa','=',$id_empresa);
-        if($buscar!='')
-        {
-            $cajas_admin = CajasAdmin::where($criterio, 'like', '%'. $buscar . '%')
-            ->orderBy('id', 'desc')->paginate(3);  
-        }
-        else
-        {
-            $cajas_admin = CajasAdmin::orderBy('id', 'desc')->paginate(3);
-        }
-
-        return [
-            'pagination' => [
-                'total'        => $cajas_admin->total(),
-                'current_page' => $cajas_admin->currentPage(),
-                'per_page'     => $cajas_admin->perPage(),
-                'last_page'    => $cajas_admin->lastPage(),
-                'from'         => $cajas_admin->firstItem(),
-                'to'           => $cajas_admin->lastItem(),
-            ],
-            'cajas_admin' => $cajas_admin
-        ];
-    }*/
+    
 
     public function index(Request $request)
     {
@@ -61,19 +31,12 @@ class CajasAdminController extends Controller
         {
             $cajas_admin = CajasAdmin::leftJoin('users','cajas_admin.id_usuario','=','users.id')
             ->select('cajas_admin.id','cajas_admin.id_caja','cajas_admin.id_usuario','cajas_admin.usu_crea','users.usuario','cajas_admin.condicion')->where($criterio, 'like', '%'. $buscar . '%')->orderBy('id', 'desc')->paginate(6);  
-            /*$users = User::where('empresas_id','=',$id_empresa)
-            ->where('condicion','1')
-            ->where($criterio, 'like', '%'. $buscar . '%')
-            ->where('idrol','2')->orderBy('usuario')->paginate(10);*/
         }
         else
         {
             $cajas_admin = CajasAdmin::leftJoin('users','cajas_admin.id_usuario','=','users.id')
             ->select('cajas_admin.id','cajas_admin.id_caja','cajas_admin.id_usuario','cajas_admin.usu_crea','users.usuario','cajas_admin.condicion')
             ->orderBy('id', 'desc')->paginate(6);
-            /*$users = User::where('empresas_id','=',$id_empresa)
-            ->where('condicion','1')
-            ->where('idrol','2')->orderBy('id', 'desc')->paginate(10);*/
         }
     
         return [

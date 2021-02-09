@@ -19,10 +19,10 @@ class ObservacionController extends Controller
         $criterio = $request->criterio;
         
         if ($buscar==''){
-            $observacion = Observacion::leftJoin('articulos', 'articulos.id', 'observaciones.id_articulo')->select('observacion', 'observaciones.id as id', 'articulos.nombre as nombre_articulo', 'observaciones.estado as estado')->orderBy('id', 'desc')->paginate(3);
+            $observacion = Observacion::leftJoin('articulos', 'articulos.id', 'observaciones.id_articulo')->select('observacion', 'observaciones.id as id', 'articulos.nombre as nombre_articulo', 'observaciones.estado as estado')->orderBy('id', 'desc')->paginate(10);
         }
         else{
-            $observacion = Observacion::leftJoin('articulos', 'articulos.id', 'observaciones.id_articulo')->select('observacion', 'observaciones.id as id', 'articulos.nombres as nombre_articulo', 'observaciones.estado as estado')->where($criterio, 'like', '%'. $buscar . '%')->orderBy('id', 'desc')->paginate(3);
+            $observacion = Observacion::leftJoin('articulos', 'articulos.id', 'observaciones.id_articulo')->select('observacion', 'observaciones.id as id', 'articulos.nombres as nombre_articulo', 'observaciones.estado as estado')->where($criterio, 'like', '%'. $buscar . '%')->orderBy('id', 'desc')->paginate(10);
         }
         
 
