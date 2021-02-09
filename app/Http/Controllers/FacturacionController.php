@@ -228,17 +228,16 @@ class FacturacionController extends Controller
             $stock->sumatoria = $request->sumatoria;
             $stock->save();
            
-            $arregloDatos=[
-               
-                'numero' => $numVentas,
-                'id_detalle_facturacion' => $detalle->id,
-                'cantidad' => $detalle->cantidad,
-                'id_producto' => $detalle->id_producto,
-                'id_factura' => $detalle->id_factura,
-                'estado' => 'Preparando'
-            ];
+            // $arregloDatos=[               
+            //     'numero' => $numVentas,
+            //     'id_detalle_facturacion' => $detalle->id,
+            //     'cantidad' => $detalle->cantidad,
+            //     'id_producto' => $detalle->id_producto,
+            //     'id_factura' => $detalle->id_factura,
+            //     'estado' => 'Preparando'
+            // ];
 
-            $allUsers = User::all();
+            // $allUsers = User::where('idrol', 2)->orWhere('idrol', 1)->get();
 
             // foreach ($allUsers as $notificar){
             //     User::findOrFail($notificar->id)->notify(new NotifyAdmin($arregloDatos));
@@ -246,9 +245,7 @@ class FacturacionController extends Controller
 
            
         }
-        return ['id_facturacion' => $facturacion->id];
-
-        
+        return ['id_facturacion' => $facturacion->id];        
     }
   
 

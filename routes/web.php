@@ -21,6 +21,7 @@ Route::group(['middleware'=>['auth']],function(){
     Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
     Route::post('/notification/get', 'NotificationController@get');
     Route::post('/notification/delete', 'NotificationController@eliminarNotificacion');
+    Route::post('/notification/guardar', 'NotificationController@guardarNotificacion');
     
     
     Route::get('/main', function () {

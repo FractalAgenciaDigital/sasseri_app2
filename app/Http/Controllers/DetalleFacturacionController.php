@@ -105,7 +105,7 @@ class DetalleFacturacionController extends Controller
         $detalle_facturacion = DetalleFacturacion::leftJoin('facturacion', 'detalle_facturacion.id_factura','=','facturacion.id')
         ->leftJoin('articulos', 'detalle_facturacion.id_producto','=','articulos.id')
         ->leftJoin('presentacion','articulos.id_presentacion','=','presentacion.id')
-        ->select('detalle_facturacion.id','detalle_facturacion.id_factura','facturacion.num_factura as num_factura','detalle_facturacion.id_producto','detalle_facturacion.padre','articulos.id as idarticulo','articulos.codigo','articulos.codigo as codigo_articulo','articulos.nombre as articulo','articulos.precio_venta as precio','articulos.stock','detalle_facturacion.valor_venta','detalle_facturacion.cantidad','detalle_facturacion.cantidad as cantidad2','detalle_facturacion.valor_iva','detalle_facturacion.valor_descuento','detalle_facturacion.valor_descuento as valor_descuento2','detalle_facturacion.porcentaje_iva as iva','detalle_facturacion.valor_subtotal','detalle_facturacion.valor_final','articulos.id_presentacion','presentacion.nombre as nom_presentacion', 'articulos.tipo_articulo','preparado')
+        ->select('detalle_facturacion.id', 'detalle_facturacion.observaciones','detalle_facturacion.id_factura','facturacion.num_factura as num_factura','detalle_facturacion.id_producto','detalle_facturacion.padre','articulos.id as idarticulo','articulos.codigo','articulos.codigo as codigo_articulo','articulos.nombre as articulo','articulos.precio_venta as precio','articulos.stock','detalle_facturacion.valor_venta','detalle_facturacion.cantidad','detalle_facturacion.cantidad as cantidad2','detalle_facturacion.valor_iva','detalle_facturacion.valor_descuento','detalle_facturacion.valor_descuento as valor_descuento2','detalle_facturacion.porcentaje_iva as iva','detalle_facturacion.valor_subtotal','detalle_facturacion.valor_final','articulos.id_presentacion','presentacion.nombre as nom_presentacion', 'articulos.tipo_articulo','preparado')
         ->where('detalle_facturacion.id_factura','=', $id_factura)
         // ->where('articulos.id_impresora','=', $id_impresora)
         ->get();
@@ -179,7 +179,11 @@ class DetalleFacturacionController extends Controller
         // ->where('articulos.id_impresora','=', $id_impresora)
         ->get();
 
-        $facturacion = Facturacion::select()->where('id','=', $id_factura)->get();
+        $facturacion = Facturacion::leftJoin('personas', 'personas.id', 'facturacion.id_tercero')
+        ->leftJoin('personas as p_usuarios', 'p_usuarios.id', 'facturacion.id_usuario')
+        ->select('facturacion.id as id', 'facturacion.fec_crea', 'personas.nombre1', 'personas.nombre2', 'personas.apellido1', 'personas.apellido2', 'p_usuarios.nombre as cajero', 'p_usuarios.id as idusuario', 'personas.id as idpersona')->where('facturacion.id','=', $id_factura)
+        ->first();
+        // ->get();
         $infoEmpresa = ConfigGenerales::select()->where('id','=', $id_empresa)->limit(1)->get();
         
 
@@ -198,9 +202,12 @@ class DetalleFacturacionController extends Controller
         $impresora->text($infoEmpresa[0]->direccion."\n");
         
         $impresora->text("Cliente: ");
-        $impresora->text(" Camilo Monsalve \n");
+        $impresora->text($facturacion->nombre1." ".$facturacion->nombre2." ".$facturacion->apellido1." ".$facturacion->apellido2."\n");
 
-        $impresora->text($facturacion[0]->fec_crea."\n"."\n");
+        $impresora->text("Cajero(a): ");
+        $impresora->text($facturacion->cajero."\n");
+
+        $impresora->text($facturacion->fec_crea."\n"."\n");
         $impresora->setLineSpacing(2);
  
         $impresora->setJustification(Printer::JUSTIFY_LEFT);
@@ -230,7 +237,7 @@ class DetalleFacturacionController extends Controller
         $impresora->setEmphasis(true);
         $impresora->setLineSpacing(2);
 
-        $impresora->text("\nTotal: $" . number_format($facturacion[0]->total, 2) . "\n");
+        $impresora->text("\nTotal: $" . number_format($facturacion->total, 2) . "\n");
         $impresora->setJustification(Printer::JUSTIFY_CENTER);
        
         $impresora->setTextSize(1, 1);

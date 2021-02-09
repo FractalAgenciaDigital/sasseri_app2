@@ -852,9 +852,7 @@
             },
         },
         methods : {
-            showUserOpts(id_resaltar){
-                console.log(id_resaltar);
-            },
+            showUserOpts(id_resaltar){},
             ivaProces(){
                  
                 var resultado=0.0;
@@ -1706,11 +1704,48 @@
                     }).catch(function (error) {
                         console.log(error);
                     });
+
+
+
+                    axios.post(this.ruta +'/notification/guardar',{
+                        'num_factura': null,
+                        'id_tercero': me.id_tercero,
+                        'fec_edita': null,
+                        'usu_edita': null,
+                        'subtotal': me.subtotal,
+                        'valor_iva': me.valor_iva,
+                        'total': me.valor_final,
+                        'abono': me.abono,
+                        'saldo': me.saldo,
+                        'detalle': me.detalle,
+                        'lugar': me.lugar,
+                        'descuento': me.calcularDescuento,
+                        'fec_registra': null,
+                        'fec_envia': null,
+                        'fec_anula': null,
+                        'usu_registra': null,
+                        'usu_envia': null,
+                        'usu_anula': null,
+                        'fecha': me.fecha,
+                        'id_tarifario': me.id_tarifario,
+                        'id_cierre_caja': me.id_cierre_caja_facturacion,
+                        'data': me.arrayDetalle,
+                        'tipo_movimiento' : 4,
+                        'sumatoria' : 0
+                    }).then(function (response) {
+                    
+                        
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+
+
+                    
                 }
             },
             
             actualizarFacturacion(){
-                console.log('hola0');
+                
                 if (!this.id_tercero) this.errorMostrarMsjFacturacion.push("Seleccione un tercero");
                 if (!this.lugar) this.errorMostrarMsjFacturacion.push("Seleccione un lugar");
                 let me = this;
@@ -1799,11 +1834,12 @@
             },
             imprimirTicket(){
                 let me = this;
-                // console.log(id);
-                axios.get(this.ruta+'/detalle_facturacion/imprimir-ticket?id='+me.factura_imprimir).then(function(response){
-                    console.log(response)
+            
+                axios.get(this.ruta+'/detalle_facturacion/imprimir-ticket?id='+me.factura_imprimir).then(function(response){                 
 
-                })
+                }).catch(function (error) {
+                    console.log(error);
+                });
             },  
             selectZonas(){
                 let me=this;
@@ -1935,7 +1971,6 @@
                             }
                             case 'listar_cierres':
                             {
-                                console.log(data);
                                 Swal.fire({
                                 title: 'ERROR!',
                                 text: "Este usuario tiene una caja abierta desde hace mas de 24 horas",
@@ -2163,8 +2198,6 @@
                 this.terc_busq = '';
             },
             cargarTercero(tercero){
-             
-                console.log("llegando");
                 this.tercero = tercero['nombre1']+" "+tercero['nombre2']+" "+tercero['apellido1']+" "+tercero['apellido2'];
                 this.id_tercero = tercero['id'];
                 this.position=2;
@@ -2291,8 +2324,6 @@
                 allowClear: true,
                 tokenSeparators: ['/',',',';'," "] 
             });
-            //console.log( $(".mul-select"));
-             
             let me= this;
             var d = new Date();
             $(".mul-select").on("change", function (e) { 
