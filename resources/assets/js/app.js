@@ -66,11 +66,8 @@ Vue.component('multiselect', Multiselect);
 const app = new Vue({
     el: '#app',
     data: {
-        menu: 0,
-        // ruta : 'http://192.168.0.100/laravel_estudio/sistema2/public',
-        // ruta : 'http://localhost/laravel_estudio/sistema2/public',
+        menu: 0,       
         ruta: 'http://localhost/sasseri_app2/public',
-        //ruta : 'http://fractalagenciadigital.com/sistema/public',
         permisosUser: {
             'leer': 1,
             'escribir': 1,

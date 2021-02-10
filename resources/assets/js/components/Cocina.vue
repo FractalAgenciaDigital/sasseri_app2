@@ -27,6 +27,7 @@
                                                 <th>#</th>
                                                 <th>Producto</th>
                                                 <th>Cantidad</th>
+                                                <th>Observaciones</th>
                                                 <th>Preparado</th>
                                                 <!-- <th>Estado de impresion</th> -->
                                             </tr>
@@ -34,16 +35,18 @@
                                         <tbody>
                                             <tr v-for="(detalle,index) in arrayDetalle" :key="detalle.id">
                                                 <td v-text="index+1"></td>
+                                                
                                                 <td v-if="detalle.padre==null || detalle.padre==''" >{{detalle.articulo+' - '+detalle.nom_presentacion}}</td>
                                                 <td v-else >
                                                     {{detalle.articulo+' - '+detalle.nom_presentacion+' (Presentación asociada)'}}
                                                 </td>
                                                 <td>{{detalle.cantidad}}</td>
+                                                <td v-text="detalle.observaciones"></td>
                                                 <td>
-                                                    <button class="btn text-danger" v-if="detalle.preparado==0" title="Activar" @click="productoListo(detalle.id)">
+                                                    <button class="btn btn-lg text-danger" style="font-size:1.5rem"  v-if="detalle.preparado==0" title="Activar" @click="productoListo(detalle.id)">
                                                         <i class="fa fa-times"></i>
                                                     </button>
-                                                    <button class="btn text-success" v-if="detalle.preparado==1" title="Desactivar" @click="productoNoListo(detalle.id)">
+                                                    <button class="btn btn-lg text-success" style="font-size:1.5rem" v-if="detalle.preparado==1" title="Desactivar" @click="productoNoListo(detalle.id)">
                                                         
                                                         <i class="fa fa-check"></i>
                                                     </button>
@@ -499,7 +502,7 @@
                 me.arrayDetalle=[];
                 me.arrayTerceros=[];       
             },
-             imprimirTicket(id){
+            imprimirTicket(id){
                 let me = this;
                 console.log(id);
                 axios.get(this.ruta+'/detalle_facturacion/imprimir-ticket?id='+id).then(function(response){

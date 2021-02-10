@@ -22,7 +22,8 @@
                         </div>
                         <div>
                             <div class="font-weight-bold">
-                                <span v-text="nombresProductos[item.data.datos.id_producto]"></span>                                
+                                <span v-text="nombresProductos[item.data.datos.id_producto]"></span>  <br>
+                                <small> CANTIDAD : {{item.data.datos.cantidad}}</small>                              
                             </div>
                             <div>
                                 <span v-text="item.data.datos.estado"></span>
@@ -34,7 +35,7 @@
                     </div>
                 </li>
             </div>
-            <div v-else>
+            <div v-else class="p-2">
                 Sin notificaciones
             </div>
             <a class="dropdown-item text-center small text-gray-500" href="#">Mostrar lista completa</a>
@@ -56,7 +57,7 @@ export default {
         nombreProducto(){
         let me = this;
         // var url= this.ruta+'/articulo';
-        axios.get('http://localhost/sasseri_app2/public/articulo')
+        axios.get('http://192.168.0.109/sasseri_app2/public/articulo')
         .then(function (response){
           var auxProducto = response.data.articulos.data;
           console.log(response.data.articulos.data)
@@ -69,9 +70,9 @@ export default {
         axios.post('notification/delete',{
             'id': id
         }).then(function (response) {
-          alert('ok');
-        //   listar();
-        }).catch(function (error) {
+
+        })
+        .catch(function (error) {
             console.log(error);
         });
                         
