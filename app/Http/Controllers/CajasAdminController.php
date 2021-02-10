@@ -48,16 +48,7 @@ class CajasAdminController extends Controller
                 'from'         => $cajas_admin->firstItem(),
                 'to'           => $cajas_admin->lastItem(),
             ],
-            // 'cajas_admin' => $cajas_admin,
-            // 'pagination' => [
-            //     'total'        => $users->total(),
-            //     'current_page' => $users->currentPage(),
-            //     'per_page'     => $users->perPage(),
-            //     'last_page'    => $users->lastPage(),
-            //     'from'         => $users->firstItem(),
-            //     'to'           => $users->lastItem(),
-            // ],
-            // 'users' => $users,
+                    
             'cajas_admin' => $cajas_admin
         ];
     }
@@ -97,7 +88,7 @@ class CajasAdminController extends Controller
         ->where('condicion','1')
         ->where(function($query) {
             $query->where('idrol','2')
-                  ->orWhere('idrol','1');
+                ->orWhere('idrol','1');
         })
         ->orderBy('usuario')->paginate(10);
 

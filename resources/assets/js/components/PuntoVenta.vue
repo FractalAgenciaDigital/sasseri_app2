@@ -275,7 +275,7 @@
                         </div>                                  
                     </div>
                     <div class="ticket">
-                        <img class="img-logo espacio-1" src="http://localhost/sasseri_app2/public/Empresas/1_empresa/ImgLogos/f4f72620874a541d0113ea86bcf699a8.jpg" alt="img-logo">
+                        <img class="img-logo espacio-1" src="http://192.168.0.109/sasseri_app2/public/Empresas/1_empresa/ImgLogos/f4f72620874a541d0113ea86bcf699a8.jpg" alt="img-logo">
                         <p class="centrado espacio-1">SASSERI_APP_2<br>NIT: 81245875-0<br>BR/DIAGONAL LAS AMERICAS 20_CRA 15-25<br>TEL: 2448484154<br>RES DIAN 100000554554 DE DICIEMBRE 20/2020<br>PERSONA JURUDICA DECLARANTE - REGIMEN COMUN<br>FACTURA DE VENTA N°. 155455<br>FECHA 20/12/2020 - 04:44:42 P.M.</p>
                         -----------------------------------------
                         <table class="table table-sm espacio-1">
@@ -346,15 +346,15 @@
                         </div>                                      
                     </div>
                     <div class="ticket">
-                        <img class="img-logo espacio-1" src="http://localhost/sasseri_app2/public/Empresas/1_empresa/ImgLogos/f4f72620874a541d0113ea86bcf699a8.jpg" alt="img-logo">
-                        <p class="centrado espacio-1">FECHA 20/12/2020 - 04:44:42 P.M.</p>
+                        <!-- <img class="img-logo espacio-1" src="http://localhost/sasseri_app2/public/Empresas/1_empresa/ImgLogos/f4f72620874a541d0113ea86bcf699a8.jpg" alt="img-logo"> -->
+                        <p class="centrado espacio-1">FECHA {{ datosFactura.fec_crea}}</p>
                         -----------------------------------------
                         <div class="input-group mb-0">
                             <div class="col-6">
-                                <p class="espacio-1">MESERO:</p>
+                                <p class="espacio-1">MESERO: </p>
                             </div> 
                             <div class="col-6">
-                                <p class="espacio-1">ANDRES ALBERTO</p>
+                                <p class="espacio-1"> {{ datosFactura.cajero }}</p>
                             </div>
                         </div>
                         <div class="input-group mb-0">
@@ -362,7 +362,7 @@
                                 <p class="espacio-1">MESA:</p>
                             </div> 
                             <div class="col-6">
-                                <p class="espacio-1 centrado">1/4</p>
+                                <p class="espacio-1 centrado">{{ datosFactura.zona }}</p>
                             </div>
                         </div>
                         -----------------------------------------
@@ -370,13 +370,15 @@
                             <thead>
                                 <tr>
                                     <th scope="col">PRODUCTO</th>
+                                    <th scope="col">OBSERVACIONES</th>
                                     <th colspan="1">CANTIDAD</th>
                                     <th scope="col">PRECIO</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="(prod_preparado,index) in arrayPreparado" :key="index">
-                                    <td>{{prod_preparado.articulo}}</td>
+                                    <td>{{prod_preparado.nombre_articulo}}</td>
+                                    <td>{{prod_preparado.observaciones}}</td>
                                     <td>{{prod_preparado.cantidad}}</td>
                                     <td>{{prod_preparado.precio}}</td>
                                 </tr>
@@ -786,6 +788,7 @@
                 auxObser : '',
                 prod_nuevo : 0,
                 factura_imprimir:0,
+                datosFactura :[]
             }
         },
         components: {
@@ -1441,40 +1444,7 @@
                     ivaVenta_vr = Math.round(parseFloat(producto.precio_venta)-parseFloat((producto.precio_venta)/((ivaVenta/100)+1)));
                 }
                 
-                //console.log("ivaVenta_vr"+ivaVenta_vr);
                 let auxPosition = me.arrayDetalle.indexOf(me.arrayDetalle.find(({codigo}) => codigo === producto.codigo));
-
-                let auxPreparado = me.arrayPreparado.indexOf(me.arrayPreparado.find(({codigo}) => codigo === producto.codigo));
-                if(producto.tipo_articulo == 4) {
-                    if(auxPreparado >= 0) {
-                        me.arrayPreparado[auxPreparado].cantidad+=this.cantidad;
-                        me.arrayPreparado[auxPreparado].valor_iva+=(ivaVenta_vr * this.cantidad);
-                        me.arrayPreparado[auxPreparado].valor_subtotal +=  Math.round(parseFloat((me.arrayPreparado[auxPreparado].precio_venta - ivaVenta_vr) * this.cantidad));
-                        me.arrayPreparado[auxPreparado].observaciones+=this.auxObser ? ' - '+this.auxObser: '';
-                    }else {
-                        me.arrayPreparado.push({
-                            codigo: producto.codigo,
-                            idarticulo: producto.id_articulo,
-                            id_asociado: producto.id_asociado,
-                            articulo: producto.nombre,
-                            cantidad: this.cantidad,
-                            tipo: producto.tipo_articulo,
-                            valor_descuento: 0,
-                            precio: producto.precio_venta,
-                            precio_venta: producto.precio_venta,
-                            iva: ivaVenta,
-                            valor_iva: ivaVenta_vr * this.cantidad,
-                            valor_subtotal: Math.round(parseFloat((producto.precio_venta - ivaVenta_vr)* this.cantidad)),
-                            stock : producto.stock,
-                            descuento : 0,
-                            nom_presentacion : producto.nom_presentacion,
-                            id_presentacion : producto.id_presentacion,
-                            padre : producto.padre,
-                            observaciones : this.auxObser
-                        });
-                    }
-                }
-                
 
                 if(auxPosition >= 0) {
                     me.arrayDetalle[auxPosition].cantidad+=this.cantidad;
@@ -1696,16 +1666,19 @@
                         me.ocultarDetalle();
                         me.listarArticulo(me.buscarA,me.criterioA,me.buscarCategoriaA);
                         me.listarFacturacion(1,'','','','','','','');
-                        if(filtered)
+                        if(filtered){
+
+                            me.verTicket(me.factura_imprimir);
+                            me.imprimirTicket(me.factura_imprimir);                            
                             me.position = 6;
-                        else 
+                        }
+                        else {
                             me.position = 7;
+                        }
                         
                     }).catch(function (error) {
                         console.log(error);
                     });
-
-
 
                     axios.post(this.ruta +'/notification/guardar',{
                         'num_factura': null,
@@ -1832,6 +1805,17 @@
                 }
                
             },
+            verTicket(){
+                let me = this;
+            
+                axios.get(this.ruta+'/detalle_facturacion/ver-ticket?id='+me.factura_imprimir).then(function(response){    
+                    me.arrayPreparado = response.data.detalles_facturacion;
+                    me.datosFactura = response.data.facturacion;                    
+
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            }, 
             imprimirTicket(){
                 let me = this;
             
