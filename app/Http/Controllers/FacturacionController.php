@@ -560,18 +560,22 @@ class FacturacionController extends Controller
 
         foreach($detalle_facturacion as $df)
         {
-            $impresora->setJustification(Printer::JUSTIFY_LEFT);
-            $impresora->text($df->cantidad. "\n");
+            // $impresora->setJustification(Printer::JUSTIFY_LEFT);
+            // $impresora->text($df->cantidad. "   ");
             
-            $impresora->setJustification(Printer::JUSTIFY_CENTER);
-            $impresora->text(sprintf( $df->nombre_articulo ."\n"));
+            // $impresora->setJustification(Printer::JUSTIFY_CENTER);
+            // $impresora->text(sprintf( $df->nombre_articulo ."  "));
             
-            $impresora->setJustification(Printer::JUSTIFY_RIGHT);
-            $impresora->text('$' . number_format($df->cantidad * $df->precio, 2)."\n");
-            $impresora->setJustification(Printer::JUSTIFY_LEFT);
-            $impresora->text($df->observaciones. "\n");
-            $impresora->setJustification(Printer::JUSTIFY_CENTER);
-            $impresora->text("-------------------------\n\n");
+            // $impresora->setJustification(Printer::JUSTIFY_RIGHT);
+            // $impresora->text('$' . number_format($df->cantidad * $df->precio, 2)."\n");
+            // $impresora->setJustification(Printer::JUSTIFY_LEFT);
+            // $impresora->text($df->observaciones. "\n");
+            // $impresora->setJustification(Printer::JUSTIFY_CENTER);
+            // $impresora->text("-------------------------\n\n");
+
+            $line = sprintf('%-44.44s %5.0s %13.2f %13.2f', $df->nombre_articulo, "Cant ".$df->cantidad, $df->precio, ($df->cantidad * $df->precio));
+            $impresora->text($line);
+            $impresora->text("\n"); 
             
         }
 
@@ -603,4 +607,6 @@ class FacturacionController extends Controller
         return redirect()->back()->with("mensaje", "Ticket impreso");
         
     }
+
+   
 }
