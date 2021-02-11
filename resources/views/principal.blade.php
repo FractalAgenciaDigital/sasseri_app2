@@ -91,7 +91,7 @@
                         </li>                       
                         <li @click="menu=42" class="nav-item">
                             <a href="#" class="nav-link">
-                            <i class="fa fa-utensils"></i>
+                            <i class="icon-cup"></i>
                                 <span>Cocina</span>
                             </a>
                         </li>  
@@ -184,7 +184,7 @@
                 
                 @elseif($rol_usu==3)
                     <li @click="menu=42" class="nav-item">
-                        <a href="#" class="nav-link"><i class="icon-calculator"></i><span>Cocina</span> </a>
+                        <a href="#" class="nav-link"><i class="icon-cup"></i><span>Cocina</span> </a>
                     </li>    
                 @endif
                 

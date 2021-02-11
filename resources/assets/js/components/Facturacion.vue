@@ -950,7 +950,8 @@
                     vr_inicial_cierre : 0,
                     vr_gastos_cierre : 0,
                     vr_final_cierre : 0,
-                }
+                },
+                observaciones: ''
             }
         },
         components: {
@@ -1573,7 +1574,8 @@
                 //Actualiza la página actual
                 me.pagination.current_page = page;
                 //Envia la petición para visualizar la data de esa página
-                me.listarFacturacion(1,numFacturaFiltro,estadoFiltro,idTerceroFiltro,ordenFiltro,desdeFiltro,hastaFiltro,idVendedorFiltro);
+                // me.listarFacturacion(1,numFacturaFiltro,estadoFiltro,idTerceroFiltro,ordenFiltro,desdeFiltro,hastaFiltro,idVendedorFiltro);
+                me.listarFacturacion(page,buscar,criterio);
             },
            
             encuentra(id,id_asociado){
@@ -1596,7 +1598,7 @@
             },
             agregarDetalle(){
                 let me=this;
-                console.log("por aca ")
+                // console.log("por aca ")
                 if(me.idarticulo==0 || me.cantidad==0 || me.precio==0){
                 }
                 else{
@@ -1619,7 +1621,8 @@
                             descuento : me.descuento,
                             nom_presentacion : me.nom_presentacion,
                             id_presentacion : me.id_presentacion,
-                            padre : me.padreDetalle
+                            padre : me.padreDetalle,
+                            observaciones : ''
                         });
                         me.codigo="";
                         me.idarticulo=0;
@@ -1675,6 +1678,7 @@
                         unidades : data['unidades'],
                         descuento : 0,
                         valor_descuento : 0,
+                        observaciones :''
                     }); 
                 }
             },
