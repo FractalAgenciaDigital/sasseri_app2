@@ -485,7 +485,7 @@
                 let me=this;
                 var url= this.ruta + '/categoria/selectCategoria';
                 axios.get(url).then(function (response) {
-                    //console.log(response);
+                     
                     var respuesta= response.data;
                     me.arrayCategoria = respuesta.categorias;
                 })
@@ -497,7 +497,7 @@
                 let me=this;
                 var url= this.ruta + '/planCuentasCategorias/selectPlanCuentasCategorias?id_plan_cuentas='+id;
                 axios.get(url).then(function (response) {
-                    //console.log(response);
+                     
                     var respuesta= response.data;
                     me.id_categoria = respuesta.planCuentasCategorias;
                 })
@@ -741,7 +741,7 @@
                             }
                             case 'actualizar':
                             {
-                                //console.log(data);
+                                  
                                 this.modal=1;
                                 this.tituloModal = 'Actualizar categoría';
                                 this.tipoAccion = 2;

@@ -561,7 +561,7 @@
                             }
                             case 'actualizar':
                             {
-                                //console.log(data);
+                                  
                                 this.modal=1;
                                 this.tituloModal='Cierre de caja';
                                 this.tipoAccion=2;

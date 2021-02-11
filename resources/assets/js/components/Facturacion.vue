@@ -121,8 +121,9 @@
                             <table class="table table-bordered table-striped table-sm  table-responsive table-earning ">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
+                                        <!-- <th>#</th> -->
                                         <th>N° factura</th>
+                                        <th>Ver / Imprimir</th>
                                         <th>Tercero</th>
                                         <th>Fecha</th>
                                         <th>Subtotal</th>
@@ -142,6 +143,12 @@
                                             <!-- <i class="icon-eye"></i> -->
                                             <button type="button" @click="verFacturacion(facturacion.id)" class="btn btn-success btn-sm" title="Ver factura">
                                                 <i class="icon-eye"></i>
+                                            </button>
+                                            <!-- <button type="button" @click="imprimirTicketFacturacion(facturacion.id);" class=" btn btn-primary btn-sm" title="imprimir">
+                                               <i class="icon-printer"></i> 
+                                            </button> -->
+                                            <button type="button" @click="abrirModalImpresion(facturacion.id);" class=" btn btn-primary btn-sm" title="imprimir">
+                                               <i class="icon-printer"></i> 
                                             </button>
                                         </td>
                                         <td v-text="facturacion.nom_tercero"></td>
@@ -630,7 +637,8 @@
                                             <td v-text="articulo.precio_venta"></td>
                                             <td v-if="articulo.padre!=''" v-text="parseInt(articulo.stock/articulo.unidades)"></td>
                                             <td v-else v-text="articulo.stock"></td>
-                                            <td><input type="number" v-model="articulo.cant"></td>
+                                            <td><input type="number" v-model="articulo.cant">
+                                            <input type="hidden" v-model="articulo.observaciones" value=""></td>
                                             <td v-if="articulo.cant">
                                                 <button type="button" v-if="articulo.cant!=0 && articulo.cant!=''" @click="agregarDetalleModal(articulo),articulo.cant=''" class="btn btn-success btn-sm">
                                                     <i class="icon-check"></i>
@@ -771,6 +779,45 @@
                         </div>
                     </div>
                 </div>
+
+            <!-- fin modal busqueda de terceros -->
+
+
+             <!-- Modal Impresoras -->
+            <div class="modal fade" tabindex="-1" :class="{'mostrar' : mostrarModImp}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog modal-primary modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Imprimir ticket</h4>
+                            <button type="button" class="close" @click="cerrarModalImpresion()" aria-label="Close">
+                              <span aria-hidden="true" title="Cerrar">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                <div class="col-12">
+                                    <h6 class="col-12 text-center">Por favor, seleccionar Impresora</h6>
+                                    <div class="form-group">
+                                        <select class="custom-select" id="" v-model="id_impresora">
+                                            <option disabled>--Seleccionar impresora--</option>
+                                            <option v-for="(imp, index) in arrayImpresora" :key="index" :value="imp.id"> {{imp.nombre_impresora}} </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" @click="cerrarModalImpresion()">Cerrar</button>
+                            <button type="button" class="btn btn-success" @click="imprimirTicketFacturacion()">Imprimir</button>
+                            
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- Fin modal observaciones -->
             
         </main>
 </template>
@@ -945,7 +992,15 @@
                     vr_gastos_cierre : 0,
                     vr_final_cierre : 0,
                 },
-                observaciones: ''
+                observaciones: '',
+
+
+                //Impresion de factura en ticket
+                mostrarModImp : 0,
+                arrayImpresora : [], 
+                id_impresora: 0, 
+                nombre_impresora : '',
+                id_factura_imprimir:0
             }
         },
         components: {
@@ -1018,6 +1073,17 @@
             },
         },
         methods : {
+             listarImpresora (page,buscar,criterio){
+                let me=this;
+                var url= this.ruta +'/impresora?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
+                axios.get(url).then(function (response) {
+                    var respuesta= response.data;
+                    me.arrayImpresora = respuesta.impresoras.data;                    
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
             listarFacturacion (page,numFacturaFiltro,estadoFiltro,idTerceroFiltro,ordenFiltro,desdeFiltro,hastaFiltro,idVendedorFiltro){
                 let me=this;
 
@@ -1063,7 +1129,7 @@
                 let me=this;
                 var url= this.ruta + '/categoria/selectCategoria';
                 axios.get(url).then(function (response) {
-                    //console.log(response);
+                     
                     var respuesta= response.data;
                     me.arrayCategoria2 = respuesta.categorias;
                 })
@@ -1523,15 +1589,6 @@
                     
                 }
                 }) 
-
-                // axios.put(this.ruta +'/facturacion/cambiarEstado',{
-                //     'estado': cambiarEstado,
-                //     'id': id_factura
-                // }).then(function (response) {
-                //     me.listarFacturacion(1,'','','','','','','');
-                // }).catch(function (error) {
-                //     console.log(error);
-                // });
             },
             cargarPreciosTarifarios(id){
                 let me = this;
@@ -1672,7 +1729,7 @@
                         unidades : data['unidades'],
                         descuento : 0,
                         valor_descuento : 0,
-                        observaciones :''
+                        observaciones:''
                     }); 
                 }
             },
@@ -1710,6 +1767,7 @@
                         padre : me.arrayInfoArticuloModalCantidad.padre,
                         descuento : 0,
                         valor_descuento : 0,
+                        observaciones : ''
                     }); 
                 }
                 me.cerrarModalCantidadArticulo();
@@ -1801,7 +1859,9 @@
                     'data': me.arrayDetalle,
                     'tipo_movimiento' : 4,
                     'sumatoria' : 0,
-                    'id' : me.facturacion_id
+                    'id' : me.facturacion_id, 
+                    'observaciones' : ''
+                    
                 }).then(function (response) {
                     me.ocultarDetalle();
                     me.listarFacturacion(1,'','','','','','','');
@@ -1827,7 +1887,7 @@
                 let me=this;
                 var url= this.ruta + '/zona/selectZona';
                 axios.get(url).then(function (response) {
-                    //console.log(response);
+                     
                     var respuesta= response.data;
                     me.arrayZonas = respuesta.zona;
                 })
@@ -1926,7 +1986,7 @@
                             }
                             case 'cerrar_caja':
                             {
-                                //console.log(data);
+                                  
                                 if(data.length!=0)
                                 {
                                     this.arrayCierresUsuario = [];
@@ -2067,14 +2127,32 @@
                 //Obtener los datos de los detalles 
                 me.listarDetalle(id);
             },
+
+            abrirModalImpresion(factura){
+                let me = this;
+                this.mostrarModImp = 1;
+                // this.listarImpresora();
+                this.id_factura_imprimir = factura;
+                me.listarImpresora(1,'','nombre_impresora');
+                
+            },
+            cerrarModalImpresion(){
+                let me = this;
+                this.mostrarModImp = 0;
+                this.id_factura_imprimir = 0
+            },
+
+            imprimirTicketFacturacion(){
+                let me = this;            
+                axios.get(this.ruta+'/facturacion/imprimir-ticket-facturacion?id='+this.id_factura_imprimir+'&id_impresora='+this.id_impresora).then(function(response){                 
+
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            },
             cerrarModal(){
                 this.modal=0;
-               /* this.tituloModal='';
-                this.buscar = '';
-                this.arrayArticulo = [];
-                this.buscarA = '';
-                this.buscarCategoriaA = '';
-                this.tipo_vista_articulo = 1;*/
+             
             }, 
             abrirModal(){               
                 this.arrayArticulo=[];

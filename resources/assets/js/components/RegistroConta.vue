@@ -1014,7 +1014,7 @@ export default {
             let me=this;
             var url= this.ruta +'/conf_formatos/get_tipos_formatos';
             axios.get(url).then(function (response) {
-                //console.log(response);
+                 
                 var respuesta= response.data;
                 me.arrayTiposFormatos = respuesta.conf_formatos;
             })
@@ -1026,7 +1026,7 @@ export default {
             let me=this;
             var url= this.ruta +'/cuentas/get_fuentes';
             axios.get(url).then(function (response) {
-                //console.log(response);
+                 
                 var respuesta= response.data;
                 me.arrayFuentes = respuesta.fuentes;
             })

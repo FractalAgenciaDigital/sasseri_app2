@@ -356,7 +356,7 @@
                             }
                             case 'actualizar':
                             {
-                                //console.log(data);
+                                  
                                 this.modal=1;
                                 this.tituloModal='Actualizar Unidad De Medida';
                                 this.tipoAccion=2;

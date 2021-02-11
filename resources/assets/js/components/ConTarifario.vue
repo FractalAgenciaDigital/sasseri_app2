@@ -496,7 +496,7 @@
                             }
                             case 'actualizar':
                             {
-                                //console.log(data);
+                                  
                                 this.modal=1;
                                 this.tituloModal='Actualizar tarifario';
                                 this.tipoAccion=2;

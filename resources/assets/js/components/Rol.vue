@@ -479,7 +479,7 @@
                             }
                             case 'actualizar':
                             {
-                                //console.log(data);
+                                  
                                 this.rol_id = data['id'];
                                 this.modal=1;
                                 this.tituloModal='Actualizar Rol';

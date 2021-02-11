@@ -260,7 +260,7 @@
                     me.arrayConf_formatos = respuesta.conf_formatos.data;
                     me.pagination = respuesta.pagination;
 
-                    //console.log(response);
+                     
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -447,7 +447,7 @@
                             }
                             case 'actualizar':
                             {
-                                //console.log(data);
+                                  
                                 this.modal=1;
                                 this.tituloModal='Actualizar Formato';
                                 this.tipoAccion=2;
