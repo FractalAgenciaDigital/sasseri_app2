@@ -215,7 +215,7 @@
             <table class="table table-bordered table-striped table-sm">
                 <thead>
                     <tr>
-                        <<th rowspan="2">Cod. Cilindro</th>
+                        <th rowspan="2">Cod. Cilindro</th>
                         <th rowspan="2">Fecha Fundición</th>
                         <th rowspan="2">Fecha Rotura</th>
                         <th rowspan="2">Edad</th>

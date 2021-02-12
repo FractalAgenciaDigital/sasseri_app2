@@ -7,10 +7,27 @@
 ?>
     @if(Auth::check())
         <template v-if="menu==0">
-            <br>
-            <div class="card center">
-                <img src="img/targeta.PNG" class="card-img-top" alt="">
-            </div>   
+            <body>
+                <section id="w3hubs">
+                    <div class="container-fluid">
+                        <div class="card-deck">
+                            <div class="card bg-light b1">
+                                <div class="card-body text-center">
+                                    <img src="img/Recurso 11@0.75x.png" style="max-width: 299px;"><br><br><br>
+                                    <h3 class="text-primary">Bienvenido al Sistema</h3><br><br>
+                                    <p class="card-text">www.fractalagenciadigital.com</p>
+                                    <div class="socialicon">
+                                        <a href="#"><i class="fa fa-facebook-square"></i></a>
+                                        <a href="#"><i class="fa fa-twitter-square"></i></a>
+                                        <a href="#"><i class="fa fa-google-plus-square"></i></a>
+                                        <a href="#"><i class="fa fa-linkedin-square"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </body>  
         </template>
         @if($rol_usu==2)                
             <template v-if="menu==40">

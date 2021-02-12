@@ -394,44 +394,35 @@
             <div v-show="position==7"> <!-- listado de faturas -->
                 <div class="card">
                     <div class="card-header">
-                        <div class="row">
-                            <!--
-                            <div class="col-3">
-                                <button @click="position=6" class="btn btn-primary fa fa-undo"></button>
-                            </div>-->
-                            <div class="col-3">
-                                <div class="input">
-                                    <div class="input-group-prepend">
-                                        <h4  style="margin-left: -23px; margin-left: 13px; margin-top: 6px; font-size: 14px;" for="inputGroupSelect01">Estado</h4>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="input">
+                                        <h4  style="font-size: 11px;" for="inputGroupSelect01">Estado</h4>
+                                        <select class="custom-select" id="inputGroupSelect01" style="font-size: 12px; width: 297px;">
+                                            <option selected  style="font-size: 11px;">Seleccionar</option>
+                                            <option value="1" style="font-size: 11px;">Abierta</option>
+                                            <option value="2" style="font-size: 11px;">Cerrada</option>
+                                            <option value="3" style="font-size: 11px;">Cancelada</option>
+                                        </select>
                                     </div>
+                                </div>                                    
+                                <div class="col">
+                                    <label style="font-size: 11px;">Desde:</label>                                   
+                                    <input v-if="permisosUser.leer" type="date" class="form-control" style="border-radius: 5px; width: 136px;" v-model="desdeFiltro">
+                                    <input v-else disabled type="date" class="form-control" v-model="desdeFiltro">
+                                </div>
+                                <div class="col">
+                                    <label style="font-size: 11px;">Hasta:</label>                                   
+                                    <input v-if="permisosUser.leer" type="date" class="form-control" style="border-radius: 5px; width: 136px;" v-model="hastaFiltro">
+                                    <input v-else disabled type="date" class="form-control" v-model="hastaFiltro">
                                 </div>
                             </div>
-                            <div class="col-8">  
-                                <select class="custom-select" id="inputGroupSelect01">
-                                    <option selected  style="font-size: 14px;">Seleccionar</option>
-                                    <option value="1" style="font-size: 14px;">Abierta</option>
-                                    <option value="2" style="font-size: 14px;">Cerrada</option>
-                                    <option value="3" style="font-size: 14px;">Cancelada</option>
-                                </select>  
-                            </div>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <label>Desde:</label>                                   
-                                        <input v-if="permisosUser.leer" type="date" class="form-control" style="border-radius: 7px;" v-model="desdeFiltro">
-                                        <input v-else disabled type="date" class="form-control" v-model="desdeFiltro">
-                                    </div>
-                                    <div class="col-6">
-                                        <label>Hasta:</label>                                   
-                                        <input v-if="permisosUser.leer" type="date" class="form-control" style="border-radius: 7px;" v-model="hastaFiltro">
-                                        <input v-else disabled type="date" class="form-control" v-model="hastaFiltro">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>                         
+                        </div>  
+                    </div>                        
                     </div>
                     
-                    <div class="card-header" style="font-size: 13px;">
+                    <div class="card-body" style="font-size: 13px;">
                         <div class="row">
                             <table class="table table-sm table-bordered">
                                 <thead class="thead-light">
@@ -1439,10 +1430,12 @@
                 producto.productos_iva.forEach(function(iva){
                     if(iva.tipo_iva =='Venta'){ivaVenta=iva.porcentaje;}
                 });
-                var ivaVenta_vr=0;
                 if(ivaVenta>0) {
-                    ivaVenta_vr = Math.round(parseFloat(producto.precio_venta)-parseFloat((producto.precio_venta)/((ivaVenta/100)+1)));
+
+
+                    var ivaVenta_vr = Math.round(parseFloat(producto.precio_venta)-parseFloat((producto.precio_venta)/((ivaVenta/100)+1)));
                 }
+
                 
                 let auxPosition = me.arrayDetalle.indexOf(me.arrayDetalle.find(({codigo}) => codigo === producto.codigo));
 
@@ -2465,3 +2458,5 @@
     }
 
 </style>
+
+
