@@ -73,9 +73,9 @@
                                 <thead class="thead-light">
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Factura</th>
+                                        
                                         <th scope="col">Mesa</th>
-                                        <th scope="col">Total</th>
+                                        
                                         <th scope="col">Estado</th>
                                         <th scope="col">Editar</th>
                                         <th> Imprimir</th>
@@ -84,10 +84,10 @@
                                 </thead>
                                 <tbody>
                                     <tr v-for="facturacion in arrayFacturacion" :key="facturacion.id" style="text-align: right;">
-                                        <th scope="row">1</th>
-                                        <td v-text="facturacion.num_factura? facturacion.num_factura: ''"></td>
+                                        <th scope="row" v-text="facturacion.id"></th>
+                                        
                                         <td class="centrado" v-text="facturacion.nom_lugar? facturacion.nom_lugar : ''"></td>
-                                        <td class="text-right" v-text="facturacion.total? '$ '+facturacion.total : ''"></td>
+                                        
                                         <td v-if="facturacion.estado==1" class="text-warning">Abierta</td>
                                         <td v-if="facturacion.estado==2" class="text-success">Cerrada</td>
                                         <td v-if="facturacion.estado==0" class="text-danger">Cancelada</td>

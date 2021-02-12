@@ -275,10 +275,10 @@ class DetalleFacturacionController extends Controller
         $impresora->setEmphasis(true);
         $impresora->text($infoEmpresa[0]->nombre."\n");
         $impresora->setEmphasis(false);
-        $impresora->text("NIT: ");
-        $impresora->text($infoEmpresa[0]->nit."\n");
-        $impresora->text("Dirección: ");
-        $impresora->text($infoEmpresa[0]->direccion."\n");
+        // $impresora->text("NIT: ");
+        // $impresora->text($infoEmpresa[0]->nit."\n");
+        // $impresora->text("Dirección: ");
+        // $impresora->text($infoEmpresa[0]->direccion."\n");
         
         $impresora->text("Cliente: ");
         $impresora->text($facturacion->nombre1." ".$facturacion->nombre2." ".$facturacion->apellido1." ".$facturacion->apellido2."\n");
@@ -290,10 +290,11 @@ class DetalleFacturacionController extends Controller
         $impresora->setLineSpacing(2);
  
         $impresora->setJustification(Printer::JUSTIFY_LEFT);
-        $impresora->text("|     ARTICULO  |  ");
+        $impresora->text("| CANTIDAD  ");
        
-        $impresora->setJustification(Printer::JUSTIFY_CENTER);
-        $impresora->text("  CANTIDAD ");
+        $impresora->setJustification(Printer::JUSTIFY_CENTER);        
+        $impresora->text("|  ARTICULO  |  ");
+
         $impresora->setJustification(Printer::JUSTIFY_RIGHT);
         $impresora->text("  |   PRECIO     |\n");
 
@@ -304,10 +305,11 @@ class DetalleFacturacionController extends Controller
         {
             
             $impresora->setJustification(Printer::JUSTIFY_LEFT);
-            $impresora->text(sprintf( $df->nombre_articulo . "-" . $df->nom_presentacion."\n"));
+            $impresora->text($df->cantidad. "\n");
             
             $impresora->setJustification(Printer::JUSTIFY_CENTER);
-            $impresora->text($df->cantidad. "\n");
+            $impresora->text(sprintf( $df->nombre_articulo ."\n"));
+            
             $impresora->setJustification(Printer::JUSTIFY_RIGHT);
             $impresora->text('$' . number_format($df->cantidad * $df->precio, 2)."\n");
             $impresora->setJustification(Printer::JUSTIFY_LEFT);
@@ -331,7 +333,7 @@ class DetalleFacturacionController extends Controller
         $impresora->text("\n===============================\n");
         $impresora->setEmphasis(false);
         $impresora->setFont(Printer::FONT_C);
-        $impresora->text("Sasseri - Software contable");
+        $impresora->text("Sasseri");
         $impresora->text("\nwww.fractalagenciadigital.com\n");
         $impresora->text("\n===============================\n");
         $impresora->text("Gracias por su compra\n");
