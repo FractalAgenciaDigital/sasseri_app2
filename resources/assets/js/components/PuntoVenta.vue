@@ -37,7 +37,7 @@
                                         <span class="num text-white "> $ {{articulo.precio_venta}} </span>
                                     </div>
                                     <div class="card mx-auto">
-                                        <img sv-if="`${articulo.img}`!='default.png'" :src="`${ruta}/Empresas/${articulo.id_empresa}_empresa/ImgProductos/${articulo.img}`" class="img-prods">
+                                        <img v-if="`${articulo.img}`!='default.png'" :src="`${ruta}/Empresas/${articulo.id_empresa}_empresa/ImgProductos/${articulo.img}`" class="img-prods">
                                     </div>
                                     <div class="txt-nom-prod bg-success">
                                         <small class="mb-0 text-white">{{articulo.nombre}}</small>
@@ -488,7 +488,7 @@
                                             <span class="num text-white "> $ {{auxProd.precio_venta}} </span>
                                         </div>
                                         <div class="card mx-auto" v-if="auxProd">
-                                            <img sv-if="`${auxProd.img}`!='default.png'" :src="`${ruta}/Empresas/${auxProd.id_empresa}_empresa/ImgProductos/${auxProd.img}`" class="img-prods">
+                                            <img v-if="`${auxProd.img}`!='default.png'" :src="`${ruta}/Empresas/${auxProd.id_empresa}_empresa/ImgProductos/${auxProd.img}`" class="img-prods">
                                         </div>
                                         <div class="txt-nom-prod bg-success">
                                             <small class="mb-0 text-white">{{auxProd.nombre}}</small>
@@ -527,13 +527,13 @@
                                         <h3><strong>Observaciones</strong></h3>
                                     </div>
                                     <div class="col-12  ">
-                                        <textarea name="auxObser" id="auxObser" v-model="auxObser" cols="38" rows="2" class="form-group"></textarea>                                        
+                                        <textarea name="auxObser" id="auxObser" v-model="auxObser" rows="2" class="form-group"></textarea>                                        
                                     </div>
                                 </div>
                                 <div v-if="auxProd.observaciones" class=" row col-12 text-center pd-3 mt-2 mb-2 pb-3">
-                                    <div class="col-6  mb-3" v-for="observ in auxProd.observaciones" :key="observ.id">
-                                       <button v-if="auxObser==''" type="button" class="btn btn-primary" @click="auxObser=auxObser+' '+ observ.observacion">{{observ.observacion}}</button>
-                                       <button v-else type="button" class="btn btn-primary" @click="auxObser=auxObser+', '+ observ.observacion">{{observ.observacion}}</button>
+                                    <div class="col-sm-12 col-md-6 col-lg-3 mb-3" v-for="observ in auxProd.observaciones" :key="observ.id">
+                                       <button v-if="auxObser==''" type="button" class="btn btn-primary btn-block" @click="auxObser=auxObser+' '+ observ.observacion">{{observ.observacion}}</button>
+                                       <button v-else type="button" class="btn btn-primary btn-block" @click="auxObser=auxObser+', '+ observ.observacion">{{observ.observacion}}</button>
                                     </div>
                                     
                                 </div>
@@ -1620,12 +1620,20 @@
             },
             registrarFacturacion(){
                 //console.log(this.validarFacturacion());
+                
+
+
                 if (!this.validarFacturacion()){
 
                     return;
                 }
                 else {                
                     let me = this;
+                    if(this.id_tercero == 0 || this.id_tercero ==''){
+                        this.id_tercero = 999999
+                    }else{
+                            this.id_tercero  =  this.id_tercero ;
+                    }
                     axios.post(this.ruta +'/facturacion/registrar',{
                         'num_factura': null,
                         'id_tercero': me.id_tercero,
@@ -1727,7 +1735,7 @@
                     'num_factura': me.num_factura,
                     'id_tercero': me.id_tercero,
                     'fec_edita': me.fechaHoraActual,
-                    // 'subtotal': me.subtotal,
+                    'subtotal': me.subtotal,
                     'valor_iva': me.valor_iva,
                     'total': me.valor_final,
                     'abono': me.abono,
@@ -1749,11 +1757,12 @@
                     'sumatoria' : 0,
                     'id' : me.facturacion_id
                 }).then(function (response) {
+                    this.position = 7;
                     me.ocultarDetalle();
                     me.listarFacturacion(1,'','','','','','','');
                     this.listarArticulo(me.buscarA,me.criterioA,me.buscarCategoriaA);
                     me.tipoAccion2 =1;
-                    position = 7;
+                    
                   
                 }).catch(function (error) {
                     console.log(error);
@@ -1769,17 +1778,17 @@
                 
                     this.errorMostrarMsjFacturacion =[];
 
-                    if (!this.id_tercero) {
-                        this.$notify({
-                            group: 'foo',
-                            duration: 10000,
-                            position: 'top right',
-                            title: 'Seleccione Cliente',
-                            type: 'error',
-                            text: 'Debes seleccion un cliente'
-                        });
-                        return false;
-                    }
+                    // if (!this.id_tercero) {
+                    //     this.$notify({
+                    //         group: 'foo',
+                    //         duration: 10000,
+                    //         position: 'top right',
+                    //         title: 'Seleccione Cliente',
+                    //         type: 'error',
+                    //         text: 'Debes seleccion un cliente'
+                    //     });
+                    //     return false;
+                    // }
                     if (!this.lugar) { 
                          this.$notify({
                             group: 'foo',

@@ -486,30 +486,7 @@ class FacturacionController extends Controller
         $detalle_facturacion = DetalleFacturacion::leftJoin('facturacion', 'detalle_facturacion.id_factura','=','facturacion.id')
         ->leftJoin('articulos', 'detalle_facturacion.id_producto','=','articulos.id')
         ->leftJoin('presentacion','articulos.id_presentacion','=','presentacion.id')
-        ->select('detalle_facturacion.id',
-        'detalle_facturacion.id_factura',
-        'facturacion.num_factura as num_factura',
-        'detalle_facturacion.id_producto',
-        'detalle_facturacion.padre',
-        'articulos.id as idarticulo',
-        'articulos.codigo',
-        'articulos.codigo as codigo_articulo',
-        'articulos.nombre as nombre_articulo',
-        'articulos.precio_venta as precio',
-        'articulos.stock',
-        'detalle_facturacion.valor_venta',
-        'detalle_facturacion.cantidad',
-        'detalle_facturacion.cantidad as cantidad2',
-        'detalle_facturacion.valor_iva',
-        'detalle_facturacion.valor_descuento',
-        'detalle_facturacion.valor_descuento as valor_descuento2',
-        'detalle_facturacion.porcentaje_iva as iva',
-        'detalle_facturacion.valor_subtotal',
-        'detalle_facturacion.observaciones',
-        'detalle_facturacion.valor_final',
-        'articulos.id_presentacion',
-        'presentacion.nombre as nom_presentacion',
-        'articulos.tipo_articulo',         
+        ->select('detalle_facturacion.id','detalle_facturacion.id_factura','facturacion.num_factura as num_factura','detalle_facturacion.id_producto','detalle_facturacion.padre','articulos.id as idarticulo','articulos.codigo','articulos.codigo as codigo_articulo','articulos.nombre as nombre_articulo','articulos.precio_venta as precio','articulos.stock','detalle_facturacion.valor_venta','detalle_facturacion.cantidad','detalle_facturacion.cantidad as cantidad2','detalle_facturacion.valor_iva','detalle_facturacion.valor_descuento','detalle_facturacion.valor_descuento as valor_descuento2','detalle_facturacion.porcentaje_iva as iva','detalle_facturacion.valor_subtotal','detalle_facturacion.observaciones','detalle_facturacion.valor_final','articulos.id_presentacion','presentacion.nombre as nom_presentacion','articulos.tipo_articulo',
         'preparado')
         ->where('detalle_facturacion.id_factura','=', $id_factura)
         ->get();
@@ -563,6 +540,7 @@ class FacturacionController extends Controller
             // $impresora->setJustification(Printer::JUSTIFY_LEFT);
             // $impresora->text($df->cantidad. "   ");
             
+
             // $impresora->setJustification(Printer::JUSTIFY_CENTER);
             // $impresora->text(sprintf( $df->nombre_articulo ."  "));
             
@@ -573,7 +551,7 @@ class FacturacionController extends Controller
             // $impresora->setJustification(Printer::JUSTIFY_CENTER);
             // $impresora->text("-------------------------\n\n");
 
-            $line = sprintf('%-44.44s %5.0s %13.2f %13.2f', $df->nombre_articulo, "Cant ".$df->cantidad, $df->precio, ($df->cantidad * $df->precio));
+            $line = sprintf('%-44.44s %5.0f %13.2f %13.2f', $df->nombre_articulo, $df->cantidad, $df->precio, ($df->cantidad * $df->precio));
             $impresora->text($line);
             $impresora->text("\n"); 
             
