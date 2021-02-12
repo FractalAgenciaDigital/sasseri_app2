@@ -207,6 +207,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/facturacion/obtenerCabecera', 'FacturacionController@obtenerCabecera');
         Route::get('/facturacion/pdfFacturacion/{id}','FacturacionController@PdfFacturacion')->name('recibo_pdf');
         Route::get('/facturacion/excelFacturacion/{id}','FacturacionController@ExcelFacturacion')->name('recibo_pdf');
+        Route::get('/facturacion/imprimir-ticket-facturacion', 'FacturacionController@imprimirTicketFacturacion'); 
 
         Route::get('/formatos','FormatoController@index');
         Route::post('/formatos/registrar','FormatoController@store');

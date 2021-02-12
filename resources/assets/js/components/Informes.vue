@@ -1329,7 +1329,7 @@
                 let me=this;
                 var url= this.ruta + '/categoria/selectCategoria';
                 axios.get(url).then(function (response) {
-                    //console.log(response);
+                     
                     var respuesta= response.data;
                     me.arrayCategoria2 = respuesta.categorias;
                 })
@@ -2154,7 +2154,7 @@
                 let me=this;
                 var url= this.ruta + '/zona/selectZona';
                 axios.get(url).then(function (response) {
-                    //console.log(response);
+                     
                     var respuesta= response.data;
                     me.arrayZonas = respuesta.zona;
                 })
@@ -2253,7 +2253,7 @@
                             }
                             case 'cerrar_caja':
                             {
-                                //console.log(data);
+                                  
                                 if(data.length!=0)
                                 {
                                     this.arrayCierresUsuario = [];

@@ -891,7 +891,7 @@
                 let me=this;
                 var url= this.ruta + '/categoria/selectCategoria';
                 axios.get(url).then(function (response) {
-                    //console.log(response);
+                     
                     var respuesta= response.data;
                     me.arrayCategoria2 = respuesta.categorias;
                 })
@@ -1646,7 +1646,7 @@
                         'sumatoria' : 0
                     }).then(function (response) {
                         me.factura_imprimir = response.data.id_facturacion;
-                        // console.log(response);
+                        //  
 
                         var toFind = "4";
                         var filtered = me.arrayDetalle.filter(function(el) {
@@ -1822,7 +1822,7 @@
                 let me=this;
                 var url= this.ruta + '/zona/selectZona';
                 axios.get(url).then(function (response) {
-                    //console.log(response);
+                     
                     var respuesta= response.data;
                     me.arrayZonas = respuesta.zona;
                 })
@@ -1921,7 +1921,7 @@
                             }
                             case 'cerrar_caja':
                             {
-                                //console.log(data);
+                                  
                                 if(data.length!=0)
                                 {
                                     this.arrayCierresUsuario = [];

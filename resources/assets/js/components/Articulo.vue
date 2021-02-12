@@ -1243,7 +1243,7 @@
                 let me=this;
                 var url= this.ruta + '/modelo_contable/selectModeloContable';
                 axios.get(url).then(function (response) {
-                    //console.log(response);
+                     
                     var respuesta= response.data;
                     me.arrayCategoria = respuesta.modelo_contable;
                 })
@@ -1255,7 +1255,7 @@
                 let me=this;
                 var url= this.ruta + '/categoria/selectCategoria';
                 axios.get(url).then(function (response) {
-                    //console.log(response);
+                     
                     var respuesta= response.data;
                     me.arrayCategoria2 = respuesta.categorias;
                 })
@@ -1267,7 +1267,7 @@
                 let me=this;
                 var url= this.ruta + '/und_medida/selectUndMedida';
                 axios.get(url).then(function (response) {
-                    //console.log(response);
+                     
                     var respuesta= response.data;
                     me.arrayUndMedida = respuesta.unidades;
                 })
@@ -1279,7 +1279,7 @@
                 let me=this;
                 var url= this.ruta + '/concentracion/selectConcentracion';
                 axios.get(url).then(function (response) {
-                    //console.log(response);
+                     
                     var respuesta= response.data;
                     me.arrayConcentracion = respuesta.concentracion;
                 })
@@ -1304,7 +1304,7 @@
                 if(concat!=''){concat = '?'+concat;}
                 var url= this.ruta + '/presentacion/selectPresentacion'+concat;
                 axios.get(url).then(function (response) {
-                    //console.log(response);
+                     
                     var respuesta= response.data;
                     me.arrayPresentacion = respuesta.presentacion;
                 })
@@ -1960,7 +1960,7 @@
                             }
                             case 'actualizar': 
                             {
-                                //console.log(data);
+                                  
                                 this.modalObs=1;
                                 this.tituloModalObservacion='Actualizar Observacion';
                                 this.tipoAccionObservacion=2;

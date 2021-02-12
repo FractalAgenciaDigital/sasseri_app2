@@ -18,6 +18,11 @@ use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Facades\Excel;
 
+use App\Impresora;
+use App\ConfigGenerales;
+use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
+use Mike42\Escpos\Printer;
+
 class FacturacionController extends Controller
 {
     /**
@@ -228,21 +233,6 @@ class FacturacionController extends Controller
             $stock->sumatoria = $request->sumatoria;
             $stock->save();
            
-            // $arregloDatos=[               
-            //     'numero' => $numVentas,
-            //     'id_detalle_facturacion' => $detalle->id,
-            //     'cantidad' => $detalle->cantidad,
-            //     'id_producto' => $detalle->id_producto,
-            //     'id_factura' => $detalle->id_factura,
-            //     'estado' => 'Preparando'
-            // ];
-
-            // $allUsers = User::where('idrol', 2)->orWhere('idrol', 1)->get();
-
-            // foreach ($allUsers as $notificar){
-            //     User::findOrFail($notificar->id)->notify(new NotifyAdmin($arregloDatos));
-            // }
-
            
         }
         return ['id_facturacion' => $facturacion->id];        
@@ -307,7 +297,11 @@ class FacturacionController extends Controller
             $detalle->porcentaje_iva = $det['iva'];
             $detalle->valor_subtotal = $det['valor_subtotal'];  
             $detalle->valor_final = $det['valor_subtotal']+$det['valor_iva'];
-            $detalle->observaciones = $det['observaciones'];
+            if(isset($det['observaciones'])){
+                $detalle->observaciones = $det['observaciones'];
+            }else{
+                $detalle->observaciones = '';
+            }
             $detalle->save();
         }
 
@@ -476,5 +470,134 @@ class FacturacionController extends Controller
 
         // return view('pdf.FacturaExcel', ['facturacion'=>$factura, 'tercero'=>$tercero,'detalles'=>$detalles,'user'=>$user,'caja'=>$caja,'lugar'=>$lugar,],);
         return Excel::download(new FacturacionExport($id), 'pdf.facturaExcel-'.$factura->num_factura.'.xlsx');
+    }
+
+    public function imprimirTicketFacturacion(Request $request)
+    {
+        $id_factura = $request->id;
+        $id_empresa = $request->session()->get('id_empresa');
+        $id_impresora = $request->id_impresora;
+        
+       $imprimir = Impresora::where('id', $id_impresora)->first();
+
+        // $detalle_facturacion = DetalleFacturacion::findOrFail($id_factura);
+        // $nombreImpresora = env("NOMBRE_IMPRESORA");
+
+        $detalle_facturacion = DetalleFacturacion::leftJoin('facturacion', 'detalle_facturacion.id_factura','=','facturacion.id')
+        ->leftJoin('articulos', 'detalle_facturacion.id_producto','=','articulos.id')
+        ->leftJoin('presentacion','articulos.id_presentacion','=','presentacion.id')
+        ->select('detalle_facturacion.id',
+        'detalle_facturacion.id_factura',
+        'facturacion.num_factura as num_factura',
+        'detalle_facturacion.id_producto',
+        'detalle_facturacion.padre',
+        'articulos.id as idarticulo',
+        'articulos.codigo',
+        'articulos.codigo as codigo_articulo',
+        'articulos.nombre as nombre_articulo',
+        'articulos.precio_venta as precio',
+        'articulos.stock',
+        'detalle_facturacion.valor_venta',
+        'detalle_facturacion.cantidad',
+        'detalle_facturacion.cantidad as cantidad2',
+        'detalle_facturacion.valor_iva',
+        'detalle_facturacion.valor_descuento',
+        'detalle_facturacion.valor_descuento as valor_descuento2',
+        'detalle_facturacion.porcentaje_iva as iva',
+        'detalle_facturacion.valor_subtotal',
+        'detalle_facturacion.observaciones',
+        'detalle_facturacion.valor_final',
+        'articulos.id_presentacion',
+        'presentacion.nombre as nom_presentacion',
+        'articulos.tipo_articulo',         
+        'preparado')
+        ->where('detalle_facturacion.id_factura','=', $id_factura)
+        ->get();
+
+        $facturacion = Facturacion::leftJoin('personas', 'personas.id', 'facturacion.id_tercero')
+        ->leftJoin('personas as p_usuarios', 'p_usuarios.id', 'facturacion.id_usuario')
+        ->select('facturacion.id as id', 'facturacion.fec_crea', 'personas.nombre1', 'personas.nombre2', 'personas.apellido1', 'personas.apellido2', 'p_usuarios.nombre as cajero', 'p_usuarios.id as idusuario', 'personas.id as idpersona', 'total')->where('facturacion.id','=', $id_factura)
+        ->first();
+        // ->get();
+        $infoEmpresa = ConfigGenerales::select()->where('id','=', $id_empresa)->limit(1)->get();
+        
+
+        $connector = new WindowsPrintConnector($imprimir->nombre_impresora);
+        $impresora = new Printer($connector);
+        // $impresora->lineSpacing(19);
+        $impresora->setJustification(Printer::JUSTIFY_CENTER)
+        ;
+        $impresora->text("\n===============================\n");
+        $impresora->setEmphasis(true);
+        $impresora->text($infoEmpresa[0]->nombre."\n");
+        $impresora->setEmphasis(false);
+        $impresora->text("NIT: ");
+        $impresora->text($infoEmpresa[0]->nit."\n");
+        $impresora->text("Dirección: ");
+        $impresora->text($infoEmpresa[0]->direccion."\n");
+        
+        $impresora->text("Cliente: ");
+        $impresora->text($facturacion->nombre1." ".$facturacion->nombre2." ".$facturacion->apellido1." ".$facturacion->apellido2."\n");
+
+        $impresora->text("Cajero(a): ");
+        $impresora->text($facturacion->cajero."\n");
+
+        $impresora->text($facturacion->fec_crea."\n"."\n");
+        $impresora->setLineSpacing(2);
+ 
+        $impresora->setJustification(Printer::JUSTIFY_LEFT);
+        $impresora->text("|     ARTICULO  |  ");
+       
+        $impresora->setJustification(Printer::JUSTIFY_CENTER);
+        $impresora->text("  CANTIDAD ");
+        $impresora->setJustification(Printer::JUSTIFY_RIGHT);
+        $impresora->text("  |   PRECIO     |\n");
+
+        $impresora->setJustification(Printer::JUSTIFY_CENTER);
+        $impresora->text("______________________________________\n"."\n");
+
+        foreach($detalle_facturacion as $df)
+        {
+            
+            $impresora->setJustification(Printer::JUSTIFY_LEFT);
+            $impresora->text(sprintf( $df->nombre_articulo . "-" . $df->nom_presentacion."\n"));
+            
+            $impresora->setJustification(Printer::JUSTIFY_CENTER);
+            $impresora->text($df->cantidad. "\n");
+            $impresora->setJustification(Printer::JUSTIFY_RIGHT);
+            $impresora->text('$' . number_format($df->cantidad * $df->precio, 2)."\n");
+            $impresora->setJustification(Printer::JUSTIFY_LEFT);
+            $impresora->text($df->observaciones. "\n");
+            $impresora->setJustification(Printer::JUSTIFY_CENTER);
+            $impresora->text("-------------------------\n\n");
+            
+        }
+
+        $impresora->setJustification(Printer::JUSTIFY_CENTER);
+        $impresora->text("\n_________________________________\n");
+        $impresora->setJustification(Printer::JUSTIFY_RIGHT);
+        $impresora->setEmphasis(true);
+        $impresora->setLineSpacing(2);
+
+        $impresora->text("\nTotal: $" . number_format($facturacion->total, 2) . "\n");
+        $impresora->setJustification(Printer::JUSTIFY_CENTER);
+       
+        $impresora->setTextSize(1, 1);
+        $impresora->setLineSpacing(2);
+        $impresora->text("\n===============================\n");
+        $impresora->setEmphasis(false);
+        $impresora->setFont(Printer::FONT_C);
+        $impresora->text("Sasseri - Software contable");
+        $impresora->text("\nwww.fractalagenciadigital.com\n");
+        $impresora->text("\n===============================\n");
+        $impresora->text("Gracias por su compra\n");
+        $impresora->text("\n===============================\n");
+
+        
+        $impresora->feed(5);$impresora->cut();
+        $impresora->close();
+        
+        return redirect()->back()->with("mensaje", "Ticket impreso");
+        
     }
 }

@@ -17,18 +17,9 @@
                     <div class="card-body">
                         <div class="form-group row">
                             <div class="col-md-6">
-                                <div class="input-group">
-                                    <!--<select v-if="permisosUser.leer" class="form-control col-md-3" v-model="criterio">
-                                      <option value="nombre">Nombre</option>>
-                                    </select>
-                                    <select v-else disabled class="form-control col-md-3" v-model="criterio">
-                                    </select>-->
-
+                                <div class="input-group">                                   
                                     <input v-if="permisosUser.leer" type="text" v-model="buscar" @keyup="listarColaboradores(1,buscar,criterio)" class="form-control" placeholder="Texto a buscar">
                                     <input v-else disabled type="text" v-model="buscar" class="form-control" placeholder="Texto a buscar">
-
-                                    <!--<button v-if="permisosUser.leer" type="submit" @click="listarColaboradores(1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
-                                    <button v-else type="submit" class="btn btn-secondary"><i class="fa fa-search"></i> Buscar</button>-->
                                 </div>
                             </div>
                         </div>
@@ -384,7 +375,7 @@
                             }
                             case 'actualizar': 
                             {
-                                //console.log(data);
+                                  
                                 this.modal=1;
                                 this.tituloModal='Actualizar Colaborador';
                                 this.tipoAccion=2;

@@ -426,8 +426,7 @@
                 else{
                     var url= this.ruta +'/info_auxiliares/aux_con_saldos?id_tercero=' + me.id_rercero + '&cuenta_ini='+ me.cuenta_ini + '&cuenta_fin='+ me.cuenta_fin + '&cuenta_fin='+ me.cuenta_fin + '&id_cuenta_ini=' +me.id_cuenta_ini+ '&id_cuenta_fin=' + me.id_cuenta_fin+'&id_tercero=' + me.id_tercero + '&fecha_ini=' + me.fecha_ini + '&fecha_fin=' + me.fecha_fin + '&id_formato='+me.tipo_formato;
                     axios.get(url).then(function (response) {
-                        var respuesta= response.data;
-                        console.log(response.data); 
+                        var respuesta= response.data;                        
                         me.informe = respuesta.html;                    
                     })
                     .catch(function (error) {
@@ -459,7 +458,7 @@
                 let me=this;
                 var url= this.ruta +'/conf_formatos/get_tipos_formatos';
                 axios.get(url).then(function (response) {
-                    //console.log(response);
+                     
                     var respuesta= response.data;
                     me.arrayTiposFormatos = respuesta.conf_formatos;
                 })

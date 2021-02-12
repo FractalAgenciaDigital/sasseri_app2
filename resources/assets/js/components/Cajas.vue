@@ -592,12 +592,10 @@
             },
             selectCajeros(id){
                 let me=this;
-                console.log(id)
                 var url= this.ruta +'/cajas_admin/listarCajerosAdmin?id='+id;
                 axios.get(url).then(function (response) {
                     console.log(response.data.cajas_admin.data)
                     var respuesta = response.data;
-                    console.log(respuesta);
                     me.arrayCajeros = respuesta.cajas_admin.data;    
                 })
                 .catch(function (error) {
@@ -677,7 +675,7 @@
                 let me=this;
                 var url= this.ruta +'/cierres_caja/consultarCierreXCaja?id='+id;
                 axios.get(url).then(function (response) {
-                    // console.log(response);
+                    //  
                     var respuesta= response.data;
                     me.arrayCierresXCajas = respuesta.cierres_caja;
                 })
@@ -811,7 +809,7 @@
                             }
                             case 'actualizar':
                             {
-                                //console.log(data);
+                                  
                                 this.modal=1;
                                 this.tituloModal='Actualizar Caja';
                                 this.tipoAccion=2;
@@ -846,12 +844,12 @@
                             }
                             case 'cerrar_caja':
                             {
-                                //console.log(data);
+                                  
 
                                 let me=this;
                                 var url= this.ruta +'/cierres_caja/consultarCierreXCaja?id='+data['id'];
                                 axios.get(url).then(function (response) {
-                                    // console.log(response);
+                                    //  
                                     var respuesta= response.data;
                                     me.arrayCierresXCajas = respuesta.cierres_caja;
 
@@ -882,31 +880,7 @@
                                 .catch(function (error) {
                                     console.log(error);
                                 });
-
-                                /*if(this.arrayCierresXCajas.length)
-                                {
-                                    console.log('entra if');
-                                    this.arrayCierresUsuario = [];
-                                    this.modalCierreCaja=1;
-                                    this.tituloModalCierre='Cerrar caja';
-                                    this.tipoAccionCierre=2;
-                                    this.cierre_caja_id=this.arrayCierresXCajas['id'];
-                                    this.id_caja_cierre = this.arrayCierresXCajas['id_caja'];
-                                    this.vr_inicial_cierre = this.arrayCierresXCajas['vr_inicial'];
-                                    this.obs_inicial_cierre = this.arrayCierresXCajas['obs_inicial'];
-                                    this.vr_gastos_cierre = this.arrayCierresXCajas['vr_gastos'];
-                                    this.obs_gastos_cierre = this.arrayCierresXCajas['obs_gastos'];
-                                    this.vr_software_cierre = 0;
-                                    this.vr_final_cierre = this.arrayCierresXCajas['vr_final'];
-                                }
-                                else
-                                {
-                                    console.log('entra else');
-                                    this.arrayCierresUsuario = [];
-                                    this.modalCierreCaja=1;
-                                    this.tituloModalCierre='Cerrar caja';
-                                    this.tipoAccionCierre=2;
-                                }*/
+                        
                                 break;
                             }
                             case 'listar_cierres':
