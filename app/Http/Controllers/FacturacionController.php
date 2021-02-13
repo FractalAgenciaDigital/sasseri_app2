@@ -508,15 +508,18 @@ class FacturacionController extends Controller
     
         $impresora->setJustification(Printer::JUSTIFY_CENTER);
         //     try{
-        //     $logo = EscposImage::load(env('APP_URL').'/Empresas/'.$infoEmpresa->id.'_empresa/ImgLogos/'.$infoEmpresa->logo, false);
+            // $logo = EscposImage::load(env('APP_URL').'/Empresas/'.$infoEmpresa->id.'_empresa/ImgLogos/'.$infoEmpresa->logo, false);
         //     //   $logo = EscposImage::load("logo.jpg", true);
-        //     $impresora->bitImage($logo);
+            // $impresora->bitImage($logo);
         // }catch(Exception $e){/*No hacemos nada si hay error*/}
     
          
         $impresora->text("\n===============================\n");
-        $impresora->setEmphasis(true);
+        
+        $impresora->setTextSize(1, 2);
         $impresora->text($infoEmpresa->nombre."\n");
+        $impresora->setTextSize(1, 1);
+        
         $impresora->setEmphasis(false);
         $impresora->text("NIT: ");
         $impresora->text($infoEmpresa->nit."\n");
@@ -525,56 +528,58 @@ class FacturacionController extends Controller
         
 
         $impresora->setJustification(Printer::JUSTIFY_LEFT);
+        $impresora->setEmphasis(true);
         $impresora->text("Mesa: ");
         $impresora->text($facturacion->zona."\n");
+        $impresora->text("Cajero(a): ");
+        $impresora->text($facturacion->cajero."\n");
+        $impresora->setEmphasis(false);
         $impresora->text("Fecha: ");
         $impresora->text($facturacion->fec_crea."\n");
 
         if(isset($facturacion->num_factura) || $facturacion->num_factura != NULL){
             $impresora->text("N° Factura: ");
             $impresora->text($facturacion->num_factura."\n");
-        
+        // 
         }
         $impresora->text("Cliente: ");
         $impresora->text($facturacion->nombre1." ".$facturacion->nombre2." ".$facturacion->apellido1." ".$facturacion->apellido2."\n");
 
-        $impresora->text("Cajero(a): ");
-        $impresora->text($facturacion->cajero."\n");
+       
 
 
         $impresora->setLineSpacing(2);
  
         $impresora->setJustification(Printer::JUSTIFY_LEFT);
-        $impresora->text("\n______________________________________"."\n");
-        $impresora->text(sprintf('%-20s %+10.8s %+10.7s','ARTICULO', 'CANT', 'PRECIO'));
+        $impresora->text("\n______________________________________"."\n\n");
+        $impresora->setLineSpacing(1);
+        $impresora->setEmphasis(true);
+        $impresora->text(sprintf('%-25s %+10.8s %+10.7s','ARTICULO', 'CANT', 'PRECIO'));
+        $impresora->setEmphasis(false);
 
-        $impresora->setJustification(Printer::JUSTIFY_CENTER);
-        $impresora->text("\n______________________________________"."\n");
-
+        $impresora->text("\n"); 
         foreach($detalle_facturacion as $df)
         {
-            $impresora->setJustification(Printer::JUSTIFY_LEFT);
-            $impresora->text($df->cantidad. "   ");
+            // $impresora->setJustification(Printer::JUSTIFY_LEFT);
+            // $impresora->text($df->cantidad. "   ");
             
 
-            $impresora->setJustification(Printer::JUSTIFY_CENTER);
-            $impresora->text(sprintf( $df->nombre_articulo ."  "));
+            // $impresora->setJustification(Printer::JUSTIFY_CENTER);
+            // $impresora->text(sprintf( $df->nombre_articulo ."  "));
             
-            $impresora->setJustification(Printer::JUSTIFY_RIGHT);
-            $impresora->text('$' . number_format($df->cantidad * $df->precio, 2)."\n");
-            $impresora->setJustification(Printer::JUSTIFY_LEFT);
-            $impresora->text($df->observaciones. "\n");
-            $impresora->setJustification(Printer::JUSTIFY_CENTER);
-            $impresora->text("-------------------------\n\n");
+            // $impresora->setJustification(Printer::JUSTIFY_RIGHT);
+            // $impresora->text('$' . number_format($df->cantidad * $df->precio, 2)."\n");
+            // $impresora->setJustification(Printer::JUSTIFY_LEFT);
+        //   $impresora->text($df->observaciones. "\n");
+        //     $impresora->setJustification(Printer::JUSTIFY_CENTER);
+        //     $impresora->text("-------------------------\n\n");
 
-            $line = sprintf('%-20s %+10f %10.2f ', $df->nombre_articulo, $df->cantidad,'', ($df->cantidad * $df->precio));
+            $line = sprintf('%-25s %10.0f %10.2f ', $df->nombre_articulo, $df->cantidad, $df->cantidad * $df->precio);
             $impresora->text($line);
             $impresora->text("\n"); 
             
         }
 
-        $impresora->setJustification(Printer::JUSTIFY_CENTER);
-        $impresora->text("\n_________________________________\n");
         $impresora->setJustification(Printer::JUSTIFY_RIGHT);
         $impresora->setEmphasis(true);
         $impresora->setLineSpacing(2);
@@ -582,7 +587,7 @@ class FacturacionController extends Controller
         $impresora->text("\nTotal: $" . number_format($facturacion->total, 2) . "\n");
         $impresora->setJustification(Printer::JUSTIFY_CENTER);
        
-        $impresora->setTextSize(1, 2);
+        
         $impresora->setLineSpacing(2);
         $impresora->text("\n===============================\n");
         $impresora->setEmphasis(false);

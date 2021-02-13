@@ -128,9 +128,12 @@
                                         </div>
                                         <div v-if="detalle.observaciones" class="col-12">
                                             
-                                                <strong>Obseraciones: </strong> <small >{{detalle.observaciones}} </small>
+                                                <strong>Observaciones: </strong> <small >{{detalle.observaciones}} </small>
                                             
                                         </div>
+                                        <td style="text-align: right; opacity:0">
+                                                $ {{detalle.valor_subtotal=Math.round(parseFloat((detalle.precio*detalle.cantidad)-detalle.valor_iva-detalle.valor_descuento))}}
+                                            </td>
                                     </div>
                                    
                                 </div>
@@ -142,11 +145,13 @@
                                 <div class="col-4 text-righ text-right">
                                     $ {{subtotal=calcularSubtotal}}
                                 </div>
+                                
                             </div>
                             <div class="row mt-1">
                                 <div class="col-6">
                                     <b>IVA</b>
                                 </div>
+                                
                                 <div class="col-4 text-righ text-right">
                                     $ {{valor_iva=calcularTotalIva}}
                                 </div>
@@ -275,7 +280,7 @@
                         </div>                                  
                     </div>
                     <div class="ticket">
-                        <img class="img-logo espacio-1" src="http://192.168.0.109/sasseri_app2/public/Empresas/1_empresa/ImgLogos/f4f72620874a541d0113ea86bcf699a8.jpg" alt="img-logo">
+                        <img class="img-logo espacio-1" src="http://192.168.100.9/sasseri_app2/public/Empresas/1_empresa/ImgLogos/f4f72620874a541d0113ea86bcf699a8.jpg" alt="img-logo">
                         <p class="centrado espacio-1">SASSERI_APP_2<br>NIT: 81245875-0<br>BR/DIAGONAL LAS AMERICAS 20_CRA 15-25<br>TEL: 2448484154<br>RES DIAN 100000554554 DE DICIEMBRE 20/2020<br>PERSONA JURUDICA DECLARANTE - REGIMEN COMUN<br>FACTURA DE VENTA N°. 155455<br>FECHA 20/12/2020 - 04:44:42 P.M.</p>
                         -----------------------------------------
                         <table class="table table-sm espacio-1">
@@ -1461,6 +1466,7 @@
                         iva: ivaVenta,
                         valor_iva: ivaVenta_vr * this.cantidad,
                         valor_subtotal: Math.round(parseFloat((producto.precio_venta -ivaVenta_vr)* this.cantidad)),
+                        // valor_subtotal : this.subtotal,
                         stock : producto.stock,
                         descuento : 0,
                         nom_presentacion : producto.nom_presentacion,
@@ -1750,7 +1756,7 @@
                     'sumatoria' : 0,
                     'id' : me.facturacion_id
                 }).then(function (response) {
-                    this.position = 7;
+                    me.position = 7;
                     me.ocultarDetalle();
                     me.listarFacturacion(1,'','','','','','','');
                     this.listarArticulo(me.buscarA,me.criterioA,me.buscarCategoriaA);
