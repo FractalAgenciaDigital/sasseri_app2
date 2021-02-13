@@ -199,7 +199,7 @@
                             <div v-if="tipoAccionCierre==2">
                                 <div class="form-group col-md-12">
                                     <label>Vr. Gastos</label>                                    
-                                    <input type="number" class="form-control" v-model="vr_gastos_cierre" v-bind:class="{ 'is-invalid' : hasError.vr_gastos_cierre==1 }">                                   
+                                    <input type="number" class="form-control" v-model="vr_gastos_cierre" >                                   
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label>Obs. Gastos</label>                                    
@@ -759,6 +759,8 @@
                 if(!this.vr_inicial_cierre || this.vr_inicial_cierre<=0){error=1; this.hasError['vr_inicial_cierre']=1;}
                 if(this.tipoAccionCierre==2)
                 {
+
+       
                     // if(!this.vr_gastos_cierre || this.vr_gastos_cierre<=0){error=1; this.hasError['vr_gastos_cierre']=1;}
                     if(this.vr_final_cierre<0){error=1; this.hasError['vr_final_cierre']=1;}
                 }

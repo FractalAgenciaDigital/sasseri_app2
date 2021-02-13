@@ -37,7 +37,7 @@
                                         <span class="num text-white "> $ {{articulo.precio_venta}} </span>
                                     </div>
                                     <div class="card mx-auto">
-                                        <img sv-if="`${articulo.img}`!='default.png'" :src="`${ruta}/Empresas/${articulo.id_empresa}_empresa/ImgProductos/${articulo.img}`" class="img-prods">
+                                        <img v-if="`${articulo.img}`!='default.png'" :src="`${ruta}/Empresas/${articulo.id_empresa}_empresa/ImgProductos/${articulo.img}`" class="img-prods">
                                     </div>
                                     <div class="txt-nom-prod bg-success">
                                         <small class="mb-0 text-white">{{articulo.nombre}}</small>
@@ -394,44 +394,35 @@
             <div v-show="position==7"> <!-- listado de faturas -->
                 <div class="card">
                     <div class="card-header">
-                        <div class="row">
-                            <!--
-                            <div class="col-3">
-                                <button @click="position=6" class="btn btn-primary fa fa-undo"></button>
-                            </div>-->
-                            <div class="col-3">
-                                <div class="input">
-                                    <div class="input-group-prepend">
-                                        <h4  style="margin-left: -23px; margin-left: 13px; margin-top: 6px; font-size: 14px;" for="inputGroupSelect01">Estado</h4>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="input">
+                                        <h4  style="font-size: 11px;" for="inputGroupSelect01">Estado</h4>
+                                        <select class="custom-select" id="inputGroupSelect01" style="font-size: 12px; width: 297px;">
+                                            <option selected  style="font-size: 11px;">Seleccionar</option>
+                                            <option value="1" style="font-size: 11px;">Abierta</option>
+                                            <option value="2" style="font-size: 11px;">Cerrada</option>
+                                            <option value="3" style="font-size: 11px;">Cancelada</option>
+                                        </select>
                                     </div>
+                                </div>                                    
+                                <div class="col">
+                                    <label style="font-size: 11px;">Desde:</label>                                   
+                                    <input v-if="permisosUser.leer" type="date" class="form-control" style="border-radius: 5px; width: 136px;" v-model="desdeFiltro">
+                                    <input v-else disabled type="date" class="form-control" v-model="desdeFiltro">
+                                </div>
+                                <div class="col">
+                                    <label style="font-size: 11px;">Hasta:</label>                                   
+                                    <input v-if="permisosUser.leer" type="date" class="form-control" style="border-radius: 5px; width: 136px;" v-model="hastaFiltro">
+                                    <input v-else disabled type="date" class="form-control" v-model="hastaFiltro">
                                 </div>
                             </div>
-                            <div class="col-8">  
-                                <select class="custom-select" id="inputGroupSelect01">
-                                    <option selected  style="font-size: 14px;">Seleccionar</option>
-                                    <option value="1" style="font-size: 14px;">Abierta</option>
-                                    <option value="2" style="font-size: 14px;">Cerrada</option>
-                                    <option value="3" style="font-size: 14px;">Cancelada</option>
-                                </select>  
-                            </div>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <label>Desde:</label>                                   
-                                        <input v-if="permisosUser.leer" type="date" class="form-control" style="border-radius: 7px;" v-model="desdeFiltro">
-                                        <input v-else disabled type="date" class="form-control" v-model="desdeFiltro">
-                                    </div>
-                                    <div class="col-6">
-                                        <label>Hasta:</label>                                   
-                                        <input v-if="permisosUser.leer" type="date" class="form-control" style="border-radius: 7px;" v-model="hastaFiltro">
-                                        <input v-else disabled type="date" class="form-control" v-model="hastaFiltro">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>                         
+                        </div>  
+                    </div>                        
                     </div>
                     
-                    <div class="card-header" style="font-size: 13px;">
+                    <div class="card-body" style="font-size: 13px;">
                         <div class="row">
                             <table class="table table-sm table-bordered">
                                 <thead class="thead-light">
@@ -488,7 +479,7 @@
                                             <span class="num text-white "> $ {{auxProd.precio_venta}} </span>
                                         </div>
                                         <div class="card mx-auto" v-if="auxProd">
-                                            <img sv-if="`${auxProd.img}`!='default.png'" :src="`${ruta}/Empresas/${auxProd.id_empresa}_empresa/ImgProductos/${auxProd.img}`" class="img-prods">
+                                            <img v-if="`${auxProd.img}`!='default.png'" :src="`${ruta}/Empresas/${auxProd.id_empresa}_empresa/ImgProductos/${auxProd.img}`" class="img-prods">
                                         </div>
                                         <div class="txt-nom-prod bg-success">
                                             <small class="mb-0 text-white">{{auxProd.nombre}}</small>
@@ -527,13 +518,13 @@
                                         <h3><strong>Observaciones</strong></h3>
                                     </div>
                                     <div class="col-12  ">
-                                        <textarea name="auxObser" id="auxObser" v-model="auxObser" cols="38" rows="2" class="form-group"></textarea>                                        
+                                        <textarea name="auxObser" id="auxObser" v-model="auxObser" rows="2" class="form-group"></textarea>                                        
                                     </div>
                                 </div>
                                 <div v-if="auxProd.observaciones" class=" row col-12 text-center pd-3 mt-2 mb-2 pb-3">
-                                    <div class="col-6  mb-3" v-for="observ in auxProd.observaciones" :key="observ.id">
-                                       <button v-if="auxObser==''" type="button" class="btn btn-primary" @click="auxObser=auxObser+' '+ observ.observacion">{{observ.observacion}}</button>
-                                       <button v-else type="button" class="btn btn-primary" @click="auxObser=auxObser+', '+ observ.observacion">{{observ.observacion}}</button>
+                                    <div class="col-sm-12 col-md-6 col-lg-3 mb-3" v-for="observ in auxProd.observaciones" :key="observ.id">
+                                       <button v-if="auxObser==''" type="button" class="btn btn-primary btn-block" @click="auxObser=auxObser+' '+ observ.observacion">{{observ.observacion}}</button>
+                                       <button v-else type="button" class="btn btn-primary btn-block" @click="auxObser=auxObser+', '+ observ.observacion">{{observ.observacion}}</button>
                                     </div>
                                     
                                 </div>
@@ -1439,10 +1430,12 @@
                 producto.productos_iva.forEach(function(iva){
                     if(iva.tipo_iva =='Venta'){ivaVenta=iva.porcentaje;}
                 });
-                var ivaVenta_vr=0;
                 if(ivaVenta>0) {
-                    ivaVenta_vr = Math.round(parseFloat(producto.precio_venta)-parseFloat((producto.precio_venta)/((ivaVenta/100)+1)));
+
+
+                    var ivaVenta_vr = Math.round(parseFloat(producto.precio_venta)-parseFloat((producto.precio_venta)/((ivaVenta/100)+1)));
                 }
+
                 
                 let auxPosition = me.arrayDetalle.indexOf(me.arrayDetalle.find(({codigo}) => codigo === producto.codigo));
 
@@ -1620,12 +1613,20 @@
             },
             registrarFacturacion(){
                 //console.log(this.validarFacturacion());
+                
+
+
                 if (!this.validarFacturacion()){
 
                     return;
                 }
                 else {                
                     let me = this;
+                    if(this.id_tercero == 0 || this.id_tercero ==''){
+                        this.id_tercero = 999999
+                    }else{
+                            this.id_tercero  =  this.id_tercero ;
+                    }
                     axios.post(this.ruta +'/facturacion/registrar',{
                         'num_factura': null,
                         'id_tercero': me.id_tercero,
@@ -1727,7 +1728,7 @@
                     'num_factura': me.num_factura,
                     'id_tercero': me.id_tercero,
                     'fec_edita': me.fechaHoraActual,
-                    // 'subtotal': me.subtotal,
+                    'subtotal': me.subtotal,
                     'valor_iva': me.valor_iva,
                     'total': me.valor_final,
                     'abono': me.abono,
@@ -1749,11 +1750,12 @@
                     'sumatoria' : 0,
                     'id' : me.facturacion_id
                 }).then(function (response) {
+                    this.position = 7;
                     me.ocultarDetalle();
                     me.listarFacturacion(1,'','','','','','','');
                     this.listarArticulo(me.buscarA,me.criterioA,me.buscarCategoriaA);
                     me.tipoAccion2 =1;
-                    position = 7;
+                    
                   
                 }).catch(function (error) {
                     console.log(error);
@@ -1769,17 +1771,17 @@
                 
                     this.errorMostrarMsjFacturacion =[];
 
-                    if (!this.id_tercero) {
-                        this.$notify({
-                            group: 'foo',
-                            duration: 10000,
-                            position: 'top right',
-                            title: 'Seleccione Cliente',
-                            type: 'error',
-                            text: 'Debes seleccion un cliente'
-                        });
-                        return false;
-                    }
+                    // if (!this.id_tercero) {
+                    //     this.$notify({
+                    //         group: 'foo',
+                    //         duration: 10000,
+                    //         position: 'top right',
+                    //         title: 'Seleccione Cliente',
+                    //         type: 'error',
+                    //         text: 'Debes seleccion un cliente'
+                    //     });
+                    //     return false;
+                    // }
                     if (!this.lugar) { 
                          this.$notify({
                             group: 'foo',
@@ -2456,3 +2458,5 @@
     }
 
 </style>
+
+
