@@ -67,11 +67,7 @@ const app = new Vue({
     el: '#app',
     data: {
         menu: 0,       
-<<<<<<< HEAD
         ruta: 'http://192.168.100.64/sasseri_app2/public',
-=======
-        ruta: 'http://192.168.0.109/sasseri_app2/public',
->>>>>>> a2a3f8f745b0e94fd03c1fcbec682a5432cdf52d
         permisosUser: {
             'leer': 1,
             'escribir': 1,
