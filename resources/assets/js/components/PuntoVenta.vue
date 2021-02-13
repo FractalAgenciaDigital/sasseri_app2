@@ -128,9 +128,12 @@
                                         </div>
                                         <div v-if="detalle.observaciones" class="col-12">
                                             
-                                                <strong>Obseraciones: </strong> <small >{{detalle.observaciones}} </small>
+                                                <strong>Observaciones: </strong> <small >{{detalle.observaciones}} </small>
                                             
                                         </div>
+                                        <td style="text-align: right; opacity:0">
+                                                $ {{detalle.valor_subtotal=Math.round(parseFloat((detalle.precio*detalle.cantidad)-detalle.valor_iva-detalle.valor_descuento))}}
+                                            </td>
                                     </div>
                                    
                                 </div>
@@ -142,11 +145,13 @@
                                 <div class="col-4 text-righ text-right">
                                     $ {{subtotal=calcularSubtotal}}
                                 </div>
+                                
                             </div>
                             <div class="row mt-1">
                                 <div class="col-6">
                                     <b>IVA</b>
                                 </div>
+                                
                                 <div class="col-4 text-righ text-right">
                                     $ {{valor_iva=calcularTotalIva}}
                                 </div>
@@ -534,7 +539,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        <!-- </div> -->
         <div>  
             
             <div class="row mt-1 fixed-bottom mx-auto"> <!-- boton de facturar -->
@@ -1461,6 +1466,7 @@
                         iva: ivaVenta,
                         valor_iva: ivaVenta_vr * this.cantidad,
                         valor_subtotal: Math.round(parseFloat((producto.precio_venta -ivaVenta_vr)* this.cantidad)),
+                        // valor_subtotal : this.subtotal,
                         stock : producto.stock,
                         descuento : 0,
                         nom_presentacion : producto.nom_presentacion,
@@ -1750,7 +1756,7 @@
                     'sumatoria' : 0,
                     'id' : me.facturacion_id
                 }).then(function (response) {
-                    this.position = 7;
+                    me.position = 7;
                     me.ocultarDetalle();
                     me.listarFacturacion(1,'','','','','','','');
                     this.listarArticulo(me.buscarA,me.criterioA,me.buscarCategoriaA);
