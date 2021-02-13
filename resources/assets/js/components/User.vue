@@ -453,7 +453,7 @@
                 let me=this;
                 var url= this.ruta +'/rol/selectRol';
                 axios.get(url).then(function (response) {
-                    //console.log(response);
+                     
                     var respuesta= response.data;
                     me.arrayRol = respuesta.roles;
                 })
@@ -562,7 +562,7 @@
                 let me=this;
                 var url= this.ruta +'/permisos/recargarPermisos';
                 axios.get(url).then(function (response) {
-                    //console.log(response);
+                     
                     // var respuesta= response.data;
                     // me.arrayRol = respuesta.roles;
                 })
@@ -596,7 +596,7 @@
                             }
                             case 'actualizar':
                             {
-                                //console.log(data);
+                                  
                                 this.modal=1;
                                 this.tituloModal='Actualizar Usuario';
                                 this.tipoAccion=2;

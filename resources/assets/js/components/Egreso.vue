@@ -1170,7 +1170,7 @@
                 let me=this;
                 var url= this.ruta +'/cuentas/get_fuentes2';
                 axios.get(url).then(function (response) {
-                    //console.log(response);
+                     
                     var respuesta= response.data;
                     me.arrayFuentes = respuesta.fuentes2;
                 })
@@ -1212,7 +1212,7 @@
                 let me=this;
                 var url= this.ruta +'/conf_formatos/get_tipos_formatos';
                 axios.get(url).then(function (response) {
-                    //console.log(response);
+                     
                     var respuesta= response.data;
                     me.arrayTiposFormatos = respuesta.conf_formatos;
                 })
@@ -1224,7 +1224,7 @@
                 let me=this;
                 var url= this.ruta + '/categoria/selectCategoria';
                 axios.get(url).then(function (response) {
-                    //console.log(response);
+                     
                     var respuesta= response.data;
                     me.arrayCategoria2 = respuesta.categorias;
                 })
@@ -1639,7 +1639,7 @@
                 var urld= this.ruta +'/egreso/obtenerDetalles?id=' + id;
                 
                 axios.get(urld).then(function (response) {
-                    console.log(response);
+                     
                     var respuesta= response.data;
                     me.arrayDetalle = respuesta.detalles;
                 })
