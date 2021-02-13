@@ -174,7 +174,7 @@ class DetalleFacturacionController extends Controller
         'detalle_facturacion.observaciones',
         'preparado')
         ->where('detalle_facturacion.id_factura','=', $id_factura)
-        ->where('articulos.id_impresora','=', $id_impresora)
+        // ->where('articulos.id_impresora','=', $id_impresora)
         ->get();
 
         $facturacion = Facturacion::leftJoin('personas', 'personas.id', 'facturacion.id_tercero')
@@ -254,7 +254,7 @@ class DetalleFacturacionController extends Controller
          'articulos.tipo_articulo',         
         'preparado')
         ->where('detalle_facturacion.id_factura','=', $id_factura)
-        ->where('articulos.id_impresora','=', $id_impresora)
+        // ->where('articulos.id_impresora','=', $id_impresora)
         ->get();
 
         $facturacion = Facturacion::leftJoin('personas', 'personas.id', 'facturacion.id_tercero')
@@ -304,10 +304,12 @@ class DetalleFacturacionController extends Controller
             
             $line = sprintf('%-25s %10.0f %10.2f ','-'. $df->nombre_articulo, $df->cantidad, $df->cantidad * $df->precio);
             $impresora->setEmphasis(true);
+          
+            $impresora->text($line);
+                      
+            $impresora->text("\n"); 
             $impresora->text('Notas:');
             $impresora->text($df->observaciones);
-            $impresora->text("\n"); 
-            $impresora->text($line);
             $impresora->text("\n"); 
             $impresora->text("\n"); 
             

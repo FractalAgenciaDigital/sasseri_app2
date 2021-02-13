@@ -4,19 +4,19 @@
             <notifications group="foo" />
             <div class="card" v-show="position==1">  <!-- listado de productos de factura -->
                 <div class="card-header"> 
-                    <div class="row mb-1">                        
-                        <div class="col-10">
-                            <input class="form-control" type="search" placeholder="Buscar" aria-label="Search" v-model="buscarA" @keyup="listarArticulo(buscarA,criterioA,buscarCategoriaA)">
+                    <div class="row mb-5">                        
+                        <div class="col-11">
+                            <input class="form-control form-control-lg" type="search" placeholder="Buscar" aria-label="Search" v-model="buscarA" @keyup="listarArticulo(buscarA,criterioA,buscarCategoriaA)">
                         </div>
-                        <div class="col-2">
-                            <button class="btn btn-success  fa fa-search btn-buscar float-right" type="submit" @click="listarArticulo(buscarA,criterioA,buscarCategoriaA)">
+                        <div class="col-1">
+                            <button class="btn btn-success btn-block p-2  fa fa-search btn-buscar float-right" type="submit" @click="listarArticulo(buscarA,criterioA,buscarCategoriaA)">
                             </button>
                         </div>                        
                     </div>
                     <div class="row">                            
                         <div class="col-12">
                             <div class="form-group">
-                                <select size="2" class="form-control" multiple  v-model="buscarCategoriaA"  placeholder="- Categorias -" @change="listarArticulo(buscarA,criterioA,buscarCategoriaA)">
+                                <select size="10" class="form-control" multiple  v-model="buscarCategoriaA"  placeholder="- Categorias -" @change="listarArticulo(buscarA,criterioA,buscarCategoriaA)">
                                     <option value="">- Categorias -</option>
                                     <option v-for="categoria in arrayCategoria2" :key="categoria.id" :value="categoria.id" v-text="categoria.nombre"></option>
                                 </select>
@@ -378,7 +378,7 @@
                                     <tr v-for="(prod_preparado,index) in arrayPreparado" :key="index" >
                                         <td  colspan="1"> - {{prod_preparado.nombre_articulo}}</td>                                    
                                         <td  colspan="1">{{prod_preparado.cantidad}}</td>
-                                        <td  colspan="1">{{prod_preparado.precio}}</td>
+                                        <td  colspan="1">{{prod_preparado.precio * prod_preparado.cantidad }}</td>
                                         
                                     </tr>
 
@@ -404,22 +404,22 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="input">
-                                        <h4  style="font-size: 11px;" for="inputGroupSelect01">Estado</h4>
+                                        <h4  for="inputGroupSelect01">Estado</h4>
                                         <select class="custom-select" id="inputGroupSelect01" style="font-size: 12px; width: 297px;">
-                                            <option selected  style="font-size: 11px;">Seleccionar</option>
-                                            <option value="1" style="font-size: 11px;">Abierta</option>
-                                            <option value="2" style="font-size: 11px;">Cerrada</option>
-                                            <option value="3" style="font-size: 11px;">Cancelada</option>
+                                            <option selected >Seleccionar</option>
+                                            <option value="1">Abierta</option>
+                                            <option value="2">Cerrada</option>
+                                            <option value="3">Cancelada</option>
                                         </select>
                                     </div>
                                 </div>                                    
                                 <div class="col">
-                                    <label style="font-size: 11px;">Desde:</label>                                   
+                                    <label>Desde:</label>                                   
                                     <input v-if="permisosUser.leer" type="date" class="form-control" style="border-radius: 5px; width: 136px;" v-model="desdeFiltro">
                                     <input v-else disabled type="date" class="form-control" v-model="desdeFiltro">
                                 </div>
                                 <div class="col">
-                                    <label style="font-size: 11px;">Hasta:</label>                                   
+                                    <label>Hasta:</label>                                   
                                     <input v-if="permisosUser.leer" type="date" class="form-control" style="border-radius: 5px; width: 136px;" v-model="hastaFiltro">
                                     <input v-else disabled type="date" class="form-control" v-model="hastaFiltro">
                                 </div>
@@ -2361,10 +2361,10 @@
     }
 </script>
 <style> 
-    /* {
-            font-size: 12px;
-            font-family: 'Times New Roman';
-    }*/
+    *{
+        font-size: 14px;
+            
+    }
     .ex1 {
         border: 1px solid rgb(49, 173, 45);
         outline-style: solid;
@@ -2438,7 +2438,7 @@
         float: right;
         top: 74px;
         right: 33px;
-        font-size: 95%;
+        font-size: 14px;
         z-index: 2;
         min-width: 85px;
     }
@@ -2469,6 +2469,11 @@
         .btnagregar {
             margin-top: 2rem;
         }
+    }
+    select option{
+        font-size:14px;
+        padding:5px;
+        margin: 5px
     }
 
 </style>
