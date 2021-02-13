@@ -251,8 +251,7 @@ class DetalleFacturacionController extends Controller
         'detalle_facturacion.valor_final',
         'articulos.id_presentacion',
         'presentacion.nombre as nom_presentacion',
-         'articulos.tipo_articulo',
-         
+         'articulos.tipo_articulo',         
         'preparado')
         ->where('detalle_facturacion.id_factura','=', $id_factura)
         ->where('articulos.id_impresora','=', $id_impresora)
@@ -303,8 +302,13 @@ class DetalleFacturacionController extends Controller
         foreach($detalle_facturacion as $df)
         {
             
-            $line = sprintf('%-25s %10.0f %10.2f ', $df->nombre_articulo, $df->cantidad, $df->cantidad * $df->precio);
+            $line = sprintf('%-25s %10.0f %10.2f ','-'. $df->nombre_articulo, $df->cantidad, $df->cantidad * $df->precio);
+            $impresora->setEmphasis(true);
+            $impresora->text('Notas:');
+            $impresora->text($df->observaciones);
+            $impresora->text("\n"); 
             $impresora->text($line);
+            $impresora->text("\n"); 
             $impresora->text("\n"); 
             
             

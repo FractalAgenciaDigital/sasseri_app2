@@ -367,19 +367,27 @@
                         <table class="table table-sm">
                             <thead>
                                 <tr>
-                                    <th scope="col">PRODUCTO</th>
-                                    <th scope="col">OBSERVACIONES</th>
+                                    <th colspan="1">PRODUCTO</th>                                    
                                     <th colspan="1">CANTIDAD</th>
-                                    <th scope="col">PRECIO</th>
+                                    <th colspan="1">PRECIO</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(prod_preparado,index) in arrayPreparado" :key="index">
-                                    <td>{{prod_preparado.nombre_articulo}}</td>
-                                    <td>{{prod_preparado.observaciones}}</td>
-                                    <td>{{prod_preparado.cantidad}}</td>
-                                    <td>{{prod_preparado.precio}}</td>
-                                </tr>
+
+                                
+                                    <tr v-for="(prod_preparado,index) in arrayPreparado" :key="index" >
+                                        <td  colspan="1"> - {{prod_preparado.nombre_articulo}}</td>                                    
+                                        <td  colspan="1">{{prod_preparado.cantidad}}</td>
+                                        <td  colspan="1">{{prod_preparado.precio}}</td>
+                                        
+                                    </tr>
+
+                                    <tr v-for="(prod_preparado,index) in arrayPreparado" :key="index" >
+                                        <td colspan="3">
+                                            {{prod_preparado.observaciones}}
+                                        </td>
+                                    <tr></tr>
+                                  
                             </tbody>
                         </table>
                         -----------------------------------------
