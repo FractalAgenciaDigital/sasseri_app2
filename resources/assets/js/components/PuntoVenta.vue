@@ -4,16 +4,14 @@
             <notifications group="foo" />
             <div class="card" v-show="position==1">  <!-- listado de productos de factura -->
                 <div class="card-header"> 
-                    <div class="row mb-1">
-                        
+                    <div class="row mb-1">                        
                         <div class="col-10">
                             <input class="form-control" type="search" placeholder="Buscar" aria-label="Search" v-model="buscarA" @keyup="listarArticulo(buscarA,criterioA,buscarCategoriaA)">
                         </div>
                         <div class="col-2">
                             <button class="btn btn-success  fa fa-search btn-buscar float-right" type="submit" @click="listarArticulo(buscarA,criterioA,buscarCategoriaA)">
                             </button>
-                        </div>
-                        
+                        </div>                        
                     </div>
                     <div class="row">                            
                         <div class="col-12">
@@ -48,8 +46,7 @@
                     </div>
                 </div>
             </div>
-            <div v-show="position==2">  <!-- VISTA NUEVA FACTURA -->
-                
+            <div v-show="position==2">  <!-- VISTA NUEVA FACTURA -->                
                 <div class="card">
                     <div class="card-header">
                         <div class="row">
@@ -119,21 +116,18 @@
                                         <div class="col-3 float-right"><p class="text-right"> $ {{Math.round(parseFloat((detalle.precio*detalle.cantidad)))}} </p></div>
                                         <div class="col-1 ">                                           
                                             <h3 class="text-danger" v-if="rolusuario==1 || detalle.prod_nuevo==1" @click="eliminarDetalle(detalle,index)" title="Remover"><i class="fa fa-times-circle"></i></h3>
-                                            <!-- <h3 v-else-if="detalle.prod_nuevo==1"  @click="eliminarDetalle(detalle,index)">
-                                                <i class="fa fa-times-circle"></i>
-                                            </h3> -->
+                                          
                                              <h3 class="text-secondary" title="Deshabilitado" v-else>
                                                 <i class="fa fa-times-circle"></i>
                                             </h3>
                                         </div>
-                                        <div v-if="detalle.observaciones" class="col-12">
-                                            
-                                                <strong>Observaciones: </strong> <small >{{detalle.observaciones}} </small>
-                                            
+                                        <div v-if="detalle.observaciones" class="col-12">                                            
+                                            <strong>Observaciones: </strong> 
+                                            <small >{{detalle.observaciones}} </small>                                            
                                         </div>
-                                        <td style="text-align: right; opacity:0">
-                                                $ {{detalle.valor_subtotal=Math.round(parseFloat((detalle.precio*detalle.cantidad)-detalle.valor_iva-detalle.valor_descuento))}}
-                                            </td>
+                                        <td style="display:none">
+                                            $ {{detalle.valor_subtotal=Math.round(parseFloat((detalle.precio*detalle.cantidad)-detalle.valor_iva-detalle.valor_descuento))}}
+                                        </td>
                                     </div>
                                    
                                 </div>
@@ -158,8 +152,7 @@
                             </div>
                         </div>
                     </div>
-                </div>      
-                
+                </div> 
             </div>
             <div v-show="position==3"> <!-- listado de clientes -->
                 <div class="card">
@@ -540,8 +533,7 @@
                 </div>
             </div>
         <!-- </div> -->
-        <div>  
-            
+        <div>              
             <div class="row mt-1 fixed-bottom mx-auto"> <!-- boton de facturar -->
                 <div class="col-12" v-if="position==1||(position==2 && tipoAccion2==1) ||(position==2 && tipoAccion2==0)">
                     <button type="button" @click="registrarFacturacion();" class="btn btn-block btn-lg active btn-success" href="#" role="button"><h3 class="text-white">Facturar $ {{valor_final=calcularTotal}}</h3></button>
@@ -1713,7 +1705,10 @@
                         'tipo_movimiento' : 4,
                         'sumatoria' : 0
                     }).then(function (response) {
-                    
+                        me.factura_imprimir = response.data.id_facturacion;
+                        me.verTicket(me.factura_imprimir);
+                        me.imprimirTicket(me.factura_imprimir);                            
+                        me.position = 6;
                         
                     }).catch(function (error) {
                         console.log(error);
@@ -1726,8 +1721,8 @@
             
             actualizarFacturacion(){
                 
-                if (!this.id_tercero) this.errorMostrarMsjFacturacion.push("Seleccione un tercero");
-                if (!this.lugar) this.errorMostrarMsjFacturacion.push("Seleccione un lugar");
+                // if (!this.id_tercero) this.errorMostrarMsjFacturacion.push("Seleccione un tercero");
+                // if (!this.lugar) this.errorMostrarMsjFacturacion.push("Seleccione un lugar");
                 let me = this;
 
                 axios.put(this.ruta +'/facturacion/actualizar',{
@@ -1756,10 +1751,15 @@
                     'sumatoria' : 0,
                     'id' : me.facturacion_id
                 }).then(function (response) {
-                    me.position = 7;
+
+                     me.factura_imprimir = response.data.id_facturacion;
+                        me.verTicket(me.factura_imprimir);
+                        me.imprimirTicket(me.factura_imprimir);                            
+                        
+                    me.position = 6;
                     me.ocultarDetalle();
                     me.listarFacturacion(1,'','','','','','','');
-                    this.listarArticulo(me.buscarA,me.criterioA,me.buscarCategoriaA);
+                    me.listarArticulo(me.buscarA,me.criterioA,me.buscarCategoriaA);
                     me.tipoAccion2 =1;
                     
                   

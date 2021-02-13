@@ -308,7 +308,7 @@ class FacturacionController extends Controller
         }
 
 
-        return 'ok';
+        return ['id_facturacion' => $request->id];   
     }
 
     public function cambiarEstado(Request $request)
