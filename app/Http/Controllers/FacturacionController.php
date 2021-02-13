@@ -574,7 +574,7 @@ class FacturacionController extends Controller
         //     $impresora->setJustification(Printer::JUSTIFY_CENTER);
         //     $impresora->text("-------------------------\n\n");
 
-            $line = sprintf('%-25s %10.0f %10.2f ', $df->nombre_articulo, $df->cantidad, $df->cantidad * $df->precio);
+            $line = sprintf('%-25s %10.0f %10.2f ','-'. $df->nombre_articulo, $df->cantidad, $df->cantidad * $df->precio);
             $impresora->text($line);
             $impresora->text("\n"); 
             
