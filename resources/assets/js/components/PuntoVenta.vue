@@ -539,7 +539,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        <!-- </div> -->
         <div>  
             
             <div class="row mt-1 fixed-bottom mx-auto"> <!-- boton de facturar -->
