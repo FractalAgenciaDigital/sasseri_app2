@@ -4,21 +4,19 @@
             <notifications group="foo" />
             <div class="card" v-show="position==1">  <!-- listado de productos de factura -->
                 <div class="card-header"> 
-                    <div class="row mb-1">
-                        
-                        <div class="col-10">
-                            <input class="form-control" type="search" placeholder="Buscar" aria-label="Search" v-model="buscarA" @keyup="listarArticulo(buscarA,criterioA,buscarCategoriaA)">
+                    <div class="row mb-5">                        
+                        <div class="col-11">
+                            <input class="form-control form-control-lg" type="search" placeholder="Buscar" aria-label="Search" v-model="buscarA" @keyup="listarArticulo(buscarA,criterioA,buscarCategoriaA)">
                         </div>
-                        <div class="col-2">
-                            <button class="btn btn-success  fa fa-search btn-buscar float-right" type="submit" @click="listarArticulo(buscarA,criterioA,buscarCategoriaA)">
+                        <div class="col-1">
+                            <button class="btn btn-success btn-block p-2  fa fa-search btn-buscar float-right" type="submit" @click="listarArticulo(buscarA,criterioA,buscarCategoriaA)">
                             </button>
-                        </div>
-                        
+                        </div>                        
                     </div>
                     <div class="row">                            
                         <div class="col-12">
                             <div class="form-group">
-                                <select size="2" class="form-control" multiple  v-model="buscarCategoriaA"  placeholder="- Categorias -" @change="listarArticulo(buscarA,criterioA,buscarCategoriaA)">
+                                <select size="10" class="form-control" multiple  v-model="buscarCategoriaA"  placeholder="- Categorias -" @change="listarArticulo(buscarA,criterioA,buscarCategoriaA)">
                                     <option value="">- Categorias -</option>
                                     <option v-for="categoria in arrayCategoria2" :key="categoria.id" :value="categoria.id" v-text="categoria.nombre"></option>
                                 </select>
@@ -48,8 +46,7 @@
                     </div>
                 </div>
             </div>
-            <div v-show="position==2">  <!-- VISTA NUEVA FACTURA -->
-                
+            <div v-show="position==2">  <!-- VISTA NUEVA FACTURA -->                
                 <div class="card">
                     <div class="card-header">
                         <div class="row">
@@ -119,18 +116,18 @@
                                         <div class="col-3 float-right"><p class="text-right"> $ {{Math.round(parseFloat((detalle.precio*detalle.cantidad)))}} </p></div>
                                         <div class="col-1 ">                                           
                                             <h3 class="text-danger" v-if="rolusuario==1 || detalle.prod_nuevo==1" @click="eliminarDetalle(detalle,index)" title="Remover"><i class="fa fa-times-circle"></i></h3>
-                                            <!-- <h3 v-else-if="detalle.prod_nuevo==1"  @click="eliminarDetalle(detalle,index)">
-                                                <i class="fa fa-times-circle"></i>
-                                            </h3> -->
+                                          
                                              <h3 class="text-secondary" title="Deshabilitado" v-else>
                                                 <i class="fa fa-times-circle"></i>
                                             </h3>
                                         </div>
-                                        <div v-if="detalle.observaciones" class="col-12">
-                                            
-                                                <strong>Obseraciones: </strong> <small >{{detalle.observaciones}} </small>
-                                            
+                                        <div v-if="detalle.observaciones" class="col-12">                                            
+                                            <strong>Observaciones: </strong> 
+                                            <small >{{detalle.observaciones}} </small>                                            
                                         </div>
+                                        <td style="display:none">
+                                            $ {{detalle.valor_subtotal=Math.round(parseFloat((detalle.precio*detalle.cantidad)-detalle.valor_iva-detalle.valor_descuento))}}
+                                        </td>
                                     </div>
                                    
                                 </div>
@@ -142,19 +139,20 @@
                                 <div class="col-4 text-righ text-right">
                                     $ {{subtotal=calcularSubtotal}}
                                 </div>
+                                
                             </div>
                             <div class="row mt-1">
                                 <div class="col-6">
                                     <b>IVA</b>
                                 </div>
+                                
                                 <div class="col-4 text-righ text-right">
                                     $ {{valor_iva=calcularTotalIva}}
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>      
-                
+                </div> 
             </div>
             <div v-show="position==3"> <!-- listado de clientes -->
                 <div class="card">
@@ -275,7 +273,7 @@
                         </div>                                  
                     </div>
                     <div class="ticket">
-                        <img class="img-logo espacio-1" src="http://192.168.0.100/sasseri_app2/public/Empresas/1_empresa/ImgLogos/f4f72620874a541d0113ea86bcf699a8.jpg" alt="img-logo">
+                        <img class="img-logo espacio-1" src="http://192.168.100.64/sasseri_app2/public/Empresas/1_empresa/ImgLogos/f4f72620874a541d0113ea86bcf699a8.jpg" alt="img-logo">
                         <p class="centrado espacio-1">SASSERI_APP_2<br>NIT: 81245875-0<br>BR/DIAGONAL LAS AMERICAS 20_CRA 15-25<br>TEL: 2448484154<br>RES DIAN 100000554554 DE DICIEMBRE 20/2020<br>PERSONA JURUDICA DECLARANTE - REGIMEN COMUN<br>FACTURA DE VENTA N°. 155455<br>FECHA 20/12/2020 - 04:44:42 P.M.</p>
                         -----------------------------------------
                         <table class="table table-sm espacio-1">
@@ -346,7 +344,7 @@
                         </div>                                      
                     </div>
                     <div class="ticket">
-                        <!-- <img class="img-logo espacio-1" src="http://localhost/sasseri_app2/public/Empresas/1_empresa/ImgLogos/f4f72620874a541d0113ea86bcf699a8.jpg" alt="img-logo"> -->
+                        <!-- <img class="img-logo espacio-1" src="http://192.168.100.64/sasseri_app2/public/Empresas/1_empresa/ImgLogos/f4f72620874a541d0113ea86bcf699a8.jpg" alt="img-logo"> -->
                         <p class="centrado espacio-1">FECHA {{ datosFactura.fec_crea}}</p>
                         -----------------------------------------
                         <div class="input-group mb-0">
@@ -369,19 +367,27 @@
                         <table class="table table-sm">
                             <thead>
                                 <tr>
-                                    <th scope="col">PRODUCTO</th>
-                                    <th scope="col">OBSERVACIONES</th>
+                                    <th colspan="1">PRODUCTO</th>                                    
                                     <th colspan="1">CANTIDAD</th>
-                                    <th scope="col">PRECIO</th>
+                                    <th colspan="1">PRECIO</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(prod_preparado,index) in arrayPreparado" :key="index">
-                                    <td>{{prod_preparado.nombre_articulo}}</td>
-                                    <td>{{prod_preparado.observaciones}}</td>
-                                    <td>{{prod_preparado.cantidad}}</td>
-                                    <td>{{prod_preparado.precio}}</td>
-                                </tr>
+
+                                
+                                    <tr v-for="(prod_preparado,index) in arrayPreparado" :key="index" >
+                                        <td  colspan="1"> - {{prod_preparado.nombre_articulo}}</td>                                    
+                                        <td  colspan="1">{{prod_preparado.cantidad}}</td>
+                                        <td  colspan="1">{{prod_preparado.precio * prod_preparado.cantidad }}</td>
+                                        
+                                    </tr>
+
+                                    <tr v-for="(prod_preparado,index) in arrayPreparado" :key="index" >
+                                        <td colspan="3">
+                                            {{prod_preparado.observaciones}}
+                                        </td>
+                                    <tr></tr>
+                                  
                             </tbody>
                         </table>
                         -----------------------------------------
@@ -398,22 +404,22 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="input">
-                                        <h4  style="font-size: 11px;" for="inputGroupSelect01">Estado</h4>
+                                        <h4  for="inputGroupSelect01">Estado</h4>
                                         <select class="custom-select" id="inputGroupSelect01" style="font-size: 12px; width: 297px;">
-                                            <option selected  style="font-size: 11px;">Seleccionar</option>
-                                            <option value="1" style="font-size: 11px;">Abierta</option>
-                                            <option value="2" style="font-size: 11px;">Cerrada</option>
-                                            <option value="3" style="font-size: 11px;">Cancelada</option>
+                                            <option selected >Seleccionar</option>
+                                            <option value="1">Abierta</option>
+                                            <option value="2">Cerrada</option>
+                                            <option value="3">Cancelada</option>
                                         </select>
                                     </div>
                                 </div>                                    
                                 <div class="col">
-                                    <label style="font-size: 11px;">Desde:</label>                                   
+                                    <label>Desde:</label>                                   
                                     <input v-if="permisosUser.leer" type="date" class="form-control" style="border-radius: 5px; width: 136px;" v-model="desdeFiltro">
                                     <input v-else disabled type="date" class="form-control" v-model="desdeFiltro">
                                 </div>
                                 <div class="col">
-                                    <label style="font-size: 11px;">Hasta:</label>                                   
+                                    <label>Hasta:</label>                                   
                                     <input v-if="permisosUser.leer" type="date" class="form-control" style="border-radius: 5px; width: 136px;" v-model="hastaFiltro">
                                     <input v-else disabled type="date" class="form-control" v-model="hastaFiltro">
                                 </div>
@@ -535,8 +541,7 @@
                 </div>
             </div>
         <!-- </div> -->
-        <div>  
-            
+        <div>              
             <div class="row mt-1 fixed-bottom mx-auto"> <!-- boton de facturar -->
                 <div class="col-12" v-if="position==1||(position==2 && tipoAccion2==1) ||(position==2 && tipoAccion2==0)">
                     <button type="button" @click="registrarFacturacion();" class="btn btn-block btn-lg active btn-success" href="#" role="button"><h3 class="text-white">Facturar $ {{valor_final=calcularTotal}}</h3></button>
@@ -1461,6 +1466,7 @@
                         iva: ivaVenta,
                         valor_iva: ivaVenta_vr * this.cantidad,
                         valor_subtotal: Math.round(parseFloat((producto.precio_venta -ivaVenta_vr)* this.cantidad)),
+                        // valor_subtotal : this.subtotal,
                         stock : producto.stock,
                         descuento : 0,
                         nom_presentacion : producto.nom_presentacion,
@@ -1707,7 +1713,10 @@
                         'tipo_movimiento' : 4,
                         'sumatoria' : 0
                     }).then(function (response) {
-                    
+                        me.factura_imprimir = response.data.id_facturacion;
+                        me.verTicket(me.factura_imprimir);
+                        me.imprimirTicket(me.factura_imprimir);                            
+                        me.position = 6;
                         
                     }).catch(function (error) {
                         console.log(error);
@@ -1720,8 +1729,8 @@
             
             actualizarFacturacion(){
                 
-                if (!this.id_tercero) this.errorMostrarMsjFacturacion.push("Seleccione un tercero");
-                if (!this.lugar) this.errorMostrarMsjFacturacion.push("Seleccione un lugar");
+                // if (!this.id_tercero) this.errorMostrarMsjFacturacion.push("Seleccione un tercero");
+                // if (!this.lugar) this.errorMostrarMsjFacturacion.push("Seleccione un lugar");
                 let me = this;
 
                 axios.put(this.ruta +'/facturacion/actualizar',{
@@ -1750,10 +1759,15 @@
                     'sumatoria' : 0,
                     'id' : me.facturacion_id
                 }).then(function (response) {
-                    this.position = 7;
+
+                     me.factura_imprimir = response.data.id_facturacion;
+                        me.verTicket(me.factura_imprimir);
+                        me.imprimirTicket(me.factura_imprimir);                            
+                        
+                    me.position = 6;
                     me.ocultarDetalle();
                     me.listarFacturacion(1,'','','','','','','');
-                    this.listarArticulo(me.buscarA,me.criterioA,me.buscarCategoriaA);
+                    me.listarArticulo(me.buscarA,me.criterioA,me.buscarCategoriaA);
                     me.tipoAccion2 =1;
                     
                   
@@ -2347,10 +2361,10 @@
     }
 </script>
 <style> 
-    /* {
-            font-size: 12px;
-            font-family: 'Times New Roman';
-    }*/
+    *{
+        font-size: 14px;
+            
+    }
     .ex1 {
         border: 1px solid rgb(49, 173, 45);
         outline-style: solid;
@@ -2424,7 +2438,7 @@
         float: right;
         top: 74px;
         right: 33px;
-        font-size: 95%;
+        font-size: 14px;
         z-index: 2;
         min-width: 85px;
     }
@@ -2455,6 +2469,11 @@
         .btnagregar {
             margin-top: 2rem;
         }
+    }
+    select option{
+        font-size:14px;
+        padding:5px;
+        margin: 5px
     }
 
 </style>

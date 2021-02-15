@@ -178,47 +178,55 @@
                                                 </button>
                                             </template>
 
-                                            <div class="btn-group dropright">
+                                            <!-- Botones de registrar -->
+                                            <template> 
+                                                <button type="button" v-if="permisosUser.actualizar && facturacion.estado==1" class="btn btn-primary text-white" @click="cambiarEstadoFacturacion(facturacion.id,'registrar')" title="Registrar">
+                                                    <i class="fa fa-registered"></i> 
+                                                    <!-- Registrar -->
+                                                </button>
+
+                                                <button type="button" v-else-if="permisosUser.actualizar && facturacion.estado==2" @click="pdfFormato(facturacion.id)" class="btn btn-info btn-sm" title="PDF">
+                                                    <i class="icon-doc"></i> 
+                                                    <!-- Descargar PDF -->
+                                                </button>
+
+                                                <button type="button" v-else class="btn btn-primary text-white" title="Registrar (Deshabilitado)">
+                                                    <i class="fa fa-registered"></i> 
+                                                     <!-- Registrar -->
+                                                </button>
+                                            </template>
+
+                                            <!--Botones de anular -->
+
+                                            <template v-if="permisosUser.anular && facturacion.estado==1">
+                                                <button type="button" class="btn btn-primary text-white" @click="cambiarEstadoFacturacion(facturacion.id,'anular')" v-if="facturacion.estado!=4 && facturacion.estado!=3" title="Anular">
+                                                    <i class="icon-trash"></i> 
+                                                    <!-- Anular -->
+                                                </button>
+                                                <button type="button" class="btn btn-primary text-white" v-else title="Anular (Deshabilitado)">
+                                                    <i class="icon-trash"></i> 
+                                                     <!-- Anular (Deshabilitado) -->
+                                                </button>
+                                            </template>
+                                            <template v-else>
+                                                <button type="button" class="btn btn-primary text-white" title="Anular (Deshabilitado)">
+                                                    <i class="icon-trash"></i> 
+                                                    <!-- Anular (Deshabilitado) -->
+                                                </button>
+                                            </template>
+                                            
+                                            <!-- Despliegue de opciones -->
+                                            <!-- <div class="btn-group dropright">
                                                 <button type="button" class="btn btn-light text-secondary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                    <i class="fa fa-ellipsis-v"></i>
                                                 </button>
                                                 <div class="dropdown-menu" style="top:5px;">   
                                                     <button type="button" @click="verFacturacion(facturacion.id)" class="dropdown-item" title="Ver factura">
-                                                        <i class="icon-eye"></i> Ver factura
-                                                    </button>                                                 
+                                                        <i class="icon-eye"></i> Ver factura                                                  </button>                                                 
                                                 
-                                                    <template>
-                                                        <button type="button" v-if="permisosUser.actualizar && facturacion.estado==1" class="dropdown-item" @click="cambiarEstadoFacturacion(facturacion.id,'registrar')" title="Registrar">
-                                                            <i class="fa fa-registered"></i> Registrar
-                                                        </button>
-
-                                                        <button type="button" v-else-if="permisosUser.actualizar && facturacion.estado==2" @click="pdfFormato(facturacion.id)" class="btn btn-info btn-sm" title="PDF">
-                                                            <i class="icon-doc"></i> Descargar PDF
-                                                        </button>
-
-                                                        <button type="button" v-else class="dropdown-item" title="Registrar (Deshabilitado)">
-                                                            <i class="fa fa-registered"></i>  Registrar
-                                                        </button>
-                                                    </template>
-                                                
-                                                    <template v-if="permisosUser.anular && facturacion.estado==1">
-                                                        <button type="button" class="dropdown-item" @click="cambiarEstadoFacturacion(facturacion.id,'anular')" v-if="facturacion.estado!=4 && facturacion.estado!=3" title="Anular">
-                                                            <i class="icon-trash"></i> Anular
-                                                        </button>
-                                                        <button type="button" class="dropdown-item" v-else title="Anular (Deshabilitado)">
-                                                            <i class="icon-trash"></i>  Anular (Deshabilitado)
-                                                        </button>
-                                                    </template>
-                                                    <template v-else>
-                                                        <button type="button" class="dropdown-item" title="Anular (Deshabilitado)">
-                                                            <i class="icon-trash"></i> Anular (Deshabilitado)
-                                                        </button>
-                                                    </template>
-                                                   
-
                                                 </div>
                                             </div>                                            
-                                            
+                                             -->
                                         </td>
                                     </tr>                                
                                 </tbody>
