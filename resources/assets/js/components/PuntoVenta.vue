@@ -273,7 +273,7 @@
                         </div>                                  
                     </div>
                     <div class="ticket">
-                        <img class="img-logo espacio-1" src="http://192.168.100.64/sasseri_app2/public/Empresas/1_empresa/ImgLogos/f4f72620874a541d0113ea86bcf699a8.jpg" alt="img-logo">
+                        <img class="img-logo espacio-1" src="http://192.168.0.108/sasseri_app2/public/Empresas/1_empresa/ImgLogos/f4f72620874a541d0113ea86bcf699a8.jpg" alt="img-logo">
                         <p class="centrado espacio-1">SASSERI_APP_2<br>NIT: 81245875-0<br>BR/DIAGONAL LAS AMERICAS 20_CRA 15-25<br>TEL: 2448484154<br>RES DIAN 100000554554 DE DICIEMBRE 20/2020<br>PERSONA JURUDICA DECLARANTE - REGIMEN COMUN<br>FACTURA DE VENTA N°. 155455<br>FECHA 20/12/2020 - 04:44:42 P.M.</p>
                         -----------------------------------------
                         <table class="table table-sm espacio-1">
@@ -344,7 +344,7 @@
                         </div>                                      
                     </div>
                     <div class="ticket">
-                        <!-- <img class="img-logo espacio-1" src="http://192.168.100.64/sasseri_app2/public/Empresas/1_empresa/ImgLogos/f4f72620874a541d0113ea86bcf699a8.jpg" alt="img-logo"> -->
+                        <!-- <img class="img-logo espacio-1" src="http://192.168.0.108/sasseri_app2/public/Empresas/1_empresa/ImgLogos/f4f72620874a541d0113ea86bcf699a8.jpg" alt="img-logo"> -->
                         <p class="centrado espacio-1">FECHA {{ datosFactura.fec_crea}}</p>
                         -----------------------------------------
                         <div class="input-group mb-0">
@@ -372,21 +372,16 @@
                                     <th colspan="1">PRECIO</th>
                                 </tr>
                             </thead>
-                            <tbody>
-
-                                
-                                    <tr v-for="(prod_preparado,index) in arrayPreparado" :key="index" >
-                                        <td  colspan="1"> - {{prod_preparado.nombre_articulo}}</td>                                    
-                                        <td  colspan="1">{{prod_preparado.cantidad}}</td>
-                                        <td  colspan="1">{{prod_preparado.precio * prod_preparado.cantidad }}</td>
-                                        
-                                    </tr>
-
-                                    <tr v-for="(prod_preparado,index) in arrayPreparado" :key="index" >
-                                        <td colspan="3">
-                                            {{prod_preparado.observaciones}}
-                                        </td>
-                                    <tr></tr>
+                            <tbody>                               
+                                <tr v-for="(prod_preparado,index) in arrayPreparado" :key="index" >
+                                    <td  colspan="1"> - {{prod_preparado.nombre_articulo}}
+                                        <br>
+                                        {{prod_preparado.observaciones}}
+                                    </td>                                    
+                                    <td  colspan="1">{{prod_preparado.cantidad}}</td>
+                                    <td  colspan="1">{{prod_preparado.precio * prod_preparado.cantidad }}</td>
+                                    
+                                </tr>
                                   
                             </tbody>
                         </table>

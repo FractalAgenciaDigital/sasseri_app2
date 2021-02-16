@@ -67,49 +67,77 @@
             <div v-show="position==2"> <!-- listado de faturas -->
                 <div class="card">
                    
-                    <div class="card-header" style="font-size: 13px;">
-                        <div class="row">
-                            <table class="table table-sm table-bordered">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        
-                                        <th scope="col">Mesa</th>
-                                        
-                                        <th scope="col">Estado</th>
-                                        <th scope="col">Editar</th>
-                                        <th> Imprimir</th>
+                    <div class="card-header col-12"> 
+                        <h1>Ordenes en cocina</h1> 
+                        <button class="btn btn-sm btn-success" @click="recargarPagina();">Recargar página</button>
+                    </div> 
+                    <div class="card-body row">
+                        
+                        <div class=" p-2 mb-2 col-lg-6 -1" v-for="(det,index) in arrayDetalle" :key="index">
+                            <div class="card">
+                                <div class="card-header  text-white bg-primary ">
+                                    <div class="row col-12">
 
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="facturacion in arrayFacturacion" :key="facturacion.id" style="text-align: right;">
-                                        <th scope="row" v-text="facturacion.id"></th>
+                                        <div class="col-lg-8">
+                                            {{det.nombre_lugar}}
+                                            <br>
+                                            <small v-if="det.estado==1"><span>Activa</span></small>
+                                            <small v-else-if="det.estado==2"><span>Registrada</span></small>
+                                            <small v-else-if="det.estado==3"><span>Enviada</span></small>
+                                            <small v-else-if="det.estado==4"><span>Anulada</span></small>
+                                            
+                                        </div>
+                                        <div class="col-lg-4">                                        
+                                            <button @click="imprimirTicket(det.id)" class="btn btn-light" style="float:right;">
+                                                <i class="icon-printer"></i> 
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="card-body">
+                                    <!-- <div v-for=""></div> -->
+                                    <h5 class="card-title"></h5>
+                                    <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Articulo</th>
+                                                <th>Cant</th>
+                                                <th>Observaciones</th>
+                                                <th>¿Listo?</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="prod in det.productos" :key="prod.id">
+                                                <td v-text="prod.id"></td>
+                                                <td v-text="prod.articulo"></td>
+                                                <td v-text="prod.cantidad"></td>
+                                                <td v-text="prod.observaciones"></td>
+                                                <td>
+                                                    <button class="btn btn-lg text-danger" style="font-size:1.5rem"  v-if="prod.preparado==0" title="Activar" @click="productoListo(prod.id)">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
+                                                    <button class="btn btn-lg text-success" style="font-size:1.5rem" v-if="prod.preparado==1" title="Desactivar" @click="productoNoListo(prod.id)">
+                                                        
+                                                        <i class="fa fa-check"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
                                         
-                                        <td class="centrado" v-text="facturacion.nom_lugar? facturacion.nom_lugar : ''"></td>
-                                        
-                                        <td v-if="facturacion.estado==1" class="text-warning">Abierta</td>
-                                        <td v-if="facturacion.estado==2" class="text-success">Cerrada</td>
-                                        <td v-if="facturacion.estado==0" class="text-danger">Cancelada</td>
-                                        <td class="centrado">
-                                            <button v-if="facturacion.estado==1"  @click="mostrarDetalle('facturacion','actualizar',facturacion);position=1;" class="btn-1 btn btn-success rounded-circle">
-                                                <i class="fa fa-pencil btn-edit-factura"></i>
-                                            </button>
-                                             <button v-else class="btn-1 btn btn-secondary rounded-circle">
-                                                <i class="fa fa-pencil btn-edit-factura"></i>
-                                            </button>
-                                        </td>
-                                        <td>
-                                            <button @click="imprimirTicket(facturacion.id)" class="btn btn-light">
-                                                Imprimir
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    
-                                </tbody>
-                            </table>            
+                                </div>
+                            </div>
                         </div>
-                    </div>                      
+
+                            
+                    </div>
+                                    
                 </div>  
             </div>
         </div>
@@ -183,7 +211,7 @@
         
         },
         methods : {
-           
+         
             
             listarFacturacion (page,numFacturaFiltro,estadoFiltro,idTerceroFiltro,ordenFiltro,desdeFiltro,hastaFiltro,idVendedorFiltro){
                 let me=this;
@@ -512,11 +540,14 @@
             },         
             listarDetalle(id_factura){
                 let me=this;
-                var url= this.ruta +'/detalle_facturacion/productosPreparados?id_factura=' + id_factura;
+                // var url= this.ruta +'/detalle_facturacion/productosPreparados?id_factura=' + id_factura;
+                var url= this.ruta +'/detalle_facturacion/productosPreparados';
                 axios.get(url).then(function (response) {
+                    console.log(response);
                     var respuesta= response.data;
-                    me.arrayDetalle = respuesta.detalles;
-                    me.arrayDetalleT = respuesta.detalles;
+                    // me.arrayDetalle = respuesta.detalles;
+                    me.arrayDetalle = respuesta.factura;
+                    // me.arrayDetalleT = respuesta.detalles;
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -534,6 +565,13 @@
                 .catch(function (error) {
                     console.log(error);
                 });
+            },
+            recargarPagina(){
+                let me = this;
+                this.listarDetalle();
+                this.listarCajas();
+                this.buscarTercero();
+                this.selectZonas();
             },
            
         },
@@ -578,7 +616,8 @@
             
            // me.llamarMensaje();
             this.listarArticulo(this.buscarA,this.criterioA,this.buscarCategoriaA);
-             me.listarFacturacion(1,me.numFacturaFiltro,me.estadoFiltro,me.idTerceroFiltro,me.ordenFiltro,me.desdeFiltro,me.hastaFiltro,me.idVendedorFiltro);
+            me.listarFacturacion(1,me.numFacturaFiltro,me.estadoFiltro,me.idTerceroFiltro,me.ordenFiltro,me.desdeFiltro,me.hastaFiltro,me.idVendedorFiltro);
+            me.listarDetalle();
              
         }
     }

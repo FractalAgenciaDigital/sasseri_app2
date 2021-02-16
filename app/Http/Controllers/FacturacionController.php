@@ -234,8 +234,7 @@ class FacturacionController extends Controller
             $stock->tipo_movimiento = $request->tipo_movimiento;
             $stock->sumatoria = $request->sumatoria;
             $stock->save();
-           
-           
+                      
         }
         return ['id_facturacion' => $facturacion->id];        
     }
@@ -545,9 +544,6 @@ class FacturacionController extends Controller
         $impresora->text("Cliente: ");
         $impresora->text($facturacion->nombre1." ".$facturacion->nombre2." ".$facturacion->apellido1." ".$facturacion->apellido2."\n");
 
-       
-
-
         $impresora->setLineSpacing(2);
  
         $impresora->setJustification(Printer::JUSTIFY_LEFT);
@@ -558,6 +554,8 @@ class FacturacionController extends Controller
         $impresora->setEmphasis(false);
 
         $impresora->text("\n"); 
+
+        $total = 0;
         foreach($detalle_facturacion as $df)
         {
             // $impresora->setJustification(Printer::JUSTIFY_LEFT);
@@ -575,6 +573,8 @@ class FacturacionController extends Controller
         //     $impresora->text("-------------------------\n\n");
 
             $line = sprintf('%-25s %10.0f %10.2f ','-'. $df->nombre_articulo, $df->cantidad, $df->cantidad * $df->precio);
+
+            $total +=  $df->cantidad * $df->precio;
             $impresora->text($line);
             $impresora->text("\n"); 
             
@@ -584,7 +584,7 @@ class FacturacionController extends Controller
         $impresora->setEmphasis(true);
         $impresora->setLineSpacing(2);
 
-        $impresora->text("\nTotal: $" . number_format($facturacion->total, 2) . "\n");
+        $impresora->text("\nTotal: $" . number_format($total, 2) . "\n");
         $impresora->setJustification(Printer::JUSTIFY_CENTER);
        
         

@@ -206,7 +206,7 @@ class CierresXCajaController extends Controller
         $carbon = Carbon::now('America/Bogota')->subDay()->toDateTimeString();
 
         $cierres_caja = CierresXCaja::leftJoin('cajas','cajas_cierres.id_caja','=','cajas.id')
-        ->select('cajas_cierres.id','cajas_cierres.id_caja','cajas_cierres.vr_inicial','cajas_cierres.obs_inicial','cajas_cierres.vr_gastos','cajas_cierres.obs_gastos','cajas_cierres.vr_software','cajas_cierres.vr_final','cajas_cierres.estado','cajas.nombre','cajas_cierres.created_at','cajas_cierres.usu_crea','cajas_cierres.created_at')
+        ->select('cajas_cierres.id','cajas_cierres.id_caja','cajas_cierres.vr_inicial','cajas_cierres.obs_inicial','cajas_cierres.vr_gastos','cajas_cierres.obs_gastos','cajas_cierres.vr_software','cajas_cierres.vr_final','cajas_cierres.estado','cajas.nombre','cajas_cierres.usu_crea','cajas_cierres.created_at')
         ->where('.cajas_cierres.id_empresa','=',$id_empresa)
         // ->where('cajas_cierres.usu_crea','=',$id_usuario)
         ->orderBy('cajas_cierres.id','desc')->limit(1)->get();
@@ -231,4 +231,6 @@ class CierresXCajaController extends Controller
             'usu_crea'=>$id_usuario,
         ];
     }
+
+  
 }
