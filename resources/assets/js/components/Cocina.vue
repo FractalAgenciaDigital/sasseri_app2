@@ -71,73 +71,76 @@
                         <h1>Ordenes en cocina</h1> 
                         <button class="btn btn-sm btn-success" @click="recargarPagina();">Recargar página</button>
                     </div> 
-                    <div class="card-body row">
-                        
-                        <div class=" p-2 mb-2 col-lg-6 -1" v-for="(det,index) in arrayDetalle" :key="index">
-                            <div class="card">
-                                <div class="card-header  text-white bg-primary ">
-                                    <div class="row col-12">
 
-                                        <div class="col-lg-8">
-                                            {{det.nombre_lugar}}
-                                            <br>
-                                            <small v-if="det.estado==1"><span>Activa</span></small>
-                                            <small v-else-if="det.estado==2"><span>Registrada</span></small>
-                                            <small v-else-if="det.estado==3"><span>Enviada</span></small>
-                                            <small v-else-if="det.estado==4"><span>Anulada</span></small>
-                                            
+                    <div class="">
+
+                        <table class="table table-bordered table-striped table-sm table-hover table-sm-responsive table-earning ">
+                            <thead class="thead-primary">
+                                <tr>
+                                    <th scope="col" rowspan="2">#</th>                                    
+                                    <th  scope="col" rowspan="2">Mesa</th>                                    
+                                    <th scope="col" colspan="1" rowspan="1">Productos</th>
+                                    <th rowspan="2"> Imprimir</th>
+                                </tr>
+                                <tr>
+                                    <th colspan="1" rowspan="1">
+                                        <div class="list-groupx list-group-flushx row">
+                                            <div class="list-group-itemx py-1 col-4">Articulo</div>
+                                            <div class="list-group-itemx py-1 col-5" >Nota</div>
+                                            <div class="list-group-itemx py-1 col-3">Finalizar</div>
                                         </div>
-                                        <div class="col-lg-4">                                        
-                                            <button @click="imprimirTicket(det.id)" class="btn btn-light" style="float:right;">
-                                                <i class="icon-printer"></i> 
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="card-body">
-                                    <!-- <div v-for=""></div> -->
-                                    <h5 class="card-title"></h5>
-                                    <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-
-                                    <table class="table table-sm">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Articulo</th>
-                                                <th>Cant</th>
-                                                <th>Observaciones</th>
-                                                <th>¿Listo?</th>
-
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr v-for="prod in det.productos" :key="prod.id">
-                                                <td v-text="prod.id"></td>
-                                                <td v-text="prod.articulo"></td>
-                                                <td v-text="prod.cantidad"></td>
-                                                <td v-text="prod.observaciones"></td>
-                                                <td>
-                                                    <button class="btn btn-lg text-danger" style="font-size:1.5rem"  v-if="prod.preparado==0" title="Activar" @click="productoListo(prod.id)">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                    <button class="btn btn-lg text-success" style="font-size:1.5rem" v-if="prod.preparado==1" title="Desactivar" @click="productoNoListo(prod.id)">
-                                                        
-                                                        <i class="fa fa-check"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-
+                                    </th>                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(det,index) in arrayDetalle" :key="index">                                      
+                                    <th scope="row" v-text="det.id"></th>                                        
+                                    <th class="text-center">
+                                        {{det.nombre_lugar}}
+                                        <br>
                                         
-                                </div>
-                            </div>
-                        </div>
+                                        <small v-if="det.estado==1"><span>Activa</span></small>
+                                        <small v-else-if="det.estado==2"><span>Registrada</span></small>
+                                        <small v-else-if="det.estado==3"><span>Enviada</span></small>
+                                        <small v-else-if="det.estado==4"><span>Anulada</span></small>
+                                        <br>
+                                        <i class="icon-cup"></i>
 
-                            
-                    </div>
+                                    </th>
+                                    <td>
+                                        <div class="list-groupx list-groupx-flush row" v-for="prod in det.productos" :key="prod.id">
+                                            <div class="list-group-itemx py-1 text-left col-4">
+                                                <b>#<span class="badge rounded-pill bg-primary text-white">{{prod.cantidad}}</span></b>
+                                                 -  
+                                                <span class="text-uppercase">{{prod.articulo}}</span>
+                                            </div>   
+                                            <div class="list-group-itemx py-1 text-left col-5">                                                
+                                                {{prod.observaciones}}
+                                            </div>   
+                                            <div class="list-group-itemx p-0 col-3">
+                                                <button class="btn btn-lg text-danger"  v-if="prod.preparado==0" title="Activar" @click="productoListo(prod.id)">
+                                                    <i class="fa fa-times"></i>Preparado
+                                                </button>
+                                                <button class="btn btn-lg text-success" v-if="prod.preparado==1" title="Desactivar" @click="productoNoListo(prod.id)">
+                                                    
+                                                    <i class="fa fa-check"></i> Cancelar
+                                                </button>                        
+                                            </div>                                                
+                                        </div>
+                                    </td>    
+                                                   
+                                    <td>
+                                        <button @click="imprimirTicket(det.id)" class="btn btn-light">
+                                            Imprimir
+                                        </button>
+                                    </td>                    
                                     
+                                </tr>
+                                
+                                
+                            </tbody>
+                        </table>                                   
+                    </div>
                 </div>  
             </div>
         </div>
