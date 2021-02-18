@@ -240,6 +240,10 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/info_auxiliares/balance_general', 'InfAuxiliaresController@BalanceGeneral');
         Route::get('/info_auxiliares', 'InfAuxiliaresController@index');
 
+        Route::get('/informe/cajas', 'InformeController@cajas');
+        Route::get('/informe/productos', 'InformeController@productos');
+        Route::get('/informe/categorias', 'InformeController@categorias');
+
         Route::get('/ingreso', 'IngresoController@index');
         Route::post('/ingreso/registrar', 'IngresoController@store');
         Route::put('/ingreso/actualizar', 'IngresoController@update');

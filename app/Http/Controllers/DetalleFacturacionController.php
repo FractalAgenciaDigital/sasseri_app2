@@ -105,7 +105,7 @@ class DetalleFacturacionController extends Controller
 
         $facturacion = Facturacion::join('personas', 'facturacion.id_tercero','=','personas.id')
             ->join('zona', 'facturacion.lugar','=','zona.id')->join('users', 'facturacion.id_usuario','=','users.id')
-            ->select('facturacion.id','facturacion.num_factura','facturacion.id_tercero','personas.nombre as nom_tercero','facturacion.id_usuario','facturacion.fec_crea','facturacion.fec_edita','facturacion.usu_edita','facturacion.subtotal','facturacion.valor_iva','facturacion.total','abono','facturacion.saldo','facturacion.detalle','facturacion.lugar','zona.zona as nom_lugar','facturacion.descuento','facturacion.fec_registra','facturacion.fec_envia','facturacion.fec_anula','facturacion.usu_registra','facturacion.usu_envia','facturacion.usu_anula','facturacion.fecha','facturacion.id_tarifario','facturacion.estado','personas.nombre1','personas.nombre2','personas.apellido1','personas.apellido2','users.idrol')
+            ->select('facturacion.id','facturacion.num_factura','facturacion.id_tercero','personas.nombre as nom_tercero','facturacion.id_usuario','facturacion.fec_crea','facturacion.fec_edita','facturacion.usu_edita','facturacion.subtotal','facturacion.valor_iva','facturacion.total','abono','facturacion.saldo','facturacion.detalle','facturacion.lugar','zona.zona as nom_lugar','facturacion.descuento','facturacion.fec_registra','facturacion.fec_envia','facturacion.fec_anula','facturacion.usu_registra','facturacion.usu_envia','facturacion.usu_anula','facturacion.fecha','facturacion.id_tarifario','facturacion.estado','personas.nombre1','personas.nombre2','personas.apellido1','personas.apellido2','users.idrol', 'facturacion.fec_crea')
             ->where('facturacion.estado','=',1)
             ->get();        
 
@@ -115,12 +115,12 @@ class DetalleFacturacionController extends Controller
             foreach($facturacion as $fac){
                
 
-
                 $detalle_facturacion = DetalleFacturacion::leftJoin('facturacion', 'detalle_facturacion.id_factura','=','facturacion.id')
                 ->leftJoin('articulos', 'detalle_facturacion.id_producto','=','articulos.id')
                 ->leftJoin('presentacion','articulos.id_presentacion','=','presentacion.id')
                 ->select('detalle_facturacion.id as id', 'detalle_facturacion.observaciones','detalle_facturacion.id_factura','facturacion.num_factura as num_factura','detalle_facturacion.id_producto','detalle_facturacion.padre','articulos.id as idarticulo','articulos.codigo','articulos.codigo as codigo_articulo','articulos.nombre as articulo','articulos.precio_venta as precio','articulos.stock','detalle_facturacion.valor_venta','detalle_facturacion.cantidad','detalle_facturacion.cantidad as cantidad2','detalle_facturacion.valor_iva','detalle_facturacion.valor_descuento','detalle_facturacion.valor_descuento as valor_descuento2','detalle_facturacion.porcentaje_iva as iva','detalle_facturacion.valor_subtotal','detalle_facturacion.valor_final','articulos.id_presentacion','presentacion.nombre as nom_presentacion', 'articulos.tipo_articulo','preparado')   
                 ->where('detalle_facturacion.id_factura', '=', $fac->id)
+                ->orderBy('facturacion.id', 'asc')
                 ->get();
                 
               
@@ -128,14 +128,10 @@ class DetalleFacturacionController extends Controller
                 $factura[$fac['id']]=array(
                     'nombre_lugar' => $fac['nom_lugar'],
                     'id' => $fac['id'],
-                    'estado' => $fac['estado']
+                    'estado' => $fac['estado'],
+                    'fec_crea' => $fac['fec_crea']
                 );
                 foreach($detalle_facturacion as $det){
-                   
-                   
-                    // $dxf[$fac['id']][$det['id']] = $det;
-                                      
-
                     $factura[$fac['id']]['productos'][$det['id']] = [
                             'id' => $det['id'],
                             'articulo' => $det['articulo'],
@@ -143,11 +139,7 @@ class DetalleFacturacionController extends Controller
                             'observaciones' => $det['observaciones'],
                             'preparado' => $det['preparado'],                       
                     ];
-
-                   
                 }
-
-        
             }       
 
             return [
@@ -326,9 +318,11 @@ class DetalleFacturacionController extends Controller
           
             $impresora->text($line);
                       
-            $impresora->text("\n"); 
-            $impresora->text('Notas:');
-            $impresora->text($df->observaciones);
+            if(isset($df->observaciones)){
+                $impresora->text("\n"); 
+                $impresora->text('Notas:');
+                $impresora->text($df->observaciones);
+            }
             $impresora->text("\n"); 
             $impresora->text("\n"); 
             

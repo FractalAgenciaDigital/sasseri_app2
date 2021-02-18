@@ -108,8 +108,15 @@
                 <template v-if="menu==30">
                     <cierrescaja :ruta="ruta"></cierrescaja>
                 </template>
+            <!-- Informes -->
                 <template v-if="menu==31">
                     <informes :ruta="ruta"></informes>
+                </template>
+                <template v-if="menu==44">
+                    <informe_arqueo :ruta="ruta"></informe_arqueo>
+                </template>
+                <template v-if="menu==45">
+                    <informe_producto :ruta="ruta"></informe_producto>
                 </template>
             <!-- Cartera -->
                 <template v-if="menu==33">
