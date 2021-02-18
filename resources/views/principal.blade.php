@@ -148,8 +148,29 @@
                         <li @click="menu=10" class="nav-item">
                             <a href="#" class="nav-link"><i class="icon-user"></i> <span>Terceros</span></a>
                         </li>
-                        <li @click="menu=31" class="nav-item">
-                            <a href="#" class="nav-link"><i class="icon-notebook"></i> <span>Informes</span></a>
+                   
+                        <li class="nav-item">
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInforme"
+                            aria-expanded="true" aria-controls="collapseInforme" >
+                                <i class="icon-notebook"></i>
+                                <span>Informes</span>
+                            </a>
+                            <ul  id="collapseInforme" class="collapse" aria-labelledby="headingInforme"
+                            data-parent="#accordionSidebar">
+                                <div class="collapse-inner">
+                                    <li @click="menu=31" class="collapse-item">
+                                        <a href="#"><i class="icon-notebook"></i> Informe Cajas</a>
+                                    </li>
+                                    <li @click="menu=44" class="collapse-item">
+                                        <a href="#"><i class="fa fa-cutlery"></i> Informe arqueo</a>
+                                    </li>
+                                    <li @click="menu=45" class="collapse-item">
+                                        <a href="#"><i class="fa fa-percent"></i> Informe productos y categorias</a>
+                                    </li>   
+                                                                      
+                                </div>
+
+                            </ul>
                         </li>
                         <li @click="menu=43" class="nav-item">
                             <a href="#" class="nav-link"><i class="icon-note"></i> <span>Observaciones</span></a>
@@ -216,28 +237,7 @@
                                     <img style="width:70%;" src="img/logo.png" alt="Sasseri" />
                                 </a>
                             </div>
-                            <ul class="navbar-nav ml-auto">
-
-                                <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                                <li class="nav-item dropdown no-arrow d-sm-none">
-                                    
-                                    <!-- Dropdown - Messages -->
-                                    <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                        aria-labelledby="searchDropdown">
-                                        <!-- <form class="form-inline mr-auto w-100 navbar-search">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control bg-light border-0 small"
-                                                    placeholder="Search for..." aria-label="Search"
-                                                    aria-describedby="basic-addon2">
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-primary" type="button">
-                                                        <i class="fa fa-search fa-sm"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form> -->
-                                    </div>
-                                </li>
+                            <ul class="navbar-nav ml-auto">                               
 
                                 <!-- Nav Item - Alerts -->
                                 <notification :notifications="notifications"></notification>
