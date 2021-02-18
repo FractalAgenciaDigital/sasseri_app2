@@ -110,6 +110,7 @@ class CierresXCajaController extends Controller
 
         $cierres_caja = new CierresXCaja();
         $cierres_caja->id_caja = $request->id_caja;
+        $cierres_caja->id_cajero = $id_usuario;
         $cierres_caja->vr_inicial = $request->vr_inicial;
         $cierres_caja->obs_inicial = $request->obs_inicial;
         $cierres_caja->vr_gastos = $request->vr_gastos;
@@ -129,6 +130,7 @@ class CierresXCajaController extends Controller
 
         $cierres_caja = CierresXCaja::findOrFail($request->id);
         $cierres_caja->id_caja = $request->id_caja;
+        $cierres_caja->id_cajero = $id_usuario;
         $cierres_caja->vr_inicial = $request->vr_inicial;
         $cierres_caja->obs_inicial = $request->obs_inicial;
         $cierres_caja->vr_gastos = $request->vr_gastos;
@@ -209,6 +211,41 @@ class CierresXCajaController extends Controller
         ->select('cajas_cierres.id','cajas_cierres.id_caja','cajas_cierres.vr_inicial','cajas_cierres.obs_inicial','cajas_cierres.vr_gastos','cajas_cierres.obs_gastos','cajas_cierres.vr_software','cajas_cierres.vr_final','cajas_cierres.estado','cajas.nombre','cajas_cierres.usu_crea','cajas_cierres.created_at')
         ->where('.cajas_cierres.id_empresa','=',$id_empresa)
         // ->where('cajas_cierres.usu_crea','=',$id_usuario)
+        ->orderBy('cajas_cierres.id','desc')->limit(1)->get();
+
+        $ban = 0;
+
+        if(!empty($cierres_caja) && count($cierres_caja)>0)
+        {
+            if($cierres_caja[0]->estado!=1){$ban = 1;} /*caja cerrada*/
+            else if($cierres_caja[0]->estado==1){
+                if($cierres_caja[0]->created_at->lessThan($carbon))
+                { $ban = 2; } /*Caja abierta pero vencida */
+                else
+                { $ban = 3; } /*Caja abierta y vigente*/
+            }
+        }
+
+        return [
+            'carbon'=>$carbon,
+            'cierres_cajas'=>$cierres_caja,
+            'ban'=>$ban,
+            'usu_crea'=>$id_usuario,
+        ];
+    }
+
+    public function validarCierreCajaWeb(Request $request)
+    {
+        // if (!$request->ajax()) return redirect('/');
+        $id_empresa = $request->session()->get('id_empresa');
+        $id_usuario = Auth::user()->id;
+
+        $carbon = Carbon::now('America/Bogota')->subDay()->toDateTimeString();
+
+        $cierres_caja = CierresXCaja::leftJoin('cajas','cajas_cierres.id_caja','=','cajas.id')
+        ->select('cajas_cierres.id','cajas_cierres.id_caja','cajas_cierres.vr_inicial','cajas_cierres.obs_inicial','cajas_cierres.vr_gastos','cajas_cierres.obs_gastos','cajas_cierres.vr_software','cajas_cierres.vr_final','cajas_cierres.estado','cajas.nombre','cajas_cierres.usu_crea','cajas_cierres.created_at')
+        ->where('.cajas_cierres.id_empresa','=',$id_empresa)
+        ->where('cajas_cierres.id_cajero','=',$id_usuario)
         ->orderBy('cajas_cierres.id','desc')->limit(1)->get();
 
         $ban = 0;

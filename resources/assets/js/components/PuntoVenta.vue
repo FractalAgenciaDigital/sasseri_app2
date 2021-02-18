@@ -399,7 +399,7 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="input">
-                                        <h4  for="inputGroupSelect01">Estado</h4>
+                                        <label  for="inputGroupSelect01">Estado</label>
                                         <select class="custom-select" id="inputGroupSelect01" style="font-size: 12px; width: 297px;">
                                             <option selected >Seleccionar</option>
                                             <option value="1">Abierta</option>

@@ -1165,7 +1165,7 @@
             
             listarCajas(){
                 let me=this;
-                var url= this.ruta +'/cierres_caja/validarCierreCaja';
+                var url= this.ruta +'/cierres_caja/validarCierreCajaWeb';
                 axios.get(url).then(function (response) {
                     console.log(response.data)
                     var respuesta= response.data;
