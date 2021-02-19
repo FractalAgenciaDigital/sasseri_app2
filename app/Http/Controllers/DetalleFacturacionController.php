@@ -318,12 +318,12 @@ class DetalleFacturacionController extends Controller
           
             $impresora->text($line);
                       
-            $impresora->text("\n"); 
             if(isset($df->observaciones)){
                 $impresora->text("\n"); 
                 $impresora->text('Notas:');
                 $impresora->text($df->observaciones);
             }
+            $impresora->text("\n"); 
             $impresora->text("\n"); 
             
             
