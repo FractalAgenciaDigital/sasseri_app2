@@ -103,6 +103,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/cierres_caja/cerrar', 'CierresXCajaController@cerrar');
         Route::get('/cierres_caja/selectValorInicialCaja', 'CierresXCajaController@selectValorInicialCaja');
         Route::get('/cierres_caja/validarCierreCaja', 'CierresXCajaController@ValidarCierreCaja');
+        Route::get('/cierres_caja/validarCierreCajaWeb', 'CierresXCajaController@ValidarCierreCajaWeb');
         
 
         Route::get('/colaboradores', 'ColaboradoresController@index');

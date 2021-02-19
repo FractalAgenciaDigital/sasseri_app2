@@ -141,9 +141,7 @@ class InformeController extends Controller
         ->join('categorias', 'articulos.idcategoria2', '=', 'categorias.id')
         ->get();
 
-        foreach($detalles_facturacion as $dt){
-            // $dt
-        }
+    
 
         return [
             'detalles_facturacion' => $detalles_facturacion,
@@ -156,11 +154,46 @@ class InformeController extends Controller
         if (!$request->ajax()) return redirect('/');
         $id_empresa = $request->session()->get('id_empresa');
 
+        
+
         $cajas_cierres = CierresXCaja::select('cajas_cierres.id as id', 'cajas_cierres.id_caja', 'cajas_cierres.vr_inicial', 'cajas_cierres.vr_gastos', 'cajas_cierres.vr_final', 'cajas.nombre as nombre_caja', 'cajas.id as idcaja', 'cajas_cierres.updated_at as fecha_cierre')
         ->join('cajas','cajas_cierres.id_caja','cajas.id')
         ->where('cajas_cierres.id_empresa',1)
         ->get();
 
+
+        foreach($cajas_cierres as $cc ){
+
+            $facturacion = Facturacion::select()
+            ->where('facturacion.id_cierre_caja','=',$cc->id)
+            ->get();
+
+            $total_ventas=0;
+
+            foreach($facturacion as $fac){
+                $total_ventas += $fac->total;
+            }
+
+            
+            $cc->total_ventas = $total_ventas;
+            $cc->total_caja =$cc->total_ventas + $cc->vr_inicial;
+            $cc->diferencia = $cc->total_caja-$cc->vr_final;
+
+            if($cc->diferencia == 0){
+                $cc->estado = 1; /*Correcto*/
+            }
+            else 
+            {
+                if($cc->diferencia < 0){
+                    $cc->estado = 2;//falta
+                } 
+                elseif($cc->diferencia > 0){
+                    $cc->estado = 3;//sobra
+                }
+
+            }
+
+        }
         return [
             'cajas_cierres' => $cajas_cierres,
         ];

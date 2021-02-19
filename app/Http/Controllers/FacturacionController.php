@@ -558,20 +558,6 @@ class FacturacionController extends Controller
         $total = 0;
         foreach($detalle_facturacion as $df)
         {
-            // $impresora->setJustification(Printer::JUSTIFY_LEFT);
-            // $impresora->text($df->cantidad. "   ");
-            
-
-            // $impresora->setJustification(Printer::JUSTIFY_CENTER);
-            // $impresora->text(sprintf( $df->nombre_articulo ."  "));
-            
-            // $impresora->setJustification(Printer::JUSTIFY_RIGHT);
-            // $impresora->text('$' . number_format($df->cantidad * $df->precio, 2)."\n");
-            // $impresora->setJustification(Printer::JUSTIFY_LEFT);
-        //   $impresora->text($df->observaciones. "\n");
-        //     $impresora->setJustification(Printer::JUSTIFY_CENTER);
-        //     $impresora->text("-------------------------\n\n");
-
             $line = sprintf('%-25s %10.0f %10.2f ','-'. $df->nombre_articulo, $df->cantidad, $df->cantidad * $df->precio);
 
             $total +=  $df->cantidad * $df->precio;
