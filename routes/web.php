@@ -244,6 +244,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/informe/cajas', 'InformeController@cajas');
         Route::get('/informe/productos', 'InformeController@productos');
         Route::get('/informe/categorias', 'InformeController@categorias');
+        Route::get('/informe/imprimir-ticket-informe-cajas', 'InformeController@imprimirTicketInformeCajas');
 
         Route::get('/ingreso', 'IngresoController@index');
         Route::post('/ingreso/registrar', 'IngresoController@store');

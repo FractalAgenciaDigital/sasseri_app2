@@ -7,10 +7,17 @@ use App\Facturacion;
 use App\DetalleFacturacion;
 use App\Articulo;
 use App\Cajas;
+use App\User;
 use App\CierresXCaja;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+
+use App\Impresora;
+use App\ConfigGenerales;
+use Mike42\Escpos\EscposImage;
+use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
+use Mike42\Escpos\Printer;
 
 class InformeController extends Controller
 {
@@ -153,31 +160,52 @@ class InformeController extends Controller
     {
         if (!$request->ajax()) return redirect('/');
         $id_empresa = $request->session()->get('id_empresa');
-
-        
+        $noCajaFiltro = $request->noCajaFiltro;
+        $desdeFiltro = $request->desdeFiltro;
+        $hastaFiltro = $request->hastaFiltro;
 
         $cajas_cierres = CierresXCaja::select('cajas_cierres.id as id', 'cajas_cierres.id_caja', 'cajas_cierres.vr_inicial', 'cajas_cierres.vr_gastos', 'cajas_cierres.vr_final', 'cajas.nombre as nombre_caja', 'cajas.id as idcaja', 'cajas_cierres.updated_at as fecha_cierre')
-        ->join('cajas','cajas_cierres.id_caja','cajas.id')
-        ->where('cajas_cierres.id_empresa',1)
-        ->get();
+        ->join('cajas','cajas_cierres.id_caja','cajas.id');       
+        
 
+        if(isset($request)){
+
+            if($noCajaFiltro!='' && $noCajaFiltro!='0')
+                {
+                    $cajas_cierres = $cajas_cierres->where('cajas_cierres.id','=',$noCajaFiltro);
+                }
+
+            if($desdeFiltro!='' && $desdeFiltro!=0)
+            {
+                $cajas_cierres = $cajas_cierres->whereDate('cajas_cierres.updated_at', '>=' , $desdeFiltro);
+            }
+            if($hastaFiltro!='' && $hastaFiltro!=0)
+            {
+                $cajas_cierres = $cajas_cierres->whereDate('cajas_cierres.updated_at','<=' , $hastaFiltro);
+            }
+        }
+        $cajas_cierres = $cajas_cierres->where('cajas_cierres.id_empresa',$id_empresa)->get();
 
         foreach($cajas_cierres as $cc ){
 
             $facturacion = Facturacion::select()
             ->where('facturacion.id_cierre_caja','=',$cc->id)
+            ->where('facturacion.estado','=',2)
             ->get();
 
             $total_ventas=0;
+            $cont=0;
 
             foreach($facturacion as $fac){
                 $total_ventas += $fac->total;
+                $cont++;
             }
 
             
             $cc->total_ventas = $total_ventas;
             $cc->total_caja =$cc->total_ventas + $cc->vr_inicial;
             $cc->diferencia = $cc->total_caja-$cc->vr_final;
+            $cc->no_facturas = $cont;
 
             if($cc->diferencia == 0){
                 $cc->estado = 1; /*Correcto*/
@@ -197,6 +225,107 @@ class InformeController extends Controller
         return [
             'cajas_cierres' => $cajas_cierres,
         ];
+
+    }
+    public function imprimirTicketInformeCajas(Request $request)
+    {
+        if (!$request->ajax()) return redirect('/');
+
+        // Datos para el ticket
+        $id_empresa = $request->session()->get('id_empresa');
+        $id_impresora = $request->id_impresora;
+        $imprimir = Impresora::where('id', $id_impresora)->first();
+        $infoEmpresa = ConfigGenerales::select()->where('id','=', $id_empresa)->first();
+
+        // filtros
+        $noCajaFiltro = $request->noCajaFiltro;
+        $desdeFiltro = $request->desdeFiltro;
+        $hastaFiltro = $request->hastaFiltro;
+
+        $cajas_cierres = CierresXCaja::select('cajas_cierres.id as id', 'cajas_cierres.id_caja', 'cajas_cierres.vr_inicial', 'cajas_cierres.vr_gastos', 'cajas_cierres.vr_final', 'cajas.nombre as nombre_caja', 'cajas.id as idcaja', 'cajas_cierres.updated_at as fecha_cierre')
+        ->join('cajas','cajas_cierres.id_caja','cajas.id');  
+
+        if(isset($request)){
+            if($noCajaFiltro!='' && $noCajaFiltro!='0'){
+                $cajas_cierres = $cajas_cierres->where('cajas_cierres.id','=',$noCajaFiltro);
+            }
+            if($desdeFiltro!='' && $desdeFiltro!=0){
+                $cajas_cierres = $cajas_cierres->whereDate('cajas_cierres.updated_at', '>=' , $desdeFiltro);
+            }
+            if($hastaFiltro!='' && $hastaFiltro!=0){
+                $cajas_cierres = $cajas_cierres->whereDate('cajas_cierres.updated_at','<=' , $hastaFiltro);
+            }
+        }
+        $cajas_cierres = $cajas_cierres->where('cajas_cierres.id_empresa',$id_empresa)->get();
+
+        // Inicio de impresion
+        $infoEmpresa = ConfigGenerales::select()->where('id','=', $id_empresa)->first();       
+        $connector = new WindowsPrintConnector($imprimir->nombre_impresora);        
+        $impresora = new Printer($connector);    
+        $impresora->setJustification(Printer::JUSTIFY_CENTER);            
+        $impresora->text("\n===============================\n");        
+        $impresora->setTextSize(1, 2);
+        $impresora->text($infoEmpresa->nombre."\n");
+        $impresora->setTextSize(1, 1);        
+        $impresora->setEmphasis(false);
+        $impresora->text("NIT: ");
+        $impresora->text($infoEmpresa->nit."\n");
+        $impresora->text("Dirección: ");
+        $impresora->text($infoEmpresa->direccion."\n");
+        $impresora->text("\n______________________________________\n");
+        $impresora->text(sprintf('%-10s %-10s %+10s %+10s', '$Inicial', '$Ventas','$Report','$Diferen'));        
+
+        foreach($cajas_cierres as $cc ){
+            $facturacion = Facturacion::select()
+            ->where('facturacion.id_cierre_caja','=',$cc->id)
+            ->where('facturacion.estado','=',2)
+            ->get();
+
+            $total_ventas=0;
+            $cont=0;
+
+            foreach($facturacion as $fac){
+                $total_ventas += $fac->total;
+                $cont++;
+            }            
+            $cc->total_ventas = $total_ventas;
+            $cc->total_caja =$cc->total_ventas + $cc->vr_inicial;
+            $cc->diferencia = $cc->total_caja-$cc->vr_final;
+            $cc->no_facturas = $cont;
+
+            $impresora->text(sprintf('%-10s %-10s %+10s %+10s', $cc->vr_inicial,$cc->total_ventas,$cc->vr_final,$cc->diferencia));
+            $impresora->text("\n");    
+
+            // Coincidencia de valor reportado y valor vendido
+            if($cc->diferencia == 0){
+                $cc->estado = 1; /*Correcto*/
+            }
+            else 
+            {
+                if($cc->diferencia < 0){
+                    $cc->estado = 2;//falta
+                } 
+                elseif($cc->diferencia > 0){
+                    $cc->estado = 3;//sobra
+                }
+
+            }
+
+        }
+
+        $impresora->setFont(Printer::FONT_C);
+        $impresora->text("Sasseri");
+        $impresora->text("\nwww.fractalagenciadigital.com\n");
+        $impresora->text("\n===============================\n");
+
+        $impresora->feed(5);
+        $impresora->cut();
+        $impresora->close();        
+        
+        return redirect()->back()->with("mensaje", "Ticket impreso");
+        // return [
+        //     'cajas_cierres' => $cajas_cierres,
+        // ];
 
     }
 

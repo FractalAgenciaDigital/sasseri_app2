@@ -164,9 +164,9 @@
                                     <li @click="menu=44" class="collapse-item">
                                         <a href="#"><i class="fa fa-cutlery"></i> Informe arqueo</a>
                                     </li>
-                                    <li @click="menu=45" class="collapse-item">
+                                    <!-- <li @click="menu=45" class="collapse-item">
                                         <a href="#"><i class="fa fa-percent"></i> Informe productos y categorias</a>
-                                    </li>   
+                                    </li>    -->
                                                                       
                                 </div>
 

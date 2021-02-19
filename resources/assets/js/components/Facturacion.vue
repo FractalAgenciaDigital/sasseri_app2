@@ -1087,7 +1087,7 @@
             },
         },
         methods : {
-             listarImpresora (page,buscar,criterio){
+            listarImpresora (page,buscar,criterio){
                 let me=this;
                 var url= this.ruta +'/impresora?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
                 axios.get(url).then(function (response) {
