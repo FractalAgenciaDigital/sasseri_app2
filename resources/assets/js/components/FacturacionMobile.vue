@@ -257,7 +257,7 @@
                                             <td style="text-align: right;">
                                                 {{detalle.cantidad}}
                                             </td>
-                                            <!-- <td>
+                                            <td class="d-none">
                                                 <input v-model="detalle.valor_descuento" v-if="tipoAccion2==1" type="number" value="0" class="form-control" :min="0" :max="((detalle.precio*detalle.cantidad)-detalle.valor_iva)" @blur="function(){
                                                         if(detalle.valor_descuento>((detalle.precio*detalle.cantidad)-detalle.valor_iva) || detalle.valor_descuento>0)
                                                         {detalle.valor_descuento=((detalle.precio*detalle.cantidad)-detalle.valor_iva);}
@@ -270,13 +270,13 @@
                                                     {detalle.valor_descuento=((detalle.precio*detalle.cantidad)-detalle.valor_iva);}
                                                     else{detalle.valor_descuento=0;}
                                                 }">
-                                            </td> -->
-                                            <!-- <td style="text-align: right;">
+                                            </td>
+                                            <td style="text-align: right;" class="d-none">
                                                 $ {{detalle.valor_iva=Math.round(parseFloat(detalle.precio*detalle.cantidad)-parseFloat((detalle.precio*detalle.cantidad)/((detalle.iva/100)+1)))}}
                                             </td>
-                                            <td style="text-align: right;">
+                                            <td style="text-align: right;" class="d-none">
                                                 $ {{detalle.valor_subtotal=Math.round(parseFloat((detalle.precio*detalle.cantidad)-detalle.valor_iva-detalle.valor_descuento))}}
-                                            </td> -->
+                                            </td>
                                         </tr>
                                         <tr style="background-color: #CEECF5; text-align: right;">
                                             <td colspan="3" align="right"><strong>Total iva:</strong></td>
@@ -1725,12 +1725,12 @@
                 this.errorFacturacion=0;
                 this.errorMostrarMsjFacturacion =[];
 
-                if (this.fecha==0) this.errorMostrarMsjFacturacion.push("Ingrese la fecha");
+                // if (this.fecha==0) this.errorMostrarMsjFacturacion.push("Ingrese la fecha");
                 // if (this.num_factura==0) this.errorMostrarMsjFacturacion.push("Seleccione el comprobante");
                 // if (!this.id_tercero) this.errorMostrarMsjFacturacion.push("Seleccione un tercero");
                 if (!this.id_tercero) this.id_tercero=999999;
                 if (!this.lugar) this.errorMostrarMsjFacturacion.push("Seleccione un lugar");
-                if (this.arrayDetalle.length<=0) this.errorMostrarMsjFacturacion.push("Ingrese detalles");
+                // if (this.arrayDetalle.length<=0) this.errorMostrarMsjFacturacion.push("Ingrese detalles");
 
                 if (this.errorMostrarMsjFacturacion.length) this.errorFacturacion = 1;
 
@@ -1954,8 +1954,6 @@
             me.fecha = d;
             me.fechaHoraActual = d+' '+h+':'+min+':'+sec;
 
-
-
             me.listarCajas();
             me.selectZonas();
             me.mostrarDetalle('facturacion','registrar');            
@@ -1970,7 +1968,7 @@
     .mostrar{
         display: list-item !important;
         opacity: 1 !important;
-        position: absolute !important;
+        position: fixed !important;
         background-color: #3c29297a !important;
     }
     .mosaico{

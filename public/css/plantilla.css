@@ -4041,7 +4041,8 @@ select option {
     color: #333;
 }
 .mostrar{
-    /* overflow: auto; */
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 .table td.td-estado a > i{
     font-size: 1.5rem;

@@ -662,7 +662,7 @@
                                             <td v-text="articulo.precio_venta"></td>
                                             <td v-if="articulo.padre!=''" v-text="parseInt(articulo.stock/articulo.unidades)"></td>
                                             <td v-else v-text="articulo.stock"></td>
-                                            <td><input type="number" v-model="articulo.cant">
+                                            <td><input type="number" class="form-control" style="width:60px;" v-model="articulo.cant">
                                             <input type="hidden" v-model="articulo.observaciones" value=""></td>
                                             <td v-if="articulo.cant">
                                                 <button type="button" v-if="articulo.cant!=0 && articulo.cant!=''" @click="agregarDetalleModal(articulo),articulo.cant=''" class="btn btn-success btn-sm">
@@ -684,7 +684,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div v-if="tipo_vista_articulo==2" class="container" style="display: block;height: 36em;max-height: 36em;overflow-y: auto;">
+                            <div v-if="tipo_vista_articulo==2" class="card-group">
                                 <div v-for="(articulo, index) in arrayArticulo" :key="index" @click="abrirModalCantidadArticulo(articulo)" class="col-sm-6 col-md-3 p-sm-2 p-md-1 mosaico">
                                     <div class="border col-md-12" style="height: 100%;">
                                         <div class="text-center py-md-2">
@@ -1712,12 +1712,12 @@
                 this.errorFacturacion=0;
                 this.errorMostrarMsjFacturacion =[];
 
-                if (this.fecha==0) this.errorMostrarMsjFacturacion.push("Ingrese la fecha");
+                // if (this.fecha==0) this.errorMostrarMsjFacturacion.push("Ingrese la fecha");
                 // if (this.num_factura==0) this.errorMostrarMsjFacturacion.push("Seleccione el comprobante");
                 // if (!this.id_tercero) this.errorMostrarMsjFacturacion.push("Seleccione un tercero");
                 if (!this.id_tercero) this.id_tercero=999999;
                 if (!this.lugar) this.errorMostrarMsjFacturacion.push("Seleccione un lugar");
-                if (this.arrayDetalle.length<=0) this.errorMostrarMsjFacturacion.push("Ingrese detalles");
+                // if (this.arrayDetalle.length<=0) this.errorMostrarMsjFacturacion.push("Ingrese detalles");
 
                 if (this.errorMostrarMsjFacturacion.length) this.errorFacturacion = 1;
 
@@ -1940,9 +1940,6 @@
             me.hastaFiltro = d;
             me.fecha = d;
             me.fechaHoraActual = d+' '+h+':'+min+':'+sec;
-
-
-
             me.listarCajas();
             me.selectZonas();
             me.mostrarDetalle('facturacion','registrar');
@@ -1958,7 +1955,7 @@
     .mostrar{
         display: list-item !important;
         opacity: 1 !important;
-        position: absolute !important;
+        position: fixed !important;
         background-color: #3c29297a !important;
     }
     .mosaico{
