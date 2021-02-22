@@ -201,6 +201,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/evidencias_egresos/eliminarEvidencia', 'EvidenciasEgresosController@eliminarEvidencia');
 
         Route::get('/facturacion', 'FacturacionController@index');
+        Route::get('/facturacion/listarPendientes', 'FacturacionController@listarPendientes');
         Route::post('/facturacion/registrar', 'FacturacionController@store');
         Route::put('/facturacion/actualizar', 'FacturacionController@update');
         Route::get('/facturacion/buscarFacturacion', 'FacturacionController@buscarFacturacion');

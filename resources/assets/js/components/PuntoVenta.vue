@@ -2,8 +2,8 @@
     <main class="main">
         <div>
             <notifications group="foo" />
-            <div class="card" v-show="position==1">  <!-- listado de productos de factura -->
-                <div class="card-header"> 
+            <div class="container-fluid row" v-show="position==1">  <!-- listado de productos de factura -->
+                <div class="card-header col-xs-12 col-sm-12 col-md-4"> 
                     <div class="row mb-5">                        
                         <div class="col-11">
                             <input class="form-control form-control-lg" type="search" placeholder="Buscar" aria-label="Search" v-model="buscarA" @keyup="listarArticulo(buscarA,criterioA,buscarCategoriaA)">
@@ -25,7 +25,7 @@
                     </div>
                 </div>
 
-                <div class="card-body">
+                <div class="card-body col-xs-12 col-sm-12 col-md-8">
                     <div class="form-group">
                         <div class="row">
                             <div v-for="(articulo, index) in arrayArticulo" :key="index" class="col-4 separa-cards">
@@ -273,7 +273,7 @@
                         </div>                                  
                     </div>
                     <div class="ticket">
-                        <img class="img-logo espacio-1" src="http://192.168.100.64/sasseri_app2/public/Empresas/1_empresa/ImgLogos/f4f72620874a541d0113ea86bcf699a8.jpg" alt="img-logo">
+                        <img class="img-logo espacio-1" src="http://192.168.0.102/sasseri_app2/public/Empresas/1_empresa/ImgLogos/f4f72620874a541d0113ea86bcf699a8.jpg" alt="img-logo">
                         <p class="centrado espacio-1">SASSERI_APP_2<br>NIT: 81245875-0<br>BR/DIAGONAL LAS AMERICAS 20_CRA 15-25<br>TEL: 2448484154<br>RES DIAN 100000554554 DE DICIEMBRE 20/2020<br>PERSONA JURUDICA DECLARANTE - REGIMEN COMUN<br>FACTURA DE VENTA N°. 155455<br>FECHA 20/12/2020 - 04:44:42 P.M.</p>
                         -----------------------------------------
                         <table class="table table-sm espacio-1">
@@ -344,7 +344,7 @@
                         </div>                                      
                     </div>
                     <div class="ticket">
-                        <!-- <img class="img-logo espacio-1" src="http://192.168.100.64/sasseri_app2/public/Empresas/1_empresa/ImgLogos/f4f72620874a541d0113ea86bcf699a8.jpg" alt="img-logo"> -->
+                        <!-- <img class="img-logo espacio-1" src="http://192.168.0.102/sasseri_app2/public/Empresas/1_empresa/ImgLogos/f4f72620874a541d0113ea86bcf699a8.jpg" alt="img-logo"> -->
                         <p class="centrado espacio-1">FECHA {{ datosFactura.fec_crea}}</p>
                         -----------------------------------------
                         <div class="input-group mb-0">
@@ -392,38 +392,12 @@
                 </div>  
    
             </div>
-            <div v-show="position==7"> <!-- listado de faturas -->
-                <div class="card">
-                    <div class="card-header">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="input">
-                                        <label  for="inputGroupSelect01">Estado</label>
-                                        <select class="custom-select" id="inputGroupSelect01" style="font-size: 12px; width: 297px;">
-                                            <option selected >Seleccionar</option>
-                                            <option value="1">Abierta</option>
-                                            <option value="2">Cerrada</option>
-                                            <option value="3">Cancelada</option>
-                                        </select>
-                                    </div>
-                                </div>                                    
-                                <div class="col">
-                                    <label>Desde:</label>                                   
-                                    <input v-if="permisosUser.leer" type="date" class="form-control" style="border-radius: 5px; width: 136px;" v-model="desdeFiltro">
-                                    <input v-else disabled type="date" class="form-control" v-model="desdeFiltro">
-                                </div>
-                                <div class="col">
-                                    <label>Hasta:</label>                                   
-                                    <input v-if="permisosUser.leer" type="date" class="form-control" style="border-radius: 5px; width: 136px;" v-model="hastaFiltro">
-                                    <input v-else disabled type="date" class="form-control" v-model="hastaFiltro">
-                                </div>
-                            </div>
-                        </div>  
-                    </div>                        
-                    </div>
+            <div v-show="position==7"> <!-- listado de facturas -->
+                <div class="card">          
+                    </div>                            
                     
-                    <div class="card-body" style="font-size: 13px;">
+                    
+                    <div class="card-body">
                         <div class="row">
                             <table class="table table-sm table-bordered">
                                 <thead class="thead-light">
