@@ -28,13 +28,13 @@
                                         <th>Editar / Imprimir</th>                                 
                                         <th>Lugar</th>                                        
                                         <th>Total</th>                                        
-                                        <th class="text-right">$</th>
+                                        <th class="text-right">Pagar $</th>
                                     </tr>
                                 </thead>
                                 <tbody v-if="permisosUser.leer && arrayPendientes.length">
                                     <tr v-for="pendientes in arrayPendientes" :key="pendientes.id" style="text-align: right;">                                        
                                         <td v-if="pendientes.num_factura" v-text="pendientes.num_factura"></td>
-                                        <td v-else >
+                                        <td v-else class="text-left">
                                             <!-- <i class="icon-eye"></i> -->
                                             <!-- <button type="button" @click="verFacturacion(pendientes.id)" class="btn btn-success btn-sm" title="Ver factura">
                                                 <i class="icon-eye"></i>
@@ -56,8 +56,6 @@
                                         </td>                                        <td v-text="pendientes.nom_lugar"></td>                                        
                                         <td v-text="pendientes.total"></td>                                        
                                         <td>
-                                           
-
                                             <!-- Botones de registrar -->
                                             <template> 
                                                 <button type="button" v-if="permisosUser.actualizar && pendientes.estado==1" class="btn btn-primary text-white" @click="cambiarEstadoFacturacion(pendientes.id,'registrar')" title="Registrar">
@@ -1333,7 +1331,7 @@
                 me.arrayTerceros=[];    
                 me.listarFacturacion();
 
-                me.tipoAccion2=2;
+                me.tipoAccion2=1;
                 
                 
             },
