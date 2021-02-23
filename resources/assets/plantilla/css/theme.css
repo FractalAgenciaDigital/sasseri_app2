@@ -13144,7 +13144,11 @@ a {
 }
 .mostrar{
     width: 100%;
-    overflow: auto;
+    overflow-y: auto;
+    display: list-item !important;
+    opacity: 1 !important;
+    position: fixed !important;
+    background-color: #3c29297a !important;
 }
 a:hover{
     text-decoration: none;

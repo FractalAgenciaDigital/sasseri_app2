@@ -76,6 +76,9 @@
             <template v-if="menu==14">
                 <facturacion :ruta="ruta"></facturacion>
             </template>
+            <template v-if="menu==47">
+                <facturacion_mobile :ruta="ruta"></facturacion_mobile>
+            </template>
             <!-- almacen -->
                 <template v-if="menu==15">
                     <articulo :ruta="ruta"></articulo>
@@ -108,8 +111,18 @@
                 <template v-if="menu==30">
                     <cierrescaja :ruta="ruta"></cierrescaja>
                 </template>
+            <!-- Informes -->
                 <template v-if="menu==31">
                     <informes :ruta="ruta"></informes>
+                </template>
+                <template v-if="menu==44">
+                    <informe_arqueo :ruta="ruta"></informe_arqueo>
+                </template>
+                <template v-if="menu==45">
+                    <informe_producto :ruta="ruta"></informe_producto>
+                </template>
+                <template v-if="menu==46">
+                    <historial :ruta="ruta"></historial>
                 </template>
             <!-- Cartera -->
                 <template v-if="menu==33">

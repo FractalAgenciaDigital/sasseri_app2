@@ -67,49 +67,80 @@
             <div v-show="position==2"> <!-- listado de faturas -->
                 <div class="card">
                    
-                    <div class="card-header" style="font-size: 13px;">
-                        <div class="row">
-                            <table class="table table-sm table-bordered">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        
-                                        <th scope="col">Mesa</th>
-                                        
-                                        <th scope="col">Estado</th>
-                                        <th scope="col">Editar</th>
-                                        <th> Imprimir</th>
+                    <div class="card-header col-12"> 
+                        <h1>Ordenes en cocina</h1> 
+                        <button class="btn btn-sm btn-success" @click="recargarPagina();">Recargar página</button>
+                    </div> 
 
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="facturacion in arrayFacturacion" :key="facturacion.id" style="text-align: right;">
-                                        <th scope="row" v-text="facturacion.id"></th>
+                    <div class="">
+
+                        <table class="table table-bordered table-striped table-sm table-hover table-sm-responsive table-earning ">
+                            <thead class="thead-primary">
+                                <tr>
+                                    <th scope="col" rowspan="2">#</th>                                    
+                                    <th  scope="col" rowspan="2">Mesa</th>                                    
+                                    <th scope="col" colspan="1" rowspan="1">Productos</th>
+                                    <th rowspan="2"> Imprimir</th>
+                                </tr>
+                                <tr>
+                                    <th colspan="1" rowspan="1">
+                                        <div class="list-groupx list-group-flushx row">
+                                            <div class="list-group-itemx py-1 col-4">Articulo</div>
+                                            <div class="list-group-itemx py-1 col-5" >Nota</div>
+                                            <div class="list-group-itemx py-1 col-3">Finalizar</div>
+                                        </div>
+                                    </th>                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(det,index) in arrayDetalle" :key="index">                                      
+                                    <th scope="row" v-text="det.id"></th>                                        
+                                    <th class="text-center">
+                                        {{det.nombre_lugar}}
+                                        <br>
                                         
-                                        <td class="centrado" v-text="facturacion.nom_lugar? facturacion.nom_lugar : ''"></td>
-                                        
-                                        <td v-if="facturacion.estado==1" class="text-warning">Abierta</td>
-                                        <td v-if="facturacion.estado==2" class="text-success">Cerrada</td>
-                                        <td v-if="facturacion.estado==0" class="text-danger">Cancelada</td>
-                                        <td class="centrado">
-                                            <button v-if="facturacion.estado==1"  @click="mostrarDetalle('facturacion','actualizar',facturacion);position=1;" class="btn-1 btn btn-success rounded-circle">
-                                                <i class="fa fa-pencil btn-edit-factura"></i>
-                                            </button>
-                                             <button v-else class="btn-1 btn btn-secondary rounded-circle">
-                                                <i class="fa fa-pencil btn-edit-factura"></i>
-                                            </button>
-                                        </td>
-                                        <td>
-                                            <button @click="imprimirTicket(facturacion.id)" class="btn btn-light">
-                                                Imprimir
-                                            </button>
-                                        </td>
-                                    </tr>
+                                        <small v-if="det.estado==1"><span>Activa</span></small>
+                                        <small v-else-if="det.estado==2"><span>Registrada</span></small>
+                                        <small v-else-if="det.estado==3"><span>Enviada</span></small>
+                                        <small v-else-if="det.estado==4"><span>Anulada</span></small>
+                                        <br>
+                                        <i class="icon-cup"></i>
+
+                                    </th>
+                                    <td>
+                                        <div class="list-groupx list-groupx-flush row" v-for="prod in det.productos" :key="prod.id">
+                                            <div class="list-group-itemx py-1 text-left col-4">
+                                                <b>#<span class="badge rounded-pill bg-primary text-white">{{prod.cantidad}}</span></b>
+                                                 -  
+                                                <span class="text-uppercase">{{prod.articulo}}</span>
+                                            </div>   
+                                            <div class="list-group-itemx py-1 text-left col-5">                                                
+                                                {{prod.observaciones}}
+                                            </div>   
+                                            <div class="list-group-itemx p-0 col-3">
+                                                <button class="btn btn-lg text-danger"  v-if="prod.preparado==0" title="Activar" @click="productoListo(prod.id)">
+                                                    <i class="fa fa-times"></i>Preparado
+                                                </button>
+                                                <button class="btn btn-lg text-success" v-if="prod.preparado==1" title="Desactivar" @click="productoNoListo(prod.id)">
+                                                    
+                                                    <i class="fa fa-check"></i> Cancelar
+                                                </button>                        
+                                            </div>                                                
+                                        </div>
+                                    </td>    
+                                                   
+                                    <td>
+                                        <button @click="imprimirTicket(det.id)" class="btn btn-light">
+                                            Imprimir
+                                        </button>
+                                    </td>                    
                                     
-                                </tbody>
-                            </table>            
-                        </div>
-                    </div>                      
+                                </tr>
+                                
+                                
+                            </tbody>
+                        </table>                                   
+                    </div>
                 </div>  
             </div>
         </div>
@@ -183,7 +214,7 @@
         
         },
         methods : {
-           
+         
             
             listarFacturacion (page,numFacturaFiltro,estadoFiltro,idTerceroFiltro,ordenFiltro,desdeFiltro,hastaFiltro,idVendedorFiltro){
                 let me=this;
@@ -512,11 +543,14 @@
             },         
             listarDetalle(id_factura){
                 let me=this;
-                var url= this.ruta +'/detalle_facturacion/productosPreparados?id_factura=' + id_factura;
+                // var url= this.ruta +'/detalle_facturacion/productosPreparados?id_factura=' + id_factura;
+                var url= this.ruta +'/detalle_facturacion/productosPreparados';
                 axios.get(url).then(function (response) {
+                    console.log(response);
                     var respuesta= response.data;
-                    me.arrayDetalle = respuesta.detalles;
-                    me.arrayDetalleT = respuesta.detalles;
+                    // me.arrayDetalle = respuesta.detalles;
+                    me.arrayDetalle = respuesta.factura;
+                    // me.arrayDetalleT = respuesta.detalles;
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -534,6 +568,13 @@
                 .catch(function (error) {
                     console.log(error);
                 });
+            },
+            recargarPagina(){
+                let me = this;
+                this.listarDetalle();
+                this.listarCajas();
+                this.buscarTercero();
+                this.selectZonas();
             },
            
         },
@@ -578,7 +619,8 @@
             
            // me.llamarMensaje();
             this.listarArticulo(this.buscarA,this.criterioA,this.buscarCategoriaA);
-             me.listarFacturacion(1,me.numFacturaFiltro,me.estadoFiltro,me.idTerceroFiltro,me.ordenFiltro,me.desdeFiltro,me.hastaFiltro,me.idVendedorFiltro);
+            me.listarFacturacion(1,me.numFacturaFiltro,me.estadoFiltro,me.idTerceroFiltro,me.ordenFiltro,me.desdeFiltro,me.hastaFiltro,me.idVendedorFiltro);
+            me.listarDetalle();
              
         }
     }
@@ -672,7 +714,7 @@
     .mostrar{
         display: list-item !important;
         opacity: 1 !important;
-        position: absolute !important;
+        position: fixed !important;
         background-color: #3c29297a !important;
     }
     .div-error{

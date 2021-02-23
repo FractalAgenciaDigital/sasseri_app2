@@ -103,6 +103,8 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/cierres_caja/cerrar', 'CierresXCajaController@cerrar');
         Route::get('/cierres_caja/selectValorInicialCaja', 'CierresXCajaController@selectValorInicialCaja');
         Route::get('/cierres_caja/validarCierreCaja', 'CierresXCajaController@ValidarCierreCaja');
+        Route::get('/cierres_caja/validarCierreCajaWeb', 'CierresXCajaController@ValidarCierreCajaWeb');
+        
 
         Route::get('/colaboradores', 'ColaboradoresController@index');
         Route::post('/colaboradores/registrar', 'ColaboradoresController@store');
@@ -199,6 +201,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/evidencias_egresos/eliminarEvidencia', 'EvidenciasEgresosController@eliminarEvidencia');
 
         Route::get('/facturacion', 'FacturacionController@index');
+        Route::get('/facturacion/listarPendientes', 'FacturacionController@listarPendientes');
         Route::post('/facturacion/registrar', 'FacturacionController@store');
         Route::put('/facturacion/actualizar', 'FacturacionController@update');
         Route::get('/facturacion/buscarFacturacion', 'FacturacionController@buscarFacturacion');
@@ -238,6 +241,11 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/info_auxiliares/aux_con_saldos', 'InfAuxiliaresController@AuxConSaldos');
         Route::get('/info_auxiliares/balance_general', 'InfAuxiliaresController@BalanceGeneral');
         Route::get('/info_auxiliares', 'InfAuxiliaresController@index');
+
+        Route::get('/informe/cajas', 'InformeController@cajas');
+        Route::get('/informe/productos', 'InformeController@productos');
+        Route::get('/informe/categorias', 'InformeController@categorias');
+        Route::get('/informe/imprimir-ticket-informe-cajas', 'InformeController@imprimirTicketInformeCajas');
 
         Route::get('/ingreso', 'IngresoController@index');
         Route::post('/ingreso/registrar', 'IngresoController@store');

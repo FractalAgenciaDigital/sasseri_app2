@@ -142,6 +142,88 @@ class FacturacionController extends Controller
             ];
         }
     }
+    public function listarPendientes(Request $request)
+    {
+        if (!$request->ajax()) return redirect('/');
+        $id_empresa = $request->session()->get('id_empresa');
+
+        $numFacturaFiltro = $request->numFacturaFiltro;
+        $estadoFiltro = $request->estadoFiltro;
+        $idTerceroFiltro = $request->idTerceroFiltro;
+        $ordenFiltro = $request->ordenFiltro;
+        $desdeFiltro = $request->desdeFiltro;
+        $hastaFiltro = $request->hastaFiltro;
+        $idVendedorFiltro = $request->idVendedorFiltro;
+        
+        if(isset($request->filtroInformes))
+        {
+            
+            $n = '';
+            $facturacion = Facturacion::join('personas', 'facturacion.id_tercero','=','personas.id')
+            ->join('zona', 'facturacion.lugar','=','zona.id')
+            ->join('users', 'facturacion.id_usuario','=','users.id');
+            if(isset($request->idCajaInformes) && $request->idCajaInformes!='' && $request->idCajaInformes!=0){
+            $facturacion = $facturacion->join('cajas_cierres','facturacion.id_cierre_caja','=','cajas_cierres.id');}
+
+            $facturacion = $facturacion->select('facturacion.id','facturacion.num_factura','facturacion.id_tercero','personas.nombre as nom_tercero','facturacion.id_usuario','facturacion.fec_crea','facturacion.fec_edita','facturacion.usu_edita','facturacion.subtotal','facturacion.valor_iva','facturacion.total','abono','facturacion.saldo','facturacion.detalle','facturacion.lugar','zona.zona as nom_lugar','facturacion.descuento','facturacion.fec_registra','facturacion.fec_envia','facturacion.fec_anula','facturacion.usu_registra','facturacion.usu_envia','facturacion.usu_anula','facturacion.fecha','facturacion.id_tarifario','facturacion.estado','personas.nombre1','personas.nombre2','personas.apellido1','personas.apellido2','users.idrol');
+            
+            if(isset($request->idCajaInformes) && $request->idCajaInformes!='' && $request->idCajaInformes!=0){$facturacion = $facturacion->where('cajas_cierres.id_caja','=',$request->idCajaInformes);}
+            if(isset($request->idCajeroInformes) && $request->idCajeroInformes!='' && $request->idCajeroInformes!=0){$facturacion = $facturacion->where('facturacion.id_usuario','=',$request->idCajeroInformes);}
+            if(isset($request->saldoInformes) && $request->saldoInformes!=''){
+                if($request->saldoInformes == 'Saldo'){
+                    $facturacion = $facturacion->where('facturacion.saldo','>',0);
+                }else if($request->saldoInformes == 'Sin Saldo'){
+                    $facturacion = $facturacion->where('facturacion.saldo','=',0);
+                }
+            }
+            if(isset($request->estadoInformes) && $request->estadoInformes!=''){
+                if($request->estadoInformes == '1'){
+                    $facturacion = $facturacion->where('facturacion.estado','=',1);
+                }else if($request->estadoInformes == '2'){
+                    $facturacion = $facturacion->where('facturacion.estado','=',2);
+                }else if($request->estadoInformes == '3'){
+                    $facturacion = $facturacion->where('facturacion.estado','=',3);
+                }else if($request->estadoInformes == '4'){
+                    $facturacion = $facturacion->where('facturacion.estado','=',4);
+                }
+            }
+
+            $facturacion = $facturacion->where('facturacion.id_empresa','=',$id_empresa)
+            ->get();
+
+            return ['facturacion'=>$facturacion,];
+        }
+        else
+        {
+            
+            $facturacion = Facturacion::join('personas', 'facturacion.id_tercero','=','personas.id')
+            ->join('zona', 'facturacion.lugar','=','zona.id')->join('users', 'facturacion.id_usuario','=','users.id')
+            ->select('facturacion.id','facturacion.num_factura','facturacion.id_tercero','personas.nombre as nom_tercero','facturacion.id_usuario','facturacion.fec_crea','facturacion.fec_edita','facturacion.usu_edita','facturacion.subtotal','facturacion.valor_iva','facturacion.total','abono','facturacion.saldo','facturacion.detalle','facturacion.lugar','zona.zona as nom_lugar','facturacion.descuento','facturacion.fec_registra','facturacion.fec_envia','facturacion.fec_anula','facturacion.usu_registra','facturacion.usu_envia','facturacion.usu_anula','facturacion.fecha','facturacion.id_tarifario','facturacion.estado','personas.nombre1','personas.nombre2','personas.apellido1','personas.apellido2','users.idrol');
+            
+            
+          
+            if($request->id_cierre_caja && $request->id_cierre_caja!=0){$facturacion = $facturacion->where('id_cierre_caja','=',$request->id_cierre_caja);}
+
+            $facturacion = $facturacion->where('facturacion.id_empresa','=',$id_empresa)->where('facturacion.estado','!=','2')
+            ->get();
+            // ->paginate(6);
+
+
+            return [
+                // 'pagination' => [
+                //     'total'        => $facturacion->total(),
+                //     'current_page' => $facturacion->currentPage(),
+                //     'per_page'     => $facturacion->perPage(),
+                //     'last_page'    => $facturacion->lastPage(),
+                //     'from'         => $facturacion->firstItem(),
+                //     'to'           => $facturacion->lastItem(),
+                // ],               
+                'facturacion' => $facturacion,
+                'idrol' => Auth::user()->idrol,
+            ];
+        }
+    }
+
 
     public function buscarFacturacion(Request $request){
         if (!$request->ajax()) return redirect('/');
@@ -234,8 +316,7 @@ class FacturacionController extends Controller
             $stock->tipo_movimiento = $request->tipo_movimiento;
             $stock->sumatoria = $request->sumatoria;
             $stock->save();
-           
-           
+                      
         }
         return ['id_facturacion' => $facturacion->id];        
     }
@@ -499,34 +580,22 @@ class FacturacionController extends Controller
         ->select('facturacion.id as id', 'facturacion.fec_crea', 'personas.nombre1', 'personas.nombre2', 'personas.apellido1', 'personas.apellido2', 'p_usuarios.nombre as cajero', 'p_usuarios.id as idusuario', 'personas.id as idpersona', 'total', 'zona.zona', 'facturacion.num_factura')->where('facturacion.id','=', $id_factura)
         ->first();
         // ->get();
-        $infoEmpresa = ConfigGenerales::select()->where('id','=', $id_empresa)->first();
-        
+
+        $infoEmpresa = ConfigGenerales::select()->where('id','=', $id_empresa)->first();       
 
         $connector = new WindowsPrintConnector($imprimir->nombre_impresora);
         
-        $impresora = new Printer($connector);
-    
-        $impresora->setJustification(Printer::JUSTIFY_CENTER);
-        //     try{
-            // $logo = EscposImage::load(env('APP_URL').'/Empresas/'.$infoEmpresa->id.'_empresa/ImgLogos/'.$infoEmpresa->logo, false);
-        //     //   $logo = EscposImage::load("logo.jpg", true);
-            // $impresora->bitImage($logo);
-        // }catch(Exception $e){/*No hacemos nada si hay error*/}
-    
-         
-        $impresora->text("\n===============================\n");
-        
+        $impresora = new Printer($connector);    
+        $impresora->setJustification(Printer::JUSTIFY_CENTER);            
+        $impresora->text("\n===============================\n");        
         $impresora->setTextSize(1, 2);
         $impresora->text($infoEmpresa->nombre."\n");
-        $impresora->setTextSize(1, 1);
-        
+        $impresora->setTextSize(1, 1);        
         $impresora->setEmphasis(false);
         $impresora->text("NIT: ");
         $impresora->text($infoEmpresa->nit."\n");
         $impresora->text("Dirección: ");
         $impresora->text($infoEmpresa->direccion."\n");
-        
-
         $impresora->setJustification(Printer::JUSTIFY_LEFT);
         $impresora->setEmphasis(true);
         $impresora->text("Mesa: ");
@@ -536,58 +605,33 @@ class FacturacionController extends Controller
         $impresora->setEmphasis(false);
         $impresora->text("Fecha: ");
         $impresora->text($facturacion->fec_crea."\n");
-
         if(isset($facturacion->num_factura) || $facturacion->num_factura != NULL){
             $impresora->text("N° Factura: ");
-            $impresora->text($facturacion->num_factura."\n");
-        // 
+            $impresora->text($facturacion->num_factura."\n");        // 
         }
         $impresora->text("Cliente: ");
         $impresora->text($facturacion->nombre1." ".$facturacion->nombre2." ".$facturacion->apellido1." ".$facturacion->apellido2."\n");
-
-       
-
-
-        $impresora->setLineSpacing(2);
- 
+        $impresora->setLineSpacing(2); 
         $impresora->setJustification(Printer::JUSTIFY_LEFT);
         $impresora->text("\n______________________________________"."\n\n");
         $impresora->setLineSpacing(1);
         $impresora->setEmphasis(true);
-        $impresora->text(sprintf('%-25s %+10.8s %+10.7s','ARTICULO', 'CANT', 'PRECIO'));
+        $impresora->text(sprintf('%-25s %+10.8s %+10.7s','ARTICULO', 'CANT', 'PRECIO'));        
         $impresora->setEmphasis(false);
-
         $impresora->text("\n"); 
+        $total = 0;
         foreach($detalle_facturacion as $df)
         {
-            // $impresora->setJustification(Printer::JUSTIFY_LEFT);
-            // $impresora->text($df->cantidad. "   ");
-            
-
-            // $impresora->setJustification(Printer::JUSTIFY_CENTER);
-            // $impresora->text(sprintf( $df->nombre_articulo ."  "));
-            
-            // $impresora->setJustification(Printer::JUSTIFY_RIGHT);
-            // $impresora->text('$' . number_format($df->cantidad * $df->precio, 2)."\n");
-            // $impresora->setJustification(Printer::JUSTIFY_LEFT);
-        //   $impresora->text($df->observaciones. "\n");
-        //     $impresora->setJustification(Printer::JUSTIFY_CENTER);
-        //     $impresora->text("-------------------------\n\n");
-
             $line = sprintf('%-25s %10.0f %10.2f ','-'. $df->nombre_articulo, $df->cantidad, $df->cantidad * $df->precio);
+            $total +=  $df->cantidad * $df->precio;
             $impresora->text($line);
-            $impresora->text("\n"); 
-            
+            $impresora->text("\n");             
         }
-
         $impresora->setJustification(Printer::JUSTIFY_RIGHT);
         $impresora->setEmphasis(true);
         $impresora->setLineSpacing(2);
-
-        $impresora->text("\nTotal: $" . number_format($facturacion->total, 2) . "\n");
+        $impresora->text("\nTotal: $" . number_format($total, 2) . "\n");
         $impresora->setJustification(Printer::JUSTIFY_CENTER);
-       
-        
         $impresora->setLineSpacing(2);
         $impresora->text("\n===============================\n");
         $impresora->setEmphasis(false);
@@ -597,12 +641,9 @@ class FacturacionController extends Controller
         $impresora->text("\n===============================\n");
         $impresora->text("Gracias por su compra\n");
         $impresora->text("\n===============================\n");
-
-        
         $impresora->feed(5);$impresora->cut();
-        $impresora->close();
+        $impresora->close();        
         
-        // return $connector;
         return redirect()->back()->with("mensaje", "Ticket impreso");
         
     }

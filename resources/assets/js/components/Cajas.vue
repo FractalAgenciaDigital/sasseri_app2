@@ -197,14 +197,14 @@
                             </div>
                             
                             <div v-if="tipoAccionCierre==2">
-                                <div class="form-group col-md-12">
+                                <!-- <div class="form-group col-md-12">
                                     <label>Vr. Gastos</label>                                    
                                     <input type="number" class="form-control" v-model="vr_gastos_cierre" >                                   
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label>Obs. Gastos</label>                                    
                                     <input type="text" class="form-control" v-model="obs_gastos_cierre">                                  
-                                </div>
+                                </div> -->
                                  <div class="form-group col-md-12">
                                     <label>Vr. Final</label>                                    
                                     <input type="number" class="form-control" v-model="vr_final_cierre" v-bind:class="{ 'is-invalid' : hasError.vr_final_cierre==1 }">                                   
@@ -954,7 +954,7 @@
     .mostrar{
         display: list-item !important;
         opacity: 1 !important;
-        position: absolute !important;
+        position: fixed !important;
         background-color: #3c29297a !important;
     }
     .div-error{
