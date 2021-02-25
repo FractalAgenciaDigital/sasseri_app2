@@ -3,13 +3,14 @@
         <div>
             <notifications group="foo" />
             <div class="container-fluid row" v-show="position==1">  <!-- listado de productos de factura -->
-                <div class="card-header col-xs-12 col-sm-12 col-md-4"> 
+                <div class="card-header col-xs-12 col-sm-12 col-md-3"> 
                     <div class="row mb-5">                        
-                        <div class="col-11">
+                        <div class="col-9">
                             <input class="form-control form-control-lg" type="search" placeholder="Buscar" aria-label="Search" v-model="buscarA" @keyup="listarArticulo(buscarA,criterioA,buscarCategoriaA)">
                         </div>
-                        <div class="col-1">
-                            <button class="btn btn-success btn-block p-2  fa fa-search btn-buscar float-right" type="submit" @click="listarArticulo(buscarA,criterioA,buscarCategoriaA)">
+                        <div class="col-3">
+                            <button class="btn btn-success btn-block p-2 btn-buscar" type="submit" @click="listarArticulo(buscarA,criterioA,buscarCategoriaA)">
+                                <i class="fa fa-search"></i>
                             </button>
                         </div>                        
                     </div>
@@ -25,10 +26,10 @@
                     </div>
                 </div>
 
-                <div class="card-body col-xs-12 col-sm-12 col-md-8">
+                <div class="card-body col-xs-12 col-sm-12 col-md-9">
                     <div class="form-group">
                         <div class="row">
-                            <div v-for="(articulo, index) in arrayArticulo" :key="index" class="col-4 separa-cards">
+                            <div v-for="(articulo, index) in arrayArticulo" :key="index" class="col-lg-2 col-md-3 col-sm-4 col-6 separa-cards">
                                 <!--<div class="card text-center mb-1" style="cursor:pointer" @click="agregaDetalleMesero(articulo)">-->
                                 <div class="card text-center mb-1" style="cursor:pointer" @click="abrirModal(articulo)">
                                     <div class=" txt-price-prod btn-primary">
@@ -93,7 +94,13 @@
                             </div>
                             <div class="row ">
                                 <div class="col-12">
+                                   
                                     <div class="row border-bottom" v-for="(detalle,index) in arrayDetalle" :key="detalle.id">
+                                         <div style="display:none">
+                                            
+                                            {{detalle.valor_iva=Math.round(parseFloat(detalle.precio*detalle.cantidad)-parseFloat((detalle.precio*detalle.cantidad)/((detalle.iva/100)+1)))}}
+                                            {{detalle.valor_subtotal=Math.round(parseFloat((detalle.precio*detalle.cantidad)-detalle.valor_iva-detalle.valor_descuento))}}
+                                        </div>
                                         <div class="col-5">
                                             <div class="row">
                                                 <div class="col-12" v-if="detalle.padre==null || detalle.padre==''" >
@@ -125,9 +132,7 @@
                                             <strong>Observaciones: </strong> 
                                             <small >{{detalle.observaciones}} </small>                                            
                                         </div>
-                                        <td style="display:none">
-                                            $ {{detalle.valor_subtotal=Math.round(parseFloat((detalle.precio*detalle.cantidad)-detalle.valor_iva-detalle.valor_descuento))}}
-                                        </td>
+                                        
                                     </div>
                                    
                                 </div>
@@ -260,68 +265,72 @@
                 </div> 
             </div>
             <div v-show="position==5"> <!-- tickets imprimir factura -->
-                <div class="card">
+                 <div class="card">
                     <div class="card-header">
                         <div class="row">
+                            <!-- <div class="col-3">
+                                <button @click="position=5" class="btn btn-primary fa fa-undo"></button>
+                            </div> -->
                             <div class="col-3">
-                                <button @click="position=6" class="btn btn-success fa fa-plus"></button>
-                            </div>
-                            <div class="col-3">   
+                                <button @click="position=7" class="btn btn-primary fa fa-list"></button>
                             </div>
                             <div class="col-6 pr-1">  
                             </div> 
-                        </div>                                  
+                            <div class="col-3">  
+                                <button @click="imprimirTicket()" class="btn btn-light">
+                                    Imprimir
+                                </button>
+                            </div> 
+                            
+                        </div>                                      
                     </div>
                     <div class="ticket">
-                        <img class="img-logo espacio-1" src="http://localhost/sasseri_app2/public/Empresas/1_empresa/ImgLogos/f4f72620874a541d0113ea86bcf699a8.jpg" alt="img-logo">
-                        <p class="centrado espacio-1">SASSERI_APP_2<br>NIT: 81245875-0<br>BR/DIAGONAL LAS AMERICAS 20_CRA 15-25<br>TEL: 2448484154<br>RES DIAN 100000554554 DE DICIEMBRE 20/2020<br>PERSONA JURUDICA DECLARANTE - REGIMEN COMUN<br>FACTURA DE VENTA N°. 155455<br>FECHA 20/12/2020 - 04:44:42 P.M.</p>
+                        <!-- <img class="img-logo espacio-1" src="http://localhost/sasseri_app2/public/Empresas/1_empresa/ImgLogos/f4f72620874a541d0113ea86bcf699a8.jpg" alt="img-logo"> -->
+                        <p class="centrado espacio-1">FECHA {{ datosFactura.fec_crea}}</p>
                         -----------------------------------------
-                        <table class="table table-sm espacio-1">
+                        <div class="input-group mb-0">
+                            <div class="col-6">
+                                <p class="espacio-1">MESERO: </p>
+                            </div> 
+                            <div class="col-6">
+                                <p class="espacio-1"> {{ datosFactura.cajero }}</p>
+                            </div>
+                        </div>
+                        <div class="input-group mb-0">
+                            <div class="col-6">
+                                <p class="espacio-1">MESA:</p>
+                            </div> 
+                            <div class="col-6">
+                                <p class="espacio-1 centrado">{{ datosFactura.zona }}</p>
+                            </div>
+                        </div>
+                        -----------------------------------------
+                        <table class="table table-sm">
                             <thead>
                                 <tr>
-                                    <th scope="col">CANT</th>
-                                    <th colspan="2" scope="col">DESCRIPCION</th>
-                                    <th scope="col">TOTAL</th>
+                                    <th colspan="1">PRODUCTO</th>                                    
+                                    <th colspan="1">CANTIDAD</th>
+                                    <th colspan="1">PRECIO</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="centrado">2</td>
-                                    <td colspan="2">LECHE ALQUERIA</td>
-                                    <td>$5000</td>
+                            <tbody>                               
+                                <tr v-for="(prod_preparado,index) in arrayPreparado" :key="index" >
+                                    <td  colspan="1"> - {{prod_preparado.nombre_articulo}}
+                                        <br>
+                                        {{prod_preparado.observaciones}}
+                                    </td>                                    
+                                    <td  colspan="1">{{prod_preparado.cantidad}}</td>
+                                    <td  colspan="1">{{prod_preparado.precio * prod_preparado.cantidad }}</td>
+                                    
                                 </tr>
-                                <tr>
-                                    <td class="centrado">1</td>
-                                    <td colspan="2">CAFE NEGRO</td>
-                                    <td>$2500</td>
-                                </tr>
-                                <tr>
-                                    <td class="centrado">1</td>
-                                    <td colspan="2">PAN DE QUESO</td>
-                                    <td>$2000</td>
-                                </tr>    
-                                <tr>
-                                    <th colspan="2" scope="col">SUBTOTAL:</th>
-                                    <th scope="col"></th>
-                                    <td>$9500</td>
-                                </tr>
-                                <tr class="table-borderless">
-                                    <th colspan="2" scope="col">IVA:</th>
-                                    <th scope="col"></th>
-                                    <td>$950</td>
-                                </tr>
-                                <tr>
-                                    <th colspan="2" scope="col">TOTAL:</th>
-                                    <th scope="col"></th>
-                                    <th>$10450</th>
-                                </tr>
+                                  
                             </tbody>
                         </table>
                         -----------------------------------------
                         <br>
-                        <p class="centrado minimizar espacio-1">POWERED BY - FRACTAL AGENCIA DIGITAL<br>www.fractalagenciadigital.com<br>(CEL. 312-524-2544)</p><br>
-                    </div> 
-                </div>                    
+                        <p class="centrado minimizar espacio-1">POWERE BY - FRACTAL AGENCIA DIGITAL<br>www.fractalagenciadigital.  com</p><br> 
+                    </div>                    
+                </div>        
             </div>  
             <div v-show="position==6"> <!-- tickets listado preparcion chef -->
                 <div class="card">
@@ -1682,11 +1691,6 @@
                         'tipo_movimiento' : 4,
                         'sumatoria' : 0
                     }).then(function (response) {
-                        me.factura_imprimir = response.data.id_facturacion;
-                        me.verTicket(me.factura_imprimir);
-                        me.imprimirTicket(me.factura_imprimir);                            
-                        me.position = 6;
-                        
                     }).catch(function (error) {
                         console.log(error);
                     });
@@ -2280,6 +2284,7 @@
                 }).then(function (response) {
                     // me.cerrarModal();
                     // me.listarPersona(1,'','nombre');
+                    me.position=3;
                     me.buscarTercero();
                 }).catch(function (error) {
                     console.log(error); 

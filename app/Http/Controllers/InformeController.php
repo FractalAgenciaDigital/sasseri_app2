@@ -204,7 +204,7 @@ class InformeController extends Controller
             
             $cc->total_ventas = $total_ventas;
             $cc->total_caja =$cc->total_ventas + $cc->vr_inicial;
-            $cc->diferencia = $cc->total_caja-$cc->vr_final;
+            $cc->diferencia = $cc->vr_final-$cc->total_caja;
             $cc->no_facturas = $cont;
 
             if($cc->diferencia == 0){
