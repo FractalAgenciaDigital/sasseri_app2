@@ -28,8 +28,7 @@
                                     </tr>       
                                     <tr>
                                         <th>Lugar</th>                                        
-                                        <th>Total</th>                                        
-                                        
+                                        <th>Total</th>
                                         <th>Opciones</th>
                                         <th >Pagar $</th>
                                     </tr>
@@ -121,7 +120,7 @@
                                 </div>
                             </div> -->
                         
-                            <div class="form-group col-md-7">
+                            <div class="form-group col-lg-7 col-md-12">
                                 <label for="">Tercero(*)</label>
                                 <div class="input-group">
                                     <input type="text" readonly class="form-control" name="cuenta_fin" v-model="tercero" placeholder="Cliente generico">
@@ -141,7 +140,7 @@
                                     </select>
                                 </div>
                             </div> -->
-                            <div class="col-md-5 form-group">
+                            <div class="col-lg-5 col-md-12 form-group">
                                 
                                 <label>Mesa</label>
                                 <select v-model="lugar" class="form-control">
@@ -173,7 +172,7 @@
                             </div> -->
                         </div>
                         <div class="form-group row border">
-                            <div class="col-md-6 col-sm-9">
+                            <div class="col-lg-6 col-md-12">
                                 <div class="form-group">
                                     <label>Artículo <span style="color:red;" v-show="idarticulo==0">(*Seleccione)</span></label>
                                     <div class="form-inline">
@@ -187,13 +186,13 @@
                                     </div>                                    
                                 </div>
                             </div>
-                            <div class="col-md-3 col-sm-3">
+                            <div class="col-md-6 col-sm-6 col-lg-3">
                                 <div class="form-group">
                                     <label>Precio</label>
                                     <input type="number" :min="1" :max="precio" disabled step="any" class="form-control" v-model="precio">
                                 </div>
                             </div>
-                            <div class="col-md-3 col-sm-3">
+                            <div class="col-md-6 col-sm-6 col-lg-3">
                                 <div class="form-group">
                                     <label>Cantidad <span style="color:red;" v-show="cantidad==0 && idarticulo!=0">(*Ingrese)</span></label>
                               
@@ -212,7 +211,7 @@
                                     <span v-if="idarticulo!=0" v-text="'Maximo descuento '+Math.round((precio*cantidad)/((iva/100)+1))"></span>
                                 </div>
                             </div> -->
-                            <div class="col-md-3 col-sm-3">
+                            <div class="col-lg-3 col-md-6 col-sm-6">
                                 <div class="form-group">
                                     <button v-if="idarticulo!=0 && cantidad!=0" @click="agregarDetalle()" class="btn btn-success form-control btnagregar"><i class="icon-plus"></i></button>
                                     <button v-else class="btn btn-secondary form-control btnagregar"><i class="icon-plus"></i></button>
@@ -536,7 +535,7 @@
                                 </table>
                             </div>
                             <div v-if="tipo_vista_articulo==2" class="card-group row" :class="tipo_vista_articulo==2 ? 'col-lg-12 col-md-12 col-sm-12' : 'col-sm-12 col-md-5'">
-                                <div v-for="(articulo, index) in arrayArticulo" :key="index" @click="abrirModalCantidadArticulo(articulo)" class="col-sm-6 col-md-3 p-sm-2 p-md-1 mosaico">
+                                <div v-for="(articulo, index) in arrayArticulo" :key="index" @click="abrirModalCantidadArticulo(articulo)" class="col-sm-6 col-md-6 p-sm-2 p-md-1 mosaico">
                                     <div class="border col-md-12" style="height: 100%;">
                                         <div class="text-center py-md-2">
                                             <img v-if="`${articulo.img}`!='default.png'" :src="`${ruta}/Empresas/${articulo.id_empresa}_empresa/ImgProductos/${articulo.img}`" class="img-responsive img-thumbnail">
@@ -1859,6 +1858,14 @@
             eliminarDetalle(index){
                 let me = this;
                 me.arrayDetalle.splice(index, 1);
+            },
+            imprimirTicketFacturacion(){
+                let me = this;            
+                axios.get(this.ruta+'/facturacion/imprimir-ticket-facturacion?id='+this.id_factura_imprimir+'&id_impresora='+this.id_impresora).then(function(response){                 
+
+                }).catch(function (error) {
+                    console.log(error);
+                });
             },
         },
         computed:{

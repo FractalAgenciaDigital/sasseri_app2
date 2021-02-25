@@ -43,7 +43,7 @@
                                                 <td>{{detalle.cantidad}}</td>
                                                 <td v-text="detalle.observaciones"></td>
                                                 <td>
-                                                    <button class="btn btn-lg text-danger" style="font-size:1.5rem"  v-if="detalle.preparado==0" title="Activar" @click="productoListo(detalle.id)">
+                                                    <button class="btn btn-lg text-danger" style="font-size:1.5rem"  v-if="detalle.preparado==0" title="Activar" @click="productoListo(detalle.id),2">
                                                         <i class="fa fa-times"></i>
                                                     </button>
                                                     <button class="btn btn-lg text-success" style="font-size:1.5rem" v-if="detalle.preparado==1" title="Desactivar" @click="productoNoListo(detalle.id)">
@@ -74,11 +74,12 @@
 
                     <div class="">
 
-                        <table class="table table-bordered table-striped table-sm table-hover table-sm-responsive table-earning ">
+                        <table class="table table-bordered table-striped table-sm table-hover table-sm-responsive table-earning " align="center">
                             <thead class="thead-primary">
                                 <tr>
                                     <th scope="col" rowspan="2">#</th>                                    
                                     <th  scope="col" rowspan="2">Mesa</th>                                    
+                                    <th  scope="col" rowspan="2" class="text-center">Finalizar</th>          
                                     <th scope="col" colspan="1" rowspan="1">Productos</th>
                                     <th rowspan="2"> Imprimir</th>
                                 </tr>
@@ -87,7 +88,7 @@
                                         <div class="list-groupx list-group-flushx row">
                                             <div class="list-group-itemx py-1 col-4">Articulo</div>
                                             <div class="list-group-itemx py-1 col-5" >Nota</div>
-                                            <div class="list-group-itemx py-1 col-3">Finalizar</div>
+                                            <div class="list-group-itemx py-1 col-3">Preparado</div>
                                         </div>
                                     </th>                                    
                                 </tr>
@@ -107,10 +108,13 @@
                                         <i class="icon-cup"></i>
 
                                     </th>
+                                    <td class="text-center">
+                                        <button class="btn btn-primary btn-sm" @click="productoListo(det.id,1);">Finalizar todo <br> el pedido</button>
+                                    </td>
                                     <td>
                                         <div class="list-groupx list-groupx-flush row" v-for="prod in det.productos" :key="prod.id">
                                             <div class="list-group-itemx py-1 text-left col-4">
-                                                <b>#<span class="badge rounded-pill bg-primary text-white">{{prod.cantidad}}</span></b>
+                                                <b>#<span class="badge rounded-pill bg-primary text-white" style="font-size:14px">{{prod.cantidad}}</span></b>
                                                  -  
                                                 <span class="text-uppercase">{{prod.articulo}}</span>
                                             </div>   
@@ -118,7 +122,7 @@
                                                 {{prod.observaciones}}
                                             </div>   
                                             <div class="list-group-itemx p-0 col-3">
-                                                <button class="btn btn-lg text-danger"  v-if="prod.preparado==0" title="Activar" @click="productoListo(prod.id)">
+                                                <button class="btn btn-lg text-danger"  v-if="prod.preparado==0" title="Activar" @click="productoListo(prod.id,2)">
                                                     <i class="fa fa-times"></i>Preparado
                                                 </button>
                                                 <button class="btn btn-lg text-success" v-if="prod.preparado==1" title="Desactivar" @click="productoNoListo(prod.id)">
@@ -313,12 +317,13 @@
                     console.log(error);
                 });
             },
-            productoListo(id){
+            productoListo(id,tipo){
                 let me = this;
-                console.log(me.facturacion_id);
+                console.log(tipo);
+                console.log(id);
                 var id_fac = me.facturacion_id;
 
-                console.log(id);
+                
                  Swal.fire({
                 title: '¿Este producto está listo?',
                 type: 'warning',
@@ -336,7 +341,8 @@
                     let me = this;
 
                     axios.put(this.ruta +'/detalle_facturacion/cocinado',{
-                        'id': id
+                        'id': id,
+                        'tipo':tipo,
                     }).then(function (response) {
                        me.listarDetalle(id_fac);                      
                         Swal.fire(

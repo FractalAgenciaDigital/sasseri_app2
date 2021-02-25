@@ -120,25 +120,27 @@ class DetalleFacturacionController extends Controller
                 ->leftJoin('presentacion','articulos.id_presentacion','=','presentacion.id')
                 ->select('detalle_facturacion.id as id', 'detalle_facturacion.observaciones','detalle_facturacion.id_factura','facturacion.num_factura as num_factura','detalle_facturacion.id_producto','detalle_facturacion.padre','articulos.id as idarticulo','articulos.codigo','articulos.codigo as codigo_articulo','articulos.nombre as articulo','articulos.precio_venta as precio','articulos.stock','detalle_facturacion.valor_venta','detalle_facturacion.cantidad','detalle_facturacion.cantidad as cantidad2','detalle_facturacion.valor_iva','detalle_facturacion.valor_descuento','detalle_facturacion.valor_descuento as valor_descuento2','detalle_facturacion.porcentaje_iva as iva','detalle_facturacion.valor_subtotal','detalle_facturacion.valor_final','articulos.id_presentacion','presentacion.nombre as nom_presentacion', 'articulos.tipo_articulo','preparado')   
                 ->where('detalle_facturacion.id_factura', '=', $fac->id)
+                ->where('detalle_facturacion.preparado', '<>', 3)
                 ->orderBy('facturacion.id', 'asc')
                 ->get();
                 
-              
-                // $df[$fac['id']]=$fac;
-                $factura[$fac['id']]=array(
-                    'nombre_lugar' => $fac['nom_lugar'],
-                    'id' => $fac['id'],
-                    'estado' => $fac['estado'],
-                    'fec_crea' => $fac['fec_crea']
-                );
-                foreach($detalle_facturacion as $det){
-                    $factura[$fac['id']]['productos'][$det['id']] = [
-                            'id' => $det['id'],
-                            'articulo' => $det['articulo'],
-                            'cantidad' => $det['cantidad'],
-                            'observaciones' => $det['observaciones'],
-                            'preparado' => $det['preparado'],                       
-                    ];
+                if((count($detalle_facturacion))>0){
+                    // $df[$fac['id']]=$fac;
+                    $factura[$fac['id']]=array(
+                        'nombre_lugar' => $fac['nom_lugar'],
+                        'id' => $fac['id'],
+                        'estado' => $fac['estado'],
+                        'fec_crea' => $fac['fec_crea']
+                    );
+                    foreach($detalle_facturacion as $det){
+                        $factura[$fac['id']]['productos'][$det['id']] = [
+                                'id' => $det['id'],
+                                'articulo' => $det['articulo'],
+                                'cantidad' => $det['cantidad'],
+                                'observaciones' => $det['observaciones'],
+                                'preparado' => $det['preparado'],                       
+                        ];
+                    }
                 }
             }       
 
@@ -404,9 +406,28 @@ class DetalleFacturacionController extends Controller
     public function cocinado(Request $request)
     {
         if (!$request->ajax()) return redirect('/');
-        $categoria = DetalleFacturacion::findOrFail($request->id);
-        $categoria->preparado = '1';
-        $categoria->save();
+
+        // $app = App\ModelName::find(1);
+        // $app->where("status", 1)
+        // ->update(["keyOne" => $valueOne, "keyTwo" => $valueTwo]);
+
+        if($request->tipo==1){
+
+            $factura = DetalleFacturacion::where('detalle_facturacion.id_factura',$request['id'])->get();
+
+            foreach($factura as $cat){
+                $categoria = DetalleFacturacion::findOrFail($cat['id']);
+                $categoria->preparado = '3';
+                $categoria->save();
+            }        
+        }
+        else{
+            $categoria = DetalleFacturacion::findOrFail($request->id);
+            $categoria->preparado = '1';
+            $categoria->save();            
+        }
+
+        
     }
 
     
