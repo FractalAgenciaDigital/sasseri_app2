@@ -90,7 +90,7 @@
                             <a href="#" class="nav-link d-none d-lg-block"><i class="icon-calculator"></i><span>Facturación</span> </a>
                         </li>                       
                         <li @click="menu=47" class="nav-item">
-                            <a href="#" class="nav-link d-nonex d-md-blocck d-lg-nocne"><i class="icon-calculator"></i><span>Facturación M</span> </a>
+                            <a href="#" class="nav-link d-none d-md-block d-lg-none"><i class="icon-calculator"></i><span>Facturación M</span> </a>
                         </li> 
                         <li @click="menu=42" class="nav-item">
                             <a href="#" class="nav-link">
