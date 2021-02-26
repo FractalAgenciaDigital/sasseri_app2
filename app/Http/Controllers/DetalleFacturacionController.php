@@ -287,8 +287,8 @@ class DetalleFacturacionController extends Controller
         $connector = new WindowsPrintConnector($imprimir->nombre_impresora);
         $impresora = new Printer($connector);
         // $impresora->lineSpacing(19);
-        // $logo = EscposImage::load('../Http/logo.jpg', false);
-        // $impresora->bitImage($logo);
+        // $logo = EscposImage::load('logo.jpg', false);
+        $impresora->bitImage($logo);
         $impresora->setJustification(Printer::JUSTIFY_CENTER)
         ;
         $impresora->text("\n===============================\n");

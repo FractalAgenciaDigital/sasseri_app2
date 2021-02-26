@@ -586,7 +586,9 @@ class FacturacionController extends Controller
         $connector = new WindowsPrintConnector($imprimir->nombre_impresora);
         
         $impresora = new Printer($connector);    
-        $impresora->setJustification(Printer::JUSTIFY_CENTER);            
+        $impresora->setJustification(Printer::JUSTIFY_CENTER);     
+        // $logo = EscposImage::load('logo.jpg', false);
+        // $impresora->bitImage($logo);       
         $impresora->text("\n===============================\n");        
         $impresora->setTextSize(1, 2);
         $impresora->text($infoEmpresa->nombre."\n");
