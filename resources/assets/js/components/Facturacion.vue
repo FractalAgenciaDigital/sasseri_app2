@@ -1847,6 +1847,14 @@
                 let me = this;
                 me.arrayDetalle.splice(index, 1);
             },
+            imprimirTicketFacturacion(){
+                let me = this;            
+                axios.get(this.ruta+'/facturacion/imprimir-ticket-facturacion?id='+this.id_factura_imprimir+'&id_impresora='+this.id_impresora).then(function(response){                 
+
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            },
         },
         computed:{
             isActived: function(){

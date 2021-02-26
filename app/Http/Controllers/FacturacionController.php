@@ -641,7 +641,9 @@ class FacturacionController extends Controller
         $impresora->text("\n===============================\n");
         $impresora->text("Gracias por su compra\n");
         $impresora->text("\n===============================\n");
-        $impresora->feed(5);$impresora->cut();
+        $impresora->feed(5);
+        $impresora->cut();
+        $impresora->pulse();
         $impresora->close();        
         
         return redirect()->back()->with("mensaje", "Ticket impreso");

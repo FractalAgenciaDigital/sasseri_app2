@@ -165,7 +165,8 @@ class InformeController extends Controller
         $hastaFiltro = $request->hastaFiltro;
 
         $cajas_cierres = CierresXCaja::select('cajas_cierres.id as id', 'cajas_cierres.id_caja', 'cajas_cierres.vr_inicial', 'cajas_cierres.vr_gastos', 'cajas_cierres.vr_final', 'cajas.nombre as nombre_caja', 'cajas.id as idcaja', 'cajas_cierres.updated_at as fecha_cierre')
-        ->join('cajas','cajas_cierres.id_caja','cajas.id');       
+        ->join('cajas','cajas_cierres.id_caja','cajas.id')
+        ->orderBy('id','desc');       
         
 
         if(isset($request)){

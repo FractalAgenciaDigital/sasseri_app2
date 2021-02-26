@@ -708,7 +708,7 @@
 
                 // Variables filtro
                 numFacturaFiltro : '',
-                estadoFiltro : '',
+                estadoFiltro : 1,
                 idTerceroFiltro : '',
                 terceroFiltro : '',
                 desdeFiltro : '2019-01-01',

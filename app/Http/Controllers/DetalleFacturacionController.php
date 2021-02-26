@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 use Mike42\Escpos\Printer;
+use Mike42\Escpos\EscposImage;
 
 class DetalleFacturacionController extends Controller
 {
@@ -173,6 +174,7 @@ class DetalleFacturacionController extends Controller
         'articulos.precio_venta as precio',
         'articulos.stock',
         'detalle_facturacion.valor_venta',
+        'detalle_facturacion.observaciones',
         'detalle_facturacion.cantidad',
         'detalle_facturacion.cantidad as cantidad2',
         'detalle_facturacion.valor_iva',
@@ -235,6 +237,8 @@ class DetalleFacturacionController extends Controller
         
        $imprimir = Impresora::where('id', $id_impresora)->first();
 
+       
+
         // $detalle_facturacion = DetalleFacturacion::findOrFail($id_factura);
         // $nombreImpresora = env("NOMBRE_IMPRESORA");
 
@@ -264,6 +268,7 @@ class DetalleFacturacionController extends Controller
         'detalle_facturacion.valor_final',
         'articulos.id_presentacion',
         'presentacion.nombre as nom_presentacion',
+        'detalle_facturacion.observaciones',
          'articulos.tipo_articulo',         
         'preparado')
         ->where('detalle_facturacion.id_factura','=', $id_factura)
@@ -282,6 +287,8 @@ class DetalleFacturacionController extends Controller
         $connector = new WindowsPrintConnector($imprimir->nombre_impresora);
         $impresora = new Printer($connector);
         // $impresora->lineSpacing(19);
+        // $logo = EscposImage::load('../Http/logo.jpg', false);
+        // $impresora->bitImage($logo);
         $impresora->setJustification(Printer::JUSTIFY_CENTER)
         ;
         $impresora->text("\n===============================\n");
@@ -320,7 +327,7 @@ class DetalleFacturacionController extends Controller
           
             $impresora->text($line);
                       
-            if(isset($df->observaciones)){
+            if(($df->observaciones) != ''){
                 $impresora->text("\n"); 
                 $impresora->text('Notas:');
                 $impresora->text($df->observaciones);
@@ -352,7 +359,9 @@ class DetalleFacturacionController extends Controller
         $impresora->text("\n===============================\n");
 
         
-        $impresora->feed(5);$impresora->cut();
+        $impresora->feed(5);
+        $impresora->cut();
+        $impresora->pulse();
         $impresora->close();
         
         return redirect()->back()->with("mensaje", "Ticket impreso");

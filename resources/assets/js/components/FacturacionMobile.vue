@@ -643,7 +643,7 @@
 
                 // Variables filtro
                 numFacturaFiltro : '',
-                estadoFiltro : '',
+                estadoFiltro : 1,
                 idTerceroFiltro : '',
                 terceroFiltro : '',
                 desdeFiltro : '2019-01-01',
@@ -1748,7 +1748,8 @@
             imprimirTicket(){
                 let me = this;
             
-                axios.get(this.ruta+'/detalle_facturacion/imprimir-ticket?id='+me.factura_imprimir).then(function(response){                 
+                axios.get(this.ruta+'/detalle_facturacion/imprimir-ticket?id='+me.factura_imprimir).then(function(response){   
+                    console.log(response)              
 
                 }).catch(function (error) {
                     console.log(error);

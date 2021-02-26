@@ -27,7 +27,7 @@
                         <thead>
                             <tr>
                                 <th class="col-md-4">Nombre</th>
-                                <th>Codigo</th>
+                                <th>Tipo</th>
                                 <th class="col-md-1">Estado</th>
                             </tr>
                         </thead>
