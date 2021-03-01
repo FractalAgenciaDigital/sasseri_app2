@@ -1855,11 +1855,12 @@
                         me.ocultarDetalle();
                         me.listarFacturacion(1,'','','','','','','');
                         me.listarPendientes();
+                        me.modalRegreso = 0;
                     }).catch(function (error) {
                         console.log(error);
                     });
 
-                    axios.get(this.ruta+'/facturacion/imprimir-ticket-facturacion?id='+this.facturacion_id+'&id_impresora=5&valorEfectivo='+this.valorEfectivo+'&valorCambio='+this.valorRegreso).then(function(response){                 
+                    axios.get(this.ruta+'/facturacion/imprimir-ticket-facturacion?id='+this.facturacion_id+'&id_impresora=1&valorEfectivo='+this.valorEfectivo+'&valorCambio='+this.valorRegreso).then(function(response){                 
 
                     }).catch(function (error) {
                         console.log(error);

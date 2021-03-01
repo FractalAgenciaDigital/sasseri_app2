@@ -202,7 +202,7 @@ class FacturacionController extends Controller
             
             
           
-            if($request->id_cierre_caja && $request->id_cierre_caja!=0){$facturacion = $facturacion->where('id_cierre_caja','=',$request->id_cierre_caja);}
+            // if($request->id_cierre_caja && $request->id_cierre_caja!=0){$facturacion = $facturacion->where('id_cierre_caja','=',$request->id_cierre_caja);}
 
             $facturacion = $facturacion->where('facturacion.id_empresa','=',$id_empresa)->where('facturacion.estado','!=','2')
             ->get();
@@ -588,7 +588,7 @@ class FacturacionController extends Controller
         
         $impresora = new Printer($connector);  
         $impresora->initialize();
-        // $impresora->setPrintWidth(30);
+        // $impresora->setPrintWidth(25);
         $impresora->setJustification(Printer::JUSTIFY_CENTER);     
         $logo = EscposImage::load('logo.jpg', false);
         $impresora->bitImage($logo);       
@@ -618,42 +618,42 @@ class FacturacionController extends Controller
         $impresora->text($facturacion->nombre1." ".$facturacion->nombre2." ".$facturacion->apellido1." ".$facturacion->apellido2."\n");
         $impresora->setLineSpacing(2); 
         $impresora->setJustification(Printer::JUSTIFY_LEFT);
-        $impresora->text("\n----------------------------------------------"."\n\n");
+        $impresora->text("\n-----------------------------------------"."\n\n");
         $impresora->setLineSpacing(1);
         $impresora->setEmphasis(true);
-        $impresora->text(sprintf('%-25s %+10.8s %+10.7s','ARTICULO', 'CANT', 'PRECIO'));        
-        $impresora->text("\n----------------------------------------------"."\n\n");
+        $impresora->text(sprintf('%-20s %+10.8s %+10.7s','ARTICULO', 'CANT', 'PRECIO'));        
+        $impresora->text("\n-----------------------------------------"."\n\n");
         $impresora->setEmphasis(false);
         $impresora->text("\n"); 
         $total = 0;
         foreach($detalle_facturacion as $df)
         {
-            $line = sprintf('%-25s %10.0f %10.2f ','-'. $df->nombre_articulo, $df->cantidad, $df->cantidad * $df->precio);
+            $line = sprintf('%-20s %10.0f %10.2f ','-'. $df->nombre_articulo, $df->cantidad, $df->cantidad * $df->precio);
             $total +=  $df->cantidad * $df->precio;
             $impresora->text($line);
             $impresora->text("\n");             
         }
-        $impresora->text("\n=============================================="."\n\n");
+        $impresora->text("\n=========================================="."\n\n");
         $impresora->setJustification(Printer::JUSTIFY_LEFT);
         $impresora->setEmphasis(true);
         $impresora->setLineSpacing(2);
         $impresora->setTextSize(1, 2);
-        $impresora->text(sprintf('%-30s %+15.15s','TOTAL',number_format($total, 2)  )); 
+        $impresora->text(sprintf('%-25s %+15.15s','TOTAL',number_format($total, 2)  )); 
         $impresora->setEmphasis(false);
-        $impresora->text("\n=============================================="."\n\n");
+        $impresora->text("\n========================================="."\n\n");
         // $impresora->text("\nTotal: $" . number_format($total, 2) . "\n");
         $impresora->setTextSize(1, 1);
         if(isset($request->valorEfectivo)){
             $valorEfectivo=$request->valorEfectivo;
 
-            $impresora->text(sprintf('%-30s %+15.15s','Efectivo:',number_format($valorEfectivo, 0)."\n")); 
+            $impresora->text(sprintf('%-25s %+15.15s','Efectivo:',number_format($valorEfectivo, 0)."\n")); 
 
             // $impresora->text("\nEfectivo: ".$valorEfectivo);
         }
         if(isset($request->valorCambio)){
             $valorCambio=$request->valorCambio;
             // $impresora->text("\Cambio: ".$valorCambio);
-            $impresora->text(sprintf('%-30s %+15.15s','Cambio:',number_format($valorCambio, 0) ."\n" )); 
+            $impresora->text(sprintf('%-25s %+15.15s','Cambio:',number_format($valorCambio, 0) ."\n" )); 
         }
         $impresora->setJustification(Printer::JUSTIFY_CENTER);
         $impresora->setLineSpacing(2);

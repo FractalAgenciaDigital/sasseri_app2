@@ -87,10 +87,10 @@
                             <a href="#" class="nav-link"><i class="icon-screen-desktop"></i> <span>Punto de venta</span></a>
                         </li> -->
                         <li @click="menu=14" class="nav-item">
-                            <a href="#" class="nav-link d-none d-lg-block"><i class="icon-calculator"></i><span>Facturación</span> </a>
+                            <a href="#" class="nav-link d-nonex d-lg-blockx"><i class="icon-calculator"></i><span>Facturación</span> </a>
                         </li>                       
                         <li @click="menu=47" class="nav-item">
-                            <a href="#" class="nav-link d-none d-md-block d-lg-none"><i class="icon-calculator"></i><span>Facturación M</span> </a>
+                            <a href="#" class="nav-link d-nonex d-md-blockx xd-lg-none"><i class="icon-calculator"></i><span>Táctil</span> </a>
                         </li> 
                         <li @click="menu=42" class="nav-item">
                             <a href="#" class="nav-link">

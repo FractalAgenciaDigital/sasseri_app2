@@ -233,7 +233,8 @@ class DetalleFacturacionController extends Controller
     {
         $id_factura = $request->id;
         $id_empresa = $request->session()->get('id_empresa');
-        $id_impresora = Auth::user()->id_impresora;
+        // $id_impresora = Auth::user()->id_impresora;
+        $id_impresora=2;
         
        $imprimir = Impresora::where('id', $id_impresora)->first();
         $detalle_facturacion = DetalleFacturacion::leftJoin('facturacion', 'detalle_facturacion.id_factura','=','facturacion.id')
@@ -281,10 +282,10 @@ class DetalleFacturacionController extends Controller
         $connector = new WindowsPrintConnector($imprimir->nombre_impresora);
         $impresora = new Printer($connector);
         // $impresora->lineSpacing(19);
-        // $logo = EscposImage::load('logo.jpg', false);
+        $impresora->setJustification(Printer::JUSTIFY_CENTER) ;
+        $logo = EscposImage::load('logo.jpg', false);
         $impresora->bitImage($logo);
-        $impresora->setJustification(Printer::JUSTIFY_CENTER)
-        ;
+        
         $impresora->text("\n===============================\n");
         $impresora->setEmphasis(true);
         $impresora->text($infoEmpresa[0]->nombre."\n");
