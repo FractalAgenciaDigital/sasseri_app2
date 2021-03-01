@@ -129,7 +129,7 @@
                                 </div>
                             </ul>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCartera"
                             aria-expanded="true" aria-controls="collapseCartera">
                                 <i class="icon-wallet"></i><span>Cartera</span>
@@ -145,7 +145,7 @@
                                     </li>
                                 </div>
                             </ul>
-                        </li>
+                        </li> -->
                         <li @click="menu=999991" class="nav-item">
                             <a href="#" class="nav-link"><i class="icon-user"></i> <span>Usuarios</span></a>
                         </li>
@@ -162,18 +162,18 @@
                             <ul  id="collapseInforme" class="collapse" aria-labelledby="headingInforme"
                             data-parent="#accordionSidebar">
                                 <div class="collapse-inner">
-                                    <li @click="menu=31" class="collapse-item">
+                                    <!-- <li @click="menu=31" class="collapse-item">
                                         <a href="#"><i class="icon-notebook"></i> Informe Cajas</a>
-                                    </li>
+                                    </li> -->
                                     <li @click="menu=44" class="collapse-item">
                                         <a href="#"><i class="fa fa-cutlery"></i> Informe arqueo</a>
                                     </li>
                                     <!-- <li @click="menu=45" class="collapse-item">
                                         <a href="#"><i class="fa fa-percent"></i> Informe productos y categorias</a>
                                     </li>    -->
-                                     <li @click="menu=46" class="collapse-item">
+                                     <!-- <li @click="menu=46" class="collapse-item">
                                         <a href="#"><i class="fa fa-percent"></i>Historial facturas</a>
-                                    </li>   
+                                    </li>    -->
                                                                       
                                 </div>
 
