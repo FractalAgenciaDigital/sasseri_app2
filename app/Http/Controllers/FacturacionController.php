@@ -561,6 +561,7 @@ class FacturacionController extends Controller
         $id_empresa = $request->session()->get('id_empresa');
         $id_impresora = $request->id_impresora;
         
+        
        $imprimir = Impresora::where('id', $id_impresora)->first();
 
         // $detalle_facturacion = DetalleFacturacion::findOrFail($id_factura);
@@ -585,10 +586,12 @@ class FacturacionController extends Controller
 
         $connector = new WindowsPrintConnector($imprimir->nombre_impresora);
         
-        $impresora = new Printer($connector);    
+        $impresora = new Printer($connector);  
+        $impresora->initialize();
+        // $impresora->setPrintWidth(30);
         $impresora->setJustification(Printer::JUSTIFY_CENTER);     
-        // $logo = EscposImage::load('logo.jpg', false);
-        // $impresora->bitImage($logo);       
+        $logo = EscposImage::load('logo.jpg', false);
+        $impresora->bitImage($logo);       
         $impresora->text("\n===============================\n");        
         $impresora->setTextSize(1, 2);
         $impresora->text($infoEmpresa->nombre."\n");
@@ -615,10 +618,11 @@ class FacturacionController extends Controller
         $impresora->text($facturacion->nombre1." ".$facturacion->nombre2." ".$facturacion->apellido1." ".$facturacion->apellido2."\n");
         $impresora->setLineSpacing(2); 
         $impresora->setJustification(Printer::JUSTIFY_LEFT);
-        $impresora->text("\n______________________________________"."\n\n");
+        $impresora->text("\n----------------------------------------------"."\n\n");
         $impresora->setLineSpacing(1);
         $impresora->setEmphasis(true);
         $impresora->text(sprintf('%-25s %+10.8s %+10.7s','ARTICULO', 'CANT', 'PRECIO'));        
+        $impresora->text("\n----------------------------------------------"."\n\n");
         $impresora->setEmphasis(false);
         $impresora->text("\n"); 
         $total = 0;
@@ -629,22 +633,32 @@ class FacturacionController extends Controller
             $impresora->text($line);
             $impresora->text("\n");             
         }
+        $impresora->text("\n========================================"."\n\n");
         $impresora->setJustification(Printer::JUSTIFY_RIGHT);
         $impresora->setEmphasis(true);
         $impresora->setLineSpacing(2);
         $impresora->text("\nTotal: $" . number_format($total, 2) . "\n");
+        if(isset($request->valorEfectivo)){
+            $valorEfectivo=$request->valorEfectivo;
+
+            $impresora->text("\nEfectivo: ".$valorEfectivo);
+        }
+        if(isset($request->valorCambio)){
+            $valorCambio=$request->valorCambio;
+            $impresora->text("\Cambio: ".$valorCambio);
+        }
         $impresora->setJustification(Printer::JUSTIFY_CENTER);
         $impresora->setLineSpacing(2);
-        $impresora->text("\n===============================\n");
+        $impresora->text("\n******************************\n");        
         $impresora->setEmphasis(false);
-        $impresora->setFont(Printer::FONT_C);
+        $impresora->text("Gracias por su compra\n");
+        $impresora->setFont(Printer::MODE_FONT_B);
         $impresora->text("Sasseri");
         $impresora->text("\nwww.fractalagenciadigital.com\n");
-        $impresora->text("\n===============================\n");
-        $impresora->text("Gracias por su compra\n");
-        $impresora->text("\n===============================\n");
-        $impresora->feed(5);
-        $impresora->cut();
+        $impresora->text("\n******************************\n");
+      
+
+        $impresora -> cut();
         $impresora->pulse();
         $impresora->close();        
         

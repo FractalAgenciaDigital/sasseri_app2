@@ -24,15 +24,17 @@
                                             <button class="btn btn-success" @click="listarPendientes();">Recargar Pedidos</button>
                                         </td>
                                     </tr>       
-                                    <tr>                                        
-                                        <th>Editar / Imprimir</th>                                 
+                                    <tr>     
                                         <th>Lugar</th>                                        
-                                        <th>Total</th>                                        
+                                        <th>Total</th>                                   
+                                        <th>Editar / Imprimir</th>
                                         <th class="text-right">Pagar $</th>
                                     </tr>
                                 </thead>
                                 <tbody v-if="permisosUser.leer && arrayPendientes.length">
                                     <tr v-for="pendientes in arrayPendientes" :key="pendientes.id" style="text-align: right;">                                        
+                                        <td v-text="pendientes.nom_lugar"></td>                                        
+                                        <td v-text="pendientes.total"></td>
                                         <td v-if="pendientes.num_factura" v-text="pendientes.num_factura"></td>
                                         <td v-else class="text-left">
                                             <!-- <i class="icon-eye"></i> -->
@@ -53,12 +55,13 @@
                                             <button type="button" @click="abrirModalImpresion(pendientes.id);" class=" btn btn-primary btn-sm" title="imprimir">
                                             <i class="icon-printer"></i> 
                                             </button>
-                                        </td>                                        <td v-text="pendientes.nom_lugar"></td>                                        
-                                        <td v-text="pendientes.total"></td>                                        
+                                        </td>
+                                                                               
                                         <td>
                                             <!-- Botones de registrar -->
                                             <template> 
-                                                <button type="button" v-if="permisosUser.actualizar && pendientes.estado==1" class="btn btn-primary text-white" @click="cambiarEstadoFacturacion(pendientes.id,'registrar')" title="Registrar">
+                                                <button type="button" v-if="permisosUser.actualizar && pendientes.estado==1" class="btn btn-primary text-white" @click="validarRegreso(pendientes.id, pendientes.total);" title="Registrar">
+                                                    <!-- cambiarEstadoFacturacion(pendientes.id,'registrar',pendientes.total) -->
                                                     Pagar
                                                     <!-- Registrar -->
                                                 </button>
@@ -685,7 +688,7 @@
                                 </table>
                             </div>
                             <div v-if="tipo_vista_articulo==2" class="card-group">
-                                <div v-for="(articulo, index) in arrayArticulo" :key="index" @click="abrirModalCantidadArticulo(articulo)" class="col-sm-6 col-md-3 p-sm-2 p-md-1 mosaico">
+                                <div v-for="(articulo, index) in arrayArticulo" :key="index" @click="abrirModalCantidadArticulo(articulo)" class="col-sm-6 col-md-2 p-sm-2 p-md-1 mosaico">
                                     <div class="border col-md-12" style="height: 100%;">
                                         <div class="text-center py-md-2">
                                             <img v-if="`${articulo.img}`!='default.png'" :src="`${ruta}/Empresas/${articulo.id_empresa}_empresa/ImgProductos/${articulo.img}`" class="img-responsive img-thumbnail">
@@ -765,49 +768,121 @@
             <!-- fin modal cantidad por articulo -->
 
             <!-- Modal busqueda tercero-->
-                <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal2}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
-                    <div class="modal-dialog modal-primary modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title" v-text="tituloModal2"></h4>
-                                <button type="button" class="close" @click="cerrarModalT()" aria-label="Close">
-                                    <span aria-hidden="true" title="Cerrar">×</span>
-                                </button>
+            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal2}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog modal-primary modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" v-text="tituloModal2"></h4>
+                            <button type="button" class="close" @click="cerrarModalT()" aria-label="Close">
+                                <span aria-hidden="true" title="Cerrar">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group row">
+                                <div style="max-width: 120px !important;" class="col-md-2   ">
+                                    <label style='margin-top: 3px; '><b>Tercero</b></label>                                
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="cta_busq" v-model="terc_busq" @keyup="buscarTercero()">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="modal-body">
-                                <div class="form-group row">
-                                    <div style="max-width: 120px !important;" class="col-md-2   ">
-                                        <label style='margin-top: 3px; '><b>Tercero</b></label>                                
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" name="cta_busq" v-model="terc_busq" @keyup="buscarTercero()">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-striped table-sm  table-responsive">
-                                        
-                                            <tr><th>Documento</th><th>Nombre</th><th style="    width: 35px;">-</th></tr>
-                                        
-                                            <tr v-for="tercero in arrayTerceros" :key="tercero.id">
-                                                <td v-text="tercero.num_documento"></td>
-                                                <td v-if="tercero.nombre && !tercero.nombre1">{{ tercero.nombre }}  </td>
-                                                <td v-else>{{ tercero.nombre1 + ' ' + validarUnder(tercero.nombre2)+' '+tercero.apellido1+' '+validarUnder(tercero.apellido2) }} </td>
-                                                <td>
-                                                    <button type="button" style=" margin-right: -8px;" @click="cargarTercero(tercero)" class="btn btn-success btn-sm" title='Ver formato'>
-                                                        <i class="icon-check"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                    </table>
-                                </div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-sm  table-responsive">
+                                    
+                                        <tr><th>Documento</th><th>Nombre</th><th style="    width: 35px;">-</th></tr>
+                                    
+                                        <tr v-for="tercero in arrayTerceros" :key="tercero.id">
+                                            <td v-text="tercero.num_documento"></td>
+                                            <td v-if="tercero.nombre && !tercero.nombre1">{{ tercero.nombre }}  </td>
+                                            <td v-else>{{ tercero.nombre1 + ' ' + validarUnder(tercero.nombre2)+' '+tercero.apellido1+' '+validarUnder(tercero.apellido2) }} </td>
+                                            <td>
+                                                <button type="button" style=" margin-right: -8px;" @click="cargarTercero(tercero)" class="btn btn-success btn-sm" title='Ver formato'>
+                                                    <i class="icon-check"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
-
+            </div>
             <!-- fin modal busqueda de terceros -->
+
+
+            <!-- Modal de regreso -->
+            <div class="modal fade" :class="{'mostrar':modalRegreso}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true" >
+                <div  class="modal-dialog modal-primary" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Registro de Pago</h5>
+                            <button type="button" class="close" @click="cerrarModalRegreso();" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="row border">
+                                <div class="row col-12">
+                                    <h5 class="col-6">Valor total: </h5>
+                                    <input class="form-control col-6  text-right" type="text" v-model="valorPagar" aria-label="readonly input example" readonly>
+                                </div>
+                                <div class="row col-12">
+                                    <h5 class="col-6">Efectivo: </h5>
+                                    <input class="form-control col-6  text-right" type="text" placeholder="$0" v-model="valorEfectivo" aria-label="readonly input example" >
+                                    
+                                </div>
+                                 <div class="row col-12">
+                                    <h5 class="col-6">Cambio: </h5>
+                                    <input class="form-control col-6  text-right" type="text" v-model="valorRegreso" placeholder="$0" aria-label="readonly input" readonly>
+                                </div>
+                                
+                            </div>
+
+                            <div class="row border">
+                                <div class="col-4">
+                                    <input class="btn btn-primary btn-block"  @click="valorEfectivo=1000" :value="1000">
+                                    <input class="btn btn-primary btn-block"  @click="valorEfectivo=2000" :value="2000">
+                                    <input class="btn btn-primary btn-block"  @click="valorEfectivo=5000" :value="5000">
+                                    <input class="btn btn-primary btn-block"  @click="valorEfectivo=10000" :value="10000">
+                                    <input class="btn btn-primary btn-block"  @click="valorEfectivo=20000" :value="20000">
+                                    <input class="btn btn-primary btn-block"  @click="valorEfectivo=50000" :value="50000">
+                                    <input class="btn btn-primary btn-block"  @click="valorEfectivo=100000" :value="100000">
+                                    
+                                </div>
+                                <div class="col-8 row">
+                                    <button class="btn btn-light col-4" @click="append(1);">1</button>
+                                    <button class="btn btn-light col-4" @click="append(2);">2</button>
+                                    <button class="btn btn-light col-4" @click="append(3);">3</button>
+                                    <button class="btn btn-light col-4" @click="append(4);">4</button>
+
+                                    <button class="btn btn-light col-4" @click="append(5);">5</button>
+                                    <button class="btn btn-light col-4" @click="append(6);">6</button>
+                                    <button class="btn btn-light col-4" @click="append(7);">7</button>
+                                    <button class="btn btn-light col-4" @click="append(8);">8</button>
+
+                                    <button class="btn btn-light col-4" @click="append(9);">9</button>
+                                    <button class="btn btn-danger col-4" @click="limpiarRegreso();">x</button>
+                                    <button class="btn btn-light col-4" @click="append(0);">0</button>
+                                     <button type="button" class="btn btn-success col-4" @click="calcularRegreso();">
+                                        <i class="icon-check"></i>
+                                    </button>
+                                    
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" @click="cerrarModalRegreso();">Close</button>
+                            <button type="button" class="btn btn-primary" @click="cambiarEstadoFacturacion(facturacion_id,'registrar')">Pagar</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--Fin modal de regreso -->
         </div>
 
     </main>
@@ -968,6 +1043,13 @@
                 id_presentacion : 0,
                 padreDetalle : '',
                 idDetalleAsociado : 0,
+
+                // Calculo de efectivos}
+                valorPagar:0,
+                valorEfectivo:0,
+                valorRegreso:0,
+                modalRegreso:0,
+                operatorClicked: false
             }
         },
         components: {
@@ -1723,6 +1805,7 @@
 
                 return this.errorFacturacion;
             },
+
             cambiarEstadoFacturacion(id_factura, accion){
                 let me=this;
                 var cambiarEstado = '';
@@ -1775,6 +1858,12 @@
                     }).catch(function (error) {
                         console.log(error);
                     });
+
+                    axios.get(this.ruta+'/facturacion/imprimir-ticket-facturacion?id='+this.facturacion_id+'&id_impresora=1&valorEfectivo='+this.valorEfectivo+'&valorCambio='+this.valorCambio).then(function(response){                 
+
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
                     
                     
                 } else if (
@@ -1784,6 +1873,40 @@
                     
                     }
                 }) 
+            },
+            
+            validarRegreso(id_factura, total_pagar){
+                let me = this;
+                me.modalRegreso = 1;
+                me.valorPagar = total_pagar;
+                me.facturacion_id = id_factura;
+            },
+            cerrarModalRegreso(){
+                let me = this;
+                me.modalRegreso = 0;
+                me.valorEfectivo = 0;
+                me.valorPagar = 0;
+                me.valorRegreso = 0;
+            }, 
+            calcularRegreso(){
+                let me = this; 
+                me.valorRegreso = me.valorEfectivo-me.valorPagar;
+
+            }, 
+            limpiarRegreso(){
+                let me = this;
+                me.valorEfectivo=0;
+                me.valorRegreso=0;
+            },
+            append(number) {
+                if (this.operatorClicked === true) {
+                    this.valorEfectivo = '';
+                    this.operatorClicked = false;
+                }
+                this.valorEfectivo =
+                    this.valorEfectivo === 0
+                    ? (this.valorEfectivo = number)
+                    : '' + this.valorEfectivo + number;
             },
             buscarArticulo(){
                 let me=this;

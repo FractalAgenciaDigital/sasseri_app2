@@ -236,12 +236,6 @@ class DetalleFacturacionController extends Controller
         $id_impresora = Auth::user()->id_impresora;
         
        $imprimir = Impresora::where('id', $id_impresora)->first();
-
-       
-
-        // $detalle_facturacion = DetalleFacturacion::findOrFail($id_factura);
-        // $nombreImpresora = env("NOMBRE_IMPRESORA");
-
         $detalle_facturacion = DetalleFacturacion::leftJoin('facturacion', 'detalle_facturacion.id_factura','=','facturacion.id')
         ->leftJoin('articulos', 'detalle_facturacion.id_producto','=','articulos.id')
         ->leftJoin('presentacion','articulos.id_presentacion','=','presentacion.id')
