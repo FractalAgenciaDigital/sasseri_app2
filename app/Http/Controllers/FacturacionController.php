@@ -633,29 +633,38 @@ class FacturacionController extends Controller
             $impresora->text($line);
             $impresora->text("\n");             
         }
-        $impresora->text("\n========================================"."\n\n");
-        $impresora->setJustification(Printer::JUSTIFY_RIGHT);
+        $impresora->text("\n=============================================="."\n\n");
+        $impresora->setJustification(Printer::JUSTIFY_LEFT);
         $impresora->setEmphasis(true);
         $impresora->setLineSpacing(2);
-        $impresora->text("\nTotal: $" . number_format($total, 2) . "\n");
+        $impresora->setTextSize(1, 2);
+        $impresora->text(sprintf('%-30s %+15.15s','TOTAL',number_format($total, 2)  )); 
+        $impresora->setEmphasis(false);
+        $impresora->text("\n=============================================="."\n\n");
+        // $impresora->text("\nTotal: $" . number_format($total, 2) . "\n");
+        $impresora->setTextSize(1, 1);
         if(isset($request->valorEfectivo)){
             $valorEfectivo=$request->valorEfectivo;
 
-            $impresora->text("\nEfectivo: ".$valorEfectivo);
+            $impresora->text(sprintf('%-30s %+15.15s','Efectivo:',number_format($valorEfectivo, 0)."\n")); 
+
+            // $impresora->text("\nEfectivo: ".$valorEfectivo);
         }
         if(isset($request->valorCambio)){
             $valorCambio=$request->valorCambio;
-            $impresora->text("\Cambio: ".$valorCambio);
+            // $impresora->text("\Cambio: ".$valorCambio);
+            $impresora->text(sprintf('%-30s %+15.15s','Cambio:',number_format($valorCambio, 0) ."\n" )); 
         }
         $impresora->setJustification(Printer::JUSTIFY_CENTER);
         $impresora->setLineSpacing(2);
-        $impresora->text("\n******************************\n");        
+        $impresora->text("\n******************************************\n");        
         $impresora->setEmphasis(false);
         $impresora->text("Gracias por su compra\n");
+        $impresora->text("\n******************************************\n");        
         $impresora->setFont(Printer::MODE_FONT_B);
         $impresora->text("Sasseri");
         $impresora->text("\nwww.fractalagenciadigital.com\n");
-        $impresora->text("\n******************************\n");
+        
       
 
         $impresora -> cut();

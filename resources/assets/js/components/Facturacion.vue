@@ -1859,7 +1859,7 @@
                         console.log(error);
                     });
 
-                    axios.get(this.ruta+'/facturacion/imprimir-ticket-facturacion?id='+this.facturacion_id+'&id_impresora=1&valorEfectivo='+this.valorEfectivo+'&valorCambio='+this.valorCambio).then(function(response){                 
+                    axios.get(this.ruta+'/facturacion/imprimir-ticket-facturacion?id='+this.facturacion_id+'&id_impresora=5&valorEfectivo='+this.valorEfectivo+'&valorCambio='+this.valorRegreso).then(function(response){                 
 
                     }).catch(function (error) {
                         console.log(error);
