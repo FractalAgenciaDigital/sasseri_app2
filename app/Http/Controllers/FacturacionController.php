@@ -204,7 +204,7 @@ class FacturacionController extends Controller
           
             // if($request->id_cierre_caja && $request->id_cierre_caja!=0){$facturacion = $facturacion->where('id_cierre_caja','=',$request->id_cierre_caja);}
 
-            $facturacion = $facturacion->where('facturacion.id_empresa','=',$id_empresa)->where('facturacion.estado','!=','2')
+            $facturacion = $facturacion->where('facturacion.id_empresa','=',$id_empresa)->where('facturacion.estado','!=','2')->where('facturacion.estado','!=','4')
             ->get();
             // ->paginate(6);
 

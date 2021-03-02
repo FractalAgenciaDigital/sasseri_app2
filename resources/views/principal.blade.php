@@ -171,9 +171,9 @@
                                     <!-- <li @click="menu=45" class="collapse-item">
                                         <a href="#"><i class="fa fa-percent"></i> Informe productos y categorias</a>
                                     </li>    -->
-                                     <!-- <li @click="menu=46" class="collapse-item">
+                                     <li @click="menu=46" class="collapse-item">
                                         <a href="#"><i class="fa fa-percent"></i>Historial facturas</a>
-                                    </li>    -->
+                                    </li>   
                                                                       
                                 </div>
 

@@ -28,21 +28,23 @@
 
                 <div class="card-body col-xs-12 col-sm-12 col-md-9">
                     <div class="form-group">
-                        <div class="row">
-                            <div v-for="(articulo, index) in arrayArticulo" :key="index" class="col-lg-2 col-md-3 col-sm-4 col-6 separa-cards">
-                                <!--<div class="card text-center mb-1" style="cursor:pointer" @click="agregaDetalleMesero(articulo)">-->
-                                <div class="card text-center mb-1" style="cursor:pointer" @click="abrirModal(articulo)">
-                                    <div class=" txt-price-prod btn-primary">
-                                        <span class="num text-white "> $ {{articulo.precio_venta}} </span>
+                        <div class="row card-group">
+                          
+                            <div  v-for="(articulo, index) in arrayArticulo" :key="index" class="col-lg-2 col-md-3 col-sm-4 col-6 p-1" >
+                                <div class="cardz"  style="cursor:pointer" @click="abrirModal(articulo)">
+                                    <div class="card-header bg-primary text-white p-1">
+                                        {{articulo.nombre}}
                                     </div>
-                                    <div class="card mx-auto">
-                                        <img v-if="`${articulo.img}`!='default.png'" :src="`${ruta}/Empresas/${articulo.id_empresa}_empresa/ImgProductos/${articulo.img}`" class="img-prods">
-                                    </div>
-                                    <div class="txt-nom-prod bg-success">
-                                        <small class="mb-0 text-white">{{articulo.nombre}}</small>
+                                    <img class="card-img-top" v-if="`${articulo.img}`!='default.png'" :src="`${ruta}/Empresas/${articulo.id_empresa}_empresa/ImgProductos/${articulo.img}`" >
+                                    <!-- <img class="card-img-top" v-if="`${articulo.img}`!='default.png'" :src="`${ruta}/img/food.jpg`" > -->
+                                    <div class="card-footer bg-success text-white text-right">                                       
+                                       $ {{articulo.precio_venta}} 
                                     </div>
                                 </div>
                             </div>
+                             
+
+
                         </div>  
                     </div>
                 </div>
@@ -67,7 +69,7 @@
                                     <div class="col-1">
                                         <h3><i class="fa fa-user"></i></h3>
                                     </div>
-                                    <div class="col-9 nombre-tercero"><small class="text-muted ">{{tercero}}</small></div>
+                                    <div class="col-9"><small class="text-muted ">{{tercero}}</small></div>
                                     <div class="col-1">
                                         <h3  v-if="!tercero" style="cursor:pointer" class="text-primary" @click="position=3">
                                             <i class="fa fa-plus-circle" href="#59981A"></i>
@@ -191,7 +193,7 @@
                                  
                             </div> 
                             <div class="col-2 text-center">
-                                <h3 v-if="id_selected_row==tercero.id" class="text-success ex1" v-bind:id="'person_opts_'+tercero.id" style="margin: auto; font-size: 19px;"><i class="fa fa-pencil"></i></h3>
+                                <h3 v-if="id_selected_row==tercero.id" class="text-success" v-bind:id="'person_opts_'+tercero.id" style="margin: auto; font-size: 19px;"><i class="fa fa-pencil"></i></h3>
                             </div>
                         </div>                        
                     </div>                    
@@ -287,8 +289,7 @@
                             
                         </div>                                      
                     </div>
-                    <div class="ticket">
-                        <!-- <img class="img-logo espacio-1" src="http://192.168.1.50/sasseri_app2/public/Empresas/1_empresa/ImgLogos/f4f72620874a541d0113ea86bcf699a8.jpg" alt="img-logo"> -->
+                    <div class="ticket">                        
                         <p class="centrado espacio-1">FECHA {{ datosFactura.fec_crea}}</p>
                         -----------------------------------------
                         <div class="input-group mb-0">
@@ -331,7 +332,7 @@
                         </table>
                         -----------------------------------------
                         <br>
-                        <p class="centrado minimizar espacio-1">POWERE BY - FRACTAL AGENCIA DIGITAL<br>www.fractalagenciadigital.  com</p><br> 
+                        <small class="text-center p-1"><a href="https://www.fractalagenciadigital.com">POWERE BY - FRACTAL AGENCIA DIGITAL<br>www.fractalagenciadigital.com</a></small><br> 
                     </div>                    
                 </div>  
    
@@ -365,10 +366,10 @@
                                         <td v-if="facturacion.estado==0" class="text-danger">Cancelada</td>
                                         <td class="centrado">
                                             <button v-if="facturacion.estado==1"  @click="mostrarDetalle('facturacion','actualizar',facturacion);position=2;" class="btn-1 btn btn-success rounded-circle">
-                                                <i class="fa fa-pencil btn-edit-factura"></i>
+                                                <i class="fa fa-pencil"></i>
                                             </button>
                                              <button v-else class="btn-1 btn btn-secondary rounded-circle">
-                                                <i class="fa fa-pencil btn-edit-factura"></i>
+                                                <i class="fa fa-pencil"></i>
                                             </button>
                                         </td>
                                     </tr>
@@ -391,16 +392,16 @@
                         </div>
                         <div class="modal-body">
                             <div class="row">
-                                <div class="col-4 separa-cards">
+                                <div class="col-4">
                                     <!--<div class="card text-center mb-1" style="cursor:pointer" @click="agregaDetalleMesero(articulo)">-->
                                     <div class="card text-center mb-1" style="cursor:pointer" @click="cantidad++">
-                                        <div class=" txt-price-prod btn-primary">
+                                        <div class="btn-primary">
                                             <span class="num text-white "> $ {{auxProd.precio_venta}} </span>
                                         </div>
                                         <div class="card mx-auto" v-if="auxProd">
-                                            <img v-if="`${auxProd.img}`!='default.png'" :src="`${ruta}/Empresas/${auxProd.id_empresa}_empresa/ImgProductos/${auxProd.img}`" class="img-prods">
+                                            <img v-if="`${auxProd.img}`!='default.png'" :src="`${ruta}/Empresas/${auxProd.id_empresa}_empresa/ImgProductos/${auxProd.img}`">
                                         </div>
-                                        <div class="txt-nom-prod bg-success">
+                                        <div class="bg-success">
                                             <small class="mb-0 text-white">{{auxProd.nombre}}</small>
                                         </div>
                                     </div>
@@ -1323,16 +1324,8 @@
                 return sw;
             },
             eliminarDetalle(detalle,index){
-                let me = this;
-                if(detalle.cantidad2){
-                    if (detalle.cantidad != detalle.cantidad2) {
-                        detalle.cantidad = detalle.cantidad2
-                        detalle.prod_nuevo = 0; 
-                    }
-                }
-                else{
-                    me.arrayDetalle.splice(index, 1);
-                }
+                let me = this;               
+                me.arrayDetalle.splice(index, 1);
              
             },
            
@@ -2276,71 +2269,20 @@
     }
 </script>
 <style> 
-    *{
-        font-size: 14px;
-            
-    }
-    .ex1 {
-        border: 1px solid rgb(49, 173, 45);
-        outline-style: solid;
-        outline-color: rgba(45, 189, 76, 0.87);
-        outline-width: thin;
-}
-    .btn-edit-factura {
-        font-size: 15px !important;
-    }
-    .minimizar {
-        font-size: 9px;
-    }
-    .espacio-1 {
-        margin-top: 0 !important; 
-        margin-bottom: 0rem !important;
-    }
-    .centrado {
-        text-align: center;
-        align-content: center;
-    }
     .ticket {
         width: 288px;
         max-width: 320px;
         margin: auto;
         line-height: 1;
     }
-     .img-logo {
-        max-width: 87px;
-        margin-left: 100px;
-    }
+    
     .select2-search__field {
             width: 100% !important;
     }
     .select2-container {
             width: 100% !important
     }
-    .nombre-tercero {
-        font-size: 16px !important;
-    }
-    .txt-nom-prod {
-        line-height: 1 !important;
-        min-height: 35px;
-        border-radius: 3px;
-    }
-    .separa-cards {
-        padding-right: 0.15rem !important;
-        padding-left: 0.15rem !important;       
-    }
-    .img-prods {
-        width: 89px;
-        height: 89px
-    }
-    .txt-price-prod {
-        font-size: 12px;
-        border-radius: 3px !important;
-    }
-
-    h3.ocultar{
-        display: none !important;
-    }
-    
+  
     div.resaltar:hover, div.active:hover, div h3.resaltar:hover, div>h3.active:hover  {
         background-color: #d1d3e2!important;
        
@@ -2348,15 +2290,7 @@
     .mul-select  {
          width: 100%;
     }
-    .precio-prod{
-        position: absolute;
-        float: right;
-        top: 74px;
-        right: 33px;
-        font-size: 14px;
-        z-index: 2;
-        min-width: 85px;
-    }
+    
     .modal-content{
         width: 100% !important;
         position: absolute !important;
@@ -2367,29 +2301,7 @@
         opacity: 1 !important;
         position: fixed !important;
         background-color: #3c29297a !important;
-    }
-    .div-error{
-        display: flex;
-        justify-content: center;
-    }
-    .text-error{
-        color: red !important;
-        font-weight: bold;
-    }
-    .mosaico{
-        display: inline-block;
-        float: left;
-    }
-    @media (min-width: 600px) {
-        .btnagregar {
-            margin-top: 2rem;
-        }
-    }
-    select option{
-        font-size:14px;
-        padding:5px;
-        margin: 5px
-    }
+    } 
 
 </style>
 

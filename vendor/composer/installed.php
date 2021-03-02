@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '8b033bc065608826bcd7434f17a52cd5d0eba9b0',
+    'reference' => '7c4a3e87c2500335efc0b35e3a31967193b649d8',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -388,7 +388,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '8b033bc065608826bcd7434f17a52cd5d0eba9b0',
+      'reference' => '7c4a3e87c2500335efc0b35e3a31967193b649d8',
     ),
     'laravel/tinker' => 
     array (
@@ -473,12 +473,12 @@
     ),
     'mockery/mockery' => 
     array (
-      'pretty_version' => '1.3.3',
-      'version' => '1.3.3.0',
+      'pretty_version' => '1.3.4',
+      'version' => '1.3.4.0',
       'aliases' => 
       array (
       ),
-      'reference' => '60fa2f67f6e4d3634bb4a45ff3171fa52215800d',
+      'reference' => '31467aeb3ca3188158613322d66df81cedd86626',
     ),
     'monolog/monolog' => 
     array (
@@ -513,12 +513,12 @@
     ),
     'myclabs/php-enum' => 
     array (
-      'pretty_version' => '1.8.0',
-      'version' => '1.8.0.0',
+      'pretty_version' => '1.7.7',
+      'version' => '1.7.7.0',
       'aliases' => 
       array (
       ),
-      'reference' => '46cf3d8498b095bd33727b13fd5707263af99421',
+      'reference' => 'd178027d1e679832db9f38248fcc7200647dc2b7',
     ),
     'nesbot/carbon' => 
     array (

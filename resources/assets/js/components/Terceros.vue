@@ -110,15 +110,15 @@
                         <div class="modal-body">
                             <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                                 <div class="form-row">
-                                    <div class="form-group col-md-4">
+                                    <!-- <div class="form-group col-md-4">
                                         <label for="text-input">Tipo Persona (*)</label>                                                                             
                                         <select v-model="tipo_persona" class="form-control" v-bind:class="{ 'is-invalid': hasError.tipo_persona==1 }">
                                             <option value="0" disabled>Seleccione</option>
                                             <option value="Natural">Natural</option>
                                             <option value="Juridica">Jurídica</option>
                                         </select>                                        
-                                    </div>
-                                    <div class="form-group form-check col-md-4">
+                                    </div> -->
+                                    <!-- <div class="form-group form-check col-md-4">
                                         <label class="form-check-label">Dig. Verificación</label>
                                         <input type="checkbox" v-model="digito_verif" class="form-check-inputx" v-bind:class="{ 'is-invalid': hasError.digito_verif==1 }">
                                        
@@ -126,12 +126,19 @@
                                         <div v-if="digito_verif==1" >
                                             <input type="number" id="digito_verif" class="form-control" v-model="num_verif" max="1" v-bind:class="{ 'is-invalid': hasError.num_verif==1 }">
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="form-group custom-file col-md-4">
                                         <label class="custom-file-label" for="img">Foto</label>
                                         <input type="file" id="img" name="img" ref="inputFileImg"  @change="cargarImg" class="custom-file-input" v-bind:class="{ 'is-invalid': hasError.img==1 }">
+                                        
+                                    </div>
+                                    <div class="col-4">
+                                        <small id="" class="text-muted">
+                                           Solo se admite formatos PNG, JPEG, JPG (*)
+                                        </small>
                                     </div>
                                 </div>
+                                <br>
                                 <div class="form-group col-lg-4" v-if="tipo_persona !='Natural'">
                                     <label for="text-input">Razon Social (*)</label>                                    
                                     <input type="text" v-model="nombre" class="form-control" placeholder="Nombre de la entidad" v-bind:class="{ 'is-invalid': hasError.nombre==1 }">                                    
@@ -146,9 +153,6 @@
                                         <input type="text" v-model="nombre2" class="form-control" placeholder="2° Nombre" v-bind:class="{ 'is-invalid': hasError.nombre2==1 }">                                        
                                     </div>
                                     
-                                <!-- </div>
-                                
-                                <div class="form-row" v-if="tipo_persona =='Natural'"> -->
                                      <div  class="form-group col-lg-4">
                                         <label for="text-input">1° Apellido (*)</label>                                      
                                         <input type="text" v-model="apellido1" class="form-control" placeholder="1° Apellido" v-bind:class="{ 'is-invalid': hasError.apellido1==1 }">
@@ -159,7 +163,7 @@
                                         <input type="text" v-model="apellido2" class="form-control" placeholder="2° Apellido" v-bind:class="{ 'is-invalid': hasError.apellido2==1 }">
                                         
                                     </div>
-                                    <div  class="form-group col-lg-4">
+                                    <!-- <div  class="form-group col-lg-4">
                                         <label for="text-input">Departamento</label>                                        
                                         <select v-model="departamento" @change="listarMunicipios(departamento)" class="form-control" v-bind:class="{ 'is-invalid': hasError.departamento==1 }">
                                             <option v-for="departamento in arrayDepartamentos" :key="departamento.id" :value="departamento.id" v-text="departamento.nombre"></option>
@@ -171,7 +175,7 @@
                                             <option v-for="municipio in arrayMunicipios" :key="municipio.id" :value="municipio.id" v-text="municipio.nombre"></option>
                                         </select>                                        
                                         
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="form-row">
                                     <div  class="form-group col-lg-4">
@@ -188,7 +192,7 @@
                                         <label for="text-input">Documento</label>                                        
                                         <input type="text" v-model="num_documento" class="form-control" placeholder="Número de documento" v-bind:class="{ 'is-invalid': hasError.num_documento==1 }">
                                     </div>   
-                                    <div class="form-group col-lg-4">
+                                    <!-- <div class="form-group col-lg-4">
                                         <label for="text-input">Regimen</label>                                        
                                         <select v-model="regimen" class="form-control" v-bind:class="{ 'is-invalid': hasError.regimen==1 }">
                                             <option value="0" disabled>Seleccione</option>
@@ -196,11 +200,11 @@
                                             <option value="Simplificado">Simplificado</option>
                                             <option value="CE">Gran Contribuyente</option>
                                         </select>     
-                                    </div>                                
+                                    </div>                                 -->
                                 </div>
                                
                                 <div class="form-row">
-                                    <div  class="form-group col-lg-4">
+                                    <!-- <div  class="form-group col-lg-4">
                                         <label for="text-input">Dirección</label>
                                         <input type="text" v-model="direccion" class="form-control" placeholder="Dirección" v-bind:class="{ 'is-invalid': hasError.direccion==1 }">
                                      </div>
@@ -211,10 +215,10 @@
                                     <div  class="form-group col-lg-4">
                                         <label for="number-input">Teléfono 1</label>                                    
                                         <input type="number" id="telefono1" v-model="telefono1" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" placeholder="Teléfono 1" v-bind:class="{ 'is-invalid': hasError.telefono1==1 }">
-                                    </div>                                     
+                                    </div>                                      -->
                                 </div>
                                 <div class="form-row">
-                                    <div  class="form-group col-lg-4">
+                                    <!-- <div  class="form-group col-lg-4">
                                         <label for="text-input">Género</label>                                   
                                         <select v-model="sexo" class="form-control" v-bind:class="{ 'is-invalid': hasError.sexo==1 }">
                                             <option value="0" disabled>Seleccione</option>
@@ -222,27 +226,27 @@
                                             <option value="Masculino">Masculino</option>
                                             <option value="Otro">Otro</option>
                                         </select>                                    
-                                    </div>
-                                    <div  class="form-group col-lg-4">
+                                    </div> -->
+                                    <!-- <div  class="form-group col-lg-4">
                                         <label for="date-input">Fec. Nacimiento</label>
                                         <input type="date" v-model="fec_nac" class="form-control" placeholder="Fecha Nacimento" v-bind:class="{ 'is-invalid': hasError.fec_nac==1 }">
-                                    </div>
+                                    </div> -->
                                     
-                                    <div class="form-group col-lg-4">
+                                    <!-- <div class="form-group col-lg-4">
                                         <label for="text-input">Ubicación</label>
                                         <input type="text" v-model="reside" class="form-control" placeholder="Ubicacion" v-bind:class="{ 'is-invalid': hasError.reside==1 }">
-                                    </div>
-                                    <div  class="form-group col-lg-4" v-if="tipo_persona !='Natural'">
+                                    </div> -->
+                                    <!-- <div  class="form-group col-lg-4" v-if="tipo_persona !='Natural'">
                                         <label for="text-input">Rep. Legal</label>                                        
                                         <input type="text" v-model="representante" class="form-control" placeholder="Representante" v-bind:class="{ 'is-invalid': hasError.representante==1 }">
                                     </div>
                                     <div v-if="tipo_persona =='Natural'" class="form-group col-lg-4">
                                         <label for="text-input">Empresa</label>                                      
                                         <input type="text" v-model="entidad" class="form-control" placeholder="Empresa" v-bind:class="{ 'is-invalid': hasError.entidad==1 }">                                      
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="form-row">
-                                    <div class="form-group col-lg-4">
+                                    <!-- <div class="form-group col-lg-4">
                                         <label for="text-input">Autoretenedor</label>
                                         <select class="form-control" v-model="autoretenedor" v-bind:class="{ 'is-invalid': hasError.autoretenedor==1 }">
                                             <option value="0" disabled>Seleccione</option>
@@ -257,8 +261,8 @@
                                             <option value="1">Declarante</option>
                                             <option value="2">No declarante</option>
                                         </select>
-                                    </div>
-                                    <fieldset class="form-group col-md-4">
+                                    </div> -->
+                                    <!-- <fieldset class="form-group col-md-4">
                                         <br>
                                         <div class="form-check">              
                                             <input type="checkbox" class="form-check-input" id="cliente1" :value="1" v-model="cliente">
@@ -268,7 +272,7 @@
                                             <input type="checkbox" class="form-check-input" id="proveedor1" v-model="proveedor">
                                             <label class="form-check-label" for="proveedor1">Proveedor</label>
                                         </div>
-                                    </fieldset>
+                                    </fieldset> -->
                                 </div>                                
                                 <div v-show="errorPersona" class="form-group row div-error">
                                     <div class="text-center text-error">
@@ -281,11 +285,11 @@
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button v-if="cliente" type="button" class="btn btn-info" @click="abrirModal('persona','cliente')">Cliente</button>
+                            <!-- <button v-if="cliente" type="button" class="btn btn-info" @click="abrirModal('persona','cliente')">Cliente</button>
                             <button v-else type="button" class="btn btn-secondary">Cliente</button>
 
                             <button v-if="proveedor" type="button" class="btn btn-info" @click="abrirModal('persona','proveedor')">Proveedor</button>
-                            <button v-else type="button" class="btn btn-secondary">Proveedor</button>
+                            <button v-else type="button" class="btn btn-secondary">Proveedor</button> -->
 
                             <button type="button" class="btn btn-primary" @click="cerrarModal()">Cerrar</button>
                             <button type="button" v-if="tipoAccion==1" class="btn btn-success" @click="registrarPersona()">Guardar</button>
@@ -508,16 +512,16 @@
                 nombre : '',
                 tipo_documento : 'DNI',
                 num_documento : '',
-                direccion : '',
-                telefono1 : '',
-                telefono2 : '',
-                celular : '',
-                email : '',
-                email2 : '',
-                sexo: '',
-                regimen: '',
-                fec_nac: '',
-                reside: '',
+                direccion : 'direccion',
+                telefono1 : 'telefono1',
+                telefono2 : 'telefono2',
+                celular : 'celular',
+                email : '@',
+                email2 : '@',
+                sexo: 'Undefined',
+                regimen: 'Comun',
+                fec_nac: '2000-01-01',
+                reside: 'Colombia',
                 tipo_persona: 'Natural',
                 representante: '',
                 nombre1: '',
@@ -552,8 +556,8 @@
                 modal : 0,
                 tituloModal : '',
                 tipoAccion : 0,
-                entidad: '',
-                digito_verif: '',
+                entidad: 'No aplica',
+                digito_verif:0,
                 num_verif: '',
                 errorPersona : 0,
                 errorMostrarMsjPersona : [],
@@ -584,8 +588,8 @@
                 link : '',
                 arrayNovedades : [],
 
-                departamento : '',
-                municipio : '',
+                departamento : 27,
+                municipio : 1077,
                 arrayDepartamentos : [],
                 arrayMunicipios : [],
 
@@ -936,7 +940,7 @@
                 me.errorMostrarMsjPersona =[];
 
                 if(!me.tipo_persona || me.tipo_persona==0 || me.tipo_persona==null) {me.errorPersona=1; me.hasError['tipo_persona']=1;}
-                if(me.tipoAccion==1 && me.$refs.inputFileImg.value=='') {me.errorPersona=1; me.hasError['img']=1;}
+                // if(me.tipoAccion==1 && me.$refs.inputFileImg.value=='') {me.errorPersona=1; me.hasError['img']=1;}
                 if(!me.tipo_documento || me.tipo_documento==0) {me.errorPersona=1; me.hasError['tipo_documento']=1;}
                 if(!me.num_documento || me.num_documento==0) {me.errorPersona=1; me.hasError['num_documento']=1;}
                 if(me.digito_verif && (!me.num_verif || me.num_verif<=0)) {me.errorPersona=1; me.hasError['num_verif']=1;}
@@ -1077,11 +1081,11 @@
                                 this.nombre= '';
                                 this.tipo_documento='CC';
                                 this.num_documento='';
-                                this.direccion='';
-                                this.telefono1='';
-                                this.email='';
-                                this.autoretenedor='';
-                                this.declarante='';
+                                this.direccion='direcccion';
+                                this.telefono1='telefono1';
+                                this.email='@';
+                                this.autoretenedor='No';
+                                this.declarante='No';
                                 this.cliente = false;
                                 this.proveedor = false;
                                 this.id_vendedor = '';
@@ -1100,9 +1104,9 @@
                                 this.num_cuenta_banco = '';
                                 this.tipo_cuenta = '';
                                 this.representante_cuenta = '';
-                                this.tipo_nacionalidad = '';
-                                this.departamento = '';
-                                this.municipio = '';
+                                this.tipo_nacionalidad = 'Colombiana';
+                                this.departamento = '27';
+                                this.municipio = '1077';
 
                                 this.tipoAccion = 1;
                                 break;
@@ -1133,8 +1137,8 @@
                                 this.entidad =data['entidad'];
                                 this.digito_verif =data['digito_verif'];
                                 this.num_verif =data['num_verif'];
-                                this.autoretenedor = data['autoretenedor'];
-                                this.declarante = data['declarante'];
+                                this.autoretenedor = 'No';
+                                this.declarante ='No';
                                 this.cliente = data['cliente'];
                                 this.proveedor = data['proveedor'];
                                 this.id_vendedor = data['id_vendedor'];
