@@ -288,7 +288,7 @@
                         </div>                                      
                     </div>
                     <div class="ticket">
-                        <!-- <img class="img-logo espacio-1" src="http://localhost/sasseri_app2/public/Empresas/1_empresa/ImgLogos/f4f72620874a541d0113ea86bcf699a8.jpg" alt="img-logo"> -->
+                        <!-- <img class="img-logo espacio-1" src="http://192.168.1.50/sasseri_app2/public/Empresas/1_empresa/ImgLogos/f4f72620874a541d0113ea86bcf699a8.jpg" alt="img-logo"> -->
                         <p class="centrado espacio-1">FECHA {{ datosFactura.fec_crea}}</p>
                         -----------------------------------------
                         <div class="input-group mb-0">
