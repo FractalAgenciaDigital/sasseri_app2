@@ -32,10 +32,12 @@
                           
                             <div  v-for="(articulo, index) in arrayArticulo" :key="index" class="col-lg-2 col-md-3 col-sm-4 col-6 p-1" >
                                 <div class="cardz"  style="cursor:pointer" @click="abrirModal(articulo)">
-                                    <div class="card-header bg-primary text-white p-1">
+                                    <div class="card-header bg-primary text-white p-1" style="height:3rem;font-size:12px">
                                         {{articulo.nombre}}
                                     </div>
-                                    <img class="card-img-top" v-if="`${articulo.img}`!='default.png'" :src="`${ruta}/Empresas/${articulo.id_empresa}_empresa/ImgProductos/${articulo.img}`" >
+                                    <div style="height:5rem;">
+                                        <img class="card-img-top" v-if="`${articulo.img}`!='default.png'" :src="`${ruta}/Empresas/${articulo.id_empresa}_empresa/ImgProductos/${articulo.img}`" style="width:100%;max-height:100%">
+                                    </div>
                                     <!-- <img class="card-img-top" v-if="`${articulo.img}`!='default.png'" :src="`${ruta}/img/food.jpg`" > -->
                                     <div class="card-footer bg-success text-white text-right">                                       
                                        $ {{articulo.precio_venta}} 
@@ -399,7 +401,9 @@
                                             <span class="num text-white "> $ {{auxProd.precio_venta}} </span>
                                         </div>
                                         <div class="card mx-auto" v-if="auxProd">
-                                            <img v-if="`${auxProd.img}`!='default.png'" :src="`${ruta}/Empresas/${auxProd.id_empresa}_empresa/ImgProductos/${auxProd.img}`">
+                                            <div style="height:6rem;">
+                                                <img v-if="`${auxProd.img}`!='default.png'" :src="`${ruta}/Empresas/${auxProd.id_empresa}_empresa/ImgProductos/${auxProd.img}`" style="width:100%;max-height:100%">
+                                            </div>
                                         </div>
                                         <div class="bg-success">
                                             <small class="mb-0 text-white">{{auxProd.nombre}}</small>

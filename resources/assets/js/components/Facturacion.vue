@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-12 text-left">
                     <h5>Facturacion</h5>
-                    <hr>
+                    
                 </div>
                 <section class="col-12">
                     <div class="card p-0">

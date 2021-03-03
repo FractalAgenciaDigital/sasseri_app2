@@ -24,7 +24,7 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>#</th>
+                                                
                                                 <th>Producto</th>
                                                 <th>Cantidad</th>
                                                 <th>Observaciones</th>
@@ -34,7 +34,7 @@
                                         </thead>
                                         <tbody>
                                             <tr v-for="(detalle,index) in arrayDetalle" :key="detalle.id">
-                                                <td v-text="index+1"></td>
+                                                
                                                 
                                                 <td v-if="detalle.padre==null || detalle.padre==''" >{{detalle.articulo+' - '+detalle.nom_presentacion}}</td>
                                                 <td v-else >
@@ -74,28 +74,28 @@
 
                     <div class="">
 
-                        <table class="table table-bordered table-striped table-sm table-hover table-sm-responsive table-earning h5" align="center">
+                        <table class="table table-bordered table-striped table-sm table-hover table-sm-responsive table-earning h4" align="center">
                             <thead class="thead-primary">
                                 <tr>
-                                    <th scope="col" rowspan="2">#</th>                                    
+                                                               
                                     <th  scope="col" rowspan="2">Mesa</th>                                    
                                     <th  scope="col" rowspan="2" class="text-center">Finalizar</th>          
-                                    <th scope="col" colspan="1" rowspan="1">Productos</th>
-                                    <th rowspan="2"> Imprimir</th>
+                                    <th scope="col" colspan="1" rowspan="1" class="text-center">Productos</th>
+                                    
                                 </tr>
                                 <tr>
                                     <th colspan="1" rowspan="1">
                                         <div class="list-groupx list-group-flushx row">
-                                            <div class="list-group-itemx py-1 col-4">Articulo</div>
+                                            <div class="list-group-itemx py-1 col-7">Articulo</div>
                                             <div class="list-group-itemx py-1 col-5" >Nota</div>
-                                            <div class="list-group-itemx py-1 col-3">Preparado</div>
+                                            <!--<div class="list-group-itemx py-1 col-3">Preparado</div>-->
                                         </div>
                                     </th>                                    
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="(det,index) in arrayDetalle" :key="index" class="text-dark">                                      
-                                    <th scope="row" v-text="det.id"></th>                                        
+                                                                           
                                     <th class="text-center">
                                         {{det.nombre_lugar}}
                                         <br>
@@ -113,7 +113,7 @@
                                     </td>
                                     <td>
                                         <div class="list-groupx list-groupx-flush row" v-for="prod in det.productos" :key="prod.id">
-                                            <div class="list-group-itemx py-1 text-left col-4">
+                                            <div class="list-group-itemx py-1 text-left col-7">
                                                 <b>#<span class="badge rounded-pill bg-primary text-white h4">{{prod.cantidad}}</span></b>
                                                  -  
                                                 <span class="text-uppercase">{{prod.articulo}}</span>
@@ -121,23 +121,19 @@
                                             <div class="list-group-itemx py-1 text-left col-5">                                                
                                                 {{prod.observaciones}}
                                             </div>   
-                                            <div class="list-group-itemx p-0 col-3">
+                                            <!--<div class="list-group-itemx p-0 col-3">
                                                 <a class="btn h5 text-danger"  v-if="prod.preparado==0" title="Activar" @click="productoListo(prod.id,2)">
-                                                    <i class="fa fa-times"></i>Preparando
+                                                    <i class="fa fa-times"></i>
                                                 </a>
                                                 <a class="btn h5 text-success" v-if="prod.preparado==1" title="Desactivar" @click="productoNoListo(prod.id)">
                                                     
-                                                    <i class="fa fa-check"></i> Cancelar
+                                                    <i class="fa fa-check"></i> 
                                                 </a>                        
-                                            </div>                                                
+                                            </div>   -->                                             
                                         </div>
                                     </td>    
                                                    
-                                    <td>
-                                        <button @click="imprimirTicket(det.id)" class="btn btn-light">
-                                            Imprimir
-                                        </button>
-                                    </td>                    
+                                                   
                                     
                                 </tr>
                                 
