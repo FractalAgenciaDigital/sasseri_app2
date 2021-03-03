@@ -35,14 +35,7 @@
                                         <td v-if="pendientes.num_factura" v-text="pendientes.num_factura"></td>
                                         <td v-else class="text-left">
                                            
-                                            <template>
-                                                <button href="#" @click="mostrarDetalle('facturacion','actualizar',pendientes)" class="btn btn-success btn-sm" v-if="permisosUser.actualizar  && pendientes.estado==1" title="Actualizar">
-                                                    <i class="icon-pencil"></i>
-                                                </button>
-                                                <button href="#" class="btn btn-secondary btn-sm" v-else title="Actualizar (Deshabilitado)">
-                                                    <i class="icon-pencil"></i>
-                                                </button>
-                                            </template>
+                                           
                                             <button type="button" @click="abrirModalImpresion(pendientes.id);" class=" btn btn-primary btn-sm" title="imprimir">
                                             <i class="icon-printer"></i> 
                                             </button>
@@ -441,15 +434,26 @@ export default {
                     me.ocultarDetalle();
                     me.listarFacturacion(1,'','','','','','','');
                     me.listarPendientes();
+                    me.modalRegreso = 0;
                 }).catch(function (error) {
                     console.log(error);
                 });
                 if(accion=='registrar'){
 
-                    axios.get(this.ruta+'/facturacion/imprimir-ticket-facturacion?id='+this.facturacion_id+'&id_impresora=5&valorEfectivo='+this.valorEfectivo+'&valorCambio='+this.valorRegreso).then(function(response){                 
+                    axios.get(this.ruta+'/facturacion/imprimir-ticket-facturacion?id='+this.facturacion_id+'&id_impresora=1&valorEfectivo='+this.valorEfectivo+'&valorCambio='+this.valorRegreso)
+                    .then(function(response){  
+                        me.modalRegreso = 0;        
+                        me.listarPendientes();       
 
                     }).catch(function (error) {
                         console.log(error);
+                        Swal.fire({
+                    
+                            type:'warning',
+                            title: 'Oops...',
+                            text: 'No se pudo imprimir',
+                            
+                        })
                     });
                 
                 }
@@ -501,6 +505,13 @@ export default {
 
             }).catch(function (error) {
                 console.log(error);
+                Swal.fire({
+                    
+                    type:'warning',
+                    title: 'Oops...',
+                    text: 'No se pudo imprimir',
+                    
+                })
             });
         },
 

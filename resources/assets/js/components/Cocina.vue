@@ -64,7 +64,7 @@
                 
             </div>
             
-            <div v-show="position==2"> <!-- listado de faturas -->
+            <div v-show="position==2"> <!-- listado de facturas -->
                 <div class="card">
                    
                     <div class="card-header col-12"> 
@@ -74,7 +74,7 @@
 
                     <div class="">
 
-                        <table class="table table-bordered table-striped table-sm table-hover table-sm-responsive table-earning " align="center">
+                        <table class="table table-bordered table-striped table-sm table-hover table-sm-responsive table-earning h5" align="center">
                             <thead class="thead-primary">
                                 <tr>
                                     <th scope="col" rowspan="2">#</th>                                    
@@ -94,7 +94,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(det,index) in arrayDetalle" :key="index">                                      
+                                <tr v-for="(det,index) in arrayDetalle" :key="index" class="text-dark">                                      
                                     <th scope="row" v-text="det.id"></th>                                        
                                     <th class="text-center">
                                         {{det.nombre_lugar}}
@@ -114,7 +114,7 @@
                                     <td>
                                         <div class="list-groupx list-groupx-flush row" v-for="prod in det.productos" :key="prod.id">
                                             <div class="list-group-itemx py-1 text-left col-4">
-                                                <b>#<span class="badge rounded-pill bg-primary text-white" style="font-size:14px">{{prod.cantidad}}</span></b>
+                                                <b>#<span class="badge rounded-pill bg-primary text-white h4">{{prod.cantidad}}</span></b>
                                                  -  
                                                 <span class="text-uppercase">{{prod.articulo}}</span>
                                             </div>   
@@ -122,13 +122,13 @@
                                                 {{prod.observaciones}}
                                             </div>   
                                             <div class="list-group-itemx p-0 col-3">
-                                                <button class="btn btn-lg text-danger"  v-if="prod.preparado==0" title="Activar" @click="productoListo(prod.id,2)">
-                                                    <i class="fa fa-times"></i>Preparado
-                                                </button>
-                                                <button class="btn btn-lg text-success" v-if="prod.preparado==1" title="Desactivar" @click="productoNoListo(prod.id)">
+                                                <a class="btn h5 text-danger"  v-if="prod.preparado==0" title="Activar" @click="productoListo(prod.id,2)">
+                                                    <i class="fa fa-times"></i>Preparando
+                                                </a>
+                                                <a class="btn h5 text-success" v-if="prod.preparado==1" title="Desactivar" @click="productoNoListo(prod.id)">
                                                     
                                                     <i class="fa fa-check"></i> Cancelar
-                                                </button>                        
+                                                </a>                        
                                             </div>                                                
                                         </div>
                                     </td>    

@@ -28,8 +28,11 @@
                         <input v-else disabled type="date" class="form-control" v-model="hastaFiltro">
                         
                     </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-success" @change="listarVentas(noCajaFiltro,desdeFiltro,hastaFiltro)">Buscar</button>
+                    </div>
                     <div class="form-group col-md-3">
-                        <label><i class="icon-printer"></i></label>    <br>
+                        <!-- <label><i class="icon-printer"></i></label>    <br> -->
 
                         <button type="button" @click="abrirModalImpresion();" class=" btn btn-primary btn-sm" title="imprimir">
                             <i class="icon-printer"></i> Imprimir listado
@@ -185,7 +188,14 @@ export default {
             axios.get(this.ruta+'/informe/imprimir-ticket-informe-cajas?noCajaFiltro='+me.noCajaFiltro +'&desdeFiltro='+me. desdeFiltro + '&hastaFiltro='+ me.hastaFiltro+'&id_impresora='+this.id_impresora).then(function(response){                 
 
             }).catch(function (error) {
-                console.log(error);
+            Swal.fire({
+                    
+                    type:'warning',
+                    title: 'Oops...',
+                    text: 'No se pudo imprimir',
+                    
+                })
+                                
             });
         },
 
@@ -206,6 +216,30 @@ export default {
     },
     mounted(){
         let me = this;
+
+        var d = new Date();
+                    
+        var dd = d.getDate();
+        var mm = d.getMonth()+1;
+        var yyyy = d.getFullYear();
+        var h = d.getHours();
+        var min = d.getMinutes();
+        var sec = d.getSeconds();
+
+        
+        
+        if(dd<10){
+            dd='0'+dd;
+        } 
+        if(mm<10){
+            mm='0'+mm;
+        } 
+        d = yyyy+'-'+mm+'-'+dd;
+        me.fechaActual = d;
+        me.desdeFiltro = d;
+        me.fecha = d;
+        me.fechaHoraActual = d+' '+h+':'+min+':'+sec;
+
         me.listarVentas();
         me.listarCajas();
     }

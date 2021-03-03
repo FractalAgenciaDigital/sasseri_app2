@@ -283,20 +283,19 @@ class DetalleFacturacionController extends Controller
         $impresora = new Printer($connector);
         // $impresora->lineSpacing(19);
         $impresora->setJustification(Printer::JUSTIFY_CENTER) ;
-        $logo = EscposImage::load('logo.jpg', false);
-        $impresora->bitImage($logo);
-        
-        $impresora->text("\n===============================\n");
+
+        try {
+            $logo = EscposImage::load('logo.jpg', false);
+            $impresora->bitImage($logo);
+        } catch (Exception $e) {
+            /* Images not supported on your PHP, or image file not found */
+            $impresora -> text($e -> getMessage() . "\n");
+        }
         $impresora->setEmphasis(true);
         $impresora->text($infoEmpresa[0]->nombre."\n");
         $impresora->setEmphasis(false);
-        // $impresora->text("NIT: ");
-        // $impresora->text($infoEmpresa[0]->nit."\n");
-        // $impresora->text("Dirección: ");
-        // $impresora->text($infoEmpresa[0]->direccion."\n");
-        
        
-         $impresora->setEmphasis(true);
+        $impresora->setEmphasis(true);
         $impresora->text("Cajero(a): ");
         $impresora->text($facturacion->cajero."\n");
         $impresora->text("Mesa: ");
@@ -307,12 +306,12 @@ class DetalleFacturacionController extends Controller
         $impresora->setLineSpacing(2);
  
         $impresora->setJustification(Printer::JUSTIFY_LEFT);
-        $impresora->text("\n______________________________________"."\n\n");
+        $impresora->text("\n============================================="."\n\n");
         $impresora->setLineSpacing(2);
         $impresora->text(sprintf('%-25s %+10.8s %+10.7s','ARTICULO', 'CANT', 'PRECIO'));
         $impresora->text("\n"); 
        
-        $impresora->text("______________________________________\n"."\n");
+        $impresora->text("=============================================\n"."\n");
 
         foreach($detalle_facturacion as $df)
         {

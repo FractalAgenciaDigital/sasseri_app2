@@ -86,7 +86,7 @@
                                             <label class="input-group-text" for="inputGroupSelect01">Mesas</label>
                                         </div>
                                         <select class="custom-select form-control" v-model="lugar" id="inputGroupSelect01">
-                                            <option selected>Ubicacion...</option>                                            
+                                            <option selected disabled>Ubicacion...</option>                                            
                                             <option v-for="zonas in arrayZonas" :key="zonas.id" :value="zonas.id" v-text="zonas.zona"></option>
                                         </select>                                        
                                     </div>
@@ -1812,6 +1812,13 @@
 
                 }).catch(function (error) {
                     console.log(error);
+                    Swal.fire({
+                    
+                        type:'warning',
+                        title: 'Oops...',
+                        text: 'No se pudo imprimir',
+                        
+                    })
                 });
             },  
             selectZonas(){

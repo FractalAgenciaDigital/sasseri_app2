@@ -263,9 +263,17 @@ class InformeController extends Controller
         $infoEmpresa = ConfigGenerales::select()->where('id','=', $id_empresa)->first();       
         $connector = new WindowsPrintConnector($imprimir->nombre_impresora);        
         $impresora = new Printer($connector);    
-        $impresora->setJustification(Printer::JUSTIFY_CENTER);            
-        $impresora->text("\n===============================\n");        
+        $impresora->setJustification(Printer::JUSTIFY_CENTER); 
+        try {
+            $logo = EscposImage::load('logo.jpg', false);
+            $impresora->bitImage($logo);
+        } catch (Exception $e) {
+            /* Images not supported on your PHP, or image file not found */
+            $impresora -> text($e -> getMessage() . "\n");
+        }             
+        
         $impresora->setTextSize(1, 2);
+        $impresora->setEmphasis(true);
         $impresora->text($infoEmpresa->nombre."\n");
         $impresora->setTextSize(1, 1);        
         $impresora->setEmphasis(false);
@@ -273,8 +281,14 @@ class InformeController extends Controller
         $impresora->text($infoEmpresa->nit."\n");
         $impresora->text("Dirección: ");
         $impresora->text($infoEmpresa->direccion."\n");
-        $impresora->text("\n______________________________________\n");
-        $impresora->text(sprintf('%-10s %-10s %+10s %+10s', '$Inicial', '$Ventas','$Report','$Diferen'));        
+        $impresora->text("Fecha: ");
+        $impresora->text($desdeFiltro." - ". $hastaFiltro."\n");
+        $impresora->text("\n=====================================\n");
+        $impresora->setEmphasis(true);
+        $impresora->text(sprintf('%+10s %+10s %+10s %+10s', '$Inicial', '$Ventas','$Report','$Diferen'));
+        $impresora->setEmphasis(false);
+        $impresora->text("\n=====================================\n");
+        
 
         foreach($cajas_cierres as $cc ){
             $facturacion = Facturacion::select()
@@ -294,7 +308,7 @@ class InformeController extends Controller
             $cc->diferencia = $cc->total_caja-$cc->vr_final;
             $cc->no_facturas = $cont;
 
-            $impresora->text(sprintf('%-10s %-10s %+10s %+10s', $cc->vr_inicial,$cc->total_ventas,$cc->vr_final,$cc->diferencia));
+            $impresora->text(sprintf('%+10s %+10s %+10s %+10s', $cc->vr_inicial,$cc->total_ventas,$cc->vr_final,$cc->diferencia));
             $impresora->text("\n");    
 
             // Coincidencia de valor reportado y valor vendido
@@ -313,12 +327,11 @@ class InformeController extends Controller
             }
 
         }
-
-        $impresora->setFont(Printer::FONT_C);
+        $impresora->text("\n******************************************\n");        
+        $impresora->setFont(Printer::MODE_FONT_B);
         $impresora->text("Sasseri");
         $impresora->text("\nwww.fractalagenciadigital.com\n");
-        $impresora->text("\n===============================\n");
-
+        
         $impresora->feed(5);
         $impresora->cut();
         $impresora->close();        
