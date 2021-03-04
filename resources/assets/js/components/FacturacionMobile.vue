@@ -1711,17 +1711,6 @@
                 
                     this.errorMostrarMsjFacturacion =[];
 
-                    // if (!this.id_tercero) {
-                    //     this.$notify({
-                    //         group: 'foo',
-                    //         duration: 10000,
-                    //         position: 'top right',
-                    //         title: 'Seleccione Cliente',
-                    //         type: 'error',
-                    //         text: 'Debes seleccion un cliente'
-                    //     });
-                    //     return false;
-                    // }
                     if (!this.lugar) { 
                          this.$notify({
                             group: 'foo',

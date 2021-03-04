@@ -289,12 +289,14 @@ class DetalleFacturacionController extends Controller
         try {
             $logo = EscposImage::load('logo.jpg', false);
             $impresora->bitImage($logo);
+            $impresora->text("\n"); 
         } catch (Exception $e) {
             /* Images not supported on your PHP, or image file not found */
             $impresora -> text($e -> getMessage() . "\n");
         }
         $impresora->setEmphasis(true);
         $impresora->text($infoEmpresa[0]->nombre."\n");
+        $impresora->text($request);
         $impresora->setEmphasis(false);
        
         $impresora->setEmphasis(true);
@@ -308,60 +310,55 @@ class DetalleFacturacionController extends Controller
         $impresora->setLineSpacing(2);
  
         $impresora->setJustification(Printer::JUSTIFY_LEFT);
-        $impresora->text("\n============================================="."\n\n");
+        $impresora->text("\n-----------------------------------------------"."\n\n");
         $impresora->setLineSpacing(2);
         $impresora->text(sprintf('%-25s %+10.8s %+10.7s','ARTICULO', 'CANT', 'PRECIO'));
         $impresora->text("\n"); 
        
-        $impresora->text("=============================================\n"."\n");
+        $impresora->text("-----------------------------------------------\n"."\n");
+        $total = 0;
 
         foreach($detalle_facturacion as $df)
         {
             
             $line = sprintf('%-25s %10.0f %10.2f ','-'. $df->nombre_articulo, $df->cantidad, $df->cantidad * $df->precio);
-            $impresora->setEmphasis(true);
-          
-            $impresora->text($line);
-                      
+            $total +=  $df->cantidad * $df->precio;             
+            $impresora->text($line);                      
             if(($df->observaciones) != ''){
                 $impresora->text("\n"); 
                 $impresora->text('Notas:');
                 $impresora->text($df->observaciones);
             }
+            $impresora->setLineSpacing(2);
             $impresora->text("\n"); 
-            $impresora->text("\n"); 
-            
             
         }
 
         $impresora->setJustification(Printer::JUSTIFY_CENTER);
-        $impresora->text("\n_________________________________\n");
-        $impresora->setJustification(Printer::JUSTIFY_RIGHT);
+        $impresora->text("=============================================\n"."\n");
+        
         $impresora->setEmphasis(true);
         $impresora->setLineSpacing(2);
-
-        $impresora->text("\nTotal: $" . number_format($facturacion->total, 2) . "\n");
-        $impresora->setJustification(Printer::JUSTIFY_CENTER);
-       
+        $impresora->setTextSize(1, 2);
+        $impresora->text(sprintf('%-25s %+15.15s','TOTAL',number_format($total, 2)  ));        
+        $impresora->text("\n"); 
         $impresora->setTextSize(1, 1);
-        $impresora->setJustification(Printer::JUSTIFY_CENTER);
         $impresora->setLineSpacing(2);
-        $impresora->text("\n******************************************\n");        
+        $impresora->text("=============================================\n"."\n");
         $impresora->setEmphasis(false);
-        $impresora->text("Gracias por su compra\n");
-        $impresora->text("\n******************************************\n");        
-        $impresora->setFont(Printer::MODE_FONT_B);
+        $impresora->setFont(Printer::FONT_C);
         $impresora->text("Sasseri");
         $impresora->text("\nwww.fractalagenciadigital.com\n");
+     
 
         if(count($detalle_facturacion)){
             $impresora->feed(5);
             $impresora->cut();
             $impresora->pulse();
             $impresora->close();
-           }   
+            
             return redirect()->back()->with("mensaje", "Ticket impreso");
-      
+        }
         
     }
     public function redirect_log(){

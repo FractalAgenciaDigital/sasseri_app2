@@ -632,6 +632,7 @@ class FacturacionController extends Controller
         $impresora->setEmphasis(false);
         $impresora->text("\n"); 
         $total = 0;
+        
         foreach($detalle_facturacion as $df)
         {
             $line = sprintf('%-20s %10.0f %10.2f ','-'. $df->nombre_articulo, $df->cantidad, $df->cantidad * $df->precio);
