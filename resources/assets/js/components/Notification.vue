@@ -58,7 +58,7 @@ export default {
         nombreProducto(){
         let me = this;
         // var url= this.ruta+'/articulo';
-        axios.get('http://192.168.100.64/sasseri_app2/public/articulo')
+        axios.get('http://localhost/sasseri_app2/public/articulo')
         .then(function (response){
           var auxProducto = response.data.articulos.data;
           console.log(response.data.articulos.data)

@@ -4,10 +4,6 @@
 
 $issues = array();
 
-<<<<<<< HEAD
-if (!(PHP_VERSION_ID >= 70205)) {
-    $issues[] = 'Your Composer dependencies require a PHP version ">= 7.2.5". You are running ' . PHP_VERSION . '.';
-=======
 if (!(PHP_VERSION_ID >= 70300)) {
     $issues[] = 'Your Composer dependencies require a PHP version ">= 7.3.0". You are running ' . PHP_VERSION  .  '.';
 }
@@ -36,7 +32,6 @@ extension_loaded('zlib') || $missingExtensions[] = 'zlib';
 
 if ($missingExtensions) {
     $issues[] = 'Your Composer dependencies require the following PHP extensions to be installed: ' . implode(', ', $missingExtensions);
->>>>>>> eeec350f6446b2decd5501cba69f370b7f9fe58f
 }
 
 if ($issues) {

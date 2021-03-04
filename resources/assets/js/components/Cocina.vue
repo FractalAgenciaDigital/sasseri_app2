@@ -33,7 +33,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr v-for="(detalle,index) in arrayDetalle" :key="detalle.id">
+                                            <tr v-for="(detalle) in arrayDetalle" :key="detalle.id">
                                                 
                                                 
                                                 <td v-if="detalle.padre==null || detalle.padre==''" >{{detalle.articulo+' - '+detalle.nom_presentacion}}</td>

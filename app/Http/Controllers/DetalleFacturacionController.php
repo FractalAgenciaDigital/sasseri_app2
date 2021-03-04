@@ -296,7 +296,7 @@ class DetalleFacturacionController extends Controller
         }
         $impresora->setEmphasis(true);
         $impresora->text($infoEmpresa[0]->nombre."\n");
-        $impresora->text($request);
+        // $impresora->text($request);
         $impresora->setEmphasis(false);
        
         $impresora->setEmphasis(true);
