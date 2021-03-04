@@ -35,7 +35,7 @@
                                     <div class="card-header bg-primary text-white p-1">
                                         {{articulo.nombre}}
                                     </div>
-                                    <img class="card-img-top" v-if="`${articulo.img}`!='default.png'" :src="`${ruta}/Empresas/${articulo.id_empresa}_empresa/ImgProductos/${articulo.img}`" >
+                                    <img class="card-img-top" style="max-height:80px" v-if="`${articulo.img}`!='default.png'" :src="`${ruta}/Empresas/${articulo.id_empresa}_empresa/ImgProductos/${articulo.img}`" >
                                     <!-- <img class="card-img-top" v-if="`${articulo.img}`!='default.png'" :src="`${ruta}/img/food.jpg`" > -->
                                     <div class="card-footer bg-success text-white text-right">                                       
                                        $ {{articulo.precio_venta}} 
@@ -88,7 +88,7 @@
                                             <label class="input-group-text" for="inputGroupSelect01">Mesas</label>
                                         </div>
                                         <select class="custom-select form-control" v-model="lugar" id="inputGroupSelect01">
-                                            <option selected>Ubicacion...</option>                                            
+                                            <option disabled>Ubicacion...</option>                                            
                                             <option v-for="zonas in arrayZonas" :key="zonas.id" :value="zonas.id" v-text="zonas.zona"></option>
                                         </select>                                        
                                     </div>
