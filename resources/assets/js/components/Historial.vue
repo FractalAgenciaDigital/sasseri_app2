@@ -137,9 +137,9 @@
                                 </thead>
                                 <tbody v-if="permisosUser.leer && arrayFacturacion.length">
                                     <tr v-for="facturacion in arrayFacturacion" :key="facturacion.id" style="text-align: right;">
-                                        <td v-text="facturacion.id"></td>
+                                        <td v-text="facturacion.num_factura"></td>
                                         <td v-if="facturacion.num_factura">
-                                            {{facturacion.num_factura}}
+                                            <!-- {{facturacion.num_factura}} -->
                                              <button type="button" @click="verFacturacion(facturacion.id)" class="btn btn-success btn-sm" title="Ver factura">
                                                 <i class="icon-eye"></i>
                                             </button>
@@ -195,12 +195,18 @@
                                                                               
                             
                                         </td>
-                                    </tr>                                
+                                    </tr> 
+                                    <tr class="text-dark h5">
+                                        <td colspan="7"></td>
+                                        <td colspan="1">Total: </td>
+                                        <td colspan="1">{{totalizado = CalcularTotalizado}}</td>
+                                    </tr>                               
                                 </tbody>
                                 <tbody v-else>
                                     <tr><td colspan="11">No hay registros para mostrar</td></tr>
                                 </tbody>
                             </table>
+                           
                         </div>
                         <nav>
                             <ul class="pagination">
@@ -1050,6 +1056,13 @@
 
                 resultado=resultado+(this.calcularTotal-this.abono);
                 
+                return resultado;
+            },
+            CalcularTotalizado: function(){
+                var resultado=0.0;
+                for(var i=0;i<this.arrayFacturacion.length;i++){
+                    resultado=resultado+this.arrayFacturacion[i].total;
+                }
                 return resultado;
             },
         },

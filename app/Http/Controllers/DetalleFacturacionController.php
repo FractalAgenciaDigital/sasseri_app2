@@ -344,24 +344,24 @@ class DetalleFacturacionController extends Controller
         $impresora->setJustification(Printer::JUSTIFY_CENTER);
        
         $impresora->setTextSize(1, 1);
+        $impresora->setJustification(Printer::JUSTIFY_CENTER);
         $impresora->setLineSpacing(2);
-        $impresora->text("\n===============================\n");
+        $impresora->text("\n******************************************\n");        
         $impresora->setEmphasis(false);
-        $impresora->setFont(Printer::FONT_C);
+        $impresora->text("Gracias por su compra\n");
+        $impresora->text("\n******************************************\n");        
+        $impresora->setFont(Printer::MODE_FONT_B);
         $impresora->text("Sasseri");
         $impresora->text("\nwww.fractalagenciadigital.com\n");
-        $impresora->text("\n===============================\n");
-        $impresora->text("Gracias por su compra\n");
-        $impresora->text("\n===============================\n");
 
         if(count($detalle_facturacion)){
             $impresora->feed(5);
             $impresora->cut();
             $impresora->pulse();
             $impresora->close();
-            
+           }   
             return redirect()->back()->with("mensaje", "Ticket impreso");
-        }
+      
         
     }
     public function redirect_log(){

@@ -623,7 +623,7 @@ class FacturacionController extends Controller
         $impresora->text("Cliente: ");
         $impresora->text($facturacion->nombre1." ".$facturacion->nombre2." ".$facturacion->apellido1." ".$facturacion->apellido2."\n");
         $impresora->setLineSpacing(2); 
-        $impresora->setJustification(Printer::JUSTIFY_LEFT);
+        $impresora->setJustification(Printer::JUSTIFY_CENTER);
         $impresora->text("\n-----------------------------------------"."\n\n");
         $impresora->setLineSpacing(1);
         $impresora->setEmphasis(true);

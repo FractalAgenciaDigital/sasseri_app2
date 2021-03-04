@@ -141,16 +141,54 @@ class InformeController extends Controller
     {
         if (!$request->ajax()) return redirect('/');
         $id_empresa = $request->session()->get('id_empresa');
+        $desdeFiltro = $request->desdeFiltro;
+        $hastaFiltro = $request->hastaFiltro;
+        $noProductoFiltro = $request->noProductoFiltro;
+        $noCategoriaFiltro = $request->noCategoriaFiltro;
+        
 
         $detalles_facturacion = DetalleFacturacion::select('articulos.nombre as articulo', 'categorias.nombre as categoria', 'articulos.idcategoria2', 'articulos.id as id_prod', 'facturacion.id as id_fac', 'detalle_facturacion.id as id', 'detalle_facturacion.valor_venta', 'detalle_facturacion.cantidad','detalle_facturacion.valor_final', 'facturacion.fec_crea')
         ->join('facturacion', 'detalle_facturacion.id_factura', '=', 'facturacion.id')
         ->join('articulos', 'detalle_facturacion.id_producto', '=', 'articulos.id')
-        ->join('categorias', 'articulos.idcategoria2', '=', 'categorias.id')
-        ->get();
+        ->join('categorias', 'articulos.idcategoria2', '=', 'categorias.id');
+        
+
+        if(isset($request)){
+
+            if($noProductoFiltro!=''){
+                $detalles_facturacion = $detalles_facturacion
+                ->where('articulos.nombre', 'like', '%'. $noProductoFiltro . '%');
+            }
+           
+            if($noCategoriaFiltro!=''){
+                $detalles_facturacion = $detalles_facturacion
+                ->where('categorias.nombre', 'like', '%'. $noCategoriaFiltro . '%');
+            }
+            if($desdeFiltro!='' && $desdeFiltro!=0)
+            {
+                $detalles_facturacion = $detalles_facturacion->whereDate('detalle_facturacion.updated_at', '>=' , $desdeFiltro);
+            }
+            if($hastaFiltro!='' && $hastaFiltro!=0)
+            {
+                $detalles_facturacion = $detalles_facturacion->whereDate('detalle_facturacion.updated_at','<=' , $hastaFiltro);
+            }           
+
+        };
+        
+        
+        $detalles_facturacion = $detalles_facturacion->paginate(20);
 
     
 
         return [
+            'pagination' => [
+                'total'        => $detalles_facturacion->total(),
+                'current_page' => $detalles_facturacion->currentPage(),
+                'per_page'     => $detalles_facturacion->perPage(),
+                'last_page'    => $detalles_facturacion->lastPage(),
+                'from'         => $detalles_facturacion->firstItem(),
+                'to'           => $detalles_facturacion->lastItem(),
+            ], 
             'detalles_facturacion' => $detalles_facturacion,
         ];
 
@@ -166,6 +204,7 @@ class InformeController extends Controller
 
         $cajas_cierres = CierresXCaja::select('cajas_cierres.id as id', 'cajas_cierres.id_caja', 'cajas_cierres.vr_inicial', 'cajas_cierres.vr_gastos', 'cajas_cierres.vr_final', 'cajas.nombre as nombre_caja', 'cajas.id as idcaja', 'cajas_cierres.updated_at as fecha_cierre')
         ->join('cajas','cajas_cierres.id_caja','cajas.id')
+        ->where('cajas_cierres.id_empresa','=',$id_empresa)
         ->orderBy('id','desc');       
         
 
@@ -185,7 +224,7 @@ class InformeController extends Controller
                 $cajas_cierres = $cajas_cierres->whereDate('cajas_cierres.updated_at','<=' , $hastaFiltro);
             }
         }
-        $cajas_cierres = $cajas_cierres->where('cajas_cierres.id_empresa',$id_empresa)->get();
+        $cajas_cierres = $cajas_cierres->where('cajas_cierres.id_empresa',$id_empresa)->paginate(20);
 
         foreach($cajas_cierres as $cc ){
 
@@ -224,6 +263,14 @@ class InformeController extends Controller
 
         }
         return [
+            'pagination' => [
+                'total'        => $cajas_cierres->total(),
+                'current_page' => $cajas_cierres->currentPage(),
+                'per_page'     => $cajas_cierres->perPage(),
+                'last_page'    => $cajas_cierres->lastPage(),
+                'from'         => $cajas_cierres->firstItem(),
+                'to'           => $cajas_cierres->lastItem(),
+            ], 
             'cajas_cierres' => $cajas_cierres,
         ];
 

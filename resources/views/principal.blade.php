@@ -162,18 +162,16 @@
                             <ul  id="collapseInforme" class="collapse" aria-labelledby="headingInforme"
                             data-parent="#accordionSidebar">
                                 <div class="collapse-inner">
-                                    <!-- <li @click="menu=31" class="collapse-item">
-                                        <a href="#"><i class="icon-notebook"></i> Informe Cajas</a>
-                                    </li> -->
+                                    <li @click="menu=46" class="collapse-item">
+                                        <a href="#"><i class="fa fa-percent"></i>Informe facturas</a>
+                                    </li> 
+                                    
                                     <li @click="menu=44" class="collapse-item">
                                         <a href="#"><i class="fa fa-cutlery"></i> Informe arqueo</a>
                                     </li>
-                                    <!-- <li @click="menu=45" class="collapse-item">
+                                    <li @click="menu=45" class="collapse-item">
                                         <a href="#"><i class="fa fa-percent"></i> Informe productos y categorias</a>
-                                    </li>    -->
-                                     <li @click="menu=46" class="collapse-item">
-                                        <a href="#"><i class="fa fa-percent"></i>Historial facturas</a>
-                                    </li>   
+                                    </li>                                     
                                                                       
                                 </div>
 

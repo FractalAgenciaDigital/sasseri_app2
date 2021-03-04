@@ -33,18 +33,6 @@ class StockController extends Controller
         };
         $stock = $stock->where('stock.id_empresa','=',$id_empresa)->orderBy('stock.fec_crea', 'desc')->paginate(12);
 
-        // return [
-        //     'pagination_stock' => [
-        //         'total_stock'        => $stock->total(),
-        //         'current_page_stock' => $stock->currentPage(),
-        //         'per_page_stock'     => $stock->perPage(),
-        //         'last_page_stock'    => $stock->lastPage(),
-        //         'from_stock'         => $stock->firstItem(),
-        //         'to_stock'           => $stock->lastItem(),
-        //     ],
-        //     'stock' => $stock
-        // ];
-
         return [
             'pagination' => [
                 'total'        => $stock->total(),

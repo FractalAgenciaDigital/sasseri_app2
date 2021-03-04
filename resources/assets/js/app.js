@@ -30,15 +30,10 @@ Vue.component('user', require('./components/User.vue'));
 Vue.component('terceros', require('./components/Terceros.vue'));
 Vue.component('modulo', require('./components/Modulo.vue'));
 Vue.component('configgenerales', require('./components/ConfigGenerales.vue'));
-// Vue.component('auxiliares_conta', require('./components/AuxiliaresConta.vue'));
-// Vue.component('retenciones', require('./components/Retenciones.vue'));
-Vue.component('colaboradores', require('./components/Colaboradores.vue'));
 Vue.component('zona', require('./components/Zona.vue'));
-Vue.component('bancos', require('./components/Bancos.vue'));
 Vue.component('facturacion', require('./components/Facturacion.vue'));
 Vue.component('facturacion_mobile', require('./components/FacturacionMobile.vue'));
 Vue.component('articulo', require('./components/Articulo.vue'));
-// Vue.component('modelo_contable', require('./components/ModeloContable.vue'));
 Vue.component('categoria', require('./components/Categoria.vue'));
 Vue.component('presentacion', require('./components/Presentacion.vue'));
 Vue.component('und_medida', require('./components/UndMedida.vue'));
@@ -48,9 +43,7 @@ Vue.component('ingreso', require('./components/Ingreso.vue'));
 Vue.component('egreso', require('./components/Egreso.vue'));
 Vue.component('cliente', require('./components/Cliente.vue'));
 Vue.component('con_tarifario', require('./components/ConTarifario.vue'));
-// Vue.component('tarifario', require('./components/Tarifario.vue'));
 Vue.component('iva', require('./components/Iva.vue'));
-Vue.component('formato_procesos', require('./components/FormatoProceso.vue'));
 Vue.component('cajas', require('./components/Cajas.vue'));
 Vue.component('cajas_admin', require('./components/CajasAdmin.vue'));
 Vue.component('cierrescaja', require('./components/CierresXCaja.vue'));
@@ -71,7 +64,7 @@ const app = new Vue({
     el: '#app',
     data: {
         menu: 0,       
-        ruta: 'http://192.168.100.64/sasseri_app2/public',
+        ruta: 'http://localhost/sasseri_app2/public',
         permisosUser: {
             'leer': 1,
             'escribir': 1,

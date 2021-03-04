@@ -310,14 +310,23 @@
                                 <p class="espacio-1 centrado">{{ datosFactura.zona }}</p>
                             </div>
                         </div>
-                        -----------------------------------------
-                        <table class="table table-sm">
+                        
+                        <table class="table table-sm" border="0">
+                            
                             <thead>
+                                <tr>
+                                    <td colspan="3">===================================</td>
+                                </tr>
+                                
                                 <tr>
                                     <th colspan="1">PRODUCTO</th>                                    
                                     <th colspan="1">CANTIDAD</th>
                                     <th colspan="1">PRECIO</th>
                                 </tr>
+                                <tr>
+                                    <td colspan="3"> ===================================</td>
+                                </tr>
+                                
                             </thead>
                             <tbody>                               
                                 <tr v-for="(prod_preparado,index) in arrayPreparado" :key="index" >
@@ -332,9 +341,9 @@
                                   
                             </tbody>
                         </table>
-                        -----------------------------------------
+                        
                         <br>
-                        <small class="text-center p-1"><a href="https://www.fractalagenciadigital.com">POWERE BY - FRACTAL AGENCIA DIGITAL<br>www.fractalagenciadigital.com</a></small><br> 
+                        <p class="text-center p-1" style="font-size:10px"><a href="https://www.fractalagenciadigital.com">POWERE BY - FRACTAL AGENCIA DIGITAL<br>www.fractalagenciadigital.com</a></p><br> 
                     </div>                    
                 </div>  
    
@@ -1756,6 +1765,7 @@
                     console.log(response)              
 
                 }).catch(function (error) {
+                    console.log(error);
                     Swal.fire({
                     
                         type:'warning',

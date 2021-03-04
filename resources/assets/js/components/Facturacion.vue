@@ -282,7 +282,7 @@ export default {
         }, 
         listarCajas(){
             let me=this;
-            var url= this.ruta +'/cierres_caja/validarCierreCajaWeb';
+            var url= this.ruta +'/cierres_caja/validarCierreCaja';
             axios.get(url).then(function (response) {
                 console.log(response.data)
                 var respuesta= response.data;

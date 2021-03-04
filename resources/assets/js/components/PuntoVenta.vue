@@ -285,7 +285,7 @@
                         </div>                                      
                     </div>
                     <div class="ticket">
-                        <!-- <img class="img-logo espacio-1" src="http://192.168.100.64/sasseri_app2/public//img/logo.jpg" alt="img-logo"> -->
+                        <!-- <img class="img-logo espacio-1" src="http://localhost/sasseri_app2/public//img/logo.jpg" alt="img-logo"> -->
                         <p class="centrado espacio-1">FECHA {{ datosFactura.fec_crea}}</p>
                         -----------------------------------------
                         <div class="input-group mb-0">
@@ -353,7 +353,7 @@
                         </div>                                      
                     </div>
                     <div class="ticket">
-                        <!-- <img class="img-logo espacio-1" src="http://192.168.100.64/sasseri_app2/public/logo.jpg" alt="img-logo"> -->
+                        <!-- <img class="img-logo espacio-1" src="http://localhost/sasseri_app2/public/logo.jpg" alt="img-logo"> -->
                         <p class="centrado espacio-1">FECHA {{ datosFactura.fec_crea}}</p>
                         -----------------------------------------
                         <div class="input-group mb-0">
