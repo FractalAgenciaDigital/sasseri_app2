@@ -35,9 +35,13 @@
                                     <div class="card-header bg-primary text-white p-1" style="height:3rem;font-size:12px">
                                         {{articulo.nombre}}
                                     </div>
+<<<<<<< HEAD
+                                    <img class="card-img-top" style="max-height:80px" v-if="`${articulo.img}`!='default.png'" :src="`${ruta}/Empresas/${articulo.id_empresa}_empresa/ImgProductos/${articulo.img}`" >
+=======
                                     <div style="height:5rem;">
                                         <img class="card-img-top" v-if="`${articulo.img}`!='default.png'" :src="`${ruta}/Empresas/${articulo.id_empresa}_empresa/ImgProductos/${articulo.img}`" style="width:100%;max-height:100%">
                                     </div>
+>>>>>>> eeec350f6446b2decd5501cba69f370b7f9fe58f
                                     <!-- <img class="card-img-top" v-if="`${articulo.img}`!='default.png'" :src="`${ruta}/img/food.jpg`" > -->
                                     <div class="card-footer bg-success text-white text-right">                                       
                                        $ {{articulo.precio_venta}} 
@@ -90,7 +94,11 @@
                                             <label class="input-group-text" for="inputGroupSelect01">Mesas</label>
                                         </div>
                                         <select class="custom-select form-control" v-model="lugar" id="inputGroupSelect01">
+<<<<<<< HEAD
+                                            <option disabled>Ubicacion...</option>                                            
+=======
                                             <option selected disabled>Ubicacion...</option>                                            
+>>>>>>> eeec350f6446b2decd5501cba69f370b7f9fe58f
                                             <option v-for="zonas in arrayZonas" :key="zonas.id" :value="zonas.id" v-text="zonas.zona"></option>
                                         </select>                                        
                                     </div>

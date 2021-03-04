@@ -434,12 +434,25 @@ export default {
                     me.ocultarDetalle();
                     me.listarFacturacion(1,'','','','','','','');
                     me.listarPendientes();
+<<<<<<< HEAD
+                me.modalRegreso = 0;
+=======
                     me.modalRegreso = 0;
+>>>>>>> eeec350f6446b2decd5501cba69f370b7f9fe58f
                 }).catch(function (error) {
                     console.log(error);
                 });
                 if(accion=='registrar'){
 
+<<<<<<< HEAD
+                    axios.get(this.ruta+'/facturacion/imprimir-ticket-facturacion?id='+this.facturacion_id+'&id_impresora=1&valorEfectivo='+this.valorEfectivo+'&valorCambio='+this.valorRegreso).then(function(response){                 
+                          me.modalRegreso = 0;
+                          me.listarPendientes();
+
+                    }).catch(function (error) {
+                        console.log(error);
+                        me.listarPendientes();
+=======
                     axios.get(this.ruta+'/facturacion/imprimir-ticket-facturacion?id='+this.facturacion_id+'&id_impresora=1&valorEfectivo='+this.valorEfectivo+'&valorCambio='+this.valorRegreso)
                     .then(function(response){  
                         me.modalRegreso = 0;        
@@ -454,6 +467,7 @@ export default {
                             text: 'No se pudo imprimir',
                             
                         })
+>>>>>>> eeec350f6446b2decd5501cba69f370b7f9fe58f
                     });
                 
                 }
