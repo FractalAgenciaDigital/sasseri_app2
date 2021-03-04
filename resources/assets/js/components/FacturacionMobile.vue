@@ -32,10 +32,16 @@
                           
                             <div  v-for="(articulo, index) in arrayArticulo" :key="index" class="col-lg-2 col-md-3 col-sm-4 col-6 p-1" >
                                 <div class="cardz"  style="cursor:pointer" @click="abrirModal(articulo)">
-                                    <div class="card-header bg-primary text-white p-1">
+                                    <div class="card-header bg-primary text-white p-1" style="height:3rem;font-size:12px">
                                         {{articulo.nombre}}
                                     </div>
+<<<<<<< HEAD
                                     <img class="card-img-top" style="max-height:80px" v-if="`${articulo.img}`!='default.png'" :src="`${ruta}/Empresas/${articulo.id_empresa}_empresa/ImgProductos/${articulo.img}`" >
+=======
+                                    <div style="height:5rem;">
+                                        <img class="card-img-top" v-if="`${articulo.img}`!='default.png'" :src="`${ruta}/Empresas/${articulo.id_empresa}_empresa/ImgProductos/${articulo.img}`" style="width:100%;max-height:100%">
+                                    </div>
+>>>>>>> eeec350f6446b2decd5501cba69f370b7f9fe58f
                                     <!-- <img class="card-img-top" v-if="`${articulo.img}`!='default.png'" :src="`${ruta}/img/food.jpg`" > -->
                                     <div class="card-footer bg-success text-white text-right">                                       
                                        $ {{articulo.precio_venta}} 
@@ -88,7 +94,11 @@
                                             <label class="input-group-text" for="inputGroupSelect01">Mesas</label>
                                         </div>
                                         <select class="custom-select form-control" v-model="lugar" id="inputGroupSelect01">
+<<<<<<< HEAD
                                             <option disabled>Ubicacion...</option>                                            
+=======
+                                            <option selected disabled>Ubicacion...</option>                                            
+>>>>>>> eeec350f6446b2decd5501cba69f370b7f9fe58f
                                             <option v-for="zonas in arrayZonas" :key="zonas.id" :value="zonas.id" v-text="zonas.zona"></option>
                                         </select>                                        
                                     </div>
@@ -308,14 +318,23 @@
                                 <p class="espacio-1 centrado">{{ datosFactura.zona }}</p>
                             </div>
                         </div>
-                        -----------------------------------------
-                        <table class="table table-sm">
+                        
+                        <table class="table table-sm" border="0">
+                            
                             <thead>
+                                <tr>
+                                    <td colspan="3">===================================</td>
+                                </tr>
+                                
                                 <tr>
                                     <th colspan="1">PRODUCTO</th>                                    
                                     <th colspan="1">CANTIDAD</th>
                                     <th colspan="1">PRECIO</th>
                                 </tr>
+                                <tr>
+                                    <td colspan="3"> ===================================</td>
+                                </tr>
+                                
                             </thead>
                             <tbody>                               
                                 <tr v-for="(prod_preparado,index) in arrayPreparado" :key="index" >
@@ -330,9 +349,9 @@
                                   
                             </tbody>
                         </table>
-                        -----------------------------------------
+                        
                         <br>
-                        <small class="text-center p-1"><a href="https://www.fractalagenciadigital.com">POWERE BY - FRACTAL AGENCIA DIGITAL<br>www.fractalagenciadigital.com</a></small><br> 
+                        <p class="text-center p-1" style="font-size:10px"><a href="https://www.fractalagenciadigital.com">POWERE BY - FRACTAL AGENCIA DIGITAL<br>www.fractalagenciadigital.com</a></p><br> 
                     </div>                    
                 </div>  
    
@@ -399,7 +418,9 @@
                                             <span class="num text-white "> $ {{auxProd.precio_venta}} </span>
                                         </div>
                                         <div class="card mx-auto" v-if="auxProd">
-                                            <img v-if="`${auxProd.img}`!='default.png'" :src="`${ruta}/Empresas/${auxProd.id_empresa}_empresa/ImgProductos/${auxProd.img}`">
+                                            <div style="height:6rem;">
+                                                <img v-if="`${auxProd.img}`!='default.png'" :src="`${ruta}/Empresas/${auxProd.id_empresa}_empresa/ImgProductos/${auxProd.img}`" style="width:100%;max-height:100%">
+                                            </div>
                                         </div>
                                         <div class="bg-success">
                                             <small class="mb-0 text-white">{{auxProd.nombre}}</small>
@@ -1679,7 +1700,14 @@
                   
                 }).catch(function (error) {
                     console.log(error);
-                  
+                    Swal.fire({
+                    
+                        type:'warning',
+                        title: 'Oops...',
+                        text: 'No se pudo guardar, intentar nuevamente',
+                        
+                    })
+                    
                 });
             },
             validarFacturacion(){
@@ -1746,6 +1774,13 @@
 
                 }).catch(function (error) {
                     console.log(error);
+                    Swal.fire({
+                    
+                        type:'warning',
+                        title: 'Oops...',
+                        text: 'No se pudo imprimir',
+                        
+                    })
                 });
             },  
             selectZonas(){

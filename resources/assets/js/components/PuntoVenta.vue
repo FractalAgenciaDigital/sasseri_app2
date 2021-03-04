@@ -86,7 +86,7 @@
                                             <label class="input-group-text" for="inputGroupSelect01">Mesas</label>
                                         </div>
                                         <select class="custom-select form-control" v-model="lugar" id="inputGroupSelect01">
-                                            <option selected>Ubicacion...</option>                                            
+                                            <option selected disabled>Ubicacion...</option>                                            
                                             <option v-for="zonas in arrayZonas" :key="zonas.id" :value="zonas.id" v-text="zonas.zona"></option>
                                         </select>                                        
                                     </div>
@@ -285,7 +285,11 @@
                         </div>                                      
                     </div>
                     <div class="ticket">
+<<<<<<< HEAD
                         <!-- <img class="img-logo espacio-1" src="http://192.168.100.64/sasseri_app2/public/Empresas/1_empresa/ImgLogos/f4f72620874a541d0113ea86bcf699a8.jpg" alt="img-logo"> -->
+=======
+                        <!-- <img class="img-logo espacio-1" src="http://localhost/sasseri_app2/public//img/logo.jpg" alt="img-logo"> -->
+>>>>>>> eeec350f6446b2decd5501cba69f370b7f9fe58f
                         <p class="centrado espacio-1">FECHA {{ datosFactura.fec_crea}}</p>
                         -----------------------------------------
                         <div class="input-group mb-0">
@@ -353,7 +357,11 @@
                         </div>                                      
                     </div>
                     <div class="ticket">
+<<<<<<< HEAD
                         <!-- <img class="img-logo espacio-1" src="http://192.168.100.64/sasseri_app2/public/Empresas/1_empresa/ImgLogos/f4f72620874a541d0113ea86bcf699a8.jpg" alt="img-logo"> -->
+=======
+                        <!-- <img class="img-logo espacio-1" src="http://localhost/sasseri_app2/public/logo.jpg" alt="img-logo"> -->
+>>>>>>> eeec350f6446b2decd5501cba69f370b7f9fe58f
                         <p class="centrado espacio-1">FECHA {{ datosFactura.fec_crea}}</p>
                         -----------------------------------------
                         <div class="input-group mb-0">
@@ -1812,6 +1820,13 @@
 
                 }).catch(function (error) {
                     console.log(error);
+                    Swal.fire({
+                    
+                        type:'warning',
+                        title: 'Oops...',
+                        text: 'No se pudo imprimir',
+                        
+                    })
                 });
             },  
             selectZonas(){

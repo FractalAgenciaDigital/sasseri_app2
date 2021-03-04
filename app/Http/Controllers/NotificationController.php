@@ -63,7 +63,7 @@ class NotificationController extends Controller
 
         $user = Auth::user()->unreadNotifications;
         foreach ($user as $notification) {
-            $notification->markAsRead();
+            $notification->delete();
         }
 
         // foreach ($user->unreadNotifications as $notification) {

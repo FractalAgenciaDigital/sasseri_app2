@@ -88,48 +88,7 @@ class ConfigGeneralesController extends Controller
         }
     }
 
-    /*public function update(Request $request)
-    {
-        // if (!$request->ajax()) return redirect('/');
-        $id_usuario = Auth::user()->id;
-        $id_empresa = $request->session()->get('id_empresa');
-        
-        $config = ConfigGenerales::findOrFail($request->id);
-
-        $carpetaEmpresa = $id_empresa .'_empresa'; 
-        $dirEmpresa = public_path("Empresas/$carpetaEmpresa/ImgLogos");
-        if (!file_exists($dirEmpresa)) mkdir($dirEmpresa, 0777);
-
-        if(isset($request->logo)){
-            if(is_uploaded_file($_FILES['logo']['name']))
-            {
-                $nombreImg = $_FILES['logo']['name'];
-                if($_FILES['logo']['type'] == "image/jpg" || $_FILES['logo']['type'] == "image/jpeg" || $_FILES['logo']['type'] == "image/png")
-                {
-                    copy($_FILES['logo']['tmp_name'],$dirEmpresa.'/'.$_FILES['logo']['name']);
-                }
-            }
-        }
-        else
-        {
-            $nombreImg = $config->logo;
-        }
-        
-        $archivo = [
-            'nombre' => $request->nombre,
-            'logo' => $nombreImg,
-            'repre_legal' => $request->repre_legal,
-            'nit' => $request->nit,
-            'nombre' => $request->nombre,
-            'res_fact_elect' => $request->res_fact_elect,
-            'res_fact_pos' => $request->res_fact_pos,
-            'correo' => $request->correo,
-            'celular' => $request->celular,
-            'telefono' => $request->telefono,
-        ];
-
-        $config->update($archivo);
-    }*/
+  
 
     public function update(Request $request)
     {

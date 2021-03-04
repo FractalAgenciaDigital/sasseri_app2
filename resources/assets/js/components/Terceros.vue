@@ -678,7 +678,7 @@
                     console.log(error);
                 });
             },
-            listarVendedores(page,buscar,criterio){
+            listarVendedores(){
                 let me=this;
                 var url=  this.ruta +'/colaboradores/selectColaboradorVendedor';
                 axios.get(url).then(function (response) {
@@ -689,7 +689,7 @@
                     console.log(error);
                 });
             },
-            listarZonas(page,buscar,criterio){
+            listarZonas(){
                 let me=this;
                 var url=  this.ruta +'/zona/selectZona';
                 axios.get(url).then(function (response) {
@@ -706,7 +706,7 @@
                 axios.get(url).then(function (response) {
                     var respuesta= response.data;
                     me.arrayNovedades = respuesta.novedades;
-                    // me.pagination= respuesta.pagination;
+                    
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -729,7 +729,7 @@
                 axios.get(url).then(function (response) {
                     var respuesta= response.data;
                     me.arrayDepartamentos = respuesta.departamentos;
-                    // me.pagination= respuesta.pagination;
+                    
                 })
                 .catch(function (error) {
                     console.log(error);

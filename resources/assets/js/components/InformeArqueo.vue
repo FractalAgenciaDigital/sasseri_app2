@@ -28,8 +28,11 @@
                         <input v-else disabled type="date" class="form-control" v-model="hastaFiltro">
                         
                     </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-success" @change="listarVentas(noCajaFiltro,desdeFiltro,hastaFiltro)">Buscar</button>
+                    </div>
                     <div class="form-group col-md-3">
-                        <label><i class="icon-printer"></i></label>    <br>
+                        <!-- <label><i class="icon-printer"></i></label>    <br> -->
 
                         <button type="button" @click="abrirModalImpresion();" class=" btn btn-primary btn-sm" title="imprimir">
                             <i class="icon-printer"></i> Imprimir listado
@@ -74,6 +77,19 @@
 
             </table>
         </div>  
+        <nav>
+            <ul class="pagination">
+                <li class="page-item" v-if="pagination.current_page > 1">
+                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,noCajaFiltro,desdeFiltro,hastaFiltro)">Ant</a>
+                </li>
+                <li class="page-item" v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
+                    <a class="page-link" href="#" @click.prevent="cambiarPagina(page,noCajaFiltro,desdeFiltro,hastaFiltro)" v-text="page"></a>
+                </li>
+                <li class="page-item" v-if="pagination.current_page < pagination.last_page">
+                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1,noCajaFiltro,desdeFiltro,hastaFiltro)">Sig</a>
+                </li>
+            </ul>
+        </nav>
         <!-- Modal de impresion -->
         <div class="modal fade" tabindex="-1" :class="{'mostrar' : mostrarModImp}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
             <div class="modal-dialog modal-primary modal-sm" role="document">
@@ -127,6 +143,15 @@ export default {
             arrayVentas:[],
             arrayCajas:[],
             arrayImpresora : [],
+
+            pagination : {
+                'total' : 0,
+                'current_page' : 0,
+                'per_page' : 0,
+                'last_page' : 0,
+                'from' : 0,
+                'to' : 0,
+            },
               
             // Filtros            
             noCajaFiltro:'',
@@ -140,19 +165,54 @@ export default {
         }
 
     },
+    computed:{
+        isActived: function(){
+            return this.pagination.current_page;
+        },
+        //Calcula los elementos de la paginación
+        pagesNumber: function() {
+            if(!this.pagination.to) {
+                return [];
+            }
+            
+            var from = this.pagination.current_page - this.offset; 
+            if(from < 1) {
+                from = 1;
+            }
+
+            var to = from + (this.offset * 2); 
+            if(to >= this.pagination.last_page){
+                to = this.pagination.last_page;
+            }  
+
+            var pagesArray = [];
+            while(from <= to) {
+                pagesArray.push(from);
+                from++;
+            }
+            return pagesArray;
+        },
+    },
     methods:{
-        listarVentas(noCajaFiltro,desdeFiltro,hastaFiltro){
+        listarVentas(page,noCajaFiltro,desdeFiltro,hastaFiltro){
             let me=this;
 
-            var url= this.ruta +'/informe/cajas?noCajaFiltro='+me.noCajaFiltro +'&desdeFiltro='+me. desdeFiltro + '&hastaFiltro='+ me.hastaFiltro ;
+            var url= this.ruta +'/informe/cajas?page='+me.page+'&noCajaFiltro='+me.noCajaFiltro +'&desdeFiltro='+me. desdeFiltro + '&hastaFiltro='+ me.hastaFiltro ;
             axios.get(url).then(function (response) {
                 var respuesta= response.data;
                 console.log(response)
-                me.arrayVentas = respuesta.cajas_cierres;
+                me.arrayVentas = respuesta.cajas_cierres.data;
+                me.pagination= respuesta.pagination;
             })
             .catch(function (error) {
                 console.log(error);
             });
+        },
+        cambiarPagina(page,noCajaFiltro,desdeFiltro,hastaFiltro){
+            let me = this;
+            //Actualiza la página actual
+            me.pagination.current_page = page;
+            me.listarVentas(page,noCajaFiltro,desdeFiltro,hastaFiltro);
         },
 
         listarCajas (){
@@ -185,7 +245,14 @@ export default {
             axios.get(this.ruta+'/informe/imprimir-ticket-informe-cajas?noCajaFiltro='+me.noCajaFiltro +'&desdeFiltro='+me. desdeFiltro + '&hastaFiltro='+ me.hastaFiltro+'&id_impresora='+this.id_impresora).then(function(response){                 
 
             }).catch(function (error) {
-                console.log(error);
+            Swal.fire({
+                    
+                    type:'warning',
+                    title: 'Oops...',
+                    text: 'No se pudo imprimir',
+                    
+                })
+                                
             });
         },
 
@@ -206,6 +273,30 @@ export default {
     },
     mounted(){
         let me = this;
+
+        var d = new Date();
+                    
+        var dd = d.getDate();
+        var mm = d.getMonth()+1;
+        var yyyy = d.getFullYear();
+        var h = d.getHours();
+        var min = d.getMinutes();
+        var sec = d.getSeconds();
+
+        
+        
+        if(dd<10){
+            dd='0'+dd;
+        } 
+        if(mm<10){
+            mm='0'+mm;
+        } 
+        d = yyyy+'-'+mm+'-'+dd;
+        me.fechaActual = d;
+        me.desdeFiltro = d;
+        me.fecha = d;
+        me.fechaHoraActual = d+' '+h+':'+min+':'+sec;
+
         me.listarVentas();
         me.listarCajas();
     }

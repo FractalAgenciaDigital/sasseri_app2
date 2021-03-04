@@ -17,7 +17,8 @@
                     <div class="dropdown-item d-flex align-items-center" href="#" @click="eliminarNotificacion(item.id)">
                         <div class="mr-3">
                             <div class="icon-circle bg-primary">
-                                <i class="fa fa-file-alt text-white"></i>
+                                
+                                <i class="icon-cup text-white"></i>
                             </div>                            
                         </div>
                         <div>
@@ -38,7 +39,7 @@
             <div v-else class="p-2">
                 Sin notificaciones
             </div>
-            <a class="dropdown-item text-center small text-gray-500" href="#">Mostrar lista completa</a>
+            <!-- <a class="dropdown-item text-center small text-gray-500" href="#">Mostrar lista completa</a> -->
         </div>
     </li>
 </template>

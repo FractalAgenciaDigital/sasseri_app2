@@ -30,7 +30,11 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
+<<<<<<< HEAD
     'reference' => 'c073d8ff4bdcc18abfe7b46bcf81012b7636935f',
+=======
+    'reference' => '4ab6789f6d557963d79d27cd696d0c6689144c0b',
+>>>>>>> eeec350f6446b2decd5501cba69f370b7f9fe58f
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -412,7 +416,11 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
+<<<<<<< HEAD
       'reference' => 'c073d8ff4bdcc18abfe7b46bcf81012b7636935f',
+=======
+      'reference' => '4ab6789f6d557963d79d27cd696d0c6689144c0b',
+>>>>>>> eeec350f6446b2decd5501cba69f370b7f9fe58f
     ),
     'laravel/tinker' => 
     array (
@@ -537,12 +545,12 @@ private static $installed = array (
     ),
     'myclabs/php-enum' => 
     array (
-      'pretty_version' => '1.7.7',
-      'version' => '1.7.7.0',
+      'pretty_version' => '1.8.0',
+      'version' => '1.8.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'd178027d1e679832db9f38248fcc7200647dc2b7',
+      'reference' => '46cf3d8498b095bd33727b13fd5707263af99421',
     ),
     'nesbot/carbon' => 
     array (
@@ -645,12 +653,12 @@ private static $installed = array (
     ),
     'phpoffice/phpspreadsheet' => 
     array (
-      'pretty_version' => '1.16.0',
-      'version' => '1.16.0.0',
+      'pretty_version' => '1.17.1',
+      'version' => '1.17.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '76d4323b85129d0c368149c831a07a3e258b2b50',
+      'reference' => 'c55269cb06911575a126dc225a05c0e4626e5fb4',
     ),
     'phpspec/prophecy' => 
     array (

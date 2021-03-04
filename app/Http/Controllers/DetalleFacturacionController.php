@@ -122,6 +122,7 @@ class DetalleFacturacionController extends Controller
                 ->select('detalle_facturacion.id as id', 'detalle_facturacion.observaciones','detalle_facturacion.id_factura','facturacion.num_factura as num_factura','detalle_facturacion.id_producto','detalle_facturacion.padre','articulos.id as idarticulo','articulos.codigo','articulos.codigo as codigo_articulo','articulos.nombre as articulo','articulos.precio_venta as precio','articulos.stock','detalle_facturacion.valor_venta','detalle_facturacion.cantidad','detalle_facturacion.cantidad as cantidad2','detalle_facturacion.valor_iva','detalle_facturacion.valor_descuento','detalle_facturacion.valor_descuento as valor_descuento2','detalle_facturacion.porcentaje_iva as iva','detalle_facturacion.valor_subtotal','detalle_facturacion.valor_final','articulos.id_presentacion','presentacion.nombre as nom_presentacion', 'articulos.tipo_articulo','preparado')   
                 ->where('detalle_facturacion.id_factura', '=', $fac->id)
                 ->where('detalle_facturacion.preparado', '<>', 3)
+                ->where('articulos.tipo_articulo', '=', 4)
                 ->orderBy('facturacion.id', 'asc')
                 ->get();
                 
@@ -236,7 +237,7 @@ class DetalleFacturacionController extends Controller
         // $id_impresora = Auth::user()->id_impresora;
         $id_impresora=2;
         
-       $imprimir = Impresora::where('id', $id_impresora)->first();
+        $imprimir = Impresora::where('id', $id_impresora)->first();
         $detalle_facturacion = DetalleFacturacion::leftJoin('facturacion', 'detalle_facturacion.id_factura','=','facturacion.id')
         ->leftJoin('articulos', 'detalle_facturacion.id_producto','=','articulos.id')
         ->leftJoin('presentacion','articulos.id_presentacion','=','presentacion.id')
@@ -268,6 +269,7 @@ class DetalleFacturacionController extends Controller
         'preparado')
         ->where('detalle_facturacion.id_factura','=', $id_factura)
         // ->where('articulos.id_impresora','=', $id_impresora)
+        ->where('articulos.tipo_articulo', '=', 4)
         ->get();
 
         $facturacion = Facturacion::leftJoin('personas', 'personas.id', 'facturacion.id_tercero')
@@ -283,20 +285,19 @@ class DetalleFacturacionController extends Controller
         $impresora = new Printer($connector);
         // $impresora->lineSpacing(19);
         $impresora->setJustification(Printer::JUSTIFY_CENTER) ;
-        $logo = EscposImage::load('logo.jpg', false);
-        $impresora->bitImage($logo);
-        
-        $impresora->text("\n===============================\n");
+
+        try {
+            $logo = EscposImage::load('logo.jpg', false);
+            $impresora->bitImage($logo);
+        } catch (Exception $e) {
+            /* Images not supported on your PHP, or image file not found */
+            $impresora -> text($e -> getMessage() . "\n");
+        }
         $impresora->setEmphasis(true);
         $impresora->text($infoEmpresa[0]->nombre."\n");
         $impresora->setEmphasis(false);
-        // $impresora->text("NIT: ");
-        // $impresora->text($infoEmpresa[0]->nit."\n");
-        // $impresora->text("Dirección: ");
-        // $impresora->text($infoEmpresa[0]->direccion."\n");
-        
        
-         $impresora->setEmphasis(true);
+        $impresora->setEmphasis(true);
         $impresora->text("Cajero(a): ");
         $impresora->text($facturacion->cajero."\n");
         $impresora->text("Mesa: ");
@@ -307,12 +308,12 @@ class DetalleFacturacionController extends Controller
         $impresora->setLineSpacing(2);
  
         $impresora->setJustification(Printer::JUSTIFY_LEFT);
-        $impresora->text("\n______________________________________"."\n\n");
+        $impresora->text("\n============================================="."\n\n");
         $impresora->setLineSpacing(2);
         $impresora->text(sprintf('%-25s %+10.8s %+10.7s','ARTICULO', 'CANT', 'PRECIO'));
         $impresora->text("\n"); 
        
-        $impresora->text("______________________________________\n"."\n");
+        $impresora->text("=============================================\n"."\n");
 
         foreach($detalle_facturacion as $df)
         {
@@ -343,23 +344,24 @@ class DetalleFacturacionController extends Controller
         $impresora->setJustification(Printer::JUSTIFY_CENTER);
        
         $impresora->setTextSize(1, 1);
+        $impresora->setJustification(Printer::JUSTIFY_CENTER);
         $impresora->setLineSpacing(2);
-        $impresora->text("\n===============================\n");
+        $impresora->text("\n******************************************\n");        
         $impresora->setEmphasis(false);
-        $impresora->setFont(Printer::FONT_C);
+        $impresora->text("Gracias por su compra\n");
+        $impresora->text("\n******************************************\n");        
+        $impresora->setFont(Printer::MODE_FONT_B);
         $impresora->text("Sasseri");
         $impresora->text("\nwww.fractalagenciadigital.com\n");
-        $impresora->text("\n===============================\n");
-        $impresora->text("Gracias por su compra\n");
-        $impresora->text("\n===============================\n");
 
-        
-        $impresora->feed(5);
-        $impresora->cut();
-        $impresora->pulse();
-        $impresora->close();
-        
-        return redirect()->back()->with("mensaje", "Ticket impreso");
+        if(count($detalle_facturacion)){
+            $impresora->feed(5);
+            $impresora->cut();
+            $impresora->pulse();
+            $impresora->close();
+           }   
+            return redirect()->back()->with("mensaje", "Ticket impreso");
+      
         
     }
     public function redirect_log(){

@@ -126,7 +126,7 @@ class FacturacionController extends Controller
             if($request->id_cierre_caja && $request->id_cierre_caja!=0){$facturacion = $facturacion->where('id_cierre_caja','=',$request->id_cierre_caja);}
 
             $facturacion = $facturacion->where('facturacion.id_empresa','=',$id_empresa)
-            ->paginate(6);
+            ->paginate(20);
 
             return [
                 'pagination' => [
@@ -590,10 +590,16 @@ class FacturacionController extends Controller
         $impresora->initialize();
         // $impresora->setPrintWidth(25);
         $impresora->setJustification(Printer::JUSTIFY_CENTER);     
-        $logo = EscposImage::load('logo.jpg', false);
-        $impresora->bitImage($logo);       
+        try {
+            $logo = EscposImage::load('logo.jpg', false);
+            $impresora->bitImage($logo);
+        } catch (Exception $e) {
+            /* Images not supported on your PHP, or image file not found */
+            $impresora -> text($e -> getMessage() . "\n");
+        }
         $impresora->text("\n===============================\n");        
         $impresora->setTextSize(1, 2);
+        $impresora->setEmphasis(true);
         $impresora->text($infoEmpresa->nombre."\n");
         $impresora->setTextSize(1, 1);        
         $impresora->setEmphasis(false);
@@ -617,7 +623,7 @@ class FacturacionController extends Controller
         $impresora->text("Cliente: ");
         $impresora->text($facturacion->nombre1." ".$facturacion->nombre2." ".$facturacion->apellido1." ".$facturacion->apellido2."\n");
         $impresora->setLineSpacing(2); 
-        $impresora->setJustification(Printer::JUSTIFY_LEFT);
+        $impresora->setJustification(Printer::JUSTIFY_CENTER);
         $impresora->text("\n-----------------------------------------"."\n\n");
         $impresora->setLineSpacing(1);
         $impresora->setEmphasis(true);
