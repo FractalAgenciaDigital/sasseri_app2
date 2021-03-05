@@ -168,7 +168,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/detalle_facturacion', 'DetalleFacturacionController@index');               
         Route::get('/detalle_facturacion/buscarDetalleFacturacion', 'DetalleFacturacionController@buscarDetalleFacturacion');
         Route::get('/detalle_facturacion/productosPreparados', 'DetalleFacturacionController@productosPreparados');
-        Route::get('/detalle_facturacion/imprimir-ticket', 'DetalleFacturacionController@imprimirTicket'); 
+        Route::post('/detalle_facturacion/imprimir-ticket', 'DetalleFacturacionController@imprimirTicket'); 
         Route::get('/detalle_facturacion/ver-ticket', 'DetalleFacturacionController@verTicket'); 
         Route::post('/detalle_facturacion/registrar', 'DetalleFacturacionController@store'); 
         Route::put('/detalle_facturacion/actualizar', 'DetalleFacturacionController@update');

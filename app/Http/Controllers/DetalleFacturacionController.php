@@ -230,6 +230,24 @@ class DetalleFacturacionController extends Controller
         ];
         
     }
+    public function imprimirTicketx(Request $request){
+        // var_dump($request->datos);
+        $detalles = $request->datos;
+
+        $datos=array();
+        foreach($detalles as $det){
+            if(isset($det['prod_nuevo'])){
+                if(isset($det['cantidad2']) && ($det['cantidad'] > $det['cantidad2']) ){
+
+
+                    $datos['articulo'] = $det['articulo'];
+                }
+            }
+        }
+        return ['datos'=>$datos];
+
+        
+    }
     public function imprimirTicket(Request $request)
     {
         $id_factura = $request->id;
@@ -296,7 +314,6 @@ class DetalleFacturacionController extends Controller
         }
         $impresora->setEmphasis(true);
         $impresora->text($infoEmpresa[0]->nombre."\n");
-        // $impresora->text($request);
         $impresora->setEmphasis(false);
        
         $impresora->setEmphasis(true);
@@ -318,20 +335,59 @@ class DetalleFacturacionController extends Controller
         $impresora->text("-----------------------------------------------\n"."\n");
         $total = 0;
 
-        foreach($detalle_facturacion as $df)
-        {
-            
-            $line = sprintf('%-25s %10.0f %10.2f ','-'. $df->nombre_articulo, $df->cantidad, $df->cantidad * $df->precio);
-            $total +=  $df->cantidad * $df->precio;             
-            $impresora->text($line);                      
-            if(($df->observaciones) != ''){
-                $impresora->text("\n"); 
-                $impresora->text('Notas:');
-                $impresora->text($df->observaciones);
+        $detalles = $request->datos;
+
+        if(count($request->datos)>0){
+            foreach($detalles as $det){
+                if(isset($det['prod_nuevo'])){
+
+                    $articulo = $det['articulo'];
+                    if(isset($det['precio_venta'])){
+                        $precio = $det['precio_venta'];
+                    }
+                    else{
+                        $precio = $det['valor_venta'];
+                    }
+                    if(isset($det['cantidad2']) && ($det['cantidad'] > $det['cantidad2']) ){                   
+                        $cantidad = $det['cantidad']-$det['cantidad2'];
+
+                    }elseif(!isset($det['cantidad2'])){                    
+                        $cantidad = $det['cantidad'];
+                    }
+                
+                    $line = sprintf('%-25s %10.0f %10.2f ','-'. $articulo, $cantidad, $cantidad * $precio);
+                    $impresora->text($line);     
+
+                    $total += ($precio * $cantidad);
+
+                    if(($det['observaciones']) != ''){
+                        $observaciones = $det['observaciones'];
+                        $impresora->text('Notas:');
+                        $impresora->text($observaciones);
+                    }
+                    $impresora->setLineSpacing(2);
+                    $impresora->text("\n"); 
+
+
+                }
             }
-            $impresora->setLineSpacing(2);
-            $impresora->text("\n"); 
+        }
+        else{
+            foreach($detalle_facturacion as $df)
+            {
             
+                $line = sprintf('%-25s %10.0f %10.2f ','-'. $df->nombre_articulo, $df->cantidad, $df->cantidad * $df->precio);
+                $total +=  $df->cantidad * $df->precio;             
+                $impresora->text($line);                      
+                if(($df->observaciones) != ''){
+                    $impresora->text("\n"); 
+                    $impresora->text('Notas:');
+                    $impresora->text($df->observaciones);
+                }
+                $impresora->setLineSpacing(2);
+                $impresora->text("\n"); 
+                
+            }
         }
 
         $impresora->setJustification(Printer::JUSTIFY_CENTER);
@@ -351,14 +407,14 @@ class DetalleFacturacionController extends Controller
         $impresora->text("\nwww.fractalagenciadigital.com\n");
      
 
-        if(count($detalle_facturacion)){
+        // if(count($detalle_facturacion)){
             $impresora->feed(5);
             $impresora->cut();
             $impresora->pulse();
             $impresora->close();
             
             return redirect()->back()->with("mensaje", "Ticket impreso");
-        }
+        // }
         
     }
     public function redirect_log(){

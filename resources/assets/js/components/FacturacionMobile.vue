@@ -712,6 +712,8 @@
                 prod_nuevo : 0,
                 factura_imprimir:0,
                 datosFactura :[],
+
+                arrayImprimir:[]
             }
         },
         components: {
@@ -1688,6 +1690,7 @@
                     me.listarFacturacion(1,'','','','','','','');
                     me.listarArticulo(me.buscarA,me.criterioA,me.buscarCategoriaA);
                     me.tipoAccion2 =1;
+                    me.arrayDetalleT=[]
                     
                   
                 }).catch(function (error) {
@@ -1749,11 +1752,16 @@
             }, 
             imprimirTicket(){
                 let me = this;
-            
-                axios.get(this.ruta+'/detalle_facturacion/imprimir-ticket?id='+me.factura_imprimir).then(function(response){   
-                    console.log(response)              
+                axios.post(this.ruta+'/detalle_facturacion/imprimir-ticket',{
+                        'id': me.factura_imprimir,
+                       'datos':me.arrayDetalleT
+                    
+                }).then(function(response){   
+                    console.log(response)        
+                    me.arrayDetalleT=[]      
 
                 }).catch(function (error) {
+                    me.arrayDetalleT=[]
                     console.log(error);
                     Swal.fire({
                     
@@ -1778,6 +1786,7 @@
             },
             mostrarDetalle(modelo, accion, data=[]){
                 let me=this;
+                me.arrayDetalleT=[]
                 
                 switch(modelo){
                     case 'facturacion':{
