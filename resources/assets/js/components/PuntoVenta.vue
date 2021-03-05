@@ -265,72 +265,7 @@
                 </div> 
             </div>
             <div v-show="position==5"> <!-- tickets imprimir factura -->
-                 <div class="card">
-                    <div class="card-header">
-                        <div class="row">
-                            <!-- <div class="col-3">
-                                <button @click="position=5" class="btn btn-primary fa fa-undo"></button>
-                            </div> -->
-                            <div class="col-3">
-                                <button @click="position=7" class="btn btn-primary fa fa-list"></button>
-                            </div>
-                            <div class="col-6 pr-1">  
-                            </div> 
-                            <div class="col-3">  
-                                <button @click="imprimirTicket()" class="btn btn-light">
-                                    Imprimir
-                                </button>
-                            </div> 
-                            
-                        </div>                                      
-                    </div>
-                    <div class="ticket">
-                        <!-- <img class="img-logo espacio-1" src="http://localhost/sasseri_app2/public//img/logo.jpg" alt="img-logo"> -->
-                        <p class="centrado espacio-1">FECHA {{ datosFactura.fec_crea}}</p>
-                        -----------------------------------------
-                        <div class="input-group mb-0">
-                            <div class="col-6">
-                                <p class="espacio-1">MESERO: </p>
-                            </div> 
-                            <div class="col-6">
-                                <p class="espacio-1"> {{ datosFactura.cajero }}</p>
-                            </div>
-                        </div>
-                        <div class="input-group mb-0">
-                            <div class="col-6">
-                                <p class="espacio-1">MESA:</p>
-                            </div> 
-                            <div class="col-6">
-                                <p class="espacio-1 centrado">{{ datosFactura.zona }}</p>
-                            </div>
-                        </div>
-                        -----------------------------------------
-                        <table class="table table-sm">
-                            <thead>
-                                <tr>
-                                    <th colspan="1">PRODUCTO</th>                                    
-                                    <th colspan="1">CANTIDAD</th>
-                                    <th colspan="1">PRECIO</th>
-                                </tr>
-                            </thead>
-                            <tbody>                               
-                                <tr v-for="(prod_preparado,index) in arrayPreparado" :key="index" >
-                                    <td  colspan="1"> - {{prod_preparado.nombre_articulo}}
-                                        <br>
-                                        {{prod_preparado.observaciones}}
-                                    </td>                                    
-                                    <td  colspan="1">{{prod_preparado.cantidad}}</td>
-                                    <td  colspan="1">{{prod_preparado.precio * prod_preparado.cantidad }}</td>
-                                    
-                                </tr>
-                                  
-                            </tbody>
-                        </table>
-                        -----------------------------------------
-                        <br>
-                        <p class="centrado minimizar espacio-1">POWERE BY - FRACTAL AGENCIA DIGITAL<br>www.fractalagenciadigital.  com</p><br> 
-                    </div>                    
-                </div>        
+                  
             </div>  
             <div v-show="position==6"> <!-- tickets listado preparcion chef -->
                 <div class="card">
@@ -353,7 +288,9 @@
                         </div>                                      
                     </div>
                     <div class="ticket">
-                        <!-- <img class="img-logo espacio-1" src="http://localhost/sasseri_app2/public/logo.jpg" alt="img-logo"> -->
+                         <img class="card-img-top" :src="`${ruta}/Empresas/${datosEmpresa.id}_empresa/ImgLogos/${datosEmpresa.logo}`" style="width:100%;max-height:100px;max-width:100px;height:auto;">
+                        
+                            <h6 class="col-12">{{datosEmpresa.nombre}}</h6>
                         <p class="centrado espacio-1">FECHA {{ datosFactura.fec_crea}}</p>
                         -----------------------------------------
                         <div class="input-group mb-0">
@@ -762,7 +699,8 @@
                 auxObser : '',
                 prod_nuevo : 0,
                 factura_imprimir:0,
-                datosFactura :[]
+                datosFactura :[],
+                datosEmpresa:[],
             }
         },
         components: {
@@ -1800,7 +1738,8 @@
             
                 axios.get(this.ruta+'/detalle_facturacion/ver-ticket?id='+me.factura_imprimir).then(function(response){    
                     me.arrayPreparado = response.data.detalles_facturacion;
-                    me.datosFactura = response.data.facturacion;                    
+                    me.datosFactura = response.data.facturacion;
+                    me.datosEmpresa=response.data.empresa;
 
                 }).catch(function (error) {
                     console.log(error);

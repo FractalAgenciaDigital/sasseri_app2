@@ -199,7 +199,7 @@ class DetalleFacturacionController extends Controller
         ->select('facturacion.id as id', 'facturacion.fec_crea', 'personas.nombre1', 'personas.nombre2', 'personas.apellido1', 'personas.apellido2', 'p_usuarios.nombre as cajero', 'p_usuarios.id as idusuario', 'personas.id as idpersona', 'zona.zona')->where('facturacion.id','=', $id_factura)
         ->first();
         // ->get();
-        $infoEmpresa = ConfigGenerales::select()->where('id','=', $id_empresa)->limit(1)->get();
+        $infoEmpresa = ConfigGenerales::select()->where('id','=', $id_empresa)->first();
 
         foreach($detalle_facturacion as $df)
         {
@@ -226,7 +226,8 @@ class DetalleFacturacionController extends Controller
 
         
         return ['detalles_facturacion' => $detalle_facturacion,
-                'facturacion'  => $facturacion
+                'facturacion'  => $facturacion, 
+                'empresa' => $infoEmpresa
         ];
         
     }
@@ -407,14 +408,14 @@ class DetalleFacturacionController extends Controller
         $impresora->text("\nwww.fractalagenciadigital.com\n");
      
 
-        // if(count($detalle_facturacion)){
+        if(count($detalle_facturacion)){
             $impresora->feed(5);
             $impresora->cut();
             $impresora->pulse();
             $impresora->close();
             
             return redirect()->back()->with("mensaje", "Ticket impreso");
-        // }
+        }
         
     }
     public function redirect_log(){

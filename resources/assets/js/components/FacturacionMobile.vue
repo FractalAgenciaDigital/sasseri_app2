@@ -291,23 +291,26 @@
                             
                         </div>                                      
                     </div>
-                    <div class="ticket">                        
+                    <div class="ticket text-center">                        
+                        <img class="card-img-top" :src="`${ruta}/Empresas/${datosEmpresa.id}_empresa/ImgLogos/${datosEmpresa.logo}`" style="width:100%;max-height:100px;max-width:100px;height:auto;">
+                        
+                            <h6 class="col-12">{{datosEmpresa.nombre}}</h6>
                         <p class="centrado espacio-1">FECHA {{ datosFactura.fec_crea}}</p>
                         -----------------------------------------
                         <div class="input-group mb-0">
                             <div class="col-6">
-                                <p class="espacio-1">MESERO: </p>
+                                <p class="mb-0">MESERO: </p>
                             </div> 
                             <div class="col-6">
-                                <p class="espacio-1"> {{ datosFactura.cajero }}</p>
+                                <p class="mb-0"> {{ datosFactura.cajero }}</p>
                             </div>
                         </div>
                         <div class="input-group mb-0">
                             <div class="col-6">
-                                <p class="espacio-1">MESA:</p>
+                                <p class="mb-0">MESA:</p>
                             </div> 
                             <div class="col-6">
-                                <p class="espacio-1 centrado">{{ datosFactura.zona }}</p>
+                                <p class="mb-0 centrado">{{ datosFactura.zona }}</p>
                             </div>
                         </div>
                         
@@ -712,6 +715,7 @@
                 prod_nuevo : 0,
                 factura_imprimir:0,
                 datosFactura :[],
+                datosEmpresa:[],
 
                 arrayImprimir:[]
             }
@@ -1744,7 +1748,8 @@
             
                 axios.get(this.ruta+'/detalle_facturacion/ver-ticket?id='+me.factura_imprimir).then(function(response){    
                     me.arrayPreparado = response.data.detalles_facturacion;
-                    me.datosFactura = response.data.facturacion;                    
+                    me.datosFactura = response.data.facturacion;          
+                    me.datosEmpresa=response.data.empresa;          
 
                 }).catch(function (error) {
                     console.log(error);
