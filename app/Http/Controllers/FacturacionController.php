@@ -640,8 +640,7 @@ class FacturacionController extends Controller
             $impresora->text($line);
             $impresora->text("\n");             
         }
-        $impresora->text("\n=========================================="."\n\n");
-        $impresora->setJustification(Printer::JUSTIFY_LEFT);
+        $impresora->text("\n=========================================="."\n");
         $impresora->setEmphasis(true);
         $impresora->setLineSpacing(2);
         $impresora->setTextSize(1, 2);
@@ -674,6 +673,24 @@ class FacturacionController extends Controller
         
       
 
+        $impresora -> cut();
+        $impresora->pulse();
+        $impresora->close();        
+        
+        return redirect()->back()->with("mensaje", "Ticket impreso");
+        
+    }
+    public function abrirCajaRegistradora(Request $request)
+    {
+        $id_factura = $request->id;
+        $id_empresa = $request->session()->get('id_empresa');
+        $id_impresora = $request->id_impresora;
+        
+        
+        $imprimir = Impresora::where('id', $id_impresora)->first();        
+        $connector = new WindowsPrintConnector($imprimir->nombre_impresora);        
+        $impresora = new Printer($connector);  
+        $impresora->initialize();
         $impresora -> cut();
         $impresora->pulse();
         $impresora->close();        

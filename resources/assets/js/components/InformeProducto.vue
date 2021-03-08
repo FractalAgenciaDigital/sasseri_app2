@@ -108,10 +108,10 @@ export default {
             },
 
             // Filtros
-            page : '',
+            page : 1,
             noProductoFiltro : '',
             noCategoriaFiltro : '',
-            desdeFiltro : '2021-01-01',
+            desdeFiltro : '',
             hastaFiltro : ''
         }
 
@@ -146,7 +146,7 @@ export default {
         CalcularTotalizado: function(){
             var resultado=0.0;
             for(var i=0;i<this.arrayVentas.length;i++){
-                resultado=resultado+this.arrayVentas[i].valor_venta;
+                resultado=resultado+this.arrayVentas[i].valor_final;
             }
             return resultado;
         },
@@ -155,7 +155,7 @@ export default {
         listarVentas(page,noProductoFiltro, noCategoriaFiltro, desdeFiltro, hastaFiltro){
             let me=this;
 
-            var url= this.ruta +'/informe/productos?page='+me.page+'&noCategoriaFiltro='+me.noCategoriaFiltro +'&noProductoFiltro='+me.noProductoFiltro +'&desdeFiltro='+me. desdeFiltro + '&hastaFiltro='+ me.hastaFiltro;
+            var url= this.ruta +'/informe/productos?page='+page+'&noCategoriaFiltro='+me.noCategoriaFiltro +'&noProductoFiltro='+me.noProductoFiltro +'&desdeFiltro='+me. desdeFiltro + '&hastaFiltro='+ me.hastaFiltro;
             axios.get(url).then(function (response) {
                 var respuesta= response.data;
                 // console.log(response)
@@ -175,8 +175,28 @@ export default {
 
     },
     mounted(){
-        let me = this;
-        me.listarVentas(me.page,me.noProductoFiltro,me.noCategoriaFiltro,me.desdeFiltro,me.hastaFiltro);
+         let me= this;
+            var d = new Date();
+                       
+            var dd = d.getDate();
+            var mm = d.getMonth()+1;
+            var yyyy = d.getFullYear();
+            var h = d.getHours();
+            var min = d.getMinutes();
+            var sec = d.getSeconds();
+
+           
+            
+            if(dd<10){
+                dd='0'+dd;
+            } 
+            if(mm<10){
+                mm='0'+mm;
+            } 
+            d = yyyy+'-'+mm+'-'+dd;
+            me.fechaActual = d;
+            me.desdeFiltro = d;
+        me.listarVentas(1,me.noProductoFiltro,me.noCategoriaFiltro,me.desdeFiltro,me.hastaFiltro);
         
     }
 }

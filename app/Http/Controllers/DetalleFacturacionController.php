@@ -106,11 +106,11 @@ class DetalleFacturacionController extends Controller
 
         $facturacion = Facturacion::join('personas', 'facturacion.id_tercero','=','personas.id')
             ->join('zona', 'facturacion.lugar','=','zona.id')->join('users', 'facturacion.id_usuario','=','users.id')
-            ->select('facturacion.id','facturacion.num_factura','facturacion.id_tercero','personas.nombre as nom_tercero','facturacion.id_usuario','facturacion.fec_crea','facturacion.fec_edita','facturacion.usu_edita','facturacion.subtotal','facturacion.valor_iva','facturacion.total','abono','facturacion.saldo','facturacion.detalle','facturacion.lugar','zona.zona as nom_lugar','facturacion.descuento','facturacion.fec_registra','facturacion.fec_envia','facturacion.fec_anula','facturacion.usu_registra','facturacion.usu_envia','facturacion.usu_anula','facturacion.fecha','facturacion.id_tarifario','facturacion.estado','personas.nombre1','personas.nombre2','personas.apellido1','personas.apellido2','users.idrol', 'facturacion.fec_crea')
+            ->select('facturacion.id','facturacion.num_factura','facturacion.id_tercero','personas.nombre as nom_tercero','facturacion.id_usuario','facturacion.fec_crea','facturacion.fec_edita','facturacion.usu_edita','facturacion.subtotal','facturacion.valor_iva','facturacion.total','abono','facturacion.saldo','facturacion.detalle','facturacion.lugar','zona.zona as nom_lugar','facturacion.descuento','facturacion.fec_registra','facturacion.fec_envia','facturacion.fec_anula','facturacion.usu_registra','facturacion.usu_envia','facturacion.usu_anula','facturacion.fecha','facturacion.id_tarifario','facturacion.estado','personas.nombre1','personas.nombre2','personas.apellido1','personas.apellido2','users.idrol','users.usuario as mesero', 'facturacion.fec_crea')
             ->where('facturacion.estado','=',1)
             ->get();        
 
-            $factura = array();            
+            $factura = array();           
             $df = array();
         
             foreach($facturacion as $fac){
@@ -132,15 +132,16 @@ class DetalleFacturacionController extends Controller
                         'nombre_lugar' => $fac['nom_lugar'],
                         'id' => $fac['id'],
                         'estado' => $fac['estado'],
-                        'fec_crea' => $fac['fec_crea']
+                        'fec_crea' => $fac['fec_crea'],
+                        'mesero' => $fac['mesero']
                     );
                     foreach($detalle_facturacion as $det){
                         $factura[$fac['id']]['productos'][$det['id']] = [
-                                'id' => $det['id'],
-                                'articulo' => $det['articulo'],
-                                'cantidad' => $det['cantidad'],
-                                'observaciones' => $det['observaciones'],
-                                'preparado' => $det['preparado'],                       
+                            'id' => $det['id'],
+                            'articulo' => $det['articulo'],
+                            'cantidad' => $det['cantidad'],
+                            'observaciones' => $det['observaciones'],
+                            'preparado' => $det['preparado'],                       
                         ];
                     }
                 }

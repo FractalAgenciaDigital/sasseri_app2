@@ -147,13 +147,16 @@ class InformeController extends Controller
         $noCategoriaFiltro = $request->noCategoriaFiltro;
         
 
-        $detalles_facturacion = DetalleFacturacion::select('articulos.nombre as articulo', 'categorias.nombre as categoria', 'articulos.idcategoria2', 'articulos.id as id_prod', 'facturacion.id as id_fac', 'detalle_facturacion.id as id', 'detalle_facturacion.valor_venta', 'detalle_facturacion.cantidad','detalle_facturacion.valor_final', 'facturacion.fec_crea')
+        $detalles_facturacion = DetalleFacturacion::select('articulos.nombre as articulo', 'categorias.nombre as categoria', 'articulos.idcategoria2', 'articulos.id as id_prod', 'facturacion.id as id_fac', 'detalle_facturacion.id as id','articulos.precio_venta as valor_venta', 'facturacion.fec_crea','facturacion.fecha', DB::raw('SUM(detalle_facturacion.cantidad) as cantidad'), DB::raw('SUM(detalle_facturacion.valor_final) as valor_final') )
+        ->groupBy('articulos.id')
+        ->groupBy('facturacion.fecha')
         ->join('facturacion', 'detalle_facturacion.id_factura', '=', 'facturacion.id')
         ->join('articulos', 'detalle_facturacion.id_producto', '=', 'articulos.id')
         ->join('categorias', 'articulos.idcategoria2', '=', 'categorias.id');
         
 
         if(isset($request)){
+            
 
             if($noProductoFiltro!=''){
                 $detalles_facturacion = $detalles_facturacion
@@ -176,7 +179,7 @@ class InformeController extends Controller
         };
         
         
-        $detalles_facturacion = $detalles_facturacion->paginate(20);
+        $detalles_facturacion = $detalles_facturacion->orderBy('detalle_facturacion.id', 'desc')->paginate(20);
 
     
 
@@ -198,6 +201,7 @@ class InformeController extends Controller
     {
         if (!$request->ajax()) return redirect('/');
         $id_empresa = $request->session()->get('id_empresa');
+        $idFiltro = $request->idFiltro;
         $noCajaFiltro = $request->noCajaFiltro;
         $desdeFiltro = $request->desdeFiltro;
         $hastaFiltro = $request->hastaFiltro;
@@ -209,6 +213,10 @@ class InformeController extends Controller
         
 
         if(isset($request)){
+            if($idFiltro!='' && $idFiltro!='0'){
+                $cajas_cierres = $cajas_cierres
+                ->where('cajas_cierres.id','=',$idFiltro);                
+            }
 
             if($noCajaFiltro!='' && $noCajaFiltro!='0')
                 {
@@ -277,6 +285,12 @@ class InformeController extends Controller
     }
     public function imprimirTicketInformeCajas(Request $request)
     {
+
+        // Project::chunk(200, function ($projects) {
+        //     foreach ($projects as $project) {
+        //         //Aquí escribimos lo que haremos con los datos (operar, modificar, etc)
+        //     }
+        // });
         if (!$request->ajax()) return redirect('/');
 
         // Datos para el ticket
@@ -286,14 +300,20 @@ class InformeController extends Controller
         $infoEmpresa = ConfigGenerales::select()->where('id','=', $id_empresa)->first();
 
         // filtros
+        $idFiltro = $request->idFiltro;
         $noCajaFiltro = $request->noCajaFiltro;
         $desdeFiltro = $request->desdeFiltro;
         $hastaFiltro = $request->hastaFiltro;
+        
 
         $cajas_cierres = CierresXCaja::select('cajas_cierres.id as id', 'cajas_cierres.id_caja', 'cajas_cierres.vr_inicial', 'cajas_cierres.vr_gastos', 'cajas_cierres.vr_final', 'cajas.nombre as nombre_caja', 'cajas.id as idcaja', 'cajas_cierres.updated_at as fecha_cierre')
         ->join('cajas','cajas_cierres.id_caja','cajas.id');  
 
         if(isset($request)){
+            if($idFiltro!='' && $idFiltro!='0'){
+                $cajas_cierres = $cajas_cierres
+                ->where('cajas_cierres.id','=',$idFiltro);                
+            }
             if($noCajaFiltro!='' && $noCajaFiltro!='0'){
                 $cajas_cierres = $cajas_cierres->where('cajas_cierres.id','=',$noCajaFiltro);
             }

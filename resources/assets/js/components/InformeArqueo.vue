@@ -9,27 +9,33 @@
                 <div class="filtros row">
                     <div class="form-group col-md-3">
                         <label for="exampleFormControlInput1" class="form-label">Caja</label>
-                        <select  v-model="noCajaFiltro" class="custom-select" @change="listarVentas(noCajaFiltro,desdeFiltro,hastaFiltro)">
+                        <select  v-model="noCajaFiltro" class="custom-select" @change="listarVentas(1,idFiltro,noCajaFiltro,desdeFiltro,hastaFiltro)">
                            <option value="0">Seleccione</option>
                             <option v-for="(caja, index) in arrayCajas" :value="caja.id" v-text="caja.nombre" :key="index"></option>
                         </select>
                         <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                     </div>
+                     <div class="form-group col-md-3">
+                        <label>Nro Registro:</label>                                   
+                        <input v-if="permisosUser.leer" type="number" class="form-control" v-model="idFiltro" @change="listarVentas(1,idFiltro,noCajaFiltro,desdeFiltro,hastaFiltro)">
+                        <input v-else disabled type="number" class="form-control" v-model="idFiltro">
+                        
+                    </div>
 
                     <div class="form-group col-md-3">
                         <label>Desde:</label>                                   
-                        <input v-if="permisosUser.leer" type="date" class="form-control" v-model="desdeFiltro" @change="listarVentas(noCajaFiltro,desdeFiltro,hastaFiltro)">
+                        <input v-if="permisosUser.leer" type="date" class="form-control" v-model="desdeFiltro" @change="listarVentas(1,idFiltro,noCajaFiltro,desdeFiltro,hastaFiltro)">
                         <input v-else disabled type="date" class="form-control" v-model="desdeFiltro">
                         
                     </div>
                     <div class="form-group col-md-3">
                         <label>Hasta:</label>                                   
-                        <input v-if="permisosUser.leer" type="date" class="form-control" v-model="hastaFiltro" @change="listarVentas(noCajaFiltro,desdeFiltro,hastaFiltro)">
+                        <input v-if="permisosUser.leer" type="date" class="form-control" v-model="hastaFiltro" @change="listarVentas(1,idFiltro,noCajaFiltro,desdeFiltro,hastaFiltro)">
                         <input v-else disabled type="date" class="form-control" v-model="hastaFiltro">
                         
                     </div>
                     <div class="col-md-3">
-                        <button class="btn btn-success" @change="listarVentas(noCajaFiltro,desdeFiltro,hastaFiltro)">Buscar</button>
+                        <button class="btn btn-success" @change="listarVentas(1,idFiltro,noCajaFiltro,desdeFiltro,hastaFiltro)">Buscar</button>
                     </div>
                     <div class="form-group col-md-3">
                         <!-- <label><i class="icon-printer"></i></label>    <br> -->
@@ -80,13 +86,13 @@
         <nav>
             <ul class="pagination">
                 <li class="page-item" v-if="pagination.current_page > 1">
-                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,noCajaFiltro,desdeFiltro,hastaFiltro)">Ant</a>
+                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,idFiltro,noCajaFiltro,desdeFiltro,hastaFiltro)">Ant</a>
                 </li>
                 <li class="page-item" v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
-                    <a class="page-link" href="#" @click.prevent="cambiarPagina(page,noCajaFiltro,desdeFiltro,hastaFiltro)" v-text="page"></a>
+                    <a class="page-link" href="#" @click.prevent="cambiarPagina(page,idFiltro,idFiltro,noCajaFiltro,desdeFiltro,hastaFiltro)" v-text="page"></a>
                 </li>
                 <li class="page-item" v-if="pagination.current_page < pagination.last_page">
-                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1,noCajaFiltro,desdeFiltro,hastaFiltro)">Sig</a>
+                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1,idFiltro,noCajaFiltro,desdeFiltro,hastaFiltro)">Sig</a>
                 </li>
             </ul>
         </nav>
@@ -153,10 +159,12 @@ export default {
                 'to' : 0,
             },
               
-            // Filtros            
+            // Filtros          
+            page:1,  
             noCajaFiltro:'',
             desdeFiltro : '2021-01-01',
             hastaFiltro : '',
+            idFiltro:'',
 
             // Variables de impresion
             mostrarModImp :0,
@@ -194,10 +202,10 @@ export default {
         },
     },
     methods:{
-        listarVentas(page,noCajaFiltro,desdeFiltro,hastaFiltro){
+        listarVentas(page,idFiltro,noCajaFiltro,desdeFiltro,hastaFiltro){
             let me=this;
 
-            var url= this.ruta +'/informe/cajas?page='+me.page+'&noCajaFiltro='+me.noCajaFiltro +'&desdeFiltro='+me. desdeFiltro + '&hastaFiltro='+ me.hastaFiltro ;
+            var url= this.ruta +'/informe/cajas?page='+me.page+'&idFiltro='+me.idFiltro +'&noCajaFiltro='+me.noCajaFiltro +'&desdeFiltro='+me. desdeFiltro + '&hastaFiltro='+ me.hastaFiltro ;
             axios.get(url).then(function (response) {
                 var respuesta= response.data;
                 console.log(response)
@@ -208,11 +216,11 @@ export default {
                 console.log(error);
             });
         },
-        cambiarPagina(page,noCajaFiltro,desdeFiltro,hastaFiltro){
+        cambiarPagina(page,idFiltro,noCajaFiltro,desdeFiltro,hastaFiltro){
             let me = this;
             //Actualiza la página actual
             me.pagination.current_page = page;
-            me.listarVentas(page,noCajaFiltro,desdeFiltro,hastaFiltro);
+            me.listarVentas(page,idFiltro,noCajaFiltro,desdeFiltro,hastaFiltro);
         },
 
         listarCajas (){
@@ -242,7 +250,7 @@ export default {
 
         imprimirTicketFacturacion(){
             let me = this;            
-            axios.get(this.ruta+'/informe/imprimir-ticket-informe-cajas?noCajaFiltro='+me.noCajaFiltro +'&desdeFiltro='+me. desdeFiltro + '&hastaFiltro='+ me.hastaFiltro+'&id_impresora='+this.id_impresora).then(function(response){                 
+            axios.get(this.ruta+'/informe/imprimir-ticket-informe-cajas?idFiltro='+me.idFiltro +'&noCajaFiltro='+me.noCajaFiltro +'&desdeFiltro='+me. desdeFiltro + '&hastaFiltro='+ me.hastaFiltro+'&id_impresora='+this.id_impresora).then(function(response){                 
 
             }).catch(function (error) {
             Swal.fire({

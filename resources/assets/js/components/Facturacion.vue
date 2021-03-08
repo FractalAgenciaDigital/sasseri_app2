@@ -156,8 +156,9 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" @click="cerrarModalRegreso();">Close</button>
-                            <button type="button" class="btn btn-primary" @click="cambiarEstadoFacturacion(facturacion_id,'registrar')">Pagar</button>
+                            <button type="button" class="btn btn-secondary" @click="cerrarModalRegreso();">Cerrar</button>
+                            <button type="button" class="btn btn-primary" @click="opcionPago(facturacion_id)">Pagar</button>
+                            <button type="button" class="btn btn-primary" @click="opcionPagoImprimir(facturacion_id)">Pagar e imprimir ticket</button>
                         </div>
                     </div>
                 </div>
@@ -200,7 +201,7 @@
                 <!-- /.modal-dialog -->
             </div>
             <!-- Fin modal Impresoras -->
-           
+          
 
         </div>
     </main>
@@ -259,9 +260,7 @@ export default {
             valorEfectivo:0,
             valorRegreso:0,
             modalRegreso:0,
-            operatorClicked: false
-
-
+            operatorClicked: false,
 
         }
     },
@@ -464,6 +463,86 @@ export default {
                 
                 }
             }) 
+        },
+        opcionPago(id_factura, accion){
+            let me=this;
+            var cambiarEstado = '';
+            var nomEstado = '';
+            
+            me.sugerirNumFactura();
+            cambiarEstado = '2';
+            nomEstado = '"'+'Registrado'+'"';
+            
+            
+            axios.put(this.ruta +'/facturacion/cambiarEstado',{
+                'estado': cambiarEstado,
+                'num_factura': me.num_factura,
+                'id': id_factura
+            }).then(function (response) {
+                me.ocultarDetalle();
+                me.listarFacturacion(1,'','','','','','','');
+                me.listarPendientes();
+                me.modalRegreso = 0;
+            }).catch(function (error) {
+                console.log(error);
+            });
+                
+          
+            axios.get(this.ruta+'/facturacion/abrir-caja-registradora?&id_impresora=1')
+            .then(function(response){  
+                me.modalRegreso = 0;        
+                me.listarPendientes();       
+
+            }).catch(function (error) {
+                console.log(error);
+                Swal.fire({
+            
+                    type:'warning',
+                    title: 'Oops...',
+                    text: 'No se pudo imprimir',
+                    
+                })
+            });
+        },
+        opcionPagoImprimir(id_factura, accion){
+            let me=this;
+            var cambiarEstado = '';
+            var nomEstado = '';
+            
+            me.sugerirNumFactura();
+            cambiarEstado = '2';
+            nomEstado = '"'+'Registrado'+'"';
+
+            axios.put(this.ruta +'/facturacion/cambiarEstado',{
+                'estado': cambiarEstado,
+                'num_factura': me.num_factura,
+                'id': id_factura
+            }).then(function (response) {
+                me.ocultarDetalle();
+                me.listarFacturacion(1,'','','','','','','');
+                me.listarPendientes();
+                me.modalRegreso = 0;
+            }).catch(function (error) {
+                console.log(error);
+            });
+                
+            
+            axios.get(this.ruta+'/facturacion/imprimir-ticket-facturacion?id='+this.facturacion_id+'&id_impresora=1&valorEfectivo='+this.valorEfectivo+'&valorCambio='+this.valorRegreso)
+            .then(function(response){  
+                me.modalRegreso = 0;        
+                me.listarPendientes();       
+
+            }).catch(function (error) {
+                console.log(error);
+                Swal.fire({
+            
+                    type:'warning',
+                    title: 'Oops...',
+                    text: 'No se pudo imprimir',
+                    
+                })
+            });
+           
         },
         
         validarRegreso(id_factura, total_pagar){

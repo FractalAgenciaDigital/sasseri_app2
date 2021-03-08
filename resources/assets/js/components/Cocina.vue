@@ -105,7 +105,8 @@
                                         <small v-else-if="det.estado==3"><span>Enviada</span></small>
                                         <small v-else-if="det.estado==4"><span>Anulada</span></small>
                                         <br>
-                                        <i class="icon-cup"></i>
+                                        <i class="icon-cup"></i>  
+                                        <h5 class="text-uppercase font-weight-bold">{{det.mesero}}</h5>
 
                                     </th>
                                     <td class="text-center">
@@ -545,14 +546,14 @@
             },         
             listarDetalle(id_factura){
                 let me=this;
-                // var url= this.ruta +'/detalle_facturacion/productosPreparados?id_factura=' + id_factura;
+                
                 var url= this.ruta +'/detalle_facturacion/productosPreparados';
                 axios.get(url).then(function (response) {
                     console.log(response);
                     var respuesta= response.data;
-                    // me.arrayDetalle = respuesta.detalles;
+                    
                     me.arrayDetalle = respuesta.factura;
-                    // me.arrayDetalleT = respuesta.detalles;
+                    
                 })
                 .catch(function (error) {
                     console.log(error);

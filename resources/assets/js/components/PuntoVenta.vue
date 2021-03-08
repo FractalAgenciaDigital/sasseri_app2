@@ -287,7 +287,7 @@
                             
                         </div>                                      
                     </div>
-                    <div class="ticket">
+                    <div class="ticket text-center">
                          <img class="card-img-top" :src="`${ruta}/Empresas/${datosEmpresa.id}_empresa/ImgLogos/${datosEmpresa.logo}`" style="width:100%;max-height:100px;max-width:100px;height:auto;">
                         
                             <h6 class="col-12">{{datosEmpresa.nombre}}</h6>
