@@ -1,5 +1,6 @@
 <template>
     <main>
+        <notifications group="foo" />
         <div class="container">
             <div class="row">
                 <div class="col-12 text-left">
@@ -592,6 +593,34 @@ export default {
                     
                 })
             });
+        },
+        ocultarDetalle(){
+            let me=this;
+            me.listado=1;
+            me.facturacion_id=0;
+            me.num_factura=0,
+            me.id_tercero=0,
+            me.tercero_facturacion='',
+            me.id_usuario=0,
+            me.fec_edita='',
+            me.subtotal=0.0,
+            me.valor_iva=0.0,
+            me.iva = 0,
+            me.total=0.0,
+            me.abono=0.0,
+            me.saldo=0.0,
+            me.detalle='',
+            me.lugar='',
+            me.descuento=0.0,
+            me.fec_registra='',
+            me.fec_envia='',
+            me.fec_anula='',
+         
+            me.id_tarifario = 0;
+            me.estado = 0,
+           
+            me.arrayDetalle=[];
+            me.arrayTerceros=[];       
         },
 
     },

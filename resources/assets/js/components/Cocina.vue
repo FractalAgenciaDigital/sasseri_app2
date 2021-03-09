@@ -1,5 +1,6 @@
 <template>
     <main class="main">
+        <notifications group="foo" />
         <div>           
             <div v-show="position==1">  <!-- VISTA NUEVA FACTURA -->
                 

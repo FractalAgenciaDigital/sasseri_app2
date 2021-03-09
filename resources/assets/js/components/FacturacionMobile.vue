@@ -1,5 +1,6 @@
 <template>
     <main class="main">
+        <notifications group="foo" />
         <div>
             <div class="container-fluid row" v-show="position==1">  <!-- listado de productos de factura -->
                 <div class="card-header col-xs-12 col-sm-12 col-md-3"> 

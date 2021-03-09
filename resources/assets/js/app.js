@@ -12,10 +12,12 @@ window.Vue = require('vue');
 import Multiselect from 'vue-multiselect';
 // ES6 Modules or TypeScript
 import Swal from 'sweetalert2';
+import Notifications from 'vue-notification'
 // import Echo from 'laravel-echo';
 
 
 window.Swal = Swal;
+Vue.use(Notifications);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
