@@ -2252,7 +2252,7 @@
             this.selectCategoria2();
             me.listarCajas();
             me.buscarTercero();
-            me.selectZonas();
+            this.selectZonas();
            // me.llamarMensaje();
             this.listarArticulo(this.buscarA,this.criterioA,this.buscarCategoriaA);
              me.listarFacturacion(1,me.numFacturaFiltro,me.estadoFiltro,me.idTerceroFiltro,me.ordenFiltro,me.desdeFiltro,me.hastaFiltro,me.idVendedorFiltro);
