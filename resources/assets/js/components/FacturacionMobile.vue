@@ -1,7 +1,6 @@
 <template>
     <main class="main">
         <div>
-            <notifications group="foo" />
             <div class="container-fluid row" v-show="position==1">  <!-- listado de productos de factura -->
                 <div class="card-header col-xs-12 col-sm-12 col-md-3"> 
                     <div class="row mb-5">                        
@@ -492,7 +491,6 @@
 <script>  
 
     import vSelect from 'vue-select';
-    import Notifications from 'vue-notification'
     import Vue from 'vue'
     export default {
         props : ['ruta'],
@@ -1612,43 +1610,6 @@
                         console.log(error);
                     });
 
-                    axios.post(this.ruta +'/notification/guardar',{
-                        'num_factura': null,
-                        'id_tercero': me.id_tercero,
-                        'fec_edita': null,
-                        'usu_edita': null,
-                        'subtotal': me.subtotal,
-                        'valor_iva': me.valor_iva,
-                        'total': me.valor_final,
-                        'abono': me.abono,
-                        'saldo': me.saldo,
-                        'detalle': me.detalle,
-                        'lugar': me.lugar,
-                        'descuento': me.calcularDescuento,
-                        'fec_registra': null,
-                        'fec_envia': null,
-                        'fec_anula': null,
-                        'usu_registra': null,
-                        'usu_envia': null,
-                        'usu_anula': null,
-                        'fecha': me.fecha,
-                        'id_tarifario': me.id_tarifario,
-                        'id_cierre_caja': me.id_cierre_caja_facturacion,
-                        'data': me.arrayDetalle,
-                        'tipo_movimiento' : 4,
-                        'sumatoria' : 0
-                    }).then(function (response) {
-                        // me.factura_imprimir = response.data.id_facturacion;
-                        // me.verTicket(me.factura_imprimir);
-                        // me.imprimirTicket(me.factura_imprimir);                            
-                        // me.position = 6;
-                        
-                    }).catch(function (error) {
-                        console.log(error);
-                    });
-
-
-                    
                 }
             },
             

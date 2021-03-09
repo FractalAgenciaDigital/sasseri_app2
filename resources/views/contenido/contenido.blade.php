@@ -121,6 +121,9 @@
                 <template v-if="menu==45">
                     <informe_producto :ruta="ruta"></informe_producto>
                 </template>
+                <template v-if="menu==48">
+                    <informe_categoria :ruta="ruta"></informe_categoria>
+                </template>
                 <template v-if="menu==46">
                     <historial :ruta="ruta"></historial>
                 </template>

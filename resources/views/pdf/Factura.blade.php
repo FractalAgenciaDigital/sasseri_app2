@@ -120,14 +120,14 @@
             <!--<img src="img/logo2.png" alt="incanatoIT" id="imagen2">-->
             
         </div>
-        <div     style="text-align: center;">
+        <!-- <div     style="text-align: center;">
             <b>EMCOFUNERAL LA PAZ</b><br>
             "Tu mano amiga en momentos dificiles"<br>
             NIT 901.022.959.-0 Régimen Común<br>
             Crr 29 # 12 - 14 B/ Allende<br>
             Puerto Asís - Putumayo<br>
             Tel: 4229808 Cel: 3202479589<br>
-        </div>
+        </div> -->
         <br>             
         <b>Recibo No.</b> {{$facturacion->id}}<br>
         <b>Fecha:    </b> {{$facturacion->fecha}}<br><br>
@@ -143,7 +143,7 @@
         <b>Impuestos:</b> $0<br>
         <b>Total:</b> {{$facturacion->total}}<br><br>
         <div     style="text-align: center;">
-            <b>Email: </b>emcofuneraleslapaz@hotmail.com
+            <!-- <b>Email: </b>emcofuneraleslapaz@hotmail.com -->
         </div>
         <br><br><br><br><br>
         <!--

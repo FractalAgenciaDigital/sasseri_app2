@@ -8,7 +8,6 @@ use App\DetalleFacturacion;
 use App\Stock;
 use App\Articulo;
 use App\User;
-use App\Notifications\NotifyAdmin;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;

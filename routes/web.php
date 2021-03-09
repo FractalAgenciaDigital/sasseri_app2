@@ -19,11 +19,7 @@ Route::group(['middleware'=>['guest']],function(){
 Route::group(['middleware'=>['auth']],function(){
     
     Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
-    Route::post('/notification/get', 'NotificationController@get');
-    Route::post('/notification/delete', 'NotificationController@eliminarNotificacion');
-    Route::post('/notification/guardar', 'NotificationController@guardarNotificacion');
-    
-    
+   
     Route::get('/main', function () {
         return view('contenido/contenido');
     })->name('main');
@@ -247,6 +243,8 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/informe/productos', 'InformeController@productos');
         Route::get('/informe/categorias', 'InformeController@categorias');
         Route::get('/informe/imprimir-ticket-informe-cajas', 'InformeController@imprimirTicketInformeCajas');
+        Route::get('/informe/imprimir-ticket-informe-productos', 'InformeController@imprimirTicketInformeProductos');
+        Route::get('/informe/imprimir-ticket-informe-categorias', 'InformeController@imprimirTicketInformeCategorias');
 
         Route::get('/ingreso', 'IngresoController@index');
         Route::post('/ingreso/registrar', 'IngresoController@store');

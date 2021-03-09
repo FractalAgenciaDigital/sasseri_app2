@@ -122,7 +122,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" @click="cerrarModalImpresion()">Cerrar</button>
-                        <button type="button" class="btn btn-success" @click="imprimirTicketFacturacion(noCajaFiltro,desdeFiltro,hastaFiltro)">Imprimir</button>
+                        <button type="button" class="btn btn-success" @click="imprimirTicketFacturacion(idFiltro,noCajaFiltro,desdeFiltro,hastaFiltro)">Imprimir</button>
                         
                     </div>
                 </div>

@@ -12,13 +12,10 @@ window.Vue = require('vue');
 import Multiselect from 'vue-multiselect';
 // ES6 Modules or TypeScript
 import Swal from 'sweetalert2';
-import Notifications from 'vue-notification'
 // import Echo from 'laravel-echo';
 
 
 window.Swal = Swal;
-//window.Notifications = Notifications;
-Vue.use(Notifications);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -50,13 +47,13 @@ Vue.component('cierrescaja', require('./components/CierresXCaja.vue'));
 Vue.component('informes', require('./components/Informes.vue'));
 Vue.component('informe_arqueo', require('./components/InformeArqueo.vue'));
 Vue.component('informe_producto', require('./components/InformeProducto.vue'));
+Vue.component('informe_categoria', require('./components/InformeCategoria.vue'));
 Vue.component('cuentasxcobrar', require('./components/CuentasxCobrar.vue'));
 Vue.component('cuentasxpagar', require('./components/CuentasxPagar.vue'));
 Vue.component('punto_venta', require('./components/PuntoVenta.vue'));
 Vue.component('impresora', require('./components/Impresora.vue'));
 Vue.component('cocina', require('./components/Cocina.vue'));
 Vue.component('observacion', require('./components/Observacion.vue'));
-Vue.component('notification', require('./components/Notification.vue'));
 Vue.component('historial', require('./components/Historial.vue'));
 Vue.component('multiselect', Multiselect);
 
@@ -72,20 +69,10 @@ const app = new Vue({
             'actualizar': 1,
             'anular': 1,
         },
-        notifications: []
+      
     },
     created(){
-        let me = this;
-        axios.post('notification/get').then(function(response){
-            me.notifications = response.data;
-        }).catch(function(error){
-            console.log(error);
-        });
-        var userId = $('meta[name="userId"]').attr('content');
       
-        Echo.private('App.User.' + userId).notification((notification)=>{
-            me.notifications.unshift(notification);
-        });
     },
     
     mounted() {

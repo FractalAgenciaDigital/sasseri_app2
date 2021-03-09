@@ -1,8 +1,6 @@
 <template>
     <main class="main">
-        <div>
-            <notifications group="foo" />
-           
+        <div>           
             <div v-show="position==1">  <!-- VISTA NUEVA FACTURA -->
                 
                 <div class="card">
@@ -154,7 +152,6 @@
 <script>  
 
     import vSelect from 'vue-select';
-    import Notifications from 'vue-notification'
     import Vue from 'vue'
     export default {
         props : ['ruta'],

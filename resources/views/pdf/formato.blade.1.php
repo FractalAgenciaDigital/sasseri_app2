@@ -129,9 +129,9 @@
                         <b><!--<span>EMCOFUNERAL LA PAZ S.A.S</span>--><span>{{ $f->nom_empresa }}</span></b><br> 
                         NIT 901022959-0 - Régimen Común
                         <br>Cel: 3202479589 - 3115946736<br>
-                        <span style="font-size: 10px;margin-bottom: 3px;" >E-MAIL:emcofuneraleslapaz@hotmail.com</span><br>
+                        <!-- <span style="font-size: 10px;margin-bottom: 3px;" >E-MAIL:emcofuneraleslapaz@hotmail.com</span><br>
                         <hr style="margin-top: -10px; margin-bottom: 3px; border-color: #0d520d;" size="2" noshade="noshade" >
-                        <span style="font-size: 8px;"><b>Crr 29 No 12 -14 B/ Allende - Tel: 4229808 - Puerto Asís - Putumayo</b></span>
+                        <span style="font-size: 8px;"><b>Crr 29 No 12 -14 B/ Allende - Tel: 4229808 - Puerto Asís - Putumayo</b></span> -->
                         
                     </p>
                 </div>

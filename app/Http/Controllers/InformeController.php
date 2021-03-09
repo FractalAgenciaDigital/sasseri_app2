@@ -196,6 +196,264 @@ class InformeController extends Controller
         ];
 
     }
+    public function imprimirTicketInformeProductos(Request $request)
+    {
+        if (!$request->ajax()) return redirect('/');
+        $id_empresa = $request->session()->get('id_empresa');
+        $id_impresora = $request->id_impresora;
+        $imprimir = Impresora::where('id', $id_impresora)->first();
+        $infoEmpresa = ConfigGenerales::select()->where('id','=', $id_empresa)->first();
+
+        // Filtros
+        $desdeFiltro = $request->desdeFiltro;
+        $hastaFiltro = $request->hastaFiltro;
+        $noProductoFiltro = $request->noProductoFiltro;
+        $noCategoriaFiltro = $request->noCategoriaFiltro;        
+
+        $detalles_facturacion = DetalleFacturacion::select('articulos.nombre as articulo', 'categorias.nombre as categoria', 'articulos.idcategoria2', 'articulos.id as id_prod', 'facturacion.id as id_fac', 'detalle_facturacion.id as id','articulos.precio_venta as valor_venta', 'facturacion.fec_crea','facturacion.fecha', DB::raw('SUM(detalle_facturacion.cantidad) as cantidad'), DB::raw('SUM(detalle_facturacion.valor_final) as valor_final') )
+        ->groupBy('articulos.id')
+        ->groupBy('facturacion.fecha')
+        ->join('facturacion', 'detalle_facturacion.id_factura', '=', 'facturacion.id')
+        ->join('articulos', 'detalle_facturacion.id_producto', '=', 'articulos.id')
+        ->join('categorias', 'articulos.idcategoria2', '=', 'categorias.id');
+        
+
+        if(isset($request)){
+            
+
+            if($noProductoFiltro!=''){
+                $detalles_facturacion = $detalles_facturacion
+                ->where('articulos.nombre', 'like', '%'. $noProductoFiltro . '%');
+            }
+           
+            if($noCategoriaFiltro!=''){
+                $detalles_facturacion = $detalles_facturacion
+                ->where('categorias.nombre', 'like', '%'. $noCategoriaFiltro . '%');
+            }
+            if($desdeFiltro!='' && $desdeFiltro!=0)
+            {
+                $detalles_facturacion = $detalles_facturacion->whereDate('detalle_facturacion.updated_at', '>=' , $desdeFiltro);
+            }
+            if($hastaFiltro!='' && $hastaFiltro!=0)
+            {
+                $detalles_facturacion = $detalles_facturacion->whereDate('detalle_facturacion.updated_at','<=' , $hastaFiltro);
+            }           
+
+        };
+        
+        
+        $detalles_facturacion = $detalles_facturacion->orderBy('detalle_facturacion.id', 'desc')->get();
+
+        
+        // Inicio de impresion
+        $infoEmpresa = ConfigGenerales::select()->where('id','=', $id_empresa)->first();
+        $connector = new WindowsPrintConnector($imprimir->nombre_impresora);        
+        $impresora = new Printer($connector);    
+        $impresora->setJustification(Printer::JUSTIFY_CENTER); 
+        try {
+            $logo = EscposImage::load('logo.jpg', false);
+            $impresora->bitImage($logo);
+        } catch (Exception $e) {
+            /* Images not supported on your PHP, or image file not found */
+            $impresora -> text($e -> getMessage() . "\n");
+        }             
+        
+        $impresora->setTextSize(1, 2);
+        $impresora->setEmphasis(true);
+        $impresora->text($infoEmpresa->nombre."\n");
+        $impresora->setTextSize(1, 1);        
+        $impresora->setEmphasis(false);
+        $impresora->text("NIT: ");
+        $impresora->text($infoEmpresa->nit."\n");
+        $impresora->text("Dirección: ");
+        $impresora->text($infoEmpresa->direccion."\n");
+        $impresora->text("Fecha: ");
+        $impresora->text($desdeFiltro." - ". $hastaFiltro."\n");
+        $impresora->text("\n=====================================\n");
+        $impresora->setEmphasis(true);
+        $impresora->text(sprintf('%-20s %-8s %+12s', 'PRODUCTO', 'CANT','PRECIO'));
+        $impresora->setEmphasis(false);
+        $impresora->text("\n=====================================\n");
+
+        $total=0;
+        foreach($detalles_facturacion as $df){
+            
+            $line = sprintf('%-20s %-8s %12.2f', $df->articulo,  $df->cantidad, $df->valor_final);
+            $impresora->text($line);
+            $impresora->text("\n");    
+            $total+=($df->valor_final);
+        }
+        $impresora->text("\n=====================================\n");
+        $impresora->text(sprintf('%+25s %15.2f', 'TOTAL:',  $total));
+        $impresora->text("\n");    
+        $impresora->text("\n******************************************\n");        
+        $impresora->setFont(Printer::MODE_FONT_B);
+        $impresora->text("Sasseri");
+        $impresora->text("\nwww.fractalagenciadigital.com\n");
+        
+        $impresora->feed(5);
+        $impresora->cut();
+        $impresora->close();        
+        
+        return redirect()->back()->with("mensaje", "Ticket impreso");
+    }
+    public function categorias(Request $request)
+    {
+        if (!$request->ajax()) return redirect('/');
+        $id_empresa = $request->session()->get('id_empresa');
+        $desdeFiltro = $request->desdeFiltro;
+        $hastaFiltro = $request->hastaFiltro;
+        $noProductoFiltro = $request->noProductoFiltro;
+        $noCategoriaFiltro = $request->noCategoriaFiltro;
+        
+
+        $detalles_facturacion = DetalleFacturacion::select('articulos.nombre as articulo', 'categorias.nombre as categoria', 'articulos.idcategoria2', 'articulos.id as id_prod', 'facturacion.id as id_fac', 'detalle_facturacion.id as id','articulos.precio_venta as valor_venta', 'facturacion.fec_crea','facturacion.fecha', DB::raw('SUM(detalle_facturacion.cantidad) as cantidad'), DB::raw('SUM(detalle_facturacion.valor_final) as valor_final') )
+        ->groupBy('categorias.id')
+        ->groupBy('facturacion.fecha')
+        ->join('facturacion', 'detalle_facturacion.id_factura', '=', 'facturacion.id')
+        ->join('articulos', 'detalle_facturacion.id_producto', '=', 'articulos.id')
+        ->join('categorias', 'articulos.idcategoria2', '=', 'categorias.id');
+        
+
+        if(isset($request)){
+            
+
+            if($noProductoFiltro!=''){
+                $detalles_facturacion = $detalles_facturacion
+                ->where('articulos.nombre', 'like', '%'. $noProductoFiltro . '%');
+            }
+           
+            if($noCategoriaFiltro!=''){
+                $detalles_facturacion = $detalles_facturacion
+                ->where('categorias.nombre', 'like', '%'. $noCategoriaFiltro . '%');
+            }
+            if($desdeFiltro!='' && $desdeFiltro!=0)
+            {
+                $detalles_facturacion = $detalles_facturacion->whereDate('detalle_facturacion.updated_at', '>=' , $desdeFiltro);
+            }
+            if($hastaFiltro!='' && $hastaFiltro!=0)
+            {
+                $detalles_facturacion = $detalles_facturacion->whereDate('detalle_facturacion.updated_at','<=' , $hastaFiltro);
+            }           
+
+        };
+        
+        
+        $detalles_facturacion = $detalles_facturacion->orderBy('detalle_facturacion.id', 'desc')->paginate(20);
+
+    
+
+        return [
+            'pagination' => [
+                'total'        => $detalles_facturacion->total(),
+                'current_page' => $detalles_facturacion->currentPage(),
+                'per_page'     => $detalles_facturacion->perPage(),
+                'last_page'    => $detalles_facturacion->lastPage(),
+                'from'         => $detalles_facturacion->firstItem(),
+                'to'           => $detalles_facturacion->lastItem(),
+            ], 
+            'detalles_facturacion' => $detalles_facturacion,
+        ];
+
+    }
+    public function imprimirTicketInformeCategorias(Request $request)
+    {
+        if (!$request->ajax()) return redirect('/');
+        $id_empresa = $request->session()->get('id_empresa');
+        $id_impresora = $request->id_impresora;
+        $imprimir = Impresora::where('id', $id_impresora)->first();
+        $infoEmpresa = ConfigGenerales::select()->where('id','=', $id_empresa)->first();
+
+        // Filtros
+        $desdeFiltro = $request->desdeFiltro;
+        $hastaFiltro = $request->hastaFiltro;
+        $noCategoriaFiltro = $request->noCategoriaFiltro;
+        
+
+        $detalles_facturacion = DetalleFacturacion::select('articulos.nombre as articulo', 'categorias.nombre as categoria', 'articulos.idcategoria2', 'articulos.id as id_prod', 'facturacion.id as id_fac', 'detalle_facturacion.id as id','articulos.precio_venta as valor_venta', 'facturacion.fec_crea','facturacion.fecha', DB::raw('SUM(detalle_facturacion.cantidad) as cantidad'), DB::raw('SUM(detalle_facturacion.valor_final) as valor_final') )
+        ->groupBy('categorias.id')
+        ->groupBy('facturacion.fecha')
+        ->join('facturacion', 'detalle_facturacion.id_factura', '=', 'facturacion.id')
+        ->join('articulos', 'detalle_facturacion.id_producto', '=', 'articulos.id')
+        ->join('categorias', 'articulos.idcategoria2', '=', 'categorias.id');
+        
+
+        if(isset($request)){
+      
+           
+            if($noCategoriaFiltro!=''){
+                $detalles_facturacion = $detalles_facturacion
+                ->where('categorias.nombre', 'like', '%'. $noCategoriaFiltro . '%');
+            }
+            if($desdeFiltro!='' && $desdeFiltro!=0)
+            {
+                $detalles_facturacion = $detalles_facturacion->whereDate('detalle_facturacion.updated_at', '>=' , $desdeFiltro);
+            }
+            if($hastaFiltro!='' && $hastaFiltro!=0)
+            {
+                $detalles_facturacion = $detalles_facturacion->whereDate('detalle_facturacion.updated_at','<=' , $hastaFiltro);
+            }           
+
+        };
+        
+        
+        $detalles_facturacion = $detalles_facturacion->orderBy('detalle_facturacion.id', 'desc')->get();
+        // Inicio de impresion
+        $infoEmpresa = ConfigGenerales::select()->where('id','=', $id_empresa)->first();
+        $connector = new WindowsPrintConnector($imprimir->nombre_impresora);        
+        $impresora = new Printer($connector);    
+        $impresora->setJustification(Printer::JUSTIFY_CENTER); 
+        try {
+            $logo = EscposImage::load('logo.jpg', false);
+            $impresora->bitImage($logo);
+        } catch (Exception $e) {
+            /* Images not supported on your PHP, or image file not found */
+            $impresora -> text($e -> getMessage() . "\n");
+        }             
+        
+        $impresora->setTextSize(1, 2);
+        $impresora->setEmphasis(true);
+        $impresora->text($infoEmpresa->nombre."\n");
+        $impresora->setTextSize(1, 1);        
+        $impresora->setEmphasis(false);
+        $impresora->text("NIT: ");
+        $impresora->text($infoEmpresa->nit."\n");
+        $impresora->text("Dirección: ");
+        $impresora->text($infoEmpresa->direccion."\n");
+        $impresora->text("Fecha: ");
+        $impresora->text($desdeFiltro." - ". $hastaFiltro."\n");
+        $impresora->text("\n=====================================\n");
+        $impresora->setEmphasis(true);
+        $impresora->text(sprintf('%-18s %-8s %+14s', 'CATEGORIA', 'CANT','PRECIO'));
+        $impresora->setEmphasis(false);
+        $impresora->text("\n=====================================\n");
+
+        $total=0;
+        foreach($detalles_facturacion as $df){
+            
+            $line = sprintf('%-18s %-8s %14.2f', $df->categoria,  $df->cantidad, $df->valor_final);
+            $impresora->text($line);
+            $impresora->text("\n");    
+            $total+=($df->valor_final);
+        }
+        $impresora->text("\n=====================================\n");
+        $impresora->text(sprintf('%+25s %15.2f', 'TOTAL:',  $total));
+        $impresora->text("\n");    
+        $impresora->text("\n******************************************\n");        
+        $impresora->setFont(Printer::MODE_FONT_B);
+        $impresora->text("Sasseri");
+        $impresora->text("\nwww.fractalagenciadigital.com\n");
+        
+        $impresora->feed(5);
+        $impresora->cut();
+        $impresora->close();        
+        
+        return redirect()->back()->with("mensaje", "Ticket impreso");
+    
+
+    
+
+    }
 
     public function cajas(Request $request)
     {
@@ -327,7 +585,7 @@ class InformeController extends Controller
         $cajas_cierres = $cajas_cierres->where('cajas_cierres.id_empresa',$id_empresa)->get();
 
         // Inicio de impresion
-        $infoEmpresa = ConfigGenerales::select()->where('id','=', $id_empresa)->first();       
+        $infoEmpresa = ConfigGenerales::select()->where('id','=', $id_empresa)->first();
         $connector = new WindowsPrintConnector($imprimir->nombre_impresora);        
         $impresora = new Printer($connector);    
         $impresora->setJustification(Printer::JUSTIFY_CENTER); 

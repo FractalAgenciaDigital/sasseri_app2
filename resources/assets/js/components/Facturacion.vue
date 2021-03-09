@@ -482,7 +482,7 @@ export default {
                 me.ocultarDetalle();
                 me.listarFacturacion(1,'','','','','','','');
                 me.listarPendientes();
-                me.modalRegreso = 0;
+                me.cerrarModalRegreso();
             }).catch(function (error) {
                 console.log(error);
             });
@@ -521,7 +521,7 @@ export default {
                 me.ocultarDetalle();
                 me.listarFacturacion(1,'','','','','','','');
                 me.listarPendientes();
-                me.modalRegreso = 0;
+                me.cerrarModalRegreso();
             }).catch(function (error) {
                 console.log(error);
             });

@@ -162,16 +162,20 @@
                             <ul  id="collapseInforme" class="collapse" aria-labelledby="headingInforme"
                             data-parent="#accordionSidebar">
                                 <div class="collapse-inner">
-                                    <li @click="menu=46" class="collapse-item">
-                                        <a href="#"><i class="fa fa-percent"></i>Informe facturas</a>
-                                    </li> 
+                                   
                                     
                                     <li @click="menu=44" class="collapse-item">
                                         <a href="#"><i class="fa fa-cutlery"></i> Informe arqueo</a>
                                     </li>
                                     <li @click="menu=45" class="collapse-item">
-                                        <a href="#"><i class="fa fa-percent"></i> Informe productos y categorias</a>
-                                    </li>                                     
+                                        <a href="#"><i class="fa fa-percent"></i> Informe productos </a>
+                                    </li>       
+                                    <li @click="menu=48" class="collapse-item">
+                                        <a href="#"><i class="fa fa-percent"></i> Informe categorias</a>
+                                    </li>
+                                    <li @click="menu=46" class="collapse-item">
+                                        <a href="#"><i class="fa fa-percent"></i>Informe facturas</a>
+                                    </li>                               
                                                                       
                                 </div>
 
@@ -242,10 +246,7 @@
                                     <img style="width:70%;" src="img/logo.png" alt="Sasseri" />
                                 </a>
                             </div>
-                            <ul class="navbar-nav ml-auto">                               
-
-                                <!-- Nav Item - Alerts -->
-                                <notification :notifications="notifications"></notification>
+                            <ul class="navbar-nav ml-auto">         
 
                                 <!-- Nav Item - Messages -->    
                                 <li class="nav-item dropdown no-arrow mx-1">
