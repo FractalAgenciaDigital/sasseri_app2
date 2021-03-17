@@ -19,7 +19,8 @@ class DetalleGastosController extends Controller
         
         $detalle_gastos = DetalleGasto::select('detalles_gastos.id as id','detalles_gastos.id_caja_cierre', 'valor_gasto', 'detalle_gasto', 'cajas.nombre as nombre_caja')->where('detalle_gasto', 'like', '%'. $buscar . '%')
         ->join('cajas_cierres', 'cajas_cierres.id', 'detalles_gastos.id_caja_cierre')
-        ->join('cajas', 'cajas.id', 'cajas_cierres.id_caja');
+        ->join('cajas', 'cajas.id', 'cajas_cierres.id_caja')
+        ->where('cajas_cierres.estado', '1');
         if($buscar!=''){$detalle_gastos = $detalle_gastos->where('cajas_cierres.estado', '1');}
         $detalle_gastos = $detalle_gastos->orderBy('id', 'desc')->paginate(10);        
 
