@@ -57,6 +57,7 @@ Vue.component('impresora', require('./components/Impresora.vue'));
 Vue.component('cocina', require('./components/Cocina.vue'));
 Vue.component('observacion', require('./components/Observacion.vue'));
 Vue.component('historial', require('./components/Historial.vue'));
+Vue.component('gastos', require('./components/Gastos.vue'));
 Vue.component('multiselect', Multiselect);
 
 const app = new Vue({

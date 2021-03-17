@@ -171,6 +171,11 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/detalle_facturacion/cocinado', 'DetalleFacturacionController@cocinado');
         Route::put('/detalle_facturacion/sin-cocinar', 'DetalleFacturacionController@sinCocinar');
         
+        Route::get('/detalle_gastos', 'DetalleGastosController@index');
+        Route::post('/detalle_gastos/registrar', 'DetalleGastosController@store');
+        Route::put('/detalle_gastos/actualizar', 'DetalleGastosController@update');
+        Route::get('/detalle_gastos/seleccionar-caja-abierta', 'DetalleGastosController@seleccionarCajaAbierta');
+        
         Route::get('/detalle_ingreso', 'DetalleIngresoController@index');
         Route::post('/detalle_ingreso/registrar', 'DetalleIngresoController@store');
         Route::put('/detalle_ingreso/actualizar', 'DetalleIngresoController@update');

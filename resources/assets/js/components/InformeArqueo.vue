@@ -57,7 +57,8 @@
                         <th>Caja</th>                        
                         <th>Cant. Facturas</th>           
                         <th>Valor inicial</th>
-                        <th>Valor Ventas</th>                        
+                        <th>Valor Ventas</th>
+                        <th>Valor Gastos</th>
                         <th>Valor Reportado</th>
                         <th>Estado</th>
                         <th>Vr Diferencia</th>
@@ -71,6 +72,7 @@
                         <td v-text="venta.no_facturas"></td>
                         <td v-text="venta.vr_inicial"></td>
                         <td v-text="venta.total_ventas"></td>                        
+                        <td v-text="venta.vr_gastos"></td>          
                         <th v-text="venta.vr_final"></th>
                         <td v-if="venta.estado == 1" class=""> <i class="icon-check text-primary"></i>Correcto</td>
                         <td v-if="venta.estado == 2" class=""><i class="fa fa-times-circle text-danger"></i>Faltante</td>

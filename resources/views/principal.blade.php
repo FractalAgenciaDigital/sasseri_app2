@@ -123,29 +123,13 @@
                                     <li @click="menu=35" class="collapse-item">
                                         <a href="#"><i class="fa fa-list-ol"></i> Gestión de cajas</a>
                                     </li>
-                                    <!-- <li @click="menu=30" class="collapse-item">
-                                        <a href="#"><i class="fa fa-times-circle"></i> <span>Cierre de caja</span></a>
-                                    </li> -->
+                                    <li @click="menu=49" class="collapse-item">
+                                        <a href="#"><i class="fa fa-dollar"></i> Gastos de caja</a>
+                                    </li>
                                 </div>
                             </ul>
                         </li>
-                        <!-- <li class="nav-item">
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCartera"
-                            aria-expanded="true" aria-controls="collapseCartera">
-                                <i class="icon-wallet"></i><span>Cartera</span>
-                            </a>
-                            <ul id="collapseCartera" class="collapse" aria-labelledby="headingCartera"
-                            data-parent="#accordionSidebar">
-                                <div class="collapse-inner">
-                                    <li @click="menu=33" class="collapse-item">
-                                        <a href="#"><i class="fa fa-money"></i> Cuentas por cobrar</a>
-                                    </li>
-                                    <li @click="menu=34" class="collapse-item">
-                                        <a href="#"><i class="fa fa-money"></i> Cuentas por pagar</a>
-                                    </li>
-                                </div>
-                            </ul>
-                        </li> -->
+                       
                         <li @click="menu=999991" class="nav-item">
                             <a href="#" class="nav-link"><i class="icon-user"></i> <span>Usuarios</span></a>
                         </li>
@@ -168,13 +152,13 @@
                                         <a href="#"><i class="fa fa-cutlery"></i> Informe arqueo</a>
                                     </li>
                                     <li @click="menu=45" class="collapse-item">
-                                        <a href="#"><i class="fa fa-percent"></i> Informe productos </a>
+                                        <a href="#"><i class="icon-menu"></i> Informe productos </a>
                                     </li>       
                                     <li @click="menu=48" class="collapse-item">
-                                        <a href="#"><i class="fa fa-percent"></i> Informe categorias</a>
+                                        <a href="#"><i class="icon-organization"></i> Informe categorias</a>
                                     </li>
                                     <li @click="menu=46" class="collapse-item">
-                                        <a href="#"><i class="fa fa-percent"></i>Informe facturas</a>
+                                        <a href="#"><i class="icon-book-open"></i>Informe facturas</a>
                                     </li>                               
                                                                       
                                 </div>

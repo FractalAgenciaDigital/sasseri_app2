@@ -9,6 +9,7 @@ use App\Articulo;
 use App\Cajas;
 use App\User;
 use App\CierresXCaja;
+use App\DetalleGasto;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -498,7 +499,7 @@ class InformeController extends Controller
             ->where('facturacion.id_cierre_caja','=',$cc->id)
             ->where('facturacion.estado','=',2)
             ->get();
-
+            
             $total_ventas=0;
             $cont=0;
 
@@ -507,9 +508,22 @@ class InformeController extends Controller
                 $cont++;
             }
 
+            $detalles_gastos = DetalleGasto::select()
+            ->where('detalles_gastos.id_caja_cierre','=',$cc->id)
+            ->get();
+
+            $total_gastos=0;
+            $cont2=0;
+
+            foreach($detalles_gastos as $dg){
+                $total_gastos += $dg->valor_gasto;
+                $cont2++;
+            }
+
             
             $cc->total_ventas = $total_ventas;
-            $cc->total_caja =$cc->total_ventas + $cc->vr_inicial;
+            $cc->total_gastos = $total_gastos;
+            $cc->total_caja =$cc->total_ventas + $cc->vr_inicial - $total_gastos;
             $cc->diferencia = $cc->vr_final-$cc->total_caja;
             $cc->no_facturas = $cont;
 
@@ -544,11 +558,6 @@ class InformeController extends Controller
     public function imprimirTicketInformeCajas(Request $request)
     {
 
-        // Project::chunk(200, function ($projects) {
-        //     foreach ($projects as $project) {
-        //         //Aquí escribimos lo que haremos con los datos (operar, modificar, etc)
-        //     }
-        // });
         if (!$request->ajax()) return redirect('/');
 
         // Datos para el ticket
@@ -627,9 +636,24 @@ class InformeController extends Controller
             foreach($facturacion as $fac){
                 $total_ventas += $fac->total;
                 $cont++;
-            }            
+            }  
+
+            $detalles_gastos = DetalleGasto::select()
+            ->where('detalles_gastos.id_caja_cierre','=',$cc->id)
+            ->get();
+
+            $total_gastos=0;
+            $cont2=0;
+
+            foreach($detalles_gastos as $dg){
+                $total_gastos += $dg->valor_gasto;
+                $cont2++;
+            }
+
+            
             $cc->total_ventas = $total_ventas;
-            $cc->total_caja =$cc->total_ventas + $cc->vr_inicial;
+            $cc->total_gastos = $total_gastos;
+            $cc->total_caja =$cc->total_ventas + $cc->vr_inicial - $total_gastos;
             $cc->diferencia = $cc->total_caja-$cc->vr_final;
             $cc->no_facturas = $cont;
 

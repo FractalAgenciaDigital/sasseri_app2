@@ -140,6 +140,9 @@
                 <template v-if="menu==43">
                     <observacion :ruta="ruta"></observacion>
                 </template>
+                <template v-if="menu==49">
+                    <gastos :ruta="ruta"></gastos>
+                </template>
 
             <template v-if="menu==999992">
                 <rol :ruta="ruta"></rol>
