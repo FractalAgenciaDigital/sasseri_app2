@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'e71ce4bb019eeb0a0a4b7ac346dc5cd12defbc7e',
+    'reference' => '14134f78d7c4920fe63dc53f71859923e2c01050',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -162,12 +162,12 @@
     ),
     'filp/whoops' => 
     array (
-      'pretty_version' => '2.9.2',
-      'version' => '2.9.2.0',
+      'pretty_version' => '2.11.0',
+      'version' => '2.11.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'df7933820090489623ce0be5e85c7e693638e536',
+      'reference' => 'f6e14679f948d8a5cfb866fa7065a30c66bd64d3',
     ),
     'fzaninotto/faker' => 
     array (
@@ -191,196 +191,196 @@
     array (
       'replaced' => 
       array (
-        0 => 'v6.20.18',
+        0 => 'v6.20.20',
       ),
     ),
     'illuminate/broadcasting' => 
     array (
       'replaced' => 
       array (
-        0 => 'v6.20.18',
+        0 => 'v6.20.20',
       ),
     ),
     'illuminate/bus' => 
     array (
       'replaced' => 
       array (
-        0 => 'v6.20.18',
+        0 => 'v6.20.20',
       ),
     ),
     'illuminate/cache' => 
     array (
       'replaced' => 
       array (
-        0 => 'v6.20.18',
+        0 => 'v6.20.20',
       ),
     ),
     'illuminate/config' => 
     array (
       'replaced' => 
       array (
-        0 => 'v6.20.18',
+        0 => 'v6.20.20',
       ),
     ),
     'illuminate/console' => 
     array (
       'replaced' => 
       array (
-        0 => 'v6.20.18',
+        0 => 'v6.20.20',
       ),
     ),
     'illuminate/container' => 
     array (
       'replaced' => 
       array (
-        0 => 'v6.20.18',
+        0 => 'v6.20.20',
       ),
     ),
     'illuminate/contracts' => 
     array (
       'replaced' => 
       array (
-        0 => 'v6.20.18',
+        0 => 'v6.20.20',
       ),
     ),
     'illuminate/cookie' => 
     array (
       'replaced' => 
       array (
-        0 => 'v6.20.18',
+        0 => 'v6.20.20',
       ),
     ),
     'illuminate/database' => 
     array (
       'replaced' => 
       array (
-        0 => 'v6.20.18',
+        0 => 'v6.20.20',
       ),
     ),
     'illuminate/encryption' => 
     array (
       'replaced' => 
       array (
-        0 => 'v6.20.18',
+        0 => 'v6.20.20',
       ),
     ),
     'illuminate/events' => 
     array (
       'replaced' => 
       array (
-        0 => 'v6.20.18',
+        0 => 'v6.20.20',
       ),
     ),
     'illuminate/filesystem' => 
     array (
       'replaced' => 
       array (
-        0 => 'v6.20.18',
+        0 => 'v6.20.20',
       ),
     ),
     'illuminate/hashing' => 
     array (
       'replaced' => 
       array (
-        0 => 'v6.20.18',
+        0 => 'v6.20.20',
       ),
     ),
     'illuminate/http' => 
     array (
       'replaced' => 
       array (
-        0 => 'v6.20.18',
+        0 => 'v6.20.20',
       ),
     ),
     'illuminate/log' => 
     array (
       'replaced' => 
       array (
-        0 => 'v6.20.18',
+        0 => 'v6.20.20',
       ),
     ),
     'illuminate/mail' => 
     array (
       'replaced' => 
       array (
-        0 => 'v6.20.18',
+        0 => 'v6.20.20',
       ),
     ),
     'illuminate/notifications' => 
     array (
       'replaced' => 
       array (
-        0 => 'v6.20.18',
+        0 => 'v6.20.20',
       ),
     ),
     'illuminate/pagination' => 
     array (
       'replaced' => 
       array (
-        0 => 'v6.20.18',
+        0 => 'v6.20.20',
       ),
     ),
     'illuminate/pipeline' => 
     array (
       'replaced' => 
       array (
-        0 => 'v6.20.18',
+        0 => 'v6.20.20',
       ),
     ),
     'illuminate/queue' => 
     array (
       'replaced' => 
       array (
-        0 => 'v6.20.18',
+        0 => 'v6.20.20',
       ),
     ),
     'illuminate/redis' => 
     array (
       'replaced' => 
       array (
-        0 => 'v6.20.18',
+        0 => 'v6.20.20',
       ),
     ),
     'illuminate/routing' => 
     array (
       'replaced' => 
       array (
-        0 => 'v6.20.18',
+        0 => 'v6.20.20',
       ),
     ),
     'illuminate/session' => 
     array (
       'replaced' => 
       array (
-        0 => 'v6.20.18',
+        0 => 'v6.20.20',
       ),
     ),
     'illuminate/support' => 
     array (
       'replaced' => 
       array (
-        0 => 'v6.20.18',
+        0 => 'v6.20.20',
       ),
     ),
     'illuminate/translation' => 
     array (
       'replaced' => 
       array (
-        0 => 'v6.20.18',
+        0 => 'v6.20.20',
       ),
     ),
     'illuminate/validation' => 
     array (
       'replaced' => 
       array (
-        0 => 'v6.20.18',
+        0 => 'v6.20.20',
       ),
     ),
     'illuminate/view' => 
     array (
       'replaced' => 
       array (
-        0 => 'v6.20.18',
+        0 => 'v6.20.20',
       ),
     ),
     'jakub-onderka/php-console-color' => 
@@ -419,12 +419,12 @@
     ),
     'laravel/framework' => 
     array (
-      'pretty_version' => 'v6.20.18',
-      'version' => '6.20.18.0',
+      'pretty_version' => 'v6.20.20',
+      'version' => '6.20.20.0',
       'aliases' => 
       array (
       ),
-      'reference' => '784f8ff1469a0bb288600d2bb9e02541c8e38a8d',
+      'reference' => '664a9432bcceb67871c5c9252f920d28f21dfc23',
     ),
     'laravel/helpers' => 
     array (
@@ -442,7 +442,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'e71ce4bb019eeb0a0a4b7ac346dc5cd12defbc7e',
+      'reference' => '14134f78d7c4920fe63dc53f71859923e2c01050',
     ),
     'laravel/tinker' => 
     array (
@@ -482,12 +482,12 @@
     ),
     'maatwebsite/excel' => 
     array (
-      'pretty_version' => '3.1.28',
-      'version' => '3.1.28.0',
+      'pretty_version' => '3.1.29',
+      'version' => '3.1.29.0',
       'aliases' => 
       array (
       ),
-      'reference' => '71f27435091a78906276d00133f287ed67dd390e',
+      'reference' => '1e567e6e19a04fd65b5876d5bc92f4015f09fab4',
     ),
     'maennchen/zipstream-php' => 
     array (
@@ -702,12 +702,12 @@
     ),
     'phpspec/prophecy' => 
     array (
-      'pretty_version' => '1.12.2',
-      'version' => '1.12.2.0',
+      'pretty_version' => '1.13.0',
+      'version' => '1.13.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '245710e971a030f42e08f4912863805570f23d39',
+      'reference' => 'be1996ed8adc35c3fd795488a653f4b518be70ea',
     ),
     'phpunit/php-code-coverage' => 
     array (

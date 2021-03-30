@@ -10,6 +10,10 @@
                     <button v-else type="button" class="btn btn-secondary">
                         <i class="icon-plus"></i>&nbsp;Nuevo
                     </button>
+
+                    <button type="button" @click="abrirModalImpresion();" class=" btn btn-primary btn-sm" title="imprimir">
+                        <i class="icon-printer"></i> Imprimir listado
+                    </button>
                 </div>
                 <div class="card-body">
                     <table class="table">
@@ -28,8 +32,7 @@
                                 <td>{{gasto.detalle_gasto}}</td>
                                 <td>{{gasto.valor_gasto}}</td>
                                 <td>{{gasto.nombre_caja}}</td>
-                                <td>
-                                    
+                                <td>                                                                        
                                     <button 
                                         type="button" 
                                         @click="abrirModal('gastos','actualizar',gasto)" 
@@ -38,20 +41,16 @@
                                     >
                                         <i class="icon-pencil"></i>
                                     </button>
-                                   
                                 
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-
             </div>
+        </div>       
 
-        </div>
-       
-
-            <!-- Modal -->
+        <!-- Modal -->
         <div class="modal fade"  :class="{'mostrar' : modal}" id="modalGastos" tabindex="-1" aria-labelledby="ModalGastos" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -59,18 +58,20 @@
                     <h5 class="modal-title" id="exampleModalLabel" v-text="tituloModal"></h5>
                     <button type="button" class="btn-close" @click="cerrarModal();" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    
+
+                <div class="modal-body">                    
                     <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                         <div class="col-12">
                              <div class="form-group">
                                 <label for="formGroupExampleInput">Detalles gasto</label>
                                 <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Describir los gastos" v-model="detalle_gasto">
                             </div>
+
                             <div class="form-group">
                                 <label for="formGroupExampleInput">Valor de gasto</label>
                                 <input type="number" class="form-control" id="formGroupExampleInput" placeholder="Valor del gasto" v-model="valor_gasto">
                             </div>
+
                             <div class="form-group">
                                 <label for="caja">Caja</label>
                                 <select class="custom-select" v-model="id_caja_cierre">
@@ -90,6 +91,43 @@
                 </div>
             </div>
         </div>
+        <!-- fin modal crear gastis -->
+
+        <!-- Modal de impresion -->
+        <div class="modal fade" tabindex="-1" :class="{'mostrar' : mostrarModImp}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-primary modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Imprimir ticket</h4>
+                        <button type="button" class="close" @click="cerrarModalImpresion()" aria-label="Close">
+                            <span aria-hidden="true" title="Cerrar">×</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                            <div class="col-12">
+                                <h6 class="col-12 text-center">Por favor, seleccionar Impresora</h6>
+                                <div class="form-group">
+                                    <select class="custom-select" id="" v-model="id_impresora">
+                                        <option disabled>--Seleccionar impresora--</option>
+                                        <option v-for="(imp, index) in arrayImpresora" :key="index" :value="imp.id"> {{imp.nombre_impresora}} </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" @click="cerrarModalImpresion()">Cerrar</button>
+                        <button type="button" class="btn btn-success" @click="imprimirTicketFacturacion()">Imprimir</button>                        
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- Cierre de modal de impresion -->
 
     </main>
     
@@ -121,7 +159,12 @@
                 valor_gasto:0,
                 detalle_gasto:'',
                 gasto_id:0,
-                tipoAccion:0
+                tipoAccion:0,
+                
+                // Variables de impresion
+                mostrarModImp :0,
+                id_impresora:0,
+                arrayImpresora : [],
 
             }
         },
@@ -157,18 +200,14 @@
             },
         
         },
-        methods : {
-         
+        methods : {         
             listarGastos(){
-                 let me=this;
-                
+                let me=this;                
                 var url= this.ruta +'/detalle_gastos/';
                 axios.get(url).then(function (response) {
                     console.log(response);
-                    var respuesta= response.data;
-                    
-                    me.arrayGastos = respuesta.detalle_gastos.data;
-                    
+                    var respuesta= response.data;                    
+                    me.arrayGastos = respuesta.detalle_gastos.data;                    
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -180,10 +219,8 @@
                 var url= this.ruta +'/detalle_gastos/seleccionar-caja-abierta';
                 axios.get(url).then(function (response) {
                     console.log(response);
-                    var respuesta= response.data;
-                    
+                    var respuesta= response.data;                    
                     me.arrayCajasAbiertas = respuesta.cierres_caja;
-                    
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -211,8 +248,7 @@
                                 break;
                             }
                             case 'actualizar':
-                            {
-                                  
+                            {                                  
                                 this.modal=1;
                                 this.tituloModal='Actualizar detalle de gasto';
                                 this.tipoAccion=2;
@@ -235,38 +271,72 @@
                     'id_caja_cierre': this.id_caja_cierre
                 }).then(function (response) {
                     me.cerrarModal();
-                    me.listarCategoria(1,'','nombre');
                 }).catch(function (error) {
                     console.log(error);
                 });
-
             },
             actualizarGasto(){
-
                 let me = this;
-
                 axios.put(this.ruta +'/detalle_gastos/actualizar',{
                     'valor_gasto': this.valor_gasto,
                     'detalle_gasto': this.detalle_gasto,
                     'id_caja_cierre': this.id_caja_cierre,
                     'id': this.gasto_id
                 }).then(function (response) {
-                    me.cerrarModal();
-                    me.listarCategoria(1,'','nombre');
+                    me.cerrarModal();                    
                 }).catch(function (error) {
                     console.log(error);
                 });
             },
-            
            
             imprimirTicket(id){
                 let me = this;
                 console.log(id);
                 axios.get(this.ruta+'/detalle_facturacion/imprimir-ticket?id='+id).then(function(response){
-                    console.log(response)
-
+                    //console.log(response)
                 })
-            },         
+            },
+              listarImpresora (){
+            let me=this;
+            var url= this.ruta +'/impresora';
+            axios.get(url).then(function (response) {
+                var respuesta= response.data;
+                me.arrayImpresora = respuesta.impresoras.data;                    
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        },
+
+        imprimirTicketFacturacion(){
+            let me = this;            
+            axios.get(this.ruta+'/informe/imprimir-ticket-informe-gastos?id_impresora='+this.id_impresora).then(function(response){                 
+
+            }).catch(function (error) {
+            Swal.fire({
+                    
+                    type:'warning',
+                    title: 'Oops...',
+                    text: 'No se pudo imprimir',
+                    
+                })
+                                
+            });
+        },
+
+        abrirModalImpresion(){
+            let me = this;
+            this.mostrarModImp = 1;
+            this.listarImpresora();
+            // this.id_factura_imprimir = factura;
+            // me.listarImpresora(1,'','nombre_impresora');
+            
+        },
+        cerrarModalImpresion(){
+            let me = this;
+            this.mostrarModImp = 0;
+            this.id_factura_imprimir = 0
+        },
             
         },
         mounted() {

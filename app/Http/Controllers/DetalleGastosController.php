@@ -47,8 +47,8 @@ class DetalleGastosController extends Controller
         $detalle_gasto->save();
 
         $cierrexcaja =CierresXCaja::where('cajas_cierres.id', '=',$request->id_caja_cierre)->first();
-
         $cierrexcaja->vr_gastos = $cierrexcaja->vr_gastos +  $request->valor_gasto;
+        $cierrexcaja->save();
     }
     
     public function update(Request $request)

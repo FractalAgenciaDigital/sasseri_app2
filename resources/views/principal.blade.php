@@ -97,8 +97,10 @@
                             <i class="icon-cup"></i>
                                 <span>Cocina</span>
                             </a>
-                        </li>  
-                            
+                        </li>
+                        <li @click="menu=49" class="nav-item">
+                            <a href="#" class="nav-link"><i class="fa fa-dollar"></i><span> Gastos de caja</span></a>
+                        </li>
                         <li class="nav-item">
                             <a 
                                 class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCajas"
@@ -122,13 +124,11 @@
                                     </li>
                                     <li @click="menu=35" class="collapse-item">
                                         <a href="#"><i class="fa fa-list-ol"></i> Gestión de cajas</a>
-                                    </li>
-                                    <li @click="menu=49" class="collapse-item">
-                                        <a href="#"><i class="fa fa-dollar"></i> Gastos de caja</a>
-                                    </li>
+                                    </li>                                   
                                 </div>
                             </ul>
                         </li>
+                        
                        
                         <li @click="menu=999991" class="nav-item">
                             <a href="#" class="nav-link"><i class="icon-user"></i> <span>Usuarios</span></a>
@@ -145,8 +145,7 @@
                             </a>
                             <ul  id="collapseInforme" class="collapse" aria-labelledby="headingInforme"
                             data-parent="#accordionSidebar">
-                                <div class="collapse-inner">
-                                   
+                                <div class="collapse-inner">                                   
                                     
                                     <li @click="menu=44" class="collapse-item">
                                         <a href="#"><i class="fa fa-cutlery"></i> Informe arqueo</a>

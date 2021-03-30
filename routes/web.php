@@ -250,6 +250,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/informe/imprimir-ticket-informe-cajas', 'InformeController@imprimirTicketInformeCajas');
         Route::get('/informe/imprimir-ticket-informe-productos', 'InformeController@imprimirTicketInformeProductos');
         Route::get('/informe/imprimir-ticket-informe-categorias', 'InformeController@imprimirTicketInformeCategorias');
+        Route::get('/informe/imprimir-ticket-informe-gastos', 'InformeController@imprimirInformeGastos');
 
         Route::get('/ingreso', 'IngresoController@index');
         Route::post('/ingreso/registrar', 'IngresoController@store');
