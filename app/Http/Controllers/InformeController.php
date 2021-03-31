@@ -488,8 +488,8 @@ class InformeController extends Controller
             
             $cc->total_ventas = $total_ventas;
             $cc->total_gastos = $total_gastos;
-            $cc->total_caja =$cc->total_ventas + $cc->vr_inicial;
-            $cc->diferencia = $cc->vr_final - $total_gastos + $cc->total_caja;
+            $cc->total_caja =($cc->total_ventas + $cc->vr_inicial)- $cc->total_gastos;
+            $cc->diferencia = $cc->vr_final-(($cc->total_ventas + $cc->vr_inicial)- $cc->total_gastos);
             $cc->no_facturas = $cont;
 
             if ($cc->diferencia == 0){
@@ -614,8 +614,8 @@ class InformeController extends Controller
 
             $cc->total_ventas = $total_ventas;
             $cc->total_gastos = $total_gastos;
-            $cc->total_caja =$cc->total_ventas + $cc->vr_inicial;
-            $cc->diferencia = $cc->vr_final - $total_gastos + $cc->total_caja;
+            $cc->total_caja =($cc->total_ventas + $cc->vr_inicial)- $cc->total_gastos;
+            $cc->diferencia = $cc->vr_final-(($cc->total_ventas + $cc->vr_inicial)- $cc->total_gastos);
             $cc->no_facturas = $cont;
 
             // Codigo anterior por verificar
