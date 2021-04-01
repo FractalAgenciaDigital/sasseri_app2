@@ -159,6 +159,15 @@
                                     $ {{valor_iva=calcularTotalIva}}
                                 </div>
                             </div>
+                            <div class="row mt-1">
+                                <div class="col-6">
+                                    <b>Total</b>
+                                </div>
+                                <div class="col-4 text-righ text-right">
+                                    $ {{total=calcularTotal}}
+                                </div>
+                                
+                            </div>
                         </div>
                     </div>
                 </div> 
@@ -479,7 +488,7 @@
                  <button type="button" v-if="(position==2 && tipoAccion2==2)"  class="btn-block btn-lg active btn-success" @click="actualizarFacturacion();">Actualizar</button>
                
                 <div class="col-12" v-if="position==7">
-                    <a v-if="no_caja==0" @click="position=1;mostrarDetalle()" class="btn btn-block btn-lg active btn-success"  href="#" role="button"><h3 class="text-white">Iniciar Factura</h3></a>
+                    <a v-if="no_caja==0" @click="position=1;mostrarDetalle('facturacion','registrar')" class="btn btn-block btn-lg active btn-success"  href="#" role="button"><h3 class="text-white">Iniciar Factura</h3></a>
                     <a v-else  class="btn btn-block btn-lg active btn-secondary"  href="#" role="button"><h3 class="text-white">No tienes una caja abierta</h3></a>
                 </div>
             </div> 
@@ -1626,7 +1635,7 @@
                     'fec_edita': me.fechaHoraActual,
                     'subtotal': me.subtotal,
                     'valor_iva': me.valor_iva,
-                    'total': me.valor_final,
+                    'total': me.total,
                     'abono': me.abono,
                     'saldo': me.saldo,
                     'detalle': me.detalle,
