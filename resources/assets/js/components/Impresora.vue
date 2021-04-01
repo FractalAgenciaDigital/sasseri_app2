@@ -23,12 +23,18 @@
                             </div>
                         </div>
                     </div>
+                    <div class="alert alert-primary" role="alert">
+                        Es importante que el "tipo" de cada impresora se relacione a la seccion a la cuál pertenece.
+                        Ej: Sí la impresora es de cocina, su tipo será "cocina"; sí la impresora es caja, su tipo será "caja".
+                        El texto debe ir en minusculas tal cual se indica <b>(cocina, caja)</b>
+                    </div>
                     <table class="table table-bordered table-striped table-sm table-responsive table-earning">
                         <thead>
                             <tr>
                                 <th class="col-md-4">Nombre</th>
                                 <th>Tipo</th>
                                 <th class="col-md-1">Estado</th>
+                                <th>Opciones</th>
                             </tr>
                         </thead>
                         <tbody v-if="permisosUser.leer && arrayImpresora.length">
@@ -54,7 +60,11 @@
                                         </a>
                                     </template>
                                 </td>
-                               
+                               <td>
+                                    <button v-if="permisosUser.crear" type="button" @click="abrirModal('impresora','actualizar', impresora)" class="btn btn-primary">
+                                        <i class="icon-pencil"></i>
+                                    </button>
+                               </td>
                             </tr>                                
                         </tbody>
                         <tbody v-else>
@@ -98,9 +108,9 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-3 form-control-label" for="email-input">Código</label>
+                                <label class="col-md-3 form-control-label" for="email-input">Tipo</label>
                                 <div class="col-md-9">
-                                    <input type="text" v-model="codigo" class="form-control" placeholder="Ingrese código">
+                                    <input type="text" v-model="codigo" class="form-control" placeholder="Ej: cocina, caja">
                                 </div>
                             </div>
                             <div v-show="errorImpresora" class="form-group row div-error">
