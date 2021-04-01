@@ -271,6 +271,7 @@
                     'id_caja_cierre': this.id_caja_cierre
                 }).then(function (response) {
                     me.cerrarModal();
+                    me.listarGastos();
                 }).catch(function (error) {
                     console.log(error);
                 });
