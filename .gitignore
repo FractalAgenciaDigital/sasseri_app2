@@ -10,8 +10,9 @@ Homestead.yaml
 npm-debug.log
 /node_modules/.cache
 yarn-error.log
-/public/logos
-/public/Empresas
+/public/logos/*.jpg
+/public/Empresas/*.jpg
+/public/Empresas/*.png
 /node_modules/.cache
 /public/plantilla
 public/plantilla/CoolAdmin
