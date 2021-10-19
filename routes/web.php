@@ -11,15 +11,15 @@
 |
 */
 
-Route::group(['middleware'=>['guest']],function(){
-    Route::get('/','Auth\LoginController@showLoginForm');
+Route::group(['middleware' => ['guest']], function () {
+    Route::get('/', 'Auth\LoginController@showLoginForm');
     Route::post('/login', 'Auth\LoginController@login')->name('login');
     Route::get('/login', 'Auth\LoginController@login')->name('login');
 });
-Route::group(['middleware'=>['auth']],function(){
-    
+Route::group(['middleware' => ['auth']], function () {
+
     Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
-   
+
     Route::get('/main', function () {
         return view('contenido/contenido');
     })->name('main');
@@ -27,7 +27,7 @@ Route::group(['middleware'=>['auth']],function(){
 
     Route::group(['middleware' => ['Administrador']], function () {
 
-        
+
         Route::get('/articulo', 'ArticuloController@index');
         Route::post('/articulo/registrar', 'ArticuloController@store');
         Route::post('/articulo/actualizar', 'ArticuloController@update');
@@ -35,14 +35,14 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/articulo/activar', 'ArticuloController@activar');
         Route::get('/articulo/buscarArticulo', 'ArticuloController@buscarArticulo');
         Route::get('/articulo/listarArticulo', 'ArticuloController@listarArticulo');
-        
+
         Route::get('/bancos', 'BancosController@index');
         Route::post('/bancos/registrar', 'BancosController@store');
         Route::put('/bancos/actualizar', 'BancosController@update');
         Route::get('/bancos/selectBancos', 'BancosController@selectBancos');
         Route::put('/bancos/desactivar', 'BancosController@desactivar');
         Route::put('/bancos/activar', 'BancosController@activar');
-        
+
         Route::get('/cajas', 'CajasController@index');
         Route::post('/cajas/registrar', 'CajasController@store');
         Route::put('/cajas/actualizar', 'CajasController@update');
@@ -59,14 +59,14 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/cajas_admin/desactivar', 'CajasAdminController@desactivar');
         Route::put('/cajas_admin/activar', 'CajasAdminController@activar');
         Route::get('/cajas_admin/listarVendedores', 'CajasAdminController@listarVendedores');
-        
+
         Route::get('/categoria', 'CategoriaController@index');
         Route::post('/categoria/registrar', 'CategoriaController@store');
         Route::put('/categoria/actualizar', 'CategoriaController@update');
         Route::put('/categoria/desactivar', 'CategoriaController@desactivar');
         Route::put('/categoria/activar', 'CategoriaController@activar');
         Route::get('/categoria/selectCategoria', 'CategoriaController@selectCategoria');
-     
+
         Route::get('/cliente', 'ClienteController@index');
         Route::post('/cliente/registrar', 'ClienteController@store');
         Route::post('/cliente/actualizar', 'ClienteController@update');
@@ -87,7 +87,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/conf_formatos/activar', 'Conf_formatosController@activar');
         Route::get('/conf_formatos/get_tipos_formatos', 'Conf_formatosController@get_tipos_formatos');
         Route::get('/conf_formatos/get_filt_tipo', 'Conf_formatosController@get_filt_tipo');
-        
+
         Route::get('/cierres_caja', 'CierresXCajaController@index');
         Route::post('/cierres_caja/registrar', 'CierresXCajaController@store');
         Route::put('/cierres_caja/actualizar', 'CierresXCajaController@update');
@@ -100,7 +100,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/cierres_caja/selectValorInicialCaja', 'CierresXCajaController@selectValorInicialCaja');
         Route::get('/cierres_caja/validarCierreCaja', 'CierresXCajaController@ValidarCierreCaja');
         Route::get('/cierres_caja/validarCierreCajaWeb', 'CierresXCajaController@ValidarCierreCajaWeb');
-        
+
 
         Route::get('/colaboradores', 'ColaboradoresController@index');
         Route::post('/colaboradores/registrar', 'ColaboradoresController@store');
@@ -126,7 +126,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/con_tarifario/activar', 'ConTarifarioController@activar');
         Route::get('/con_tarifario/listarTarifarioPresentacion', 'ConTarifarioController@listarTarifarioPresentacion');
         Route::put('/con_tarifario/marcarFavorito', 'ConTarifarioController@marcarFavorito');
-        
+
         Route::get('/cuentasxcobrar', 'CuentasxCobrarController@index');
         Route::post('/cuentasxcobrar/registrar', 'CuentasxCobrarController@store');
         Route::get('/terceronombre', 'CuentasxCobrarController@terceroNombre');
@@ -151,7 +151,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/cuentas/get_fuentes', 'CuentasController@get_fuentes');
         Route::get('/cuentas/get_fuentes2', 'CuentasController@get_fuentes2');
         Route::get('/cuentas/get_x_afectar', 'CuentasController@get_x_afectar');
-        
+
         Route::get('/departamentos', 'DepartamentosController@index');
 
         Route::get('/detalle_egreso', 'DetalleEgresoController@index');
@@ -161,28 +161,28 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/detalle_egreso/desactivar', 'DetalleEgresoController@desactivar');
         Route::put('/detalle_egreso/activar', 'DetalleEgresoController@activar');
 
-        Route::get('/detalle_facturacion', 'DetalleFacturacionController@index');               
+        Route::get('/detalle_facturacion', 'DetalleFacturacionController@index');
         Route::get('/detalle_facturacion/buscarDetalleFacturacion', 'DetalleFacturacionController@buscarDetalleFacturacion');
         Route::get('/detalle_facturacion/productosPreparados', 'DetalleFacturacionController@productosPreparados');
-        Route::post('/detalle_facturacion/imprimir-ticket', 'DetalleFacturacionController@imprimirTicket'); 
-        Route::get('/detalle_facturacion/ver-ticket', 'DetalleFacturacionController@verTicket'); 
-        Route::post('/detalle_facturacion/registrar', 'DetalleFacturacionController@store'); 
+        Route::post('/detalle_facturacion/imprimir-ticket', 'DetalleFacturacionController@imprimirTicket');
+        Route::get('/detalle_facturacion/ver-ticket', 'DetalleFacturacionController@verTicket');
+        Route::post('/detalle_facturacion/registrar', 'DetalleFacturacionController@store');
         Route::put('/detalle_facturacion/actualizar', 'DetalleFacturacionController@update');
         Route::put('/detalle_facturacion/cocinado', 'DetalleFacturacionController@cocinado');
         Route::put('/detalle_facturacion/sin-cocinar', 'DetalleFacturacionController@sinCocinar');
-        
+
         Route::get('/detalle_gastos', 'DetalleGastosController@index');
         Route::post('/detalle_gastos/registrar', 'DetalleGastosController@store');
         Route::put('/detalle_gastos/actualizar', 'DetalleGastosController@update');
         Route::get('/detalle_gastos/seleccionar-caja-abierta', 'DetalleGastosController@seleccionarCajaAbierta');
-        
+
         Route::get('/detalle_ingreso', 'DetalleIngresoController@index');
         Route::post('/detalle_ingreso/registrar', 'DetalleIngresoController@store');
         Route::put('/detalle_ingreso/actualizar', 'DetalleIngresoController@update');
         Route::get('/detalle_ingreso/selectDetalleIngreso', 'DetalleIngresoController@selectDetalleIngreso');
         Route::put('/detalle_ingreso/desactivar', 'DetalleIngresoController@desactivar');
         Route::put('/detalle_ingreso/activar', 'DetalleIngresoController@activar');
-      
+
         Route::get('/egreso', 'EgresosController@index');
         Route::post('/egreso/registrar', 'EgresosController@store');
         Route::put('/egreso/actualizar', 'EgresosController@update');
@@ -209,19 +209,19 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/facturacion/cambiarEstado', 'FacturacionController@cambiarEstado');
         Route::get('/facturacion/buscarNumFacturaSugerida', 'FacturacionController@buscarNumFacturaSugerida');
         Route::get('/facturacion/obtenerCabecera', 'FacturacionController@obtenerCabecera');
-        Route::get('/facturacion/pdfFacturacion/{id}','FacturacionController@PdfFacturacion')->name('recibo_pdf');
-        Route::get('/facturacion/excelFacturacion/{id}','FacturacionController@ExcelFacturacion')->name('recibo_pdf');
-        Route::get('/facturacion/imprimir-ticket-facturacion', 'FacturacionController@imprimirTicketFacturacion'); 
-        Route::get('/facturacion/abrir-caja-registradora', 'FacturacionController@abrirCajaRegistradora'); 
+        Route::get('/facturacion/pdfFacturacion/{id}', 'FacturacionController@PdfFacturacion')->name('recibo_pdf');
+        Route::get('/facturacion/excelFacturacion/{id}', 'FacturacionController@ExcelFacturacion')->name('recibo_pdf');
+        Route::get('/facturacion/imprimir-ticket-facturacion', 'FacturacionController@imprimirTicketFacturacion');
+        Route::get('/facturacion/abrir-caja-registradora', 'FacturacionController@abrirCajaRegistradora');
 
-        Route::get('/formatos','FormatoController@index');
-        Route::post('/formatos/registrar','FormatoController@store');
-        Route::get('/formatos/numero_next','FormatoController@numero_next');
+        Route::get('/formatos', 'FormatoController@index');
+        Route::post('/formatos/registrar', 'FormatoController@store');
+        Route::get('/formatos/numero_next', 'FormatoController@numero_next');
         Route::put('/formatos/desactivar', 'FormatoController@desactivar');
         Route::put('/formatos/cerrar', 'FormatoController@cerrar');
         Route::get('/formatos/obtenerCabecera', 'FormatoController@obtenerCabecera');
         Route::get('/formatos/obtenerDetalles', 'FormatoController@obtenerDetalles');
-        Route::get('/formatos/pdf/{id}','FormatoController@pdf')->name('formato_pdf');
+        Route::get('/formatos/pdf/{id}', 'FormatoController@pdf')->name('formato_pdf');
         Route::put('/formatos/actualizar', 'FormatoController@update');
 
 
@@ -231,7 +231,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/formato_proceso/selectFormatoProceso', 'FormatoProcesoController@selectFormatoProceso');
         Route::put('/formato_proceso/desactivar', 'FormatoProcesoController@desactivar');
         Route::put('/formato_proceso/activar', 'FormatoProcesoController@activar');
-        
+
         Route::get('/impresora', 'ImpresoraController@index');
         Route::post('/impresora/registrar', 'ImpresoraController@store');
         Route::put('/impresora/actualizar', 'ImpresoraController@update');
@@ -273,14 +273,14 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/iva_producto/selectIvaProducto', 'IvaProductoController@selectIvaProducto');
         Route::put('/iva_producto/eliminarIvaProducto', 'IvaProductoController@eliminarIvaProducto');
 
-       
+
         Route::get('/modelo_contable', 'ModeloContableController@index');
         Route::post('/modelo_contable/registrar', 'ModeloContableController@store');
         Route::put('/modelo_contable/actualizar', 'ModeloContableController@update');
         Route::put('/modelo_contable/desactivar', 'ModeloContableController@desactivar');
         Route::put('/modelo_contable/activar', 'ModeloContableController@activar');
         Route::get('/modelo_contable/selectModeloContable', 'ModeloContableController@selectModeloContable');
-  
+
         Route::get('/modulo', 'ModuloController@index');
         Route::post('/modulo/registrar', 'ModuloController@store');
         Route::put('/modulo/cambiarHijos', 'ModuloController@cambiarHijos');
@@ -290,9 +290,9 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/modulo/desactivarHijos', 'ModuloController@desactivarHijos');
         Route::put('/modulo/activar', 'ModuloController@activar');
         Route::put('/modulo/activarHijos', 'ModuloController@activarHijos');
- 
+
         Route::get('/municipios', 'MunicipiosController@index');
-        Route::get('/municipios/listarMunicipios', 'MunicipiosController@listarMunicipios');       
+        Route::get('/municipios/listarMunicipios', 'MunicipiosController@listarMunicipios');
 
         Route::get('/novedades', 'NovedadesController@index');
         Route::post('/novedades/registrar', 'NovedadesController@store');
@@ -304,16 +304,16 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/observacion/actualizar', 'ObservacionController@update');
         Route::get('/observacion/selectZona', 'ObservacionController@selectZona');
         Route::put('/observacion/desactivar', 'ObservacionController@desactivar');
-        Route::put('/observacion/activar', 'ObservacionController@activar');    
+        Route::put('/observacion/activar', 'ObservacionController@activar');
 
         Route::post('/permisos', 'PermisosController@insertar');
         Route::post('/listar_permisos', 'PermisosController@listarPermisos');
         Route::get('/listar_permisos2', 'PermisosController@listarPermisos2');
         Route::get('/permisos/listarPermisosLogueado', 'PermisosController@listarPermisosLogueado');
         Route::get('/permisos/recargarPermisos', 'PermisosController@recargarPermisos');
-            
-        Route::get('/planCuentas', 'PlanCuentas@index');        
-        Route::post('/planCuentas/registrar', 'PlanCuentas@store');        
+
+        Route::get('/planCuentas', 'PlanCuentas@index');
+        Route::post('/planCuentas/registrar', 'PlanCuentas@store');
         Route::put('/planCuentas/actualizar', 'PlanCuentas@update');
         Route::get('/planCuentas/selectCuenta', 'PlanCuentas@selectCuenta');
         Route::get('/planCuentas/selectCuenta2', 'PlanCuentas@selectCuenta2');
@@ -348,11 +348,11 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/productos_asociados/desactivar', 'ProductosAsociadosController@desactivar');
         Route::put('/productos_asociados/activar', 'ProductosAsociadosController@activar');
 
-        
-        Route::get('/retenciones', 'RetencionesController@index');        
-        Route::post('/retenciones/registrar', 'RetencionesController@store');        
+
+        Route::get('/retenciones', 'RetencionesController@index');
+        Route::post('/retenciones/registrar', 'RetencionesController@store');
         Route::put('/retenciones/actualizar', 'RetencionesController@update');
-        Route::get('/retenciones/selectReteInfo','RetencionesController@selectReteInfo');
+        Route::get('/retenciones/selectReteInfo', 'RetencionesController@selectReteInfo');
         Route::put('/retenciones/desactivar', 'RetencionesController@desactivar');
         Route::put('/retenciones/activar', 'RetencionesController@activar');
 
@@ -366,13 +366,13 @@ Route::group(['middleware'=>['auth']],function(){
 
         Route::get('/stock', 'StockController@index');
         Route::post('/stock/registrar', 'StockController@store');
-        
+
         Route::get('/user', 'UserController@index');
         Route::post('/user/registrar', 'UserController@store');
         Route::put('/user/actualizar', 'UserController@update');
         Route::put('/user/desactivar', 'UserController@desactivar');
-        Route::put('/user/activar', 'UserController@activar'); 
-        
+        Route::put('/user/activar', 'UserController@activar');
+
         Route::get('/und_medida', 'UndMedidaController@index');
         Route::post('/und_medida/registrar', 'UndMedidaController@store');
         Route::put('/und_medida/actualizar', 'UndMedidaController@update');
@@ -385,9 +385,8 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/zona/actualizar', 'ZonaController@update');
         Route::get('/zona/selectZona', 'ZonaController@selectZona');
         Route::put('/zona/desactivar', 'ZonaController@desactivar');
-        Route::put('/zona/activar', 'ZonaController@activar');        
+        Route::put('/zona/activar', 'ZonaController@activar');
     });
-
 });
 
 //Route::get('/home', 'HomeController@index')->name('home');
