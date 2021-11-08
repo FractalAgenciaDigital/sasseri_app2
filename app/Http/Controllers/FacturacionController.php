@@ -206,14 +206,6 @@ class FacturacionController extends Controller
 
 
             return [
-                // 'pagination' => [
-                //     'total'        => $facturacion->total(),
-                //     'current_page' => $facturacion->currentPage(),
-                //     'per_page'     => $facturacion->perPage(),
-                //     'last_page'    => $facturacion->lastPage(),
-                //     'from'         => $facturacion->firstItem(),
-                //     'to'           => $facturacion->lastItem(),
-                // ],               
                 'facturacion' => $facturacion,
                 'idrol' => Auth::user()->idrol,
             ];
@@ -284,7 +276,9 @@ class FacturacionController extends Controller
         $detalles = $request->data; //Array de detalles
         //Recorro todos los elementos
 
-        foreach ($detalles as $ep => $det) {
+        foreach ($detalles as $det) {
+
+
             $detalle = new DetalleFacturacion();
             $detalle->id_factura = $facturacion->id;
             if (isset($det['id_asociado']) && $det['id_asociado'] != '') {
@@ -314,6 +308,9 @@ class FacturacionController extends Controller
             $stock->tipo_movimiento = $request->tipo_movimiento;
             $stock->sumatoria = $request->sumatoria;
             $stock->save();
+            $articulo = Articulo::findOrFail($det['idarticulo']);
+            $articulo->stock = $articulo->stock - $det['cantidad'];
+            $articulo->save();
         }
         return ['id_facturacion' => $facturacion->id];
     }
@@ -395,7 +392,7 @@ class FacturacionController extends Controller
 
         $facturacion = Facturacion::findOrFail($request->id);
         $facturacion->estado = $request->estado;
-        if ($request->estado == 2 && $request->num_factura) {
+        if ($request->estado == 2) {
             $detalles = DetalleFacturacion::where('id_factura', '=', $request->id)->get();
 
             if (!empty($detalles)) {

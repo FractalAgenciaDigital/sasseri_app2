@@ -13,25 +13,24 @@ class StockController extends Controller
         // if (!$request->ajax()) return redirect('/');
 
         $id_articulo = $request->id_articulo;
-        $fecIni = $request->fecIni.' 00:00:00';
-        $fecFin = $request->fecFin.' 23:59:59';
+        $fecIni = $request->fecIni . ' 00:00:00';
+        $fecFin = $request->fecFin . ' 23:59:59';
         $id_empresa = $request->session()->get('id_empresa');
 
-        $stock = Stock::join('articulos','stock.id_producto','=','articulos.id')
-        ->join('users','stock.id_usuario','=','users.id')
-        ->select('stock.id','stock.id_producto','stock.id_usuario','articulos.nombre as nombre_producto', 'articulos.codigo as codigo_producto','users.usuario as nombre_usuario','stock.fec_crea','stock.cantidad','stock.tipo_movimiento','stock.sumatoria','stock.condicion');
-        if($request->id_articulo!='' && $request->id_articulo!=0)
-        {
-            $stock = $stock->where('id_producto','like', $id_articulo);
+        $stock = Stock::join('articulos', 'stock.id_producto', '=', 'articulos.id')
+            ->join('users', 'stock.id_usuario', '=', 'users.id')
+            ->select('stock.id', 'stock.id_producto', 'stock.id_usuario', 'articulos.stock as stock_articulo', 'articulos.nombre as nombre_producto', 'articulos.codigo as codigo_producto', 'users.usuario as nombre_usuario', 'stock.fec_crea', 'stock.cantidad', 'stock.tipo_movimiento', 'stock.sumatoria', 'stock.condicion');
+        if ($request->id_articulo != '' && $request->id_articulo != 0) {
+            $stock = $stock->where('id_producto', 'like', $id_articulo);
         }
-        if($request->fecIni!='' && $request->fecFin!=''){
+        if ($request->fecIni != '' && $request->fecFin != '') {
             $stock = $stock->whereBetween('stock.fec_crea', [$fecIni, $fecFin]);
         };
-        if($request->buscar!=''){
-            $stock = $stock->where('articulos.'.$request->criterio, 'like', '%'. $request->buscar . '%')
-            ->orWhere('articulos.codigo', 'like', '%'. $request->buscar . '%');
+        if ($request->buscar != '') {
+            $stock = $stock->where('articulos.' . $request->criterio, 'like', '%' . $request->buscar . '%')
+                ->orWhere('articulos.codigo', 'like', '%' . $request->buscar . '%');
         };
-        $stock = $stock->where('stock.id_empresa','=',$id_empresa)->orderBy('stock.fec_crea', 'desc')->paginate(12);
+        $stock = $stock->where('stock.id_empresa', '=', $id_empresa)->orderBy('stock.fec_crea', 'desc')->paginate(12);
 
         return [
             'pagination' => [
@@ -60,7 +59,7 @@ class StockController extends Controller
         $stock->tipo_movimiento = $request->tipo_movimiento;
         $stock->sumatoria = $request->sumatoria;
         $stock->id_empresa = $id_empresa;
-        
+
         $stock->save();
     }
 
@@ -86,5 +85,4 @@ class StockController extends Controller
         $articulo->condicion = '1';
         $articulo->save();
     }
-
 }

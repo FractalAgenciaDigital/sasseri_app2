@@ -80,7 +80,7 @@ class ClienteController extends Controller
         try{
             $carpetaEmpresa = $id_empresa .'_empresa'; 
             $dirEmpresa = public_path("Empresas/$carpetaEmpresa/ImgPerfil");
-            if (!file_exists($dirEmpresa)) mkdir("Empresas/$carpetaEmpresa", 0777);
+            // if (!file_exists($dirEmpresa)) mkdir("Empresas/$carpetaEmpresa", 0777);
             if (!file_exists($dirEmpresa)) mkdir($dirEmpresa, 0777);
             
             $arrayExtensiones = array('image/jpg','image/jpeg','image/png','jpg','jpeg','png');

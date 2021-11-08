@@ -1,2390 +1,2933 @@
 <template>
-    <main class="main">
-        <div>
-            <div class="container-fluid row" v-show="position==1">  <!-- listado de productos de factura -->
-                <div class="card-header col-xs-12 col-sm-12 col-md-3"> 
-                    <div class="row mb-5">                        
-                        <div class="col-9">
-                            <input class="form-control form-control-lg" type="search" placeholder="Buscar" aria-label="Search" v-model="buscarA" @keyup="listarArticulo(buscarA,criterioA,buscarCategoriaA)">
-                        </div>
-                        <div class="col-3">
-                            <button class="btn btn-success btn-block p-2 btn-buscar" type="submit" @click="listarArticulo(buscarA,criterioA,buscarCategoriaA)">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </div>                        
+  <main class="main">
+    <div>
+      <div class="container-fluid row" v-show="position == 1">
+        <!-- listado de productos de factura -->
+        <div class="card-header col-xs-12 col-sm-12 col-md-3">
+          <div class="row mb-5">
+            <div class="col-9">
+              <input
+                class="form-control form-control-lg"
+                type="search"
+                placeholder="Buscar"
+                aria-label="Search"
+                v-model="buscarA"
+                @keyup="listarArticulo(buscarA, criterioA, buscarCategoriaA)"
+              />
+            </div>
+            <div class="col-3">
+              <button
+                class="btn btn-success btn-block p-2 btn-buscar"
+                type="submit"
+                @click="listarArticulo(buscarA, criterioA, buscarCategoriaA)"
+              >
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group">
+                <select
+                  size="10"
+                  class="form-control"
+                  multiple
+                  v-model="buscarCategoriaA"
+                  placeholder="- Categorias -"
+                  @change="listarArticulo(buscarA, criterioA, buscarCategoriaA)"
+                >
+                  <option value="">- Categorias -</option>
+                  <option
+                    v-for="categoria in arrayCategoria2"
+                    :key="categoria.id"
+                    :value="categoria.id"
+                    v-text="categoria.nombre"
+                  ></option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body col-xs-12 col-sm-12 col-md-9">
+          <div class="form-group">
+            <div class="row">
+              <div
+                v-for="(articulo, index) in arrayArticulo"
+                :key="index"
+                class="col-lg-2 col-md-3 col-sm-4 col-6 separa-cards"
+              >
+                <!--<div class="card text-center mb-1" style="cursor:pointer" @click="agregaDetalleMesero(articulo)">-->
+                <div
+                  class="card text-center mb-1"
+                  style="cursor:pointer"
+                  @click="abrirModal(articulo)"
+                >
+                  <div class=" txt-price-prod btn-primary">
+                    <span class="num text-white ">
+                      $ {{ articulo.precio_venta }}
+                    </span>
+                  </div>
+                  <div class="card mx-auto">
+                    <img
+                      v-if="`${articulo.img}` != 'default.png'"
+                      :src="
+                        `${ruta}/Empresas/${articulo.id_empresa}_empresa/ImgProductos/${articulo.img}`
+                      "
+                      class="img-prods"
+                    />
+                  </div>
+                  <div class="txt-nom-prod bg-success">
+                    <small class="mb-0 text-white">{{ articulo.nombre }}</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-show="position == 2">
+        <!-- VISTA NUEVA FACTURA -->
+        <div class="card">
+          <div class="card-header">
+            <div class="row">
+              <div class="col-6">
+                <button class="btn btn-info" @click="position = 1">
+                  <i class="fa fa-arrow-left"></i> Productos
+                </button>
+              </div>
+              <div class="col-5 pr-1">
+                <button
+                  class="btn btn-danger"
+                  style="margin-left: -31px;"
+                  @click="
+                    ocultarDetalle();
+                    position = 7;
+                  "
+                >
+                  Descartar <i class="fa fa-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <div class="row">
+                <div class="input-group mb-3">
+                  <div class="col-1">
+                    <h3><i class="fa fa-user"></i></h3>
+                  </div>
+                  <div class="col-9 nombre-tercero">
+                    <small class="text-muted ">{{ tercero }}</small>
+                  </div>
+                  <div class="col-1">
+                    <h3
+                      v-if="!tercero"
+                      style="cursor:pointer"
+                      class="text-primary"
+                      @click="position = 3"
+                    >
+                      <i class="fa fa-plus-circle" href="#59981A"></i>
+                    </h3>
+
+                    <h3
+                      v-else
+                      style="cursor:pointer"
+                      class="text-primary"
+                      @click="quitar(3)"
+                    >
+                      <i class="fa fa-times-circle" href="#59981A"></i>
+                    </h3>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text" for="inputGroupSelect01"
+                        >Mesas <span class=" text-danger">(*)</span></label
+                      >
                     </div>
-                    <div class="row">                            
+                    <select
+                      class="custom-select form-control"
+                      required
+                      v-model="lugar"
+                      id="inputGroupSelect01"
+                    >
+                      <option selected disabled value="">Ubicacion...</option>
+                      <option
+                        v-for="zonas in arrayZonas"
+                        :key="zonas.id"
+                        :value="zonas.id"
+                        v-text="zonas.zona"
+                      ></option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row ">
+                <div class="col-12">
+                  <div
+                    class="row border-bottom"
+                    v-for="(detalle, index) in arrayDetalle"
+                    :key="detalle.id"
+                  >
+                    <div style="display:none">
+                      {{
+                        (detalle.valor_iva = Math.round(
+                          parseFloat(detalle.precio * detalle.cantidad) -
+                            parseFloat(
+                              (detalle.precio * detalle.cantidad) /
+                                (detalle.iva / 100 + 1)
+                            )
+                        ))
+                      }}
+                      {{
+                        (detalle.valor_subtotal = Math.round(
+                          parseFloat(
+                            detalle.precio * detalle.cantidad -
+                              detalle.valor_iva -
+                              detalle.valor_descuento
+                          )
+                        ))
+                      }}
+                    </div>
+                    <div class="col-5">
+                      <div class="row">
+                        <div
+                          class="col-12"
+                          v-if="detalle.padre == null || detalle.padre == ''"
+                        >
+                          <small class="text-muted">{{
+                            detalle.articulo + " - " + detalle.nom_presentacion
+                          }}</small>
+                        </div>
+                        <div class="col-12" v-else>
+                          <small class="text-muted">{{
+                            detalle.articulo +
+                              " - " +
+                              detalle.nom_presentacion +
+                              " (Presentación asociada)"
+                          }}</small>
+                        </div>
+                      </div>
+                      <div class="row">
                         <div class="col-12">
-                            <div class="form-group">
-                                <select size="10" class="form-control" multiple  v-model="buscarCategoriaA"  placeholder="- Categorias -" @change="listarArticulo(buscarA,criterioA,buscarCategoriaA)">
-                                    <option value="">- Categorias -</option>
-                                    <option v-for="categoria in arrayCategoria2" :key="categoria.id" :value="categoria.id" v-text="categoria.nombre"></option>
-                                </select>
-                            </div> 
-                        </div>  
+                          <small>
+                            $ {{ detalle.precio }} | IVA = $
+                            {{ detalle.valor_iva }}
+                          </small>
+                        </div>
+                      </div>
                     </div>
+                    <div class="col-2 ">
+                      <p class="text-right">{{ detalle.cantidad }}</p>
+                    </div>
+                    <div class="col-3 float-right">
+                      <p class="text-right">
+                        $
+                        {{
+                          Math.round(
+                            parseFloat(detalle.precio * detalle.cantidad)
+                          )
+                        }}
+                      </p>
+                    </div>
+                    <div class="col-1 ">
+                      <h3
+                        class="text-danger"
+                        v-if="rolusuario == 1 || detalle.prod_nuevo == 1"
+                        @click="eliminarDetalle(detalle, index)"
+                        title="Remover"
+                      >
+                        <i class="fa fa-times-circle"></i>
+                      </h3>
+
+                      <h3 class="text-secondary" title="Deshabilitado" v-else>
+                        <i class="fa fa-times-circle"></i>
+                      </h3>
+                    </div>
+                    <div v-if="detalle.observaciones" class="col-12">
+                      <strong>Observaciones: </strong>
+                      <small>{{ detalle.observaciones }} </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-1">
+                <div class="col-6">
+                  <b>Subtotal</b>
+                </div>
+                <div class="col-4 text-righ text-right">
+                  $ {{ (subtotal = calcularSubtotal) }}
+                </div>
+              </div>
+              <div class="row mt-1">
+                <div class="col-6">
+                  <b>IVA</b>
                 </div>
 
-                <div class="card-body col-xs-12 col-sm-12 col-md-9">
-                    <div class="form-group">
-                        <div class="row">
-                            <div v-for="(articulo, index) in arrayArticulo" :key="index" class="col-lg-2 col-md-3 col-sm-4 col-6 separa-cards">
-                                <!--<div class="card text-center mb-1" style="cursor:pointer" @click="agregaDetalleMesero(articulo)">-->
-                                <div class="card text-center mb-1" style="cursor:pointer" @click="abrirModal(articulo)">
-                                    <div class=" txt-price-prod btn-primary">
-                                        <span class="num text-white "> $ {{articulo.precio_venta}} </span>
-                                    </div>
-                                    <div class="card mx-auto">
-                                        <img v-if="`${articulo.img}`!='default.png'" :src="`${ruta}/Empresas/${articulo.id_empresa}_empresa/ImgProductos/${articulo.img}`" class="img-prods">
-                                    </div>
-                                    <div class="txt-nom-prod bg-success">
-                                        <small class="mb-0 text-white">{{articulo.nombre}}</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>  
-                    </div>
+                <div class="col-4 text-righ text-right">
+                  $ {{ (valor_iva = calcularTotalIva) }}
                 </div>
+              </div>
+              <div class="row mt-1">
+                <div class="col-6">
+                  <b>Total</b>
+                </div>
+                <div class="col-4 text-righ text-right">
+                  $ {{ (total = calcularTotal) }}
+                </div>
+              </div>
             </div>
-            <div v-show="position==2">  <!-- VISTA NUEVA FACTURA -->                
-                <div class="card">
-                    <div class="card-header">
-                        <div class="row">
-                            <div class="col-6">
-                                <button class="btn btn-info" @click="position=1"><i class="fa fa-arrow-left"></i> Productos </button>
-                            </div>
-                            <div class="col-5 pr-1">
-                                <button class="btn btn-danger" style="margin-left: -31px;" @click="ocultarDetalle(); position=7;">Descartar <i class="fa fa-trash"></i>
-                                </button>
-                            </div>
-                        </div>                                
-                    </div>
-                    <div class="card-body">
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="input-group mb-3">
-                                    <div class="col-1">
-                                        <h3><i class="fa fa-user"></i></h3>
-                                    </div>
-                                    <div class="col-9 nombre-tercero"><small class="text-muted ">{{tercero}}</small></div>
-                                    <div class="col-1">
-                                        <h3  v-if="!tercero" style="cursor:pointer" class="text-primary" @click="position=3">
-                                            <i class="fa fa-plus-circle" href="#59981A"></i>
-                                        </h3>     
-                                        
-                                        <h3 v-else style="cursor:pointer" class="text-primary" @click="quitar(3)">
-                                            <i class="fa fa-times-circle" href="#59981A"></i>
-                                        </h3>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <label class="input-group-text" for="inputGroupSelect01">Mesas</label>
-                                        </div>
-                                        <select class="custom-select form-control" v-model="lugar" id="inputGroupSelect01">
-                                            <option selected disabled>Ubicacion...</option>                                            
-                                            <option v-for="zonas in arrayZonas" :key="zonas.id" :value="zonas.id" v-text="zonas.zona"></option>
-                                        </select>                                        
-                                    </div>
-                                </div>                                            
-                            </div>
-                            <div class="row ">
-                                <div class="col-12">
-                                   
-                                    <div class="row border-bottom" v-for="(detalle,index) in arrayDetalle" :key="detalle.id">
-                                         <div style="display:none">
-                                            
-                                            {{detalle.valor_iva=Math.round(parseFloat(detalle.precio*detalle.cantidad)-parseFloat((detalle.precio*detalle.cantidad)/((detalle.iva/100)+1)))}}
-                                            {{detalle.valor_subtotal=Math.round(parseFloat((detalle.precio*detalle.cantidad)-detalle.valor_iva-detalle.valor_descuento))}}
-                                        </div>
-                                        <div class="col-5">
-                                            <div class="row">
-                                                <div class="col-12" v-if="detalle.padre==null || detalle.padre==''" >
-                                                    <small class="text-muted">{{detalle.articulo+' - '+detalle.nom_presentacion}}</small>
-                                                </div>
-                                                <div class="col-12" v-else >
-                                                    <small class="text-muted">{{detalle.articulo+' - '+detalle.nom_presentacion+' (Presentación asociada)'}}</small>
-                                                </div>
-                                            </div>    
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <small > 
-                                                        $ {{detalle.precio}} | IVA = $ {{detalle.valor_iva}}
-                                                    </small>
-                                                </div>
-                                            </div>    
-                                            
-                                        </div>
-                                        <div class="col-2 "><p class="text-right">{{detalle.cantidad}}</p></div>
-                                        <div class="col-3 float-right"><p class="text-right"> $ {{Math.round(parseFloat((detalle.precio*detalle.cantidad)))}} </p></div>
-                                        <div class="col-1 ">                                           
-                                            <h3 class="text-danger" v-if="rolusuario==1 || detalle.prod_nuevo==1" @click="eliminarDetalle(detalle,index)" title="Remover"><i class="fa fa-times-circle"></i></h3>
-                                          
-                                             <h3 class="text-secondary" title="Deshabilitado" v-else>
-                                                <i class="fa fa-times-circle"></i>
-                                            </h3>
-                                        </div>
-                                        <div v-if="detalle.observaciones" class="col-12">                                            
-                                            <strong>Observaciones: </strong> 
-                                            <small >{{detalle.observaciones}} </small>                                            
-                                        </div>
-                                        
-                                    </div>
-                                   
-                                </div>
-                            </div> 
-                            <div class="row mt-1">
-                                <div class="col-6">
-                                    <b>Subtotal</b>
-                                </div>
-                                <div class="col-4 text-righ text-right">
-                                    $ {{subtotal=calcularSubtotal}}
-                                </div>
-                                
-                            </div>
-                            <div class="row mt-1">
-                                <div class="col-6">
-                                    <b>IVA</b>
-                                </div>
-                                
-                                <div class="col-4 text-righ text-right">
-                                    $ {{valor_iva=calcularTotalIva}}
-                                </div>
-                            </div>
-                            <div class="row mt-1">
-                                <div class="col-6">
-                                    <b>Total</b>
-                                </div>
-                                <div class="col-4 text-righ text-right">
-                                    $ {{total=calcularTotal}}
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div> 
+          </div>
+        </div>
+      </div>
+      <div v-show="position == 3">
+        <!-- listado de clientes -->
+        <div class="card">
+          <div class="card-header">
+            <div class="row">
+              <div class="col-2">
+                <button
+                  @click="position = 4"
+                  class="btn btn-success fa fa-plus"
+                ></button>
+              </div>
+              <div class="col-2">
+                <button
+                  @click="position = 2"
+                  class="btn btn-primary fa fa-undo"
+                ></button>
+              </div>
+              <div class="col-6 pr-1">
+                <input
+                  class="form-control mr-sm-2"
+                  type="search"
+                  placeholder="Buscar"
+                  aria-label="Search"
+                  name="cta_busq"
+                  v-model="terc_busq"
+                  @keyup="buscarTercero()"
+                />
+              </div>
             </div>
-            <div v-show="position==3"> <!-- listado de clientes -->
-                <div class="card">
+          </div>
 
-                    <div class="card-header">
-                        <div class="row">
-                            <div class="col-2">
-                                <button @click="position=4" class="btn btn-success fa fa-plus"></button>
-                            </div>
-                            <div class="col-2">
-                                <button @click="position=2" class="btn btn-primary fa fa-undo"></button>
-                            </div>
-                            <div class="col-6 pr-1">
-                               <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search" name="cta_busq" v-model="terc_busq" @keyup="buscarTercero()">
-                            </div> 
-                        </div>                                
-                    </div>
-
-                    <div class="card-body">  
-                        
-                        <div class="row " :class=" id_selected_row_acitve==tercero.id ? 'border border-primary ' : 'border-bottom resaltar'" @click="showUserOpts(tercero.id); id_selected_row=tercero.id"  v-for="tercero in arrayTerceros" :key="tercero.id"  v-bind:id="'person_row_'+tercero.id" > 
-                            <div v-if="tercero.nombre && !tercero.nombre1" class="col-8" >
-                                {{ tercero.nombre }} 
-                            </div>
-                            <div v-else class="col-8" >
-                                {{ tercero.nombre1 + ' ' + validarUnder(tercero.nombre2)+' '+tercero.apellido1+' '+validarUnder(tercero.apellido2) }} 
-                            </div>
-                            <div class="col-2 text-right">
-                                <h3 v-if="id_selected_row==tercero.id&&id_selected_row_acitve!=tercero.id" class="text-primary" v-bind:id="'person_opts_'+tercero.id" style="margin: auto; font-size: 19px;" @click="cargarTercero(tercero);id_selected_row_acitve=tercero.id;"><i class="fa fa-check"></i></h3>
-                                <h3 v-if="id_selected_row==tercero.id&&id_selected_row_acitve==tercero.id" class="text-danger" v-bind:id="'person_opts_'+tercero.id" style="margin: auto; font-size: 19px;" @click="id_selected_row_acitve='';"><i class="fa fa-times-circle"></i></h3>
-                                 
-                            </div> 
-                            <div class="col-2 text-center">
-                                <h3 v-if="id_selected_row==tercero.id" class="text-success ex1" v-bind:id="'person_opts_'+tercero.id" style="margin: auto; font-size: 19px;"><i class="fa fa-pencil"></i></h3>
-                            </div>
-                        </div>                        
-                    </div>                    
-                </div>      
+          <div class="card-body">
+            <div
+              class="row "
+              :class="
+                id_selected_row_acitve == tercero.id
+                  ? 'border border-primary '
+                  : 'border-bottom resaltar'
+              "
+              @click="
+                showUserOpts(tercero.id);
+                id_selected_row = tercero.id;
+              "
+              v-for="tercero in arrayTerceros"
+              :key="tercero.id"
+              v-bind:id="'person_row_' + tercero.id"
+            >
+              <div v-if="tercero.nombre && !tercero.nombre1" class="col-8">
+                {{ tercero.nombre }}
+              </div>
+              <div v-else class="col-8">
+                {{
+                  tercero.nombre1 +
+                    " " +
+                    validarUnder(tercero.nombre2) +
+                    " " +
+                    tercero.apellido1 +
+                    " " +
+                    validarUnder(tercero.apellido2)
+                }}
+              </div>
+              <div class="col-2 text-right">
+                <h3
+                  v-if="
+                    id_selected_row == tercero.id &&
+                      id_selected_row_acitve != tercero.id
+                  "
+                  class="text-primary"
+                  v-bind:id="'person_opts_' + tercero.id"
+                  style="margin: auto; font-size: 19px;"
+                  @click="
+                    cargarTercero(tercero);
+                    id_selected_row_acitve = tercero.id;
+                  "
+                >
+                  <i class="fa fa-check"></i>
+                </h3>
+                <h3
+                  v-if="
+                    id_selected_row == tercero.id &&
+                      id_selected_row_acitve == tercero.id
+                  "
+                  class="text-danger"
+                  v-bind:id="'person_opts_' + tercero.id"
+                  style="margin: auto; font-size: 19px;"
+                  @click="id_selected_row_acitve = ''"
+                >
+                  <i class="fa fa-times-circle"></i>
+                </h3>
+              </div>
+              <div class="col-2 text-center">
+                <h3
+                  v-if="id_selected_row == tercero.id"
+                  class="text-success ex1"
+                  v-bind:id="'person_opts_' + tercero.id"
+                  style="margin: auto; font-size: 19px;"
+                >
+                  <i class="fa fa-pencil"></i>
+                </h3>
+              </div>
             </div>
-            <div v-show="position==4"> <!-- agregar clientes -->
-            
-                <div class="card">
+          </div>
+        </div>
+      </div>
+      <div v-show="position == 4">
+        <!-- agregar clientes -->
 
-                    <div class="card-header">
-                        <div class="row">
-                            <div class="col-6">
-                                <!-- <button  class="btn btn-success fa fa-save"></button> -->
-                            </div>
-                            <div class="col-6">
-                                <button @click="position=2" class="btn btn-primary fa fa-undo"></button>
-                            </div>
-                        </div>                                
-                    </div>
-
-                    <div class="card-body">                                                       
-                        <form>
-                            <div class="form-row">
-                                <div class="form-group col-6">
-                                    <label for="exampleFormControlSelect1">Tipo de documento</label>
-                                    <select class="form-control" v-model="tipo_documento">
-                                        <option value="0" disabled>Seleccione</option>
-                                        <option>Cedula Ciudadania</option>
-                                        <option>Cedula Extranjera</option>
-                                        <option>Tarjeta Identidad</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-6">
-                                    <label for="nro documento">Documento</label>
-                                    <input type="num" class="form-control" v-model="num_documento" aria-describedby="documentHelp" placeholder="document">
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col">
-                                    <label for="exampleInputNombre1">Nombre 1</label>
-                                    <input type="text" class="form-control" v-model="nombre1" placeholder="First name">
-                                </div>
-                                <div class="col">
-                                    <label for="exampleInputNombre2">Nombre 2</label>
-                                    <input type="text" class="form-control" v-model="nombre2" placeholder="First name">
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col">
-                                    <label for="exampleInputApellido1">Apellido 1</label>
-                                    <input type="text" class="form-control" v-model="apellido1" placeholder="Last name">
-                                </div>
-                                <div class="col">
-                                    <label for="exampleInputApellido2">Apellido 2</label>
-                                    <input type="text" class="form-control" v-model="apellido2" placeholder="Last name">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPhone">Celular</label>
-                                <input type="num" class="form-control" v-model="celular" aria-describedby="phoneHelp" placeholder="57+">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Correo electronico</label>
-                                <input type="email" class="form-control" v-model="email" aria-describedby="emailHelp" placeholder="email@example.com">
-                            </div>
-                        </form> 
-                        <div class="col-6">
-                            <button @click="registrarCliente();"  class="btn btn-success text-white"><i class="fa fa-save"></i>Guardar</button>
-                        </div>
-                    </div>                    
-                </div> 
+        <div class="card">
+          <div class="card-header">
+            <div class="row">
+              <div class="col-6">
+                <!-- <button  class="btn btn-success fa fa-save"></button> -->
+              </div>
+              <div class="col-6">
+                <button
+                  @click="position = 2"
+                  class="btn btn-primary fa fa-undo"
+                ></button>
+              </div>
             </div>
-            <div v-show="position==5"> <!-- tickets imprimir factura -->
-                  
-            </div>  
-            <div v-show="position==6"> <!-- tickets listado preparcion chef -->
-                <div class="card">
-                    <div class="card-header">
-                        <div class="row">
-                            <!-- <div class="col-3">
+          </div>
+
+          <div class="card-body">
+            <form>
+              <div class="form-row">
+                <div class="form-group col-6">
+                  <label for="exampleFormControlSelect1"
+                    >Tipo de documento</label
+                  >
+                  <select class="form-control" v-model="tipo_documento">
+                    <option value="0" disabled>Seleccione</option>
+                    <option>Cedula Ciudadania</option>
+                    <option>Cedula Extranjera</option>
+                    <option>Tarjeta Identidad</option>
+                  </select>
+                </div>
+                <div class="form-group col-6">
+                  <label for="nro documento">Documento</label>
+                  <input
+                    type="num"
+                    class="form-control"
+                    v-model="num_documento"
+                    aria-describedby="documentHelp"
+                    placeholder="document"
+                  />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col">
+                  <label for="exampleInputNombre1">Nombre 1</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model="nombre1"
+                    placeholder="First name"
+                  />
+                </div>
+                <div class="col">
+                  <label for="exampleInputNombre2">Nombre 2</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model="nombre2"
+                    placeholder="First name"
+                  />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col">
+                  <label for="exampleInputApellido1">Apellido 1</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model="apellido1"
+                    placeholder="Last name"
+                  />
+                </div>
+                <div class="col">
+                  <label for="exampleInputApellido2">Apellido 2</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model="apellido2"
+                    placeholder="Last name"
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPhone">Celular</label>
+                <input
+                  type="num"
+                  class="form-control"
+                  v-model="celular"
+                  aria-describedby="phoneHelp"
+                  placeholder="57+"
+                />
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Correo electronico</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  v-model="email"
+                  aria-describedby="emailHelp"
+                  placeholder="email@example.com"
+                />
+              </div>
+            </form>
+            <div class="col-6">
+              <button
+                @click="registrarCliente()"
+                class="btn btn-success text-white"
+              >
+                <i class="fa fa-save"></i>Guardar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-show="position == 5"><!-- tickets imprimir factura --></div>
+      <div v-show="position == 6">
+        <!-- tickets listado preparcion chef -->
+        <div class="card">
+          <div class="card-header">
+            <div class="row">
+              <!-- <div class="col-3">
                                 <button @click="position=5" class="btn btn-primary fa fa-undo"></button>
                             </div> -->
-                            <div class="col-3">
-                                <button @click="position=7" class="btn btn-primary fa fa-list"></button>
-                            </div>
-                            <div class="col-6 pr-1">  
-                            </div> 
-                            <div class="col-3">  
-                                <button @click="imprimirTicket()" class="btn btn-light">
-                                    Imprimir
-                                </button>
-                            </div> 
-                            
-                        </div>                                      
-                    </div>
-                    <div class="ticket text-center">
-                         <img class="card-img-top" :src="`${ruta}/Empresas/${datosEmpresa.id}_empresa/ImgLogos/${datosEmpresa.logo}`" style="width:100%;max-height:100px;max-width:100px;height:auto;">
-                        
-                            <h6 class="col-12">{{datosEmpresa.nombre}}</h6>
-                        <p class="centrado espacio-1">FECHA {{ datosFactura.fec_crea}}</p>
-                        -----------------------------------------
-                        <div class="input-group mb-0">
-                            <div class="col-6">
-                                <p class="espacio-1">MESERO: </p>
-                            </div> 
-                            <div class="col-6">
-                                <p class="espacio-1"> {{ datosFactura.cajero }}</p>
-                            </div>
-                        </div>
-                        <div class="input-group mb-0">
-                            <div class="col-6">
-                                <p class="espacio-1">MESA:</p>
-                            </div> 
-                            <div class="col-6">
-                                <p class="espacio-1 centrado">{{ datosFactura.zona }}</p>
-                            </div>
-                        </div>
-                        -----------------------------------------
-                        <table class="table table-sm">
-                            <thead>
-                                <tr>
-                                    <th colspan="1">PRODUCTO</th>                                    
-                                    <th colspan="1">CANTIDAD</th>
-                                    <th colspan="1">PRECIO</th>
-                                </tr>
-                            </thead>
-                            <tbody>                               
-                                <tr v-for="(prod_preparado,index) in arrayPreparado" :key="index" >
-                                    <td  colspan="1"> - {{prod_preparado.nombre_articulo}}
-                                        <br>
-                                        {{prod_preparado.observaciones}}
-                                    </td>                                    
-                                    <td  colspan="1">{{prod_preparado.cantidad}}</td>
-                                    <td  colspan="1">{{prod_preparado.precio * prod_preparado.cantidad }}</td>
-                                    
-                                </tr>
-                                  
-                            </tbody>
-                        </table>
-                        -----------------------------------------
-                        <br>
-                        <p class="centrado minimizar espacio-1">POWERE BY - FRACTAL AGENCIA DIGITAL<br>www.fractalagenciadigital.  com</p><br> 
-                    </div>                    
-                </div>  
-   
+              <div class="col-3">
+                <button
+                  @click="position = 7"
+                  class="btn btn-primary fa fa-list"
+                ></button>
+              </div>
+              <div class="col-6 pr-1"></div>
+              <div class="col-3">
+                <button @click="imprimirTicket()" class="btn btn-light">
+                  Imprimir
+                </button>
+              </div>
             </div>
-            <div v-show="position==7"> <!-- listado de facturas -->
-                <div class="card">          
-                    </div>                            
-                    
-                    
-                    <div class="card-body">
-                        <div class="row">
-                            <table class="table table-sm table-bordered">
-                                <thead class="thead-light">
-                                    <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Factura</th>
-                                    <th scope="col">Mesa</th>
-                                    <th scope="col">Total</th>
-                                    <th scope="col">Estado</th>
-                                    <th scope="col">Editar</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="facturacion in arrayFacturacion" :key="facturacion.id" style="text-align: right;">
-                                        <th scope="row">1</th>
-                                        <td v-text="facturacion.num_factura? facturacion.num_factura: ''"></td>
-                                        <td class="centrado" v-text="facturacion.nom_lugar? facturacion.nom_lugar : ''"></td>
-                                        <td class="text-right" v-text="facturacion.total? '$ '+facturacion.total : ''"></td>
-                                        <td v-if="facturacion.estado==1" class="text-warning">Abierta</td>
-                                        <td v-if="facturacion.estado==2" class="text-success">Cerrada</td>
-                                        <td v-if="facturacion.estado==0" class="text-danger">Cancelada</td>
-                                        <td class="centrado">
-                                            <button v-if="facturacion.estado==1"  @click="mostrarDetalle('facturacion','actualizar',facturacion);position=2;" class="btn-1 btn btn-success rounded-circle">
-                                                <i class="fa fa-pencil btn-edit-factura"></i>
-                                            </button>
-                                             <button v-else class="btn-1 btn btn-secondary rounded-circle">
-                                                <i class="fa fa-pencil btn-edit-factura"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    
-                                </tbody>
-                            </table>            
-                        </div>
-                    </div>                      
-                </div>  
-            </div>
-            <!-- MODAL AGREGAR PRODUCTO Y DETALLE -->
-            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none; overflow: auto !important;" aria-hidden="true">
-                <div class="modal-dialog modal-primary modal-xl" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title"></h4>
-                            <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
-                              <span aria-hidden="true" title="Cerrar">×</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col-4 separa-cards">
-                                    <!--<div class="card text-center mb-1" style="cursor:pointer" @click="agregaDetalleMesero(articulo)">-->
-                                    <div class="card text-center mb-1" style="cursor:pointer" @click="cantidad++">
-                                        <div class=" txt-price-prod btn-primary">
-                                            <span class="num text-white "> $ {{auxProd.precio_venta}} </span>
-                                        </div>
-                                        <div class="card mx-auto" v-if="auxProd">
-                                            <img v-if="`${auxProd.img}`!='default.png'" :src="`${ruta}/Empresas/${auxProd.id_empresa}_empresa/ImgProductos/${auxProd.img}`" class="img-prods">
-                                        </div>
-                                        <div class="txt-nom-prod bg-success">
-                                            <small class="mb-0 text-white">{{auxProd.nombre}}</small>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-1">
-                                    <h4 class="mt-5"> X </h4>
-                                </div>
-                                <div class="col-3">
-                                    <input type="text" min="1" style="font-size: 30px !important;" v-model="cantidad" class="display-3 form-control text-right mt-4" aria-label="Large" aria-describedby="inputGroup-sizing-xl" required readonly>
-                                </div>
-                                <div class="col-2 text-center mt-4 ">
-                                    <input type="button" class="btn text-center btn-lg btn-primary mt-2 align-middle"  value="+" @click="cantidad++">
-                                </div>
-                                
-                                <div v-if="cantidad>1" class="text-center col-2 mt-4">
-                                    <input type="button" class="btn btn-lg text-center btn-danger mt-2"  value="-" @click="cantidad--">
-                                </div>
-                            </div>
-                           
+          </div>
+          <div class="ticket text-center">
+            <img
+              class="card-img-top"
+              :src="
+                `${ruta}/Empresas/${datosEmpresa.id}_empresa/ImgLogos/${datosEmpresa.logo}`
+              "
+              style="width:100%;max-height:100px;max-width:100px;height:auto;"
+            />
 
-                            <div class="input-group input-group-lg">
-                               
-                                <div class=" row col-12 text-center pt-1 ">
-                                    <div class="col-6  pb-sm-1 ">
-                                        <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
-                            
-                                    </div>
-                                    <div class="col-6  pb-sm-1 ">
-                                        <button type="button" class="btn btn-success" @click="agregaDetalleMesero()">Agregar</button>
-                                    </div>
-                                </div>
-                                <div style="margin-left: -8px;" class=" row col-12 text-center ">
-                                    <div class="col-12 ">
-                                        <h3><strong>Observaciones</strong></h3>
-                                    </div>
-                                    <div class="col-12  ">
-                                        <textarea name="auxObser" id="auxObser" v-model="auxObser" rows="2" class="form-group"></textarea>                                        
-                                    </div>
-                                </div>
-                                <div v-if="auxProd.observaciones" class=" row col-12 text-center pd-3 mt-2 mb-2 pb-3">
-                                    <div class="col-sm-12 col-md-6 col-lg-3 mb-3" v-for="observ in auxProd.observaciones" :key="observ.id">
-                                       <button v-if="auxObser==''" type="button" class="btn btn-primary btn-block" @click="auxObser=auxObser+' '+ observ.observacion">{{observ.observacion}}</button>
-                                       <button v-else type="button" class="btn btn-primary btn-block" @click="auxObser=auxObser+', '+ observ.observacion">{{observ.observacion}}</button>
-                                    </div>
-                                    
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <h6 class="col-12">{{ datosEmpresa.nombre }}</h6>
+            <p class="centrado espacio-1">FECHA {{ datosFactura.fec_crea }}</p>
+            -----------------------------------------
+            <div class="input-group mb-0">
+              <div class="col-6">
+                <p class="espacio-1">MESERO:</p>
+              </div>
+              <div class="col-6">
+                <p class="espacio-1">{{ datosFactura.cajero }}</p>
+              </div>
             </div>
-        <!-- </div> -->
-        <div>              
-            <div class="row mt-1 fixed-bottom mx-auto"> <!-- boton de facturar -->
-                <div class="col-12" v-if="position==1||(position==2 && tipoAccion2==1) ||(position==2 && tipoAccion2==0)">
-                    <button type="button" @click="registrarFacturacion();" class="btn btn-block btn-lg active btn-success" href="#" role="button"><h3 class="text-white">Facturar $ {{valor_final=calcularTotal}}</h3></button>
+            <div class="input-group mb-0">
+              <div class="col-6">
+                <p class="espacio-1">MESA:</p>
+              </div>
+              <div class="col-6">
+                <p class="espacio-1 centrado">{{ datosFactura.zona }}</p>
+              </div>
+            </div>
+            -----------------------------------------
+            <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th colspan="1">PRODUCTO</th>
+                  <th colspan="1">CANTIDAD</th>
+                  <th colspan="1">PRECIO</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  v-for="(prod_preparado, index) in arrayPreparado"
+                  :key="index"
+                >
+                  <td colspan="1">
+                    - {{ prod_preparado.nombre_articulo }}
+                    <br />
+                    {{ prod_preparado.observaciones }}
+                  </td>
+                  <td colspan="1">{{ prod_preparado.cantidad }}</td>
+                  <td colspan="1">
+                    {{ prod_preparado.precio * prod_preparado.cantidad }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            -----------------------------------------
+            <br />
+            <p class="centrado minimizar espacio-1">
+              POWERE BY - FRACTAL AGENCIA DIGITAL<br />www.fractalagenciadigital.
+              com
+            </p>
+            <br />
+          </div>
+        </div>
+      </div>
+      <div v-show="position == 7">
+        <!-- listado de facturas -->
+        <div class="card"></div>
+
+        <div class="card-body">
+          <div class="row">
+            <table class="table table-sm table-bordered">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Factura</th>
+                  <th scope="col">Mesa</th>
+                  <th scope="col">Total</th>
+                  <th scope="col">Estado</th>
+                  <th scope="col">Editar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  v-for="facturacion in arrayFacturacion"
+                  :key="facturacion.id"
+                  style="text-align: right;"
+                >
+                  <th scope="row">1</th>
+                  <td
+                    v-text="
+                      facturacion.num_factura ? facturacion.num_factura : ''
+                    "
+                  ></td>
+                  <td
+                    class="centrado"
+                    v-text="facturacion.nom_lugar ? facturacion.nom_lugar : ''"
+                  ></td>
+                  <td
+                    class="text-right"
+                    v-text="facturacion.total ? '$ ' + facturacion.total : ''"
+                  ></td>
+                  <td v-if="facturacion.estado == 1" class="text-warning">
+                    Abierta
+                  </td>
+                  <td v-if="facturacion.estado == 2" class="text-success">
+                    Cerrada
+                  </td>
+                  <td v-if="facturacion.estado == 0" class="text-danger">
+                    Cancelada
+                  </td>
+                  <td class="centrado">
+                    <button
+                      v-if="facturacion.estado == 1"
+                      @click="
+                        mostrarDetalle(
+                          'facturacion',
+                          'actualizar',
+                          facturacion
+                        );
+                        position = 2;
+                      "
+                      class="btn-1 btn btn-success rounded-circle"
+                    >
+                      <i class="fa fa-pencil btn-edit-factura"></i>
+                    </button>
+                    <button
+                      v-else
+                      class="btn-1 btn btn-secondary rounded-circle"
+                    >
+                      <i class="fa fa-pencil btn-edit-factura"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- MODAL AGREGAR PRODUCTO Y DETALLE -->
+    <div
+      class="modal fade"
+      tabindex="-1"
+      :class="{ mostrar: modal }"
+      role="dialog"
+      aria-labelledby="myModalLabel"
+      style="display: none; overflow: auto !important;"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-primary modal-xl" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title"></h4>
+            <button
+              type="button"
+              class="close"
+              @click="cerrarModal()"
+              aria-label="Close"
+            >
+              <span aria-hidden="true" title="Cerrar">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-4 separa-cards">
+                <!--<div class="card text-center mb-1" style="cursor:pointer" @click="agregaDetalleMesero(articulo)">-->
+                <div
+                  class="card text-center mb-1"
+                  style="cursor:pointer"
+                  @click="cantidad++"
+                >
+                  <div class=" txt-price-prod btn-primary">
+                    <span class="num text-white ">
+                      $ {{ auxProd.precio_venta }}
+                    </span>
+                  </div>
+                  <div class="card mx-auto" v-if="auxProd">
+                    <img
+                      v-if="`${auxProd.img}` != 'default.png'"
+                      :src="
+                        `${ruta}/Empresas/${auxProd.id_empresa}_empresa/ImgProductos/${auxProd.img}`
+                      "
+                      class="img-prods"
+                    />
+                  </div>
+                  <div class="txt-nom-prod bg-success">
+                    <small class="mb-0 text-white">{{ auxProd.nombre }}</small>
+                  </div>
                 </div>
-                 <button type="button" v-if="(position==2 && tipoAccion2==2)"  class="btn-block btn-lg active btn-success" @click="actualizarFacturacion();">Actualizar</button>
-                <div class="col-12" v-if="position==7">
-                    <a v-if="no_caja==0" @click="position=1;mostrarDetalle('facturacion','registrar')" class="btn btn-block btn-lg active btn-success"  href="#" role="button"><h3 class="text-white">Iniciar Factura</h3></a>
-                    <a v-else  class="btn btn-block btn-lg active btn-secondary"  href="#" role="button"><h3 class="text-white">No tienes una caja abierta</h3></a>
+              </div>
+              <div class="col-1">
+                <h4 class="mt-5">X</h4>
+              </div>
+              <div class="col-3">
+                <input
+                  type="text"
+                  min="1"
+                  style="font-size: 30px !important;"
+                  v-model="cantidad"
+                  class="display-3 form-control text-right mt-4"
+                  aria-label="Large"
+                  aria-describedby="inputGroup-sizing-xl"
+                  required
+                  readonly
+                />
+              </div>
+              <div class="col-2 text-center mt-4 ">
+                <input
+                  type="button"
+                  class="btn text-center btn-lg btn-primary mt-2 align-middle"
+                  value="+"
+                  @click="cantidad++"
+                />
+              </div>
+
+              <div v-if="cantidad > 1" class="text-center col-2 mt-4">
+                <input
+                  type="button"
+                  class="btn btn-lg text-center btn-danger mt-2"
+                  value="-"
+                  @click="cantidad--"
+                />
+              </div>
+            </div>
+
+            <div class="input-group input-group-lg">
+              <div class=" row col-12 text-center pt-1 ">
+                <div class="col-6  pb-sm-1 ">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    @click="cerrarModal()"
+                  >
+                    Cerrar
+                  </button>
                 </div>
-            </div> 
-        </div>  
-    </main>
+                <div class="col-6  pb-sm-1 ">
+                  <button
+                    type="button"
+                    class="btn btn-success"
+                    @click="agregaDetalleMesero()"
+                  >
+                    Agregar
+                  </button>
+                </div>
+              </div>
+              <div style="margin-left: -8px;" class=" row col-12 text-center ">
+                <div class="col-12 ">
+                  <h3><strong>Observaciones</strong></h3>
+                </div>
+                <div class="col-12  ">
+                  <textarea
+                    name="auxObser"
+                    id="auxObser"
+                    v-model="auxObser"
+                    rows="2"
+                    class="form-group"
+                  ></textarea>
+                </div>
+              </div>
+              <div
+                v-if="auxProd.observaciones"
+                class=" row col-12 text-center pd-3 mt-2 mb-2 pb-3"
+              >
+                <div
+                  class="col-sm-12 col-md-6 col-lg-3 mb-3"
+                  v-for="observ in auxProd.observaciones"
+                  :key="observ.id"
+                >
+                  <button
+                    v-if="auxObser == ''"
+                    type="button"
+                    class="btn btn-primary btn-block"
+                    @click="auxObser = auxObser + ' ' + observ.observacion"
+                  >
+                    {{ observ.observacion }}
+                  </button>
+                  <button
+                    v-else
+                    type="button"
+                    class="btn btn-primary btn-block"
+                    @click="auxObser = auxObser + ', ' + observ.observacion"
+                  >
+                    {{ observ.observacion }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- </div> -->
+    <div>
+      <div class="row mt-1 fixed-bottom mx-auto">
+        <!-- boton de facturar -->
+        <div
+          class="col-12"
+          v-if="
+            position == 1 ||
+              (position == 2 && tipoAccion2 == 1) ||
+              (position == 2 && tipoAccion2 == 0)
+          "
+        >
+          <button
+            type="button"
+            @click="registrarFacturacion()"
+            class="btn btn-block btn-lg active btn-success"
+            href="#"
+            role="button"
+          >
+            <h3 class="text-white">
+              Facturar $ {{ (valor_final = calcularTotal) }}
+            </h3>
+          </button>
+        </div>
+        <button
+          type="button"
+          v-if="position == 2 && tipoAccion2 == 2"
+          class="btn-block btn-lg active btn-success"
+          @click="actualizarFacturacion()"
+        >
+          Actualizar
+        </button>
+        <div class="col-12" v-if="position == 7">
+          <a
+            v-if="no_caja == 0"
+            @click="
+              position = 1;
+              mostrarDetalle('facturacion', 'registrar');
+            "
+            class="btn btn-block btn-lg active btn-success"
+            href="#"
+            role="button"
+            ><h3 class="text-white">Iniciar Factura</h3></a
+          >
+          <a
+            v-else
+            class="btn btn-block btn-lg active btn-secondary"
+            href="#"
+            role="button"
+            ><h3 class="text-white">No tienes una caja abierta</h3></a
+          >
+        </div>
+      </div>
+    </div>
+  </main>
 </template>
 <script>
- alertify.alert('Ready!');
+alertify.alert("Ready!");
 </script>
-<script>  
+<script>
+import vSelect from "vue-select";
+import Vue from "vue";
+export default {
+  props: ["ruta"],
+  data() {
+    return {
+      //Datos de cliente
+      persona_id: 0,
+      // nombre : '',
+      tipo_documento: "DNI",
+      num_documento: "",
+      direccion: "",
+      telefono1: "",
+      telefono2: "",
+      celular: "",
+      email: "",
+      email2: "",
+      sexo: "",
+      regimen: "",
+      fec_nac: "",
+      reside: "",
+      tipo_persona: "Natural",
+      representante: "",
+      nombre1: "",
+      nombre2: "",
+      apellido1: "",
+      apellido2: "",
+      autoretenedor: "",
+      declarante: "",
+      cliente: false,
+      proveedor: false,
+      id_vendedor: "",
+      id_zona: "",
+      plazo_pago: "",
+      bloquear: "",
+      cupo_credito: "",
+      vr_cupo_credito: 0,
+      retenedor_fuente: "",
+      retenedor_iva: "",
+      excluido_iva: "",
+      autoretefuente: "",
+      autoreteiva: "",
+      autoreteica: "",
+      id_banco: 0,
+      num_cuenta_banco: "",
+      tipo_cuenta: "",
+      representante_cuenta: "",
+      tipo_nacionalidad: "",
+      img: "",
+      arrayImg: "",
 
-    import vSelect from 'vue-select';
-    import Vue from 'vue'
-    export default {
-        props : ['ruta'],
-        data (){
-            return {
-                //Datos de cliente
-                persona_id: 0,
-                // nombre : '',
-                tipo_documento : 'DNI',
-                num_documento : '',
-                direccion : '',
-                telefono1 : '',
-                telefono2 : '',
-                celular : '',
-                email : '',
-                email2 : '',
-                sexo: '',
-                regimen: '',
-                fec_nac: '',
-                reside: '',
-                tipo_persona: 'Natural',
-                representante: '',
-                nombre1: '',
-                nombre2: '',
-                apellido1: '',
-                apellido2: '',
-                autoretenedor: '',
-                declarante : '',
-                cliente : false,
-                proveedor : false,
-                id_vendedor : '',
-                id_zona : '',
-                plazo_pago : '',
-                bloquear : '',
-                cupo_credito : '',
-                vr_cupo_credito : 0,
-                retenedor_fuente : '',
-                retenedor_iva : '',
-                excluido_iva : '',
-                autoretefuente : '',
-                autoreteiva : '',
-                autoreteica : '',
-                id_banco : 0,
-                num_cuenta_banco : '',
-                tipo_cuenta : '',
-                representante_cuenta : '',
-                tipo_nacionalidad : '',
-                img: '',
-                arrayImg: '',
+      position: 7,
+      no_caja: 1,
+      id_selected_row_acitve: "",
+      ingreso_id: 0,
+      idproveedor: 0,
+      proveedor: "",
+      nombre: "",
+      tipo_comprobante: "BOLETA",
+      serie_comprobante: "",
+      num_comprobante: "",
+      impuesto: 0.18,
+      total: 0.0,
+      totalImpuesto: 0.0,
+      totalParcial: 0.0,
+      arrayIngreso: [],
+      arrayProveedor: [],
+      arrayDetalle: [],
+      arrayDetalleT: [],
+      arrayPreparado: [],
+      listado: 1,
+      modal: 0,
+      tituloModal: "",
+      tipoAccion: 0,
+      tipoAccion2: 0,
+      tipoAccionModalTerceros: 0,
+      errorFacturacion: 0,
+      errorMostrarMsjFacturacion: [],
+      pagination: {
+        total: 0,
+        current_page: 0,
+        per_page: 0,
+        last_page: 0,
+        from: 0,
+        to: 0,
+      },
+      permisosUser: {
+        leer: 1,
+        escribir: 1,
+        crear: 1,
+        actualizar: 1,
+        anular: 1,
+      },
+      rolusuario: 0,
+      offset: 3,
+      criterio: "num_comprobante",
+      buscar: "",
+      criterioA: "nombre",
+      buscarA: "",
+      buscarCategoriaA: [],
+      arrayCategoria2: [],
+      arrayArticulo: [],
+      idarticulo: 0,
+      codigo: "",
+      articulo: "",
+      precio: 0,
+      cantidad: 1,
+      nom_presentacion: "",
+      id_presentacion: 0,
+      padreDetalle: "",
+      idDetalleAsociado: 0,
+      tipo_vista_articulo: 1,
+      // variables modal buscar tercero
+      modal2: "",
+      tercero: "",
+      id_tercero: "",
+      tituloModal2: "",
+      buscar: "",
+      ctn_ban: 0,
+      tipo_cta: "",
+      cta_busq: "",
+      terc_busq: "",
+      tipo_ingreso: "",
+      arrayTerceros: [],
+      id_selected_row: "",
+      cuenta_ini: "",
+      id_cuenta_ini: "",
+      cuenta_fin: "",
+      id_cuenta_fin: "",
 
+      // variables nuevas
 
+      facturacion_id: 0,
+      num_factura: 0,
+      id_tercero_facturacion: 0,
+      tercero_facturacion: "",
+      id_usuario: 0,
+      fec_edita: "",
+      subtotal: 0.0,
+      valor_iva: 0.0,
+      total: 0.0,
+      abono: 0.0,
+      abono2: 0.0,
+      saldo: 0.0,
+      detalle: "",
+      descuento: 0,
+      fec_registra: "",
+      fec_envia: "",
+      fec_anula: "",
+      fecha: "",
+      stock: 0,
+      nom_caja_cierre_facturacion: "",
+      id_caja_facturacion: 0,
+      id_cierre_caja_facturacion: 0,
 
-                position: 7,
-                no_caja: 1,
-                id_selected_row_acitve: '',
-                ingreso_id: 0,
-                idproveedor:0,
-                proveedor:'',
-                nombre : '',
-                tipo_comprobante : 'BOLETA',
-                serie_comprobante : '',
-                num_comprobante : '',
-                impuesto: 0.18,
-                total:0.0,
-                totalImpuesto: 0.0,
-                totalParcial: 0.0, 
-                arrayIngreso : [],
-                arrayProveedor: [],
-                arrayDetalle : [],
-                arrayDetalleT : [],
-                arrayPreparado : [],
-                listado:1,
-                modal : 0,
-                tituloModal : '',
-                tipoAccion : 0,
-                tipoAccion2 : 0,
-                tipoAccionModalTerceros : 0,
-                errorFacturacion : 0,
-                errorMostrarMsjFacturacion : [],
-                pagination : {
-                    'total' : 0,
-                    'current_page' : 0,
-                    'per_page' : 0,
-                    'last_page' : 0,
-                    'from' : 0,
-                    'to' : 0,
-                },
-                permisosUser: {
-                    'leer' : 1,
-                    'escribir':1,
-                    'crear':1,
-                    'actualizar':1,
-                    'anular':1,
-                },
-                rolusuario:0,
-                offset : 3,
-                criterio : 'num_comprobante',
-                buscar : '',
-                criterioA:'nombre',
-                buscarA: '',
-                buscarCategoriaA : [],
-                arrayCategoria2 : [],
-                arrayArticulo: [],
-                idarticulo: 0,
-                codigo: '',
-                articulo: '',
-                precio: 0,
-                cantidad:1,
-                nom_presentacion : '',
-                id_presentacion : 0,
-                padreDetalle : '',
-                idDetalleAsociado : 0,
-                tipo_vista_articulo:1,
-                // variables modal buscar tercero
-                modal2 : '',
-                tercero :'',
-                id_tercero : '',
-                tituloModal2 : '',
-                buscar : '',   
-                ctn_ban : 0,       
-                tipo_cta : '',    
-                cta_busq : '',  
-                terc_busq : '',
-                tipo_ingreso: '',
-                arrayTerceros : [],
-                id_selected_row: '',
-                cuenta_ini : '',
-                id_cuenta_ini : '',
-                cuenta_fin : '',
-                id_cuenta_fin : '',
+      arrayFacturacion: [],
+      arrayFacturacionT: [],
+      iva: 0,
 
-                // variables nuevas
+      fechaActual: "",
+      fechaHoraActual: "",
+      estado: 0,
+      cambiarEstado: 0,
 
-                facturacion_id:0,
-                num_factura:0,
-                id_tercero_facturacion:0,
-                tercero_facturacion:'',
-                id_usuario:0,
-                fec_edita:'',
-                subtotal:0.0,
-                valor_iva:0.0,
-                total:0.0,
-                abono:0.0,
-                abono2:0.0,
-                saldo:0.0,
-                detalle:'',
-                descuento:0,
-                fec_registra:'',
-                fec_envia:'',
-                fec_anula:'',
-                fecha : '',
-                stock : 0,
-                nom_caja_cierre_facturacion : '',
-                id_caja_facturacion : 0,
-                id_cierre_caja_facturacion : 0,
+      // Variables filtro
+      numFacturaFiltro: "",
+      estadoFiltro: 1,
+      idTerceroFiltro: "",
+      terceroFiltro: "",
+      desdeFiltro: "2019-01-01",
+      hastaFiltro: "",
+      ordenFiltro: "",
+      idVendedorFiltro: "",
+      vendedorFiltro: "",
 
-                arrayFacturacion : [],
-                arrayFacturacionT : [],
-                iva:0,
+      // array del select de zonas
+      arrayZonas: [],
+      lugar: "",
 
-                fechaActual: '',
-                fechaHoraActual:'',
-                estado: 0,
-                cambiarEstado: 0,
+      // modal cantidad articulo
+      modalCantidadArticulo: 0,
+      tituloModalCantidadArticulo: "",
+      cantidadArticulo: 0,
+      precioArticulo: 0,
+      stockCantidadArticulo: 0,
+      saldoParcialCantidadArticulo: false,
+      arrayInfoArticuloModalCantidad: [],
+      accionCodigoBarras: 0,
 
-                // Variables filtro
-                numFacturaFiltro : '',
-                estadoFiltro : 1,
-                idTerceroFiltro : '',
-                terceroFiltro : '',
-                desdeFiltro : '2019-01-01',
-                hastaFiltro : '',
-                ordenFiltro : '',
-                idVendedorFiltro : '',
-                vendedorFiltro : '',
-                
-                // array del select de zonas
-                arrayZonas : [],
-                lugar : '',
+      // tarifarios
+      id_tarifario: 0,
+      arrayTarifario: [],
 
-                // modal cantidad articulo
-                modalCantidadArticulo : 0,
-                tituloModalCantidadArticulo : '',
-                cantidadArticulo : 0,
-                precioArticulo : 0,
-                stockCantidadArticulo : 0,
-                saldoParcialCantidadArticulo : false,
-                arrayInfoArticuloModalCantidad : [],
-                accionCodigoBarras : 0,
+      // variables cierre de caja
+      cierre_caja_id: 0,
+      nombre_caja: "",
+      id_caja_cierre: "",
+      vr_inicial_cierre: 0,
+      obs_inicial_cierre: "",
+      vr_gastos_cierre: 0,
+      obs_gastos_cierre: "",
+      vr_software_cierre: 0,
+      vr_final_cierre: 0,
+      arrayCierresXCajas: [],
+      arrayCierresUsuario: [],
+      arrayCajas: [],
+      modalCierreCaja: 0,
+      tituloModalCierre: "",
+      tipoAccionCierre: 0,
+      ban: 0,
 
-                // tarifarios
-                id_tarifario : 0,
-                arrayTarifario : [],
+      hasError: {
+        vr_inicial_cierre: 0,
+        vr_gastos_cierre: 0,
+        vr_final_cierre: 0,
+      },
+      auxProd: {},
+      auxObser: "",
+      prod_nuevo: 0,
+      factura_imprimir: 0,
+      datosFactura: [],
+      datosEmpresa: [],
+    };
+  },
+  components: {
+    vSelect,
+  },
+  computed: {
+    isActived: function() {
+      return this.pagination.current_page;
+    },
+    //Calcula los elementos de la paginación
+    pagesNumber: function() {
+      if (!this.pagination.to) {
+        return [];
+      }
 
-                // variables cierre de caja
-                cierre_caja_id : 0,
-                nombre_caja : '',
-                id_caja_cierre : '',
-                vr_inicial_cierre : 0,
-                obs_inicial_cierre : '',
-                vr_gastos_cierre : 0,
-                obs_gastos_cierre : '',
-                vr_software_cierre : 0,
-                vr_final_cierre : 0,
-                arrayCierresXCajas : [],
-                arrayCierresUsuario : [],
-                arrayCajas: [],
-                modalCierreCaja : 0,
-                tituloModalCierre : '',
-                tipoAccionCierre : 0,
-                ban : 0,
+      var from = this.pagination.current_page - this.offset;
+      if (from < 1) {
+        from = 1;
+      }
 
-                hasError : {
-                    vr_inicial_cierre : 0,
-                    vr_gastos_cierre : 0,
-                    vr_final_cierre : 0,
-                },
-                auxProd : {},
-                auxObser : '',
-                prod_nuevo : 0,
-                factura_imprimir:0,
-                datosFactura :[],
-                datosEmpresa:[],
+      var to = from + this.offset * 2;
+      if (to >= this.pagination.last_page) {
+        to = this.pagination.last_page;
+      }
+
+      var pagesArray = [];
+      while (from <= to) {
+        pagesArray.push(from);
+        from++;
+      }
+      return pagesArray;
+    },
+    calcularSubtotal: function() {
+      var resultado = 0.0;
+      for (var i = 0; i < this.arrayDetalle.length; i++) {
+        resultado =
+          resultado +
+          (this.arrayDetalle[i].precio * this.arrayDetalle[i].cantidad -
+            this.arrayDetalle[i].valor_descuento);
+      }
+      resultado = resultado - this.calcularTotalIva;
+      return resultado;
+    },
+    calcularDescuento: function() {
+      var resultado = 0.0;
+      for (var i = 0; i < this.arrayDetalle.length; i++) {
+        resultado = resultado + parseInt(this.arrayDetalle[i].valor_descuento);
+      }
+      return resultado;
+    },
+    calcularTotal: function() {
+      var resultado = 0.0;
+      for (var i = 0; i < this.arrayDetalle.length; i++) {
+        resultado =
+          resultado +
+          (this.arrayDetalle[i].precio * this.arrayDetalle[i].cantidad -
+            this.arrayDetalle[i].valor_descuento);
+      }
+      return resultado;
+    },
+    calcularTotalIva: function() {
+      return this.ivaProces();
+    },
+    calcularSaldo: function() {
+      var resultado = 0.0;
+
+      resultado = resultado + (this.calcularTotal - this.abono);
+
+      return resultado;
+    },
+  },
+  methods: {
+    showUserOpts(id_resaltar) {},
+    ivaProces() {
+      var resultado = 0.0;
+      for (var i = 0; i < this.arrayDetalle.length; i++) {
+        resultado += this.arrayDetalle[i].valor_iva;
+      }
+      // resultado = this.total-resultado;
+      resultado = Math.round(resultado);
+      this.valor_iva = resultado;
+      return resultado;
+    },
+    listarFacturacion(
+      page,
+      numFacturaFiltro,
+      estadoFiltro,
+      idTerceroFiltro,
+      ordenFiltro,
+      desdeFiltro,
+      hastaFiltro,
+      idVendedorFiltro
+    ) {
+      let me = this;
+
+      var url =
+        this.ruta +
+        "/facturacion?page=" +
+        page +
+        "&numFacturaFiltro=" +
+        numFacturaFiltro +
+        "&estadoFiltro=" +
+        estadoFiltro +
+        "&idTerceroFiltro=" +
+        idTerceroFiltro +
+        "&ordenFiltro=" +
+        ordenFiltro +
+        "&desdeFiltro=" +
+        desdeFiltro +
+        "&hastaFiltro=" +
+        hastaFiltro +
+        "&idVendedorFiltro=" +
+        idVendedorFiltro +
+        "&id_cierre_caja=" +
+        me.id_cierre_caja_facturacion;
+      axios
+        .get(url)
+        .then(function(response) {
+          var respuesta = response.data;
+          me.arrayFacturacion = respuesta.facturacion.data;
+          me.rolusuario = respuesta.idrol;
+          me.pagination = respuesta.pagination;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    selectProveedor(search, loading) {
+      let me = this;
+      loading(true);
+
+      var url = this.ruta + "/proveedor/selectProveedor?filtro=" + search;
+      axios
+        .get(url)
+        .then(function(response) {
+          let respuesta = response.data;
+          q: search;
+          me.arrayProveedor = respuesta.proveedores;
+          loading(false);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    selectCategoria2() {
+      let me = this;
+      var url = this.ruta + "/categoria/selectCategoria";
+      axios
+        .get(url)
+        .then(function(response) {
+          var respuesta = response.data;
+          me.arrayCategoria2 = respuesta.categorias;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    selectTarifarios() {
+      let me = this;
+      var url = this.ruta + "/con_tarifario/selectConTarifario2";
+      axios
+        .get(url)
+        .then(function(response) {
+          var respuesta = response.data;
+          me.arrayTarifario = respuesta.tarifario;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    listarCajas() {
+      let me = this;
+      var url = this.ruta + "/cierres_caja/validarCierreCaja";
+      axios
+        .get(url)
+        .then(function(response) {
+          //console.log(response.data);
+          var respuesta = response.data;
+          var ban = respuesta.ban;
+          me.arrayCierresXCajas = respuesta.cierres_cajas;
+
+          if (ban == 0 || ban == 1) {
+            me.no_caja = 1;
+
+            Swal.fire({
+              // toast: true,
+              // position: 'top-end',
+              type: "error",
+              title: "Abir caja",
+              position: "center",
+              showConfirmButton: false,
+              timer: 1700,
+            });
+          } else {
+            if (ban == 3) {
+              me.no_caja = 0;
+              me.id_caja_facturacion = me.arrayCierresXCajas[0]["id"];
+              me.id_cierre_caja_facturacion = me.arrayCierresXCajas[0]["id"];
+              me.nom_caja_cierre_facturacion =
+                me.arrayCierresXCajas[0]["nombre"];
+              me.cierre_caja_id = me.arrayCierresXCajas[0]["id"];
+              me.id_caja_cierre = me.arrayCierresXCajas[0]["id_caja"];
+              me.nom_caja_cierre = me.arrayCierresXCajas[0]["nombre"];
+              me.vr_inicial_cierre = me.arrayCierresXCajas[0]["vr_inicial"];
+              me.obs_inicial_cierre = me.arrayCierresXCajas[0]["obs_inicial"];
+              //console.log("entra al ban 3");
+              me.listarFacturacion(
+                1,
+                me.numFacturaFiltro,
+                me.estadoFiltro,
+                me.idTerceroFiltro,
+                me.ordenFiltro,
+                me.desdeFiltro,
+                me.hastaFiltro,
+                me.idVendedorFiltro
+              );
             }
-        },
-        components: {
-            vSelect
-        },
-        computed:{
-            isActived: function(){
-                return this.pagination.current_page;
-            },
-            //Calcula los elementos de la paginación
-            pagesNumber: function() {
-                if(!this.pagination.to) {
-                    return [];
-                }
-                
-                var from = this.pagination.current_page - this.offset; 
-                if(from < 1) {
-                    from = 1;
-                }
 
-                var to = from + (this.offset * 2); 
-                if(to >= this.pagination.last_page){
-                    to = this.pagination.last_page;
-                }  
+            if (ban == 2) {
+              me.no_caja = 1;
 
-                var pagesArray = [];
-                while(from <= to) {
-                    pagesArray.push(from);
-                    from++;
-                }
-                return pagesArray;
-            },
-            calcularSubtotal: function(){
-                var resultado=0.0;
-                for(var i=0;i<this.arrayDetalle.length;i++){
-                    resultado=resultado+((this.arrayDetalle[i].precio*this.arrayDetalle[i].cantidad)-this.arrayDetalle[i].valor_descuento);
-                }
-                resultado = resultado-this.calcularTotalIva;
-                return resultado;
-            },
-            calcularDescuento: function(){
-                var resultado=0.0;
-                for(var i=0;i<this.arrayDetalle.length;i++){
-                    resultado=resultado+parseInt(this.arrayDetalle[i].valor_descuento);
-                }
-                return resultado;
-            },
-            calcularTotal: function(){
-                var resultado=0.0;
-                for(var i=0;i<this.arrayDetalle.length;i++){
-                    resultado=resultado+((this.arrayDetalle[i].precio*this.arrayDetalle[i].cantidad)-this.arrayDetalle[i].valor_descuento)
-                }
-                return resultado;
-            },
-            calcularTotalIva: function(){
-               return this.ivaProces();
-            },
-            calcularSaldo: function(){
-                var resultado=0.0;
+              Swal.fire({
+                // toast: true,
+                // position: 'top-end',
+                type: "error",
+                title: "Abir caja",
+                position: "center",
+                showConfirmButton: false,
+                timer: 1700,
+              });
+            }
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    SelectCierreXCaja(id) {
+      let me = this;
+      var url = this.ruta + "/cierres_caja/SelectCierreXCaja?id=" + id;
+      axios
+        .get(url)
+        .then(function(response) {
+          var respuesta = response.data.cierres_caja[0];
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    selectCajas() {
+      let me = this;
+      var url = this.ruta + "/cajas/SelectCaja";
+      axios
+        .get(url)
+        .then(function(response) {
+          var respuesta = response.data;
+          me.arrayCajas = respuesta.cajas;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    selectValorInicialCaja(id) {
+      let me = this;
+      var url = this.ruta + "/cierres_caja/selectValorInicialCaja?id=" + id;
+      if (id != 0 && id != "") {
+        axios
+          .get(url)
+          .then(function(response) {
+            var respuesta = response.data;
+            if (respuesta.cierres_caja[0]) {
+              me.vr_inicial_cierre = respuesta.cierres_caja[0]["vr_final"];
+            } else {
+              me.vr_inicial_cierre = 0;
+            }
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+      } else {
+        alert("id vacio");
+      }
+    },
+    registrarCierreXCaja() {
+      if (this.validarCierreXCaja()) {
+        return;
+      }
 
-                resultado=resultado+(this.calcularTotal-this.abono);
-                
-                return resultado;
-            },
-        },
-        methods : {
-            showUserOpts(id_resaltar){},
-            ivaProces(){
-                 
-                var resultado=0.0;
-                for(var i=0;i<this.arrayDetalle.length;i++){                    
-                    resultado += this.arrayDetalle[i].valor_iva;                    
-                }
-                // resultado = this.total-resultado;
-                resultado = Math.round(resultado);
-                this.valor_iva = resultado;
-                return resultado;
-            },
-            listarFacturacion (page,numFacturaFiltro,estadoFiltro,idTerceroFiltro,ordenFiltro,desdeFiltro,hastaFiltro,idVendedorFiltro){
-                let me=this;
+      let me = this;
 
-                var url= this.ruta +'/facturacion?page=' + page + '&numFacturaFiltro='+ numFacturaFiltro + '&estadoFiltro='+ estadoFiltro + '&idTerceroFiltro='+ idTerceroFiltro + '&ordenFiltro='+ ordenFiltro + '&desdeFiltro='+ desdeFiltro + '&hastaFiltro='+ hastaFiltro + '&idVendedorFiltro='+ idVendedorFiltro+'&id_cierre_caja='+me.id_cierre_caja_facturacion;
-                axios.get(url).then(function (response) {
-                    var respuesta= response.data;
-                    me.arrayFacturacion = respuesta.facturacion.data;
-                    me.rolusuario = respuesta.idrol;
-                    me.pagination= respuesta.pagination;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            },            
-            selectProveedor(search,loading){
-                let me=this;
-                loading(true)
+      axios
+        .post(this.ruta + "/cierres_caja/registrar", {
+          id_caja: this.id_caja_cierre,
+          vr_inicial: this.vr_inicial_cierre,
+          obs_inicial: this.obs_inicial_cierre,
+          vr_gastos: this.vr_gastos_cierre,
+          obs_gastos: this.obs_gastos_cierre,
+          vr_final: this.vr_final_cierre,
+        })
+        .then(function(response) {
+          me.modalCierreCaja = 0;
+          me.listarCajas();
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    actualizarCierreXCaja() {
+      if (this.validarCierreXCaja()) {
+        return;
+      }
 
-                var url= this.ruta +'/proveedor/selectProveedor?filtro='+search;
-                axios.get(url).then(function (response) {
-                    let respuesta = response.data;
-                    q: search
-                    me.arrayProveedor=respuesta.proveedores;
-                    loading(false)
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            },
-            selectCategoria2(){
-                let me=this;
-                var url= this.ruta + '/categoria/selectCategoria';
-                axios.get(url).then(function (response) {
-                     
-                    var respuesta= response.data;
-                    me.arrayCategoria2 = respuesta.categorias;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            },
-            selectTarifarios(){
-                let me=this;
-                var url= this.ruta + '/con_tarifario/selectConTarifario2';
-                axios.get(url).then(function (response) {
-                    var respuesta= response.data;
-                    me.arrayTarifario = respuesta.tarifario;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            },
-            listarCajas(){
-                let me=this;
-                var url= this.ruta +'/cierres_caja/validarCierreCaja';
-                axios.get(url).then(function (response) {
-                    //console.log(response.data);
-                    var respuesta= response.data;
-                    var ban = respuesta.ban;
-                    me.arrayCierresXCajas = respuesta.cierres_cajas;
+      let me = this;
 
-                    if(ban==0 || ban==1)
-                    {
-                        me.no_caja = 1;
-                        
-                        Swal.fire({
-                            // toast: true,
-                            // position: 'top-end',
-                            type: 'error',
-                            title: 'Abir caja',
-                            position: 'center',
-                            showConfirmButton: false,
-                            timer: 1700
-                        })
-                    }
-                    else
-                    {
-                        if(ban==3)
-                        {
-                            me.no_caja = 0;
-                            me.id_caja_facturacion = me.arrayCierresXCajas[0]['id'];
-                            me.id_cierre_caja_facturacion = me.arrayCierresXCajas[0]['id'];
-                            me.nom_caja_cierre_facturacion = me.arrayCierresXCajas[0]['nombre'];
-                            me.cierre_caja_id = me.arrayCierresXCajas[0]['id'];
-                            me.id_caja_cierre = me.arrayCierresXCajas[0]['id_caja'];
-                            me.nom_caja_cierre = me.arrayCierresXCajas[0]['nombre'];
-                            me.vr_inicial_cierre = me.arrayCierresXCajas[0]['vr_inicial'];
-                            me.obs_inicial_cierre = me.arrayCierresXCajas[0]['obs_inicial'];
-                            //console.log("entra al ban 3");
-                            me.listarFacturacion(1,me.numFacturaFiltro,me.estadoFiltro,me.idTerceroFiltro,me.ordenFiltro,me.desdeFiltro,me.hastaFiltro,me.idVendedorFiltro);
-                        }
+      axios
+        .put(this.ruta + "/cierres_caja/actualizar", {
+          id_caja: this.id_caja_cierre,
+          vr_inicial: this.vr_inicial_cierre,
+          obs_inicial: this.obs_inicial_cierre,
+          vr_gastos: this.vr_gastos_cierre,
+          obs_gastos: this.obs_gastos_cierre,
+          vr_final: this.vr_final_cierre,
+          id: this.cierre_caja_id,
+        })
+        .then(function(response) {
+          me.cerrarModal();
+          me.listarCajas();
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    validarCierreXCaja() {
+      this.hasError["vr_inicial_cierre"] = 0;
+      this.hasError["vr_gastos_cierre"] = 0;
+      this.hasError["vr_final_cierre"] = 0;
+      var error = 0;
 
-                        if(ban==2)
-                        {
-                            me.no_caja = 1;
-                            
-                            Swal.fire({
-                                // toast: true,
-                                // position: 'top-end',
-                                type: 'error',
-                                title: 'Abir caja',
-                                position: 'center',
-                                showConfirmButton: false,
-                                timer: 1700
-                            })
-                        }
-                    }
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            },
-            SelectCierreXCaja(id){
-                let me=this;
-                var url= this.ruta +'/cierres_caja/SelectCierreXCaja?id='+id;
-                axios.get(url).then(function (response) {
-                    var respuesta= response.data.cierres_caja[0];
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            },
-            selectCajas(){
-                let me=this;
-                var url= this.ruta +'/cajas/SelectCaja';
-                axios.get(url).then(function (response) {
-                    var respuesta= response.data;
-                    me.arrayCajas = respuesta.cajas;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            },
-            selectValorInicialCaja(id){
-                let me=this;
-                var url= this.ruta +'/cierres_caja/selectValorInicialCaja?id='+id;
-                if(id!=0 && id!='')
-                {
-                    axios.get(url).then(function (response) {
-                        var respuesta= response.data;
-                        if(respuesta.cierres_caja[0])
-                        {
-                            me.vr_inicial_cierre = respuesta.cierres_caja[0]['vr_final'];
-                        }
-                        else
-                        {
-                            me.vr_inicial_cierre = 0;
-                        }
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-                }
-                else
-                {
-                    alert('id vacio');
-                }
-            },
-            registrarCierreXCaja(){
-                if (this.validarCierreXCaja()){
-                    return;
-                }
-                
-                let me = this;
+      if (!this.vr_inicial_cierre || this.vr_inicial_cierre <= 0) {
+        error = 1;
+        this.hasError["vr_inicial_cierre"] = 1;
+      }
+      if (!this.vr_gastos_cierre || this.vr_gastos_cierre <= 0) {
+        error = 1;
+        this.hasError["vr_gastos_cierre"] = 1;
+      }
+      if (this.tipoAccionCierre == 2) {
+        if (!this.vr_final_cierre || this.vr_final_cierre <= 0) {
+          error = 1;
+          this.hasError["vr_final_cierre"] = 1;
+        }
+      }
 
-                axios.post(this.ruta +'/cierres_caja/registrar',{
-                    'id_caja': this.id_caja_cierre,
-                    'vr_inicial': this.vr_inicial_cierre,
-                    'obs_inicial': this.obs_inicial_cierre,
-                    'vr_gastos': this.vr_gastos_cierre,
-                    'obs_gastos': this.obs_gastos_cierre,
-                    'vr_final': this.vr_final_cierre,
-                }).then(function (response) {
-                    me.modalCierreCaja = 0;
-                    me.listarCajas();
-                }).catch(function (error) {
-                    console.log(error);
-                });
-            },
-            actualizarCierreXCaja(){
-                if (this.validarCierreXCaja()){
-                    return;
-                }
-                
-                let me = this;
+      return error;
+    },
+    desactivarCierreXCaja(id) {
+      Swal.fire({
+        title: "Esta seguro de desactivar esta cierre de caja?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Aceptar!",
+        cancelButtonText: "Cancelar",
+        confirmButtonClass: "btn btn-success",
+        cancelButtonClass: "btn btn-danger",
+        buttonsStyling: false,
+        reverseButtons: true,
+      }).then((result) => {
+        if (result.value) {
+          let me = this;
 
-                axios.put(this.ruta +'/cierres_caja/actualizar',{
-                    'id_caja': this.id_caja_cierre,
-                    'vr_inicial': this.vr_inicial_cierre,
-                    'obs_inicial': this.obs_inicial_cierre,
-                    'vr_gastos': this.vr_gastos_cierre,
-                    'obs_gastos': this.obs_gastos_cierre,
-                    'vr_final': this.vr_final_cierre,
-                    'id': this.cierre_caja_id
-                }).then(function (response) {
-                    me.cerrarModal();
-                    me.listarCajas();
-                }).catch(function (error) {
-                    console.log(error);
-                }); 
-            },
-            validarCierreXCaja(){
-                this.hasError['vr_inicial_cierre'] = 0;
-                this.hasError['vr_gastos_cierre'] = 0;
-                this.hasError['vr_final_cierre'] = 0;
-                var error = 0;
+          axios
+            .put(this.ruta + "/cierre_caja/desactivar", {
+              id: id,
+            })
+            .then(function(response) {
+              me.cerrarModalCierreCaja();
+              me.listarCajas();
+              Swal.fire(
+                "Desactivado!",
+                "El registro ha sido desactivado con éxito.",
+                "success"
+              );
+            })
+            .catch(function(error) {
+              console.log(error);
+            });
+        } else if (
+          // Read more about handling dismissals
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+        }
+      });
+    },
+    activarConcentracion(id) {
+      Swal.fire({
+        title: "Esta seguro de activar este cierre de caja?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Aceptar!",
+        cancelButtonText: "Cancelar",
+        confirmButtonClass: "btn btn-success",
+        cancelButtonClass: "btn btn-danger",
+        buttonsStyling: false,
+        reverseButtons: true,
+      }).then((result) => {
+        if (result.value) {
+          let me = this;
 
-                if(!this.vr_inicial_cierre || this.vr_inicial_cierre<=0){error=1; this.hasError['vr_inicial_cierre']=1;}
-                if(!this.vr_gastos_cierre || this.vr_gastos_cierre<=0){error=1; this.hasError['vr_gastos_cierre']=1;}
-                if(this.tipoAccionCierre==2)
-                {
-                    if(!this.vr_final_cierre || this.vr_final_cierre<=0){error=1; this.hasError['vr_final_cierre']=1;}
-                }
+          axios
+            .put(this.ruta + "/concentracion/activar", {
+              id: id,
+            })
+            .then(function(response) {
+              me.listarCajas();
+              Swal.fire(
+                "Activado!",
+                "El registro ha sido activado con éxito.",
+                "success"
+              );
+            })
+            .catch(function(error) {
+              console.log(error);
+            });
+        } else if (
+          // Read more about handling dismissals
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+        }
+      });
+    },
+    cerrarCierreXCaja(id) {
+      if (this.validarCierreXCaja()) {
+        return;
+      }
+      let me = this;
 
-                return error;
-            },
-            desactivarCierreXCaja(id){
-               Swal.fire({
-                title: 'Esta seguro de desactivar esta cierre de caja?',
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Aceptar!',
-                cancelButtonText: 'Cancelar',
-                confirmButtonClass: 'btn btn-success',
-                cancelButtonClass: 'btn btn-danger',
-                buttonsStyling: false,
-                reverseButtons: true
-                }).then((result) => {
-                if (result.value) {
-                    let me = this;
+      Swal.fire({
+        title: "Esta seguro de cerrar esta caja?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Aceptar!",
+        cancelButtonText: "Cancelar",
+        confirmButtonClass: "btn btn-success",
+        cancelButtonClass: "btn btn-danger",
+        buttonsStyling: false,
+        reverseButtons: true,
+      }).then((result) => {
+        if (result.value) {
+          let me = this;
 
-                    axios.put(this.ruta +'/cierre_caja/desactivar',{
-                        'id': id
-                    }).then(function (response) {
-                        me.cerrarModalCierreCaja();
-                        me.listarCajas();
-                        Swal.fire(
-                        'Desactivado!',
-                        'El registro ha sido desactivado con éxito.',
-                        'success'
-                        )
-                    }).catch(function (error) {
-                        console.log(error);
-                    });
-                    
-                    
-                } else if (
-                    // Read more about handling dismissals
-                    result.dismiss === Swal.DismissReason.cancel
+          axios
+            .put(this.ruta + "/cierres_caja/cerrar", {
+              id_caja: this.id_caja_cierre,
+              obs_inicial: this.obs_inicial_cierre,
+              vr_gastos: this.vr_gastos_cierre,
+              obs_gastos: this.obs_gastos_cierre,
+              vr_final: this.vr_final_cierre,
+              id: this.cierre_caja_id,
+            })
+            .then(function(response) {
+              me.id_caja_facturacion = 0;
+              me.nom_caja_cierre_facturacion = "";
+              me.cerrarModalCierreCaja();
+              Swal.fire(
+                "Desactivado!",
+                "El registro ha sido cerrado con éxito.",
+                "success"
+              );
+              me.listarCajas();
+            })
+            .catch(function(error) {
+              console.log(error);
+            });
+        } else if (
+          // Read more about handling dismissals
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+        }
+      });
+    },
+    cerrarModalCierreCaja() {
+      this.modalCierreCaja = 0;
+      this.tituloModalCierre = "";
+      this.arrayCierresUsuario = 0;
+      this.arrayCierresXCajas = 0;
+      this.ban = 0;
+    },
+    getDatosProveedor(val1) {
+      let me = this;
+      me.loading = true;
+      me.idproveedor = val1.id;
+    },
+    buscarArticulo() {
+      let me = this;
+      var url = this.ruta + "/articulo/buscarArticulo?filtro=" + me.codigo;
+
+      axios
+        .get(url)
+        .then(function(response) {
+          var respuesta = response.data;
+          me.arrayArticulo = respuesta.articulos;
+
+          if (me.arrayArticulo.length > 0) {
+            if (me.arrayArticulo[0]["productos_asociados"].length > 0) {
+              me.buscarA = me.arrayArticulo[0]["codigo"];
+              me.abrirModal();
+            } else {
+              var p = "";
+              if (me.arrayArticulo[0]["padre"] != "") {
+                p =
+                  " - (Presentacion asociada: " +
+                  me.arrayArticulo[0]["nom_presentacion"] +
+                  ")";
+              } else {
+                p = " - " + me.arrayArticulo[0]["nom_presentacion"];
+              }
+              me.codigo = me.arrayArticulo[0]["codigo"];
+              me.articulo = me.arrayArticulo[0]["nombre"];
+              me.idarticulo = me.arrayArticulo[0]["id"];
+              me.precio = me.arrayArticulo[0]["precio_venta"];
+              me.cantidad = 1;
+              me.stock = me.arrayArticulo[0]["stock"];
+              for (
+                var i = 0;
+                i < me.arrayArticulo[0]["productos_iva"].length;
+                i++
+              ) {
+                if (
+                  me.arrayArticulo[0]["productos_iva"][i]["tipo_iva"] == "Venta"
                 ) {
-                    
+                  me.porcentaje =
+                    me.arrayArticulo[0]["productos_iva"][i]["porcentaje"];
                 }
-                }) 
-            },
-            activarConcentracion(id){
-               Swal.fire({
-                title: 'Esta seguro de activar este cierre de caja?',
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Aceptar!',
-                cancelButtonText: 'Cancelar',
-                confirmButtonClass: 'btn btn-success',
-                cancelButtonClass: 'btn btn-danger',
-                buttonsStyling: false,
-                reverseButtons: true
-                }).then((result) => {
-                if (result.value) {
-                    let me = this;
+              }
+              // me.porcentaje = me.arrayArticulo[0]['porcentaje'];
+              me.descuento = 0;
+              me.id_presentacion = me.arrayArticulo[0]["id_presentacion"];
+              me.idDetalleAsociado = me.arrayArticulo[0]["id_asociado"];
+              // me.cantidad=me.arrayArticulo[0]['stock'];
+            }
+          } else {
+            me.articulo = "No existe artículo";
+            me.idarticulo = 0;
+            me.precio = 0;
+            me.cantidad = 0;
+            me.stock = 0;
+            me.padreDetalle = "";
+            me.idDetalleAsociado = 0;
+            me.descuento = 0;
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    sugerirNumFactura() {
+      let me = this;
+      var url = this.ruta + "/facturacion/buscarNumFacturaSugerida";
 
-                    axios.put(this.ruta +'/concentracion/activar',{
-                        'id': id
-                    }).then(function (response) {
-                        me.listarCajas();
-                        Swal.fire(
-                        'Activado!',
-                        'El registro ha sido activado con éxito.',
-                        'success'
-                        )
-                    }).catch(function (error) {
-                        console.log(error);
-                    });
-                    
-                    
-                } else if (
-                    // Read more about handling dismissals
-                    result.dismiss === Swal.DismissReason.cancel
+      axios
+        .get(url)
+        .then(function(response) {
+          var respuesta = response.data.facturacion;
+
+          if (respuesta.length) {
+            me.num_factura = parseInt(respuesta[0].num_factura) + 1;
+          } else {
+            me.num_factura = 1;
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    cambiarEstadoFacturacion(id_factura, accion) {
+      let me = this;
+      var cambiarEstado = "";
+      var nomEstado = "";
+
+      switch (accion) {
+        case "registrar": {
+          me.sugerirNumFactura();
+          cambiarEstado = "2";
+          nomEstado = '"' + "Registrado" + '"';
+          break;
+        }
+        case "enviar": {
+          cambiarEstado = "3";
+          nomEstado = '"' + "Enviado" + '"';
+          break;
+        }
+        case "anular": {
+          cambiarEstado = "4";
+          nomEstado = '"' + "Anulado" + '"';
+          break;
+        }
+      }
+
+      Swal.fire({
+        title: "Esta seguro de cambiar el estado a " + nomEstado + "?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Aceptar!",
+        cancelButtonText: "Cancelar",
+        confirmButtonClass: "btn btn-success",
+        cancelButtonClass: "btn btn-danger",
+        buttonsStyling: false,
+        reverseButtons: true,
+      }).then((result) => {
+        if (result.value) {
+          let me = this;
+
+          axios
+            .put(this.ruta + "/facturacion/cambiarEstado", {
+              estado: cambiarEstado,
+              num_factura: me.num_factura,
+              id: id_factura,
+            })
+            .then(function(response) {
+              me.ocultarDetalle();
+              me.listarFacturacion(1, "", "", "", "", "", "", "");
+            })
+            .catch(function(error) {
+              console.log(error);
+            });
+        } else if (
+          // Read more about handling dismissals
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+        }
+      });
+    },
+    cargarPreciosTarifarios(id) {
+      let me = this;
+
+      var arrayIds = [];
+      me.arrayDetalle.forEach(function(detalle) {
+        arrayIds.push({ id: detalle["idarticulo"] });
+      });
+
+      if (arrayIds.length) {
+        var url =
+          this.ruta +
+          "/producto_tarifario/cargarPreciosTarifarios?arrayDetalle=" +
+          JSON.stringify(arrayIds) +
+          "&id_tarifario=" +
+          id;
+        axios
+          .get(url)
+          .then(function(response) {
+            var respuesta = response.data;
+
+            for (var i = 0; i < me.arrayDetalle.length; i++) {
+              for (var j = 0; j < respuesta.producto_tarifario.length; j++) {
+                if (
+                  me.arrayDetalle[i].idarticulo ==
+                  respuesta.producto_tarifario[j].id_producto
                 ) {
-                    
+                  me.arrayDetalle[i].precio =
+                    respuesta.producto_tarifario[j].valor;
                 }
-                }) 
-            },
-            cerrarCierreXCaja(id){
-                if(this.validarCierreXCaja()){
-                    return;
-                }
-                let me = this;
-                
-                Swal.fire({
-                    title: 'Esta seguro de cerrar esta caja?',
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Aceptar!',
-                    cancelButtonText: 'Cancelar',
-                    confirmButtonClass: 'btn btn-success',
-                    cancelButtonClass: 'btn btn-danger',
-                    buttonsStyling: false,
-                    reverseButtons: true
-                }).then((result) => {
-                    if (result.value) {
-                        let me = this;
+              }
+            }
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+      }
+    },
+    cambiarPagina(page, buscar, criterio) {
+      let me = this;
+      //Actualiza la página actual
+      me.pagination.current_page = page;
+      //Envia la petición para visualizar la data de esa página
+      me.listarFacturacion(
+        1,
+        numFacturaFiltro,
+        estadoFiltro,
+        idTerceroFiltro,
+        ordenFiltro,
+        desdeFiltro,
+        hastaFiltro,
+        idVendedorFiltro
+      );
+    },
 
-                        axios.put(this.ruta +'/cierres_caja/cerrar',{
-                            'id_caja': this.id_caja_cierre,
-                            'obs_inicial': this.obs_inicial_cierre,
-                            'vr_gastos': this.vr_gastos_cierre,
-                            'obs_gastos': this.obs_gastos_cierre,
-                            'vr_final': this.vr_final_cierre,
-                            'id': this.cierre_caja_id
-                        }).then(function (response) {
-                            me.id_caja_facturacion = 0;
-                            me.nom_caja_cierre_facturacion = '';
-                            me.cerrarModalCierreCaja();
-                            Swal.fire(
-                            'Desactivado!',
-                            'El registro ha sido cerrado con éxito.',
-                            'success')
-                            me.listarCajas();
-                        }).catch(function (error) {
-                            console.log(error);
-                        });
-                    } else if (
-                        // Read more about handling dismissals
-                        result.dismiss === Swal.DismissReason.cancel
-                    ) {}
-                }) 
-            },
-            cerrarModalCierreCaja(){
-                this.modalCierreCaja=0;
-                this.tituloModalCierre='';
-                this.arrayCierresUsuario = 0;
-                this.arrayCierresXCajas = 0;
-                this.ban=0;
-            },
-            getDatosProveedor(val1){
-                let me = this;
-                me.loading = true;
-                me.idproveedor = val1.id;
-            },
-            buscarArticulo(){
-                let me=this;
-                var url= this.ruta +'/articulo/buscarArticulo?filtro=' + me.codigo;
+    encuentra(id, id_asociado) {
+      let me = this;
+      var sw = 0;
+      for (var i = 0; i < this.arrayDetalle.length; i++) {
+        if (this.arrayDetalle[i].id == id) {
+          if (this.arrayDetalle[i].id_asociado == "" && id_asociado == "") {
+            sw = true;
+          }
+        }
+      }
+      return sw;
+    },
+    eliminarDetalle(detalle, index) {
+      let me = this;
+      if (detalle.cantidad2) {
+        if (detalle.cantidad != detalle.cantidad2) {
+          detalle.cantidad = detalle.cantidad2;
+          detalle.prod_nuevo = 0;
+        }
+      } else {
+        me.arrayDetalle.splice(index, 1);
+      }
+    },
 
-                axios.get(url).then(function (response) {
-                    var respuesta= response.data;
-                    me.arrayArticulo = respuesta.articulos;
+    agregaDetalleMesero() {
+      let me = this;
+      let producto = {};
+      producto = this.auxProd;
+      var p = "";
+      if ((producto.padre = "")) {
+        p = " " + producto.nom_presentacion + " (Presentacion asociada)";
+      } else {
+        p = " - " + producto.nom_presentacion;
+      }
+      var ivaVenta = 0;
+      producto.productos_iva.forEach(function(iva) {
+        if (iva.tipo_iva == "Venta") {
+          ivaVenta = iva.porcentaje;
+        }
+      });
+      if (ivaVenta > 0) {
+        var ivaVenta_vr = Math.round(
+          parseFloat(producto.precio_venta) -
+            parseFloat(producto.precio_venta / (ivaVenta / 100 + 1))
+        );
+      }
 
-                    if (me.arrayArticulo.length>0){
-                        if (me.arrayArticulo[0]['productos_asociados'].length>0){
-                            me.buscarA = me.arrayArticulo[0]['codigo'];
-                            me.abrirModal();
-                        }
-                        else {
-                            var p = '';
-                            if(me.arrayArticulo[0]['padre']!='')
-                            {
-                                p = ' - (Presentacion asociada: '+me.arrayArticulo[0]['nom_presentacion']+')';
-                            }
-                            else
-                            {
-                                p = ' - '+me.arrayArticulo[0]['nom_presentacion'];
-                            }
-                            me.codigo=me.arrayArticulo[0]['codigo'];
-                            me.articulo= me.arrayArticulo[0]['nombre'];
-                            me.idarticulo=me.arrayArticulo[0]['id'];
-                            me.precio = me.arrayArticulo[0]['precio_venta'];
-                            me.cantidad = 1;
-                            me.stock = me.arrayArticulo[0]['stock'];
-                            for(var i=0; i<me.arrayArticulo[0]['productos_iva'].length; i++)
-                            { 
-                                if(me.arrayArticulo[0]['productos_iva'][i]['tipo_iva']=='Venta')
-                                {
-                                    me.porcentaje = me.arrayArticulo[0]['productos_iva'][i]['porcentaje'];
-                                }
-                            }
-                            // me.porcentaje = me.arrayArticulo[0]['porcentaje'];
-                            me.descuento = 0;
-                            me.id_presentacion = me.arrayArticulo[0]['id_presentacion'];
-                            me.idDetalleAsociado = me.arrayArticulo[0]['id_asociado'];
-                            // me.cantidad=me.arrayArticulo[0]['stock'];
-                        }
-                    }
-                    else{
-                        me.articulo='No existe artículo';
-                        me.idarticulo=0;
-                        me.precio = 0;
-                        me.cantidad = 0;
-                        me.stock = 0;
-                        me.padreDetalle = '';
-                        me.idDetalleAsociado = 0;
-                        me.descuento = 0;
-                    }
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            },
-            sugerirNumFactura(){
-                let me=this;
-                var url= this.ruta +'/facturacion/buscarNumFacturaSugerida';
-                
-                axios.get(url).then(function (response) {
-                    var respuesta= response.data.facturacion;
-                    
-                    if(respuesta.length)
-                    {
-                        me.num_factura = parseInt(respuesta[0].num_factura)+1;
-                    }
-                    else
-                    {
-                        me.num_factura = 1;
-                    }
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            },
-            cambiarEstadoFacturacion(id_factura, accion){
-                let me=this;
-                var cambiarEstado = '';
-                var nomEstado = '';
+      let auxPosition = me.arrayDetalle.indexOf(
+        me.arrayDetalle.find(({ codigo }) => codigo === producto.codigo)
+      );
 
-                switch(accion)
-                {
-                    case 'registrar':{
-                        me.sugerirNumFactura();
-                        cambiarEstado = '2';
-                        nomEstado = '"'+'Registrado'+'"';
-                        break;
-                    };
-                    case 'enviar':{
-                        cambiarEstado = '3';
-                        nomEstado = '"'+'Enviado'+'"';
-                        break;
-                    };
-                    case 'anular':{
-                        cambiarEstado = '4';
-                        nomEstado = '"'+'Anulado'+'"';
-                        break;
-                    };
-                }
+      if (auxPosition >= 0) {
+        me.arrayDetalle[auxPosition].cantidad += this.cantidad;
+        me.arrayDetalle[auxPosition].valor_iva += ivaVenta_vr * this.cantidad;
+        me.arrayDetalle[auxPosition].valor_subtotal += Math.round(
+          parseFloat(
+            (me.arrayDetalle[auxPosition].precio_venta - ivaVenta_vr) *
+              this.cantidad
+          )
+        );
+        me.arrayDetalle[auxPosition].prod_nuevo = 1;
+        me.arrayDetalle[auxPosition].observaciones += this.auxObser
+          ? " - " + this.auxObser
+          : "";
+      } else {
+        me.arrayDetalle.push({
+          codigo: producto.codigo,
+          idarticulo: producto.id_articulo,
+          id_asociado: producto.id_asociado,
+          articulo: producto.nombre,
+          cantidad: this.cantidad,
+          tipo: producto.tipo_articulo,
+          valor_descuento: 0,
+          precio: producto.precio_venta,
+          precio_venta: producto.precio_venta,
+          iva: ivaVenta,
+          valor_iva: ivaVenta_vr * this.cantidad,
+          valor_subtotal: Math.round(
+            parseFloat((producto.precio_venta - ivaVenta_vr) * this.cantidad)
+          ),
+          // valor_subtotal : this.subtotal,
+          stock: producto.stock,
+          descuento: 0,
+          nom_presentacion: producto.nom_presentacion,
+          id_presentacion: producto.id_presentacion,
+          padre: producto.padre,
+          prod_nuevo: 1,
+          observaciones: this.auxObser,
+        });
+      }
 
-                Swal.fire({
-                title: 'Esta seguro de cambiar el estado a '+nomEstado+'?',
-                type: 'warning',
+      this.cerrarModal();
+      this.llamarMensaje(producto.nombre);
+
+      this.ivaProces();
+    },
+    agregarDetalle() {
+      let me = this;
+      if (me.idarticulo == 0 || me.cantidad == 0 || me.precio == 0) {
+      } else {
+        if (me.encuentra(me.idarticulo, me.idDetalleAsociado)) {
+          Swal.fire({
+            type: "error",
+            title: "Error...",
+            text: "Ese artículo ya se encuentra agregado!",
+          });
+        } else {
+          me.arrayDetalle.push({
+            idarticulo: me.idarticulo,
+            articulo: me.articulo,
+            cantidad: me.cantidad,
+            valor_descuento: me.descuento,
+            precio: me.precio,
+            iva: me.iva,
+            stock: me.stock,
+            descuento: me.descuento,
+            nom_presentacion: me.nom_presentacion,
+            id_presentacion: me.id_presentacion,
+            padre: me.padreDetalle,
+          });
+          me.codigo = "";
+          me.idarticulo = 0;
+          me.articulo = "";
+          me.cantidad = 0;
+          me.precio = 0;
+          me.iva = 0;
+          me.descuento = 0;
+          me.nom_presentacion = "";
+          me.id_presentacion = 0;
+          me.padreDetalle = "";
+          me.idDetalleAsociado = 0;
+        }
+      }
+    },
+    agregarDetalleModal(data = []) {
+      let me = this;
+
+      if (me.encuentra(data["id"], data["id_asociado"])) {
+        Swal.fire({
+          type: "error",
+          title: "Error...",
+          text: "Ese artículo ya se encuentra agregado!",
+        });
+      } else {
+        var p = "";
+        if (data["padre"] != "") {
+          p = " " + data["nom_presentacion"] + " (Presentacion asociada)";
+        } else {
+          p = " - " + data["nom_presentacion"];
+        }
+
+        var ivaVenta = 0;
+        data["productos_iva"].forEach(function(iva) {
+          if (iva["tipo_iva"] == "Venta") {
+            ivaVenta = iva["porcentaje"];
+          }
+        });
+
+        var descu = 0;
+        if (data["descuento"] && data["descuento"] != "") {
+          descu = data["descuento"];
+        }
+
+        me.arrayDetalle.push({
+          idarticulo: data["id"],
+          id_asociado: data["id_asociado"],
+          codigo: data["codigo"],
+          articulo: data["nombre"],
+          porcentaje: ivaVenta,
+          cantidad: data["cant"],
+          precio: data["precio_venta"],
+          precio_venta: data["precio_venta"],
+          iva: ivaVenta,
+          nom_presentacion: data["nom_presentacion"],
+          id_presentacion: data["id_presentacion"],
+          padre: data["padre"],
+          unidades: data["unidades"],
+          descuento: 0,
+          valor_descuento: 0,
+        });
+      }
+    },
+    agregarDetalleModalCantidadArticulo() {
+      let me = this;
+
+      if (
+        me.encuentra(
+          me.arrayInfoArticuloModalCantidad.id &&
+            me.arrayInfoArticuloModalCantidad.id_asociado
+        )
+      ) {
+        Swal.fire({
+          type: "error",
+          title: "Error...",
+          text: "Ese artículo ya se encuentra agregado!",
+        });
+      } else {
+        var p = "";
+        if (me.arrayInfoArticuloModalCantidad.padre != "") {
+          p = " " + data["nom_presentacion"] + " (Presentacion asociada)";
+        } else {
+          p = " - " + me.arrayInfoArticuloModalCantidad.padre;
+        }
+
+        var ivaVenta = 0;
+        me.arrayInfoArticuloModalCantidad.productos_iva.forEach(function(iva) {
+          if (iva["tipo_iva"] == "Venta") {
+            ivaVenta = iva["porcentaje"];
+          }
+        });
+
+        me.arrayDetalle.push({
+          idarticulo: me.arrayInfoArticuloModalCantidad.id,
+          id_asociado: me.arrayInfoArticuloModalCantidad.id_asociado,
+          articulo:
+            me.arrayInfoArticuloModalCantidad.codigo +
+            " - " +
+            me.arrayInfoArticuloModalCantidad.nombre,
+          porcentaje: ivaVenta,
+          cantidad: me.cantidadArticulo,
+          precio: me.arrayInfoArticuloModalCantidad.precio_venta,
+          precio_venta: me.arrayInfoArticuloModalCantidad.precio_venta,
+          iva: ivaVenta,
+          nom_presentacion: me.arrayInfoArticuloModalCantidad.nom_presentacion,
+          id_presentacion: me.arrayInfoArticuloModalCantidad.id_presentacion,
+          padre: me.arrayInfoArticuloModalCantidad.padre,
+          descuento: 0,
+          valor_descuento: 0,
+        });
+      }
+      me.cerrarModalCantidadArticulo();
+    },
+    listarArticulo(buscar, criterio, categoria) {
+      let me = this;
+      var var_categoria = "";
+      if (categoria && categoria != "") {
+        var_categoria = "&categoria=" + categoria;
+      }
+      var url =
+        this.ruta +
+        "/articulo/listarArticulo?buscar=" +
+        buscar +
+        "&criterio=" +
+        criterio +
+        var_categoria +
+        "&id_tarifario=" +
+        me.id_tarifario;
+      axios
+        .get(url)
+        .then(function(response) {
+          var respuesta = response.data;
+          me.arrayArticulo = [];
+          me.arrayArticulo = respuesta.articulos;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    registrarFacturacion() {
+      //console.log(this.validarFacturacion());
+
+      if (!this.validarFacturacion()) {
+        return;
+      } else {
+        let me = this;
+        if (this.id_tercero == 0 || this.id_tercero == "") {
+          this.id_tercero = 999999;
+        } else {
+          this.id_tercero = this.id_tercero;
+        }
+        axios
+          .post(this.ruta + "/facturacion/registrar", {
+            num_factura: null,
+            id_tercero: me.id_tercero,
+            fec_edita: null,
+            usu_edita: null,
+            subtotal: me.subtotal,
+            valor_iva: me.valor_iva,
+            total: me.valor_final,
+            abono: me.abono,
+            saldo: me.saldo,
+            detalle: me.detalle,
+            lugar: me.lugar,
+            descuento: me.calcularDescuento,
+            fec_registra: null,
+            fec_envia: null,
+            fec_anula: null,
+            usu_registra: null,
+            usu_envia: null,
+            usu_anula: null,
+            fecha: me.fecha,
+            id_tarifario: me.id_tarifario,
+            id_cierre_caja: me.id_cierre_caja_facturacion,
+            data: me.arrayDetalle,
+            tipo_movimiento: 4,
+            sumatoria: 0,
+          })
+          .then(function(response) {
+            me.factura_imprimir = response.data.id_facturacion;
+            //
+
+            var toFind = "4";
+            var filtered = me.arrayDetalle.filter(function(el) {
+              return el.tipo === toFind;
+            });
+            me.arrayDetalle = [];
+            me.id_tercero = "";
+            me.tercero = "";
+            me.lugar = "";
+            me.ocultarDetalle();
+            me.listarArticulo(me.buscarA, me.criterioA, me.buscarCategoriaA);
+            me.listarFacturacion(1, "", "", "", "", "", "", "");
+            if (filtered) {
+              me.verTicket(me.factura_imprimir);
+              me.imprimirTicket(me.factura_imprimir);
+              me.position = 6;
+            } else {
+              me.position = 7;
+            }
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+      }
+    },
+
+    actualizarFacturacion() {
+      // if (!this.id_tercero) this.errorMostrarMsjFacturacion.push("Seleccione un tercero");
+      // if (!this.lugar) this.errorMostrarMsjFacturacion.push("Seleccione un lugar");
+      let me = this;
+
+      axios
+        .put(this.ruta + "/facturacion/actualizar", {
+          num_factura: me.num_factura,
+          id_tercero: me.id_tercero,
+          fec_edita: me.fechaHoraActual,
+          subtotal: me.subtotal,
+          valor_iva: me.valor_iva,
+          total: me.total,
+          abono: me.abono,
+          saldo: me.saldo,
+          detalle: me.detalle,
+          lugar: me.lugar,
+          descuento: me.calcularDescuento,
+          fec_registra: null,
+          fec_envia: null,
+          fec_anula: null,
+          usu_registra: null,
+          usu_envia: null,
+          usu_anula: null,
+          fecha: me.fecha,
+          id_tarifario: me.id_tarifario,
+          estado: me.estado,
+          data: me.arrayDetalle,
+          tipo_movimiento: 4,
+          sumatoria: 0,
+          id: me.facturacion_id,
+        })
+        .then(function(response) {
+          me.factura_imprimir = response.data.id_facturacion;
+          me.verTicket(me.factura_imprimir);
+          me.imprimirTicket(me.factura_imprimir);
+
+          me.position = 6;
+          me.ocultarDetalle();
+          me.listarFacturacion(1, "", "", "", "", "", "", "");
+          me.listarArticulo(me.buscarA, me.criterioA, me.buscarCategoriaA);
+          me.tipoAccion2 = 1;
+          me.arrayDetalleT = [];
+        })
+        .catch(function(error) {
+          console.log(error);
+          Swal.fire({
+            type: "warning",
+            title: "Oops...",
+            text: "No se pudo guardar, intentar nuevamente",
+          });
+        });
+    },
+    validarFacturacion() {
+      this.errorFacturacion = 0;
+      if (this.position != 2) {
+        this.position = 2;
+        return false;
+      } else {
+        this.errorMostrarMsjFacturacion = [];
+
+        // if (!this.id_tercero) {
+        //     this.$notify({
+        //         group: 'foo',
+        //         duration: 10000,
+        //         position: 'top right',
+        //         title: 'Seleccione Cliente',
+        //         type: 'error',
+        //         text: 'Debes seleccion un cliente'
+        //     });
+        //     return false;
+        // }
+        if (!this.lugar) {
+          this.$notify({
+            group: "foo",
+            duration: 10000,
+            position: "top right",
+            title: "Seleccione Mesa",
+            type: "error",
+            text: "Debes selecciona una mesa",
+          });
+          return false;
+        }
+        if (this.arrayDetalle.length <= 0) {
+          this.$notify({
+            group: "foo",
+            duration: 10000,
+            position: "top right",
+            title: "Seleccione Mesa",
+            type: "error",
+            text: "Debes agregar productos",
+          });
+        }
+        return true;
+      }
+    },
+    verTicket() {
+      let me = this;
+
+      axios
+        .get(
+          this.ruta +
+            "/detalle_facturacion/ver-ticket?id=" +
+            me.factura_imprimir
+        )
+        .then(function(response) {
+          me.arrayPreparado = response.data.detalles_facturacion;
+          me.datosFactura = response.data.facturacion;
+          me.datosEmpresa = response.data.empresa;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    imprimirTicket() {
+      let me = this;
+      axios
+        .post(this.ruta + "/detalle_facturacion/imprimir-ticket", {
+          id: me.factura_imprimir,
+          datos: me.arrayDetalleT,
+        })
+        .then(function(response) {
+          console.log(response);
+          me.arrayDetalleT = [];
+        })
+        .catch(function(error) {
+          me.arrayDetalleT = [];
+          console.log(error);
+          Swal.fire({
+            type: "warning",
+            title: "Oops...",
+            text: "No se pudo imprimir",
+          });
+        });
+    },
+    selectZonas() {
+      let me = this;
+      var url = this.ruta + "/zona/selectZona";
+      axios
+        .get(url)
+        .then(function(response) {
+          var respuesta = response.data;
+          me.arrayZonas = respuesta.zona;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    mostrarDetalle(modelo, accion, data = []) {
+      let me = this;
+      me.arrayDetalleT = [];
+
+      switch (modelo) {
+        case "facturacion": {
+          me.listado = 0;
+          switch (accion) {
+            case "registrar": {
+              // me.sugerirNumFactura();
+              me.tipoAccion2 = 1;
+              me.facturacion_id = 0;
+              me.num_factura = null;
+              me.id_tercero = 0;
+              me.tercero = "";
+              me.tercero_facturacion = "";
+              me.fec_edita = "";
+              me.subtotal = 0.0;
+              me.valor_iva = 0.0;
+              me.total = 0.0;
+              me.abono = 0.0;
+              me.saldo = 0.0;
+              me.detalle = "";
+              (me.lugar = ""), (me.descuento = 0.0);
+              me.fec_registra = "";
+              me.fec_envia = "";
+              me.fec_anula = "";
+
+              me.arrayArticulo = [];
+              me.arrayDetalle = [];
+              me.arrayTerceros = [];
+              me.listarFacturacion(1, "", "", "", "", "", "", "");
+              break;
+            }
+            case "actualizar": {
+              me.tipoAccion2 = 2;
+              me.facturacion_id = data["id"];
+              me.num_factura = data["num_factura"];
+              me.id_tercero = data["id_tercero"];
+              me.tercero = data["nombre1"]
+                ? data["nombre1"] +
+                  " " +
+                  data["nombre2"] +
+                  " " +
+                  data["apellido1"] +
+                  " " +
+                  data["apellido2"]
+                : data["nom_tercero"];
+              me.fec_edita = me.fechaHoraActual;
+              me.subtotal = data["subtotal"];
+              me.valor_iva = data["valor_iva"];
+              me.total = data["total"];
+              me.abono = data["abono"];
+              me.abono2 = data["abono"];
+              me.saldo = data["saldo"];
+              me.detalle = data["detalle"];
+              me.lugar = data["lugar"];
+              // me.descuento=data['descuento'];
+              me.fec_registra = data["fec_registra"];
+              me.fec_envia = data["fec_envia"];
+              me.fec_anula = data["fec_anula"];
+              me.fecha = data["fecha"];
+              me.id_tarifario = data["id_tarifario"];
+              me.estado = data["estado"];
+
+              me.arrayArticulo = [];
+              me.arrayTerceros = [];
+              me.arrayDetalle = [];
+              // me.listarFacturacion(1,'','','','','','','');)
+              me.listarDetalle(data["id"]);
+              break;
+            }
+          }
+          me.selectZonas();
+          me.selectTarifarios();
+          break;
+        }
+        case "cierres_caja": {
+          switch (accion) {
+            case "registrar": {
+              this.arrayCierresUsuario = [];
+              this.modalCierreCaja = 1;
+              this.tituloModalCierre = "Abrir caja";
+              this.id_caja_cierre = "";
+              this.vr_inicial_cierre = 0;
+              this.obs_inicial_cierre = "";
+              this.vr_gastos_cierre = 0;
+              this.obs_gastos_cierre = "";
+              this.vr_software_cierre = 0;
+              this.vr_final_cierre = 0;
+              this.cierre_caja_id = 0;
+              this.tipoAccionCierre = 1;
+              break;
+            }
+            case "cerrar_caja": {
+              if (data.length != 0) {
+                this.arrayCierresUsuario = [];
+                this.modalCierreCaja = 1;
+                this.tituloModalCierre = "Cerrar caja";
+                this.tipoAccionCierre = 2;
+                this.cierre_caja_id = data["id"];
+                this.id_caja_cierre = data["id_caja"];
+                this.vr_inicial_cierre = data["vr_inicial"];
+                this.obs_inicial_cierre = data["obs_inicial"];
+                this.vr_gastos_cierre = data["vr_gastos"];
+                this.obs_gastos_cierre = data["obs_gastos"];
+                this.vr_software_cierre = 0;
+                this.vr_final_cierre = data["vr_final"];
+              } else {
+                this.arrayCierresUsuario = [];
+                this.modalCierreCaja = 1;
+                this.tituloModalCierre = "Cerrar caja";
+                this.tipoAccionCierre = 2;
+              }
+              break;
+            }
+            case "listar_cierres": {
+              Swal.fire({
+                title: "ERROR!",
+                text:
+                  "Este usuario tiene una caja abierta desde hace mas de 24 horas",
+                type: "warning",
                 showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Aceptar!',
-                cancelButtonText: 'Cancelar',
-                confirmButtonClass: 'btn btn-success',
-                cancelButtonClass: 'btn btn-danger',
-                buttonsStyling: false,
-                reverseButtons: true
-                }).then((result) => {
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Ok!",
+              }).then((result) => {
                 if (result.value) {
-                    let me = this;
+                  this.arrayCierresUsuario.push({
+                    created_at: data["created_at"],
+                    estado: data["estado"],
+                    id: data["id"],
+                    id_caja: data["id_caja"],
+                    nombre: data["nombre"],
+                    obs_gastos: data["obs_gastos"],
+                    obs_inicial: data["obs_inicial"],
+                    vr_final: data["vr_final"],
+                    vr_gastos: data["vr_gastos"],
+                    vr_inicial: data["vr_inicial"],
+                    vr_software: data["vr_software"],
+                  });
 
-                    axios.put(this.ruta +'/facturacion/cambiarEstado',{
-                        'estado': cambiarEstado,
-                        'num_factura': me.num_factura,
-                        'id': id_factura
-                    }).then(function (response) {
-                        me.ocultarDetalle();
-                        me.listarFacturacion(1,'','','','','','','');
-                    }).catch(function (error) {
-                        console.log(error);
-                    });
-                    
-                    
-                } else if (
-                    // Read more about handling dismissals
-                    result.dismiss === Swal.DismissReason.cancel
-                ) {
-                    
-                }
-                }) 
-
-            },
-            cargarPreciosTarifarios(id){
-                let me = this;
-
-                var arrayIds = [];
-                me.arrayDetalle.forEach(function(detalle){
-                    arrayIds.push({id : detalle['idarticulo']});
-                });
-
-                if(arrayIds.length)
-                {
-                    var url= this.ruta + '/producto_tarifario/cargarPreciosTarifarios?arrayDetalle='+JSON.stringify(arrayIds)+'&id_tarifario='+id;
-                    axios.get(url).then(function (response) {
-                        var respuesta= response.data;
-                        
-                        for(var i=0; i<me.arrayDetalle.length; i++)
-                        {
-                            for(var j=0; j<respuesta.producto_tarifario.length; j++)
-                            {
-                                if(me.arrayDetalle[i].idarticulo==respuesta.producto_tarifario[j].id_producto){
-                                    me.arrayDetalle[i].precio = respuesta.producto_tarifario[j].valor;
-                                }
-                            }
-                        }
-                        
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-                }
-            },
-            cambiarPagina(page,buscar,criterio){
-                let me = this;
-                //Actualiza la página actual
-                me.pagination.current_page = page;
-                //Envia la petición para visualizar la data de esa página
-                me.listarFacturacion(1,numFacturaFiltro,estadoFiltro,idTerceroFiltro,ordenFiltro,desdeFiltro,hastaFiltro,idVendedorFiltro);
-            },
-            
-            encuentra(id,id_asociado){
-                let me=this;
-                var sw=0;
-                for(var i=0;i<this.arrayDetalle.length;i++){
-                    if(this.arrayDetalle[i].id==id)
-                    {
-                        if(this.arrayDetalle[i].id_asociado=='' && id_asociado=='')
-                        {
-                            sw=true;
-                        }
-                    }
-                }
-                return sw;
-            },
-            eliminarDetalle(detalle,index){
-                let me = this;
-                if(detalle.cantidad2){
-                    if (detalle.cantidad != detalle.cantidad2) {
-                        detalle.cantidad = detalle.cantidad2
-                        detalle.prod_nuevo = 0; 
-                    }
-                }
-                else{
-                    me.arrayDetalle.splice(index, 1);
-                }
-             
-            },
-           
-            agregaDetalleMesero(){
-                
-                let me=this;
-                let producto = {};
-                producto = this.auxProd;
-                var p = '';
-                if(producto.padre='') {p = ' '+producto.nom_presentacion+' (Presentacion asociada)';}
-                else {p = ' - '+producto.nom_presentacion;}
-                var ivaVenta = 0;
-                producto.productos_iva.forEach(function(iva){
-                    if(iva.tipo_iva =='Venta'){ivaVenta=iva.porcentaje;}
-                });
-                if(ivaVenta>0) {
-
-
-                    var ivaVenta_vr = Math.round(parseFloat(producto.precio_venta)-parseFloat((producto.precio_venta)/((ivaVenta/100)+1)));
-                }
-
-                
-                let auxPosition = me.arrayDetalle.indexOf(me.arrayDetalle.find(({codigo}) => codigo === producto.codigo));
-
-                if(auxPosition >= 0) {
-                    me.arrayDetalle[auxPosition].cantidad+=this.cantidad;
-                    me.arrayDetalle[auxPosition].valor_iva+=(ivaVenta_vr * this.cantidad);                    
-                    me.arrayDetalle[auxPosition].valor_subtotal +=  Math.round(parseFloat((me.arrayDetalle[auxPosition].precio_venta - ivaVenta_vr) * this.cantidad));
-                    me.arrayDetalle[auxPosition].prod_nuevo = 1;
-                    me.arrayDetalle[auxPosition].observaciones+=this.auxObser ? ' - '+this.auxObser: ''
-                    
-                }else {
-                    
-                    me.arrayDetalle.push({
-                        codigo: producto.codigo,
-                        idarticulo: producto.id_articulo,
-                        id_asociado: producto.id_asociado,
-                        articulo: producto.nombre,
-                        cantidad: this.cantidad,
-                        tipo: producto.tipo_articulo,
-                        valor_descuento: 0,
-                        precio: producto.precio_venta,
-                        precio_venta: producto.precio_venta,
-                        iva: ivaVenta,
-                        valor_iva: ivaVenta_vr * this.cantidad,
-                        valor_subtotal: Math.round(parseFloat((producto.precio_venta -ivaVenta_vr)* this.cantidad)),
-                        // valor_subtotal : this.subtotal,
-                        stock : producto.stock,
-                        descuento : 0,
-                        nom_presentacion : producto.nom_presentacion,
-                        id_presentacion : producto.id_presentacion,
-                        padre : producto.padre,
-                        prod_nuevo:1,
-                        observaciones : this.auxObser
-                    });
-                }
-              
-                this.cerrarModal();
-                this.llamarMensaje(producto.nombre);
-
-                this.ivaProces();
-            },
-            agregarDetalle(){
-                let me=this;
-                if(me.idarticulo==0 || me.cantidad==0 || me.precio==0){
-                }
-                else{
-                    if(me.encuentra(me.idarticulo, me.idDetalleAsociado)){
-                        Swal.fire({
-                            type: 'error',
-                            title: 'Error...',
-                            text: 'Ese artículo ya se encuentra agregado!',
-                            })
-                    }
-                    else{
-                        me.arrayDetalle.push({
-                            idarticulo: me.idarticulo,
-                            articulo: me.articulo,
-                            cantidad: me.cantidad,
-                            valor_descuento: me.descuento,
-                            precio: me.precio,
-                            iva: me.iva,
-                            stock : me.stock,
-                            descuento : me.descuento,
-                            nom_presentacion : me.nom_presentacion,
-                            id_presentacion : me.id_presentacion,
-                            padre : me.padreDetalle
-                        });
-                        me.codigo="";
-                        me.idarticulo=0;
-                        me.articulo="";
-                        me.cantidad=0;
-                        me.precio=0;
-                        me.iva = 0;
-                        me.descuento = 0;
-                        me.nom_presentacion = '';
-                        me.id_presentacion = 0;
-                        me.padreDetalle = '';
-                        me.idDetalleAsociado = 0;
-                    }
-                    
-                }
-            },
-            agregarDetalleModal(data =[]){
-                let me=this;
-
-                if(me.encuentra(data['id'], data['id_asociado'])){
-                    Swal.fire({
-                        type: 'error',
-                        title: 'Error...',
-                        text: 'Ese artículo ya se encuentra agregado!',
-                        })
-                }
-                else{
-                    var p = '';
-                    if(data['padre']!='') {p = ' '+data['nom_presentacion']+' (Presentacion asociada)';}
-                    else {p = ' - '+data['nom_presentacion'];}
-
-                    var ivaVenta = 0;
-                    data['productos_iva'].forEach(function(iva){
-                        if(iva['tipo_iva']=='Venta'){ivaVenta=iva['porcentaje'];}
-                    });
-
-                    var descu = 0;
-                    if(data['descuento'] && data['descuento']!='') {descu=data['descuento'];}
-
-                    me.arrayDetalle.push({
-                        idarticulo: data['id'],
-                        id_asociado: data['id_asociado'],
-                        codigo: data['codigo'],
-                        articulo: data['nombre'],
-                        porcentaje : ivaVenta,
-                        cantidad: data['cant'],
-                        precio: data['precio_venta'],
-                        precio_venta: data['precio_venta'],
-                        iva : ivaVenta,
-                        nom_presentacion : data['nom_presentacion'],
-                        id_presentacion : data['id_presentacion'],
-                        padre : data['padre'],
-                        unidades : data['unidades'],
-                        descuento : 0,
-                        valor_descuento : 0,
-                    }); 
-                }
-            },
-            agregarDetalleModalCantidadArticulo(){
-                let me=this;
-                
-                if(me.encuentra(me.arrayInfoArticuloModalCantidad.id && me.arrayInfoArticuloModalCantidad.id_asociado)){
-                    Swal.fire({
-                        type: 'error',
-                        title: 'Error...',
-                        text: 'Ese artículo ya se encuentra agregado!',
-                        })
-                }
-                else{
-                    var p = ''
-                    if(me.arrayInfoArticuloModalCantidad.padre!='') {p = ' '+data['nom_presentacion']+' (Presentacion asociada)';}
-                    else {p = ' - '+me.arrayInfoArticuloModalCantidad.padre;}
-
-                    var ivaVenta = 0;
-                    me.arrayInfoArticuloModalCantidad.productos_iva.forEach(function(iva){
-                        if(iva['tipo_iva']=='Venta'){ivaVenta=iva['porcentaje'];}
-                    });
-
-                    me.arrayDetalle.push({
-                        idarticulo: me.arrayInfoArticuloModalCantidad.id,
-                        id_asociado: me.arrayInfoArticuloModalCantidad.id_asociado,
-                        articulo: me.arrayInfoArticuloModalCantidad.codigo+' - '+me.arrayInfoArticuloModalCantidad.nombre,
-                        porcentaje : ivaVenta,
-                        cantidad: me.cantidadArticulo,
-                        precio: me.arrayInfoArticuloModalCantidad.precio_venta,
-                        precio_venta : me.arrayInfoArticuloModalCantidad.precio_venta,
-                        iva: ivaVenta,
-                        nom_presentacion : me.arrayInfoArticuloModalCantidad.nom_presentacion,
-                        id_presentacion : me.arrayInfoArticuloModalCantidad.id_presentacion,
-                        padre : me.arrayInfoArticuloModalCantidad.padre,
-                        descuento : 0,
-                        valor_descuento : 0,
-                    }); 
-                }
-                me.cerrarModalCantidadArticulo();
-            },
-            listarArticulo (buscar,criterio,categoria){
-                let me=this;
-                var var_categoria='';
-                if(categoria && categoria!=''){var_categoria='&categoria='+categoria;}
-                var url= this.ruta +'/articulo/listarArticulo?buscar='+ buscar + '&criterio='+ criterio+var_categoria+'&id_tarifario='+me.id_tarifario;
-                axios.get(url).then(function (response) {
-                    var respuesta= response.data;
-                    me.arrayArticulo = [];
-                    me.arrayArticulo = respuesta.articulos;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            },
-            registrarFacturacion(){
-                //console.log(this.validarFacturacion());
-                
-
-
-                if (!this.validarFacturacion()){
-
-                    return;
-                }
-                else {                
-                    let me = this;
-                    if(this.id_tercero == 0 || this.id_tercero ==''){
-                        this.id_tercero = 999999
-                    }else{
-                            this.id_tercero  =  this.id_tercero ;
-                    }
-                    axios.post(this.ruta +'/facturacion/registrar',{
-                        'num_factura': null,
-                        'id_tercero': me.id_tercero,
-                        'fec_edita': null,
-                        'usu_edita': null,
-                        'subtotal': me.subtotal,
-                        'valor_iva': me.valor_iva,
-                        'total': me.valor_final,
-                        'abono': me.abono,
-                        'saldo': me.saldo,
-                        'detalle': me.detalle,
-                        'lugar': me.lugar,
-                        'descuento': me.calcularDescuento,
-                        'fec_registra': null,
-                        'fec_envia': null,
-                        'fec_anula': null,
-                        'usu_registra': null,
-                        'usu_envia': null,
-                        'usu_anula': null,
-                        'fecha': me.fecha,
-                        'id_tarifario': me.id_tarifario,
-                        'id_cierre_caja': me.id_cierre_caja_facturacion,
-                        'data': me.arrayDetalle,
-                        'tipo_movimiento' : 4,
-                        'sumatoria' : 0
-                    }).then(function (response) {
-                        me.factura_imprimir = response.data.id_facturacion;
-                        //  
-
-                        var toFind = "4";
-                        var filtered = me.arrayDetalle.filter(function(el) {
-                            return el.tipo === toFind;
-                        });
-                        me.arrayDetalle = [];
-                        me.id_tercero = '';
-                        me.tercero = '';
-                        me.lugar = '';
-                        me.ocultarDetalle();
-                        me.listarArticulo(me.buscarA,me.criterioA,me.buscarCategoriaA);
-                        me.listarFacturacion(1,'','','','','','','');
-                        if(filtered){
-
-                            me.verTicket(me.factura_imprimir);
-                            me.imprimirTicket(me.factura_imprimir);                            
-                            me.position = 6;
-                        }
-                        else {
-                            me.position = 7;
-                        }
-                        
-                    }).catch(function (error) {
-                        console.log(error);
-                    });
-
-                }
-            },
-            
-            actualizarFacturacion(){
-                
-                // if (!this.id_tercero) this.errorMostrarMsjFacturacion.push("Seleccione un tercero");
-                // if (!this.lugar) this.errorMostrarMsjFacturacion.push("Seleccione un lugar");
-                let me = this;
-
-                axios.put(this.ruta +'/facturacion/actualizar',{
-                    'num_factura': me.num_factura,
-                    'id_tercero': me.id_tercero,
-                    'fec_edita': me.fechaHoraActual,
-                    'subtotal': me.subtotal,
-                    'valor_iva': me.valor_iva,
-                    'total': me.total,
-                    'abono': me.abono,
-                    'saldo': me.saldo,
-                    'detalle': me.detalle,
-                    'lugar': me.lugar,
-                    'descuento': me.calcularDescuento,
-                    'fec_registra': null,
-                    'fec_envia': null,
-                    'fec_anula': null,
-                    'usu_registra': null,
-                    'usu_envia': null,
-                    'usu_anula': null,
-                    'fecha': me.fecha,
-                    'id_tarifario': me.id_tarifario,
-                    'estado': me.estado,
-                    'data': me.arrayDetalle,
-                    'tipo_movimiento' : 4,
-                    'sumatoria' : 0,
-                    'id' : me.facturacion_id
-                }).then(function (response) {
-
-                     me.factura_imprimir = response.data.id_facturacion;
-                        me.verTicket(me.factura_imprimir);
-                        me.imprimirTicket(me.factura_imprimir);                            
-                        
-                    me.position = 6;
-                    me.ocultarDetalle();
-                    me.listarFacturacion(1,'','','','','','','');
-                    me.listarArticulo(me.buscarA,me.criterioA,me.buscarCategoriaA);
-                    me.tipoAccion2 =1;
-                    me.arrayDetalleT=[]
-                    
-                  
-                }).catch(function (error) {
-                    console.log(error);
-                    Swal.fire({
-                    
-                        type:'warning',
-                        title: 'Oops...',
-                        text: 'No se pudo guardar, intentar nuevamente',
-                        
-                    })
-                    
-                });
-            },
-            validarFacturacion(){
-                this.errorFacturacion=0;               
-                if(this.position!=2) {
-                    this.position = 2;
-                    return false;
+                  this.modalCierreCaja = 1;
+                  this.tituloModalCierre = "Listado de cierres de caja";
+                  this.tipoAccionCierre = 3;
                 } else {
-                
-                    this.errorMostrarMsjFacturacion =[];
-
-                    // if (!this.id_tercero) {
-                    //     this.$notify({
-                    //         group: 'foo',
-                    //         duration: 10000,
-                    //         position: 'top right',
-                    //         title: 'Seleccione Cliente',
-                    //         type: 'error',
-                    //         text: 'Debes seleccion un cliente'
-                    //     });
-                    //     return false;
-                    // }
-                    if (!this.lugar) { 
-                         this.$notify({
-                            group: 'foo',
-                            duration: 10000,
-                            position: 'top right',
-                            title: 'Seleccione Mesa',
-                            type: 'error',
-                            text: 'Debes selecciona una mesa'
-                        });
-                        return false;
-                    }
-                    if (this.arrayDetalle.length<=0) {
-                       this.$notify({
-                            group: 'foo',
-                            duration: 10000,
-                            position: 'top right',
-                            title: 'Seleccione Mesa',
-                            type: 'error',
-                            text: 'Debes agregar productos'
-                        });
-                    }
-                    return true;
+                  result.dismiss === Swal.DismissReason.cancel;
                 }
-               
-            },
-            verTicket(){
-                let me = this;
-            
-                axios.get(this.ruta+'/detalle_facturacion/ver-ticket?id='+me.factura_imprimir).then(function(response){    
-                    me.arrayPreparado = response.data.detalles_facturacion;
-                    me.datosFactura = response.data.facturacion;
-                    me.datosEmpresa=response.data.empresa;
+              });
+              break;
+            }
+            case "ver": {
+              this.tipoAccionCierre = 4;
+              this.id_caja = data["id_caja"];
+              this.nombre_caja = data["nombre"];
+              this.vr_inicial_cierre = data["vr_inicial"];
+              this.obs_inicial_cierre = data["obs_inicial"];
+              this.vr_gastos_cierre = data["vr_gastos"];
+              this.obs_gastos_cierre = data["obs_gastos"];
+              this.vr_software_cierre = data["vr_software"];
+              this.vr_final_cierre = data["vr_final"];
+              break;
+            }
+          }
+          this.selectCajas();
+          break;
+        }
+      }
+    },
+    ocultarDetalle() {
+      let me = this;
+      me.listado = 1;
+      me.facturacion_id = 0;
+      (me.num_factura = 0),
+        (me.id_tercero = 0),
+        (me.tercero_facturacion = ""),
+        (me.id_usuario = 0),
+        (me.fec_edita = ""),
+        (me.subtotal = 0.0),
+        (me.valor_iva = 0.0),
+        (me.iva = 0),
+        (me.total = 0.0),
+        (me.abono = 0.0),
+        (me.saldo = 0.0),
+        (me.detalle = ""),
+        (me.lugar = ""),
+        (me.descuento = 0.0),
+        (me.fec_registra = ""),
+        (me.fec_envia = ""),
+        (me.fec_anula = ""),
+        // me.fecha = '',
+        //me.id_tarifario = 0;
+        (me.estado = 0),
+        // me.arrayFacturacion=[];
+        // me.arrayFacturacionT=[];
+        (me.arrayDetalle = []);
+      me.arrayTerceros = [];
+    },
+    verFacturacion(id) {
+      let me = this;
+      me.listado = 2;
 
-                }).catch(function (error) {
-                    console.log(error);
-                });
-            }, 
-            imprimirTicket(){
-                let me = this;
-                axios.post(this.ruta+'/detalle_facturacion/imprimir-ticket',{
-                        'id': me.factura_imprimir,
-                       'datos':me.arrayDetalleT
-                    
-                }).then(function(response){   
-                    console.log(response)        
-                    me.arrayDetalleT=[]      
+      //Obtener los datos de la factura
+      var arrayFacturacionT = [];
+      var url = this.ruta + "/facturacion/obtenerCabecera?id=" + id;
 
-                }).catch(function (error) {
-                    me.arrayDetalleT=[]
-                    console.log(error);
-                    Swal.fire({
-                    
-                        type:'warning',
-                        title: 'Oops...',
-                        text: 'No se pudo imprimir',
-                        
-                    })
-                });
-            },  
-            selectZonas(){
-                let me=this;
-                var url= this.ruta + '/zona/selectZona';
-                axios.get(url).then(function (response) {
-                     
-                    var respuesta= response.data;
-                    me.arrayZonas = respuesta.zona;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            },
-            mostrarDetalle(modelo, accion, data=[]){
-                let me=this;
-                me.arrayDetalleT=[]
-                
-                switch(modelo){
-                    case 'facturacion':{
-                        me.listado=0;
-                        switch(accion){
-                            case 'registrar':{
-                                // me.sugerirNumFactura();
-                                me.tipoAccion2 = 1;
-                                me.facturacion_id=0;
-                                me.num_factura=null;
-                                me.id_tercero=0;
-                                me.tercero = '';
-                                me.tercero_facturacion='';
-                                me.fec_edita='';
-                                me.subtotal=0.0;
-                                me.valor_iva=0.0;
-                                me.total=0.0;
-                                me.abono=0.0;
-                                me.saldo=0.0;
-                                me.detalle='';
-                                me.lugar = '',
-                                me.descuento=0.0;
-                                me.fec_registra='';
-                                me.fec_envia='';
-                                me.fec_anula='';
+      axios
+        .get(url)
+        .then(function(response) {
+          var respuesta = response.data;
+          arrayFacturacionT = respuesta.facturacion;
 
-                                me.arrayArticulo=[];
-                                me.arrayDetalle=[];
-                                me.arrayTerceros=[];
-                                me.listarFacturacion(1,'','','','','','','');
-                                break;
-                            };
-                            case 'actualizar':{
-                                me.tipoAccion2 = 2;
-                                me.facturacion_id=data['id'];
-                                me.num_factura=data['num_factura'];
-                                me.id_tercero=data['id_tercero'];
-                                me.tercero=data['nombre1'] ?  data['nombre1']+' '+data['nombre2']+' '+data['apellido1']+' '+data['apellido2'] : data['nom_tercero'];
-                                me.fec_edita=me.fechaHoraActual;
-                                me.subtotal=data['subtotal'];
-                                me.valor_iva=data['valor_iva'];
-                                me.total=data['total'];
-                                me.abono=data['abono'];
-                                me.abono2=data['abono'];
-                                me.saldo=data['saldo'];
-                                me.detalle=data['detalle'];
-                                me.lugar = data['lugar'];
-                                // me.descuento=data['descuento'];
-                                me.fec_registra=data['fec_registra'];
-                                me.fec_envia=data['fec_envia'];
-                                me.fec_anula=data['fec_anula'];
-                                me.fecha =data['fecha'];
-                                me.id_tarifario =data['id_tarifario'];
-                                me.estado = data['estado'];
-                                
+          me.fecha = arrayFacturacionT[0]["fecha"];
+          me.num_factura = arrayFacturacionT[0]["num_factura"];
+          me.tercero = arrayFacturacionT[0]["nom_tercero"];
+          me.detalle = arrayFacturacionT[0]["detalle"];
+          me.lugar = arrayFacturacionT[0]["nom_lugar"];
+          me.estado = arrayFacturacionT[0]["estado"];
+          me.subtotal = arrayFacturacionT[0]["subtotal"];
+          me.valor_iva = arrayFacturacionT[0]["valor_iva"];
+          me.abono = arrayFacturacionT[0]["abono"];
+          me.saldo = arrayFacturacionT[0]["saldo"];
+          me.total = arrayFacturacionT[0]["total"];
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
 
-                                me.arrayArticulo=[];
-                                me.arrayTerceros=[];
-                                me.arrayDetalle=[]
-                                // me.listarFacturacion(1,'','','','','','','');)
-                                me.listarDetalle(data['id']);
-                                break;
-                            };
-                        }
-                        me.selectZonas();
-                        me.selectTarifarios();
-                        break;
-                    }
-                    case "cierres_caja":
-                    {
-                        switch(accion){
-                            case 'registrar':
-                            {
-                                this.arrayCierresUsuario = [];
-                                this.modalCierreCaja = 1;
-                                this.tituloModalCierre = 'Abrir caja';
-                                this.id_caja_cierre='';
-                                this.vr_inicial_cierre=0;
-                                this.obs_inicial_cierre = '';
-                                this.vr_gastos_cierre = 0;
-                                this.obs_gastos_cierre = '';
-                                this.vr_software_cierre = 0;
-                                this.vr_final_cierre = 0;
-                                this.cierre_caja_id = 0;
-                                this.tipoAccionCierre = 1;
-                                break;
-                            }
-                            case 'cerrar_caja':
-                            {
-                                  
-                                if(data.length!=0)
-                                {
-                                    this.arrayCierresUsuario = [];
-                                    this.modalCierreCaja=1;
-                                    this.tituloModalCierre='Cerrar caja';
-                                    this.tipoAccionCierre=2;
-                                    this.cierre_caja_id=data['id'];
-                                    this.id_caja_cierre = data['id_caja'];
-                                    this.vr_inicial_cierre = data['vr_inicial'];
-                                    this.obs_inicial_cierre = data['obs_inicial'];
-                                    this.vr_gastos_cierre = data['vr_gastos'];
-                                    this.obs_gastos_cierre = data['obs_gastos'];
-                                    this.vr_software_cierre = 0;
-                                    this.vr_final_cierre = data['vr_final'];
-                                }
-                                else
-                                {
-                                    this.arrayCierresUsuario = [];
-                                    this.modalCierreCaja=1;
-                                    this.tituloModalCierre='Cerrar caja';
-                                    this.tipoAccionCierre=2;
-                                }
-                                break;
-                            }
-                            case 'listar_cierres':
-                            {
-                                Swal.fire({
-                                title: 'ERROR!',
-                                text: "Este usuario tiene una caja abierta desde hace mas de 24 horas",
-                                type: 'warning',
-                                showCancelButton: true,
-                                confirmButtonColor: '#3085d6',
-                                cancelButtonColor: '#d33',
-                                confirmButtonText: 'Ok!'
-                                }).then((result) => {
-                                    if(result.value){
-                                        this.arrayCierresUsuario.push({
-                                            created_at : data['created_at'],
-                                            estado : data['estado'],
-                                            id : data['id'],
-                                            id_caja : data['id_caja'],
-                                            nombre : data['nombre'],
-                                            obs_gastos : data['obs_gastos'],
-                                            obs_inicial : data['obs_inicial'],
-                                            vr_final : data['vr_final'],
-                                            vr_gastos : data['vr_gastos'],
-                                            vr_inicial : data['vr_inicial'],
-                                            vr_software : data['vr_software'],
-                                        });
-                                        
-                                        this.modalCierreCaja=1;
-                                        this.tituloModalCierre='Listado de cierres de caja';
-                                        this.tipoAccionCierre=3;
-                                    }
-                                    else{
-                                        result.dismiss === Swal.DismissReason.cancel
-                                    }
-                                })
-                                break;
-                            }
-                            case 'ver':
-                            {
-                                this.tipoAccionCierre=4;
-                                this.id_caja = data['id_caja'];
-                                this.nombre_caja = data['nombre'];
-                                this.vr_inicial_cierre = data['vr_inicial'];
-                                this.obs_inicial_cierre = data['obs_inicial'];
-                                this.vr_gastos_cierre = data['vr_gastos'];
-                                this.obs_gastos_cierre = data['obs_gastos'];
-                                this.vr_software_cierre = data['vr_software'];
-                                this.vr_final_cierre = data['vr_final'];
-                                break;
-                            }
-                        }
-                        this.selectCajas();
-                        break;
-                    }
-                }
-            },
-            ocultarDetalle(){
-                let me=this;
-                me.listado=1;
-                me.facturacion_id=0;
-                me.num_factura=0,
-                me.id_tercero=0,
-                me.tercero_facturacion='',
-                me.id_usuario=0,
-                me.fec_edita='',
-                me.subtotal=0.0,
-                me.valor_iva=0.0,
-                me.iva = 0,
-                me.total=0.0,
-                me.abono=0.0,
-                me.saldo=0.0,
-                me.detalle='',
-                me.lugar='',
-                me.descuento=0.0,
-                me.fec_registra='',
-                me.fec_envia='',
-                me.fec_anula='',
-                // me.fecha = '',
-                //me.id_tarifario = 0;
-                me.estado = 0,
-                // me.arrayFacturacion=[];
-                // me.arrayFacturacionT=[];
-                me.arrayDetalle=[];
-                me.arrayTerceros=[];       
-            },
-            verFacturacion(id){
-                let me=this;
-                me.listado=2;
-
-                //Obtener los datos de la factura
-                var arrayFacturacionT=[];
-                var url= this.ruta +'/facturacion/obtenerCabecera?id=' + id;
-                
-                axios.get(url).then(function (response) {
-                    var respuesta= response.data;
-                    arrayFacturacionT = respuesta.facturacion;
-
-                    me.fecha = arrayFacturacionT[0]['fecha'];
-                    me.num_factura=arrayFacturacionT[0]['num_factura'];
-                    me.tercero = arrayFacturacionT[0]['nom_tercero'];
-                    me.detalle = arrayFacturacionT[0]['detalle'];
-                    me.lugar = arrayFacturacionT[0]['nom_lugar'];
-                    me.estado = arrayFacturacionT[0]['estado'];
-                    me.subtotal=arrayFacturacionT[0]['subtotal'];
-                    me.valor_iva=arrayFacturacionT[0]['valor_iva'];
-                    me.abono=arrayFacturacionT[0]['abono'];
-                    me.saldo=arrayFacturacionT[0]['saldo'];
-                    me.total=arrayFacturacionT[0]['total'];
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-
-                //Obtener los datos de los detalles 
-                me.listarDetalle(id);
-            },
-            listarDetalle(id_factura){
-                let me=this;
-                var url= this.ruta +'/detalle_facturacion/buscarDetalleFacturacion?id_factura=' + id_factura;
-                axios.get(url).then(function (response) {
-                    var respuesta= response.data;
-                    me.arrayDetalle = respuesta.detalles;
-                    me.arrayDetalleT = respuesta.detalles;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            },
-            cerrarModal(){
-                this.modal=0;
-                this.cantidad = 1;
-                this.auxProd = {};
-               /* this.tituloModal='';
+      //Obtener los datos de los detalles
+      me.listarDetalle(id);
+    },
+    listarDetalle(id_factura) {
+      let me = this;
+      var url =
+        this.ruta +
+        "/detalle_facturacion/buscarDetalleFacturacion?id_factura=" +
+        id_factura;
+      axios
+        .get(url)
+        .then(function(response) {
+          var respuesta = response.data;
+          me.arrayDetalle = respuesta.detalles;
+          me.arrayDetalleT = respuesta.detalles;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    cerrarModal() {
+      this.modal = 0;
+      this.cantidad = 1;
+      this.auxProd = {};
+      /* this.tituloModal='';
                 this.buscar = '';
                 this.arrayArticulo = [];
                 this.buscarA = '';
                 this.buscarCategoriaA = '';
                 this.tipo_vista_articulo = 1;*/
-            }, 
-            abrirModal(producto){               
-               // this.arrayArticulo=[];
-                this.auxProd = producto;
-                this.auxObser = '';
-                this.modal = 1;
-                //this.tituloModal = 'Seleccione uno o varios artículos';
-                //this.selectCategoria2();
-                //this.listarArticulo(this.buscarA,this.criterioA,this.buscarCategoriaA)
-            },
-            cerrarModalCantidadArticulo(){
-                this.modalCantidadArticulo=0;
-                this.tituloModalCantidadArticulo='';
-                this.cantidadArticulo = 0;
-                this.idDetalleAsociado = 0;
-                this.stockCantidadArticulo = 0;
-                this.saldoParcialCantidadArticulo = false;
-                this.arrayInfoArticuloModalCantidad = [];
-            }, 
-            abrirModalCantidadArticulo(data){               
-                this.modalCantidadArticulo = 1;
-                this.tituloModalCantidadArticulo = 'Cantidad del articulo';
-                this.arrayInfoArticuloModalCantidad = data;
-                this.stockCantidadArticulo = data['stock']
-            },
-            desactivarIngreso(id){
-               Swal.fire({
-                title: 'Esta seguro de anular este ingreso?',
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Aceptar!',
-                cancelButtonText: 'Cancelar',
-                confirmButtonClass: 'btn btn-success',
-                cancelButtonClass: 'btn btn-danger',
-                buttonsStyling: false,
-                reverseButtons: true
-                }).then((result) => {
-                if (result.value) {
-                    let me = this;
+    },
+    abrirModal(producto) {
+      // this.arrayArticulo=[];
+      this.auxProd = producto;
+      this.auxObser = "";
+      this.modal = 1;
+      //this.tituloModal = 'Seleccione uno o varios artículos';
+      //this.selectCategoria2();
+      //this.listarArticulo(this.buscarA,this.criterioA,this.buscarCategoriaA)
+    },
+    cerrarModalCantidadArticulo() {
+      this.modalCantidadArticulo = 0;
+      this.tituloModalCantidadArticulo = "";
+      this.cantidadArticulo = 0;
+      this.idDetalleAsociado = 0;
+      this.stockCantidadArticulo = 0;
+      this.saldoParcialCantidadArticulo = false;
+      this.arrayInfoArticuloModalCantidad = [];
+    },
+    abrirModalCantidadArticulo(data) {
+      this.modalCantidadArticulo = 1;
+      this.tituloModalCantidadArticulo = "Cantidad del articulo";
+      this.arrayInfoArticuloModalCantidad = data;
+      this.stockCantidadArticulo = data["stock"];
+    },
+    desactivarIngreso(id) {
+      Swal.fire({
+        title: "Esta seguro de anular este ingreso?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Aceptar!",
+        cancelButtonText: "Cancelar",
+        confirmButtonClass: "btn btn-success",
+        cancelButtonClass: "btn btn-danger",
+        buttonsStyling: false,
+        reverseButtons: true,
+      }).then((result) => {
+        if (result.value) {
+          let me = this;
 
-                    axios.put(this.ruta +'/ingreso/desactivar',{
-                        'id': id
-                    }).then(function (response) {
-                        me.listarFacturacion(1,'','','','','','','');
-                        Swal.fire(
-                        'Anulado!',
-                        'El ingreso ha sido anulado con éxito.',
-                        'success'
-                        )
-                    }).catch(function (error) {
-                        console.log(error);
-                    });
-                    
-                    
-                } else if (
-                    // Read more about handling dismissals
-                    result.dismiss === Swal.DismissReason.cancel
-                ) {
-                    
-                }
-                }) 
-            },
-            // funcion abrir modal proveedores
-            abrirModalT(accion){               
-                this.arrayTerceros=[];
-                this.modal2 = 1;
-                switch(accion){
-                    case 'terceros':{
-                        this.tituloModal2 = 'Seleccione un tercero';
-                        this.tipoAccionModalTerceros = 1;
-                        break;
-                    }
-                    case 'tercero_filtro':{
-                        this.tituloModal2 = 'Seleccione un tercero para el filtro';
-                        this.tipoAccionModalTerceros = 2;
-                        break;
-                    }
-                    case 'vendedor_filtro':{
-                        this.tituloModal2 = 'Seleccione un vendedor';
-                        this.tipoAccionModalTerceros = 3;
-                        break;
-                    }
-                }
-            },
-            cerrarModalT(){
-                this.modal2=0;
-                this.tituloModal2='';
-                this.terc_busq = '';
-            },
-            cargarTercero(tercero){
-                this.tercero = tercero['nombre1']+" "+tercero['nombre2']+" "+tercero['apellido1']+" "+tercero['apellido2'];
-                this.id_tercero = tercero['id'];
-                this.position=2;
-            },
-            buscarTercero(){
-                let me=this;
-                var search = this.terc_busq;
-                var url= this.ruta +'/cliente/selectCliente?filtro='+search;
-                 axios.get(url).then(function (response) {
-                    var respuesta = response.data;
-                    me.arrayTerceros = respuesta.clientes;                    
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            },
-            validarUnder(valor)
-            {
-                if(valor == "undefined" || valor=="" || !valor)
-                    return "";
-                else
-                    return valor;
-            },
-            quitar(opc){
-                //alert(opc);
-                if(opc==1){
-                    this.id_cuenta_ini = '';
-                    this.cuenta_ini = '';
-                }
-                if(opc==2){
-                    this.id_cuenta_fin = '';
-                    this.cuenta_fin = '';
-                }
-                if(opc==3){
-                    this.id_tercero = '';
-                    this.tercero = '';
-                }
-                if(opc==4){
-                    this.idTerceroFiltro = '';
-                    this.terceroFiltro = '';
-                }
-                if(opc==5){
-                    this.idVendedorFiltro = '';
-                    this.vendedorFiltro = '';
-                }
-            },
-            pdfFormato(id){
-                window.open(this.ruta +'/facturacion/pdfFacturacion/'+ id);
-            },
-            llamarMensaje(producto) {
-                this.$notify({
-                    group: 'foo',
-                    duration: 500,
-                    title: 'Product agregado',
-                    type: 'success',
-                    text: 'Agregado '+producto
-                });
-            },           
-            registrarCliente(){
-               
-                let me = this;
-                var data = new FormData();
-                data.append('nombre', this.nombre);
-                data.append('tipo_documento', this.tipo_documento);
-                data.append('num_documento' , this.num_documento);
-                data.append('direccion' , this.direccion);
-                data.append('telefono1' , this.telefono1);
-                data.append('telefono2' , this.telefono2);
-                data.append('celular' , this.celular);
-                data.append('email' , this.email);
-                data.append('sexo', this.sexo ? this.sexo : 'Undefined');
-                data.append('regimen', this.regimen? this.regimen : 'Comun');
-                data.append('fec_nac', this.fec_nac);
-                data.append('reside', this.reside ?  this.reside : 'B/');
-                data.append('representante', this.representante);
-                data.append('tipo_persona' , this.tipo_persona ? this.tipo_persona : 'Natural');
-                data.append('nombre1' , this.nombre1);
-                data.append('nombre2' , this.nombre2);
-                data.append('apellido1' , this.apellido1);
-                data.append('apellido2' , this.apellido2);
-                data.append('digito_verif' , JSON.stringify(this.digito_verif) ? JSON.stringify(this.digito_verif) : 0 );
-                data.append('entidad' , this.entidad);
-                data.append('num_verif' , this.num_verif ? this.num_verif : 0);
-                data.append('autoretenedor' , this.autoretenedor ? this.autoretenedor : '0');
-                data.append('declarante' , this.declarante ? this.declarante : '0');
-                data.append('cliente' , JSON.stringify(this.cliente));
-                data.append('proveedor' , JSON.stringify(this.proveedor));
-                data.append('id_vendedor' , this.id_vendedor);
-                data.append('id_zona' , this.id_zona);
-                data.append('plazo_pago' , this.plazo_pago);
-                data.append('bloquear' , this.bloquear);
-                data.append('cupo_credito' , this.cupo_credito);
-                data.append('vr_cupo_credito' , this.vr_cupo_credito);
-                data.append('retenedor_fuente' , this.retenedor_fuente);
-                data.append('retenedor_iva' , this.retenedor_iva);
-                data.append('excluido_iva' , this.excluido_iva);
-                data.append('autoretefuente' , this.autoretefuente);
-                data.append('autoreteiva' , this.autoreteiva);
-                data.append('autoreteica' , this.autoreteica);
-                data.append('id_banco' , this.id_banco);
-                data.append('num_cuenta_banco' , this.num_cuenta_banco);
-                data.append('tipo_cuenta' , this.tipo_cuenta);
-                data.append('representante_cuenta' , this.representante_cuenta);
-                data.append('tipo_nacionalidad' , this.tipo_nacionalidad ? this.tipo_nacionalidad : 'Colombia');
-                data.append('departamento' , this.departamento ? this.departamento : 'Putumayo');
-                data.append('municipio' , this.municipio ? this.municipio : 'Mocoa');
-                data.append('img', this.arrayImg);
-
-                axios.post( this.ruta +'/cliente/registrar',data,{
-                    headers:{'Content-Type':'multipart/form-data'}
-                }).then(function (response) {
-                    // me.cerrarModal();
-                    // me.listarPersona(1,'','nombre');
-                    me.position=3;
-                    me.buscarTercero();
-                }).catch(function (error) {
-                    console.log(error); 
-                });
-            },
-        },
-        mounted() {
-            $(".mul-select").select2({
-                placeholder: "- Categorias -", //placeholder
-                tags: true,
-                allowClear: true,
-                tokenSeparators: ['/',',',';'," "] 
+          axios
+            .put(this.ruta + "/ingreso/desactivar", {
+              id: id,
+            })
+            .then(function(response) {
+              me.listarFacturacion(1, "", "", "", "", "", "", "");
+              Swal.fire(
+                "Anulado!",
+                "El ingreso ha sido anulado con éxito.",
+                "success"
+              );
+            })
+            .catch(function(error) {
+              console.log(error);
             });
-            let me= this;
-            var d = new Date();
-            $(".mul-select").on("change", function (e) { 
-                me.listarArticulo(me.buscarA,me.criterioA,me.buscarCategoriaA) 
-            });
-            var dd = d.getDate();
-            var mm = d.getMonth()+1;
-            var yyyy = d.getFullYear();
-            var h = d.getHours();
-            var min = d.getMinutes();
-            var sec = d.getSeconds();
-           
-            if(dd<10){
-                dd='0'+dd;
-            } 
-            if(mm<10){
-                mm='0'+mm;
-            } 
-            d = yyyy+'-'+mm+'-'+dd;
-            me.fechaActual = d;
-            me.hastaFiltro = d;
-            me.desdeFiltro = d;
-            me.fecha = d;
-            me.fechaHoraActual = d+' '+h+':'+min+':'+sec;
-            this.ocultarDetalle();
-            this.selectCategoria2();
-            me.listarCajas();
-            me.buscarTercero();
-            me.selectZonas();
-           // me.llamarMensaje();
-            this.listarArticulo(this.buscarA,this.criterioA,this.buscarCategoriaA);
-             me.listarFacturacion(1,me.numFacturaFiltro,me.estadoFiltro,me.idTerceroFiltro,me.ordenFiltro,me.desdeFiltro,me.hastaFiltro,me.idVendedorFiltro);
-             
+        } else if (
+          // Read more about handling dismissals
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
         }
+      });
+    },
+    // funcion abrir modal proveedores
+    abrirModalT(accion) {
+      this.arrayTerceros = [];
+      this.modal2 = 1;
+      switch (accion) {
+        case "terceros": {
+          this.tituloModal2 = "Seleccione un tercero";
+          this.tipoAccionModalTerceros = 1;
+          break;
+        }
+        case "tercero_filtro": {
+          this.tituloModal2 = "Seleccione un tercero para el filtro";
+          this.tipoAccionModalTerceros = 2;
+          break;
+        }
+        case "vendedor_filtro": {
+          this.tituloModal2 = "Seleccione un vendedor";
+          this.tipoAccionModalTerceros = 3;
+          break;
+        }
+      }
+    },
+    cerrarModalT() {
+      this.modal2 = 0;
+      this.tituloModal2 = "";
+      this.terc_busq = "";
+    },
+    cargarTercero(tercero) {
+      this.tercero =
+        tercero["nombre1"] +
+        " " +
+        tercero["nombre2"] +
+        " " +
+        tercero["apellido1"] +
+        " " +
+        tercero["apellido2"];
+      this.id_tercero = tercero["id"];
+      this.position = 2;
+    },
+    buscarTercero() {
+      let me = this;
+      var search = this.terc_busq;
+      var url = this.ruta + "/cliente/selectCliente?filtro=" + search;
+      axios
+        .get(url)
+        .then(function(response) {
+          var respuesta = response.data;
+          me.arrayTerceros = respuesta.clientes;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    validarUnder(valor) {
+      if (valor == "undefined" || valor == "" || !valor) return "";
+      else return valor;
+    },
+    quitar(opc) {
+      //alert(opc);
+      if (opc == 1) {
+        this.id_cuenta_ini = "";
+        this.cuenta_ini = "";
+      }
+      if (opc == 2) {
+        this.id_cuenta_fin = "";
+        this.cuenta_fin = "";
+      }
+      if (opc == 3) {
+        this.id_tercero = "";
+        this.tercero = "";
+      }
+      if (opc == 4) {
+        this.idTerceroFiltro = "";
+        this.terceroFiltro = "";
+      }
+      if (opc == 5) {
+        this.idVendedorFiltro = "";
+        this.vendedorFiltro = "";
+      }
+    },
+    pdfFormato(id) {
+      window.open(this.ruta + "/facturacion/pdfFacturacion/" + id);
+    },
+    llamarMensaje(producto) {
+      this.$notify({
+        group: "foo",
+        duration: 500,
+        title: "Product agregado",
+        type: "success",
+        text: "Agregado " + producto,
+      });
+    },
+    registrarCliente() {
+      let me = this;
+      var data = new FormData();
+      data.append("nombre", this.nombre);
+      data.append("tipo_documento", this.tipo_documento);
+      data.append("num_documento", this.num_documento);
+      data.append("direccion", this.direccion);
+      data.append("telefono1", this.telefono1);
+      data.append("telefono2", this.telefono2);
+      data.append("celular", this.celular);
+      data.append("email", this.email);
+      data.append("sexo", this.sexo ? this.sexo : "Undefined");
+      data.append("regimen", this.regimen ? this.regimen : "Comun");
+      data.append("fec_nac", this.fec_nac);
+      data.append("reside", this.reside ? this.reside : "B/");
+      data.append("representante", this.representante);
+      data.append(
+        "tipo_persona",
+        this.tipo_persona ? this.tipo_persona : "Natural"
+      );
+      data.append("nombre1", this.nombre1);
+      data.append("nombre2", this.nombre2);
+      data.append("apellido1", this.apellido1);
+      data.append("apellido2", this.apellido2);
+      data.append(
+        "digito_verif",
+        JSON.stringify(this.digito_verif)
+          ? JSON.stringify(this.digito_verif)
+          : 0
+      );
+      data.append("entidad", this.entidad);
+      data.append("num_verif", this.num_verif ? this.num_verif : 0);
+      data.append(
+        "autoretenedor",
+        this.autoretenedor ? this.autoretenedor : "0"
+      );
+      data.append("declarante", this.declarante ? this.declarante : "0");
+      data.append("cliente", JSON.stringify(this.cliente));
+      data.append("proveedor", JSON.stringify(this.proveedor));
+      data.append("id_vendedor", this.id_vendedor);
+      data.append("id_zona", this.id_zona);
+      data.append("plazo_pago", this.plazo_pago);
+      data.append("bloquear", this.bloquear);
+      data.append("cupo_credito", this.cupo_credito);
+      data.append("vr_cupo_credito", this.vr_cupo_credito);
+      data.append("retenedor_fuente", this.retenedor_fuente);
+      data.append("retenedor_iva", this.retenedor_iva);
+      data.append("excluido_iva", this.excluido_iva);
+      data.append("autoretefuente", this.autoretefuente);
+      data.append("autoreteiva", this.autoreteiva);
+      data.append("autoreteica", this.autoreteica);
+      data.append("id_banco", this.id_banco);
+      data.append("num_cuenta_banco", this.num_cuenta_banco);
+      data.append("tipo_cuenta", this.tipo_cuenta);
+      data.append("representante_cuenta", this.representante_cuenta);
+      data.append(
+        "tipo_nacionalidad",
+        this.tipo_nacionalidad ? this.tipo_nacionalidad : "Colombia"
+      );
+      data.append(
+        "departamento",
+        this.departamento ? this.departamento : "Putumayo"
+      );
+      data.append("municipio", this.municipio ? this.municipio : "Mocoa");
+      data.append("img", this.arrayImg);
+
+      axios
+        .post(this.ruta + "/cliente/registrar", data, {
+          headers: { "Content-Type": "multipart/form-data" },
+        })
+        .then(function(response) {
+          // me.cerrarModal();
+          // me.listarPersona(1,'','nombre');
+          me.position = 3;
+          me.buscarTercero();
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+  },
+  mounted() {
+    $(".mul-select").select2({
+      placeholder: "- Categorias -", //placeholder
+      tags: true,
+      allowClear: true,
+      tokenSeparators: ["/", ",", ";", " "],
+    });
+    let me = this;
+    var d = new Date();
+    $(".mul-select").on("change", function(e) {
+      me.listarArticulo(me.buscarA, me.criterioA, me.buscarCategoriaA);
+    });
+    var dd = d.getDate();
+    var mm = d.getMonth() + 1;
+    var yyyy = d.getFullYear();
+    var h = d.getHours();
+    var min = d.getMinutes();
+    var sec = d.getSeconds();
+
+    if (dd < 10) {
+      dd = "0" + dd;
     }
+    if (mm < 10) {
+      mm = "0" + mm;
+    }
+    d = yyyy + "-" + mm + "-" + dd;
+    me.fechaActual = d;
+    me.hastaFiltro = d;
+    me.desdeFiltro = d;
+    me.fecha = d;
+    me.fechaHoraActual = d + " " + h + ":" + min + ":" + sec;
+    this.ocultarDetalle();
+    this.selectCategoria2();
+    me.listarCajas();
+    me.buscarTercero();
+    me.selectZonas();
+    // me.llamarMensaje();
+    this.listarArticulo(this.buscarA, this.criterioA, this.buscarCategoriaA);
+    me.listarFacturacion(
+      1,
+      me.numFacturaFiltro,
+      me.estadoFiltro,
+      me.idTerceroFiltro,
+      me.ordenFiltro,
+      me.desdeFiltro,
+      me.hastaFiltro,
+      me.idVendedorFiltro
+    );
+  },
+};
 </script>
-<style> 
-    *{
-        font-size: 14px;
-            
-    }
-    .ex1 {
-        border: 1px solid rgb(49, 173, 45);
-        outline-style: solid;
-        outline-color: rgba(45, 189, 76, 0.87);
-        outline-width: thin;
+<style>
+* {
+  font-size: 14px;
 }
-    .btn-edit-factura {
-        font-size: 15px !important;
-    }
-    .minimizar {
-        font-size: 9px;
-    }
-    .espacio-1 {
-        margin-top: 0 !important; 
-        margin-bottom: 0rem !important;
-    }
-    .centrado {
-        text-align: center;
-        align-content: center;
-    }
-    .ticket {
-        width: 288px;
-        max-width: 320px;
-        margin: auto;
-        line-height: 1;
-    }
-     .img-logo {
-        max-width: 87px;
-        margin-left: 100px;
-    }
-    .select2-search__field {
-            width: 100% !important;
-    }
-    .select2-container {
-            width: 100% !important
-    }
-    .nombre-tercero {
-        font-size: 16px !important;
-    }
-    .txt-nom-prod {
-        line-height: 1 !important;
-        min-height: 35px;
-        border-radius: 3px;
-    }
-    .separa-cards {
-        padding-right: 0.15rem !important;
-        padding-left: 0.15rem !important;       
-    }
-    .img-prods {
-        width: 89px;
-        height: 89px
-    }
-    .txt-price-prod {
-        font-size: 12px;
-        border-radius: 3px !important;
-    }
+.ex1 {
+  border: 1px solid rgb(49, 173, 45);
+  outline-style: solid;
+  outline-color: rgba(45, 189, 76, 0.87);
+  outline-width: thin;
+}
+.btn-edit-factura {
+  font-size: 15px !important;
+}
+.minimizar {
+  font-size: 9px;
+}
+.espacio-1 {
+  margin-top: 0 !important;
+  margin-bottom: 0rem !important;
+}
+.centrado {
+  text-align: center;
+  align-content: center;
+}
+.ticket {
+  width: 288px;
+  max-width: 320px;
+  margin: auto;
+  line-height: 1;
+}
+.img-logo {
+  max-width: 87px;
+  margin-left: 100px;
+}
+.select2-search__field {
+  width: 100% !important;
+}
+.select2-container {
+  width: 100% !important;
+}
+.nombre-tercero {
+  font-size: 16px !important;
+}
+.txt-nom-prod {
+  line-height: 1 !important;
+  min-height: 35px;
+  border-radius: 3px;
+}
+.separa-cards {
+  padding-right: 0.15rem !important;
+  padding-left: 0.15rem !important;
+}
+.img-prods {
+  width: 89px;
+  height: 89px;
+}
+.txt-price-prod {
+  font-size: 12px;
+  border-radius: 3px !important;
+}
 
-    h3.ocultar{
-        display: none !important;
-    }
-    
-    div.resaltar:hover, div.active:hover, div h3.resaltar:hover, div>h3.active:hover  {
-        background-color: #d1d3e2!important;
-       
-    }
-    .mul-select  {
-         width: 100%;
-    }
-    .precio-prod{
-        position: absolute;
-        float: right;
-        top: 74px;
-        right: 33px;
-        font-size: 14px;
-        z-index: 2;
-        min-width: 85px;
-    }
-    .modal-content{
-        width: 100% !important;
-        position: absolute !important;
-        margin-top: 5em;
-    }
-    .mostrar{
-        display: list-item !important;
-        opacity: 1 !important;
-        position: fixed !important;
-        background-color: #3c29297a !important;
-    }
-    .div-error{
-        display: flex;
-        justify-content: center;
-    }
-    .text-error{
-        color: red !important;
-        font-weight: bold;
-    }
-    .mosaico{
-        display: inline-block;
-        float: left;
-    }
-    @media (min-width: 600px) {
-        .btnagregar {
-            margin-top: 2rem;
-        }
-    }
-    select option{
-        font-size:14px;
-        padding:5px;
-        margin: 5px
-    }
+h3.ocultar {
+  display: none !important;
+}
 
+div.resaltar:hover,
+div.active:hover,
+div h3.resaltar:hover,
+div > h3.active:hover {
+  background-color: #d1d3e2 !important;
+}
+.mul-select {
+  width: 100%;
+}
+.precio-prod {
+  position: absolute;
+  float: right;
+  top: 74px;
+  right: 33px;
+  font-size: 14px;
+  z-index: 2;
+  min-width: 85px;
+}
+.modal-content {
+  width: 100% !important;
+  position: absolute !important;
+  margin-top: 5em;
+}
+.mostrar {
+  display: list-item !important;
+  opacity: 1 !important;
+  position: fixed !important;
+  background-color: #3c29297a !important;
+}
+.div-error {
+  display: flex;
+  justify-content: center;
+}
+.text-error {
+  color: red !important;
+  font-weight: bold;
+}
+.mosaico {
+  display: inline-block;
+  float: left;
+}
+@media (min-width: 600px) {
+  .btnagregar {
+    margin-top: 2rem;
+  }
+}
+select option {
+  font-size: 14px;
+  padding: 5px;
+  margin: 5px;
+}
 </style>
-
-
